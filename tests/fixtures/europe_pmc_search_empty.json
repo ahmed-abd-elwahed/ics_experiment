@@ -1,0 +1,15 @@
+{
+    "version": "6.9",
+    "hitCount": 0,
+    "request": {
+        "queryString": "qzxvkjw plorptang zzyzxq",
+        "resultType": "core",
+        "cursorMark": "%2a",
+        "pageSize": 5,
+        "sort": "",
+        "synonym": false
+    },
+    "resultList": {
+        "result": []
+    }
+}

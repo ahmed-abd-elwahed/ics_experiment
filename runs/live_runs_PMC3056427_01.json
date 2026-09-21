@@ -1,0 +1,1162 @@
+{
+  "generated_at": "2026-09-14T21:48:00.723054+00:00",
+  "model": "deepseek/deepseek-v4-flash-0731",
+  "case_study": {
+    "case_id": "PMC3056427_01",
+    "diagnosis": "Tricuspid Valve Regurgitation",
+    "narrative": "A 75-year-old female presented with dyspnea, orthopnea, lower extremities swelling, and palpitations. Past history includes 3 years of atrial fibrillation and 1 year of chronic heart failure (NYHA class II). Exam: irregular pulse 80/min, BP 100/60 mmHg, bibasal crackles, peripheral edema, jugular venous distension, and a grade IV pansystolic murmur along the left sternal border. She reported right upper quadrant abdominal pain worsened by palpation; liver edge was tender and enlarged (6 cm below costal margin) with smooth surface; spleen not palpable. EKG: atrial fibrillation (80/min), right bundle branch block, inferolateral ischemic changes. Abdominal ultrasound: homogeneous hepatomegaly with dilated hepatic veins and dilated inferior vena cava (30 mm) without respiratory variation.",
+    "structured_findings": {},
+    "metadata": {
+      "background_and_presentation": "A 75-year-old female presents with a chief complaint of dyspnea, orthopnea, lower extremity swelling, palpitations, and right upper quadrant abdominal pain. Her past medical history is notable for three years of atrial fibrillation and one year of chronic heart failure, NYHA class II.",
+      "source_file": "cases/combined_272_whole_chunking.json"
+    }
+  },
+  "case_mapping": {
+    "narrative": "chunked_case_info joined with blank lines",
+    "metadata.background_and_presentation": "background_and_presentation",
+    "diagnosis": "diagnosis"
+  },
+  "runs": [
+    {
+      "label": "case_study_expected",
+      "input": {
+        "case_file": "cases/combined_272_whole_chunking.json",
+        "case_id": "PMC3056427_01",
+        "query": "What was her blood pressure on examination?"
+      },
+      "started_at": "2026-09-14T21:46:45.434897+00:00",
+      "output": {
+        "input_query": "What was her blood pressure on examination?",
+        "output_answer": "Her blood pressure on examination was 100/60 mmHg.",
+        "literature_search": false,
+        "literature_search_result": null,
+        "retriever_parameters": {
+          "multi_part": false,
+          "query": "What was her blood pressure on examination?",
+          "path": "case_study",
+          "retrieval_performed": false
+        },
+        "used_llm": "deepseek/deepseek-v4-flash-0731",
+        "answer_source": "case_study",
+        "evidence": [
+          "BP 100/60 mmHg"
+        ],
+        "confidence": "high",
+        "llm_calls": [
+          {
+            "stage": "resolver",
+            "model": "deepseek/deepseek-v4-flash-0731",
+            "prompt_tokens": 784,
+            "completion_tokens": 112,
+            "latency_ms": 7352.328957989812,
+            "attempt": 1,
+            "purpose": "initial",
+            "success": true,
+            "error": null
+          }
+        ]
+      },
+      "wall_time_s": 7.35
+    },
+    {
+      "label": "retrieval_expected",
+      "input": {
+        "case_file": "cases/combined_272_whole_chunking.json",
+        "case_id": "PMC3056427_01",
+        "query": "What is her serum total bilirubin level?"
+      },
+      "started_at": "2026-09-14T21:46:52.788797+00:00",
+      "output": {
+        "input_query": "What is her serum total bilirubin level?",
+        "output_answer": "Serum total bilirubin is 2.8 mg/dL.",
+        "literature_search": true,
+        "literature_search_result": {
+          "query": "serum total bilirubin tricuspid regurgitation congestive hepatopathy elderly female",
+          "documents": [
+            {
+              "source": "europe_pmc",
+              "doc_id": "PMID:38782854",
+              "title": "H2FPEF Scores Are Increased in Patients with NASH Cirrhosis and Are Associated with Post-liver Transplant Heart Failure.",
+              "text": "Introduction Patients with cirrhosis are at risk for cardiac complications such as heart failure, particularly heart failure with preserved ejection fraction (HFpEF) due to left ventricular diastolic dysfunction (LVDD). The H2FPEF score is a predictive model used to identify patients with HFpEF. Our primary aim was to assess the H2FPEF score in patients with cirrhosis and determine its potential to identify patients at risk for heart failure after liver transplant. Methods This was a cohort study of patients undergoing liver transplant for cirrhosis from January 2010 and October 2018 who had a pre-transplant transthoracic echocardiogram. Results 166 cirrhosis subjects were included in the study. The majority were men (65%) and Caucasian (85%); NASH was the most common cause of cirrhosis (41%) followed by alcohol (34%). The median H2FPEF score was 2.0 (1.0-4.0). Patients with NASH cirrhosis had higher H2FPEF scores (3.22, 2.79-3.64) than those with alcohol induced cirrhosis (1.89, 1.5-2.29, p < 0.001) and other causes of cirrhosis (1.73, 1.28-2.18, p < 0.001). All subjects with a H2FPEF score > 6 had NASH cirrhosis. There was no association between the H2FPEF scores and measures of severity of liver disease (bilirubin, INR, or MELD score). Patients with heart failure after liver transplant had higher H2FPEF scores than those without heart failure (4.0, 3.1-4.9 vs. 2.3, 2.1-2.6, respectively; p = 0.015), but the score did not predict post-transplant mortality. Conclusion H2FPE…",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/38782854/",
+              "score": null,
+              "raw": {
+                "id": "38782854",
+                "source": "MED",
+                "pmid": "38782854",
+                "pmcid": "PMC11341588",
+                "fullTextIdList": {
+                  "fullTextId": [
+                    "PMC11341588"
+                  ]
+                },
+                "doi": "10.1007/s10620-024-08438-1",
+                "title": "H2FPEF Scores Are Increased in Patients with NASH Cirrhosis and Are Associated with Post-liver Transplant Heart Failure.",
+                "authorString": "Koch DG, Rockey DC, Litwin SS, Tedford RJ.",
+                "authorList": {
+                  "author": [
+                    {
+                      "fullName": "Koch DG",
+                      "firstName": "David G",
+                      "lastName": "Koch",
+                      "initials": "DG",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0000-0002-7866-9543"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "MUSC Division of Gastroenterology and Hepatology, Department of Medicine, Medical University of South Carolina, 25 Courtenay Dr., Charleston, SC, 29425, USA. kochd@musc.edu."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Rockey DC",
+                      "firstName": "Don C",
+                      "lastName": "Rockey",
+                      "initials": "DC",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "MUSC Division of Gastroenterology and Hepatology, Department of Medicine, Medical University of South Carolina, 25 Courtenay Dr., Charleston, SC, 29425, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Litwin SS",
+                      "firstName": "Sheldon S",
+                      "lastName": "Litwin",
+                      "initials": "SS",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Division of Cardiology, Medical University of South Carolina, Charleston, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Tedford RJ",
+                      "firstName": "Ryan J",
+                      "lastName": "Tedford",
+                      "initials": "RJ",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Division of Cardiology, Medical University of South Carolina, Charleston, USA."
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                "authorIdList": {
+                  "authorId": [
+                    {
+                      "type": "ORCID",
+                      "value": "0000-0002-7866-9543"
+                    }
+                  ]
+                },
+                "journalInfo": {
+                  "issue": "8",
+                  "volume": "69",
+                  "journalIssueId": 3818801,
+                  "dateOfPublication": "2024 Aug",
+                  "monthOfPublication": 8,
+                  "yearOfPublication": 2024,
+                  "printPublicationDate": "2024-08-01",
+                  "journal": {
+                    "title": "Digestive diseases and sciences",
+                    "medlineAbbreviation": "Dig Dis Sci",
+                    "isoabbreviation": "Dig Dis Sci",
+                    "essn": "1573-2568",
+                    "issn": "0163-2116",
+                    "nlmid": "7902782"
+                  }
+                },
+                "pubYear": "2024",
+                "pageInfo": "3061-3068",
+                "abstractText": "<h4>Introduction</h4>Patients with cirrhosis are at risk for cardiac complications such as heart failure, particularly heart failure with preserved ejection fraction (HFpEF) due to left ventricular diastolic dysfunction (LVDD). The H2FPEF score is a predictive model used to identify patients with HFpEF. Our primary aim was to assess the H2FPEF score in patients with cirrhosis and determine its potential to identify patients at risk for heart failure after liver transplant.<h4>Methods</h4>This was a cohort study of patients undergoing liver transplant for cirrhosis from January 2010 and October 2018 who had a pre-transplant transthoracic echocardiogram.<h4>Results</h4>166 cirrhosis subjects were included in the study. The majority were men (65%) and Caucasian (85%); NASH was the most common cause of cirrhosis (41%) followed by alcohol (34%). The median H2FPEF score was 2.0 (1.0-4.0). Patients with NASH cirrhosis had higher H2FPEF scores (3.22, 2.79-3.64) than those with alcohol induced cirrhosis (1.89, 1.5-2.29, p < 0.001) and other causes of cirrhosis (1.73, 1.28-2.18, p < 0.001). All subjects with a H2FPEF score > 6 had NASH cirrhosis. There was no association between the H2FPEF scores and measures of severity of liver disease (bilirubin, INR, or MELD score). Patients with heart failure after liver transplant had higher H2FPEF scores than those without heart failure (4.0, 3.1-4.9 vs. 2.3, 2.1-2.6, respectively; p = 0.015), but the score did not predict post-transplant mortality.<h4>Conclusion</h4>H2FPEF scores are higher in cirrhosis patients with NASH and appear to be associated with post-transplant heart failure, but not death.",
+                "affiliation": "MUSC Division of Gastroenterology and Hepatology, Department of Medicine, Medical University of South Carolina, 25 Courtenay Dr., Charleston, SC, 29425, USA. kochd@musc.edu.",
+                "publicationStatus": "ppublish",
+                "language": "eng",
+                "pubModel": "Print-Electronic",
+                "pubTypeList": {
+                  "pubType": [
+                    "research-article",
+                    "Journal Article"
+                  ]
+                },
+                "grantsList": {
+                  "grant": [
+                    {
+                      "agency": "Medical University of South Carolina",
+                      "orderIn": 0
+                    }
+                  ]
+                },
+                "meshHeadingList": {
+                  "meshHeading": [
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Humans"
+                    },
+                    {
+                      "majorTopic_YN": "Y",
+                      "descriptorName": "Liver Cirrhosis",
+                      "meshQualifierList": {
+                        "meshQualifier": [
+                          {
+                            "abbreviation": "CO",
+                            "qualifierName": "complications",
+                            "majorTopic_YN": "N"
+                          },
+                          {
+                            "abbreviation": "SU",
+                            "qualifierName": "surgery",
+                            "majorTopic_YN": "N"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Ventricular Dysfunction, Left",
+                      "meshQualifierList": {
+                        "meshQualifier": [
+                          {
+                            "abbreviation": "ET",
+                            "qualifierName": "etiology",
+                            "majorTopic_YN": "N"
+                          },
+                          {
+                            "abbreviation": "PP",
+                            "qualifierName": "physiopathology",
+                            "majorTopic_YN": "N"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Echocardiography"
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Stroke Volume"
+                    },
+                    {
+                      "majorTopic_YN": "Y",
+                      "descriptorName": "Liver Transplantation",
+                      "meshQualifierList": {
+                        "meshQualifier": [
+                          {
+                            "abbreviation": "AE",
+                            "qualifierName": "adverse effects",
+                            "majorTopic_YN": "N"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Risk Assessment",
+                      "meshQualifierList": {
+                        "meshQualifier": [
+                          {
+                            "abbreviation": "MT",
+                            "qualifierName": "methods",
+                            "majorTopic_YN": "N"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Risk Factors"
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Retrospective Studies"
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Aged"
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Middle Aged"
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Female"
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Male"
+                    },
+                    {
+                      "majorTopic_YN": "Y",
+                      "descriptorName": "Heart Failure",
+                      "meshQualifierList": {
+                        "meshQualifier": [
+                          {
+                            "abbreviation": "DI",
+                            "qualifierName": "diagnosis",
+                            "majorTopic_YN": "N"
+                          },
+                          {
+                            "abbreviation": "ET",
+                            "qualifierName": "etiology",
+                            "majorTopic_YN": "N"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "majorTopic_YN": "Y",
+                      "descriptorName": "Non-alcoholic Fatty Liver Disease",
+                      "meshQualifierList": {
+                        "meshQualifier": [
+                          {
+                            "abbreviation": "CO",
+                            "qualifierName": "complications",
+                            "majorTopic_YN": "N"
+                          },
+                          {
+                            "abbreviation": "EP",
+                            "qualifierName": "epidemiology",
+                            "majorTopic_YN": "N"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                "keywordList": {
+                  "keyword": [
+                    "Heart",
+                    "Liver transplant",
+                    "Cardiomyopathy",
+                    "Failure",
+                    "Non-alcoholic Steatohepatitis"
+                  ]
+                },
+                "subsetList": {
+                  "subset": [
+                    {
+                      "code": "IM",
+                      "name": "Index Medicus"
+                    }
+                  ]
+                },
+                "fullTextUrlList": {
+                  "fullTextUrl": [
+                    {
+                      "availability": "Subscription required",
+                      "availabilityCode": "S",
+                      "documentStyle": "doi",
+                      "site": "DOI",
+                      "url": "https://doi.org/10.1007/s10620-024-08438-1"
+                    },
+                    {
+                      "availability": "Open access",
+                      "availabilityCode": "OA",
+                      "documentStyle": "html",
+                      "site": "Europe_PMC",
+                      "url": "https://europepmc.org/articles/PMC11341588"
+                    },
+                    {
+                      "availability": "Open access",
+                      "availabilityCode": "OA",
+                      "documentStyle": "pdf",
+                      "site": "Europe_PMC",
+                      "url": "https://europepmc.org/articles/PMC11341588?pdf=render"
+                    }
+                  ]
+                },
+                "isOpenAccess": "Y",
+                "inEPMC": "Y",
+                "inPMC": "Y",
+                "hasPDF": "Y",
+                "hasBook": "N",
+                "hasSuppl": "N",
+                "citedByCount": 3,
+                "hasData": "N",
+                "hasReferences": "Y",
+                "hasTextMinedTerms": "Y",
+                "hasDbCrossReferences": "N",
+                "hasLabsLinks": "N",
+                "license": "cc by-nc",
+                "hasEvaluations": "N",
+                "authMan": "N",
+                "epmcAuthMan": "N",
+                "nihAuthMan": "N",
+                "hasTMAccessionNumbers": "N",
+                "dateOfCompletion": "2024-08-22",
+                "dateOfCreation": "2024-05-23",
+                "firstIndexDate": "2024-05-24",
+                "fullTextReceivedDate": "2025-02-04",
+                "dateOfRevision": "2024-08-25",
+                "electronicPublicationDate": "2024-05-23",
+                "firstPublicationDate": "2024-05-23"
+              }
+            },
+            {
+              "source": "litsense",
+              "doc_id": "PMID:25446059#INTRO-d1b1aae3",
+              "title": null,
+              "text": "Dr Maron: The elevation in alkaline phosphatase and total bilirubin with a normal alanine aminotransferase may suggest a cholestatic pattern of hepatic injury. In the absence of primary liver disease or laboratory patterns indicative of alcohol-induced hepatitis, congestive hepatopathy resulting from elevated right-sided pressure is the likely cause of cholestasis, and this possibility is supported by the examination finding of pulsatile liver, which indicates that the mechanism of congestion is likely related to tricuspid regurgitation.",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/25446059/",
+              "score": 0.7372501278646764,
+              "raw": {
+                "annotations": [
+                  "355|11|disease|MESH:D002779",
+                  "144|14|disease|MESH:D056486",
+                  "82|24|gene|2875",
+                  "121|11|disease|MESH:D002779",
+                  "237|7|chemical|MESH:D000438",
+                  "487|10|disease|MESH:D002311",
+                  "186|13|disease|MESH:D008107",
+                  "264|22|disease|MESH:D002311",
+                  "58|9|chemical|MESH:D001663",
+                  "519|23|disease|MESH:D014262",
+                  "253|9|disease|MESH:D056486"
+                ],
+                "pmcid": "PMC4255914",
+                "pmid": 25446059,
+                "section": "INTRO",
+                "score": 0.7372501278646764,
+                "text": "Dr Maron: The elevation in alkaline phosphatase and total bilirubin with a normal alanine aminotransferase may suggest a cholestatic pattern of hepatic injury. In the absence of primary liver disease or laboratory patterns indicative of alcohol-induced hepatitis, congestive hepatopathy resulting from elevated right-sided pressure is the likely cause of cholestasis, and this possibility is supported by the examination finding of pulsatile liver, which indicates that the mechanism of congestion is likely related to tricuspid regurgitation."
+              }
+            },
+            {
+              "source": "europe_pmc",
+              "doc_id": "PMCID:PMC12974566",
+              "title": "Research Communications of the 34th ECVIM-CA Congress 18-20 September 2025 Maastricht Exhibition & Conference Centre Maastricht, Netherlands",
+              "text": "Research Communications of the 34th ECVIM-CA Congress 18-20 September 2025 Maastricht Exhibition & Conference Centre Maastricht, Netherlands",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12974566/",
+              "score": null,
+              "raw": {
+                "id": "PMC12974566",
+                "source": "PMC",
+                "pmcid": "PMC12974566",
+                "fullTextIdList": {
+                  "fullTextId": [
+                    "PMC12974566"
+                  ]
+                },
+                "title": "Research Communications of the 34th ECVIM-CA Congress 18-20 September 2025 Maastricht Exhibition & Conference Centre Maastricht, Netherlands",
+                "journalInfo": {
+                  "issue": "1",
+                  "volume": "40",
+                  "journalIssueId": 4132712,
+                  "dateOfPublication": "2026 Jan",
+                  "monthOfPublication": 1,
+                  "yearOfPublication": 2026,
+                  "printPublicationDate": "2026-01-01",
+                  "journal": {
+                    "title": "Journal of veterinary internal medicine",
+                    "medlineAbbreviation": "J Vet Intern Med",
+                    "isoabbreviation": "J Vet Intern Med",
+                    "essn": "1939-1676",
+                    "issn": "0891-6640",
+                    "nlmid": "8708660"
+                  }
+                },
+                "pubYear": "2026",
+                "language": "eng",
+                "pubModel": "Undetermined",
+                "pubTypeList": {
+                  "pubType": [
+                    "Abstract"
+                  ]
+                },
+                "fullTextUrlList": {
+                  "fullTextUrl": [
+                    {
+                      "availability": "Free",
+                      "availabilityCode": "F",
+                      "documentStyle": "html",
+                      "site": "PubMedCentral",
+                      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12974566/?tool=EBI"
+                    },
+                    {
+                      "availability": "Free",
+                      "availabilityCode": "F",
+                      "documentStyle": "pdf",
+                      "site": "PubMedCentral",
+                      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12974566/pdf/?tool=EBI"
+                    },
+                    {
+                      "availability": "Free",
+                      "availabilityCode": "F",
+                      "documentStyle": "html",
+                      "site": "Europe_PMC",
+                      "url": "https://europepmc.org/articles/PMC12974566"
+                    },
+                    {
+                      "availability": "Free",
+                      "availabilityCode": "F",
+                      "documentStyle": "pdf",
+                      "site": "Europe_PMC",
+                      "url": "https://europepmc.org/articles/PMC12974566?pdf=render"
+                    }
+                  ]
+                },
+                "isOpenAccess": "Y",
+                "inEPMC": "Y",
+                "inPMC": "Y",
+                "hasPDF": "Y",
+                "hasBook": "N",
+                "hasSuppl": "N",
+                "citedByCount": 0,
+                "hasData": "N",
+                "hasReferences": "N",
+                "hasTextMinedTerms": "N",
+                "hasDbCrossReferences": "N",
+                "hasLabsLinks": "N",
+                "license": "cc by-nc",
+                "hasEvaluations": "N",
+                "authMan": "N",
+                "epmcAuthMan": "N",
+                "nihAuthMan": "N",
+                "hasTMAccessionNumbers": "N",
+                "dateOfCreation": "2026-03-11",
+                "firstIndexDate": "2026-03-11",
+                "fullTextReceivedDate": "2026-03-11",
+                "dateOfRevision": "2026-03-11",
+                "electronicPublicationDate": "2026-01-01",
+                "firstPublicationDate": "2026-01-01"
+              }
+            },
+            {
+              "source": "litsense",
+              "doc_id": "PMID:39606557#TITLEABSTRACT-f7c6e282",
+              "title": null,
+              "text": "Liver dysfunction as a rare presentation of ICD lead-induced tricuspid regurgitation: a case report Abstract Background Implanted cardiac devices with right ventricular leads can cause tricuspid regurgitation and subsequent heart failure. In these patients, congestive hepatopathy because of tricuspid regurgitation is well documented; however, the presentation of liver dysfunction without overt heart failure is rare. Case summary We report a case of a 56-year-old man with presumed hypertrophic cardiomyopathy, presenting with jaundice without signs of decompensated heart failure, 8 years post-implantation of dual-chamber implantable cardiac defibrillator (ICD). A workup for abnormal liver function, including a liver biopsy, determined congestive hepatopathy as the cause. Cardiac imaging revealed severe tricuspid regurgitation caused by right ventricular ICD lead causing tricuspid valve malposition. Management included both tricuspid valve replacement and extraction of ICD, and there was an excellent recovery. Discussion This is a rare case where severe tricuspid regurgitation and congestive hepatopathy secondary to an ICD lead presented with jaundice in the absence of signs of decompensated heart failure. In patients with an implanted cardiac device presenting with signs of liver dysfunction, congestive hepatopathy secondary to tricuspid regurgitation should be considered.",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/39606557/",
+              "score": 0.7298147657539018,
+              "raw": {
+                "annotations": [
+                  "61|23|disease|MESH:D014262",
+                  "0|17|disease|MESH:D017093",
+                  "248|8|species|9606",
+                  "365|17|disease|MESH:D017093",
+                  "185|23|disease|MESH:D014262",
+                  "397|13|disease|MESH:D006333",
+                  "258|22|disease|MESH:D002311",
+                  "292|23|disease|MESH:D014262",
+                  "224|13|disease|MESH:D006333",
+                  "681|23|disease|MESH:D056486",
+                  "743|22|disease|MESH:D002311",
+                  "812|23|disease|MESH:D014262",
+                  "881|27|disease|MESH:D014262",
+                  "570|13|disease|MESH:D006333",
+                  "627|11|chemical|-",
+                  "467|3|species|None",
+                  "530|8|disease|MESH:D007565",
+                  "485|27|disease|MESH:D002312",
+                  "1226|8|species|9606",
+                  "1312|22|disease|MESH:D002311",
+                  "1134|3|chemical|-",
+                  "1208|13|disease|MESH:D006333",
+                  "1158|8|disease|MESH:D007565",
+                  "1095|22|disease|MESH:D002311",
+                  "1293|17|disease|MESH:D017093",
+                  "1348|23|disease|MESH:D014262",
+                  "1067|23|disease|MESH:D014262"
+                ],
+                "pmcid": "PMC11600958",
+                "pmid": 39606557,
+                "section": "TITLEABSTRACT",
+                "score": 0.7298147657539018,
+                "text": "Liver dysfunction as a rare presentation of ICD lead-induced tricuspid regurgitation: a case report Abstract Background Implanted cardiac devices with right ventricular leads can cause tricuspid regurgitation and subsequent heart failure. In these patients, congestive hepatopathy because of tricuspid regurgitation is well documented; however, the presentation of liver dysfunction without overt heart failure is rare. Case summary We report a case of a 56-year-old man with presumed hypertrophic cardiomyopathy, presenting with jaundice without signs of decompensated heart failure, 8 years post-implantation of dual-chamber implantable cardiac defibrillator (ICD). A workup for abnormal liver function, including a liver biopsy, determined congestive hepatopathy as the cause. Cardiac imaging revealed severe tricuspid regurgitation caused by right ventricular ICD lead causing tricuspid valve malposition. Management included both tricuspid valve replacement and extraction of ICD, and there was an excellent recovery. Discussion This is a rare case where severe tricuspid regurgitation and congestive hepatopathy secondary to an ICD lead presented with jaundice in the absence of signs of decompensated heart failure. In patients with an implanted cardiac device presenting with signs of liver dysfunction, congestive hepatopathy secondary to tricuspid regurgitation should be considered."
+              }
+            },
+            {
+              "source": "europe_pmc",
+              "doc_id": "PMCID:PMC13540732",
+              "title": "2026 ACVIM Forum Research Abstract Program June 10 – October 31, 2026 Seattle, Washington",
+              "text": "2026 ACVIM Forum Research Abstract Program June 10 – October 31, 2026 Seattle, Washington",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13540732/",
+              "score": null,
+              "raw": {
+                "id": "PMC13540732",
+                "source": "PMC",
+                "pmcid": "PMC13540732",
+                "fullTextIdList": {
+                  "fullTextId": [
+                    "PMC13540732"
+                  ]
+                },
+                "title": "2026 ACVIM Forum Research Abstract Program June 10 – October 31, 2026 Seattle, Washington",
+                "journalInfo": {
+                  "issue": "5",
+                  "volume": "40",
+                  "journalIssueId": 4260678,
+                  "dateOfPublication": "2026 Jan",
+                  "monthOfPublication": 1,
+                  "yearOfPublication": 2026,
+                  "printPublicationDate": "2026-01-01",
+                  "journal": {
+                    "title": "Journal of veterinary internal medicine",
+                    "medlineAbbreviation": "J Vet Intern Med",
+                    "isoabbreviation": "J Vet Intern Med",
+                    "essn": "1939-1676",
+                    "issn": "0891-6640",
+                    "nlmid": "8708660"
+                  }
+                },
+                "pubYear": "2026",
+                "language": "eng",
+                "pubModel": "Undetermined",
+                "pubTypeList": {
+                  "pubType": [
+                    "Abstract"
+                  ]
+                },
+                "fullTextUrlList": {
+                  "fullTextUrl": [
+                    {
+                      "availability": "Free",
+                      "availabilityCode": "F",
+                      "documentStyle": "html",
+                      "site": "PubMedCentral",
+                      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC13540732/?tool=EBI"
+                    },
+                    {
+                      "availability": "Free",
+                      "availabilityCode": "F",
+                      "documentStyle": "pdf",
+                      "site": "PubMedCentral",
+                      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC13540732/pdf/?tool=EBI"
+                    },
+                    {
+                      "availability": "Free",
+                      "availabilityCode": "F",
+                      "documentStyle": "html",
+                      "site": "Europe_PMC",
+                      "url": "https://europepmc.org/articles/PMC13540732"
+                    },
+                    {
+                      "availability": "Free",
+                      "availabilityCode": "F",
+                      "documentStyle": "pdf",
+                      "site": "Europe_PMC",
+                      "url": "https://europepmc.org/articles/PMC13540732?pdf=render"
+                    }
+                  ]
+                },
+                "isOpenAccess": "Y",
+                "inEPMC": "Y",
+                "inPMC": "Y",
+                "hasPDF": "Y",
+                "hasBook": "N",
+                "hasSuppl": "N",
+                "citedByCount": 0,
+                "hasData": "N",
+                "hasReferences": "N",
+                "hasTextMinedTerms": "N",
+                "hasDbCrossReferences": "N",
+                "hasLabsLinks": "N",
+                "license": "cc by-nc",
+                "hasEvaluations": "N",
+                "authMan": "N",
+                "epmcAuthMan": "N",
+                "nihAuthMan": "N",
+                "hasTMAccessionNumbers": "N",
+                "dateOfCreation": "2026-09-11",
+                "firstIndexDate": "2026-09-11",
+                "fullTextReceivedDate": "2026-09-11",
+                "dateOfRevision": "2026-09-11",
+                "electronicPublicationDate": "2026-01-01",
+                "firstPublicationDate": "2026-01-01"
+              }
+            },
+            {
+              "source": "litsense",
+              "doc_id": "PMID:26886619#DISCUSS-f12dc798",
+              "title": null,
+              "text": "An obvious caveat in interpreting the results of our study is that abnormal levels of serum liver enzymes may be present in patients with acute HF, possibly due either to the coexistence of cardiac hepatopathy or to the use of some potentially hepatotoxic drugs (such as amiodarone or warfarin). Cardiac hepatopathy describes any liver damage caused by cardiac disorders in the absence of other possible causes of liver damage. Although there is no consensus on the terminology used, cardiac hepatopathy can be subdivided into two forms: congestive hepatopathy and cardiogenic ischemic hepatitis. Both of these forms may have a prognostic value for identifying CHD death and events. Congestive hepatopathy is caused by passive venous congestion of the liver that generally occurs in the setting of chronic cardiac conditions such as chronic HF, constrictive pericarditis, tricuspid regurgitation, or right-sided HF of any cause. Cardiogenic ischemic hepatitis is most commonly associated with acute cardiocirculatory failure, resulting from acute myocardial infarction, or myocarditis. These 2 forms of cardiac hepatopathy exhibit different histologic findings. In addition, primary laboratory findings of congestive hepatopathy are moderately elevated serum cholestasis markers (ie, GGT, bilirubin, alkaline phosphatase), whereas cardiogenic ischemic hepatitis typically exhibits a striking elevation in serum aminotransferase and lactate dehydrogenase levels, mimicking acute hepatitis of viral or…",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/26886619/",
+              "score": 0.7216365280408276,
+              "raw": {
+                "annotations": [
+                  "565|30|disease|MESH:D013575",
+                  "296|19|disease|MESH:D006331",
+                  "353|17|disease|MESH:D006331",
+                  "285|8|chemical|MESH:D014859",
+                  "124|8|species|9606",
+                  "414|12|disease|MESH:D056486",
+                  "872|23|disease|MESH:D014262",
+                  "841|2|disease|MESH:D006333",
+                  "1206|22|disease|MESH:D002311",
+                  "683|22|disease|MESH:D002311",
+                  "929|30|disease|MESH:D013575",
+                  "244|17|disease|MESH:D000081015",
+                  "727|30|disease|MESH:D006940",
+                  "806|18|disease|MESH:D006331",
+                  "1284|3|gene|2678",
+                  "271|10|chemical|MESH:D000638",
+                  "144|2|disease|MESH:D006333",
+                  "1259|11|disease|MESH:D002779",
+                  "1041|27|disease|MESH:D009203",
+                  "1289|9|chemical|MESH:D001663",
+                  "845|25|disease|MESH:D010494",
+                  "661|3|disease|MESH:D003327",
+                  "912|2|disease|MESH:D006333",
+                  "330|12|disease|MESH:D056486",
+                  "538|22|disease|MESH:D002311",
+                  "999|17|disease|None",
+                  "1478|9|disease|MESH:D056486",
+                  "190|19|disease|MESH:D006331",
+                  "1331|30|disease|MESH:D013575",
+                  "484|19|disease|MESH:D006331",
+                  "1103|19|disease|MESH:D006331",
+                  "1073|11|disease|MESH:D009205"
+                ],
+                "pmcid": "PMC4998619",
+                "pmid": 26886619,
+                "section": "DISCUSS",
+                "score": 0.7216365280408276,
+                "text": "An obvious caveat in interpreting the results of our study is that abnormal levels of serum liver enzymes may be present in patients with acute HF, possibly due either to the coexistence of cardiac hepatopathy or to the use of some potentially hepatotoxic drugs (such as amiodarone or warfarin). Cardiac hepatopathy describes any liver damage caused by cardiac disorders in the absence of other possible causes of liver damage. Although there is no consensus on the terminology used, cardiac hepatopathy can be subdivided into two forms: congestive hepatopathy and cardiogenic ischemic hepatitis. Both of these forms may have a prognostic value for identifying CHD death and events. Congestive hepatopathy is caused by passive venous congestion of the liver that generally occurs in the setting of chronic cardiac conditions such as chronic HF, constrictive pericarditis, tricuspid regurgitation, or right-sided HF of any cause. Cardiogenic ischemic hepatitis is most commonly associated with acute cardiocirculatory failure, resulting from acute myocardial infarction, or myocarditis. These 2 forms of cardiac hepatopathy exhibit different histologic findings. In addition, primary laboratory findings of congestive hepatopathy are moderately elevated serum cholestasis markers (ie, GGT, bilirubin, alkaline phosphatase), whereas cardiogenic ischemic hepatitis typically exhibits a striking elevation in serum aminotransferase and lactate dehydrogenase levels, mimicking acute hepatitis of viral or toxic cause."
+              }
+            },
+            {
+              "source": "europe_pmc",
+              "doc_id": "PMID:35140941",
+              "title": "Hemodynamic variation is a dominant contributing factor of Graves' hyperthyroidism complication: Heart failure and fatal liver dysfunction, a case report and analysis.",
+              "text": "Tachycardia and atrial fibrillation, early symptoms of hyperthyroidism indicate significant hemodynamic variation in cardiovascular system, if left untreated and further deterioration in hemodynamics can result in chronic heart failure and liver dysfunction even a fatal event. We describe a female patient of Graves' hyperthyroidism to present the continuum of the pathophysiology development of the disease, to highlight the hemodynamic variation is a dominant contributing factor of Graves' hyperthyroidism complication, we wish to emphasize cardiac manifestations in the setting of thyrotoxicosis should be treated promptly and aggressively.",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/35140941/",
+              "score": null,
+              "raw": {
+                "id": "35140941",
+                "source": "MED",
+                "pmid": "35140941",
+                "pmcid": "PMC8813664",
+                "fullTextIdList": {
+                  "fullTextId": [
+                    "PMC8813664"
+                  ]
+                },
+                "doi": "10.1002/ccr3.5289",
+                "title": "Hemodynamic variation is a dominant contributing factor of Graves' hyperthyroidism complication: Heart failure and fatal liver dysfunction, a case report and analysis.",
+                "authorString": "Li Z, Wang J, Zeng J, Xue J, Li X, Su J, Fang Y.",
+                "authorList": {
+                  "author": [
+                    {
+                      "fullName": "Li Z",
+                      "firstName": "Zhiyuan",
+                      "lastName": "Li",
+                      "initials": "Z",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0000-0002-1959-5820"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Department of Endocrinology and Metabolism Fifth Medical Center of Chinese PLA General Hospital Beijing China."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Wang J",
+                      "firstName": "Jinjing",
+                      "lastName": "Wang",
+                      "initials": "J",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0000-0003-0805-580X"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Department of Endocrinology and Metabolism Fifth Medical Center of Chinese PLA General Hospital Beijing China."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Zeng J",
+                      "firstName": "Jing",
+                      "lastName": "Zeng",
+                      "initials": "J",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0000-0003-0569-2002"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Department of Endocrinology and Metabolism Fifth Medical Center of Chinese PLA General Hospital Beijing China."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Xue J",
+                      "firstName": "Jian",
+                      "lastName": "Xue",
+                      "initials": "J",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0000-0002-4337-1704"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Department of Cardiovascular Medicine Fifth Medical Center of Chinese PLA General Hospital Beijing China."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Li X",
+                      "firstName": "Xinyu",
+                      "lastName": "Li",
+                      "initials": "X",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0000-0001-8124-5533"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Department of Preventive Medicine, School of Public Health Capital Medical University Beijing China."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Su J",
+                      "firstName": "Jianbing",
+                      "lastName": "Su",
+                      "initials": "J",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0000-0001-6526-9623"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Outpatient Department Fifth Medical Center of Chinese PLA General Hospital Beijing China."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Fang Y",
+                      "firstName": "Yi",
+                      "lastName": "Fang",
+                      "initials": "Y",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Department of Endocrinology and Metabolism Fifth Medical Center of Chinese PLA General Hospital Beijing China."
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                "authorIdList": {
+                  "authorId": [
+                    {
+                      "type": "ORCID",
+                      "value": "0000-0001-6526-9623"
+                    },
+                    {
+                      "type": "ORCID",
+                      "value": "0000-0001-8124-5533"
+                    },
+                    {
+                      "type": "ORCID",
+                      "value": "0000-0002-1959-5820"
+                    },
+                    {
+                      "type": "ORCID",
+                      "value": "0000-0002-4337-1704"
+                    },
+                    {
+                      "type": "ORCID",
+                      "value": "0000-0003-0569-2002"
+                    },
+                    {
+                      "type": "ORCID",
+                      "value": "0000-0003-0805-580X"
+                    }
+                  ]
+                },
+                "journalInfo": {
+                  "issue": "2",
+                  "volume": "10",
+                  "journalIssueId": 3307942,
+                  "dateOfPublication": "2022 Feb",
+                  "monthOfPublication": 2,
+                  "yearOfPublication": 2022,
+                  "printPublicationDate": "2022-02-01",
+                  "journal": {
+                    "title": "Clinical case reports",
+                    "medlineAbbreviation": "Clin Case Rep",
+                    "isoabbreviation": "Clin Case Rep",
+                    "essn": "2050-0904",
+                    "issn": "2050-0904",
+                    "nlmid": "101620385"
+                  }
+                },
+                "pubYear": "2022",
+                "pageInfo": "e05289",
+                "abstractText": "Tachycardia and atrial fibrillation, early symptoms of hyperthyroidism indicate significant hemodynamic variation in cardiovascular system, if left untreated and further deterioration in hemodynamics can result in chronic heart failure and liver dysfunction even a fatal event. We describe a female patient of Graves' hyperthyroidism to present the continuum of the pathophysiology development of the disease, to highlight the hemodynamic variation is a dominant contributing factor of Graves' hyperthyroidism complication, we wish to emphasize cardiac manifestations in the setting of thyrotoxicosis should be treated promptly and aggressively.",
+                "affiliation": "Department of Endocrinology and Metabolism Fifth Medical Center of Chinese PLA General Hospital Beijing China.",
+                "publicationStatus": "epublish",
+                "language": "eng",
+                "pubModel": "Electronic-eCollection",
+                "pubTypeList": {
+                  "pubType": [
+                    "Journal Article",
+                    "Case Reports",
+                    "case-report"
+                  ]
+                },
+                "keywordList": {
+                  "keyword": [
+                    "Atrial fibrillation",
+                    "Tachycardia",
+                    "Heart Failure",
+                    "Graves' Hyperthyroidism",
+                    "Fatal Liver Dysfunction",
+                    "Hemodynamic Variation"
+                  ]
+                },
+                "fullTextUrlList": {
+                  "fullTextUrl": [
+                    {
+                      "availability": "Open access",
+                      "availabilityCode": "OA",
+                      "documentStyle": "pdf",
+                      "site": "Unpaywall",
+                      "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/ccr3.5289"
+                    },
+                    {
+                      "availability": "Subscription required",
+                      "availabilityCode": "S",
+                      "documentStyle": "doi",
+                      "site": "DOI",
+                      "url": "https://doi.org/10.1002/ccr3.5289"
+                    },
+                    {
+                      "availability": "Open access",
+                      "availabilityCode": "OA",
+                      "documentStyle": "html",
+                      "site": "Europe_PMC",
+                      "url": "https://europepmc.org/articles/PMC8813664"
+                    },
+                    {
+                      "availability": "Open access",
+                      "availabilityCode": "OA",
+                      "documentStyle": "pdf",
+                      "site": "Europe_PMC",
+                      "url": "https://europepmc.org/articles/PMC8813664?pdf=render"
+                    }
+                  ]
+                },
+                "commentCorrectionList": {
+                  "commentCorrection": [
+                    {
+                      "id": "35664518",
+                      "source": "MED",
+                      "reference": "Clin Case Rep. 2022 May 27;10(5):e05763. doi: 10.1002/ccr3.5763",
+                      "type": "Erratum in",
+                      "orderIn": 1
+                    }
+                  ]
+                },
+                "isOpenAccess": "Y",
+                "inEPMC": "Y",
+                "inPMC": "Y",
+                "hasPDF": "Y",
+                "hasBook": "N",
+                "hasSuppl": "N",
+                "citedByCount": 3,
+                "hasData": "N",
+                "hasReferences": "Y",
+                "hasTextMinedTerms": "Y",
+                "hasDbCrossReferences": "N",
+                "hasLabsLinks": "N",
+                "license": "cc by-nc-nd",
+                "hasEvaluations": "N",
+                "authMan": "N",
+                "epmcAuthMan": "N",
+                "nihAuthMan": "N",
+                "hasTMAccessionNumbers": "N",
+                "dateOfCreation": "2022-02-10",
+                "firstIndexDate": "2022-02-11",
+                "fullTextReceivedDate": "2025-02-04",
+                "dateOfRevision": "2024-08-22",
+                "electronicPublicationDate": "2022-02-03",
+                "firstPublicationDate": "2022-02-03"
+              }
+            },
+            {
+              "source": "litsense",
+              "doc_id": "PMID:34869957#METHODS-739a3774",
+              "title": null,
+              "text": "Congestive hepatopathy typically manifests with jaundice, ascites, edema, hepatomegaly, hepatojugular reflux, pulsatile liver (when associated with tricuspid valve regurgitation), and a cholestatic laboratory pattern (ie, increased serum gamma-glutamyl-transpeptidase, alkaline phosphatase, and bilirubin) with normal or mildly increased transaminases. The severity of cholestasis typically correlates with the severity of HF and implies significant prognostic values; total bilirubin is a strong predictor of adverse outcomes, such as all-cause mortality, cardiovascular mortality, and HF hospitalization.",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/34869957/",
+              "score": 0.7208325078298101,
+              "raw": {
+                "annotations": [
+                  "423|2|disease|MESH:D006333",
+                  "369|11|disease|MESH:D002779",
+                  "48|8|disease|MESH:D007565",
+                  "67|5|disease|MESH:D004487",
+                  "58|7|disease|MESH:D001201",
+                  "186|11|disease|MESH:D002779",
+                  "0|22|disease|MESH:D002311",
+                  "475|9|chemical|MESH:D001663",
+                  "238|29|gene|102724197",
+                  "295|9|chemical|MESH:D001663",
+                  "148|29|disease|MESH:D014262",
+                  "74|12|disease|MESH:D006529",
+                  "110|15|disease|MESH:D017093",
+                  "102|6|disease|MESH:D005764",
+                  "587|2|disease|MESH:D006333"
+                ],
+                "pmcid": "PMC8617573",
+                "pmid": 34869957,
+                "section": "METHODS",
+                "score": 0.7208325078298101,
+                "text": "Congestive hepatopathy typically manifests with jaundice, ascites, edema, hepatomegaly, hepatojugular reflux, pulsatile liver (when associated with tricuspid valve regurgitation), and a cholestatic laboratory pattern (ie, increased serum gamma-glutamyl-transpeptidase, alkaline phosphatase, and bilirubin) with normal or mildly increased transaminases. The severity of cholestasis typically correlates with the severity of HF and implies significant prognostic values; total bilirubin is a strong predictor of adverse outcomes, such as all-cause mortality, cardiovascular mortality, and HF hospitalization."
+              }
+            }
+          ],
+          "per_source_counts": {
+            "europe_pmc": 4,
+            "litsense": 4
+          },
+          "errors": [],
+          "latency_ms": 8263.829041039571
+        },
+        "retriever_parameters": {
+          "multi_part": false,
+          "query": "What is her serum total bilirubin level?",
+          "path": "literature",
+          "retrieval_performed": true,
+          "literature_query": "serum total bilirubin tricuspid regurgitation congestive hepatopathy elderly female",
+          "sources": [
+            "europe_pmc",
+            "litsense"
+          ],
+          "max_documents": 8,
+          "max_doc_chars": 1500,
+          "dedupe": {
+            "by_identifier": true,
+            "near_duplicate_text_jaccard": 0.9
+          },
+          "ranking": "round_robin_interleave; source-native order within each source",
+          "per_source": {
+            "europe_pmc": {
+              "endpoint": "https://www.ebi.ac.uk/europepmc/webservices/rest/search",
+              "request_params": {
+                "query": "serum total bilirubin tricuspid regurgitation congestive hepatopathy elderly female",
+                "resultType": "core",
+                "pageSize": "10",
+                "format": "json",
+                "synonym": "false",
+                "cursorMark": "*"
+              },
+              "page_size": 10,
+              "result_type": "core",
+              "filters": {
+                "open_access_only": false,
+                "full_text_only": false
+              },
+              "sort": null,
+              "synonym": false,
+              "timeout_s": 20.0,
+              "max_retries": 3,
+              "backoff_base_s": 1.0,
+              "min_interval_s": 0.0,
+              "cache_enabled": false,
+              "cache_hit": false
+            },
+            "litsense": {
+              "endpoint": "https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/passages/",
+              "request_params": {
+                "query": "serum total bilirubin tricuspid regurgitation congestive hepatopathy elderly female",
+                "rerank": "true"
+              },
+              "result_type": "passages",
+              "rerank": true,
+              "max_results": 10,
+              "filters": null,
+              "timeout_s": 30.0,
+              "max_retries": 3,
+              "backoff_base_s": 1.0,
+              "min_interval_s": 1.0,
+              "cache_enabled": false,
+              "cache_hit": false,
+              "no_match": false
+            }
+          },
+          "raw_counts": {
+            "europe_pmc": 10,
+            "litsense": 10
+          },
+          "failed_sources": []
+        },
+        "used_llm": "deepseek/deepseek-v4-flash-0731",
+        "answer_source": "literature",
+        "evidence": [
+          "PMID:34869957#METHODS-739a3774",
+          "PMID:25446059#INTRO-d1b1aae3",
+          "PMID:26886619#DISCUSS-f12dc798"
+        ],
+        "confidence": "medium",
+        "llm_calls": [
+          {
+            "stage": "resolver",
+            "model": "deepseek/deepseek-v4-flash-0731",
+            "prompt_tokens": 823,
+            "completion_tokens": 132,
+            "latency_ms": 7602.009666967206,
+            "attempt": 1,
+            "purpose": "initial",
+            "success": true,
+            "error": null
+          },
+          {
+            "stage": "query_builder",
+            "model": "deepseek/deepseek-v4-flash-0731",
+            "prompt_tokens": 673,
+            "completion_tokens": 229,
+            "latency_ms": 12112.619958003052,
+            "attempt": 1,
+            "purpose": "initial",
+            "success": true,
+            "error": null
+          },
+          {
+            "stage": "synthesizer",
+            "model": "deepseek/deepseek-v4-flash-0731",
+            "prompt_tokens": 2459,
+            "completion_tokens": 827,
+            "latency_ms": 39944.7608749615,
+            "attempt": 1,
+            "purpose": "initial",
+            "success": true,
+            "error": null
+          }
+        ]
+      },
+      "wall_time_s": 67.93
+    }
+  ]
+}

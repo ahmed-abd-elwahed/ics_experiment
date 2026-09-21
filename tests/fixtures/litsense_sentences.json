@@ -1,0 +1,1478 @@
+[
+    {
+        "annotations": [
+            "0|5|disease|MESH:D005334"
+        ],
+        "text": "Fever-an elevated body temperature-is a prominent feature of a wide range of disease conditions and is a common finding in intensive care, affecting up to 70% of patients in the intensive care unit (ICU).",
+        "score": 0.7539783227443695,
+        "pmcid": null,
+        "section": "abstract",
+        "pmid": 38033217
+    },
+    {
+        "annotations": [
+            "36|5|disease|MESH:D005334"
+        ],
+        "text": "For all definitions, the times when fever-range temperatures were least and most common were similar to the times when the circadian cycle results in lowest and highest body temperatures.",
+        "score": 0.7498509472608567,
+        "pmcid": "PMC7390559",
+        "section": "RESULTS",
+        "pmid": 32726264
+    },
+    {
+        "annotations": [
+            "73|5|disease|MESH:D005334",
+            "0|5|disease|MESH:D005334",
+            "40|18|disease|MESH:D000086382",
+            "197|9|disease|MESH:D007239"
+        ],
+        "text": "Fever is among the most common signs of COVID-19 infection yet detecting fever in older adults is challenging due to lower baseline body temperatures and blunted temperature changes in response to infection.",
+        "score": 0.7463671189546585,
+        "pmcid": "PMC8447344",
+        "section": "DISCUSS",
+        "pmid": 34375443
+    },
+    {
+        "annotations": [
+            "155|14|species|8524"
+        ],
+        "text": "Extreme temperatures ranged from 22-25 C on the cold side to 45-50 C on the warm side, thus allowing behavioral selection of optimal body temperatures for common lizards [between 25-40 C during field activity, ].",
+        "score": 0.7436093825101853,
+        "pmcid": "PMC7909639",
+        "section": "METHODS",
+        "pmid": 33635881
+    },
+    {
+        "annotations": [
+            "39|5|disease|MESH:D005334"
+        ],
+        "text": "Elevating core body temperature into a fever range (i.e., defined as 38.",
+        "score": 0.7434913808107376,
+        "pmcid": "PMC11346520",
+        "section": "DISCUSS",
+        "pmid": 39193043
+    },
+    {
+        "annotations": [
+            "194|11|chemical|MESH:D000082",
+            "6|5|disease|MESH:D005334"
+        ],
+        "text": "Treat fever early with antipyretics, especially in children who are more vulnerable to increased body temperature than adults, particularly in the 0-5 years age group; preventive treatment with Paracetamol is recommended before carrying out the common vaccinations.",
+        "score": 0.7434764069318771,
+        "pmcid": "PMC10969359",
+        "section": "METHODS",
+        "pmid": 38539316
+    },
+    {
+        "annotations": [
+            "291|5|disease|MESH:D005334",
+            "195|15|species|148947",
+            "281|4|species|10090",
+            "237|7|disease|None",
+            "102|4|species|10090"
+        ],
+        "text": "500 mg/kg per body weight of aqueous extracts from the seaweed were administered orally to adult male mice with body weights ranging around 24 to 30 g. From their experiment, they concluded that C. lentillifera showed a significant anti-pyretic effect as the rectal temperature of mice with fever decreased by 1.",
+        "score": 0.7419626325368881,
+        "pmcid": "PMC9498133",
+        "section": null,
+        "pmid": 36140958
+    },
+    {
+        "annotations": [
+            "50|11|disease|MESH:D003139",
+            "188|20|disease|MESH:D001424",
+            "174|5|disease|MESH:D005334",
+            "22|5|disease|MESH:D005334",
+            "252|16|disease|MESH:D014777"
+        ],
+        "text": "Studies indicate that fever which accompanies the common cold peaks at 4 p.m., and this is in agreement with other studies indicating that the elevation of body temperature, fever, due to bacterial infections is higher in the evening while that due to viral infections is more likely in the morning.",
+        "score": 0.7383992731571197,
+        "pmcid": null,
+        "section": "abstract",
+        "pmid": 17659809
+    },
+    {
+        "annotations": [
+            "98|12|disease|MESH:D005334",
+            "72|5|species|9940"
+        ],
+        "text": "Core body temperature is a common measure in the detection of stress in sheep with stress-induced hyperthermia being reported in response to a range of short-term stressors including shearing and isolation and vaginal temperature is a measure of core body temperature.",
+        "score": 0.7346152609586716,
+        "pmcid": "PMC7733987",
+        "section": "METHODS",
+        "pmid": 33330702
+    },
+    {
+        "annotations": [
+            "188|6|disease|MESH:D009325",
+            "219|6|disease|MESH:D023341",
+            "208|9|disease|MESH:D003967",
+            "243|5|disease|MESH:D000067390",
+            "136|9|disease|MESH:D010146",
+            "92|5|disease|MESH:D005334",
+            "73|7|disease|MESH:D008288",
+            "124|8|disease|MESH:D006261",
+            "177|9|disease|None",
+            "165|8|disease|MESH:D018908",
+            "272|10|disease|MESH:D000086722",
+            "229|8|disease|MESH:D000067390",
+            "284|8|disease|MESH:D003371",
+            "147|16|disease|MESH:D001068",
+            "196|8|disease|MESH:D014839"
+        ],
+        "text": "Respondents noted a wide range of symptoms thought to be associated with malaria, including fever or high body temperature, headache or body pain, lack of appetite, weakness or tiredness, nausea, vomiting or diarrhoea, chills or coldness, and cold-like symptoms including runny nose, coughing or sneezing.",
+        "score": 0.7339042842388153,
+        "pmcid": "PMC4338828",
+        "section": "RESULTS",
+        "pmid": 25884736
+    },
+    {
+        "annotations": [
+            "662|11|disease|MESH:D003139",
+            "302|5|disease|MESH:D048949",
+            "492|22|disease|MESH:D006973",
+            "366|8|disease|MESH:D000086382",
+            "351|9|disease|MESH:D007239",
+            "409|5|disease|MESH:D005334",
+            "416|11|disease|MESH:D003139",
+            "536|20|disease|MESH:D016640",
+            "429|33|disease|MESH:D012141",
+            "464|6|disease|MESH:D000163"
+        ],
+        "text": "Adjustments for confounding factors included maternal age, pre-pregnancy Body Mass Index (BMI) (Underweight, Normal weight, Overweight, and Obese), number of previous pregnancies (0 = 1,1 = >= 2), previous live births (0 = 0, 1 = >= 1), history of adverse perinatal outcomes (0 = No, 1 = Yes), type of labor (Spontaneous, Caesarean section, Induced), Infection with COVID-19 (0 = No, 1 = Yes), comorbidities (fever, common cold, upper respiratory tract infection, immuno-associated diseases, hypertensive disorders, and preexisting and gestational diabetes) (0 = No, 1 = Yes) and co-medication (NSAIDs, antibiotics, antiviral drugs, Chinese patent drugs for the common cold) (0 = No, 1 = Yes).",
+        "score": 0.7305470751044862,
+        "pmcid": "PMC11010302",
+        "section": "METHODS",
+        "pmid": 38605288
+    },
+    {
+        "annotations": [
+            "159|9|disease|MESH:D007251",
+            "104|11|disease|MESH:D003139"
+        ],
+        "text": "The ultimate goal could be not getting sick with, or recovering more quickly from, such ailments as the common cold, cough, congestion, fever, body aches, and influenza.",
+        "score": 0.7301856629693302,
+        "pmcid": "PMC10122243",
+        "section": "INTRO",
+        "pmid": 36862130
+    },
+    {
+        "annotations": [
+            "50|5|disease|MESH:D005334"
+        ],
+        "text": "Finally, an increase in body temperature within a fever range induces the expression of heat shock proteins, suggesting that newly synthesised proteins may occasionally be misfolded.",
+        "score": 0.7275991982221603,
+        "pmcid": "PMC4942670",
+        "section": null,
+        "pmid": 27445441
+    },
+    {
+        "annotations": [
+            "111|12|disease|MESH:D005334",
+            "53|11|disease|MESH:D003139"
+        ],
+        "text": "'When the body can handle itself', 'when it's just a common cold', 'when symptoms are mild', 'when there is no fever':these are the answers how respondents described the cases when ABs should not be used.",
+        "score": 0.7269421835267421,
+        "pmcid": "PMC10959511",
+        "section": "RESULTS",
+        "pmid": 38523731
+    },
+    {
+        "annotations": [
+            "121|8|species|9606",
+            "4|8|species|9606"
+        ],
+        "text": "All patients were evaluated preoperatively in the pre-anaesthesia clinic, explained the technique of anaesthesia and the patients' demographic data (age in years, gender and weight in kg) were recorded.. On arrival at the hospital, body temperature was measured and children who had manifestations of fever or common cold were postponed.",
+        "score": 0.7252114295959472,
+        "pmcid": "PMC9053896",
+        "section": "METHODS",
+        "pmid": 35497697
+    },
+    {
+        "annotations": [
+            "138|5|disease|MESH:D005334",
+            "104|9|disease|MESH:D003371",
+            "75|20|disease|MESH:D003139",
+            "115|11|disease|MESH:D010612",
+            "147|10|disease|MESH:D010146",
+            "18|8|species|9606"
+        ],
+        "text": "A large number of patients present to clinics and health centers with mild common cold symptoms such as dry cough, sore throat, low-grade fever or body aches.",
+        "score": 0.7242057315824144,
+        "pmcid": "PMC7117787",
+        "section": "RESULTS",
+        "pmid": 32259130
+    },
+    {
+        "annotations": [
+            "55|10|disease|MESH:D007239",
+            "175|5|disease|MESH:D005334",
+            "251|9|disease|MESH:D007239",
+            "119|12|disease|MESH:D007249",
+            "73|9|disease|MESH:D007251",
+            "188|11|disease|MESH:D003139"
+        ],
+        "text": "Given the established role of immune markers in common infections (e.g., influenza), and findings that have shown that inflammatory markers are elevated in individuals with a fever or the common cold, it is recommended that subjects are free of acute infection and that vital signs (e.g., body temperature, blood pressure) are within normal limits.",
+        "score": 0.7241073650121689,
+        "pmcid": "PMC6800199",
+        "section": "METHODS",
+        "pmid": 29928963
+    },
+    {
+        "annotations": [
+            "54|11|species|None",
+            "118|12|disease|MESH:D005334",
+            "71|13|chemical|MESH:D010424"
+        ],
+        "text": "Kiyatkin et al. anaesthetised adult (~460 g) male Long-Evans rats with pentobarbital and treated them with whole body hyperthermia via a warming pad for 75 min (peak temperature range 38.6 -41.",
+        "score": 0.722126339673996,
+        "pmcid": "PMC3609720",
+        "section": "DISCUSS",
+        "pmid": 21591897
+    },
+    {
+        "annotations": [
+            "97|5|disease|MESH:D005334",
+            "187|8|species|9606",
+            "178|8|disease|MESH:D007239",
+            "63|8|species|9606"
+        ],
+        "text": "Furthermore, it addresses the discussion on the maintenance of patients' body temperature within fever-range levels to amplify the anti-inflammatory HSR as an adjunctive care in infected patients, particularly in those with chronic inflammatory comorbidities.",
+        "score": 0.7214548695087433,
+        "pmcid": "PMC7403894",
+        "section": null,
+        "pmid": 32749472
+    },
+    {
+        "annotations": [
+            "156|5|disease|MESH:D005334",
+            "77|12|disease|MESH:D005334"
+        ],
+        "text": "Most notably, several clinical trials have shown that exposure to whole-body hyperthermia or hyperthermic baths that elevates core body temperature into a \"fever\" range (i.e., 38.",
+        "score": 0.7208393865823746,
+        "pmcid": "PMC11346520",
+        "section": "INTRO",
+        "pmid": 39193043
+    },
+    {
+        "annotations": [
+            "263|16|disease|MESH:D013898",
+            "303|19|disease|MESH:D017449",
+            "288|9|disease|MESH:D059246",
+            "147|23|disease|MESH:D014552",
+            "244|1|chemical|MESH:D003903",
+            "281|5|disease|MESH:D005334",
+            "7|4|disease|None"
+        ],
+        "text": "Common ADRs with incidence > 10% (occurred in at least 2 subjects) by PT included: body temperature increased, heart rate increased, feeling cold, urinary tract infection, blood pressure increased, blood lactate dehydrogenase increased, fibrin D-dimer increased, chest discomfort, fever, tachypnea, and allergic dermatitis, as shown in Table 1.",
+        "score": 0.7200897037982941,
+        "pmcid": "PMC11598743",
+        "section": "RESULTS",
+        "pmid": 39592888
+    },
+    {
+        "annotations": [
+            "49|4|chemical|-",
+            "172|5|species|9606",
+            "198|5|disease|MESH:D005334"
+        ],
+        "text": "The search range of the temperature of interest, Tmin and Tmax, was determined as follows: the maximum temperature Tmax was defined as the maximum normal temperature for a human body, considering a fever from a common cold (40  C).",
+        "score": 0.7199046963453293,
+        "pmcid": "PMC10708851",
+        "section": "METHODS",
+        "pmid": 38067779
+    },
+    {
+        "annotations": [
+            "192|8|species|9606",
+            "69|5|disease|MESH:D005334",
+            "184|7|disease|MESH:D000071072",
+            "152|5|disease|MESH:D003371",
+            "14|8|species|9606",
+            "122|8|disease|MESH:D003967"
+        ],
+        "text": "Among the 130 patients, the three most common clinical symptoms were fever with body temperature >= 38C (118/130, 90.8%), diarrhea (43/130, 33.1%), and cough (37/130, 28.5%); 80.5% of febrile patients had maximum body temperature >= 39C for 5 days of median duration (IQR 2-7 days, range: 1-90 days) prior to hospital admission.",
+        "score": 0.7195480072498321,
+        "pmcid": "PMC9489584",
+        "section": "RESULTS",
+        "pmid": 36040531
+    },
+    {
+        "annotations": [
+            "151|11|disease|MESH:D010612",
+            "164|5|disease|MESH:D003371",
+            "198|6|disease|None",
+            "216|10|disease|MESH:D018771",
+            "96|20|disease|MESH:D003139",
+            "177|9|disease|MESH:D049913",
+            "125|5|disease|MESH:D005334",
+            "232|11|disease|MESH:D063806",
+            "206|8|disease|MESH:D006261"
+        ],
+        "text": "During the 8 weeks, the subjects in both groups were asked to record the presence or absence of common cold symptoms such as fever (body temperature), sore throat, cough, nasal secretion, sniffles, sputum, headache, joint pain, and muscle ache in their diaries.",
+        "score": 0.7174236470460892,
+        "pmcid": "PMC6124826",
+        "section": "METHODS",
+        "pmid": 30202407
+    },
+    {
+        "annotations": [
+            "217|5|disease|MESH:D005334",
+            "259|18|disease|MESH:C535727",
+            "238|15|disease|MESH:D008206",
+            "230|6|disease|MESH:D000787",
+            "69|8|species|9606"
+        ],
+        "text": "Clinical indicators, laboratory indicators, and complications of the children were counted by means of electronic medical record investigation, including clinical indicators: length of stay, maximum body temperature, fever range, angina, lymphadenopathy, and hepatosplenomegaly.",
+        "score": 0.7171383899450302,
+        "pmcid": "PMC8604575",
+        "section": "METHODS",
+        "pmid": 34804192
+    },
+    {
+        "annotations": [
+            "120|11|species|None",
+            "135|12|species|None"
+        ],
+        "text": "Fever, cough, cold, headache, and body pain are very common during the rainy season, especially from Tamil month namely Aadi maasam to Maasi maasam.",
+        "score": 0.7168087766883486,
+        "pmcid": "PMC10114546",
+        "section": "RESULTS",
+        "pmid": 37091002
+    },
+    {
+        "annotations": [
+            "135|11|disease|MESH:D003139",
+            "128|5|disease|MESH:D003371",
+            "148|11|disease|MESH:D010612",
+            "222|10|disease|MESH:D010146",
+            "161|7|disease|MESH:D005221",
+            "119|7|disease|MESH:D004417",
+            "236|8|disease|MESH:D003967",
+            "170|10|disease|MESH:D002637",
+            "4|8|species|9606",
+            "209|8|disease|MESH:D006261",
+            "182|25|disease|MESH:D000857",
+            "112|5|disease|MESH:D005334"
+        ],
+        "text": "All patients were interviewed and examined to collect information on the presence of signs and symptoms such as fever, dyspnea, cough, common cold, sore throat, fatigue, chest pain, smell/taste abnormalities, headache and body aches or diarrhea.",
+        "score": 0.7167050896403903,
+        "pmcid": "PMC9068775",
+        "section": "METHODS",
+        "pmid": 35508669
+    },
+    {
+        "annotations": [
+            "126|7|disease|MESH:D005221",
+            "76|15|disease|MESH:D002637",
+            "159|9|disease|MESH:D010146",
+            "210|9|disease|MESH:D010146",
+            "412|9|disease|MESH:D010146",
+            "49|18|disease|MESH:D010612",
+            "258|18|disease|MESH:D000067390",
+            "305|25|disease|MESH:D012817",
+            "108|8|disease|MESH:D018908",
+            "92|7|disease|MESH:D004417",
+            "278|25|disease|MESH:D002637",
+            "101|5|disease|MESH:D003371",
+            "135|8|disease|MESH:D006261",
+            "383|20|disease|MESH:D012818",
+            "362|15|disease|MESH:D020250",
+            "332|6|disease|MESH:D023341",
+            "69|5|disease|MESH:D005334",
+            "340|20|disease|MESH:D000086722",
+            "118|7|disease|MESH:D063806",
+            "179|18|disease|MESH:D019547",
+            "169|4|disease|MESH:D010146",
+            "144|9|disease|MESH:D004244"
+        ],
+        "text": "They were composed of 8 common symptoms, such as dry or sore throat, fever, chest tightness/dyspnea, cough, weakness, myalgia/fatigue, headache/dizziness, and body ache/pain (eg, neck and back pain and general body ache), and 8 less common symptoms, such as cold-like symptoms, chest pain and congestion, gastrointestinal symptoms, chills, stuffy or runny nose, nausea/vomiting, and respiratory symptoms such as lung pain.",
+        "score": 0.7164584701191109,
+        "pmcid": "PMC7537723",
+        "section": "RESULTS",
+        "pmid": 32936770
+    },
+    {
+        "annotations": [
+            "33|5|disease|MESH:D005334"
+        ],
+        "text": "Elevation in body temperature to fever range enhances and prolongs subsequent responsiveness of macrophages to endotoxin challenge.",
+        "score": 0.7148243606090545,
+        "pmcid": "PMC3254634",
+        "section": "title",
+        "pmid": 22253887
+    },
+    {
+        "annotations": null,
+        "text": "This hypothesis proposed that: (i) for each species, maximum adult body size reflects an equilibrium among developmental processes regulated by temperature, including larval growth rate and duration, maturation period of adult structures and rate of maturation processes, with maximum adult size and fecundity achieved at an optimum temperature within the thermal tolerance range; (ii) both locally and over large geographic areas, a species distribution is limited by fecundity and adult size, which gradually diminish with increasingly cold or warm temperature cycles (Sweeney, ).",
+        "score": 0.7142777198553085,
+        "pmcid": "PMC10088029",
+        "section": "INTRO",
+        "pmid": 36173002
+    },
+    {
+        "annotations": [
+            "35|11|disease|MESH:D003139",
+            "5|16|disease|MESH:D014777"
+        ],
+        "text": "Some viral infections, such as the common cold in adults, can be eliminated from the body via the body's physiological defense mechanisms without any special treatment needed, while others need intensive care and attention.",
+        "score": 0.7141437083482742,
+        "pmcid": "PMC4745851",
+        "section": "INTRO",
+        "pmid": 26893542
+    },
+    {
+        "annotations": [
+            "104|8|disease|MESH:D014839",
+            "276|8|disease|MESH:D011693",
+            "42|8|disease|MESH:D018908",
+            "351|10|disease|MESH:D012640",
+            "374|8|disease|MESH:D006470",
+            "74|20|disease|MESH:D000007",
+            "122|14|disease|MESH:D015746",
+            "55|9|disease|MESH:D010146",
+            "215|8|disease|MESH:D006261",
+            "146|5|disease|MESH:D005334",
+            "183|5|disease|MESH:D003371"
+        ],
+        "text": "Common clinical features were generalized weakness and body ache (60.9%), abdominal distention (47.8%), vomiting (36.5%), abdominal pain (26.1%), fever with chills and rigor (23.5%), cough, common cold (15.6%), and headache (10.4%), whereas less common clinical features were petechia on the skin (7.8%), poor oral intake (6.9%), loose stools (3.6%), convulsion (2.6%), and bleeding from nose (1.7%).",
+        "score": 0.7119743184888156,
+        "pmcid": "PMC10590058",
+        "section": "DISCUSS",
+        "pmid": 37868577
+    },
+    {
+        "annotations": [
+            "172|6|mutation|tmVar:c|SUB|C|-28|C",
+            "358|7|gene|171382",
+            "286|7|gene|171382",
+            "300|4|species|10090",
+            "366|4|species|10090",
+            "129|5|gene|171382",
+            "31|5|gene|171382"
+        ],
+        "text": "The relative lack of effect of TRPM8 deficiency on the changes of rectal temperature induced by hyperthermia may be explained by TRPM8 being activated by temperatures of 8 C-28 C. Under an environmental temperature at 29 C, changes in body temperature were not different between WT and TRPM8KO adult mice, whereas the core body temperature decreased more in TRPM8KO mice in a cold environment (17 C).",
+        "score": 0.7112191873788833,
+        "pmcid": "PMC10033885",
+        "section": "DISCUSS",
+        "pmid": 36969879
+    },
+    {
+        "annotations": [
+            "67|5|disease|MESH:D005334"
+        ],
+        "text": "Common ailments for which self-medication was used frequently were fever, body aches, common cold, and cough.",
+        "score": 0.711054884656647,
+        "pmcid": "PMC9936784",
+        "section": "abstract",
+        "pmid": 36819304
+    },
+    {
+        "annotations": [
+            "121|8|disease|MESH:D006261",
+            "198|6|disease|MESH:D009325",
+            "356|8|disease|MESH:D014839",
+            "206|6|disease|MESH:D023341",
+            "255|7|disease|MESH:D004417",
+            "63|12|species|9606",
+            "214|11|disease|MESH:D006331",
+            "95|7|disease|MESH:D005221",
+            "181|15|disease|MESH:D012893",
+            "305|11|disease|MESH:D002637",
+            "233|10|disease|MESH:C538390",
+            "404|8|disease|MESH:D006470",
+            "145|11|disease|MESH:D018771",
+            "131|12|disease|MESH:D063806",
+            "293|10|disease|MESH:D001523",
+            "380|13|disease|MESH:C537732",
+            "85|9|disease|None",
+            "340|14|disease|MESH:D006973",
+            "328|10|disease|MESH:D000086722",
+            "114|5|disease|MESH:D005334",
+            "104|8|disease|MESH:D004487",
+            "170|9|disease|MESH:D004244",
+            "227|4|disease|MESH:D000067390",
+            "269|6|disease|MESH:D013543",
+            "245|8|disease|None",
+            "318|8|disease|MESH:D003967",
+            "277|14|disease|MESH:D015746",
+            "366|12|disease|MESH:D017719",
+            "158|10|disease|MESH:D000077260"
+        ],
+        "text": "The most common types of side effects experienced by the study participants included tiredness/fatigue, swelling, fever, headache, muscle pains, joint pains, sleepiness, dizziness, decreased sleep, nausea, chills, heart beats, cold, dry throat, haziness, dyspnea, body sweats, abdominal pain, irritation, chest pains, diarrhea, runny nose, blood pressure, vomiting, swollen feet, bleeding gums, and nose bleeding.",
+        "score": 0.7109783335053798,
+        "pmcid": "PMC9210956",
+        "section": "DISCUSS",
+        "pmid": 35746946
+    },
+    {
+        "annotations": [
+            "129|12|disease|MESH:D007249"
+        ],
+        "text": "Therefore, purposefully increasing or maintaining core body temperature at fever range (38-39  C) levels could activate the anti-inflammatory activity of the HSR and provide and alternative treatment.",
+        "score": 0.7105366045236587,
+        "pmcid": "PMC8196476",
+        "section": null,
+        "pmid": 34186336
+    },
+    {
+        "annotations": [
+            "55|8|species|9606",
+            "9|5|disease|MESH:D005334"
+        ],
+        "text": "Notably, fever was the most common symptom among those patients, with 86.9% had a body temperature ranging from 38 to 38.",
+        "score": 0.7096961838006973,
+        "pmcid": "PMC8863294",
+        "section": "INTRO",
+        "pmid": 35194760
+    },
+    {
+        "annotations": null,
+        "text": "Body temperatures measured in adult leatherbacks are typically in the range 24 to 28 C for individuals foraging in cold high-latitude areas and 28 to 31 C for individuals tracked in the tropics.",
+        "score": 0.7086766886711121,
+        "pmcid": "PMC5528265",
+        "section": "METHODS",
+        "pmid": 28746389
+    },
+    {
+        "annotations": [
+            "93|9|disease|MESH:D010146",
+            "120|5|disease|MESH:D003371",
+            "86|5|disease|MESH:D005334",
+            "104|11|disease|MESH:D003139"
+        ],
+        "text": "A significantly greater proportion of cases (32/33; 97%) sought professional help for fever, body ache, common cold and cough experienced in the last one year compared to controls; 69/125; 55% (OR 25.97; 95% CI 3.44-196; p = 0.002); plausibly indicating more illness experiences in them.",
+        "score": 0.7078574835191888,
+        "pmcid": "PMC7717531",
+        "section": "RESULTS",
+        "pmid": 33275646
+    },
+    {
+        "annotations": [
+            "76|5|disease|MESH:D003371",
+            "69|5|disease|MESH:D005334",
+            "56|11|disease|MESH:D003139",
+            "40|11|species|11118",
+            "101|8|disease|MESH:D006261",
+            "83|7|disease|MESH:D005221",
+            "92|7|disease|MESH:D004417",
+            "111|9|disease|MESH:D010146"
+        ],
+        "text": "The primary most common symptoms of the coronavirus are common cold, fever, cough, fatigue, dyspnea, headache, body ache from mind to severe which may become fatal.",
+        "score": 0.7076531915185564,
+        "pmcid": "PMC9598046",
+        "section": "INTRO",
+        "pmid": 36313592
+    },
+    {
+        "annotations": [
+            "152|9|disease|MESH:D003371",
+            "117|21|disease|MESH:D012131",
+            "94|11|disease|MESH:D003139",
+            "232|5|disease|MESH:D005334",
+            "163|9|disease|MESH:D004244",
+            "191|10|disease|MESH:D010146",
+            "4|10|species|2697049",
+            "140|10|disease|MESH:D000086722",
+            "218|9|disease|MESH:D006261",
+            "29|11|species|12814",
+            "174|11|disease|MESH:D010612"
+        ],
+        "text": "The SARS-CoV-2 colonizes the respiratory tract system and causes symptoms similar to those of common cold, including respiratory disorders, runny nose, dry cough, dizziness, sore throat, and body aches, accompanied by headaches and fever for several days.",
+        "score": 0.7073233886086818,
+        "pmcid": "PMC7444935",
+        "section": "INTRO",
+        "pmid": 32862110
+    },
+    {
+        "annotations": [
+            "87|5|disease|MESH:D003371",
+            "19|8|disease|MESH:D000086382",
+            "94|8|disease|MESH:D006261",
+            "108|5|disease|MESH:D005334",
+            "0|6|species|9606"
+        ],
+        "text": "People infected by COVID-19 would often experience common cold-like symptoms including cough, headache, and fever, when the viruses begin to influence their bodies.",
+        "score": 0.706633258327225,
+        "pmcid": "PMC11222153",
+        "section": "INTRO",
+        "pmid": 38052940
+    },
+    {
+        "annotations": [
+            "105|5|disease|MESH:D003371",
+            "98|5|disease|MESH:D005334",
+            "131|10|disease|MESH:D010146",
+            "31|11|disease|MESH:D003139",
+            "117|8|disease|MESH:D006261",
+            "85|11|disease|MESH:D010612"
+        ],
+        "text": "Characteristic symptoms of the common cold include a runny or stuffy nose, sneezing, sore throat, fever, cough, mild headache, and body aches (Eccles,).",
+        "score": 0.7051768295894784,
+        "pmcid": "PMC8743349",
+        "section": "abstract",
+        "pmid": 35035606
+    },
+    {
+        "annotations": [
+            "142|5|species|9606"
+        ],
+        "text": "As noted in the infectious diseases section, fever is the common symptom for the proposed infectious diseases, defined as a regulated rise in human body temperature above the normal range (36.5-37.",
+        "score": 0.7048939007520676,
+        "pmcid": "PMC8229808",
+        "section": null,
+        "pmid": 34072174
+    },
+    {
+        "annotations": [
+            "114|7|disease|MESH:D005221",
+            "67|5|disease|MESH:D005334",
+            "134|20|disease|MESH:D000086722",
+            "85|20|disease|MESH:D063806",
+            "74|9|disease|MESH:D006261",
+            "123|5|disease|MESH:D003371",
+            "18|11|disease|MESH:D003139"
+        ],
+        "text": "Influenza and the common cold have similar symptoms, which include fever, headaches, muscle or body aches, severe fatigue, cough, and runny or stuffy nose.",
+        "score": 0.7048771379706972,
+        "pmcid": "PMC5549291",
+        "section": "DISCUSS",
+        "pmid": 28808580
+    },
+    {
+        "annotations": [
+            "68|7|disease|MESH:D005221",
+            "110|8|disease|None",
+            "134|4|disease|MESH:D000067390",
+            "149|9|disease|MESH:D010146",
+            "127|5|disease|MESH:D005334",
+            "140|5|disease|MESH:D003371",
+            "12|12|species|9606"
+        ],
+        "text": "Most of the participants related the symptoms to common problems of fatigue arising from work or other common ailments such as fever, cold, cough or body pain and resorted to informal help seeking and use of medicines bought over the counter (Table 3).",
+        "score": 0.7032751674973842,
+        "pmcid": "PMC9685046",
+        "section": "METHODS",
+        "pmid": 36466373
+    },
+    {
+        "annotations": [
+            "180|3|species|10116",
+            "96|4|species|10116",
+            "167|5|disease|MESH:D005334",
+            "153|5|species|4932",
+            "29|9|chemical|MESH:D000077239"
+        ],
+        "text": "In common with other NSAIDs, meloxicam had no influence on the body temperature of normothermic rats in the anti-inflammatory dose range, but did reduce yeast-induced fever in the rat in a dose-dependent manner.",
+        "score": 0.70311059653759,
+        "pmcid": null,
+        "section": "abstract",
+        "pmid": 8564518
+    },
+    {
+        "annotations": [
+            "151|2|chemical|-",
+            "292|20|disease|MESH:D003139"
+        ],
+        "text": "The 176 adult males, who were given an explanation about the clinical study and consented to participate in it, were randomly divided into placebo and CT groups, administered the assigned preparation daily for 5 weeks, and answered a questionnaire concerning the body temperature and various common cold symptoms daily.",
+        "score": 0.7025554329156876,
+        "pmcid": "PMC3851524",
+        "section": "INTRO",
+        "pmid": 24312747
+    },
+    {
+        "annotations": [
+            "147|20|disease|MESH:D001172",
+            "119|11|disease|MESH:D003139",
+            "181|28|disease|MESH:D010146",
+            "132|6|disease|MESH:D023341",
+            "140|5|disease|MESH:D005334",
+            "33|10|species|54724"
+        ],
+        "text": "In traditional Chinese medicine, N. incisum rhizomes are used in herbal preparations for a series of symptoms from the common cold, chills, fever, rheumatoid arthritis, and general limb or body aches and pains.",
+        "score": 0.7001657127271813,
+        "pmcid": "PMC6274203",
+        "section": "RESULTS",
+        "pmid": 27669203
+    },
+    {
+        "annotations": [
+            "186|10|disease|MESH:C538390",
+            "50|9|disease|None",
+            "123|9|disease|MESH:D004244",
+            "60|7|disease|MESH:D005221",
+            "180|4|disease|MESH:D000067390",
+            "222|6|disease|MESH:D013543",
+            "285|10|disease|MESH:D000086722",
+            "69|8|disease|MESH:D004487",
+            "110|11|disease|MESH:D018771",
+            "271|8|disease|MESH:D003967",
+            "151|6|disease|MESH:D009325",
+            "208|7|disease|MESH:D004417",
+            "230|14|disease|MESH:D015746",
+            "96|12|disease|MESH:D063806",
+            "32|12|species|9606",
+            "258|11|disease|MESH:D002637",
+            "198|8|disease|None",
+            "159|6|disease|MESH:D023341",
+            "79|5|disease|MESH:D005334",
+            "246|10|disease|MESH:D001523",
+            "86|8|disease|MESH:D006261",
+            "134|15|disease|MESH:D012893",
+            "167|11|disease|MESH:D006331"
+        ],
+        "text": "Common side effects reported by participants were tiredness/fatigue, swelling, fever, headache, muscle pains, joint pains, dizziness, decreased sleep, nausea, chills, heart beats, cold, dry throat, haziness, dyspnea, body sweats, abdominal pain, irritation, chest pains, diarrhea, and runny nose.",
+        "score": 0.699400255573861,
+        "pmcid": "PMC9210956",
+        "section": "CONCL",
+        "pmid": 35746946
+    },
+    {
+        "annotations": [
+            "71|12|disease|MESH:D005334",
+            "161|6|disease|MESH:D009369"
+        ],
+        "text": "Raising the temperature to higher-than-normal body temperature (in the hyperthermia range, 41-45  C) can be used to increase the effectiveness of other types of cancer treatments (such as radiation therapy or chemotherapy), thus enabling a combined treatment approach.",
+        "score": 0.6987087470293045,
+        "pmcid": "PMC9688087",
+        "section": "INTRO",
+        "pmid": 36428778
+    },
+    {
+        "annotations": [
+            "114|5|disease|MESH:D003371",
+            "137|11|disease|MESH:D003139",
+            "95|5|disease|MESH:D005334",
+            "58|23|disease|MESH:D011538"
+        ],
+        "text": "The most frequent symptoms provoking self-medication were aches in any body parts (32, 56.1%), fever (27, 47.3%), cough (18, 31.5%), and common cold (15, 26.3%).",
+        "score": 0.6969279717051776,
+        "pmcid": "PMC9469260",
+        "section": "RESULTS",
+        "pmid": 36110747
+    },
+    {
+        "annotations": [
+            "157|4|disease|MESH:D010146",
+            "138|5|disease|MESH:D003371",
+            "105|8|disease|MESH:D014839",
+            "145|5|disease|MESH:D005334"
+        ],
+        "text": "During the intervention period, few participants reported some minor adverse events such as indigestion, vomiting, headache, common cold, cough, fever, body pain (Table 6).",
+        "score": 0.6964152340733798,
+        "pmcid": "PMC6643110",
+        "section": "RESULTS",
+        "pmid": 31337958
+    },
+    {
+        "annotations": [
+            "443|11|disease|MESH:D018771",
+            "188|12|disease|MESH:D012871",
+            "245|13|disease|MESH:D007674",
+            "462|5|disease|MESH:D005334",
+            "456|4|disease|MESH:D000067390",
+            "214|17|disease|MESH:D008659",
+            "40|8|species|9606",
+            "138|35|disease|MESH:D002318",
+            "308|3|disease|MESH:D064420",
+            "272|19|disease|MESH:D012140",
+            "357|14|disease|MESH:D007154",
+            "343|8|species|9606",
+            "87|36|disease|MESH:D002493",
+            "336|3|disease|MESH:D000081015",
+            "33|3|disease|MESH:D000081015",
+            "473|10|disease|MESH:D010146"
+        ],
+        "text": "Nonadherence was the most common DRP in patients with past medical history followed by central nervous system (CVS) disease (18, 11.32%), cardiovascular system (CNS) disease (21, 13.20%), skin disease (10, 6.30%), metabolic disease (12, 7.54%), renal disease (12, 7.54%), respiratory disease (2, 1.26%), and ADR was the most identified DRP in patients with immune disease (8, 5.03%) and other conditions (12, 7.54%) (having complaints such as joint pains, cold, fever, and body pains).",
+        "score": 0.6962894292199489,
+        "pmcid": "PMC6791085",
+        "section": "RESULTS",
+        "pmid": 31619914
+    },
+    {
+        "annotations": [
+            "274|17|species|11552"
+        ],
+        "text": "Further studies, mostly in children, described the symptoms of influenza C infection to be indistinguishable from influenza A and B infections, although the maximum body temperature may be lower and the fever shorter compared with influenza A. In Finnish military recruits, influenza C virus caused common cold-like symptoms, but occasionally resulted in pneumonia and bronchitis.",
+        "score": 0.6962443196773529,
+        "pmcid": "PMC6415498",
+        "section": "DISCUSS",
+        "pmid": 30862333
+    },
+    {
+        "annotations": null,
+        "text": "Stress-induced hyperthermia is a common response that many mammals experience when faced with stressful stimuli, and core body temperature is a measure that can aid in quantifying stress responses in a range of animal species.",
+        "score": 0.6962347137928009,
+        "pmcid": "PMC8772971",
+        "section": "DISCUSS",
+        "pmid": 35049809
+    },
+    {
+        "annotations": [
+            "148|8|disease|MESH:D006261",
+            "171|4|disease|MESH:D010146",
+            "129|9|disease|None",
+            "210|21|disease|MESH:D000086582",
+            "185|11|disease|MESH:D010612",
+            "114|4|disease|MESH:D000067390",
+            "99|5|disease|MESH:D003371",
+            "39|5|disease|MESH:D005334"
+        ],
+        "text": "The symptomatic participants described fever as being the most common symptom (77.7%), followed by cough (50.5%), cold (48.2 %), tiredness (46.7%), headache (46.2%), body pain (36.4%), sore throat (35.6%), and anosmia or smell loss (31.3%).",
+        "score": 0.6952104632375353,
+        "pmcid": "PMC11338748",
+        "section": "RESULTS",
+        "pmid": 39176313
+    },
+    {
+        "annotations": [
+            "279|4|gene|19215",
+            "474|8|mutation|tmVar:c|SUB|C|-39|C",
+            "863|4|gene|19215",
+            "6|6|gene|25526",
+            "177|12|disease|MESH:D005334",
+            "632|4|gene|19215"
+        ],
+        "text": "While L-PGDS is expressed not only in warm-sensitive neurons but also in cold-sensitive neurons and temperature-sensitive silent neurons, we hypothesize that in the scenario of hyperthermia (~36 C and above), warm-sensitive neurons contribute mostly to the temperature-dependent PGD2 production and mediate body temperature decrease, for three reasons: 1) there are many more warm-sensitive neurons than cold-sensitive neurons (Figure 2D); 2) in the temperature range of 36 C - 39 C, cold-sensitive neurons as well as temperature-sensitive silent neurons are mostly silent (Figure 1G), hence they are unlikely to contribute much to PGD2 production given its dependence on action potential firing (Figure 4E); 3) blocking synaptic transmission to mask the cold-sensitive neurons and temperature-sensitive silent neurons did not eliminate the temperature-dependent PGD2 production (Figures 2D and 4G).",
+        "score": 0.6951974195241928,
+        "pmcid": "PMC6639135",
+        "section": "DISCUSS",
+        "pmid": 31151773
+    },
+    {
+        "annotations": [
+            "70|14|disease|MESH:D004417",
+            "190|9|disease|MESH:D010146",
+            "98|11|disease|MESH:D003139",
+            "123|8|disease|MESH:D014839",
+            "145|8|disease|MESH:D018908",
+            "51|5|disease|MESH:D003371",
+            "32|5|disease|MESH:D005334",
+            "166|11|disease|MESH:D010146",
+            "215|10|disease|MESH:D002637"
+        ],
+        "text": "Common presenting symptoms were fever 58 (92.06%), cough 58 (92.06%), breathlessness 38 (60.31%), common cold 14 (22.22%), vomiting 12 (19.04%), weakness 9 (14.28%), throat pain 7 (11.11%), body ache 5 (7.93%), and chest pain 4 (6.34%).",
+        "score": 0.6945059161316078,
+        "pmcid": "PMC3766340",
+        "section": "RESULTS",
+        "pmid": 24049362
+    },
+    {
+        "annotations": [
+            "65|11|disease|MESH:D003139",
+            "185|5|disease|MESH:D005334",
+            "134|4|disease|MESH:D003139"
+        ],
+        "text": "The inclusion criteria are as follows: (1) meet the diagnosis of common cold according to Western medicine; (2) meet the diagnosis of CCHS according to traditional Uighur medicine; (3) fever and body temperature between 38 and 39  C; (4) symptom presenting within 24 h; (5) age between 18 and 65 years and (6) voluntarily participate and provide signed informed consent.",
+        "score": 0.6929886782169342,
+        "pmcid": "PMC6440128",
+        "section": "METHODS",
+        "pmid": 30922355
+    },
+    {
+        "annotations": [
+            "136|11|disease|MESH:D003139",
+            "37|18|disease|MESH:D000086382",
+            "353|9|chemical|MESH:D001205",
+            "149|3|disease|MESH:D007251",
+            "157|5|disease|MESH:D005334",
+            "505|17|species|119830",
+            "304|14|disease|MESH:D013927",
+            "232|12|disease|MESH:D007249"
+        ],
+        "text": "Cultural explanations for preventing COVID-19 infection emphasized plant remedies that were already known by Jamaicans to (1) treat the common cold, flu, or fever (known as virus remedies); (2) \"boost the immune system;\" (3) \"fight inflammation;\" (4) \"warm up the body;\" (5) \"remove toxins;\" (6) prevent blood clotting; (7) provide vitamins (especially vitamin C); or (8) plants considered natural and nutritious, including heirloom varieties, traditional landraces, and wild greens, such as gully beans (Solanum torvum Sw.",
+        "score": 0.6926372624957439,
+        "pmcid": "PMC7724619",
+        "section": null,
+        "pmid": 33298108
+    },
+    {
+        "annotations": [
+            "65|22|disease|MESH:D005334"
+        ],
+        "text": "These findings provide confirmation that the effects observed in hypo- and hyperthermia also occur within the clinically more common body temperature range.",
+        "score": 0.6911788165569306,
+        "pmcid": "PMC7894493",
+        "section": "DISCUSS",
+        "pmid": 33179782
+    },
+    {
+        "annotations": [
+            "247|6|species|9606",
+            "0|8|disease|MESH:D000086382",
+            "193|18|disease|MESH:D004417",
+            "370|7|disease|MESH:D009765",
+            "217|19|disease|MESH:D004417",
+            "342|6|disease|MESH:D001249",
+            "186|5|disease|MESH:D003371",
+            "350|14|disease|MESH:D006331",
+            "174|10|disease|MESH:D010146",
+            "167|5|disease|MESH:D005334",
+            "147|11|disease|MESH:D003139",
+            "22|20|disease|MESH:D000086382",
+            "332|8|disease|MESH:D003920",
+            "430|6|disease|MESH:D003643"
+        ],
+        "text": "COVID-19 is caused by SARS-CoV-2 infection, a virus with a positive single-stranded RNA genome, and its major symptoms are similar to those of the common cold such as fever, body aches, cough, breathing problems, and shortness of breath, although people aged more than 60 years old and/or those with chronic health issues including diabetes, asthma, heart diseases, and obesity have higher chances of severe illness and resulting deaths.",
+        "score": 0.6902516068102678,
+        "pmcid": "PMC8740689",
+        "section": null,
+        "pmid": 35004357
+    },
+    {
+        "annotations": [
+            "157|12|species|9606",
+            "92|16|disease|MESH:D001068",
+            "82|4|disease|MESH:D000067390",
+            "67|5|disease|MESH:D010146",
+            "45|5|disease|MESH:D005334",
+            "52|8|disease|MESH:D014839"
+        ],
+        "text": "The common signs and symptoms mentioned were fever, vomiting, body pains, feeling cold, and loss of appetite as illustrated by a quote from one of the study participants:",
+        "score": 0.6897319070813768,
+        "pmcid": "PMC8527756",
+        "section": "RESULTS",
+        "pmid": 34666733
+    },
+    {
+        "annotations": [
+            "28|7|disease|None",
+            "37|25|species|None"
+        ],
+        "text": "Using 24 populations of the potworm, Enchytraeus albidus Henle (Enchytraeidae), collected from a wide range of climatic conditions, we established a common garden experiment in which we determined high and low temperature tolerance (using survival as endpoint), average reproductive output and adult body size.",
+        "score": 0.6897194013123948,
+        "pmcid": null,
+        "section": "abstract",
+        "pmid": 35312816
+    },
+    {
+        "annotations": [
+            "112|5|disease|MESH:D003371",
+            "54|21|disease|MESH:D012141",
+            "89|10|disease|MESH:D010146",
+            "82|5|disease|MESH:D005334"
+        ],
+        "text": "The symptoms resemble those of a common cold or lower respiratory infection: mild fever, body aches, and a mild cough.",
+        "score": 0.6890229337345284,
+        "pmcid": "PMC11508864",
+        "section": null,
+        "pmid": 39452676
+    },
+    {
+        "annotations": [
+            "217|11|disease|None",
+            "231|4|disease|MESH:D000067390",
+            "307|8|disease|MESH:D006261",
+            "258|20|disease|MESH:D007251",
+            "88|3|disease|MESH:D007251",
+            "96|17|disease|MESH:D007251",
+            "320|5|disease|MESH:D005334",
+            "187|9|disease|MESH:D007251",
+            "293|12|disease|MESH:D010146",
+            "72|6|species|9606"
+        ],
+        "text": "The regular expression was built according to common insights about how people describe flu and flu-like symptoms, and can be divided into three groups, as described in Table 1: \"gripe\" (influenza) word derivations, \"constipacao\" (cold) word derivations and flu related symptoms, such as body/throat pains, headache and fever.",
+        "score": 0.6883684222543033,
+        "pmcid": "PMC4108891",
+        "section": "METHODS",
+        "pmid": 25077431
+    },
+    {
+        "annotations": [
+            "147|6|disease|MESH:D023341",
+            "25|20|disease|MESH:D000086382",
+            "155|10|disease|MESH:D010146",
+            "140|5|disease|MESH:D005334",
+            "77|8|disease|MESH:D007239",
+            "167|23|disease|MESH:D000086582",
+            "214|9|disease|MESH:D003371",
+            "192|16|disease|MESH:D009668",
+            "117|11|disease|MESH:D003139"
+        ],
+        "text": "Classic presentations of SARS-CoV-2 infection experienced by the majority of infected individuals are similar to the common cold, including fever, chills, body aches, loss of taste and smell, nasal congestion, and dry cough.",
+        "score": 0.6862421448552486,
+        "pmcid": "PMC9573263",
+        "section": "INTRO",
+        "pmid": 36258970
+    },
+    {
+        "annotations": [
+            "9|12|disease|MESH:D003139",
+            "107|5|disease|MESH:D005334",
+            "73|5|disease|MESH:D023341",
+            "64|5|disease|MESH:D005334"
+        ],
+        "text": "Although common colds in adults are not usually associated with fever, a chill can be the initial stage of fever as skin vasoconstricts, causing raised body temperature and shivering.",
+        "score": 0.6845538640022278,
+        "pmcid": "PMC9354706",
+        "section": "INTRO",
+        "pmid": 35975030
+    },
+    {
+        "annotations": [
+            "104|7|disease|None",
+            "305|9|disease|MESH:D004751",
+            "96|6|disease|MESH:D023341",
+            "9|9|disease|MESH:D005334",
+            "319|8|disease|MESH:D003967",
+            "199|11|disease|MESH:D003139",
+            "282|21|disease|MESH:D005759",
+            "191|6|disease|MESH:D018805",
+            "113|10|disease|MESH:D010146",
+            "125|14|disease|MESH:D014777",
+            "215|11|species|12814",
+            "89|5|disease|MESH:D005334"
+        ],
+        "text": "And the \"fever/flu\" syndrome captured visits with key words and ICD-9 codes representing fever, chills, malaise, body aches, viral syndrome, and influenza, which were not captured within the sepsis, common cold, or respiratory categories, and did not include key words representing acute gastroenteritis, enteritis, or diarrhea.",
+        "score": 0.6842540563666697,
+        "pmcid": "PMC1939858",
+        "section": "METHODS",
+        "pmid": 17683196
+    },
+    {
+        "annotations": [
+            "279|5|disease|MESH:D005334",
+            "312|8|disease|MESH:D003920"
+        ],
+        "text": "It should be noted that the temperature range explored is somewhat wider than physiological conditions, even in illness, but in extreme cases, the body temperature can exceed 40 C, and so, these experiments provide insight into how the systems would behave in conditions of high fever (more common in those with diabetes).",
+        "score": 0.6836269903182983,
+        "pmcid": "PMC5457184",
+        "section": "RESULTS",
+        "pmid": 28603417
+    },
+    {
+        "annotations": [
+            "9|5|species|9606",
+            "187|11|disease|MESH:D003139",
+            "146|5|disease|MESH:D005334"
+        ],
+        "text": "Pregnant women should examine their body temperature frequently and should consult a physician right away if they suffer any health problems like fever, difficulties in breathing, or the common cold.",
+        "score": 0.6735295575857163,
+        "pmcid": "PMC9195521",
+        "section": null,
+        "pmid": 34187926
+    },
+    {
+        "annotations": [
+            "88|5|disease|MESH:D005334",
+            "105|4|disease|MESH:D010146",
+            "95|8|disease|MESH:D014947",
+            "65|11|disease|MESH:D003139",
+            "214|9|disease|MESH:D000081084",
+            "78|8|disease|MESH:D006261",
+            "271|9|disease|MESH:D001168"
+        ],
+        "text": "Other health problems that required healthcare services included common cold, headache, fever, injuries, pain in body parts, menstruation-related problems, need for family planning services, hospitalization due to accidents, and chronic/long-term health problems such as arthritis.",
+        "score": 0.6690414901101467,
+        "pmcid": "PMC10953973",
+        "section": "RESULTS",
+        "pmid": 38516223
+    },
+    {
+        "annotations": null,
+        "text": "Additionally, children have a higher body surface per unit of body mass than adults, which increases the speed of heat exchange with the environment, accelerating both the heat gain in hot climates (greater risk for hyperthermia) and heat loss in cold climates (higher risk for hypothermia).",
+        "score": 0.668033568716277,
+        "pmcid": "PMC4685559",
+        "section": "DISCUSS",
+        "pmid": 26298654
+    },
+    {
+        "annotations": null,
+        "text": "The coldest temperature, 22  C, represents a cold morning in their natural range and approximates room temperature at which many experiments are run; 29  C is a common daily temperature during their active period in the field; 33  C is the preferred body temperature of this species; and 36  C is close to the maximal temperature lizards experienced in the field while avoiding effects of heat stress.",
+        "score": 0.6670495879650116,
+        "pmcid": "PMC7530705",
+        "section": "METHODS",
+        "pmid": 33004871
+    },
+    {
+        "annotations": [
+            "29|5|disease|MESH:D005334"
+        ],
+        "text": "The body temperatures during fever range from 38  C to 39.",
+        "score": 0.663754910826683,
+        "pmcid": "PMC9358111",
+        "section": "RESULTS",
+        "pmid": 35934702
+    },
+    {
+        "annotations": [
+            "134|11|disease|MESH:D003139",
+            "147|5|disease|MESH:D003371",
+            "166|5|disease|MESH:D005334",
+            "154|10|disease|MESH:D002311",
+            "3|9|disease|MESH:D007239",
+            "173|10|disease|MESH:D010146",
+            "74|27|disease|MESH:D012141",
+            "188|9|disease|MESH:D007251"
+        ],
+        "text": "An infection for this systematic review was defined as that related to an acute respiratory infection to include symptoms such as the common cold, cough, congestion, fever, body aches and influenza.",
+        "score": 0.663513666852692,
+        "pmcid": "PMC9655067",
+        "section": "METHODS",
+        "pmid": 36364865
+    },
+    {
+        "annotations": [
+            "181|11|disease|MESH:D003139",
+            "152|5|disease|MESH:D005334"
+        ],
+        "text": "However, in adults who had been exposed to numerous common cold viruses in the past, subsequent infections do not elicit a strong cytokine response and fever is a rare symptom of a common cold in adults (Eccles).",
+        "score": 0.6586015421152115,
+        "pmcid": "PMC7121097",
+        "section": null,
+        "pmid": 25786400
+    },
+    {
+        "annotations": [
+            "242|7|disease|MESH:D004342",
+            "202|4|disease|MESH:D010146",
+            "286|11|disease|MESH:D015431",
+            "263|12|disease|MESH:D003248",
+            "177|5|disease|MESH:D003371",
+            "312|9|disease|MESH:D006356",
+            "114|5|disease|MESH:D003371",
+            "87|11|disease|MESH:D003139",
+            "75|10|disease|MESH:D010146",
+            "68|5|disease|MESH:D005334",
+            "100|8|disease|MESH:D006261",
+            "221|8|disease|MESH:D003967"
+        ],
+        "text": "In addition, our findings closely resemble previous research, where fever, body aches, common cold, headache, and cough were identified as significant reasons for SM, including cough and cold remedies, pain relief drugs, diarrhea treatments, allergy medications, constipation remedies, weight loss products, and heartburn medications.",
+        "score": 0.6583151339422387,
+        "pmcid": "PMC11036244",
+        "section": "DISCUSS",
+        "pmid": 38651387
+    },
+    {
+        "annotations": [
+            "0|5|disease|MESH:D005334",
+            "122|10|disease|MESH:D010146",
+            "111|5|disease|MESH:D003371",
+            "83|8|species|9606",
+            "105|4|disease|MESH:D000067390"
+        ],
+        "text": "Fever is the most common symptom affecting 83.3% of non-Omicron and 62% of Omicron patients, followed by cold, cough, and body aches, per the findings of other studies.",
+        "score": 0.6573794753873226,
+        "pmcid": "PMC9826697",
+        "section": "DISCUSS",
+        "pmid": 36628021
+    },
+    {
+        "annotations": [
+            "11|12|disease|MESH:D005334",
+            "101|6|mutation|tmVar:c|SUB|C|-47|C",
+            "144|12|disease|MESH:D005334"
+        ],
+        "text": "Generally, hyperthermia can induce whole body or regional heating within the temperature range of 42 C-47 C and the most common means to induce hyperthermia include capacitive or inductive coupling of radiofrequency fields, ultrasound, or microwave.",
+        "score": 0.649620463848114,
+        "pmcid": "PMC3891567",
+        "section": "INTRO",
+        "pmid": 24531392
+    },
+    {
+        "annotations": [
+            "815|7|chemical|MESH:D007328",
+            "486|11|disease|MESH:D007022",
+            "509|20|disease|MESH:D012140",
+            "206|14|disease|MESH:D005517",
+            "337|6|disease|MESH:D001249",
+            "155|4|disease|MESH:D000067390",
+            "193|8|disease|MESH:D003967",
+            "531|13|disease|MESH:D008107",
+            "554|22|disease|MESH:D009461",
+            "148|5|disease|MESH:D003371",
+            "578|13|disease|MESH:D006331",
+            "241|9|disease|MESH:D014098",
+            "593|14|disease|MESH:D007674",
+            "171|8|disease|MESH:D006261",
+            "379|12|disease|MESH:D012871",
+            "456|14|disease|MESH:D007239",
+            "306|9|species|6239",
+            "278|7|disease|MESH:D014435",
+            "472|12|disease|MESH:D006973",
+            "296|8|disease|MESH:D007565",
+            "425|11|disease|MESH:D005134",
+            "351|20|disease|MESH:D012140",
+            "546|6|disease|MESH:D009369",
+            "373|4|disease|MESH:D000152",
+            "609|11|disease|MESH:D013966",
+            "252|24|disease|MESH:D043183",
+            "499|8|disease|MESH:D003920",
+            "164|5|disease|MESH:D005334",
+            "316|8|disease|MESH:D002590",
+            "839|8|chemical|MESH:D013256",
+            "181|10|disease|MESH:D018771",
+            "326|9|disease|MESH:D012852",
+            "287|7|disease|MESH:D008288",
+            "438|16|disease|MESH:D001008"
+        ],
+        "text": "Few other variables, such as body mass index (BMI) kg/m2 ((<18.5 (Underweight), 18.5-23.5 (Normal), >23.5 (Overweight)), common disease prevalence (cough, cold and fever, headache, joint pain, diarrhea and food poisoning, dental carries and toothache, irritable bowel syndrome, typhoid, malaria, jaundice, roundworm/tapeworm, sinusitis, asthma, other respiratory diseases, acne, skin allergy and none), common comorbidities (eye problem, anxiety disorder, skin infection, hypertension, hypotension, diabetes, respiratory diseases, liver disease, cancer, neurological disorders, heart disease, kidney disease, thyroiditis and none) and types of medication (antipyretics, analgesic, antibiotics, antacids and anti-ulcerants, antidiarrheal, antitussive, anti-allergic, vitamins, antiemetic, sedatives, contraceptives, insulin, beta blockers, steroids), were taken into consideration in terms of disease prevalence associated self-medication.",
+        "score": 0.6495244516456005,
+        "pmcid": "PMC9191716",
+        "section": "METHODS",
+        "pmid": 35696405
+    },
+    {
+        "annotations": [
+            "117|12|disease|MESH:D005334",
+            "105|5|disease|MESH:D005334",
+            "162|5|disease|MESH:D005334"
+        ],
+        "text": "However, elevating the ambient temperature beyond 34 C can sustainably increase core body temperature to fever-range hyperthermia, which we refer to as simulated fever.",
+        "score": 0.6492986196279525,
+        "pmcid": "PMC7618609",
+        "section": null,
+        "pmid": 41308154
+    },
+    {
+        "annotations": [
+            "24|11|disease|MESH:D003139",
+            "84|19|disease|MESH:D012818",
+            "51|8|disease|MESH:D006261",
+            "136|6|disease|MESH:D003643",
+            "44|5|disease|MESH:D005334",
+            "37|5|disease|MESH:D003371",
+            "107|5|species|9606"
+        ],
+        "text": "The symptom starts with common cold, cough, fever, headache and leads to the severe respiratory problem in human body and may cause the deaths.",
+        "score": 0.6491673396346682,
+        "pmcid": "PMC8100739",
+        "section": "INTRO",
+        "pmid": 33972809
+    },
+    {
+        "annotations": [
+            "67|5|disease|MESH:D005334"
+        ],
+        "text": "Common symptoms for which self-medication was used frequently were fever (139; 57.91), body ache (118; 49.16), common cold (109; 45.41%), and cough (99; 41.25%) (Figure 4).",
+        "score": 0.6474855555617687,
+        "pmcid": "PMC9936784",
+        "section": "RESULTS",
+        "pmid": 36819304
+    },
+    {
+        "annotations": [
+            "155|11|disease|MESH:D010612",
+            "254|5|disease|MESH:D005334",
+            "99|8|disease|MESH:D006261",
+            "225|10|disease|MESH:D000086722",
+            "109|10|disease|MESH:D010146",
+            "4|8|species|9606",
+            "86|11|disease|MESH:D003139",
+            "120|8|disease|MESH:D003668",
+            "211|11|disease|MESH:D009668",
+            "141|12|disease|MESH:D063806",
+            "168|5|disease|MESH:D003371",
+            "130|10|disease|MESH:D010146",
+            "193|16|disease|MESH:D009668",
+            "175|16|disease|MESH:D013898"
+        ],
+        "text": "The children were also required to have experienced at least one other symptom of the common cold (headache, sinus pain/pressure, body aches/muscle aches, sore throat, cough, chest congestion, nasal congestion [stuffy nose], runny nose, sneezing, or low fever).",
+        "score": 0.646547758412134,
+        "pmcid": "PMC7075834",
+        "section": "METHODS",
+        "pmid": 31858430
+    },
+    {
+        "annotations": [
+            "66|5|disease|MESH:D005334"
+        ],
+        "text": "However, the range of normal body temperature and the standard of fever differ among these studies and are usually based on studies related to specific diseases instead of normal adults in the general population.",
+        "score": 0.6380630779266357,
+        "pmcid": "PMC11551164",
+        "section": "INTRO",
+        "pmid": 39523412
+    },
+    {
+        "annotations": [
+            "0|5|disease|MESH:D005334"
+        ],
+        "text": "Fever is a common medical sign, defined by an increase in body temperature above the normal range of 36.5-37.",
+        "score": 0.630950626730919,
+        "pmcid": "PMC11565029",
+        "section": null,
+        "pmid": 39554608
+    },
+    {
+        "annotations": [
+            "117|5|disease|MESH:D005334",
+            "152|13|disease|MESH:D000370",
+            "110|5|disease|MESH:D003371",
+            "182|4|disease|MESH:D000067390",
+            "146|4|disease|MESH:D010146",
+            "206|6|disease|MESH:D009325",
+            "65|14|disease|MESH:D015746",
+            "124|15|disease|MESH:D019522",
+            "218|8|disease|MESH:D014839",
+            "81|14|disease|MESH:D004417",
+            "167|13|disease|MESH:D000086582"
+        ],
+        "text": "The study estimated that the most common symptoms occurring were Abdominal Pain, Breathlessness, Sore Throat, Cough, Fever, Nasal Discharge, Body Pain, Loss of taste, Loss of smell, Cold, General Weakness, Nausea, and Vomiting.",
+        "score": 0.629915121349084,
+        "pmcid": "PMC10774287",
+        "section": "RESULTS",
+        "pmid": 38191902
+    },
+    {
+        "annotations": [
+            "155|16|disease|MESH:D001068"
+        ],
+        "text": "In adults, its common symptoms are headaches, weakness, fever, aches and pains, high body temperature (chills and rigors) and bitterness of the mouth (and loss of appetite) while in children, in addition to the above-mentioned symptoms, it may also manifests in more than normal sleeping, nausea and vomiting.",
+        "score": 0.6256917816400528,
+        "pmcid": "PMC1890276",
+        "section": "INTRO",
+        "pmid": 17517146
+    },
+    {
+        "annotations": [
+            "106|11|disease|MESH:D003139",
+            "126|5|disease|MESH:D005334",
+            "240|4|disease|MESH:D045169",
+            "141|9|disease|MESH:D010146",
+            "119|5|disease|MESH:D003371",
+            "0|11|species|11118",
+            "174|11|disease|MESH:D010612",
+            "152|20|disease|MESH:D004417",
+            "133|6|disease|MESH:D009325",
+            "226|6|disease|MESH:D018352"
+        ],
+        "text": "Coronavirus is a lethal contagious virus that travels very fast.. The infected person has symptoms of the common cold, cough, fever, nausea, body pain, difficulty breathing, sore throat, etc.. In 2002-2003, a virus similar to corona called SARS affected the world on an epidemic.",
+        "score": 0.6249180374858492,
+        "pmcid": "PMC7909758",
+        "section": "INTRO",
+        "pmid": 33680703
+    },
+    {
+        "annotations": [
+            "219|4|disease|MESH:D012128",
+            "182|35|disease|MESH:D012128",
+            "114|9|disease|MESH:D010146",
+            "107|5|disease|MESH:D005334",
+            "299|6|disease|MESH:D020521",
+            "267|7|disease|MESH:D000857",
+            "140|10|disease|MESH:D000086722",
+            "276|10|disease|MESH:D012871",
+            "78|12|disease|MESH:D007251",
+            "100|5|disease|MESH:D003371"
+        ],
+        "text": "The clinical symptoms are varied from common manifestations which occurred in flu and cold, such as cough, fever, body-ache, trembling, and runny nose to severe conditions, like the Acute Respiratory Distress Syndrome (ARDS) or even uncommon/unusual symptoms such as anosmia, skin color change, and stroke.",
+        "score": 0.6236049764286202,
+        "pmcid": null,
+        "section": "abstract",
+        "pmid": 33563186
+    },
+    {
+        "annotations": [
+            "206|5|disease|MESH:D005334",
+            "176|9|species|9606",
+            "114|10|species|9606",
+            "34|9|species|9606"
+        ],
+        "text": "In many cases, virulence genes of mammalian pathogens are induced at 37 C, which is a typical body temperature of mammalians, but repressed below 30 C.  Accordingly, elevating mammalian body temperature to fever range results in an increase of MAMP-induced downstream signaling.",
+        "score": 0.6221576166152955,
+        "pmcid": "PMC3901997",
+        "section": "INTRO",
+        "pmid": 24067909
+    },
+    {
+        "annotations": [
+            "23|3|chemical|-",
+            "201|3|chemical|-"
+        ],
+        "text": "The net result is that DPH anisotropy is similar at adaptation/acclimation temperatures across organisms with a wide range of body temperatures (Logue et al.), but at a common measurement temperature, DPH anisotropy will be higher in lower fluidity membranes from warm-adapted or acclimated organisms than higher fluidity membranes from cold-adapted or acclimated organisms (Logue et al.  Overgaard et al.).",
+        "score": 0.6170109343528748,
+        "pmcid": "PMC3873056",
+        "section": "INTRO",
+        "pmid": 24391251
+    },
+    {
+        "annotations": [
+            "40|5|disease|MESH:D005334"
+        ],
+        "text": "As one of the common clinical symptoms, fever is manifested as a body temperature higher than the normal physiological range.",
+        "score": 0.6148396748304367,
+        "pmcid": "PMC10542642",
+        "section": "INTRO",
+        "pmid": 37769495
+    },
+    {
+        "annotations": [
+            "98|10|disease|MESH:D018771",
+            "127|11|disease|MESH:D003139",
+            "85|11|disease|None",
+            "117|8|disease|MESH:D003967",
+            "164|16|disease|MESH:D001068",
+            "140|7|disease|MESH:D008288",
+            "212|10|disease|MESH:D012216",
+            "228|19|disease|MESH:D014005",
+            "193|6|disease|MESH:D013180",
+            "201|9|disease|MESH:D006069",
+            "154|8|disease|MESH:D018908",
+            "12|12|species|280022",
+            "110|5|disease|MESH:D005334",
+            "182|9|disease|MESH:D011014"
+        ],
+        "text": "The leaf of R. prinoides is traditionally used for the treatment of diseases such as stomachache, joint pain, fever, diarrhea, common cold, malaria, body weakness, loss of appetite, pneumonia, sprain, gonorrhea, rheumatism, and ringworm infections.",
+        "score": 0.596337987335908,
+        "pmcid": "PMC9876683",
+        "section": "INTRO",
+        "pmid": 36711227
+    },
+    {
+        "annotations": [
+            "143|11|disease|MESH:D003139",
+            "0|11|disease|MESH:D003139",
+            "50|5|disease|MESH:D005334"
+        ],
+        "text": "Common cold in the adult is rarely accompanied by fever and some subjects have a transient fall in body temperature during the early stages of common cold.",
+        "score": 0.5952512043714523,
+        "pmcid": "PMC7185637",
+        "section": null,
+        "pmid": 16253889
+    },
+    {
+        "annotations": [
+            "24|11|disease|MESH:D007251",
+            "107|5|disease|MESH:D005334",
+            "94|11|disease|MESH:D010612",
+            "87|5|disease|MESH:D003371",
+            "60|21|disease|MESH:D003139",
+            "114|8|disease|MESH:D006261",
+            "128|9|disease|MESH:D010146"
+        ],
+        "text": "The initial symptoms of influenza A are similar to those of common seasonal colds with cough, sore throat, fever, headache, and body pain.",
+        "score": 0.5890951032960292,
+        "pmcid": "PMC6868406",
+        "section": "INTRO",
+        "pmid": 31420904
+    },
+    {
+        "annotations": [
+            "247|11|disease|MESH:D003139",
+            "236|9|disease|MESH:D007251",
+            "294|9|disease|MESH:D011014",
+            "260|20|disease|MESH:D053489",
+            "19|10|disease|MESH:D007239",
+            "207|18|disease|MESH:D007239",
+            "151|5|disease|MESH:D005334",
+            "282|10|disease|MESH:D001991",
+            "309|14|disease|MESH:D006561"
+        ],
+        "text": "In the instance of infections, subjects were asked to recall the average number of times per year during the last 10 years that they had experienced a fever or body temperature >=38 C as the result of acute febrile infections including influenza, common cold, infectious enteritis, bronchitis, pneumonia, and herpes simplex (<1, 1~2, 3~4, or >=5 times).",
+        "score": 1.0,
+        "pmcid": "PMC3356273",
+        "section": "METHODS",
+        "pmid": 22624006
+    },
+    {
+        "annotations": [
+            "86|5|disease|MESH:D005334",
+            "216|5|disease|MESH:D005334"
+        ],
+        "text": "Heads of household who cited a non-biomedical explanation as the most common cause of fever in adults were significantly more likely to identify a traditional healer as the best treatment option both for adults with fever (OR 2.7, p<0.001) and for adults with elevated body temperatures for more than three days (OR 3.2, p<0.001).",
+        "score": 1.0,
+        "pmcid": "PMC3943636",
+        "section": "RESULTS",
+        "pmid": 24103083
+    }
+]

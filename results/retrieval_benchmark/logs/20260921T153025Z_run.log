@@ -1,0 +1,2 @@
+2026-09-22 01:30:25,495 INFO bench: bench --out results/retrieval_benchmark --workers 4 run --configs improved_1to4
+2026-09-22 01:36:54,924 INFO bench.run: run improved_1to4 B:PMC9095982_01:c_reactive_protein: error LLMTruncatedError: resolver: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RESOLVER_MAX_TOKENS., 0 docs, 389.2s, $0.0000 [1/1]

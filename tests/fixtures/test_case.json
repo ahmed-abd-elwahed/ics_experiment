@@ -1,0 +1,12 @@
+{
+  "case_id": "test-urti-001",
+  "diagnosis": "common cold (viral upper respiratory tract infection)",
+  "narrative": "A 34-year-old woman presents to an urgent care clinic on day 2 of illness with sore throat, nasal congestion, rhinorrhea, and malaise. She has no chronic illnesses and takes no regular medications. At presentation her temperature was 37.9 °C and her blood pressure was 118/76 mmHg. Examination shows mild pharyngeal erythema without exudate. Lungs are clear.",
+  "structured_findings": {
+    "age": "34",
+    "sex": "female",
+    "temperature_at_presentation": "37.9 °C",
+    "blood_pressure_at_presentation": "118/76 mmHg"
+  },
+  "metadata": {"setting": "urgent care", "synthetic": true}
+}

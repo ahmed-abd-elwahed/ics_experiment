@@ -1,0 +1,17 @@
+2026-09-22 01:58:41,534 INFO bench: bench --out results/retrieval_benchmark --workers 16 judge --configs current,current_fixed,improved_1to4,improved_1to5,openrouter_search
+2026-09-22 01:58:45,419 INFO bench.judge: judge pass1: 25/236
+2026-09-22 01:58:48,350 INFO bench.judge: judge pass1: 50/236
+2026-09-22 01:58:50,796 INFO bench.judge: judge pass1: 75/236
+2026-09-22 01:58:53,710 INFO bench.judge: judge pass1: 100/236
+2026-09-22 01:58:56,371 INFO bench.judge: judge pass1: 125/236
+2026-09-22 01:58:58,847 INFO bench.judge: judge pass1: 150/236
+2026-09-22 01:59:01,569 INFO bench.judge: judge pass1: 175/236
+2026-09-22 01:59:03,883 INFO bench.judge: judge pass1: 200/236
+2026-09-22 01:59:06,721 INFO bench.judge: judge pass1: 225/236
+2026-09-22 01:59:07,665 INFO bench.judge: judge pass1: 236/236
+2026-09-22 01:59:10,127 INFO bench.judge: judge answer: 25/32
+2026-09-22 01:59:11,148 INFO bench.judge: judge answer: 32/32
+2026-09-22 01:59:14,624 INFO bench.judge: judge pass2: 25/94
+2026-09-22 01:59:17,410 INFO bench.judge: judge pass2: 50/94
+2026-09-22 01:59:19,412 INFO bench.judge: judge pass2: 75/94
+2026-09-22 01:59:21,320 INFO bench.judge: judge pass2: 94/94

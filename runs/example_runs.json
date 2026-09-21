@@ -1,0 +1,1680 @@
+{
+  "generated_at": "2026-09-14T21:36:59.575390+00:00",
+  "model": "deepseek/deepseek-v4-flash-0731",
+  "runs": [
+    {
+      "label": "case_study_expected",
+      "input": {
+        "case_file": "tests/fixtures/test_case.json",
+        "case_id": "test-urti-001",
+        "query": "What was her blood pressure at presentation?"
+      },
+      "started_at": "2026-09-14T21:36:21.935584+00:00",
+      "output": {
+        "input_query": "What was her blood pressure at presentation?",
+        "output_answer": "Her blood pressure at presentation was 118/76 mmHg.",
+        "literature_search": false,
+        "literature_search_result": null,
+        "retriever_parameters": {
+          "multi_part": false,
+          "query": "What was her blood pressure at presentation?",
+          "path": "case_study",
+          "retrieval_performed": false
+        },
+        "used_llm": "deepseek/deepseek-v4-flash-0731",
+        "answer_source": "case_study",
+        "evidence": [
+          "her blood pressure was 118/76 mmHg"
+        ],
+        "confidence": "high",
+        "llm_calls": [
+          {
+            "stage": "resolver",
+            "model": "deepseek/deepseek-v4-flash-0731",
+            "prompt_tokens": 593,
+            "completion_tokens": 174,
+            "latency_ms": 2101.272500003688,
+            "attempt": 1,
+            "purpose": "initial",
+            "success": true,
+            "error": null
+          }
+        ]
+      },
+      "wall_time_s": 2.1
+    },
+    {
+      "label": "retrieval_expected",
+      "input": {
+        "case_file": "tests/fixtures/test_case.json",
+        "case_id": "test-urti-001",
+        "query": "What is the patient's heart rate?"
+      },
+      "started_at": "2026-09-14T21:36:24.039055+00:00",
+      "output": {
+        "input_query": "What is the patient's heart rate?",
+        "output_answer": "Heart rate is not reported in the case study or supported by the provided documents; cannot determine a reliable value.",
+        "literature_search": true,
+        "literature_search_result": {
+          "query": "heart rate viral upper respiratory infection adults normal range",
+          "documents": [
+            {
+              "source": "europe_pmc",
+              "doc_id": "PMID:42481189",
+              "title": "Incidence of respiratory syncytial virus in adults ≥50 years during and following the COVID-19 pandemic in upper midwest USA: a community-based prospective cohort study.",
+              "text": "Objective Respiratory syncytial virus (RSV) is an important viral pathogen in children, older adults and adults with certain high-risk conditions. In our prospective community-based cohort study of adults 50 years and older before the COVID-19 pandemic, the incidence of RSV acute respiratory infection (ARI) was 48.6 cases/1000 person-years (PY), which decreased to near zero during the COVID-19 pandemic. Our objective was to determine the incidence of RSV-ARI during the 2 years following the initial phase of the pandemic (2021-2022 and 2022-2023). Design This is a community-based prospective cohort study. Setting Adults living in southeast Minnesota from October 2021 to September 2022 (year 3) and October 2022 to September 2023 (year 4). Participants Adults≥50 years (n=2500). Primary and secondary outcomes We calculated incidence and attack rates for RSV-ARI as primary outcome and reported hospitalisations, pneumonia and death following ARI as secondary outcome. Results There were 2500 participants in the study with a mean age of 68.2 years (SD 9.3) at the start of year 3. Participants were predominantly female (60%), non-Hispanic white (96%) and residing in urban areas (76%). The incidence rate of RSV-ARI was 6.12/1000 PY (95% CI 3.42 to 10.09) in 2021-2022 and 16.40/1000 PY (95% CI 11.66 to 22.42) in 2022-2023. We noted higher attack rates of RSV-ARI during the winter months. There were no hospitalisations, pneumonia or deaths within 30 days of RSV-ARI. Conclusions Compared…",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/42481189/",
+              "score": null,
+              "raw": {
+                "id": "42481189",
+                "source": "MED",
+                "pmid": "42481189",
+                "pmcid": "PMC13404497",
+                "fullTextIdList": {
+                  "fullTextId": [
+                    "PMC13404497"
+                  ]
+                },
+                "doi": "10.1136/bmjopen-2025-111773",
+                "title": "Incidence of respiratory syncytial virus in adults ≥50 years during and following the COVID-19 pandemic in upper midwest USA: a community-based prospective cohort study.",
+                "authorString": "Takahashi PY, Saeedi P, Wi CI, Pignolo RJ, Bosch W, King KS, Hickman J, Ryu E, Natoli T, Ihrke K, Yao J, Binnicker M, Sieler S, Speiser L, Hidaka B, Damaso S, Pircon JY, Juhn Y.",
+                "authorList": {
+                  "author": [
+                    {
+                      "fullName": "Takahashi PY",
+                      "firstName": "Paul Y",
+                      "lastName": "Takahashi",
+                      "initials": "PY",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0000-0002-1891-309X"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Division of Primary Care Internal Medicine, Geriatrics and Palliative Care, Mayo Clinic Rochester, Rochester, Minnesota, USA takahashi.paul@mayo.edu."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Saeedi P",
+                      "firstName": "Pouya",
+                      "lastName": "Saeedi",
+                      "initials": "P",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "GSK, Wavre, Belgium."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Wi CI",
+                      "firstName": "Chung-Il",
+                      "lastName": "Wi",
+                      "initials": "CI",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Division of Community Pediatrics and Adolescent Medicine, Mayo Clinic Rochester, Rochester, Minnesota, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Pignolo RJ",
+                      "firstName": "Robert J",
+                      "lastName": "Pignolo",
+                      "initials": "RJ",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Divisons of Hospital Internal Medicine and Endocrinology and the Kogod Center on Aging, Mayo Clinic Rochester, Rochester, Minnesota, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Bosch W",
+                      "firstName": "Wendelyn",
+                      "lastName": "Bosch",
+                      "initials": "W",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Division of Infectious Diseases, Mayo Clinic Florida, Jacksonville, Florida, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "King KS",
+                      "firstName": "Katherine S",
+                      "lastName": "King",
+                      "initials": "KS",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Department of Quantitative Health Sciences, Mayo Clinic Rochester, Rochester, Minnesota, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Hickman J",
+                      "firstName": "Joel",
+                      "lastName": "Hickman",
+                      "initials": "J",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Department of Quantitative Health Sciences, Mayo Clinic Rochester, Rochester, Minnesota, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Ryu E",
+                      "firstName": "Euijung",
+                      "lastName": "Ryu",
+                      "initials": "E",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Department of Quantitative Health Sciences, Mayo Clinic Rochester, Rochester, Minnesota, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Natoli T",
+                      "firstName": "Traci",
+                      "lastName": "Natoli",
+                      "initials": "T",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Division of Community Pediatrics and Adolescent Medicine, Mayo Clinic Rochester, Rochester, Minnesota, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Ihrke K",
+                      "firstName": "Kathy",
+                      "lastName": "Ihrke",
+                      "initials": "K",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Division of Community Pediatrics and Adolescent Medicine, Mayo Clinic Rochester, Rochester, Minnesota, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Yao J",
+                      "firstName": "Joseph",
+                      "lastName": "Yao",
+                      "initials": "J",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Department of Laboratory Medicine and Pathology, Mayo Clinic Rochester, Rochester, Minnesota, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Binnicker M",
+                      "firstName": "Matthew",
+                      "lastName": "Binnicker",
+                      "initials": "M",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Department of Laboratory Medicine and Pathology, Mayo Clinic Rochester, Rochester, Minnesota, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Sieler S",
+                      "firstName": "Steph",
+                      "lastName": "Sieler",
+                      "initials": "S",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Division of Community Pediatrics and Adolescent Medicine, Mayo Clinic Rochester, Rochester, Minnesota, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Speiser L",
+                      "firstName": "Lisa",
+                      "lastName": "Speiser",
+                      "initials": "L",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Division of Infectious Diseases, Mayo Clinic Arizona, Scottsdale, Arizona, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Hidaka B",
+                      "firstName": "Brandon",
+                      "lastName": "Hidaka",
+                      "initials": "B",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Department of Family Medicine, Mayo Clinic Health System in Eau Claire, Eau Claire, Wisconsin, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Damaso S",
+                      "firstName": "Silvia",
+                      "lastName": "Damaso",
+                      "initials": "S",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "GSK, Wavre, Belgium."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Pircon JY",
+                      "firstName": "Jean-Yves",
+                      "lastName": "Pircon",
+                      "initials": "JY",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "GSK, Wavre, Belgium."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Juhn Y",
+                      "firstName": "Young",
+                      "lastName": "Juhn",
+                      "initials": "Y",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0000-0003-2112-4240"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Division of Community Pediatrics and Adolescent Medicine, Mayo Clinic Rochester, Rochester, Minnesota, USA."
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                "authorIdList": {
+                  "authorId": [
+                    {
+                      "type": "ORCID",
+                      "value": "0000-0002-1891-309X"
+                    },
+                    {
+                      "type": "ORCID",
+                      "value": "0000-0003-2112-4240"
+                    }
+                  ]
+                },
+                "dataLinksTagsList": {
+                  "dataLinkstag": [
+                    "supporting_data"
+                  ]
+                },
+                "journalInfo": {
+                  "issue": "7",
+                  "volume": "16",
+                  "journalIssueId": 4224384,
+                  "dateOfPublication": "2026 Jul",
+                  "monthOfPublication": 7,
+                  "yearOfPublication": 2026,
+                  "printPublicationDate": "2026-07-01",
+                  "journal": {
+                    "title": "BMJ open",
+                    "medlineAbbreviation": "BMJ Open",
+                    "isoabbreviation": "BMJ Open",
+                    "nlmid": "101552874",
+                    "essn": "2044-6055",
+                    "issn": "2044-6055"
+                  }
+                },
+                "pubYear": "2026",
+                "pageInfo": "e111773",
+                "abstractText": "<h4>Objective</h4>Respiratory syncytial virus (RSV) is an important viral pathogen in children, older adults and adults with certain high-risk conditions. In our prospective community-based cohort study of adults 50 years and older before the COVID-19 pandemic, the incidence of RSV acute respiratory infection (ARI) was 48.6 cases/1000 person-years (PY), which decreased to near zero during the COVID-19 pandemic. Our objective was to determine the incidence of RSV-ARI during the 2 years following the initial phase of the pandemic (2021-2022 and 2022-2023).<h4>Design</h4>This is a community-based prospective cohort study.<h4>Setting</h4>Adults living in southeast Minnesota from October 2021 to September 2022 (year 3) and October 2022 to September 2023 (year 4).<h4>Participants</h4>Adults≥50 years (n=2500).<h4>Primary and secondary outcomes</h4>We calculated incidence and attack rates for RSV-ARI as primary outcome and reported hospitalisations, pneumonia and death following ARI as secondary outcome.<h4>Results</h4>There were 2500 participants in the study with a mean age of 68.2 years (SD 9.3) at the start of year 3. Participants were predominantly female (60%), non-Hispanic white (96%) and residing in urban areas (76%). The incidence rate of RSV-ARI was 6.12/1000 PY (95% CI 3.42 to 10.09) in 2021-2022 and 16.40/1000 PY (95% CI 11.66 to 22.42) in 2022-2023. We noted higher attack rates of RSV-ARI during the winter months. There were no hospitalisations, pneumonia or deaths within 30 days of RSV-ARI.<h4>Conclusions</h4>Compared with the period before the COVID-19 pandemic, RSV-ARI incidence was lower in both 2021-2022 and 2022-2023 periods. In 2022-2023, the incidence increased 2.7-fold compared with the 2021-2022 period. The observed incidence rates, particularly the significant increase in the most recent season, underscore the continued public health relevance of RSV-ARI and support the rationale for ongoing RSV vaccination efforts to mitigate its overall burden in the population.",
+                "affiliation": "Division of Primary Care Internal Medicine, Geriatrics and Palliative Care, Mayo Clinic Rochester, Rochester, Minnesota, USA takahashi.paul@mayo.edu.",
+                "publicationStatus": "epublish",
+                "language": "eng",
+                "pubModel": "Electronic",
+                "pubTypeList": {
+                  "pubType": [
+                    "research-article",
+                    "Journal Article"
+                  ]
+                },
+                "meshHeadingList": {
+                  "meshHeading": [
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Humans"
+                    },
+                    {
+                      "majorTopic_YN": "Y",
+                      "descriptorName": "Respiratory Syncytial Virus Infections",
+                      "meshQualifierList": {
+                        "meshQualifier": [
+                          {
+                            "abbreviation": "EP",
+                            "qualifierName": "epidemiology",
+                            "majorTopic_YN": "N"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Hospitalization",
+                      "meshQualifierList": {
+                        "meshQualifier": [
+                          {
+                            "abbreviation": "SN",
+                            "qualifierName": "statistics & numerical data",
+                            "majorTopic_YN": "N"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Incidence"
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Prospective Studies"
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Aged"
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Aged, 80 and over"
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Middle Aged"
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Minnesota",
+                      "meshQualifierList": {
+                        "meshQualifier": [
+                          {
+                            "abbreviation": "EP",
+                            "qualifierName": "epidemiology",
+                            "majorTopic_YN": "N"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Female"
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Male"
+                    },
+                    {
+                      "majorTopic_YN": "Y",
+                      "descriptorName": "COVID-19",
+                      "meshQualifierList": {
+                        "meshQualifier": [
+                          {
+                            "abbreviation": "EP",
+                            "qualifierName": "epidemiology",
+                            "majorTopic_YN": "N"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "SARS-CoV-2"
+                    }
+                  ]
+                },
+                "keywordList": {
+                  "keyword": [
+                    "Respiratory Infections",
+                    "Geriatric Medicine",
+                    "Community-based Participatory Research"
+                  ]
+                },
+                "subsetList": {
+                  "subset": [
+                    {
+                      "code": "IM",
+                      "name": "Index Medicus"
+                    }
+                  ]
+                },
+                "fullTextUrlList": {
+                  "fullTextUrl": [
+                    {
+                      "availability": "Subscription required",
+                      "availabilityCode": "S",
+                      "documentStyle": "doi",
+                      "site": "DOI",
+                      "url": "https://doi.org/10.1136/bmjopen-2025-111773"
+                    },
+                    {
+                      "availability": "Open access",
+                      "availabilityCode": "OA",
+                      "documentStyle": "html",
+                      "site": "Europe_PMC",
+                      "url": "https://europepmc.org/articles/PMC13404497"
+                    },
+                    {
+                      "availability": "Open access",
+                      "availabilityCode": "OA",
+                      "documentStyle": "pdf",
+                      "site": "Europe_PMC",
+                      "url": "https://europepmc.org/articles/PMC13404497?pdf=render"
+                    }
+                  ]
+                },
+                "isOpenAccess": "Y",
+                "inEPMC": "Y",
+                "inPMC": "Y",
+                "hasPDF": "Y",
+                "hasBook": "N",
+                "hasSuppl": "Y",
+                "citedByCount": 0,
+                "hasData": "Y",
+                "hasReferences": "Y",
+                "hasTextMinedTerms": "Y",
+                "hasDbCrossReferences": "N",
+                "hasLabsLinks": "N",
+                "license": "cc by-nc",
+                "hasEvaluations": "N",
+                "authMan": "N",
+                "epmcAuthMan": "N",
+                "nihAuthMan": "N",
+                "hasTMAccessionNumbers": "Y",
+                "tmAccessionTypeList": {
+                  "accessionType": [
+                    "doi"
+                  ]
+                },
+                "dateOfCompletion": "2026-07-21",
+                "dateOfCreation": "2026-07-21",
+                "firstIndexDate": "2026-07-22",
+                "fullTextReceivedDate": "2026-09-04",
+                "dateOfRevision": "2026-08-13",
+                "electronicPublicationDate": "2026-07-21",
+                "firstPublicationDate": "2026-07-21"
+              }
+            },
+            {
+              "source": "litsense",
+              "doc_id": "PMID:37181453#INTRO-7e2b99b2",
+              "title": null,
+              "text": "Viral infections also increase host susceptibility to bacterial infections. Patients with asthma are more likely to develop more severe and longer duration respiratory tract infections. Moreover, 80% of asthma exacerbations were found to be associated with colds in adults. Obesity is associated with higher risk for developing severe upper respiratory infections in adults. Adults with obesity also develop more frequent asthma exacerbations due to respiratory tract infections. Given the evidence demonstrating that viral respiratory infections disrupts the airway epithelium and is associated with higher oxidant burden, people with both obesity and asthma may be much more susceptible to airway epithelium damage and dysregulation especially after a viral or bacterial infection.",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/37181453/",
+              "score": 0.7714941962401578,
+              "raw": {
+                "annotations": [
+                  "422|6|disease|MESH:D001249",
+                  "203|6|disease|MESH:D001249",
+                  "156|28|disease|MESH:D012141",
+                  "0|16|disease|MESH:D014777",
+                  "54|20|disease|MESH:D001424",
+                  "653|6|disease|MESH:D001249",
+                  "754|5|disease|MESH:D014777",
+                  "518|5|disease|MESH:D014777",
+                  "76|8|species|9606",
+                  "90|6|disease|MESH:D001249",
+                  "641|7|disease|MESH:D009765",
+                  "450|28|disease|MESH:D012141",
+                  "335|28|disease|MESH:D012141",
+                  "524|22|disease|MESH:D012141",
+                  "387|7|disease|MESH:D009765",
+                  "274|7|disease|MESH:D009765",
+                  "763|19|disease|MESH:D001424"
+                ],
+                "text": "Viral infections also increase host susceptibility to bacterial infections. Patients with asthma are more likely to develop more severe and longer duration respiratory tract infections. Moreover, 80% of asthma exacerbations were found to be associated with colds in adults. Obesity is associated with higher risk for developing severe upper respiratory infections in adults. Adults with obesity also develop more frequent asthma exacerbations due to respiratory tract infections. Given the evidence demonstrating that viral respiratory infections disrupts the airway epithelium and is associated with higher oxidant burden, people with both obesity and asthma may be much more susceptible to airway epithelium damage and dysregulation especially after a viral or bacterial infection.",
+                "score": 0.7714941962401578,
+                "pmcid": "PMC10171222",
+                "section": "INTRO",
+                "pmid": 37181453
+              }
+            },
+            {
+              "source": "europe_pmc",
+              "doc_id": "PMID:42538619",
+              "title": "Utilizing Virtual Clinical Trials to Inform Target Coverage That Drives RSV Antiviral Efficacy.",
+              "text": "Respiratory syncytial virus (RSV) infection can result in a range of disease severity from mild upper respiratory tract symptoms to lower respiratory tract illness, with clinical manifestations dependent on age, co-morbidities, and immune status. At present, there is no antiviral approved for adults with RSV disease, and only one treatment option with limited utilization is available for pediatric patients. While several RSV antiviral candidates have demonstrated virological efficacy in healthy adult challenge studies, to date they have subsequently failed to show efficacy in patients. Mechanistically understanding the translation of efficacy from preclinical to challenge to patient studies is essential in addressing this unmet medical need in children and adults with RSV disease. This work uses a quantitative systems pharmacology (QSP) approach to mathematically represent the underlying pathophysiology of RSV infection to simulate and predict the effects of investigational direct acting RSV antiviral therapeutics. We developed virtual populations that capture viral load dynamics in viral challenge studies, where the participants are healthy adult volunteers, upon treatment with the F-protein inhibitor sisunatovir and the N-protein inhibitor zelicapavir. Due to underlying differences in dynamics between key populations, we also developed a pediatric patient virtual population to match the results from the zelicapavir pediatric Phase 2 study. This work projects that for a min…",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/42538619/",
+              "score": null,
+              "raw": {
+                "id": "42538619",
+                "source": "MED",
+                "pmid": "42538619",
+                "pmcid": "PMC13428034",
+                "fullTextIdList": {
+                  "fullTextId": [
+                    "PMC13428034"
+                  ]
+                },
+                "doi": "10.1002/psp4.70308",
+                "title": "Utilizing Virtual Clinical Trials to Inform Target Coverage That Drives RSV Antiviral Efficacy.",
+                "authorString": "Herron JC, Link KG, Meacham N, Alami NN, Brookes DW, Thomas E, Adams J, Toussi SS, Franke R, Musante CJ, Najera I, Allen R, Allen R, Boras B.",
+                "authorList": {
+                  "author": [
+                    {
+                      "fullName": "Herron JC",
+                      "firstName": "J Cody",
+                      "lastName": "Herron",
+                      "initials": "JC",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0000-0001-6240-9950"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Pfizer Inc., Translational Clinical Sciences, Cambridge, Massachusetts, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Link KG",
+                      "firstName": "Kathryn G",
+                      "lastName": "Link",
+                      "initials": "KG",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0000-0002-2148-9883"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Pfizer Inc., Translational Clinical Sciences, Cambridge, Massachusetts, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Meacham N",
+                      "firstName": "Natalie",
+                      "lastName": "Meacham",
+                      "initials": "N",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Pfizer Inc., Translational Clinical Sciences, Cambridge, Massachusetts, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Alami NN",
+                      "firstName": "Negar Niki",
+                      "lastName": "Alami",
+                      "initials": "NN",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0000-0003-4455-5780"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Pfizer Inc., R&D, Pearl River, New York, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Brookes DW",
+                      "firstName": "Daniel W",
+                      "lastName": "Brookes",
+                      "initials": "DW",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0009-0009-7852-852X"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Pfizer Inc., R&D, UK, London, UK."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Thomas E",
+                      "firstName": "Elaine",
+                      "lastName": "Thomas",
+                      "initials": "E",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0009-0000-2725-4279"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Pfizer Inc., R&D, UK, London, UK."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Adams J",
+                      "firstName": "Jan",
+                      "lastName": "Adams",
+                      "initials": "J",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Pfizer Inc., R&D, Pearl River, New York, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Toussi SS",
+                      "firstName": "Sima S",
+                      "lastName": "Toussi",
+                      "initials": "SS",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Pfizer Inc., R&D, Pearl River, New York, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Franke R",
+                      "firstName": "Ryan",
+                      "lastName": "Franke",
+                      "initials": "R",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Pfizer Inc., Translational Clinical Sciences, Cambridge, Massachusetts, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Musante CJ",
+                      "firstName": "Cynthia J",
+                      "lastName": "Musante",
+                      "initials": "CJ",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0000-0002-3003-0169"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Pfizer Inc., Translational Clinical Sciences, Cambridge, Massachusetts, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Najera I",
+                      "firstName": "Isabel",
+                      "lastName": "Najera",
+                      "initials": "I",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Pfizer Inc., R&D, Pearl River, New York, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Allen R",
+                      "firstName": "Richard",
+                      "lastName": "Allen",
+                      "initials": "R",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0000-0002-8038-9452"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Pfizer Inc., Translational Clinical Sciences, Cambridge, Massachusetts, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Allen R",
+                      "firstName": "Richard",
+                      "lastName": "Allen",
+                      "initials": "R",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0000-0002-1887-3016"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Pfizer Inc., Translational Clinical Sciences, Cambridge, Massachusetts, USA."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Boras B",
+                      "firstName": "Britton",
+                      "lastName": "Boras",
+                      "initials": "B",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0000-0003-3624-9177"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Pfizer Inc., Preclinical & Translational Sciences, La Jolla, California, USA."
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                "authorIdList": {
+                  "authorId": [
+                    {
+                      "type": "ORCID",
+                      "value": "0000-0001-6240-9950"
+                    },
+                    {
+                      "type": "ORCID",
+                      "value": "0000-0002-1887-3016"
+                    },
+                    {
+                      "type": "ORCID",
+                      "value": "0000-0002-2148-9883"
+                    },
+                    {
+                      "type": "ORCID",
+                      "value": "0000-0002-3003-0169"
+                    },
+                    {
+                      "type": "ORCID",
+                      "value": "0000-0002-8038-9452"
+                    },
+                    {
+                      "type": "ORCID",
+                      "value": "0000-0003-3624-9177"
+                    },
+                    {
+                      "type": "ORCID",
+                      "value": "0000-0003-4455-5780"
+                    },
+                    {
+                      "type": "ORCID",
+                      "value": "0009-0000-2725-4279"
+                    },
+                    {
+                      "type": "ORCID",
+                      "value": "0009-0009-7852-852X"
+                    }
+                  ]
+                },
+                "journalInfo": {
+                  "issue": "8",
+                  "volume": "15",
+                  "journalIssueId": 4231011,
+                  "dateOfPublication": "2026 Aug",
+                  "monthOfPublication": 8,
+                  "yearOfPublication": 2026,
+                  "printPublicationDate": "2026-08-01",
+                  "journal": {
+                    "title": "CPT: pharmacometrics & systems pharmacology",
+                    "medlineAbbreviation": "CPT Pharmacometrics Syst Pharmacol",
+                    "isoabbreviation": "CPT Pharmacometrics Syst Pharmacol",
+                    "nlmid": "101580011",
+                    "essn": "2163-8306",
+                    "issn": "2163-8306"
+                  }
+                },
+                "pubYear": "2026",
+                "pageInfo": "e70308",
+                "abstractText": "Respiratory syncytial virus (RSV) infection can result in a range of disease severity from mild upper respiratory tract symptoms to lower respiratory tract illness, with clinical manifestations dependent on age, co-morbidities, and immune status. At present, there is no antiviral approved for adults with RSV disease, and only one treatment option with limited utilization is available for pediatric patients. While several RSV antiviral candidates have demonstrated virological efficacy in healthy adult challenge studies, to date they have subsequently failed to show efficacy in patients. Mechanistically understanding the translation of efficacy from preclinical to challenge to patient studies is essential in addressing this unmet medical need in children and adults with RSV disease. This work uses a quantitative systems pharmacology (QSP) approach to mathematically represent the underlying pathophysiology of RSV infection to simulate and predict the effects of investigational direct acting RSV antiviral therapeutics. We developed virtual populations that capture viral load dynamics in viral challenge studies, where the participants are healthy adult volunteers, upon treatment with the F-protein inhibitor sisunatovir and the N-protein inhibitor zelicapavir. Due to underlying differences in dynamics between key populations, we also developed a pediatric patient virtual population to match the results from the zelicapavir pediatric Phase 2 study. This work projects that for a minimum coverage > 1× free EC<sub>90</sub> at C<sub>min</sub>, a treatment window of 5 to 7 days post-symptom onset is feasible for observing virological efficacy in pediatric patients and may lead to potential success in a phase 3 pivotal RSV antiviral drug trial.",
+                "affiliation": "Pfizer Inc., Translational Clinical Sciences, Cambridge, Massachusetts, USA.",
+                "publicationStatus": "ppublish",
+                "language": "eng",
+                "pubModel": "Print",
+                "pubTypeList": {
+                  "pubType": [
+                    "research-article",
+                    "Journal Article"
+                  ]
+                },
+                "meshHeadingList": {
+                  "meshHeading": [
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Humans"
+                    },
+                    {
+                      "majorTopic_YN": "Y",
+                      "descriptorName": "Respiratory Syncytial Virus, Human",
+                      "meshQualifierList": {
+                        "meshQualifier": [
+                          {
+                            "abbreviation": "DE",
+                            "qualifierName": "drug effects",
+                            "majorTopic_YN": "N"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "majorTopic_YN": "Y",
+                      "descriptorName": "Respiratory Syncytial Virus Infections",
+                      "meshQualifierList": {
+                        "meshQualifier": [
+                          {
+                            "abbreviation": "DT",
+                            "qualifierName": "drug therapy",
+                            "majorTopic_YN": "N"
+                          },
+                          {
+                            "abbreviation": "VI",
+                            "qualifierName": "virology",
+                            "majorTopic_YN": "N"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Sulfonamides",
+                      "meshQualifierList": {
+                        "meshQualifier": [
+                          {
+                            "abbreviation": "PD",
+                            "qualifierName": "pharmacology",
+                            "majorTopic_YN": "N"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "majorTopic_YN": "Y",
+                      "descriptorName": "Antiviral Agents",
+                      "meshQualifierList": {
+                        "meshQualifier": [
+                          {
+                            "abbreviation": "PD",
+                            "qualifierName": "pharmacology",
+                            "majorTopic_YN": "N"
+                          },
+                          {
+                            "abbreviation": "TU",
+                            "qualifierName": "therapeutic use",
+                            "majorTopic_YN": "N"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Viral Load",
+                      "meshQualifierList": {
+                        "meshQualifier": [
+                          {
+                            "abbreviation": "DE",
+                            "qualifierName": "drug effects",
+                            "majorTopic_YN": "N"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Adult"
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Child"
+                    },
+                    {
+                      "majorTopic_YN": "N",
+                      "descriptorName": "Clinical Trials as Topic"
+                    }
+                  ]
+                },
+                "keywordList": {
+                  "keyword": [
+                    "Respiratory syncytial virus",
+                    "Antiviral Therapy",
+                    "Quantitative Systems Pharmacology",
+                    "Virtual Populations",
+                    "Viral Dynamics Modeling"
+                  ]
+                },
+                "chemicalList": {
+                  "chemical": [
+                    {
+                      "name": "Sulfonamides",
+                      "registryNumber": "0"
+                    },
+                    {
+                      "name": "Antiviral Agents",
+                      "registryNumber": "0"
+                    }
+                  ]
+                },
+                "subsetList": {
+                  "subset": [
+                    {
+                      "code": "IM",
+                      "name": "Index Medicus"
+                    }
+                  ]
+                },
+                "fullTextUrlList": {
+                  "fullTextUrl": [
+                    {
+                      "availability": "Subscription required",
+                      "availabilityCode": "S",
+                      "documentStyle": "doi",
+                      "site": "DOI",
+                      "url": "https://doi.org/10.1002/psp4.70308"
+                    },
+                    {
+                      "availability": "Open access",
+                      "availabilityCode": "OA",
+                      "documentStyle": "html",
+                      "site": "Europe_PMC",
+                      "url": "https://europepmc.org/articles/PMC13428034"
+                    },
+                    {
+                      "availability": "Open access",
+                      "availabilityCode": "OA",
+                      "documentStyle": "pdf",
+                      "site": "Europe_PMC",
+                      "url": "https://europepmc.org/articles/PMC13428034?pdf=render"
+                    }
+                  ]
+                },
+                "isOpenAccess": "Y",
+                "inEPMC": "Y",
+                "inPMC": "Y",
+                "hasPDF": "Y",
+                "hasBook": "N",
+                "hasSuppl": "Y",
+                "citedByCount": 0,
+                "hasData": "Y",
+                "hasReferences": "Y",
+                "hasTextMinedTerms": "Y",
+                "hasDbCrossReferences": "N",
+                "hasLabsLinks": "N",
+                "license": "cc by-nc-nd",
+                "hasEvaluations": "N",
+                "authMan": "N",
+                "epmcAuthMan": "N",
+                "nihAuthMan": "N",
+                "hasTMAccessionNumbers": "N",
+                "dateOfCompletion": "2026-08-01",
+                "dateOfCreation": "2026-08-01",
+                "firstIndexDate": "2026-08-03",
+                "fullTextReceivedDate": "2026-09-04",
+                "dateOfRevision": "2026-08-13",
+                "firstPublicationDate": "2026-08-01"
+              }
+            },
+            {
+              "source": "litsense",
+              "doc_id": "PMID:40137769#DISCUSS-a11cc1dc",
+              "title": null,
+              "text": "Beyond respiratory complications, RSV has been linked to acute cardiac events, including congestive heart failure (CHF), arrhythmias, acute coronary syndromes, and myocarditis. Additionally, bacterial and viral co-infections significantly worsen disease severity and mortality. In hospitalized adults with RSV-associated lower respiratory tract infections (LRTIs), bacterial co-infection rates range from 12.5% to 23.4%, while viral co-infections are observed in 21.8% of cases.",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/40137769/",
+              "score": 0.7666441034170534,
+              "raw": {
+                "annotations": [
+                  "365|22|disease|MESH:D060085",
+                  "164|11|disease|MESH:D009205",
+                  "327|28|disease|MESH:D012141",
+                  "89|24|disease|MESH:D006333",
+                  "121|11|disease|MESH:D001145",
+                  "306|3|species|None",
+                  "191|33|disease|MESH:D014777",
+                  "115|3|disease|MESH:D006333",
+                  "357|5|disease|MESH:D012141",
+                  "427|19|disease|MESH:D014777",
+                  "134|24|disease|MESH:D054058"
+                ],
+                "text": "Beyond respiratory complications, RSV has been linked to acute cardiac events, including congestive heart failure (CHF), arrhythmias, acute coronary syndromes, and myocarditis. Additionally, bacterial and viral co-infections significantly worsen disease severity and mortality. In hospitalized adults with RSV-associated lower respiratory tract infections (LRTIs), bacterial co-infection rates range from 12.5% to 23.4%, while viral co-infections are observed in 21.8% of cases.",
+                "score": 0.7666441034170534,
+                "pmcid": "PMC11946814",
+                "section": "DISCUSS",
+                "pmid": 40137769
+              }
+            },
+            {
+              "source": "europe_pmc",
+              "doc_id": "PMID:42645803",
+              "title": "A Rare Case of Acute Rheumatic Fever Diagnosed After Recent Travel Abroad.",
+              "text": "Background Acute rheumatic fever (ARF) is a clinical syndrome triggered by group A streptococcal ( GAS ) infections and characterized by fever, carditis, and arthritis as its main manifestations. Diagnosis relies on the revised Jones criteria. We report a rare case of ARF diagnosed in Switzerland. Case presentation An 18-year-old woman presented to the emergency department five days after returning from a one-week stay in Egypt with intermittent fever and a transient sore throat, followed by migratory joint pain. Laboratory testing revealed leukocytosis, elevated C-reactive protein (CRP) and erythrocyte sedimentation rate (ESR). Chest X-ray, urine analysis, and (travel-associated) pathogen-testing ( Epstein-Barr virus , Cytomegalovirus , human immunodeficiency virus , Malaria , Dengue , Zika , Chikungunya ) were unremarkable. Blood cultures remained negative. Initially, a viral respiratory infection was suspected and symptomatic treatment established. Days later the patient was re-evaluated due to persistent symptoms. Leukocyte count (Lc) and CRP further increased and subcutaneous nodules appeared. The antistreptolysin-O (ASO)-titer was elevated more than three times higher than the normal upper limit and proofed serological evidence of a preceding streptococcal infection ( GAS throat culture had not been performed). ARF was diagnosed according to the Jones criteria. Treatment with amoxicillin and a high dose of acetylsalicylic acid (ASA) led to a rapid clinical improvement.…",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/42645803/",
+              "score": null,
+              "raw": {
+                "id": "42645803",
+                "source": "MED",
+                "pmid": "42645803",
+                "pmcid": "PMC13512616",
+                "fullTextIdList": {
+                  "fullTextId": [
+                    "PMC13512616"
+                  ]
+                },
+                "doi": "10.3390/idr18040079",
+                "title": "A Rare Case of Acute Rheumatic Fever Diagnosed After Recent Travel Abroad.",
+                "authorString": "Agreiter D, Fuchs S, Marti F.",
+                "authorList": {
+                  "author": [
+                    {
+                      "fullName": "Agreiter D",
+                      "firstName": "Debora",
+                      "lastName": "Agreiter",
+                      "initials": "D",
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Department of Internal Medicine, Hospital Walenstadt, 8880 Walenstadt, Switzerland."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Fuchs S",
+                      "firstName": "Stefan",
+                      "lastName": "Fuchs",
+                      "initials": "S",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0009-0003-7673-3251"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Department of Hematology, Cantonal Hospital of Graubünden, 7000 Chur, Switzerland."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Marti F",
+                      "firstName": "Franziska",
+                      "lastName": "Marti",
+                      "initials": "F",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0009-0003-3223-1954"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Department of Infectiology, Cantonal Hospital of Graubünden, 7000 Chur, Switzerland."
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                "authorIdList": {
+                  "authorId": [
+                    {
+                      "type": "ORCID",
+                      "value": "0009-0003-3223-1954"
+                    },
+                    {
+                      "type": "ORCID",
+                      "value": "0009-0003-7673-3251"
+                    }
+                  ]
+                },
+                "journalInfo": {
+                  "issue": "4",
+                  "volume": "18",
+                  "journalIssueId": 4233172,
+                  "dateOfPublication": "2026 Jul",
+                  "monthOfPublication": 7,
+                  "yearOfPublication": 2026,
+                  "printPublicationDate": "2026-07-01",
+                  "journal": {
+                    "title": "Infectious disease reports",
+                    "medlineAbbreviation": "Infect Dis Rep",
+                    "isoabbreviation": "Infect Dis Rep",
+                    "nlmid": "101537203",
+                    "essn": "2036-7449",
+                    "issn": "2036-7430"
+                  }
+                },
+                "pubYear": "2026",
+                "pageInfo": "79",
+                "abstractText": "<h4>Background</h4>Acute rheumatic fever (ARF) is a clinical syndrome triggered by <i>group A streptococcal</i> (<i>GAS</i>) infections and characterized by fever, carditis, and arthritis as its main manifestations. Diagnosis relies on the revised Jones criteria. We report a rare case of ARF diagnosed in Switzerland.<h4>Case presentation</h4>An 18-year-old woman presented to the emergency department five days after returning from a one-week stay in Egypt with intermittent fever and a transient sore throat, followed by migratory joint pain. Laboratory testing revealed leukocytosis, elevated C-reactive protein (CRP) and erythrocyte sedimentation rate (ESR). Chest X-ray, urine analysis, and (travel-associated) pathogen-testing (<i>Epstein-Barr virus</i>, <i>Cytomegalovirus</i>, <i>human immunodeficiency virus</i>, <i>Malaria</i>, <i>Dengue</i>, <i>Zika</i>, <i>Chikungunya</i>) were unremarkable. Blood cultures remained negative. Initially, a viral respiratory infection was suspected and symptomatic treatment established. Days later the patient was re-evaluated due to persistent symptoms. Leukocyte count (Lc) and CRP further increased and subcutaneous nodules appeared. The antistreptolysin-O (ASO)-titer was elevated more than three times higher than the normal upper limit and proofed serological evidence of a preceding streptococcal infection (<i>GAS</i> throat culture had not been performed). ARF was diagnosed according to the Jones criteria. Treatment with amoxicillin and a high dose of acetylsalicylic acid (ASA) led to a rapid clinical improvement. Secondary prophylaxis with depot penicillin (benzathine penicillin G; 1.2 million units; once monthly) was initiated to prevent rheumatic heart disease.<h4>Conclusions</h4>This case highlights a rare occurrence of ARF following travel to Egypt, with probable acquisition of <i>group A streptococcal</i> infection during the trip. It emphasizes consideration of ARF even in Western countries with low ARF-prevalence if clinical history is suggestive. Early recognition and initiation of antimicrobial and anti-inflammatory therapy is crucial to prevent cardiac involvement. To the best of our knowledge, this represents one of the first cases diagnosed in Switzerland in the past 20 years.",
+                "affiliation": "Department of Internal Medicine, Hospital Walenstadt, 8880 Walenstadt, Switzerland.",
+                "publicationStatus": "epublish",
+                "language": "eng",
+                "pubModel": "Electronic",
+                "pubTypeList": {
+                  "pubType": [
+                    "Journal Article",
+                    "Case Reports",
+                    "case-report"
+                  ]
+                },
+                "keywordList": {
+                  "keyword": [
+                    "Penicillin",
+                    "Rheumatic Fever",
+                    "Arthralgia",
+                    "Secondary Prophylaxis",
+                    "Gas-pharyngitis"
+                  ]
+                },
+                "fullTextUrlList": {
+                  "fullTextUrl": [
+                    {
+                      "availability": "Subscription required",
+                      "availabilityCode": "S",
+                      "documentStyle": "doi",
+                      "site": "DOI",
+                      "url": "https://doi.org/10.3390/idr18040079"
+                    },
+                    {
+                      "availability": "Open access",
+                      "availabilityCode": "OA",
+                      "documentStyle": "html",
+                      "site": "Europe_PMC",
+                      "url": "https://europepmc.org/articles/PMC13512616"
+                    },
+                    {
+                      "availability": "Open access",
+                      "availabilityCode": "OA",
+                      "documentStyle": "pdf",
+                      "site": "Europe_PMC",
+                      "url": "https://europepmc.org/articles/PMC13512616?pdf=render"
+                    }
+                  ]
+                },
+                "isOpenAccess": "Y",
+                "inEPMC": "Y",
+                "inPMC": "Y",
+                "hasPDF": "Y",
+                "hasBook": "N",
+                "hasSuppl": "N",
+                "citedByCount": 0,
+                "hasData": "N",
+                "hasReferences": "Y",
+                "hasTextMinedTerms": "Y",
+                "hasDbCrossReferences": "N",
+                "hasLabsLinks": "N",
+                "license": "cc by",
+                "hasEvaluations": "N",
+                "authMan": "N",
+                "epmcAuthMan": "N",
+                "nihAuthMan": "N",
+                "hasTMAccessionNumbers": "N",
+                "dateOfCompletion": "2026-08-26",
+                "dateOfCreation": "2026-08-26",
+                "firstIndexDate": "2026-08-27",
+                "fullTextReceivedDate": "2026-09-10",
+                "dateOfRevision": "2026-08-28",
+                "electronicPublicationDate": "2026-07-27",
+                "firstPublicationDate": "2026-07-27"
+              }
+            },
+            {
+              "source": "litsense",
+              "doc_id": "PMID:22639679#INTRO-c13be9e4",
+              "title": null,
+              "text": "An important \"trigger\" of asthma exacerbations is viral upper respiratory infections. Estimates suggest that up to 80% of asthma exacerbations in adults are caused by viral upper respiratory infections. Since immune function is important for the resolution of respiratory infections, the question arises regarding the impact of immunosenescence on the clinical features of asthma in the elderly. For example, are exacerbations more frequent or severe in the elderly due to an increased susceptibility or a persistence of viral respiratory infections?",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/22639679/",
+              "score": 0.7430741753899406,
+              "raw": {
+                "annotations": [
+                  "173|28|disease|MESH:D012141",
+                  "373|6|disease|MESH:D001249",
+                  "56|28|disease|MESH:D012141",
+                  "122|6|disease|MESH:D001249",
+                  "26|6|disease|MESH:D001249",
+                  "260|22|disease|MESH:D012141",
+                  "527|22|disease|MESH:D012141"
+                ],
+                "text": "An important \"trigger\" of asthma exacerbations is viral upper respiratory infections. Estimates suggest that up to 80% of asthma exacerbations in adults are caused by viral upper respiratory infections. Since immune function is important for the resolution of respiratory infections, the question arises regarding the impact of immunosenescence on the clinical features of asthma in the elderly. For example, are exacerbations more frequent or severe in the elderly due to an increased susceptibility or a persistence of viral respiratory infections?",
+                "score": 0.7430741753899406,
+                "pmcid": "PMC3359620",
+                "section": "INTRO",
+                "pmid": 22639679
+              }
+            },
+            {
+              "source": "europe_pmc",
+              "doc_id": "PMID:42661964",
+              "title": "HHV-6-Positive Meningitis in an Immunocompetent Adult: Diagnostic Challenges in Distinguishing Active Infection From Chromosomal Integration: A Case Report.",
+              "text": "Consider human herpesvirus 6 (HHV-6) in immunocompetent adults with viral meningitis when standard tests are negative. Qualitative CSF PCR requires cautious interpretation because it cannot exclude chromosomally integrated HHV-6. Serial CSF improvement and rapid clinical recovery may support probable self-limited infection and help avoid unnecessary ganciclovir or foscarnet therapy.",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/42661964/",
+              "score": null,
+              "raw": {
+                "id": "42661964",
+                "source": "MED",
+                "pmid": "42661964",
+                "pmcid": "PMC13519284",
+                "fullTextIdList": {
+                  "fullTextId": [
+                    "PMC13519284"
+                  ]
+                },
+                "doi": "10.1002/ccr3.73407",
+                "title": "HHV-6-Positive Meningitis in an Immunocompetent Adult: Diagnostic Challenges in Distinguishing Active Infection From Chromosomal Integration: A Case Report.",
+                "authorString": "Taha HM, Zahran A, Hajjeh O, AbuBaha B, AbuBaha M, Marouf O.",
+                "authorList": {
+                  "author": [
+                    {
+                      "fullName": "Taha HM",
+                      "firstName": "Hatem M",
+                      "lastName": "Taha",
+                      "initials": "HM",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0009-0009-9721-6249"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Department of Internal Medicine Palestine Medical Complex Ramallah Palestine."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Zahran A",
+                      "firstName": "Anwar",
+                      "lastName": "Zahran",
+                      "initials": "A",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0009-0001-7767-6573"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Department of Medicine, Faculty of Medicine and Health Sciences An-Najah National University Nablus Palestine."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Hajjeh O",
+                      "firstName": "Orabi",
+                      "lastName": "Hajjeh",
+                      "initials": "O",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0009-0000-6771-193X"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Department of Medicine, Faculty of Medicine and Health Sciences An-Najah National University Nablus Palestine."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "AbuBaha B",
+                      "firstName": "Bara",
+                      "lastName": "AbuBaha",
+                      "initials": "B",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0009-0001-2333-8309"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Department of Medicine, Faculty of Medicine and Health Sciences An-Najah National University Nablus Palestine."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "AbuBaha M",
+                      "firstName": "Mohammed",
+                      "lastName": "AbuBaha",
+                      "initials": "M",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0009-0000-0873-8374"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Department of Medicine, Faculty of Medicine and Health Sciences An-Najah National University Nablus Palestine."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "fullName": "Marouf O",
+                      "firstName": "Omar",
+                      "lastName": "Marouf",
+                      "initials": "O",
+                      "authorId": {
+                        "type": "ORCID",
+                        "value": "0009-0003-0786-3300"
+                      },
+                      "authorAffiliationDetailsList": {
+                        "authorAffiliation": [
+                          {
+                            "affiliation": "Department of Internal Medicine Palestine Medical Complex Ramallah Palestine."
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                "authorIdList": {
+                  "authorId": [
+                    {
+                      "type": "ORCID",
+                      "value": "0009-0000-0873-8374"
+                    },
+                    {
+                      "type": "ORCID",
+                      "value": "0009-0000-6771-193X"
+                    },
+                    {
+                      "type": "ORCID",
+                      "value": "0009-0001-2333-8309"
+                    },
+                    {
+                      "type": "ORCID",
+                      "value": "0009-0001-7767-6573"
+                    },
+                    {
+                      "type": "ORCID",
+                      "value": "0009-0003-0786-3300"
+                    },
+                    {
+                      "type": "ORCID",
+                      "value": "0009-0009-9721-6249"
+                    }
+                  ]
+                },
+                "journalInfo": {
+                  "issue": "9",
+                  "volume": "14",
+                  "journalIssueId": 4247216,
+                  "dateOfPublication": "2026 Sep",
+                  "monthOfPublication": 9,
+                  "yearOfPublication": 2026,
+                  "printPublicationDate": "2026-09-01",
+                  "journal": {
+                    "title": "Clinical case reports",
+                    "medlineAbbreviation": "Clin Case Rep",
+                    "isoabbreviation": "Clin Case Rep",
+                    "nlmid": "101620385",
+                    "essn": "2050-0904",
+                    "issn": "2050-0904"
+                  }
+                },
+                "pubYear": "2026",
+                "pageInfo": "e73407",
+                "abstractText": "Consider human herpesvirus 6 (HHV-6) in immunocompetent adults with viral meningitis when standard tests are negative. Qualitative CSF PCR requires cautious interpretation because it cannot exclude chromosomally integrated HHV-6. Serial CSF improvement and rapid clinical recovery may support probable self-limited infection and help avoid unnecessary ganciclovir or foscarnet therapy.",
+                "affiliation": "Department of Internal Medicine Palestine Medical Complex Ramallah Palestine.",
+                "publicationStatus": "epublish",
+                "language": "eng",
+                "pubModel": "Electronic-eCollection",
+                "pubTypeList": {
+                  "pubType": [
+                    "case-study",
+                    "Journal Article"
+                  ]
+                },
+                "keywordList": {
+                  "keyword": [
+                    "Cerebrospinal fluid",
+                    "Human herpesvirus 6",
+                    "Immunocompetent Adult",
+                    "Viral Meningitis",
+                    "Antiviral Stewardship",
+                    "Chromosomally Integrated Hhv‐6"
+                  ]
+                },
+                "fullTextUrlList": {
+                  "fullTextUrl": [
+                    {
+                      "availability": "Subscription required",
+                      "availabilityCode": "S",
+                      "documentStyle": "doi",
+                      "site": "DOI",
+                      "url": "https://doi.org/10.1002/ccr3.73407"
+                    },
+                    {
+                      "availability": "Open access",
+                      "availabilityCode": "OA",
+                      "documentStyle": "html",
+                      "site": "Europe_PMC",
+                      "url": "https://europepmc.org/articles/PMC13519284"
+                    },
+                    {
+                      "availability": "Open access",
+                      "availabilityCode": "OA",
+                      "documentStyle": "pdf",
+                      "site": "Europe_PMC",
+                      "url": "https://europepmc.org/articles/PMC13519284?pdf=render"
+                    }
+                  ]
+                },
+                "isOpenAccess": "Y",
+                "inEPMC": "Y",
+                "inPMC": "Y",
+                "hasPDF": "Y",
+                "hasBook": "N",
+                "hasSuppl": "N",
+                "citedByCount": 0,
+                "hasData": "N",
+                "hasReferences": "Y",
+                "hasTextMinedTerms": "Y",
+                "hasDbCrossReferences": "N",
+                "hasLabsLinks": "N",
+                "license": "cc by-nc-nd",
+                "hasEvaluations": "N",
+                "authMan": "N",
+                "epmcAuthMan": "N",
+                "nihAuthMan": "N",
+                "hasTMAccessionNumbers": "N",
+                "dateOfCompletion": "2026-08-28",
+                "dateOfCreation": "2026-08-28",
+                "firstIndexDate": "2026-08-30",
+                "fullTextReceivedDate": "2026-09-10",
+                "dateOfRevision": "2026-08-29",
+                "electronicPublicationDate": "2026-08-26",
+                "firstPublicationDate": "2026-08-26"
+              }
+            },
+            {
+              "source": "litsense",
+              "doc_id": "PMID:32578210#FIG-00450033",
+              "title": null,
+              "text": "Adverse event rates of nasopharyngitis and upper respiratory tract infections in patients with inflammatory conditions on biologic therapies. Range of percentages reflects adverse event rates with increasing doses. Most biologics show no difference or a slight increase in rates of nasopharyngitis and upper respiratory tract infections compared to placebo. *Upper respiratory infection rates, including nasopharyngitis, upper respiratory tract infections, pharyngitis, and viral upper respiratory tract infections. **Pharyngitis rates. N/A, not available",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/32578210/",
+              "score": 0.7350941432336823,
+              "raw": {
+                "annotations": [
+                  "282|15|disease|MESH:D009304",
+                  "302|34|disease|MESH:D012141",
+                  "480|34|disease|MESH:D012141",
+                  "518|11|disease|MESH:D010612",
+                  "23|15|disease|MESH:D009304",
+                  "43|34|disease|MESH:D012141",
+                  "421|34|disease|MESH:D012141",
+                  "95|23|disease|MESH:D007249",
+                  "404|15|disease|MESH:D009304",
+                  "457|11|disease|MESH:D010612",
+                  "81|8|species|9606",
+                  "359|27|disease|MESH:D012141"
+                ],
+                "text": "Adverse event rates of nasopharyngitis and upper respiratory tract infections in patients with inflammatory conditions on biologic therapies. Range of percentages reflects adverse event rates with increasing doses. Most biologics show no difference or a slight increase in rates of nasopharyngitis and upper respiratory tract infections compared to placebo. *Upper respiratory infection rates, including nasopharyngitis, upper respiratory tract infections, pharyngitis, and viral upper respiratory tract infections. **Pharyngitis rates. N/A, not available",
+                "score": 0.7350941432336823,
+                "pmcid": "PMC7361922",
+                "section": "FIG",
+                "pmid": 32578210
+              }
+            }
+          ],
+          "per_source_counts": {
+            "europe_pmc": 4,
+            "litsense": 4
+          },
+          "errors": [],
+          "latency_ms": 10631.497082998976
+        },
+        "retriever_parameters": {
+          "multi_part": false,
+          "query": "What is the patient's heart rate?",
+          "path": "synthesizer_unanswerable",
+          "retrieval_performed": true,
+          "literature_query": "heart rate viral upper respiratory infection adults normal range",
+          "sources": [
+            "europe_pmc",
+            "litsense"
+          ],
+          "max_documents": 8,
+          "max_doc_chars": 1500,
+          "dedupe": {
+            "by_identifier": true,
+            "near_duplicate_text_jaccard": 0.9
+          },
+          "ranking": "round_robin_interleave; source-native order within each source",
+          "per_source": {
+            "europe_pmc": {
+              "endpoint": "https://www.ebi.ac.uk/europepmc/webservices/rest/search",
+              "request_params": {
+                "query": "heart rate viral upper respiratory infection adults normal range",
+                "resultType": "core",
+                "pageSize": "10",
+                "format": "json",
+                "synonym": "false",
+                "cursorMark": "*"
+              },
+              "page_size": 10,
+              "result_type": "core",
+              "filters": {
+                "open_access_only": false,
+                "full_text_only": false
+              },
+              "sort": null,
+              "synonym": false,
+              "timeout_s": 20.0,
+              "max_retries": 3,
+              "backoff_base_s": 1.0,
+              "min_interval_s": 0.0,
+              "cache_enabled": false,
+              "cache_hit": false
+            },
+            "litsense": {
+              "endpoint": "https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/passages/",
+              "request_params": {
+                "query": "heart rate viral upper respiratory infection adults normal range",
+                "rerank": "true"
+              },
+              "result_type": "passages",
+              "rerank": true,
+              "max_results": 10,
+              "filters": null,
+              "timeout_s": 30.0,
+              "max_retries": 3,
+              "backoff_base_s": 1.0,
+              "min_interval_s": 1.0,
+              "cache_enabled": false,
+              "cache_hit": false,
+              "no_match": false
+            }
+          },
+          "raw_counts": {
+            "europe_pmc": 10,
+            "litsense": 10
+          },
+          "failed_sources": []
+        },
+        "used_llm": "deepseek/deepseek-v4-flash-0731",
+        "answer_source": "unanswerable",
+        "evidence": [],
+        "confidence": "low",
+        "llm_calls": [
+          {
+            "stage": "resolver",
+            "model": "deepseek/deepseek-v4-flash-0731",
+            "prompt_tokens": 710,
+            "completion_tokens": 136,
+            "latency_ms": 7677.597667090595,
+            "attempt": 1,
+            "purpose": "initial",
+            "success": true,
+            "error": null
+          },
+          {
+            "stage": "query_builder",
+            "model": "deepseek/deepseek-v4-flash-0731",
+            "prompt_tokens": 560,
+            "completion_tokens": 140,
+            "latency_ms": 8480.40783405304,
+            "attempt": 1,
+            "purpose": "initial",
+            "success": true,
+            "error": null
+          },
+          {
+            "stage": "synthesizer",
+            "model": "deepseek/deepseek-v4-flash-0731",
+            "prompt_tokens": 2370,
+            "completion_tokens": 1076,
+            "latency_ms": 8738.412957987748,
+            "attempt": 1,
+            "purpose": "initial",
+            "success": true,
+            "error": null
+          }
+        ]
+      },
+      "wall_time_s": 35.54
+    }
+  ]
+}

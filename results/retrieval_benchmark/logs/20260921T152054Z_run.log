@@ -1,0 +1,13 @@
+2026-09-22 01:20:54,904 INFO bench: bench --out results/retrieval_benchmark --workers 3 run --configs current_fixed,improved_1to4
+2026-09-22 01:21:21,866 WARNING medsim.retrieval: Europe PMC reply had no results list; retrying in 1.0s
+2026-09-22 01:21:49,007 INFO bench.run: run improved_1to4 A:PMC4746980_01:birth_weight: ok literature, 8 docs, 53.8s, $0.0004 [1/7]
+2026-09-22 01:22:12,626 INFO bench.run: run improved_1to4 A:PMC7362981_01:blood_pressure: ok literature, 8 docs, 77.4s, $0.0008 [2/7]
+2026-09-22 01:22:57,107 WARNING medsim.http: GET https://www.ebi.ac.uk/europepmc/webservices/rest/PMC6235632/fullTextXML returned 500; retrying in 1.0s
+2026-09-22 01:23:11,079 INFO bench.run: run current_fixed A:PMC6917615_01:perfusion_pressure: ok synthesizer_unanswerable, 8 docs, 82.1s, $0.0009 [3/7]
+2026-09-22 01:23:27,456 INFO bench.run: run improved_1to4 A:PMC11108692_01:blood_eosinophils_percentage: ok synthesizer_unanswerable, 8 docs, 152.3s, $0.0010 [4/7]
+2026-09-22 01:23:51,855 WARNING medsim.http: GET https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13359059/fullTextXML returned 500; retrying in 1.0s
+2026-09-22 01:24:08,694 WARNING medsim.llm: OpenRouter returned an empty reply; retrying in 1.0s
+2026-09-22 01:24:15,532 WARNING medsim.llm: OpenRouter returned an empty reply; retrying in 2.0s
+2026-09-22 01:24:52,734 INFO bench.run: run improved_1to4 B:PMC5986936_02:creatinine: ok literature, 8 docs, 101.7s, $0.0010 [5/7]
+2026-09-22 01:25:46,334 INFO bench.run: run improved_1to4 A:PMC9756760_01:heart_rate: ok literature, 8 docs, 213.7s, $0.0012 [6/7]
+2026-09-22 01:30:11,210 INFO bench.run: run improved_1to4 B:PMC9095982_01:c_reactive_protein: error LLMTruncatedError: resolver: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RESOLVER_MAX_TOKENS., 0 docs, 403.8s, $0.0000 [7/7]

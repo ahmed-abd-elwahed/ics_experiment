@@ -1,0 +1,2 @@
+2026-09-22 01:38:42,466 INFO bench: bench --out results/retrieval_benchmark --workers 2 run --configs improved_1to4
+2026-09-22 01:47:37,821 INFO bench.run: run improved_1to4 B:PMC9095982_01:c_reactive_protein: ok off_topic, 0 docs, 535.2s, $0.0068 [1/1]

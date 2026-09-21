@@ -1,0 +1,1 @@
+2026-09-22 03:04:10,305 INFO bench: bench --out results/retrieval_benchmark report --baseline current_fixed --snapshot final_all_methods --configs current,current_fixed,improved_1to4,improved_1to5,improved_1to6,openrouter_search,openrouter_search_improved

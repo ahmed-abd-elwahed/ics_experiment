@@ -1,0 +1,56 @@
+[build-system]
+requires = ["hatchling>=1.25,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "medsim"
+version = "0.1.0"
+description = "Simulated text-only medical environment for evaluating diagnostic agents."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "pydantic>=2.7,<3",
+  "pydantic-settings>=2.3,<3",
+  "httpx>=0.27,<1",
+  "python-dotenv>=1.0,<2",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8,<10",
+  "respx>=0.21,<1",
+  "mypy>=1.10,<3",
+  "ruff>=0.5,<1",
+]
+
+[project.scripts]
+medsim = "medsim.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["medsim"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["live: hits real external APIs (requires --live and OPENROUTER_API_KEY)"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["medsim", "bench", "tests"]
+
+[[tool.mypy.overrides]]
+module = ["respx", "respx.*"]
+ignore_missing_imports = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF", "ANN"]
+ignore = ["ANN401"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["ANN"]
+"bench/**" = ["RUF001"]  # report labels use typographic dashes and signs on purpose
+"results/scripts/**" = ["RUF001"]

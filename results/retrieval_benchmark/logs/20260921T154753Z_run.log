@@ -1,0 +1,81 @@
+2026-09-22 01:47:53,923 INFO bench: bench --out results/retrieval_benchmark --workers 12 run --configs improved_1to5
+2026-09-22 01:48:22,190 WARNING medsim.retrieval: Europe PMC reply had no results list; retrying in 1.0s
+2026-09-22 01:48:41,508 WARNING medsim.retrieval: Europe PMC reply had no results list; retrying in 1.0s
+2026-09-22 01:48:43,071 WARNING medsim.retrieval: Europe PMC reply had no results list; retrying in 2.0s
+2026-09-22 01:48:45,405 WARNING medsim.retrieval: Europe PMC reply had no results list; retrying in 4.0s
+2026-09-22 01:48:47,585 INFO bench.run: run improved_1to5 A:PMC7362981_01:blood_pressure: ok synthesizer_unanswerable, 8 docs, 53.5s, $0.0004 [1/50]
+2026-09-22 01:48:51,386 WARNING medsim.llm: OpenRouter returned an empty reply; retrying in 1.0s
+2026-09-22 01:48:54,479 WARNING medsim.llm: OpenRouter returned an empty reply; retrying in 1.0s
+2026-09-22 01:48:59,234 INFO bench.run: run improved_1to5 A:PMC10724032_01:bmi: ok literature, 8 docs, 65.1s, $0.0005 [2/50]
+2026-09-22 01:48:59,382 WARNING medsim.llm: OpenRouter returned an empty reply; retrying in 2.0s
+2026-09-22 01:49:01,641 INFO bench.run: run improved_1to5 A:PMC11004302_01:ki_67: ok literature, 8 docs, 67.5s, $0.0006 [3/50]
+2026-09-22 01:49:04,455 WARNING medsim.llm: OpenRouter returned an empty reply; retrying in 2.0s
+2026-09-22 01:49:05,909 INFO bench.run: run improved_1to5 A:PMC6548214_02:cerebrospinal_fluid_white_blood_cell_cou: ok literature, 8 docs, 71.8s, $0.0004 [4/50]
+2026-09-22 01:49:08,817 INFO bench.run: run improved_1to5 A:PMC5477234_01:weight: ok synthesizer_unanswerable, 8 docs, 74.7s, $0.0005 [5/50]
+2026-09-22 01:49:14,329 INFO bench.run: run improved_1to5 A:PMC4746980_01:birth_weight: error LLMError: OpenRouter returned empty message content (3 attempts)., 0 docs, 80.2s, $0.0000 [6/50]
+2026-09-22 01:49:24,491 WARNING medsim.retrieval: Europe PMC reply had no results list; retrying in 1.0s
+2026-09-22 01:49:25,823 WARNING medsim.retrieval: Europe PMC reply had no results list; retrying in 2.0s
+2026-09-22 01:49:26,899 INFO bench.run: run improved_1to5 A:PMC6016220_01:white_blood_cell_count: ok literature, 8 docs, 92.8s, $0.0008 [7/50]
+2026-09-22 01:49:35,745 INFO bench.run: run improved_1to5 A:S6:oxygen_saturation: ok literature, 8 docs, 101.6s, $0.0005 [8/50]
+2026-09-22 01:49:38,257 INFO bench.run: run improved_1to5 A:B1:spo2: ok literature, 8 docs, 39.0s, $0.0006 [9/50]
+2026-09-22 01:49:42,978 INFO bench.run: run improved_1to5 A:PMC3005659_01:weight: ok literature, 8 docs, 108.9s, $0.0016 [10/50]
+2026-09-22 01:49:45,047 INFO bench.run: run improved_1to5 A:B3:oxygen_saturation: ok literature, 8 docs, 39.1s, $0.0003 [11/50]
+2026-09-22 01:49:54,639 WARNING medsim.retrieval: Europe PMC reply had no results list; retrying in 1.0s
+2026-09-22 01:50:09,351 WARNING medsim.retrieval: Europe PMC reply had no results list; retrying in 1.0s
+2026-09-22 01:50:10,669 WARNING medsim.retrieval: Europe PMC reply had no results list; retrying in 2.0s
+2026-09-22 01:50:14,580 INFO bench.run: run improved_1to5 A:S5:heart_rate: ok literature, 8 docs, 140.5s, $0.0010 [12/50]
+2026-09-22 01:50:15,032 INFO bench.run: run improved_1to5 A:PMC4475516_01:ki_67: ok literature, 8 docs, 48.1s, $0.0006 [13/50]
+2026-09-22 01:50:15,443 INFO bench.run: run improved_1to5 A:PMC3792542_01:weight: ok literature, 8 docs, 66.6s, $0.0004 [14/50]
+2026-09-22 01:50:17,285 INFO bench.run: run improved_1to5 A:PMC8387078_01:blood_urea: ok literature, 8 docs, 63.0s, $0.0004 [15/50]
+2026-09-22 01:50:26,439 INFO bench.run: run improved_1to5 A:PMC11108692_01:blood_eosinophils_percentage: ok literature, 8 docs, 152.3s, $0.0008 [16/50]
+2026-09-22 01:50:27,087 INFO bench.run: run improved_1to5 A:PMC7737524_02:egfr: ok literature, 8 docs, 99.5s, $0.0009 [17/50]
+2026-09-22 01:50:44,725 INFO bench.run: run improved_1to5 A:PMC7305531_01:temperature: ok literature, 8 docs, 69.0s, $0.0007 [18/50]
+2026-09-22 01:50:46,440 INFO bench.run: run improved_1to5 A:PMC9273465_01:beta_hydroxybutyrate: ok literature, 8 docs, 104.8s, $0.0009 [19/50]
+2026-09-22 01:50:51,007 INFO bench.run: run improved_1to5 A:PMC11157216_01:temperature: ok literature, 8 docs, 36.0s, $0.0007 [20/50]
+2026-09-22 01:50:51,057 INFO bench.run: run improved_1to5 A:PMC6917615_01:perfusion_pressure: ok synthesizer_unanswerable, 8 docs, 68.1s, $0.0006 [21/50]
+2026-09-22 01:51:12,106 INFO bench.run: run improved_1to5 A:PMC3023755_01:albumin: ok literature, 8 docs, 56.7s, $0.0007 [22/50]
+2026-09-22 01:51:19,572 INFO bench.run: run improved_1to5 A:PMC8263235_03:hemoglobin: ok literature, 8 docs, 65.0s, $0.0008 [23/50]
+2026-09-22 01:51:21,425 INFO bench.run: run improved_1to5 A:PMC9756760_01:heart_rate: ok literature, 8 docs, 64.1s, $0.0007 [24/50]
+2026-09-22 01:51:24,324 WARNING medsim.retrieval: Europe PMC reply had no results list; retrying in 1.0s
+2026-09-22 01:51:26,967 INFO bench.run: run improved_1to5 A:PMC4518021_01:body_temperature: ok literature, 8 docs, 40.5s, $0.0010 [25/50]
+2026-09-22 01:51:40,473 INFO bench.run: run improved_1to5 A:S2:spo2: ok literature, 8 docs, 73.4s, $0.0006 [26/50]
+2026-09-22 01:52:00,509 WARNING medsim.llm: OpenRouter returned an empty reply; retrying in 1.0s
+2026-09-22 01:52:11,617 INFO bench.run: run improved_1to5 A:PMC3732352_01:lactate_dehydrogenase: ok literature, 8 docs, 105.2s, $0.0010 [27/50]
+2026-09-22 01:52:13,663 WARNING medsim.retrieval: Europe PMC reply had no results list; retrying in 1.0s
+2026-09-22 01:52:14,626 INFO bench.run: run improved_1to5 B:PMC10373170_01:temperature: ok literature, 8 docs, 53.2s, $0.0003 [28/50]
+2026-09-22 01:52:15,616 INFO bench.run: run improved_1to5 B:PMC3125664_01:heart_rate: ok literature, 8 docs, 48.6s, $0.0006 [29/50]
+2026-09-22 01:52:15,823 INFO bench.run: run improved_1to5 A:PMC5468569_01:resting_heart_rate: ok literature, 8 docs, 84.8s, $0.0011 [30/50]
+2026-09-22 01:52:25,041 INFO bench.run: run improved_1to5 A:PMC11760277_01:esr: ok literature, 8 docs, 94.0s, $0.0011 [31/50]
+2026-09-22 01:52:33,069 INFO bench.run: run improved_1to5 B:PMC4208417_01:white_cell_count: ok query_builder_declined, 0 docs, 18.4s, $0.0002 [32/50]
+2026-09-22 01:52:36,963 INFO bench.run: run improved_1to5 A:PMC3625585_01:body_mass_index: ok literature, 8 docs, 178.7s, $0.0022 [33/50]
+2026-09-22 01:52:42,481 WARNING medsim.http: GET https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/passages/ failed (ReadTimeout); retrying in 1.0s
+2026-09-22 01:52:54,179 INFO bench.run: run improved_1to5 A:PMC7375717_01:left_visual_acuity: ok literature, 8 docs, 102.1s, $0.0011 [34/50]
+2026-09-22 01:53:08,013 WARNING medsim.retrieval: Europe PMC reply had no results list; retrying in 1.0s
+2026-09-22 01:53:35,708 WARNING medsim.http: GET https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/passages/ failed (ReadTimeout); retrying in 1.0s
+2026-09-22 01:53:42,162 WARNING medsim.retrieval: Europe PMC reply had no results list; retrying in 1.0s
+2026-09-22 01:53:47,418 INFO bench.run: run improved_1to5 B:PMC8851600_09:sodium: ok synthesizer_unanswerable, 8 docs, 53.2s, $0.0003 [35/50]
+2026-09-22 01:53:49,125 WARNING medsim.llm: OpenRouter returned an empty reply; retrying in 1.0s
+2026-09-22 01:53:50,504 INFO bench.run: run improved_1to5 A:PMC11249570_01:ventricular_rate: error LLMTruncatedError: resolver: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RESOLVER_MAX_TOKENS., 0 docs, 356.4s, $0.0000 [36/50]
+2026-09-22 01:53:55,166 WARNING medsim.http: GET https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9513664/fullTextXML returned 500; retrying in 1.0s
+2026-09-22 01:53:55,532 WARNING medsim.llm: OpenRouter returned an empty reply; retrying in 2.0s
+2026-09-22 01:53:56,005 INFO bench.run: run improved_1to5 B:PMC4333364_01:respiratory_rate: ok synthesizer_unanswerable, 8 docs, 82.9s, $0.0009 [37/50]
+2026-09-22 01:54:03,826 INFO bench.run: run improved_1to5 B:PMC11735163_02:oxygen_saturation: error LLMError: OpenRouter returned empty message content (3 attempts)., 0 docs, 86.9s, $0.0000 [38/50]
+2026-09-22 01:54:06,592 INFO bench.run: run improved_1to5 A:PMC10373170_01:c_reactive_protein: ok literature, 8 docs, 167.0s, $0.0010 [39/50]
+2026-09-22 01:54:06,640 INFO bench.run: run improved_1to5 B:PMC10601745_01:glucose: ok literature, 8 docs, 146.2s, $0.0027 [40/50]
+2026-09-22 01:54:21,920 INFO bench.run: run improved_1to5 A:PMC7520668_01:bmi: ok literature, 8 docs, 276.9s, $0.0016 [41/50]
+2026-09-22 01:54:28,043 WARNING medsim.retrieval: Europe PMC reply had no results list; retrying in 1.0s
+2026-09-22 01:54:32,112 INFO bench.run: run improved_1to5 B:PMC11108692_01:blood_pressure: ok synthesizer_unanswerable, 8 docs, 136.5s, $0.0012 [42/50]
+2026-09-22 01:55:00,896 INFO bench.run: run improved_1to5 B:PMC10806383_01:platelet_count: ok synthesizer_unanswerable, 8 docs, 155.8s, $0.0010 [43/50]
+2026-09-22 01:55:04,249 INFO bench.run: run improved_1to5 B:PMC11786930_01:potassium: ok literature, 8 docs, 76.8s, $0.0004 [44/50]
+2026-09-22 01:55:06,195 INFO bench.run: run improved_1to5 B:PMC11799034_01:heart_rate: ok literature, 8 docs, 62.4s, $0.0005 [45/50]
+2026-09-22 01:55:39,683 WARNING medsim.retrieval: Europe PMC reply had no results list; retrying in 1.0s
+2026-09-22 01:55:41,112 WARNING medsim.retrieval: Europe PMC reply had no results list; retrying in 2.0s
+2026-09-22 01:55:44,881 WARNING medsim.retrieval: Europe PMC reply had no results list; retrying in 1.0s
+2026-09-22 01:55:46,334 WARNING medsim.retrieval: Europe PMC reply had no results list; retrying in 2.0s
+2026-09-22 01:55:48,681 WARNING medsim.retrieval: Europe PMC reply had no results list; retrying in 4.0s
+2026-09-22 01:55:58,250 INFO bench.run: run improved_1to5 B:S8:lactate: ok literature, 8 docs, 222.4s, $0.0015 [46/50]
+2026-09-22 01:55:59,380 INFO bench.run: run improved_1to5 B:PMC5986936_02:creatinine: ok literature, 8 docs, 227.8s, $0.0014 [47/50]
+2026-09-22 01:56:02,155 WARNING medsim.retrieval: Europe PMC reply had no results list; retrying in 1.0s
+2026-09-22 01:56:08,798 INFO bench.run: run improved_1to5 B:PMC11752478_03:temperature: ok literature, 8 docs, 132.8s, $0.0012 [48/50]
+2026-09-22 01:56:13,975 INFO bench.run: run improved_1to5 B:PMC9095982_01:c_reactive_protein: ok literature, 8 docs, 143.5s, $0.0009 [49/50]
+2026-09-22 01:56:45,656 INFO bench.run: run improved_1to5 A:PMC4294451_01:anti_ccp: ok literature, 8 docs, 360.9s, $0.0028 [50/50]

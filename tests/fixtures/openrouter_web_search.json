@@ -1,0 +1,131 @@
+{
+ "id": "gen-1789991075-MdbyMuxEqbhRnPxwz8SA",
+ "object": "chat.completion",
+ "created": 1789991075,
+ "model": "deepseek/deepseek-v4-flash-0731",
+ "provider": "OpenAI",
+ "system_fingerprint": null,
+ "service_tier": null,
+ "choices": [
+  {
+   "index": 0,
+   "logprobs": null,
+   "finish_reason": "stop",
+   "native_finish_reason": "stop",
+   "message": {
+    "role": "assistant",
+    "content": "DONE",
+    "refusal": null,
+    "annotations": [
+     {
+      "type": "url_citation",
+      "url_citation": {
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12714918/",
+       "title": "Serum direct bilirubin predicts severe tricuspid regurgitation in atrial ...",
+       "start_index": 0,
+       "end_index": 0,
+       "content": "for age [80 (74–84) vs. 76 (69–83) years, p = 0.009], BNP [403 (246– 575) vs. 210 (98–368) pg/mL, p < 0.001], total bilirubin [21 (16– 28) vs. 16 (13–20) μmol/L, p < 0.001], direct bilirubin [5 (4–7) vs. 3 (2–4) μmol/L, p < 0.001], TR"
+      }
+     },
+     {
+      "type": "url_citation",
+      "url_citation": {
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12155599/",
+       "title": "Association of Tricuspid Regurgitation With Mortality in Heart Failure With Left-Sided Heart Disease - PMC",
+       "start_index": 0,
+       "end_index": 0,
+       "content": ", uric acid, and natriuretic peptides were used to evaluate systemic conditions in the study cohorts.\n...\n| T-bilirubin, mg/dL | 0.8 [0.6, 1.2] | 1.0 [0.7, 1.5] | <0.001 | 0.8 [0.6, 1.2] | 1.0 [0.7, 1.5] | <0.001 | 0.8 [0.5, 1.0] | 0.9 [0.6, 1.3] | 0.001 |"
+      }
+     },
+     {
+      "type": "url_citation",
+      "url_citation": {
+       "url": "https://pubmed.ncbi.nlm.nih.gov/6533196/",
+       "title": "[Grading of tricuspid regurgitation by pulsed Doppler echocardiography and liver function tests] - PubMed",
+       "start_index": 0,
+       "end_index": 0,
+       "content": "Recently, pulsed Doppler echocardiography has been used for the quantitative evaluation of tricuspid regurgitation (TR). However, there are some problems about the clinical significance of TR diagnosed by Doppler examination probably because of the excellent sensitivity in detecting TR. In the present study, we used liver function tests as an indicator of the visceral damage caused by TR and compared them to the severity of TR estimated by Doppler examination. Forty Doppler examinations were performed in 33 cardiac patients including seven, in which the examinations were repeated because"
+      }
+     },
+     {
+      "type": "url_citation",
+      "url_citation": {
+       "url": "https://europepmc.org/article/MED/40546790",
+       "title": "Effects of transcatheter tricuspid valve replacement on hepatic and renal function in severe TR. - Abstract - Europe PMC",
+       "start_index": 0,
+       "end_index": 0,
+       "content": "In this prospective, multicenter study, 96 high-surgical-risk patients with severe TR (NYHA functional class III/IV) underwent LuX-Valve TTVR between September 2022 and March 2023. Follow-up at 7, 30, 180, and 360 days assessed cardiac, hepatic (total bilirubin (TBIL), direct bilirubin (DBIL), alanine aminotransferase (ALT), aspartate aminotransferase (AST), alkaline phosphatase (ALP)), and renal (serum creatinine, urea, uric acid) function.\n\n#### Results\n\n...\n\nProcedural success was 95.79 %, and 93 patients survived to 12 months. All survivors exhibited TR reduction to less than grade III. Significant hepatic improvement was noted at 12 months, especially among those with preoperative liver dysfunction (LD): total bilirubin decreased from 21.54 ± 11.14 to 18.33 ± 7.82 μmol/L (P = 0.044) and direct bilirubin from 7.95 ± 4.74 to 5.92 ± 2.98 μmol/L (P = 0.005). Renal function remained stable."
+      }
+     },
+     {
+      "type": "url_citation",
+      "url_citation": {
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8576027/",
+       "title": "Renal and hepatic function of patients with severe tricuspid regurgitation undergoing inferior caval valve implantation - PMC",
+       "start_index": 0,
+       "end_index": 0,
+       "content": "5.3 ALT, U/l (IQR) 17.0 (13.8-29.3) 16.0 (14.8-24.0) 26.0 (11.8-30.8) 18.0 (14.3-23.8AST, U/l ± SD 29.2 ± 8.6 31.4 ± 9.3 29.3 ± 8.2 28.4 ± 5.4 Gamma-GT, U/l (IQR) 226.0 (101.5-264.0) (n = 9) 144.0 (70.5-217.0) (n = 9)* 87.5 (52.3-155.3) 103.5"
+      }
+     },
+     {
+      "type": "url_citation",
+      "url_citation": {
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10183499/",
+       "title": "Influence of hepatic dysfunction in patients who underwent tricuspid ...",
+       "start_index": 0,
+       "end_index": 0,
+       "content": "Even though TV surgery has been actively performed, TV surgery have historically been associated with high mortality and morbidity owing to complications because of various reasons,\n...\n. Recently, TriSCORE by Dreyfus (30) and Clinical Risk Score (31) have"
+      }
+     },
+     {
+      "type": "url_citation",
+      "url_citation": {
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10583553/",
+       "title": "Tricuspid regurgitation, right ventricular function, and renal congestion: a cardiorenal triangle",
+       "start_index": 0,
+       "end_index": 0,
+       "content": "mild hyperbilirubinemia and elevation of cholestasis markers (alkaline phosphatase and gamma-glutamyl transferase). If liver damage progresses, increased serum aminotransferase, hypoalbuminemia and coagulopathy can be seen. Liver disease can become as"
+      }
+     },
+     {
+      "type": "url_citation",
+      "url_citation": {
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK526121/",
+       "title": "Tricuspid Regurgitation - StatPearls - NCBI Bookshelf",
+       "start_index": 0,
+       "end_index": 0,
+       "content": "Serum chemistry: Abnormal liver function test and hyperbilirubinemia secondary to hepatic congestion may be noted."
+      }
+     }
+    ]
+   }
+  }
+ ],
+ "usage": {
+  "prompt_tokens": 3055,
+  "completion_tokens": 107,
+  "total_tokens": 3162,
+  "cost": 0.00713932,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 45,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.00013932000000000001,
+   "upstream_inference_prompt_cost": 0.0001222,
+   "upstream_inference_completions_cost": 1.7120000000000002e-05
+  },
+  "server_tool_use_details": {
+   "web_search_requests": 1,
+   "tool_calls_requested": 1,
+   "tool_calls_executed": 1
+  }
+ }
+}

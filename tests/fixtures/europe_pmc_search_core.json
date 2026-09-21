@@ -1,0 +1,1483 @@
+{
+    "version": "6.9",
+    "hitCount": 7704,
+    "nextCursorMark": "AoIIQKXgLyg1NTA1NTExNg==",
+    "nextPageUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=body temperature fever range common cold adults&cursorMark=AoIIQKXgLyg1NTA1NTExNg==&resultType=core&pageSize=5&format=json",
+    "request": {
+        "queryString": "body temperature fever range common cold adults",
+        "resultType": "core",
+        "cursorMark": "%2a",
+        "pageSize": 5,
+        "sort": "",
+        "synonym": false
+    },
+    "resultList": {
+        "result": [
+            {
+                "id": "42016338",
+                "source": "MED",
+                "pmid": "42016338",
+                "pmcid": "PMC13094164",
+                "fullTextIdList": {
+                    "fullTextId": [
+                        "PMC13094164"
+                    ]
+                },
+                "doi": "10.14740/jocmr6490",
+                "title": "Approach to Low Body Temperature or Mild Hypothermia in the Geriatric Population: A Narrative Review.",
+                "authorString": "Dhami P, Alagiakrishnan K.",
+                "authorList": {
+                    "author": [
+                        {
+                            "fullName": "Dhami P",
+                            "firstName": "Prabhpaul",
+                            "lastName": "Dhami",
+                            "initials": "P",
+                            "authorId": {
+                                "type": "ORCID",
+                                "value": "0000-0002-8490-4140"
+                            },
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Division of Internal Medicine, University of Alberta, Edmonton, Alberta, Canada."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Alagiakrishnan K",
+                            "firstName": "Kannayiram",
+                            "lastName": "Alagiakrishnan",
+                            "initials": "K",
+                            "authorId": {
+                                "type": "ORCID",
+                                "value": "0000-0003-1444-2451"
+                            },
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Division of Geriatric Medicine, University of Alberta, Edmonton, Alberta, Canada."
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "authorIdList": {
+                    "authorId": [
+                        {
+                            "type": "ORCID",
+                            "value": "0000-0002-8490-4140"
+                        },
+                        {
+                            "type": "ORCID",
+                            "value": "0000-0003-1444-2451"
+                        }
+                    ]
+                },
+                "journalInfo": {
+                    "issue": "4",
+                    "volume": "18",
+                    "journalIssueId": 4183716,
+                    "dateOfPublication": "2026 Apr",
+                    "monthOfPublication": 4,
+                    "yearOfPublication": 2026,
+                    "printPublicationDate": "2026-04-01",
+                    "journal": {
+                        "title": "Journal of clinical medicine research",
+                        "medlineAbbreviation": "J Clin Med Res",
+                        "essn": "1918-3011",
+                        "issn": "1918-3003",
+                        "isoabbreviation": "J Clin Med Res",
+                        "nlmid": "101538301"
+                    }
+                },
+                "pubYear": "2026",
+                "pageInfo": "219-233",
+                "abstractText": "While normal human body temperature is often cited as 36.1-37.2 \u00b0C, there is high-quality evidence demonstrating that older adults typically have lower baseline body temperatures. In contrast to hypothermia (< 35 \u00b0C) which is well recognized as a medical emergency, there is emerging evidence that low body temperature (35.0-36.0 \u00b0C) may predict poor outcomes in the geriatric population. This narrative review synthesizes the current literature on the association between low body temperature in adults aged \u2265 65 years and common geriatric co-morbidities. Across observational and cohort studies, low body temperature has consistently been associated with adverse outcomes in chronic kidney disease, hypertension, diabetes, chronic obstructive pulmonary disease, various malignancies, frailty, and neurodegenerative disorders. Despite these associations, in the absence of hypothermia, low body temperature remains a neglected topic in geriatric medicine. Recognition of low body temperature may improve early detection of geriatric co-morbidities, guide medication review, and identify patients at risk for cognitive decline and frailty. Further prospective studies are needed to clarify causal relationships and provide more insight into therapeutic implications.",
+                "affiliation": "Division of Internal Medicine, University of Alberta, Edmonton, Alberta, Canada.",
+                "publicationStatus": "epublish",
+                "language": "eng",
+                "pubModel": "Electronic-eCollection",
+                "pubTypeList": {
+                    "pubType": [
+                        "review-article",
+                        "Review",
+                        "Journal Article"
+                    ]
+                },
+                "keywordList": {
+                    "keyword": [
+                        "Sepsis",
+                        "Hypothyroidism",
+                        "Mild hypothermia",
+                        "Polypharmacy",
+                        "Geriatric Syndromes",
+                        "Low Body Temperature",
+                        "Chronic Co-Morbidities"
+                    ]
+                },
+                "fullTextUrlList": {
+                    "fullTextUrl": [
+                        {
+                            "availability": "Subscription required",
+                            "availabilityCode": "S",
+                            "documentStyle": "doi",
+                            "site": "DOI",
+                            "url": "https://doi.org/10.14740/jocmr6490"
+                        },
+                        {
+                            "availability": "Open access",
+                            "availabilityCode": "OA",
+                            "documentStyle": "html",
+                            "site": "Europe_PMC",
+                            "url": "https://europepmc.org/articles/PMC13094164"
+                        },
+                        {
+                            "availability": "Open access",
+                            "availabilityCode": "OA",
+                            "documentStyle": "pdf",
+                            "site": "Europe_PMC",
+                            "url": "https://europepmc.org/articles/PMC13094164?pdf=render"
+                        }
+                    ]
+                },
+                "isOpenAccess": "Y",
+                "inEPMC": "Y",
+                "inPMC": "Y",
+                "hasPDF": "Y",
+                "hasBook": "N",
+                "hasSuppl": "N",
+                "citedByCount": 0,
+                "hasData": "N",
+                "hasReferences": "Y",
+                "hasTextMinedTerms": "Y",
+                "hasDbCrossReferences": "N",
+                "hasLabsLinks": "N",
+                "license": "cc by",
+                "hasEvaluations": "N",
+                "authMan": "N",
+                "epmcAuthMan": "N",
+                "nihAuthMan": "N",
+                "hasTMAccessionNumbers": "N",
+                "dateOfCompletion": "2026-04-22",
+                "dateOfCreation": "2026-04-22",
+                "firstIndexDate": "2026-04-22",
+                "fullTextReceivedDate": "2026-04-22",
+                "dateOfRevision": "2026-08-13",
+                "electronicPublicationDate": "2026-04-15",
+                "firstPublicationDate": "2026-04-15"
+            },
+            {
+                "id": "42165394",
+                "source": "MED",
+                "pmid": "42165394",
+                "pmcid": "PMC13327540",
+                "fullTextIdList": {
+                    "fullTextId": [
+                        "PMC13327540"
+                    ]
+                },
+                "doi": "10.1242/jeb.252460",
+                "title": "Early photoperiodic cues modulate capacity for adult cold tolerance in the yellow fever mosquito Aedes aegypti.",
+                "authorString": "De Nicola EHM, Ritchie MW, Hahn DA, Biggar KK, MacMillan HA.",
+                "authorList": {
+                    "author": [
+                        {
+                            "fullName": "De Nicola EHM",
+                            "firstName": "Ella H M",
+                            "lastName": "De Nicola",
+                            "initials": "EHM",
+                            "authorId": {
+                                "type": "ORCID",
+                                "value": "0000-0002-7370-6384"
+                            },
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Department of Biology, Carleton University, Ottawa, Ontario, K1S 5B6, Canada."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Ritchie MW",
+                            "firstName": "Marshall W",
+                            "lastName": "Ritchie",
+                            "initials": "MW",
+                            "authorId": {
+                                "type": "ORCID",
+                                "value": "0000-0002-1300-1753"
+                            },
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Department of Biology, Carleton University, Ottawa, Ontario, K1S 5B6, Canada."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Hahn DA",
+                            "firstName": "Daniel A",
+                            "lastName": "Hahn",
+                            "initials": "DA",
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Department of Entomology & Nematology, University of Florida, Gainesville, FL 32611, USA."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Biggar KK",
+                            "firstName": "Kyle K",
+                            "lastName": "Biggar",
+                            "initials": "KK",
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Department of Biology, Carleton University, Ottawa, Ontario, K1S 5B6, Canada."
+                                    },
+                                    {
+                                        "affiliation": "Institute of Biochemistry, Carleton University, Ottawa, Ontario, K1S 5B6, Canada."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "MacMillan HA",
+                            "firstName": "Heath A",
+                            "lastName": "MacMillan",
+                            "initials": "HA",
+                            "authorId": {
+                                "type": "ORCID",
+                                "value": "0000-0001-7598-3273"
+                            },
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Department of Biology, Carleton University, Ottawa, Ontario, K1S 5B6, Canada."
+                                    },
+                                    {
+                                        "affiliation": "Institute of Biochemistry, Carleton University, Ottawa, Ontario, K1S 5B6, Canada."
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "authorIdList": {
+                    "authorId": [
+                        {
+                            "type": "ORCID",
+                            "value": "0000-0001-7598-3273"
+                        },
+                        {
+                            "type": "ORCID",
+                            "value": "0000-0002-1300-1753"
+                        },
+                        {
+                            "type": "ORCID",
+                            "value": "0000-0002-7370-6384"
+                        }
+                    ]
+                },
+                "dataLinksTagsList": {
+                    "dataLinkstag": [
+                        "supporting_data"
+                    ]
+                },
+                "journalInfo": {
+                    "issue": "12",
+                    "volume": "229",
+                    "journalIssueId": 4217595,
+                    "dateOfPublication": "2026 Jun",
+                    "monthOfPublication": 6,
+                    "yearOfPublication": 2026,
+                    "printPublicationDate": "2026-06-01",
+                    "journal": {
+                        "title": "The Journal of experimental biology",
+                        "medlineAbbreviation": "J Exp Biol",
+                        "essn": "1477-9145",
+                        "issn": "0022-0949",
+                        "isoabbreviation": "J Exp Biol",
+                        "nlmid": "0243705"
+                    }
+                },
+                "pubYear": "2026",
+                "pageInfo": "jeb252460",
+                "abstractText": "Climate change is driving the rapid range expansion of Aedes aegypti into temperate regions, presenting novel seasonal cues that can affect seasonal plasticity. Seasonal plasticity in Ae. aegypti is well studied in eggs but remains understudied in adults. Here, we investigated the effects of photoperiod and temperature on thermal plasticity, measured by the ability to cold acclimate, and other dormancy-related traits in female Ae. aegypti adults. Cold acclimation was done under a short-day (SD) and long-day (LD) photoperiod. LD photoperiod was introduced at three life stages: parental generation, egg state and adult acclimation, to determine if timing of LD photoperiod introduction affected thermal plasticity. LD photoperiod had a significant influence on both cold tolerance metrics assessed, chill coma onset temperature and survival after a cold stress. Introduction of LD photoperiod reduced thermal plasticity, with the magnitude of change in plasticity depending on when LD was introduced. At warm temperatures, LD photoperiod modified the rhythmic expression profile of timeless, one of the circadian clock genes analysed in this study, but not the other, period. In contrast, cold acclimation abolished the cyclical expression of both clock genes. Cold acclimation under both photoperiods suppressed blood-feeding behaviour, which resumed upon warming, but cold acclimation did not change relative transcript abundance of dormancy-implicated genes. This study presents the first evidence of an adult photosensitive seasonal phenotype in Ae. aegypti, with improved cold tolerance and reproductive quiescence. These findings contribute to a deeper understanding of how environmental cues may facilitate the continued expansion of this important disease vector into temperate environments.",
+                "affiliation": "Department of Biology, Carleton University, Ottawa, Ontario, K1S 5B6, Canada.",
+                "publicationStatus": "ppublish",
+                "language": "eng",
+                "pubModel": "Print-Electronic",
+                "pubTypeList": {
+                    "pubType": [
+                        "research-article",
+                        "Journal Article"
+                    ]
+                },
+                "grantsList": {
+                    "grant": [
+                        {
+                            "grantId": "Project 37721",
+                            "agency": "Canadian Foundation for Innovation",
+                            "orderIn": 0
+                        },
+                        {
+                            "agency": "Government of Ontario",
+                            "orderIn": 0
+                        },
+                        {
+                            "grantId": "D4404",
+                            "agency": "International Atomic Energy Associtaion",
+                            "orderIn": 0
+                        },
+                        {
+                            "grantId": "Early Researcher Award",
+                            "agency": "Government of Ontario",
+                            "orderIn": 0
+                        },
+                        {
+                            "grantId": "RGPIN-2025-04488",
+                            "agency": "Natural Sciences and Engineering Research Council of Canada",
+                            "orderIn": 0
+                        },
+                        {
+                            "agency": "Carleton University",
+                            "orderIn": 0
+                        },
+                        {
+                            "grantId": "D4404",
+                            "agency": "International Atomic Energy Association",
+                            "orderIn": 0
+                        },
+                        {
+                            "grantId": "RGPIN-2023-04651",
+                            "agency": "Natural Sciences and Engineering Research Council of Canada",
+                            "orderIn": 0
+                        }
+                    ]
+                },
+                "meshHeadingList": {
+                    "meshHeading": [
+                        {
+                            "majorTopic_YN": "N",
+                            "descriptorName": "Animals"
+                        },
+                        {
+                            "majorTopic_YN": "Y",
+                            "descriptorName": "Aedes",
+                            "meshQualifierList": {
+                                "meshQualifier": [
+                                    {
+                                        "abbreviation": "GE",
+                                        "qualifierName": "genetics",
+                                        "majorTopic_YN": "N"
+                                    },
+                                    {
+                                        "abbreviation": "PH",
+                                        "qualifierName": "physiology",
+                                        "majorTopic_YN": "N"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "majorTopic_YN": "N",
+                            "descriptorName": "Cues"
+                        },
+                        {
+                            "majorTopic_YN": "N",
+                            "descriptorName": "Seasons"
+                        },
+                        {
+                            "majorTopic_YN": "Y",
+                            "descriptorName": "Acclimatization"
+                        },
+                        {
+                            "majorTopic_YN": "Y",
+                            "descriptorName": "Photoperiod"
+                        },
+                        {
+                            "majorTopic_YN": "N",
+                            "descriptorName": "Female"
+                        },
+                        {
+                            "majorTopic_YN": "Y",
+                            "descriptorName": "Cold Temperature"
+                        }
+                    ]
+                },
+                "keywordList": {
+                    "keyword": [
+                        "Aedes aegypti",
+                        "Photoperiod",
+                        "Cold acclimation",
+                        "Seasonal Plasticity"
+                    ]
+                },
+                "subsetList": {
+                    "subset": [
+                        {
+                            "code": "IM",
+                            "name": "Index Medicus"
+                        }
+                    ]
+                },
+                "fullTextUrlList": {
+                    "fullTextUrl": [
+                        {
+                            "availability": "Subscription required",
+                            "availabilityCode": "S",
+                            "documentStyle": "doi",
+                            "site": "DOI",
+                            "url": "https://doi.org/10.1242/jeb.252460"
+                        },
+                        {
+                            "availability": "Open access",
+                            "availabilityCode": "OA",
+                            "documentStyle": "html",
+                            "site": "Europe_PMC",
+                            "url": "https://europepmc.org/articles/PMC13327540"
+                        },
+                        {
+                            "availability": "Open access",
+                            "availabilityCode": "OA",
+                            "documentStyle": "pdf",
+                            "site": "Europe_PMC",
+                            "url": "https://europepmc.org/articles/PMC13327540?pdf=render"
+                        }
+                    ]
+                },
+                "isOpenAccess": "Y",
+                "inEPMC": "Y",
+                "inPMC": "Y",
+                "hasPDF": "Y",
+                "hasBook": "N",
+                "hasSuppl": "Y",
+                "citedByCount": 0,
+                "hasData": "Y",
+                "hasReferences": "Y",
+                "hasTextMinedTerms": "Y",
+                "hasDbCrossReferences": "N",
+                "hasLabsLinks": "N",
+                "license": "cc by",
+                "hasEvaluations": "N",
+                "authMan": "N",
+                "epmcAuthMan": "N",
+                "nihAuthMan": "N",
+                "hasTMAccessionNumbers": "Y",
+                "tmAccessionTypeList": {
+                    "accessionType": [
+                        "doi"
+                    ]
+                },
+                "dateOfCompletion": "2026-06-18",
+                "dateOfCreation": "2026-05-21",
+                "firstIndexDate": "2026-05-22",
+                "fullTextReceivedDate": "2026-08-19",
+                "dateOfRevision": "2026-08-13",
+                "electronicPublicationDate": "2026-06-18",
+                "firstPublicationDate": "2026-06-18"
+            },
+            {
+                "id": "42493760",
+                "source": "MED",
+                "pmid": "42493760",
+                "pmcid": "PMC13396153",
+                "fullTextIdList": {
+                    "fullTextId": [
+                        "PMC13396153"
+                    ]
+                },
+                "doi": "10.1111/apha.70281",
+                "title": "Under Control? Mouse Models of Heat Exposure: A Systematic Review of Experimental Design and Methodology.",
+                "authorString": "Rhaman AH, Kardol LR, Maloney SK, Quintrell E, Sorial E, Morgan S, Russell DJ, Kelty E, Wyrwoll CS.",
+                "authorList": {
+                    "author": [
+                        {
+                            "fullName": "Rhaman AH",
+                            "firstName": "Amina H",
+                            "lastName": "Rhaman",
+                            "initials": "AH",
+                            "authorId": {
+                                "type": "ORCID",
+                                "value": "0009-0008-2856-4525"
+                            },
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "School of Population & Global Health, University of Western Australia, Perth, Western Australia, Australia."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Kardol LR",
+                            "firstName": "Leaf R",
+                            "lastName": "Kardol",
+                            "initials": "LR",
+                            "authorId": {
+                                "type": "ORCID",
+                                "value": "0000-0002-4074-5512"
+                            },
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "School of Human Sciences, University of Western Australia, Perth, Western Australia, Australia."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Maloney SK",
+                            "firstName": "Shane K",
+                            "lastName": "Maloney",
+                            "initials": "SK",
+                            "authorId": {
+                                "type": "ORCID",
+                                "value": "0000-0002-5878-2266"
+                            },
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "School of Human Sciences, University of Western Australia, Perth, Western Australia, Australia."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Quintrell E",
+                            "firstName": "Ebony",
+                            "lastName": "Quintrell",
+                            "initials": "E",
+                            "authorId": {
+                                "type": "ORCID",
+                                "value": "0000-0002-3065-2857"
+                            },
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "School of Population & Global Health, University of Western Australia, Perth, Western Australia, Australia."
+                                    },
+                                    {
+                                        "affiliation": "The Kids Research Institute Australia, Nedlands, Western Australia, Australia."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Sorial E",
+                            "firstName": "Elizabeth",
+                            "lastName": "Sorial",
+                            "initials": "E",
+                            "authorId": {
+                                "type": "ORCID",
+                                "value": "0009-0007-3814-1641"
+                            },
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "School of Population & Global Health, University of Western Australia, Perth, Western Australia, Australia."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Morgan S",
+                            "firstName": "Shannon",
+                            "lastName": "Morgan",
+                            "initials": "S",
+                            "authorId": {
+                                "type": "ORCID",
+                                "value": "0009-0000-2233-0383"
+                            },
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Medical School, University of Western Australia, Perth, Western Australia, Australia."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Russell DJ",
+                            "firstName": "Danielle J",
+                            "lastName": "Russell",
+                            "initials": "DJ",
+                            "authorId": {
+                                "type": "ORCID",
+                                "value": "0000-0002-3366-4415"
+                            },
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "School of Population & Global Health, University of Western Australia, Perth, Western Australia, Australia."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Kelty E",
+                            "firstName": "Erin",
+                            "lastName": "Kelty",
+                            "initials": "E",
+                            "authorId": {
+                                "type": "ORCID",
+                                "value": "0000-0002-0841-2216"
+                            },
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "School of Population & Global Health, University of Western Australia, Perth, Western Australia, Australia."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Wyrwoll CS",
+                            "firstName": "Caitlin S",
+                            "lastName": "Wyrwoll",
+                            "initials": "CS",
+                            "authorId": {
+                                "type": "ORCID",
+                                "value": "0000-0002-5746-5680"
+                            },
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "School of Human Sciences, University of Western Australia, Perth, Western Australia, Australia."
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "authorIdList": {
+                    "authorId": [
+                        {
+                            "type": "ORCID",
+                            "value": "0000-0002-0841-2216"
+                        },
+                        {
+                            "type": "ORCID",
+                            "value": "0000-0002-3065-2857"
+                        },
+                        {
+                            "type": "ORCID",
+                            "value": "0000-0002-3366-4415"
+                        },
+                        {
+                            "type": "ORCID",
+                            "value": "0000-0002-4074-5512"
+                        },
+                        {
+                            "type": "ORCID",
+                            "value": "0000-0002-5746-5680"
+                        },
+                        {
+                            "type": "ORCID",
+                            "value": "0000-0002-5878-2266"
+                        },
+                        {
+                            "type": "ORCID",
+                            "value": "0009-0000-2233-0383"
+                        },
+                        {
+                            "type": "ORCID",
+                            "value": "0009-0007-3814-1641"
+                        },
+                        {
+                            "type": "ORCID",
+                            "value": "0009-0008-2856-4525"
+                        }
+                    ]
+                },
+                "dataLinksTagsList": {
+                    "dataLinkstag": [
+                        "supporting_data"
+                    ]
+                },
+                "journalInfo": {
+                    "issue": "8",
+                    "volume": "242",
+                    "journalIssueId": 4220331,
+                    "dateOfPublication": "2026 Aug",
+                    "monthOfPublication": 8,
+                    "yearOfPublication": 2026,
+                    "printPublicationDate": "2026-08-01",
+                    "journal": {
+                        "title": "Acta physiologica (Oxford, England)",
+                        "medlineAbbreviation": "Acta Physiol (Oxf)",
+                        "essn": "1748-1716",
+                        "issn": "1748-1708",
+                        "isoabbreviation": "Acta Physiol (Oxf)",
+                        "nlmid": "101262545"
+                    }
+                },
+                "pubYear": "2026",
+                "pageInfo": "e70281",
+                "abstractText": "Mouse models are widely used to study heat-related physiological responses as they provide insights relevant to human health. However, species differences (including nocturnal behavior) and standard housing below the thermoneutral zone (TNZ; 26\u00b0C-34\u00b0C) can confound comparisons. This systematic review evaluates methodologies, including housing temperatures, used in mouse heat-exposure studies published over the past 4\u2009years. Medline, Web of Science, and Embase were searched for peer-reviewed mouse heat-exposure studies published from 2020 to 10 January 2025. Data on housing temperature, heat-exposure protocols, and physiological outcomes were extracted. Screening and extraction were conducted independently and in duplicate in Covidence. One hundred seventy studies were included. Of those, 142 (83%) housed control mice below TNZ; seven (4%) studies maintained TNZ conditions and the remainder did not report control temperature. Heat exposures ranged from 30\u00b0C-45\u00b0C, most commonly 39\u00b0C-41\u00b0C. Body temperature was measured in 110 (65%) studies, often targeting ~42\u00b0C. When timing was reported, exposures occurred mainly during the light phase (52, 30%). Most studies used males only (116, 68%); 31 (18%) used females only; 9 (5%) included both sexes; and 14 (8%) did not report sex. Common outcomes were digestive (55, 32%), inflammatory (47, 28%), and central nervous system (40, 24%). Recent mouse heat-exposure studies often compare heat-exposed animals with cold-stressed controls and apply daytime exposures that conflict with the nocturnal behavior of mice and human diurnal pattern. Incomplete reporting of housing conditions limits interpretation. Future research should account for differences between mice and humans to improve translational relevance. Trial Registration: PROSPERO: CRD42024611316.",
+                "affiliation": "School of Population & Global Health, University of Western Australia, Perth, Western Australia, Australia.",
+                "publicationStatus": "ppublish",
+                "language": "eng",
+                "pubModel": "Print",
+                "pubTypeList": {
+                    "pubType": [
+                        "Systematic Review",
+                        "review-article",
+                        "Journal Article"
+                    ]
+                },
+                "grantsList": {
+                    "grant": [
+                        {
+                            "grantId": "227174/Z/23/Z",
+                            "agency": "Wellcome Trust",
+                            "acronym": "WT_",
+                            "orderIn": 0
+                        },
+                        {
+                            "grantId": "2008937",
+                            "agency": "National Health and Medical Research Council",
+                            "orderIn": 0
+                        },
+                        {
+                            "agency": "Australian Government",
+                            "orderIn": 0
+                        },
+                        {
+                            "agency": "Graduate Women Western Australia",
+                            "orderIn": 0
+                        },
+                        {
+                            "agency": "Wellcome Trust",
+                            "acronym": "WT_",
+                            "orderIn": 0
+                        },
+                        {
+                            "agency": "Stan Perron Charitable Foundation",
+                            "orderIn": 0
+                        }
+                    ]
+                },
+                "meshHeadingList": {
+                    "meshHeading": [
+                        {
+                            "majorTopic_YN": "N",
+                            "descriptorName": "Animals"
+                        },
+                        {
+                            "majorTopic_YN": "N",
+                            "descriptorName": "Mice"
+                        },
+                        {
+                            "majorTopic_YN": "N",
+                            "descriptorName": "Disease Models, Animal"
+                        },
+                        {
+                            "majorTopic_YN": "N",
+                            "descriptorName": "Body Temperature",
+                            "meshQualifierList": {
+                                "meshQualifier": [
+                                    {
+                                        "abbreviation": "PH",
+                                        "qualifierName": "physiology",
+                                        "majorTopic_YN": "N"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "majorTopic_YN": "Y",
+                            "descriptorName": "Body Temperature Regulation",
+                            "meshQualifierList": {
+                                "meshQualifier": [
+                                    {
+                                        "abbreviation": "PH",
+                                        "qualifierName": "physiology",
+                                        "majorTopic_YN": "N"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "majorTopic_YN": "N",
+                            "descriptorName": "Research Design"
+                        },
+                        {
+                            "majorTopic_YN": "Y",
+                            "descriptorName": "Hot Temperature",
+                            "meshQualifierList": {
+                                "meshQualifier": [
+                                    {
+                                        "abbreviation": "AE",
+                                        "qualifierName": "adverse effects",
+                                        "majorTopic_YN": "N"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "keywordList": {
+                    "keyword": [
+                        "Thermoregulation",
+                        "Heat exposure",
+                        "Experimental design",
+                        "Thermal stress",
+                        "Systematic review",
+                        "Mouse Models"
+                    ]
+                },
+                "subsetList": {
+                    "subset": [
+                        {
+                            "code": "IM",
+                            "name": "Index Medicus"
+                        }
+                    ]
+                },
+                "fullTextUrlList": {
+                    "fullTextUrl": [
+                        {
+                            "availability": "Subscription required",
+                            "availabilityCode": "S",
+                            "documentStyle": "doi",
+                            "site": "DOI",
+                            "url": "https://doi.org/10.1111/apha.70281"
+                        },
+                        {
+                            "availability": "Open access",
+                            "availabilityCode": "OA",
+                            "documentStyle": "html",
+                            "site": "Europe_PMC",
+                            "url": "https://europepmc.org/articles/PMC13396153"
+                        },
+                        {
+                            "availability": "Open access",
+                            "availabilityCode": "OA",
+                            "documentStyle": "pdf",
+                            "site": "Europe_PMC",
+                            "url": "https://europepmc.org/articles/PMC13396153?pdf=render"
+                        }
+                    ]
+                },
+                "isOpenAccess": "Y",
+                "inEPMC": "Y",
+                "inPMC": "Y",
+                "hasPDF": "Y",
+                "hasBook": "N",
+                "hasSuppl": "Y",
+                "citedByCount": 0,
+                "hasData": "Y",
+                "hasReferences": "Y",
+                "hasTextMinedTerms": "Y",
+                "hasDbCrossReferences": "N",
+                "hasLabsLinks": "N",
+                "license": "cc by",
+                "hasEvaluations": "N",
+                "authMan": "N",
+                "epmcAuthMan": "N",
+                "nihAuthMan": "N",
+                "hasTMAccessionNumbers": "Y",
+                "tmAccessionTypeList": {
+                    "accessionType": [
+                        "doi"
+                    ]
+                },
+                "dateOfCompletion": "2026-07-23",
+                "dateOfCreation": "2026-07-23",
+                "firstIndexDate": "2026-07-24",
+                "fullTextReceivedDate": "2026-09-03",
+                "dateOfRevision": "2026-08-23",
+                "firstPublicationDate": "2026-08-01"
+            },
+            {
+                "id": "42661956",
+                "source": "MED",
+                "pmid": "42661956",
+                "pmcid": "PMC13519197",
+                "fullTextIdList": {
+                    "fullTextId": [
+                        "PMC13519197"
+                    ]
+                },
+                "doi": "10.1177/2050313x261480874",
+                "title": "Rhabdomyolysis after strenuous exercise: A case report.",
+                "authorString": "Zhen RR, Shen YF, Li GC, Zhu YJ, Zhang LM, Zhang YN, Hong Q, Wang XL, Gu C, Shen T, Yan GL.",
+                "authorList": {
+                    "author": [
+                        {
+                            "fullName": "Zhen RR",
+                            "firstName": "Rong-Rong",
+                            "lastName": "Zhen",
+                            "initials": "RR",
+                            "authorId": {
+                                "type": "ORCID",
+                                "value": "0000-0002-5373-7765"
+                            },
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Department of Emergency and Critical Care Medicine, Shanghai Municipal Hospital of Traditional Chinese Medicine, Shanghai University of Traditional Chinese Medicine, China."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Shen YF",
+                            "firstName": "Yi-Fan",
+                            "lastName": "Shen",
+                            "initials": "YF",
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Department of Emergency and Critical Care Medicine, Shanghai Municipal Hospital of Traditional Chinese Medicine, Shanghai University of Traditional Chinese Medicine, China."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Li GC",
+                            "firstName": "Guan-Cheng",
+                            "lastName": "Li",
+                            "initials": "GC",
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Department of Acupuncture and Moxibustion, Shanghai Municipal Hospital of Traditional Chinese Medicine, Shanghai University of Traditional Chinese Medicine, China."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Zhu YJ",
+                            "firstName": "Ying-Jie",
+                            "lastName": "Zhu",
+                            "initials": "YJ",
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Department of Colorectal, Wusong Hospital, Zhongshan Hospital Affiliated to Fudan University, Shanghai, China."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Zhang LM",
+                            "firstName": "Li-Min",
+                            "lastName": "Zhang",
+                            "initials": "LM",
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Department of Neurology, Longhua Hospital, Shanghai University of Traditional Chinese Medicine, China."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Zhang YN",
+                            "firstName": "Ya-Nan",
+                            "lastName": "Zhang",
+                            "initials": "YN",
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Department of Emergency and Critical Care Medicine, Shanghai Municipal Hospital of Traditional Chinese Medicine, Shanghai University of Traditional Chinese Medicine, China."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Hong Q",
+                            "firstName": "Qi",
+                            "lastName": "Hong",
+                            "initials": "Q",
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Department of Emergency and Critical Care Medicine, Shanghai Municipal Hospital of Traditional Chinese Medicine, Shanghai University of Traditional Chinese Medicine, China."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Wang XL",
+                            "firstName": "Xin-Lu",
+                            "lastName": "Wang",
+                            "initials": "XL",
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Department of Emergency and Critical Care Medicine, Shanghai Municipal Hospital of Traditional Chinese Medicine, Shanghai University of Traditional Chinese Medicine, China."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Gu C",
+                            "firstName": "Chao",
+                            "lastName": "Gu",
+                            "initials": "C",
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Department of Special Treatment, Longhua Hospital, Shanghai University of Traditional Chinese Medicine, China."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Shen T",
+                            "firstName": "Ting",
+                            "lastName": "Shen",
+                            "initials": "T",
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Department of Medical Service, Shanghai Municipal Hospital of Traditional Chinese Medicine, Shanghai University of Traditional Chinese Medicine, China."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Yan GL",
+                            "firstName": "Guo-Liang",
+                            "lastName": "Yan",
+                            "initials": "GL",
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Department of Emergency and Critical Care Medicine, Shanghai Municipal Hospital of Traditional Chinese Medicine, Shanghai University of Traditional Chinese Medicine, China."
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "authorIdList": {
+                    "authorId": [
+                        {
+                            "type": "ORCID",
+                            "value": "0000-0002-5373-7765"
+                        }
+                    ]
+                },
+                "journalInfo": {
+                    "volume": "14",
+                    "journalIssueId": 4085900,
+                    "dateOfPublication": "2026 ",
+                    "monthOfPublication": 0,
+                    "yearOfPublication": 2026,
+                    "printPublicationDate": "2026-01-01",
+                    "journal": {
+                        "title": "SAGE open medical case reports",
+                        "medlineAbbreviation": "SAGE Open Med Case Rep",
+                        "essn": "2050-313X",
+                        "issn": "2050-313X",
+                        "isoabbreviation": "SAGE Open Med Case Rep",
+                        "nlmid": "101638686"
+                    }
+                },
+                "pubYear": "2026",
+                "pageInfo": "2050313X261480874",
+                "abstractText": "Rhabdomyolysis is a syndrome characterized by necrosis and the disruption of striated muscle fibers. It is secondary to etiologies, such as trauma, ischemia, or toxin exposure. Rhabdomyolysis releases intracellular muscle constituents into systemic circulation, frequently leading to acute kidney injury. Clinical manifestations, including muscle weakness, myalgia, and dark urine, in young adults with nontraumatic etiologies are frequently underrecognized. Early diagnosis and prompt intervention are critical for mitigating complications. We report a case of a 27-year-old male who was admitted to Shanghai Municipal Hospital of Traditional Chinese Medicine in September 2024, presenting with exertional rhabdomyolysis complicated by acute kidney injury. Serum myoglobin (>12,000\u2009ng/mL) and creatine kinase (210,000\u2009U/L) were strikingly elevated. Therapeutic intervention consisted of vigorous fluid resuscitation, urinary alkalinization, electrolyte correction, and combined intermittent renal replacement therapy and hemoperfusion. The patient recovered uneventfully and was discharged in stable condition. It highlights the vulnerability of young individuals to rhabdomyolysis and underscores the seriousness of the condition. The adjunctive use of intermittent renal replacement therapy combined with hemoperfusion was observed to reduce circulating creatinine and myoglobin levels, which may serve as a reference for future therapeutic decision-making.",
+                "affiliation": "Department of Emergency and Critical Care Medicine, Shanghai Municipal Hospital of Traditional Chinese Medicine, Shanghai University of Traditional Chinese Medicine, China.",
+                "publicationStatus": "epublish",
+                "language": "eng",
+                "pubModel": "Electronic-eCollection",
+                "pubTypeList": {
+                    "pubType": [
+                        "Journal Article",
+                        "Case Reports",
+                        "case-report"
+                    ]
+                },
+                "keywordList": {
+                    "keyword": [
+                        "strenuous exercise",
+                        "Rhabdomyolysis",
+                        "Case Report",
+                        "Aki",
+                        "Irrt"
+                    ]
+                },
+                "fullTextUrlList": {
+                    "fullTextUrl": [
+                        {
+                            "availability": "Subscription required",
+                            "availabilityCode": "S",
+                            "documentStyle": "doi",
+                            "site": "DOI",
+                            "url": "https://doi.org/10.1177/2050313X261480874"
+                        },
+                        {
+                            "availability": "Open access",
+                            "availabilityCode": "OA",
+                            "documentStyle": "html",
+                            "site": "Europe_PMC",
+                            "url": "https://europepmc.org/articles/PMC13519197"
+                        },
+                        {
+                            "availability": "Open access",
+                            "availabilityCode": "OA",
+                            "documentStyle": "pdf",
+                            "site": "Europe_PMC",
+                            "url": "https://europepmc.org/articles/PMC13519197?pdf=render"
+                        }
+                    ]
+                },
+                "isOpenAccess": "Y",
+                "inEPMC": "Y",
+                "inPMC": "Y",
+                "hasPDF": "Y",
+                "hasBook": "N",
+                "hasSuppl": "N",
+                "citedByCount": 0,
+                "hasData": "N",
+                "hasReferences": "Y",
+                "hasTextMinedTerms": "Y",
+                "hasDbCrossReferences": "N",
+                "hasLabsLinks": "N",
+                "license": "cc by-nc",
+                "hasEvaluations": "N",
+                "authMan": "N",
+                "epmcAuthMan": "N",
+                "nihAuthMan": "N",
+                "hasTMAccessionNumbers": "N",
+                "dateOfCompletion": "2026-08-28",
+                "dateOfCreation": "2026-08-28",
+                "firstIndexDate": "2026-08-30",
+                "fullTextReceivedDate": "2026-09-10",
+                "dateOfRevision": "2026-08-29",
+                "electronicPublicationDate": "2026-08-25",
+                "firstPublicationDate": "2026-08-25"
+            },
+            {
+                "id": "41784651",
+                "source": "MED",
+                "pmid": "41784651",
+                "pmcid": "PMC12963108",
+                "fullTextIdList": {
+                    "fullTextId": [
+                        "PMC12963108"
+                    ]
+                },
+                "doi": "10.1007/s00484-026-03146-z",
+                "title": "Immediate and delayed effects of thermal stress on fever-associated seizures in children: A time-stratified case-crossover study in Japan.",
+                "authorString": "Matsumoto N, Yamamura Y, Uraguchi K, Obara T, Naito H, Yorifuji T.",
+                "authorList": {
+                    "author": [
+                        {
+                            "fullName": "Matsumoto N",
+                            "firstName": "Naomi",
+                            "lastName": "Matsumoto",
+                            "initials": "N",
+                            "authorId": {
+                                "type": "ORCID",
+                                "value": "0000-0002-9980-6092"
+                            },
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Department of Epidemiology, Faculty of Medicine, Dentistry and Pharmaceutical Sciences, Okayama University, 2-5-1 Shikata-Cho, Kita-Ku, Okayama, Japan. naomim@okayama-u.ac.jp."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Yamamura Y",
+                            "firstName": "Yuka",
+                            "lastName": "Yamamura",
+                            "initials": "Y",
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Department of Epidemiology, Okayama University Graduate School of Medicine, Dentistry and Pharmaceutical Sciences, Okayama, Japan."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Uraguchi K",
+                            "firstName": "Kensuke",
+                            "lastName": "Uraguchi",
+                            "initials": "K",
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Department of Epidemiology, Okayama University Graduate School of Medicine, Dentistry and Pharmaceutical Sciences, Okayama, Japan."
+                                    },
+                                    {
+                                        "affiliation": "Department of Otolaryngology-Head & Neck Surgery, Kagawa Rosai Hospital, Kagawa, Japan."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Obara T",
+                            "firstName": "Takafumi",
+                            "lastName": "Obara",
+                            "initials": "T",
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Department of Emergency, Critical Care, and Disaster Medicine, Okayama University Faculty of Medicine, Dentistry, and Pharmaceutical Sciences, Okayama, Japan."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Naito H",
+                            "firstName": "Hiromichi",
+                            "lastName": "Naito",
+                            "initials": "H",
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Department of Emergency, Critical Care, and Disaster Medicine, Okayama University Faculty of Medicine, Dentistry, and Pharmaceutical Sciences, Okayama, Japan."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "fullName": "Yorifuji T",
+                            "firstName": "Takashi",
+                            "lastName": "Yorifuji",
+                            "initials": "T",
+                            "authorAffiliationDetailsList": {
+                                "authorAffiliation": [
+                                    {
+                                        "affiliation": "Department of Epidemiology, Faculty of Medicine, Dentistry and Pharmaceutical Sciences, Okayama University, 2-5-1 Shikata-Cho, Kita-Ku, Okayama, Japan."
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "authorIdList": {
+                    "authorId": [
+                        {
+                            "type": "ORCID",
+                            "value": "0000-0002-9980-6092"
+                        }
+                    ]
+                },
+                "dataLinksTagsList": {
+                    "dataLinkstag": [
+                        "supporting_data"
+                    ]
+                },
+                "journalInfo": {
+                    "issue": "3",
+                    "volume": "70",
+                    "journalIssueId": 4136926,
+                    "dateOfPublication": "2026 Mar",
+                    "monthOfPublication": 3,
+                    "yearOfPublication": 2026,
+                    "printPublicationDate": "2026-03-01",
+                    "journal": {
+                        "title": "International journal of biometeorology",
+                        "medlineAbbreviation": "Int J Biometeorol",
+                        "essn": "1432-1254",
+                        "issn": "0020-7128",
+                        "isoabbreviation": "Int J Biometeorol",
+                        "nlmid": "0374716"
+                    }
+                },
+                "pubYear": "2026",
+                "pageInfo": "86",
+                "abstractText": "This study aimed to examine the non-linear and delayed effects of thermal stress, measured by the hourly Universal Thermal Climate Index (UTCI), on the risk of pediatric fever-associated seizures (FAS). We conducted a time-stratified case-crossover study in Okayama, Japan (May 2015\u2013March 2023), analyzing 3,201 ambulance-attended FAS cases in children younger than 7\u00a0years. Using a distributed lag non-linear model (DLNM) with a 144-h lag, we estimated the association between UTCI and FAS. The analysis revealed a bimodal exposure\u2013response relationship. Moderate Cold Stress (10th percentile, \u20131.6\u00a0\u00b0C) was associated with a significant cumulative odds ratio (OR) of 2.22 (95% CI: 1.22\u20134.06). Risk also increased at the upper range of No Thermal Stress (24.2\u00a0\u00b0C; cumulative OR 2.74, 95% CI: 1.63\u20134.63), extending into Moderate Heat Stress (28.7\u00a0\u00b0C; cumulative OR 2.26, 95% CI: 1.33\u20133.84). These effects were primarily delayed to 72\u201396\u00a0h for Moderate Cold and reached a peak around 100\u00a0h for Moderate Heat. Strong Heat Stress showed immediate but non-significant risk patterns. These findings suggest that infection-mediated pathways likely drive the observed bimodal risk pattern, demonstrate the utility of high-resolution bioclimatic indices, and can inform the development of temperature-specific public health alerts.",
+                "affiliation": "Department of Epidemiology, Faculty of Medicine, Dentistry and Pharmaceutical Sciences, Okayama University, 2-5-1 Shikata-Cho, Kita-Ku, Okayama, Japan. naomim@okayama-u.ac.jp.",
+                "publicationStatus": "epublish",
+                "language": "eng",
+                "pubModel": "Electronic",
+                "pubTypeList": {
+                    "pubType": [
+                        "research-article",
+                        "Journal Article"
+                    ]
+                },
+                "grantsList": {
+                    "grant": [
+                        {
+                            "agency": "Okayama University",
+                            "orderIn": 0
+                        }
+                    ]
+                },
+                "meshHeadingList": {
+                    "meshHeading": [
+                        {
+                            "majorTopic_YN": "N",
+                            "descriptorName": "Humans"
+                        },
+                        {
+                            "majorTopic_YN": "Y",
+                            "descriptorName": "Seizures",
+                            "meshQualifierList": {
+                                "meshQualifier": [
+                                    {
+                                        "abbreviation": "EP",
+                                        "qualifierName": "epidemiology",
+                                        "majorTopic_YN": "N"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "majorTopic_YN": "Y",
+                            "descriptorName": "Seizures, Febrile",
+                            "meshQualifierList": {
+                                "meshQualifier": [
+                                    {
+                                        "abbreviation": "EP",
+                                        "qualifierName": "epidemiology",
+                                        "majorTopic_YN": "N"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "majorTopic_YN": "Y",
+                            "descriptorName": "Heat Stress Disorders",
+                            "meshQualifierList": {
+                                "meshQualifier": [
+                                    {
+                                        "abbreviation": "EP",
+                                        "qualifierName": "epidemiology",
+                                        "majorTopic_YN": "N"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "majorTopic_YN": "Y",
+                            "descriptorName": "Fever"
+                        },
+                        {
+                            "majorTopic_YN": "N",
+                            "descriptorName": "Cross-Over Studies"
+                        },
+                        {
+                            "majorTopic_YN": "N",
+                            "descriptorName": "Child"
+                        },
+                        {
+                            "majorTopic_YN": "N",
+                            "descriptorName": "Child, Preschool"
+                        },
+                        {
+                            "majorTopic_YN": "N",
+                            "descriptorName": "Infant"
+                        },
+                        {
+                            "majorTopic_YN": "N",
+                            "descriptorName": "Japan",
+                            "meshQualifierList": {
+                                "meshQualifier": [
+                                    {
+                                        "abbreviation": "EP",
+                                        "qualifierName": "epidemiology",
+                                        "majorTopic_YN": "N"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "majorTopic_YN": "N",
+                            "descriptorName": "Female"
+                        },
+                        {
+                            "majorTopic_YN": "N",
+                            "descriptorName": "Male"
+                        },
+                        {
+                            "majorTopic_YN": "N",
+                            "descriptorName": "Hot Temperature"
+                        }
+                    ]
+                },
+                "keywordList": {
+                    "keyword": [
+                        "Climate change",
+                        "Thermal stress",
+                        "Pediatric Emergency",
+                        "Universal Thermal Climate Index (Utci)",
+                        "Time-stratified Case-crossover Study",
+                        "Fever-associated Seizures"
+                    ]
+                },
+                "subsetList": {
+                    "subset": [
+                        {
+                            "code": "IM",
+                            "name": "Index Medicus"
+                        }
+                    ]
+                },
+                "fullTextUrlList": {
+                    "fullTextUrl": [
+                        {
+                            "availability": "Subscription required",
+                            "availabilityCode": "S",
+                            "documentStyle": "doi",
+                            "site": "DOI",
+                            "url": "https://doi.org/10.1007/s00484-026-03146-z"
+                        },
+                        {
+                            "availability": "Open access",
+                            "availabilityCode": "OA",
+                            "documentStyle": "html",
+                            "site": "Europe_PMC",
+                            "url": "https://europepmc.org/articles/PMC12963108"
+                        },
+                        {
+                            "availability": "Open access",
+                            "availabilityCode": "OA",
+                            "documentStyle": "pdf",
+                            "site": "Europe_PMC",
+                            "url": "https://europepmc.org/articles/PMC12963108?pdf=render"
+                        }
+                    ]
+                },
+                "isOpenAccess": "Y",
+                "inEPMC": "Y",
+                "inPMC": "Y",
+                "hasPDF": "Y",
+                "hasBook": "N",
+                "hasSuppl": "N",
+                "citedByCount": 0,
+                "hasData": "Y",
+                "hasReferences": "Y",
+                "hasTextMinedTerms": "Y",
+                "hasDbCrossReferences": "N",
+                "hasLabsLinks": "N",
+                "license": "cc by",
+                "hasEvaluations": "N",
+                "authMan": "N",
+                "epmcAuthMan": "N",
+                "nihAuthMan": "N",
+                "hasTMAccessionNumbers": "Y",
+                "tmAccessionTypeList": {
+                    "accessionType": [
+                        "doi"
+                    ]
+                },
+                "dateOfCompletion": "2026-06-27",
+                "dateOfCreation": "2026-03-05",
+                "firstIndexDate": "2026-03-06",
+                "fullTextReceivedDate": "2026-03-08",
+                "dateOfRevision": "2026-08-13",
+                "electronicPublicationDate": "2026-03-05",
+                "firstPublicationDate": "2026-03-05"
+            }
+        ]
+    }
+}

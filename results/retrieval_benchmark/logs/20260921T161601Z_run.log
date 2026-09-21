@@ -1,0 +1,3 @@
+2026-09-22 02:16:01,283 INFO bench: bench --out results/retrieval_benchmark --workers 3 run --configs improved_1to6
+2026-09-22 02:17:02,244 INFO bench.run: run improved_1to6 B:PMC11799034_01:heart_rate: ok literature, 8 docs, 59.7s, $0.0016 [1/2]
+2026-09-22 02:21:57,167 INFO bench.run: run improved_1to6 B:PMC10601745_01:glucose: ok literature, 8 docs, 354.7s, $0.0031 [2/2]
