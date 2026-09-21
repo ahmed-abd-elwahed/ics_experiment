@@ -429,6 +429,11 @@ def test_structured_stage_b_terms_drive_source_specific_queries(
     litsense = respx_mock.get(url__startswith=LS_PASSAGES).mock(
         return_value=httpx.Response(200, json=load_fixture("litsense_passages.json"))
     )
+    # Open-access hits get their full text read (retrieval change 3, on by default); Europe PMC
+    # answers with an error status when an article has none.
+    fulltext = respx_mock.get(url__regex=r".*/europepmc/webservices/rest/PMC\d+/fullTextXML$").mock(
+        return_value=httpx.Response(404)
+    )
     settings = make_settings()
     env = MedicalEnvironment(
         case_study=case, llm=llm, retrievers=build_retrievers(settings), settings=settings
@@ -462,3 +467,5 @@ def test_structured_stage_b_terms_drive_source_specific_queries(
     assert " | litsense: " in result.query
     assert response.retriever_parameters["literature_query"] == TEMP_QUERY
     assert "lexical term rerank" in response.retriever_parameters["ranking"]
+    assert fulltext.called
+    assert response.retriever_parameters["excerpts"]["full_text_used"] == 0

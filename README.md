@@ -50,14 +50,14 @@ All tunables live in `medsim.config.Settings` and are read from the environment 
 | `MEDSIM_RESOLVER_MAX_TOKENS` / `_QUERY_BUILDER_MAX_TOKENS` / `_SYNTHESIZER_MAX_TOKENS` | `4000` / `4000` / `6000` | Completion budgets, including reasoning tokens; a cut-off reply is retried once with double the budget |
 | `MEDSIM_ENABLED_SOURCES` | `["europe_pmc","litsense"]` | Literature sources |
 | `MEDSIM_MAX_DOCUMENTS` / `MEDSIM_MAX_DOC_CHARS` | `8` / `1500` | Context caps after merge |
-| `MEDSIM_EUROPE_PMC__PAGE_SIZE`, `__RESULT_TYPE`, `__OPEN_ACCESS_ONLY`, `__FULL_TEXT_ONLY`, `__SORT`, `__SYNONYM` | `25`, `core`, `false`, `false`, unset, `false` | Europe PMC search (page size is the candidate pool before reranking) |
+| `MEDSIM_EUROPE_PMC__PAGE_SIZE`, `__RESULT_TYPE`, `__OPEN_ACCESS_ONLY`, `__FULL_TEXT_ONLY`, `__SORT`, `__SYNONYM` | `50`, `core`, `false`, `false`, unset, `false` | Europe PMC search (page size is the candidate pool before reranking) |
 | `MEDSIM_LITSENSE__MODE`, `__RERANK`, `__MAX_RESULTS` | `passages`, `true`, `30` | LitSense search (max results is the candidate pool before reranking) |
 | `MEDSIM_RERANK_DOCUMENTS` | `true` | Rank each source's documents by variable/condition term matches before merging |
 | `MEDSIM_RELAX_MIN_RELEVANT` | `3` | Broaden a source's query while fewer documents than this mention the variable |
 | `MEDSIM_CACHE_ENABLED` / `MEDSIM_CACHE_DIR` | `false` / `.medsim_cache` | On-disk retrieval cache for reproducible reruns |
-| `MEDSIM_RANK_FOR_VALUES`, `MEDSIM_MERGE_STRATEGY` | `false`, `round_robin` | Retrieval change 1: documents stating a value rank first; `global` ranks all sources in one list |
-| `MEDSIM_POPULATION_FILTER` | `false` | Change 2: drop animal studies (MeSH, LitSense species tags, title); rank other age groups lower |
-| `MEDSIM_LADDER_VERSION`, `MEDSIM_FULLTEXT_EXCERPTS`, `MEDSIM_FULLTEXT_MAX_DOCS` | `v1`, `false`, `10` | Changes 3–4: `v2` adds a Europe PMC article-body search (`CASE`/`RESULTS`/`TABLE`) and drops unhelpful fallback rungs; excerpts keep the sentences about the variable, from open-access full text where available |
+| `MEDSIM_RANK_FOR_VALUES`, `MEDSIM_MERGE_STRATEGY` | `true`, `global` | Retrieval change 1: documents stating a value rank first; `global` ranks all sources in one list |
+| `MEDSIM_POPULATION_FILTER` | `true` | Change 2: drop animal studies (MeSH, LitSense species tags, title); rank other age groups lower |
+| `MEDSIM_LADDER_VERSION`, `MEDSIM_FULLTEXT_EXCERPTS`, `MEDSIM_FULLTEXT_MAX_DOCS` | `v2`, `true`, `10` | Changes 3–4: `v2` adds a Europe PMC article-body search (`CASE`/`RESULTS`/`TABLE`) and drops unhelpful fallback rungs; excerpts keep the sentences about the variable, from open-access full text where available |
 | `MEDSIM_LITSENSE__QUERY_STYLE` | `keywords` | Change 5: `natural` sends "serum albumin in patients with biloma" |
 | `MEDSIM_LLM_RERANK`, `MEDSIM_RERANKER_MODEL`, `MEDSIM_RERANK_CANDIDATES` | `false`, default model, `20` | Change 6: an LLM picks the final documents from the best candidates |
 | `MEDSIM_OPENROUTER_SEARCH__ENGINE`, `__MAX_RESULTS`, `__MAX_CHARACTERS`, `__ALLOWED_DOMAINS`, `__MODEL` | `exa`, `8`, `1500`, NCBI/Europe PMC/MSD Manuals/Medscape, default model | OpenRouter web search source (only used when `openrouter_search` is in `MEDSIM_ENABLED_SOURCES`) |
@@ -148,12 +148,22 @@ and its synonyms), `condition_terms` (the diagnosis and its synonyms), `related_
 - **LitSense:** a short `"<variable> <condition>"` phrase, which suits its word-overlap prefilter
   and semantic reranker.
 
-If fewer than `MEDSIM_RELAX_MIN_RELEVANT` documents mention the variable, that source moves down a
-ladder of broader queries: related conditions, then any field, then reference ranges. Results
-from every attempt are kept. Each source's documents are then reranked by term matches (variable,
-condition, and a nearby number for numeric questions) before the round-robin merge. Every attempt
-is recorded in `retriever_parameters.per_source.<source>.query_attempts`. See NOTES.md for the
-measurements behind these choices.
+Europe PMC also searches article bodies: `(CASE:(variable) OR RESULTS:(variable) OR
+TABLE:(variable)) AND TITLE_ABS:(condition)`, which finds case reports that state the value in
+their case description, results, or tables. If fewer than `MEDSIM_RELAX_MIN_RELEVANT` documents
+state a value (body-search hits count), the source broadens to related conditions. Results from
+every attempt are kept.
+
+Documents are then ranked by term matches: variable, disease, and above all a number near the
+variable for numeric questions. Animal studies are dropped, and studies of another age group rank
+lower. All sources share one ranked list. Long texts are cut to the sentences about the variable,
+read from the open-access full text where Europe PMC has it. Every attempt is recorded in
+`retriever_parameters.per_source.<source>.query_attempts`.
+
+These are retrieval changes 1–4 below, on by default since the benchmark measured them. The
+original method (title/abstract queries, a longer fallback ladder, a round-robin merge, the first
+1,500 characters) is still available through the settings. See NOTES.md and
+[results/README.md](results/README.md) for the measurements.
 
 ### Path 1: the case study answers
 
@@ -392,10 +402,19 @@ relaxation ladder, because every search is billed. Enable it with
 
 ### Retrieval changes 1–6
 
-Six optional changes to the Europe PMC + LitSense retrieval, each behind a setting above and off by
-default so the original method stays reproducible. They were designed from the benchmark's
-failure analysis and measured with it; see [results/README.md](results/README.md) for the
-evidence and the results. Implementation: `medsim/retrieval/aggregator.py` (steps),
+Six changes to the Europe PMC + LitSense retrieval, each behind a setting above. They were
+designed from the benchmark's failure analysis and measured with it; see
+[results/README.md](results/README.md) for the evidence and the results.
+
+- **Changes 1–4 are on by default:** value-first ranking in one list, the population filter,
+  article-body search with excerpts, and the reworked fallback searches, with 50 Europe PMC
+  candidates.
+- **Changes 5 and 6 are off:** natural-language LitSense queries had no measurable effect, and
+  LLM selection doubled cost and time without improving correctness.
+- **Restoring the original method:** set `MEDSIM_RANK_FOR_VALUES=false`,
+  `MEDSIM_MERGE_STRATEGY=round_robin`, `MEDSIM_POPULATION_FILTER=false`,
+  `MEDSIM_LADDER_VERSION=v1`, `MEDSIM_FULLTEXT_EXCERPTS=false`, and
+  `MEDSIM_EUROPE_PMC__PAGE_SIZE=25`. Implementation: `medsim/retrieval/aggregator.py` (steps),
 `query_formulation.py` (ladders, scoring, excerpts), `population.py`, `fulltext.py`,
 `rerank.py`.
 

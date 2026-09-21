@@ -1,9 +1,10 @@
 """Fan out a query to all retrievers, relax per source if needed, rank, dedupe, merge.
 
-With every option at its default this is the original method: per-source ladders broadened
-while few documents mention the variable, a lexical rerank within each source, a round-robin
-merge, and the first ``max_doc_chars`` of each document. The options are the retrieval changes
-measured in results/README.md:
+With every constructor option at its default this is the original method: per-source ladders
+broadened while few documents mention the variable, a lexical rerank within each source, a
+round-robin merge, and the first ``max_doc_chars`` of each document. medsim's ``Settings`` turn
+on changes 1-4 by default (see ``environment.build_aggregator``). The options are the retrieval
+changes measured in results/README.md:
 
 1. ``value_first`` + ``merge="global"``: documents stating a value rank first, in one list.
 2. ``population_filter``: drop animal studies, rank other age groups lower.

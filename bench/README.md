@@ -70,9 +70,9 @@ Every command also writes its full log to `logs/<UTC time>_<step>.log` in the wo
 
 | Name | Retrieval |
 |---|---|
-| `current` | medsim's default Europe PMC + LitSense retrieval |
+| `current` | the original Europe PMC + LitSense retrieval (pinned explicitly: medsim's defaults now include changes 1–4) |
 | `current_fixed` | the same, with the Europe PMC retry for replies without results |
-| `improved_1to4` | retrieval changes 1–4 (value-first ranking in one list, 50 Europe PMC candidates, animal and age filter, article-body search with excerpts, value-based broadening) |
+| `improved_1to4` | retrieval changes 1–4 (value-first ranking in one list, 50 Europe PMC candidates, animal and age filter, article-body search with excerpts, value-based broadening); medsim's current default |
 | `improved_1to5` | plus natural-language LitSense queries |
 | `improved_1to6` | plus LLM selection of the final 8 documents |
 | `openrouter_search` | OpenRouter's web search server tool (Exa) |

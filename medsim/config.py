@@ -21,7 +21,7 @@ def _default_sources() -> list[SourceName]:
 class EuropePMCSettings(BaseModel):
     enabled: bool = True
     base_url: str = "https://www.ebi.ac.uk/europepmc/webservices/rest"
-    page_size: int = Field(default=25, ge=1, le=1000)  # candidate pool before reranking
+    page_size: int = Field(default=50, ge=1, le=1000)  # candidate pool before reranking (was 25)
     result_type: Literal["idlist", "lite", "core"] = "core"
     open_access_only: bool = False
     full_text_only: bool = False
@@ -120,12 +120,14 @@ class Settings(BaseSettings):
     near_duplicate_threshold: float = Field(default=0.9, gt=0.0, le=1.0)
     rerank_documents: bool = True  # lexical term rerank within each source before merging
     relax_min_relevant: int = Field(default=3, ge=0)  # broaden a source's query below this
-    # Retrieval changes measured in results/README.md; all off by default (the original method).
-    rank_for_values: bool = False  # 1: documents stating a value for the variable rank first
-    merge_strategy: Literal["round_robin", "global"] = "round_robin"  # 1: one list, all sources
-    population_filter: bool = False  # 2: drop animal studies; rank other age groups lower
-    ladder_version: Literal["v1", "v2"] = "v1"  # 3+4: article-body search, value-based broadening
-    fulltext_excerpts: bool = False  # 3: text around the variable instead of the first N chars
+    # Retrieval changes measured in results/README.md. Changes 1-4 are on by default; the
+    # original method is rank_for_values=False, merge_strategy="round_robin",
+    # population_filter=False, ladder_version="v1", fulltext_excerpts=False, page_size 25.
+    rank_for_values: bool = True  # 1: documents stating a value for the variable rank first
+    merge_strategy: Literal["round_robin", "global"] = "global"  # 1: one list, all sources
+    population_filter: bool = True  # 2: drop animal studies; rank other age groups lower
+    ladder_version: Literal["v1", "v2"] = "v2"  # 3+4: article-body search, value-based broadening
+    fulltext_excerpts: bool = True  # 3: text around the variable instead of the first N chars
     fulltext_max_docs: int = Field(default=10, ge=0)  # open-access full texts fetched per search
     llm_rerank: bool = False  # 6: an LLM picks the documents that state a value for this patient
     reranker_model: str | None = None

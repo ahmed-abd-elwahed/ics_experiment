@@ -11,6 +11,7 @@ import respx
 
 from bench.run import CONFIGS, RETRIEVAL_STAGES
 from medsim import rules
+from medsim.config import EuropePMCSettings
 from medsim.environment import MedicalEnvironment, build_aggregator
 from medsim.models import CaseStudy, LiteratureQuery, RetrievedDocument, SourceName
 from medsim.retrieval.aggregator import RetrievalAggregator
@@ -262,8 +263,27 @@ def test_llm_rerank_failure_keeps_lexical_order() -> None:
     assert "error" in params["llm_rerank"]
 
 
-def test_defaults_build_the_original_aggregator() -> None:
-    agg = build_aggregator(make_settings(), [FakeRetriever("europe_pmc", [])], ScriptedLLM())
+def test_defaults_are_changes_1_to_4() -> None:
+    settings = make_settings()
+    agg = build_aggregator(settings, [FakeRetriever("europe_pmc", [])], ScriptedLLM())
+    assert (agg.merge, agg.value_first, agg.population_filter) == ("global", True, True)
+    assert agg.ladder == LadderOptions("v2", "keywords")  # change 5 stays off
+    assert agg.excerpts and agg.fulltext is not None
+    assert agg.reranker is None  # change 6 stays off
+    assert EuropePMCSettings().page_size == 50  # tests override it; the default is 50
+
+
+def test_original_method_is_still_reproducible() -> None:
+    from bench.run import ORIGINAL_RETRIEVAL
+
+    for name in ("current", "current_fixed", "openrouter_search", "sentences", "no_rerank"):
+        s = CONFIGS[name].settings(make_settings())
+        assert {k: getattr(s, k) for k in ORIGINAL_RETRIEVAL} == ORIGINAL_RETRIEVAL, name
+        assert s.europe_pmc.page_size == 25 and s.litsense.query_style == "keywords"
+    agg = build_aggregator(
+        CONFIGS["current"].settings(make_settings()), [FakeRetriever("europe_pmc", [])],
+        ScriptedLLM(),
+    )  # fmt: skip
     assert (agg.merge, agg.value_first, agg.population_filter) == ("round_robin", False, False)
     assert (agg.ladder, agg.excerpts, agg.reranker) == (LadderOptions(), False, None)
 

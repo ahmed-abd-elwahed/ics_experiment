@@ -69,13 +69,39 @@ def _sources(*names: str) -> Callable[[Settings], Settings]:
     return lambda s: s.model_copy(update={"enabled_sources": list(names)})
 
 
+# Retrieval as first evaluated: changes 1-6 off, 25 Europe PMC candidates. medsim's defaults
+# now include changes 1-4, so configurations of the original method set this explicitly.
+ORIGINAL_RETRIEVAL: dict[str, Any] = {
+    "rank_for_values": False,
+    "merge_strategy": "round_robin",
+    "population_filter": False,
+    "ladder_version": "v1",
+    "fulltext_excerpts": False,
+    "llm_rerank": False,
+}
+
+
+def _original(*sources: str) -> Callable[[Settings], Settings]:
+    def update(s: Settings) -> Settings:
+        s = _sources(*sources)(s)
+        return s.model_copy(
+            update={
+                **ORIGINAL_RETRIEVAL,
+                "europe_pmc": s.europe_pmc.model_copy(update={"page_size": 25}),
+                "litsense": s.litsense.model_copy(update={"query_style": "keywords"}),
+            }
+        )
+
+    return update
+
+
 def _improved(
     *, natural_litsense: bool = False, llm_rerank: bool = False
 ) -> Callable[[Settings], Settings]:
     """Retrieval changes 1-4 (results/README.md), optionally with 5 and 6."""
 
     def update(s: Settings) -> Settings:
-        s = _sources("europe_pmc", "litsense")(s)
+        s = _original("europe_pmc", "litsense")(s)
         return s.model_copy(
             update={
                 "europe_pmc": s.europe_pmc.model_copy(update={"page_size": 50}),
@@ -94,30 +120,35 @@ def _improved(
     return update
 
 
+def _with(base: Callable[[Settings], Settings], **update: Any) -> Callable[[Settings], Settings]:
+    return lambda s: base(s).model_copy(update=update)
+
+
 CONFIGS: dict[str, RunConfig] = {
     c.name: c
     for c in (
         RunConfig(
             "current",
-            "Europe PMC + LitSense passages, relaxation ladders, lexical rerank (medsim default)",
-            _sources("europe_pmc", "litsense"),
+            "Europe PMC + LitSense passages, relaxation ladders, lexical rerank (the original "
+            "method)",
+            _original("europe_pmc", "litsense"),
         ),
         RunConfig(
             "current_fixed",
             "current method, unchanged except that Europe PMC replies without results are "
             "retried (they made Europe PMC drop out on 11 of 50 questions in the `current` run)",
-            _sources("europe_pmc", "litsense"),
+            _original("europe_pmc", "litsense"),
         ),
         RunConfig(
             "openrouter_search",
             "OpenRouter web search server tool (Exa, 8 results, medical domains), lexical rerank",
-            _sources("openrouter_search"),
+            _original("openrouter_search"),
         ),
         RunConfig(
             "improved_1to4",
             "changes 1-4: value-first ranking in one list across sources, 50 Europe PMC "
             "candidates, animal/age filter, article-body search with excerpts, value-based "
-            "broadening without the unhelpful rungs",
+            "broadening without the unhelpful rungs (medsim's default since they were measured)",
             _improved(),
         ),
         RunConfig(
@@ -136,7 +167,7 @@ CONFIGS: dict[str, RunConfig] = {
             "OpenRouter web search with changes 1-3 applied: 10 results (same $0.007 fee), "
             "3,000-character excerpts, value-first ranking, population filter, excerpts around "
             "the variable from Europe PMC full text of PMC hits",
-            lambda s: _sources("openrouter_search")(s).model_copy(
+            lambda s: _original("openrouter_search")(s).model_copy(
                 update={
                     "openrouter_search": s.openrouter_search.model_copy(
                         update={"max_results": 10, "max_characters": 3000}
@@ -151,21 +182,19 @@ CONFIGS: dict[str, RunConfig] = {
         RunConfig(
             "sentences",
             "as current, LitSense in sentence mode",
-            lambda s: _sources("europe_pmc", "litsense")(s).model_copy(
+            lambda s: _original("europe_pmc", "litsense")(s).model_copy(
                 update={"litsense": s.litsense.model_copy(update={"mode": "sentences"})}
             ),
         ),
         RunConfig(
             "no_rerank",
             "as current, without the lexical rerank",
-            lambda s: _sources("europe_pmc", "litsense")(s).model_copy(
-                update={"rerank_documents": False}
-            ),
+            _with(_original("europe_pmc", "litsense"), rerank_documents=False),
         ),
         RunConfig(
             "reference_only",
             "as current, but searching reference ranges instead of the diagnosis",
-            _sources("europe_pmc", "litsense"),
+            _original("europe_pmc", "litsense"),
             condition_blind=True,
         ),
     )

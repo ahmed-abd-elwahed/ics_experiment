@@ -43,9 +43,10 @@ Seven retrieval methods, evaluated on the same 50 questions built from
   significantly closer to the true value than the others, and every method puts about 80% of
   answers in the right low / normal / high category. With 32 questions and Stage C sampling at
   temperature 0.2, the final-answer rows are noisy.
-- **Recommendation:** make changes 1–4 the default (the Europe PMC fix already is), leave 5 and 6
-  off, and keep OpenRouter search as an optional source. Confirm on a fresh question set first
-  (see [How much to trust these numbers](#how-much-to-trust-these-numbers)).
+- **Adopted:** changes 1–4 are now medsim's default retrieval, alongside the Europe PMC fix.
+  Changes 5 and 6 stay off, and OpenRouter search remains an optional source. A confirmation on
+  a fresh question set is still worth running (see
+  [How much to trust these numbers](#how-much-to-trust-these-numbers)).
 
 ## The comparison table
 
@@ -147,7 +148,9 @@ reasons:
 - **Its fallback searches were rarely useful**, 0–13% of the time.
 - **It read only abstracts, cut at 1,500 characters.**
 
-All changes sit behind settings that are off by default (see the main [README](../README.md)).
+Every change sits behind a setting. Changes 1–4 are on by default, and 5 and 6 are off (see the
+main [README](../README.md)). The benchmark configurations of the original method pin the
+original settings, so they still reproduce.
 
 | Change | What it does | Code | Effect measured |
 |---|---|---|---|
