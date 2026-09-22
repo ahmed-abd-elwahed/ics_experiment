@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-import json
 import re
 import unicodedata
 from collections import Counter
-from pathlib import Path
-from typing import Any
 
+# The dataset format belongs to the environment; re-exported for bench modules.
+from medsim.case_study import case_from_record as case_from_record
+from medsim.case_study import load_cases as load_cases
 from medsim.models import CaseStudy
 
 _WS = re.compile(r"\s+")
@@ -26,32 +26,6 @@ HAS_MEASUREMENT = re.compile(
 
 
 # --- cases --------------------------------------------------------------------------------------
-
-
-def case_from_record(record: dict[str, Any]) -> CaseStudy:
-    """Accept both the combined case file format and ``CaseStudy``-shaped records.
-
-    Combined format: ``chunked_case_info`` joined with blank lines becomes the narrative, and
-    ``background_and_presentation`` goes into metadata (the mapping used for earlier live runs).
-    """
-    if "chunked_case_info" in record:
-        chunks = record["chunked_case_info"]
-        narrative = "\n\n".join(chunks) if isinstance(chunks, list) else str(chunks)
-        background = str(record.get("background_and_presentation") or "")
-        return CaseStudy(
-            case_id=str(record["case_id"]),
-            diagnosis=str(record["diagnosis"]),
-            narrative=narrative,
-            metadata={"background_and_presentation": background} if background else {},
-        )
-    return CaseStudy.model_validate(record)
-
-
-def load_cases(path: Path) -> dict[str, CaseStudy]:
-    data = json.loads(path.read_text(encoding="utf-8"))
-    records = data if isinstance(data, list) else [data]
-    cases = [case_from_record(r) for r in records]
-    return {c.case_id: c for c in cases}
 
 
 def background(case: CaseStudy) -> str:

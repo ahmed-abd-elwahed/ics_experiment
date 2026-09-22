@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ICS Experiment</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='10' y='14' width='44' height='36' rx='9' fill='%231f2a5a'/%3E%3Ccircle cx='24' cy='32' r='6' fill='%23fff'/%3E%3Ccircle cx='40' cy='32' r='6' fill='%23fff'/%3E%3Cline x1='32' y1='4' x2='32' y2='14' stroke='%231f2a5a' stroke-width='4'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <svg class="brand-robot" aria-hidden="true"><use href="#robot"/></svg>
+      <span>ICS Experiment</span>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button type="button" role="tab" id="tab-run" data-tab="run" aria-controls="panel-run">Run experiment</button>
+      <button type="button" role="tab" id="tab-view" data-tab="view" aria-controls="panel-view">View record</button>
+      <button type="button" role="tab" id="tab-envruns" data-tab="envruns" aria-controls="panel-view">Environment runs</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Run ------------------------------------------------------------------------------------>
+    <section id="panel-run" role="tabpanel" aria-labelledby="tab-run" hidden>
+      <div class="run-layout">
+        <div class="card">
+          <div class="card-head">
+            <h2>Experiment config</h2>
+            <div class="inline-controls">
+              <label class="sr-only" for="config-select">Config file</label>
+              <select id="config-select" title="Config file in configs/"></select>
+              <button type="button" id="config-load">Load</button>
+              <button type="button" id="config-save">Save</button>
+              <button type="button" id="config-save-as">Save as…</button>
+            </div>
+          </div>
+
+          <div class="segmented" role="tablist" aria-label="Editor">
+            <button type="button" data-mode="form" aria-selected="true">Form</button>
+            <button type="button" data-mode="json" aria-selected="false">JSON</button>
+          </div>
+
+          <form id="config-form" class="form-grid" autocomplete="off" novalidate>
+            <label>Name
+              <input name="name" required>
+            </label>
+            <label>Parallel workers
+              <input name="workers" type="number" min="1" max="64">
+            </label>
+            <label class="span2">Case dataset
+              <input name="cases_file" list="case-files" required>
+              <datalist id="case-files"></datalist>
+            </label>
+            <label>Max cases
+              <input name="max_cases" type="number" min="1" placeholder="all">
+            </label>
+            <label>Case IDs
+              <input name="case_ids" placeholder="all, in file order">
+              <small>Comma-separated; leave empty for every case.</small>
+            </label>
+            <label class="span2">Initial information for the strategy
+              <select name="initial_information">
+                <option value="none">None: the strategy starts with no information</option>
+                <option value="background">Background: the case's presentation text</option>
+              </select>
+            </label>
+            <fieldset class="span2">
+              <legend>Stopping criteria per case run (whichever comes first)</legend>
+              <div class="form-row">
+                <label>Max iterations
+                  <input name="max_iterations" type="number" min="1" placeholder="no limit">
+                </label>
+                <label>Max seconds
+                  <input name="max_seconds" type="number" min="1" step="any" placeholder="no limit">
+                </label>
+              </div>
+            </fieldset>
+            <label class="span2">Record file
+              <input name="output">
+              <small><code>{name}</code> and <code>{timestamp}</code> are filled in; relative to the project folder.</small>
+            </label>
+            <div class="span2 field">
+              <div class="field-head">
+                <label for="strategies-input">Information gathering strategies</label>
+                <span id="strategy-buttons" class="inline-controls"></span>
+              </div>
+              <textarea id="strategies-input" name="strategies" rows="9" spellcheck="false"></textarea>
+              <small id="strategies-help"></small>
+            </div>
+            <div class="span2 field">
+              <div class="field-head">
+                <label for="environment-input">Environment settings</label>
+              </div>
+              <textarea id="environment-input" name="environment" rows="5" spellcheck="false"></textarea>
+              <small>medsim settings to override (a JSON object), or the path of a JSON file of them.
+                The API key always comes from <code>.env</code>.</small>
+              <details class="reference">
+                <summary>Settings in effect and their values</summary>
+                <pre id="environment-reference"></pre>
+              </details>
+            </div>
+          </form>
+
+          <div id="json-editor" hidden>
+            <label class="sr-only" for="config-json">Config JSON</label>
+            <textarea id="config-json" rows="30" spellcheck="false"></textarea>
+          </div>
+
+          <div id="config-message" class="message" role="status" aria-live="polite"></div>
+          <div class="actions">
+            <button type="button" id="validate-btn">Check config</button>
+            <button type="button" id="run-btn" class="primary">▶ Run experiment</button>
+          </div>
+        </div>
+
+        <div class="card progress-card">
+          <div class="card-head"><h2>Progress</h2></div>
+          <div id="progress-state" class="state-line">No experiment running.</div>
+          <div id="progress-bar" class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="progress-fill"></div>
+            <span class="progress-label">0%</span>
+          </div>
+          <dl id="progress-stats" class="stats"></dl>
+          <div class="actions">
+            <button type="button" id="stop-btn" class="danger" hidden>■ Stop</button>
+            <button type="button" id="open-record-btn" class="primary" hidden>Open record</button>
+          </div>
+          <h3 class="list-title">Running now</h3>
+          <ul id="active-list" class="run-list"><li class="muted">Nothing running.</li></ul>
+          <h3 class="list-title">Finished case runs</h3>
+          <ul id="recent-list" class="run-list"><li class="muted">None yet.</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- View ----------------------------------------------------------------------------------->
+    <section id="panel-view" role="tabpanel" hidden>
+      <div class="card toolbar">
+        <div class="tool-group grow" id="record-source">
+          <label for="record-select">Record</label>
+          <select id="record-select"></select>
+          <button type="button" id="records-refresh" title="Refresh the list and reload this record" aria-label="Refresh">↻</button>
+          <label class="file-button" title="Open a record file from anywhere">Open file…
+            <input type="file" id="record-file" accept=".json,.jsonl">
+          </label>
+        </div>
+        <div class="tool-group grow" id="envrun-source" hidden>
+          <label for="envrun-select">Environment run</label>
+          <select id="envrun-select"></select>
+          <button type="button" id="envruns-refresh" title="Refresh the list and reload this run" aria-label="Refresh">↻</button>
+        </div>
+        <div class="tool-group">
+          <label for="caserun-select" id="caserun-label">Case run</label>
+          <select id="caserun-select"></select>
+          <select id="strategy-select" title="Strategy" hidden></select>
+          <button type="button" id="prev-case" title="Previous case (P)">⏮ Previous case</button>
+          <button type="button" id="next-case" class="primary" title="Next case (N)">Next case ⏭</button>
+        </div>
+      </div>
+
+      <div id="record-summary" class="record-summary"></div>
+      <div id="view-message" class="message" role="status"></div>
+
+      <div id="viewer" hidden>
+        <div class="card stepper">
+          <button type="button" id="prev-step" class="step-btn" title="Previous step (←)" aria-label="Previous step">◀</button>
+          <div class="step-info">
+            <div class="step-title"><span id="step-title"></span><span id="step-count" class="muted"></span></div>
+            <input type="range" id="step-range" min="0" max="0" value="0" aria-label="Step">
+            <div id="step-caption" class="step-caption" aria-live="polite"></div>
+          </div>
+          <button type="button" id="next-step" class="step-btn primary" title="Next step (→)" aria-label="Next step">▶</button>
+        </div>
+
+        <div id="caserun-head" class="caserun-head"></div>
+
+        <div class="scene" id="scene">
+          <div class="env-wrap">
+            <div class="env-title">Simulated Environment</div>
+            <div class="env" id="env">
+              <svg class="env-arrows" id="env-arrows" aria-hidden="true"></svg>
+              <div class="env-grid">
+                <div class="node source" id="node-case">
+                  <h3>Case Study</h3>
+                  <svg class="icon doc" aria-hidden="true"><use href="#doc"/></svg>
+                  <div class="box" id="box-case"></div>
+                </div>
+                <div class="node source" id="node-lit">
+                  <h3>The Literature</h3>
+                  <svg class="icon magnifier" aria-hidden="true"><use href="#magnifier"/></svg>
+                  <div class="box" id="box-lit"></div>
+                </div>
+                <div class="node llm" id="node-llm">
+                  <h3>LLM</h3>
+                  <svg class="robot" aria-hidden="true"><use href="#robot"/></svg>
+                  <div class="box" id="box-llm"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="channel">
+            <div class="msg" id="msg-query">
+              <div class="msg-label">Query</div>
+              <div class="box msg-box" id="box-query"></div>
+              <div class="arrow arrow-left" aria-hidden="true"></div>
+            </div>
+            <div class="msg" id="msg-answer">
+              <div class="msg-label">Answer</div>
+              <div class="arrow arrow-right" aria-hidden="true"></div>
+              <div class="box msg-box" id="box-answer"></div>
+            </div>
+          </div>
+
+          <div class="node strategy" id="node-strategy">
+            <h3 id="strategy-title">Information Gathering Strategy</h3>
+            <svg class="robot" aria-hidden="true"><use href="#robot"/></svg>
+            <div class="box" id="box-strategy"></div>
+          </div>
+        </div>
+        <p class="hint">Keys: ← → step · N next case · P previous case · Home / End first and last step.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Icons, drawn after the experiment diagram -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="robot" viewBox="0 0 150 184">
+      <g fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <circle cx="75" cy="10" r="6.5"/>
+        <line x1="75" y1="17" x2="75" y2="28"/>
+        <rect x="50" y="28" width="50" height="42" rx="9"/>
+        <circle cx="65" cy="49" r="8"/><circle cx="65" cy="49" r="3"/>
+        <circle cx="85" cy="49" r="8"/><circle cx="85" cy="49" r="3"/>
+        <rect x="66" y="70" width="18" height="8"/>
+        <rect x="42" y="78" width="66" height="56" rx="2"/>
+        <polyline points="42,108 55,108 61,94 69,122 77,88 83,108 108,108"/>
+        <path d="M42 94 H28 V72"/>
+        <path d="M20 58 V64 A8 8 0 0 0 36 64 V58"/>
+        <path d="M108 98 H122 V112"/>
+        <path d="M114 126 V120 A8 8 0 0 1 130 120 V126"/>
+        <rect x="63" y="134" width="24" height="10"/>
+        <rect x="34" y="144" width="82" height="34" rx="17"/>
+      </g>
+      <g fill="currentColor">
+        <circle cx="56" cy="161" r="4.5"/><circle cx="75" cy="161" r="4.5"/><circle cx="94" cy="161" r="4.5"/>
+      </g>
+    </symbol>
+    <symbol id="doc" viewBox="0 0 100 130">
+      <g fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round">
+        <path d="M12 6 H66 L90 30 V124 H12 Z"/>
+        <path d="M66 6 V30 H90"/>
+        <path d="M28 48 H52 M28 60 H74 M28 72 H74 M28 84 H74 M28 96 H74 M28 108 H74"/>
+      </g>
+    </symbol>
+    <symbol id="magnifier" viewBox="0 0 112 116">
+      <g fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round">
+        <circle cx="46" cy="46" r="34"/>
+        <rect x="69" y="79.5" width="38" height="15" rx="7.5" transform="rotate(45 88 87)"/>
+      </g>
+    </symbol>
+  </svg>
+  <script src="/static/app.js"></script>
+</body>
+</html>

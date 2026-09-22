@@ -12,7 +12,7 @@ from medsim.errors import ConfigError, LLMError
 from medsim.ledger import FactLedger
 from medsim.models import EnvironmentResponse
 from tests.conftest import FIXTURES, ScriptedLLM, make_settings
-from tests.test_environment import builder, docs_retrievers, resolver, synth
+from tests.environment.test_environment import builder, docs_retrievers, resolver, synth
 
 CASE = str(FIXTURES / "test_case.json")
 

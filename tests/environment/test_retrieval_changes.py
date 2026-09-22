@@ -27,8 +27,8 @@ from medsim.retrieval.query_formulation import (
 )
 from medsim.retrieval.rerank import LLMReranker
 from tests.conftest import ScriptedLLM, make_settings
-from tests.test_aggregator import FakeRetriever
-from tests.test_environment import builder, resolver, synth
+from tests.environment.test_aggregator import FakeRetriever
+from tests.environment.test_environment import builder, resolver, synth
 
 LQ = LiteratureQuery(
     keywords="albumin biloma",

@@ -3,9 +3,9 @@ requires = ["hatchling>=1.25,<2"]
 build-backend = "hatchling.build"
 
 [project]
-name = "medsim"
-version = "0.1.0"
-description = "Simulated text-only medical environment for evaluating diagnostic agents."
+name = "ics-experiment"
+version = "0.2.0"
+description = "Experiments comparing information gathering strategies against a simulated patient environment."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
@@ -25,18 +25,24 @@ dev = [
 
 [project.scripts]
 medsim = "medsim.cli:main"
+ics-experiment = "experiment.cli:console_main"
+ics-webapp = "webapp.server:main"
 
+# The environment's packages live under environment/ and install as top-level "medsim" and
+# "bench", next to the experiment's own packages.
 [tool.hatch.build.targets.wheel]
-packages = ["medsim"]
+packages = ["environment/medsim", "environment/bench", "experiment", "strategies", "webapp"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = [".", "environment"]
 markers = ["live: hits real external APIs (requires --live and OPENROUTER_API_KEY)"]
 
 [tool.mypy]
 python_version = "3.11"
 strict = true
-files = ["medsim", "bench", "tests"]
+mypy_path = "environment"
+files = ["environment/medsim", "environment/bench", "experiment", "strategies", "webapp", "scripts", "tests"]
 
 [[tool.mypy.overrides]]
 module = ["respx", "respx.*"]
@@ -45,6 +51,7 @@ ignore_missing_imports = true
 [tool.ruff]
 line-length = 100
 target-version = "py311"
+src = [".", "environment"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF", "ANN"]
@@ -52,5 +59,5 @@ ignore = ["ANN401"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["ANN"]
-"bench/**" = ["RUF001"]  # report labels use typographic dashes and signs on purpose
-"results/scripts/**" = ["RUF001"]
+"environment/bench/**" = ["RUF001"]  # report labels use typographic dashes and signs on purpose
+"environment/results/scripts/**" = ["RUF001"]

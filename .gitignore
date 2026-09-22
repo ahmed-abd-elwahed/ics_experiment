@@ -10,3 +10,6 @@ __pycache__/
 dist/
 build/
 .DS_Store
+
+# Experiment records: finished case runs are appended here while a run is in progress
+*.partial.jsonl

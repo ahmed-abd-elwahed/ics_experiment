@@ -1,0 +1,1073 @@
+{
+  "format": "ics-experiment-record",
+  "version": 1,
+  "name": "basic",
+  "status": "completed",
+  "error": null,
+  "started_at": "2026-09-21T17:55:52+00:00",
+  "finished_at": "2026-09-21T18:00:21+00:00",
+  "elapsed_s": 268.56,
+  "output": "/private/tmp/records/smoke_20260921T175552Z.json",
+  "config": {
+    "name": "basic",
+    "cases_file": "cases/combined_272_whole_chunking.json",
+    "case_ids": null,
+    "max_cases": 2,
+    "initial_information": "none",
+    "environment": {
+      "cache_enabled": true
+    },
+    "strategies": [
+      {
+        "name": "basic",
+        "label": null,
+        "params": {
+          "model": null,
+          "temperature": 0.2,
+          "max_tokens": 4000
+        }
+      }
+    ],
+    "stopping": {
+      "max_iterations": 3,
+      "max_seconds": 600.0
+    },
+    "workers": 2,
+    "output": "/private/tmp/records/smoke_{timestamp}.json"
+  },
+  "environment_settings": {
+    "openrouter_base_url": "https://openrouter.ai/api/v1",
+    "openrouter_http_referer": null,
+    "openrouter_app_title": "medsim",
+    "verify_models_on_startup": true,
+    "default_model": "deepseek/deepseek-v4-flash-0731",
+    "resolver_model": null,
+    "query_builder_model": null,
+    "synthesizer_model": null,
+    "synthesizer_temperature": 0.2,
+    "seed": 7,
+    "resolver_max_tokens": 4000,
+    "query_builder_max_tokens": 4000,
+    "synthesizer_max_tokens": 6000,
+    "json_mode": "json_schema",
+    "llm_timeout_s": 120.0,
+    "llm_max_retries": 2,
+    "llm_backoff_base_s": 1.0,
+    "llm_extra_body": {},
+    "enabled_sources": [
+      "europe_pmc",
+      "litsense"
+    ],
+    "europe_pmc": {
+      "enabled": true,
+      "base_url": "https://www.ebi.ac.uk/europepmc/webservices/rest",
+      "page_size": 50,
+      "result_type": "core",
+      "open_access_only": false,
+      "full_text_only": false,
+      "sort": null,
+      "synonym": false,
+      "timeout_s": 20.0,
+      "max_retries": 3,
+      "backoff_base_s": 1.0,
+      "min_interval_s": 0.0
+    },
+    "litsense": {
+      "enabled": true,
+      "base_url": "https://www.ncbi.nlm.nih.gov/research/litsense2-api/api",
+      "mode": "passages",
+      "rerank": true,
+      "max_results": 30,
+      "query_style": "keywords",
+      "timeout_s": 30.0,
+      "max_retries": 3,
+      "backoff_base_s": 1.0,
+      "min_interval_s": 1.0
+    },
+    "openrouter_search": {
+      "enabled": true,
+      "model": null,
+      "engine": "exa",
+      "mode": null,
+      "max_results": 8,
+      "max_characters": 1500,
+      "allowed_domains": [
+        "ncbi.nlm.nih.gov",
+        "europepmc.org",
+        "msdmanuals.com",
+        "medscape.com"
+      ],
+      "excluded_domains": [],
+      "max_tokens": 2000,
+      "timeout_s": 120.0,
+      "max_retries": 2,
+      "backoff_base_s": 1.0
+    },
+    "max_documents": 8,
+    "max_doc_chars": 1500,
+    "near_duplicate_threshold": 0.9,
+    "rerank_documents": true,
+    "relax_min_relevant": 3,
+    "rank_for_values": true,
+    "merge_strategy": "global",
+    "population_filter": true,
+    "ladder_version": "v2",
+    "fulltext_excerpts": true,
+    "fulltext_max_docs": 10,
+    "llm_rerank": false,
+    "reranker_model": null,
+    "reranker_max_tokens": 4000,
+    "rerank_candidates": 20,
+    "cache_enabled": true,
+    "cache_dir": ".medsim_cache",
+    "contact_email": null,
+    "log_level": "WARNING"
+  },
+  "strategies": {
+    "basic": {
+      "name": "basic",
+      "description": "An LLM reads the answers collected so far and asks the single most useful next question (one call per question).",
+      "params": {
+        "model": null,
+        "temperature": 0.2,
+        "max_tokens": 4000
+      },
+      "models": [
+        "deepseek/deepseek-v4-flash-0731"
+      ]
+    }
+  },
+  "code_version": {
+    "git_commit": "f5a2d970891b4a97cfe6d594bac86585c626393c",
+    "uncommitted_changes": true
+  },
+  "case_ids": [
+    "PMC6796688_01",
+    "PMC3056427_01"
+  ],
+  "case_runs_total": 2,
+  "case_runs": [
+    {
+      "index": 0,
+      "case_id": "PMC6796688_01",
+      "strategy": "basic",
+      "strategy_name": "basic",
+      "case": {
+        "case_id": "PMC6796688_01",
+        "diagnosis": "Traumatic injury of left subclavian artery",
+        "narrative": "Previously healthy 20-year-old male presented after multiple gunshot wounds to the left upper and lower extremities. Vascular exam showed diminished left radial pulse. CT imaging demonstrated left axillo-subclavian vascular injury with associated lung contusion and nondisplaced humerus fracture. CT angiography showed arterial injury with active contrast extravasation, a large contrast pool in the axillary region, and an expanding hematoma; no vascular injury to the lower extremity. Underwent emergent endovascular repair via common femoral artery access with deployment of covered stents spanning the distal/proximal subclavian and axillary segments. Received intraoperative heparin; completion angiography confirmed no endoleak and good distal runoff. Postoperatively had palpable left brachial and radial pulses, ICU care, nonoperative management of an open humerus fracture with IV cefazolin, started on aspirin and enoxaparin, discharged home POD#5. Follow-up showed patent stent graft without endoleak.",
+        "structured_findings": {},
+        "metadata": {
+          "background_and_presentation": "A previously healthy 20-year-old male presents after sustaining multiple gunshot wounds to the left upper and lower extremities."
+        }
+      },
+      "initial_information": null,
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "error": null,
+      "started_at": "2026-09-21T17:55:52+00:00",
+      "finished_at": "2026-09-21T18:00:21+00:00",
+      "elapsed_s": 268.52,
+      "iterations": [
+        {
+          "index": 1,
+          "started_at": "2026-09-21T17:55:52+00:00",
+          "question": "What is the main problem or symptom that brought you in today?",
+          "rationale": "This is the first step in any clinical encounter, establishing the presenting complaint and guiding all subsequent history and examination.",
+          "answer": "The patient came in after sustaining multiple gunshot wounds to the left upper and lower extremities.",
+          "answer_source": "case_study",
+          "strategy_seconds": 5.165,
+          "environment_seconds": 9.267,
+          "strategy_llm_calls": [
+            {
+              "stage": "strategy",
+              "model": "deepseek/deepseek-v4-flash-0731",
+              "prompt_tokens": 299,
+              "completion_tokens": 115,
+              "latency_ms": 5163.411249872297,
+              "attempt": 1,
+              "purpose": "initial",
+              "success": true,
+              "error": null,
+              "finish_reason": "stop",
+              "max_tokens": 4000,
+              "cost_usd": 0.00002614
+            }
+          ],
+          "environment_response": {
+            "input_query": "What is the main problem or symptom that brought you in today?",
+            "output_answer": "The patient came in after sustaining multiple gunshot wounds to the left upper and lower extremities.",
+            "literature_search": false,
+            "literature_search_result": null,
+            "retriever_parameters": {
+              "multi_part": false,
+              "query": "What is the main problem or symptom that brought you in today?",
+              "path": "case_study",
+              "retrieval_performed": false
+            },
+            "used_llm": "deepseek/deepseek-v4-flash-0731",
+            "answer_source": "case_study",
+            "evidence": [
+              "Previously healthy 20-year-old male presented after multiple gunshot wounds to the left upper and lower extremities."
+            ],
+            "confidence": "high",
+            "llm_calls": [
+              {
+                "stage": "resolver",
+                "model": "deepseek/deepseek-v4-flash-0731",
+                "prompt_tokens": 758,
+                "completion_tokens": 271,
+                "latency_ms": 9262.454958166927,
+                "attempt": 1,
+                "purpose": "initial",
+                "success": true,
+                "error": null,
+                "finish_reason": "stop",
+                "max_tokens": 4000,
+                "cost_usd": 0.00006268
+              }
+            ]
+          },
+          "strategy_cost_usd": 0.00002614,
+          "environment_cost_usd": 0.00006268,
+          "error": null
+        },
+        {
+          "index": 2,
+          "started_at": "2026-09-21T17:56:07+00:00",
+          "question": "Is there active bleeding, especially pulsatile or bright red bleeding, from any of the gunshot wounds?",
+          "rationale": "This directly assesses for major vascular injury and ongoing hemorrhage, the most immediately life-threatening complication of extremity gunshot wounds.",
+          "answer": "No active external bleeding from the gunshot wounds was documented; the active bleeding identified was internal (active contrast extravasation and expanding hematoma in the axillary region on CT angiography).",
+          "answer_source": "literature",
+          "strategy_seconds": 35.014,
+          "environment_seconds": 115.37,
+          "strategy_llm_calls": [
+            {
+              "stage": "strategy",
+              "model": "deepseek/deepseek-v4-flash-0731",
+              "prompt_tokens": 333,
+              "completion_tokens": 290,
+              "latency_ms": 35012.44049984962,
+              "attempt": 1,
+              "purpose": "initial",
+              "success": true,
+              "error": null,
+              "finish_reason": "stop",
+              "max_tokens": 4000,
+              "cost_usd": 0.00024
+            }
+          ],
+          "environment_response": {
+            "input_query": "Is there active bleeding, especially pulsatile or bright red bleeding, from any of the gunshot wounds?",
+            "output_answer": "No active external bleeding from the gunshot wounds was documented; the active bleeding identified was internal (active contrast extravasation and expanding hematoma in the axillary region on CT angiography).",
+            "literature_search": true,
+            "literature_search_result": {
+              "query": "europe_pmc: (CASE:(\"active bleeding\" OR \"pulsatile bleeding\" OR \"bright red bleeding\" OR \"external hemorrhage\" OR \"wound hemorrhage\") OR RESULTS:(\"active bleeding\" OR \"pulsatile bleeding\" OR \"bright red bleeding\" OR \"external hemorrhage\" OR \"wound hemorrhage\") OR TABLE:(\"active bleeding\" OR \"pulsatile bleeding\" OR \"bright red bleeding\" OR \"external hemorrhage\" OR \"wound hemorrhage\")) AND TITLE_ABS:(\"subclavian artery injury\" OR \"axillo-subclavian vascular injury\" OR \"subclavian artery trauma\" OR \"subclavian artery laceration\") | litsense: active bleeding vascular trauma",
+              "documents": [
+                {
+                  "source": "europe_pmc",
+                  "doc_id": "PMID:23656916",
+                  "title": "Multidisciplinary treatment of subclavian artery injury after catheterization for atrial fibrillation ablation.",
+                  "text": "Subclavian vein cannulation is frequently performed in patients undergoing electrophysiologic procedures in order to facilitate catheterization of the coronary sinus. We present a rare case of massive haemothorax, secondary to subclavian artery injury, during an ablation of atrial fibrillation. Following the procedure, a chest radiograph revealed a massive left haemothorax and the angiographic phase of a computed tomography scan indicated the presence of active bleeding due to left subclavian artery injury. Active bleeding was initially managed through embolization of the subclavian artery branches and the patient was subsequently treated with combined endovascular stenting and video-assisted thoracic surgery.",
+                  "url": "https://pubmed.ncbi.nlm.nih.gov/23656916/",
+                  "score": null,
+                  "raw": {}
+                },
+                {
+                  "source": "europe_pmc",
+                  "doc_id": "PMID:33869718",
+                  "title": "Incidental aortic coarctation in traumatic subclavian artery injury.",
+                  "text": "He was admitted to a High Care Unit (HCU) for monitoring and was given appropriate analgesia and fluid resuscitation. During the course of his HCU admission, the patient's haemoglobin remained static, with no active bleeding.",
+                  "url": "https://pubmed.ncbi.nlm.nih.gov/33869718/",
+                  "score": null,
+                  "raw": {}
+                },
+                {
+                  "source": "europe_pmc",
+                  "doc_id": "PMID:28233726",
+                  "title": "Penetrating neck injury: Collaterals for another life after ligation of common carotid artery and subclavian artery.",
+                  "text": "1). One hour after the arrival, the patient developed active bleeding from the wound site, tachycardia (pulse rate 110 beats/min) and hypotension (blood pressure 85/65 mmHg).",
+                  "url": "https://pubmed.ncbi.nlm.nih.gov/28233726/",
+                  "score": null,
+                  "raw": {}
+                },
+                {
+                  "source": "litsense",
+                  "doc_id": "PMID:10771627#TITLEABSTRACT-b9536272",
+                  "title": null,
+                  "text": "Blunt traumatic subclavian artery injury. Subclavian artery injury secondary to blunt trauma is uncommon, accounting for only 3% of traumatic injuries of the upper extremity. Associated injuries of nerve, bone and joint are common. Early recognition and appropriate surgical intervention are essential to reduce disability. Long-term limb dysfunction usually results from concomitant nerve injury. This article describes our experiences treating four patients at two Level II trauma centers in Huntington, W.Va., and reviews the literature on the subject of subclavian artery injury secondary to blunt trauma.",
+                  "url": "https://pubmed.ncbi.nlm.nih.gov/10771627/",
+                  "score": 0.9214299064874649,
+                  "raw": {}
+                },
+                {
+                  "source": "litsense",
+                  "doc_id": "PMID:25717371#FIG-ce662227",
+                  "title": null,
+                  "text": "( A) Subclavian artery injury shown on contrast-enhanced computed tomography. ( B and C) Clavicle fractures and subclavian artery injury shown on three-dimensional computed tomography angiography. ( A) Angiography showing segmental dissection of the distal subclavian artery with preserved blood flow to the left upper extremity. ( B) Angiography of the subclavian artery showing an adequate stent expansion and restoration of blood flow.",
+                  "url": "https://pubmed.ncbi.nlm.nih.gov/25717371/",
+                  "score": 0.8916708195209503,
+                  "raw": {}
+                },
+                {
+                  "source": "litsense",
+                  "doc_id": "PMID:23518293#TITLEABSTRACT-47a4f1e9",
+                  "title": null,
+                  "text": "Video-assisted thoracic surgery repair of subclavian artery injury following central venous catheterization: a new approach. OBJECTIVES: Iatrogenic subclavian artery puncture following central venous catheterization is a rare but potentially fatal complication. There are very few reports in the literature on this condition. We propose the use of video-assisted thoracic surgery (VATS) in the management of these injuries. METHODS: The technique of VATS to manage subclavian artery injury was described. We presented the first reported case of successful repair of subclavian artery injury using VATS. RESULTS: Using a two-incisional approach for VATS, the haemothorax was rapidly evacuated and the subclavian artery injury was successfully repaired using pledgetted sutures under direct thoracoscopic visualization. The patient had an uneventful postoperative recovery. CONCLUSIONS: VATS can be successfully applied to repair subclavian artery injury. The advantages include rapid intrathoracic access, excellent thoracoscopic visualization of the thoracic inlet, and avoidance of the morbidity associated with open thoracotomy.",
+                  "url": "https://pubmed.ncbi.nlm.nih.gov/23518293/",
+                  "score": 0.9600285530090332,
+                  "raw": {}
+                },
+                {
+                  "source": "europe_pmc",
+                  "doc_id": "PMID:34429608",
+                  "title": "Treatment Outcome of Traumatic Subclavian Artery Injuries.",
+                  "text": "Table 2 Comparison of Preoperative Demographic Data and Clinical Characteristics [Variable | Open Repair (n=19) | Endovascular Repair (n=9) | p-value]: Clinical | | | . Table 2 Comparison of Preoperative Demographic Data and Clinical Characteristics [Variable | Open Repair (n=19) | Endovascular Repair (n=9) | p-value]: Pulsatile bleeding, n (%) | 6 (31.58) | 3 (33.33) | 0.93.",
+                  "url": "https://pubmed.ncbi.nlm.nih.gov/34429608/",
+                  "score": null,
+                  "raw": {}
+                },
+                {
+                  "source": "litsense",
+                  "doc_id": "PMID:19145457#TITLEABSTRACT-7b56ae31",
+                  "title": null,
+                  "text": "Successful interventional management for subclavian artery injury secondary to internal jugular catheterization: a report of two cases. Central venous cannulation through the right internal jugular vein is a widely used technique, and complications due to this procedure are very rare. We report two cases of right massive hemothorax due to inadvertent puncture of a right subclavian artery. Digital subtraction angiography demonstrated a perforated subclavian artery in both cases. These were successfully treated with transcatheter arterial embolization for the bleeding points of the right subclavian arteries.",
+                  "url": "https://pubmed.ncbi.nlm.nih.gov/19145457/",
+                  "score": 0.953938375711441,
+                  "raw": {}
+                }
+              ],
+              "per_source_counts": {
+                "europe_pmc": 4,
+                "litsense": 4
+              },
+              "errors": [],
+              "latency_ms": 17248.00074985251
+            },
+            "retriever_parameters": {
+              "multi_part": false,
+              "query": "Is there active bleeding, especially pulsatile or bright red bleeding, from any of the gunshot wounds?",
+              "path": "literature",
+              "retrieval_performed": true,
+              "literature_query": "active bleeding subclavian artery injury gunshot wound",
+              "sources": [
+                "europe_pmc",
+                "litsense"
+              ],
+              "max_documents": 8,
+              "max_doc_chars": 1500,
+              "dedupe": {
+                "by_identifier": true,
+                "near_duplicate_text_jaccard": 0.9
+              },
+              "query_formulation": {
+                "strategy": "source-specific relaxation ladder",
+                "ladder_version": "v2",
+                "litsense_query": "keywords",
+                "relax_until_relevant_docs": 3,
+                "relax_counts": "documents stating a value"
+              },
+              "ranking": "lexical term rerank within each source (value first), then one ranked list across sources",
+              "population_filter": true,
+              "excerpt_mode": "full text (open access) or abstract windows",
+              "per_source": {
+                "europe_pmc": {
+                  "endpoint": "https://www.ebi.ac.uk/europepmc/webservices/rest/search",
+                  "request_params": {
+                    "query": "(CASE:(\"active bleeding\" OR \"pulsatile bleeding\" OR \"bright red bleeding\" OR \"external hemorrhage\" OR \"wound hemorrhage\") OR RESULTS:(\"active bleeding\" OR \"pulsatile bleeding\" OR \"bright red bleeding\" OR \"external hemorrhage\" OR \"wound hemorrhage\") OR TABLE:(\"active bleeding\" OR \"pulsatile bleeding\" OR \"bright red bleeding\" OR \"external hemorrhage\" OR \"wound hemorrhage\")) AND TITLE_ABS:(\"subclavian artery injury\" OR \"axillo-subclavian vascular injury\" OR \"subclavian artery trauma\" OR \"subclavian artery laceration\")",
+                    "resultType": "core",
+                    "pageSize": "50",
+                    "format": "json",
+                    "synonym": "false",
+                    "cursorMark": "*"
+                  },
+                  "page_size": 50,
+                  "result_type": "core",
+                  "filters": {
+                    "open_access_only": false,
+                    "full_text_only": false
+                  },
+                  "sort": null,
+                  "synonym": false,
+                  "timeout_s": 20.0,
+                  "max_retries": 3,
+                  "backoff_base_s": 1.0,
+                  "min_interval_s": 0.0,
+                  "cache_enabled": true,
+                  "cache_hit": false,
+                  "query_attempts": [
+                    {
+                      "level": "variable_and_condition",
+                      "query": "TITLE_ABS:(\"active bleeding\" OR \"pulsatile bleeding\" OR \"bright red bleeding\" OR \"external hemorrhage\" OR \"wound hemorrhage\") AND TITLE_ABS:(\"subclavian artery injury\" OR \"axillo-subclavian vascular injury\" OR \"subclavian artery trauma\" OR \"subclavian artery laceration\")",
+                      "returned": 1,
+                      "new": 1,
+                      "relevant_total": 1
+                    },
+                    {
+                      "level": "body_variable_and_condition",
+                      "query": "(CASE:(\"active bleeding\" OR \"pulsatile bleeding\" OR \"bright red bleeding\" OR \"external hemorrhage\" OR \"wound hemorrhage\") OR RESULTS:(\"active bleeding\" OR \"pulsatile bleeding\" OR \"bright red bleeding\" OR \"external hemorrhage\" OR \"wound hemorrhage\") OR TABLE:(\"active bleeding\" OR \"pulsatile bleeding\" OR \"bright red bleeding\" OR \"external hemorrhage\" OR \"wound hemorrhage\")) AND TITLE_ABS:(\"subclavian artery injury\" OR \"axillo-subclavian vascular injury\" OR \"subclavian artery trauma\" OR \"subclavian artery laceration\")",
+                      "returned": 6,
+                      "new": 6,
+                      "relevant_total": 7
+                    }
+                  ]
+                },
+                "litsense": {
+                  "endpoint": "https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/passages/",
+                  "request_params": {
+                    "query": "active bleeding vascular trauma",
+                    "rerank": "true"
+                  },
+                  "result_type": "passages",
+                  "rerank": true,
+                  "max_results": 30,
+                  "filters": null,
+                  "timeout_s": 30.0,
+                  "max_retries": 3,
+                  "backoff_base_s": 1.0,
+                  "min_interval_s": 1.0,
+                  "cache_enabled": true,
+                  "cache_hit": false,
+                  "no_match": false,
+                  "query_attempts": [
+                    {
+                      "level": "variable_and_condition",
+                      "query": "active bleeding subclavian artery injury",
+                      "returned": 30,
+                      "new": 30,
+                      "relevant_total": 1
+                    },
+                    {
+                      "level": "variable_and_related_condition",
+                      "query": "active bleeding vascular trauma",
+                      "returned": 30,
+                      "new": 30,
+                      "relevant_total": 6
+                    }
+                  ]
+                }
+              },
+              "raw_counts": {
+                "europe_pmc": 7,
+                "litsense": 59
+              },
+              "failed_sources": [],
+              "population_filtered": {
+                "europe_pmc": 0,
+                "litsense": 1
+              },
+              "patient_age_group": "adult",
+              "excerpts": {
+                "full_text_fetched": 5,
+                "full_text_used": 5,
+                "windows": 0
+              }
+            },
+            "used_llm": "deepseek/deepseek-v4-flash-0731",
+            "answer_source": "literature",
+            "evidence": [
+              "PMID:23656916",
+              "PMID:33869718",
+              "PMID:34429608",
+              "literature range: Pulsatile bleeding was present in 33.3% of endovascular repair cases of traumatic subclavian artery injury (PMID:34429608); absence of external bleeding is also described in subclavian artery injury (PMID:33869718)."
+            ],
+            "confidence": "medium",
+            "llm_calls": [
+              {
+                "stage": "resolver",
+                "model": "deepseek/deepseek-v4-flash-0731",
+                "prompt_tokens": 820,
+                "completion_tokens": 311,
+                "latency_ms": 11621.301000006497,
+                "attempt": 1,
+                "purpose": "initial",
+                "success": true,
+                "error": null,
+                "finish_reason": "stop",
+                "max_tokens": 4000,
+                "cost_usd": 0.0000704
+              },
+              {
+                "stage": "query_builder",
+                "model": "deepseek/deepseek-v4-flash-0731",
+                "prompt_tokens": 996,
+                "completion_tokens": 1105,
+                "latency_ms": 37068.27345909551,
+                "attempt": 1,
+                "purpose": "initial",
+                "success": true,
+                "error": null,
+                "finish_reason": "stop",
+                "max_tokens": 4000,
+                "cost_usd": 0.00023096
+              },
+              {
+                "stage": "synthesizer",
+                "model": "deepseek/deepseek-v4-flash-0731",
+                "prompt_tokens": 1957,
+                "completion_tokens": 1798,
+                "latency_ms": 49424.2334170267,
+                "attempt": 1,
+                "purpose": "initial",
+                "success": true,
+                "error": null,
+                "finish_reason": "stop",
+                "max_tokens": 6000,
+                "cost_usd": 0.00077742
+              }
+            ]
+          },
+          "strategy_cost_usd": 0.00024,
+          "environment_cost_usd": 0.00107878,
+          "error": null
+        },
+        {
+          "index": 3,
+          "started_at": "2026-09-21T17:58:37+00:00",
+          "question": "Do you have any weakness, numbness, or tingling in your left hand or fingers?",
+          "rationale": "Given the axillary region hematoma and active extravasation, assessing distal neurovascular function is critical to determine the need for urgent vascular or nerve intervention.",
+          "answer": "No weakness, numbness, or tingling in the left hand or fingers.",
+          "answer_source": "literature",
+          "strategy_seconds": 21.115,
+          "environment_seconds": 82.59,
+          "strategy_llm_calls": [
+            {
+              "stage": "strategy",
+              "model": "deepseek/deepseek-v4-flash-0731",
+              "prompt_tokens": 398,
+              "completion_tokens": 636,
+              "latency_ms": 21113.873000023887,
+              "attempt": 1,
+              "purpose": "initial",
+              "success": true,
+              "error": null,
+              "finish_reason": "stop",
+              "max_tokens": 4000,
+              "cost_usd": 0.00013379
+            }
+          ],
+          "environment_response": {
+            "input_query": "Do you have any weakness, numbness, or tingling in your left hand or fingers?",
+            "output_answer": "No weakness, numbness, or tingling in the left hand or fingers.",
+            "literature_search": true,
+            "literature_search_result": {
+              "query": "europe_pmc: TITLE_ABS:(\"hand weakness\" OR numbness OR tingling OR paresthesia OR \"sensory deficit\") AND TITLE_ABS:(\"subclavian artery injury\" OR \"subclavian artery trauma\" OR \"axillosubclavian injury\" OR \"subclavian artery laceration\") | litsense: hand weakness subclavian artery injury",
+              "documents": [
+                {
+                  "source": "europe_pmc",
+                  "doc_id": "PMID:37388666",
+                  "title": "Left subclavian artery pseudoaneurysm after blunt chest trauma with left upper extremity ischemia.",
+                  "text": "We describe a 74-year-old male with delayed onset of acute left upper extremity ischemia after blunt chest trauma with left clavicular fracture, resulting in left subclavian artery injury, including pseudoaneurysm formation, intramural hematoma, thrombosis, and distal embolization to the brachial artery. The patient presented with left upper extremity pain, forearm and hand numbness, and digital cyanosis. … Case presentation. A 74-year-old male with a history of left clavicular and second to fourth ribs fractures, following a bicycle fall 2 years prior, presented to our emergency room with acute onset of LUE pain, forearm, and hand numbness, hand weakness, and cyanotic fingers.",
+                  "url": "https://pubmed.ncbi.nlm.nih.gov/37388666/",
+                  "score": null,
+                  "raw": {}
+                },
+                {
+                  "source": "litsense",
+                  "doc_id": "PMID:25717371#TITLEABSTRACT-34fef19b",
+                  "title": null,
+                  "text": "Case Report: Urgent endovascular treatment of subclavian artery injury after blunt trauma Subclavian arterial injury is rare and potentially life-threatening, particularly when it leads to arterial occlusion, causing limb ischemia, retrograde thromboembolization and cerebral infarction within hours after injury. Here we report a blunt trauma case with subclavian arterial injury, upper extremity ischemia, and the need for urgent treatment to salvage the limb and prevent cerebral infarction. A 41-year-old man had a left, open, mid-shaft clavicle fracture and left subclavian artery injury accompanied by a weak pulse in the left radial artery, decreased blood pressure of the left arm compared to the right, and left hand numbness. Urgent debridement and irrigation of the open clavicle fracture was followed by angiography for the subclavian artery injury. The left distal subclavian artery had a segmental dissection with a thrombus. Urgent endovascular treatment using a self-expanding nitinol stent successfully restored the blood flow and blood pressure to the left upper extremity. Endovascular treatment is a viable option for cases of subclavian artery injury where there is a risk of extremity ischemia and cerebral infarction.",
+                  "url": "https://pubmed.ncbi.nlm.nih.gov/25717371/",
+                  "score": 0.8718276953697204,
+                  "raw": {}
+                },
+                {
+                  "source": "europe_pmc",
+                  "doc_id": "PMID:25717371",
+                  "title": "Case Report: Urgent endovascular treatment of subclavian artery injury after blunt trauma.",
+                  "text": "Here we report a blunt trauma case with subclavian arterial injury, upper extremity ischemia, and the need for urgent treatment to salvage the limb and prevent cerebral infarction. A 41-year-old man had a left, open, mid-shaft clavicle fracture and left subclavian artery injury accompanied by a weak pulse in the left radial artery, decreased blood pressure of the left arm compared to the right, and left hand numbness. … The blood pressure of the left arm was approximately half that of the right arm blood pressure. Despite no muscle weakness in the upper extremities, the patient had left hand numbness.",
+                  "url": "https://pubmed.ncbi.nlm.nih.gov/25717371/",
+                  "score": null,
+                  "raw": {}
+                },
+                {
+                  "source": "litsense",
+                  "doc_id": "PMID:37388666#TITLEABSTRACT-9e36c9a2",
+                  "title": null,
+                  "text": "Left subclavian artery pseudoaneurysm after blunt chest trauma with left upper extremity ischemia We describe a 74-year-old male with delayed onset of acute left upper extremity ischemia after blunt chest trauma with left clavicular fracture, resulting in left subclavian artery injury, including pseudoaneurysm formation, intramural hematoma, thrombosis, and distal embolization to the brachial artery. The patient presented with left upper extremity pain, forearm and hand numbness, and digital cyanosis. The patient was treated with a hybrid approach, consisting of transfemoral percutaneous deployment of a covered stent in the left subclavian artery and concomitant surgical thrombectomy of the left brachial artery, resulting in excellent recovery and resolution of symptoms.",
+                  "url": "https://pubmed.ncbi.nlm.nih.gov/37388666/",
+                  "score": 0.8054845442128514,
+                  "raw": {}
+                },
+                {
+                  "source": "litsense",
+                  "doc_id": "PMID:34888041#DISCUSS-3bc16b6b",
+                  "title": null,
+                  "text": "Certain studies have shown brachial plexus injury post first rib resection. Brachial plexus injuries were reported in 0.6% patients with nTOS following transaxillary first rib resection and 4% incidence after supraclavicular first rib resection. Other late complications of TOS surgery include the recurrence of symptoms, phrenic nerve paralysis, subclavian artery and vein injuries, hemothorax, pneumothorax, weakness of the hand muscles, sensory deficits and autonomic dysfunction..",
+                  "url": "https://pubmed.ncbi.nlm.nih.gov/34888041/",
+                  "score": 0.8132854025786196,
+                  "raw": {}
+                },
+                {
+                  "source": "litsense",
+                  "doc_id": "PMID:31622930#TITLEABSTRACT-caf4f425",
+                  "title": null,
+                  "text": "Successful management with endovascular stent graft repair following gunshot wound to the subclavian artery: Case report and literature review Highlights Penetrating injuries to the subclavian artery are usually the result of stab wounds or gunshot wounds. Endovascular stent graft repair of traumatic subclavian artery injuries is a feasible alternative to open surgical approach. Several studies have reported that endovascular approach is associated with a decreased morbidity and mortality compared to open approach. Introduction Penetrating injuries to the subclavian artery are usually the result of gunshot wounds or stab wounds. While subclavian artery injuries are relatively uncommon, vascular injuries due to penetrating trauma are frequently encountered at Trauma Centers. Despite advances in modern medicine, these injuries are associated with a high mortality and can lead to devastating morbidity. Presentation of case We report a case of a 20-year-old male who presented after sustaining multiple gunshot wounds to his left upper and lower extremities. He underwent an emergent repair of a left axillo-subclavian artery injury via an endovascular approach using a covered self-expanding stent and was discharged after less than a week. Discussion Historically, open surgical repair was considered the gold standard in the management of subclavian artery injury. However, rapid technological developments and advances in vascular surgery offer alternative management approaches in tra…",
+                  "url": "https://pubmed.ncbi.nlm.nih.gov/31622930/",
+                  "score": 0.8089448832324183,
+                  "raw": {}
+                },
+                {
+                  "source": "litsense",
+                  "doc_id": "PMID:12781890#TITLEABSTRACT-bb422e86",
+                  "title": null,
+                  "text": "Penetrating injuries of the subclavian artery. BACKGROUND: Penetrating injuries of the subclavian artery occurs infrequently but represent a surgical challenge. We reviewed our experience with penetrating injury of the subclavian artery and identify factors that influenced morbidity and mortality. METHODS: A retrospective review was performed on 54 consecutive patients who sustained penetrating injury to the subclavian artery during a 10-year period. RESULTS: The causes of injuries were gunshot wounds in 46 patients (85%), stab wounds in 5 patients (9%), and shotgun wounds in 3 patients (6%). The overall mortality was 39%. Operative management of the subclavian artery injury included primary repair in 38 patients, interposition grafting in 13 patients, and ligation in 3 patients. The most common associated injury was subclavian vein (44%) followed by brachial plexus (31%). Predictors of survivability include mechanism of penetrating injuries, hemodynamic status of patients on arrival, and three or more associated injuries involving other structures. Associated brachial plexus injury accounts for the majority of long-term morbidity in survivors. CONCLUSIONS: Penetrating injuries of the subclavian artery are associated with high morbidity and mortality. Multiple concomitant injuries, unstable vital signs upon presentation, and gun shot injuries greatly increase mortality.",
+                  "url": "https://pubmed.ncbi.nlm.nih.gov/12781890/",
+                  "score": 0.7985747361639813,
+                  "raw": {}
+                },
+                {
+                  "source": "litsense",
+                  "doc_id": "PMID:34147761#TITLEABSTRACT-890814f9",
+                  "title": null,
+                  "text": "Apical pleural aspergillosis with pancoast's syndrome and posterior circulation stroke: a case report. Pancoast's syndrome and subclavian arteritis are rarely caused by Aspergillus sp. . Here we report a case of a 22-yr-old, immunocompetent male who presented with fever, weight loss, right-sided facial anhidrosis and hand weakness of six months duration. Neurological examination confirmed right Horner's syndrome and weakness of small muscles of right hand. Contrast MRI of neck and chest revealed a pleural-based right apical mass abutting subclavian artery and C8-T1 root and multiple enlarged lymph nodes. He developed right hemiataxia due to cerebellar infarct before the planned excision of mass. Surgical exploration showed abscess encasing subclavian artery. Biopsy of the mass resulted in accidental injury of subclavian artery which was repaired. He developed bleeding from suture site postoperatively due pseudo-aneurysm of the subclavian artery which was stented. Histopathology of mass was suggestive of Aspergillus sp. . He was successfully treated with voriconazole. This is probably the first report of Pancoast's syndrome and large vessel angiitis caused by Aspergillus fumigatus which has been successfully managed.",
+                  "url": "https://pubmed.ncbi.nlm.nih.gov/34147761/",
+                  "score": 0.8714657988720145,
+                  "raw": {}
+                }
+              ],
+              "per_source_counts": {
+                "europe_pmc": 2,
+                "litsense": 6
+              },
+              "errors": [],
+              "latency_ms": 9640.323875006288
+            },
+            "retriever_parameters": {
+              "multi_part": false,
+              "query": "Do you have any weakness, numbness, or tingling in your left hand or fingers?",
+              "path": "literature",
+              "retrieval_performed": true,
+              "literature_query": "weakness numbness tingling subclavian artery injury",
+              "sources": [
+                "europe_pmc",
+                "litsense"
+              ],
+              "max_documents": 8,
+              "max_doc_chars": 1500,
+              "dedupe": {
+                "by_identifier": true,
+                "near_duplicate_text_jaccard": 0.9
+              },
+              "query_formulation": {
+                "strategy": "source-specific relaxation ladder",
+                "ladder_version": "v2",
+                "litsense_query": "keywords",
+                "relax_until_relevant_docs": 3,
+                "relax_counts": "documents stating a value"
+              },
+              "ranking": "lexical term rerank within each source (value first), then one ranked list across sources",
+              "population_filter": true,
+              "excerpt_mode": "full text (open access) or abstract windows",
+              "per_source": {
+                "europe_pmc": {
+                  "endpoint": "https://www.ebi.ac.uk/europepmc/webservices/rest/search",
+                  "request_params": {
+                    "query": "TITLE_ABS:(\"hand weakness\" OR numbness OR tingling OR paresthesia OR \"sensory deficit\") AND TITLE_ABS:(\"subclavian artery injury\" OR \"subclavian artery trauma\" OR \"axillosubclavian injury\" OR \"subclavian artery laceration\")",
+                    "resultType": "core",
+                    "pageSize": "50",
+                    "format": "json",
+                    "synonym": "false",
+                    "cursorMark": "*"
+                  },
+                  "page_size": 50,
+                  "result_type": "core",
+                  "filters": {
+                    "open_access_only": false,
+                    "full_text_only": false
+                  },
+                  "sort": null,
+                  "synonym": false,
+                  "timeout_s": 20.0,
+                  "max_retries": 3,
+                  "backoff_base_s": 1.0,
+                  "min_interval_s": 0.0,
+                  "cache_enabled": true,
+                  "cache_hit": false,
+                  "query_attempts": [
+                    {
+                      "level": "variable_and_condition",
+                      "query": "TITLE_ABS:(\"hand weakness\" OR numbness OR tingling OR paresthesia OR \"sensory deficit\") AND TITLE_ABS:(\"subclavian artery injury\" OR \"subclavian artery trauma\" OR \"axillosubclavian injury\" OR \"subclavian artery laceration\")",
+                      "returned": 3,
+                      "new": 3,
+                      "relevant_total": 3
+                    }
+                  ]
+                },
+                "litsense": {
+                  "endpoint": "https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/passages/",
+                  "request_params": {
+                    "query": "hand weakness subclavian artery injury",
+                    "rerank": "true"
+                  },
+                  "result_type": "passages",
+                  "rerank": true,
+                  "max_results": 30,
+                  "filters": null,
+                  "timeout_s": 30.0,
+                  "max_retries": 3,
+                  "backoff_base_s": 1.0,
+                  "min_interval_s": 1.0,
+                  "cache_enabled": true,
+                  "cache_hit": false,
+                  "no_match": false,
+                  "query_attempts": [
+                    {
+                      "level": "variable_and_condition",
+                      "query": "hand weakness subclavian artery injury",
+                      "returned": 30,
+                      "new": 30,
+                      "relevant_total": 8
+                    }
+                  ]
+                }
+              },
+              "raw_counts": {
+                "europe_pmc": 3,
+                "litsense": 30
+              },
+              "failed_sources": [],
+              "population_filtered": {
+                "europe_pmc": 0,
+                "litsense": 0
+              },
+              "patient_age_group": "adult",
+              "excerpts": {
+                "full_text_fetched": 2,
+                "full_text_used": 2,
+                "windows": 0
+              }
+            },
+            "used_llm": "deepseek/deepseek-v4-flash-0731",
+            "answer_source": "literature",
+            "evidence": [],
+            "confidence": "low",
+            "llm_calls": [
+              {
+                "stage": "resolver",
+                "model": "deepseek/deepseek-v4-flash-0731",
+                "prompt_tokens": 878,
+                "completion_tokens": 193,
+                "latency_ms": 7479.512915946543,
+                "attempt": 1,
+                "purpose": "initial",
+                "success": true,
+                "error": null,
+                "finish_reason": "stop",
+                "max_tokens": 4000,
+                "cost_usd": 0.00004738
+              },
+              {
+                "stage": "query_builder",
+                "model": "deepseek/deepseek-v4-flash-0731",
+                "prompt_tokens": 889,
+                "completion_tokens": 1538,
+                "latency_ms": 12616.85770819895,
+                "attempt": 1,
+                "purpose": "initial",
+                "success": true,
+                "error": null,
+                "finish_reason": "stop",
+                "max_tokens": 4000,
+                "cost_usd": 0.00037992
+              },
+              {
+                "stage": "synthesizer",
+                "model": "deepseek/deepseek-v4-flash-0731",
+                "prompt_tokens": 2671,
+                "completion_tokens": 1630,
+                "latency_ms": 52845.689667155966,
+                "attempt": 1,
+                "purpose": "initial",
+                "success": true,
+                "error": null,
+                "finish_reason": "stop",
+                "max_tokens": 6000,
+                "cost_usd": 0.00035271
+              }
+            ]
+          },
+          "strategy_cost_usd": 0.00013379,
+          "environment_cost_usd": 0.00078001,
+          "error": null
+        }
+      ],
+      "strategy_cost_usd": 0.0004,
+      "environment_cost_usd": 0.001921
+    },
+    {
+      "index": 1,
+      "case_id": "PMC3056427_01",
+      "strategy": "basic",
+      "strategy_name": "basic",
+      "case": {
+        "case_id": "PMC3056427_01",
+        "diagnosis": "Tricuspid Valve Regurgitation",
+        "narrative": "A 75-year-old female presented with dyspnea, orthopnea, lower extremities swelling, and palpitations. Past history includes 3 years of atrial fibrillation and 1 year of chronic heart failure (NYHA class II). Exam: irregular pulse 80/min, BP 100/60 mmHg, bibasal crackles, peripheral edema, jugular venous distension, and a grade IV pansystolic murmur along the left sternal border. She reported right upper quadrant abdominal pain worsened by palpation; liver edge was tender and enlarged (6 cm below costal margin) with smooth surface; spleen not palpable. EKG: atrial fibrillation (80/min), right bundle branch block, inferolateral ischemic changes. Abdominal ultrasound: homogeneous hepatomegaly with dilated hepatic veins and dilated inferior vena cava (30 mm) without respiratory variation.",
+        "structured_findings": {},
+        "metadata": {
+          "background_and_presentation": "A 75-year-old female presents with a chief complaint of dyspnea, orthopnea, lower extremity swelling, palpitations, and right upper quadrant abdominal pain. Her past medical history is notable for three years of atrial fibrillation and one year of chronic heart failure, NYHA class II."
+        }
+      },
+      "initial_information": null,
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "error": null,
+      "started_at": "2026-09-21T17:55:52+00:00",
+      "finished_at": "2026-09-21T17:57:25+00:00",
+      "elapsed_s": 92.88,
+      "iterations": [
+        {
+          "index": 1,
+          "started_at": "2026-09-21T17:55:52+00:00",
+          "question": "What is the main symptom or problem that brought you in today?",
+          "rationale": "This is the first question in a new patient encounter, and starting with the presenting complaint is the broadest, most efficient way to begin narrowing the differential diagnosis.",
+          "answer": "The patient presented with dyspnea, orthopnea, lower extremity swelling, and palpitations, along with right upper quadrant abdominal pain.",
+          "answer_source": "case_study",
+          "strategy_seconds": 7.178,
+          "environment_seconds": 3.704,
+          "strategy_llm_calls": [
+            {
+              "stage": "strategy",
+              "model": "deepseek/deepseek-v4-flash-0731",
+              "prompt_tokens": 299,
+              "completion_tokens": 203,
+              "latency_ms": 7177.316291956231,
+              "attempt": 1,
+              "purpose": "initial",
+              "success": true,
+              "error": null,
+              "finish_reason": "stop",
+              "max_tokens": 4000,
+              "cost_usd": 0.00004383
+            }
+          ],
+          "environment_response": {
+            "input_query": "What is the main symptom or problem that brought you in today?",
+            "output_answer": "The patient presented with dyspnea, orthopnea, lower extremity swelling, and palpitations, along with right upper quadrant abdominal pain.",
+            "literature_search": false,
+            "literature_search_result": null,
+            "retriever_parameters": {
+              "multi_part": false,
+              "query": "What is the main symptom or problem that brought you in today?",
+              "path": "case_study",
+              "retrieval_performed": false
+            },
+            "used_llm": "deepseek/deepseek-v4-flash-0731",
+            "answer_source": "case_study",
+            "evidence": [
+              "A 75-year-old female presented with dyspnea, orthopnea, lower extremities swelling, and palpitations.",
+              "A 75-year-old female presents with a chief complaint of dyspnea, orthopnea, lower extremity swelling, palpitations, and right upper quadrant abdominal pain."
+            ],
+            "confidence": "high",
+            "llm_calls": [
+              {
+                "stage": "resolver",
+                "model": "deepseek/deepseek-v4-flash-0731",
+                "prompt_tokens": 771,
+                "completion_tokens": 268,
+                "latency_ms": 3697.968707885593,
+                "attempt": 1,
+                "purpose": "initial",
+                "success": true,
+                "error": null,
+                "finish_reason": "stop",
+                "max_tokens": 4000,
+                "cost_usd": 0.00018298
+              }
+            ]
+          },
+          "strategy_cost_usd": 0.00004383,
+          "environment_cost_usd": 0.00018298,
+          "error": null
+        },
+        {
+          "index": 2,
+          "started_at": "2026-09-21T17:56:03+00:00",
+          "question": "Have you ever been diagnosed with a heart condition, such as heart failure, coronary artery disease, or an irregular heartbeat?",
+          "rationale": "This helps determine whether the current symptoms represent acute decompensation of known heart disease or a new cardiac problem, which is central to the differential diagnosis.",
+          "answer": "Yes. The patient has a history of atrial fibrillation for 3 years and chronic heart failure (NYHA class II) for 1 year.",
+          "answer_source": "case_study",
+          "strategy_seconds": 27.175,
+          "environment_seconds": 12.677,
+          "strategy_llm_calls": [
+            {
+              "stage": "strategy",
+              "model": "deepseek/deepseek-v4-flash-0731",
+              "prompt_tokens": 343,
+              "completion_tokens": 843,
+              "latency_ms": 27173.72937500477,
+              "attempt": 1,
+              "purpose": "initial",
+              "success": true,
+              "error": null,
+              "finish_reason": "stop",
+              "max_tokens": 4000,
+              "cost_usd": 0.00017203
+            }
+          ],
+          "environment_response": {
+            "input_query": "Have you ever been diagnosed with a heart condition, such as heart failure, coronary artery disease, or an irregular heartbeat?",
+            "output_answer": "Yes. The patient has a history of atrial fibrillation for 3 years and chronic heart failure (NYHA class II) for 1 year.",
+            "literature_search": false,
+            "literature_search_result": null,
+            "retriever_parameters": {
+              "multi_part": false,
+              "query": "Have you ever been diagnosed with a heart condition, such as heart failure, coronary artery disease, or an irregular heartbeat?",
+              "path": "case_study",
+              "retrieval_performed": false
+            },
+            "used_llm": "deepseek/deepseek-v4-flash-0731",
+            "answer_source": "case_study",
+            "evidence": [
+              "Past history includes 3 years of atrial fibrillation and 1 year of chronic heart failure (NYHA class II)."
+            ],
+            "confidence": "high",
+            "llm_calls": [
+              {
+                "stage": "resolver",
+                "model": "deepseek/deepseek-v4-flash-0731",
+                "prompt_tokens": 856,
+                "completion_tokens": 376,
+                "latency_ms": 12672.960417112336,
+                "attempt": 1,
+                "purpose": "initial",
+                "success": true,
+                "error": null,
+                "finish_reason": "stop",
+                "max_tokens": 4000,
+                "cost_usd": 0.00008631
+              }
+            ]
+          },
+          "strategy_cost_usd": 0.00017203,
+          "environment_cost_usd": 0.00008631,
+          "error": null
+        },
+        {
+          "index": 3,
+          "started_at": "2026-09-21T17:56:43+00:00",
+          "question": "Are you taking your medications as prescribed, especially your diuretics and heart rhythm medications?",
+          "rationale": "Nonadherence to heart failure and rate-control medications is a common precipitant of acute decompensation, and this answer would directly guide management.",
+          "answer": "This cannot be answered: The question asks about the patient's medication adherence, which is a personal/behavioral detail specific to the individual patient and not a clinical, physiological, or epidemiological property that can be derived from medical literature..",
+          "answer_source": "unanswerable",
+          "strategy_seconds": 24.823,
+          "environment_seconds": 17.318,
+          "strategy_llm_calls": [
+            {
+              "stage": "strategy",
+              "model": "deepseek/deepseek-v4-flash-0731",
+              "prompt_tokens": 403,
+              "completion_tokens": 735,
+              "latency_ms": 24820.893792202696,
+              "attempt": 1,
+              "purpose": "initial",
+              "success": true,
+              "error": null,
+              "finish_reason": "stop",
+              "max_tokens": 4000,
+              "cost_usd": 0.00015211
+            }
+          ],
+          "environment_response": {
+            "input_query": "Are you taking your medications as prescribed, especially your diuretics and heart rhythm medications?",
+            "output_answer": "This cannot be answered: The question asks about the patient's medication adherence, which is a personal/behavioral detail specific to the individual patient and not a clinical, physiological, or epidemiological property that can be derived from medical literature..",
+            "literature_search": false,
+            "literature_search_result": null,
+            "retriever_parameters": {
+              "multi_part": false,
+              "query": "Are you taking your medications as prescribed, especially your diuretics and heart rhythm medications?",
+              "path": "query_builder_declined",
+              "retrieval_performed": false
+            },
+            "used_llm": "deepseek/deepseek-v4-flash-0731",
+            "answer_source": "unanswerable",
+            "evidence": [],
+            "confidence": "low",
+            "llm_calls": [
+              {
+                "stage": "resolver",
+                "model": "deepseek/deepseek-v4-flash-0731",
+                "prompt_tokens": 938,
+                "completion_tokens": 123,
+                "latency_ms": 5684.416917152703,
+                "attempt": 1,
+                "purpose": "initial",
+                "success": true,
+                "error": null,
+                "finish_reason": "stop",
+                "max_tokens": 4000,
+                "cost_usd": 0.00003398
+              },
+              {
+                "stage": "query_builder",
+                "model": "deepseek/deepseek-v4-flash-0731",
+                "prompt_tokens": 981,
+                "completion_tokens": 329,
+                "latency_ms": 11626.00166699849,
+                "attempt": 1,
+                "purpose": "initial",
+                "success": true,
+                "error": null,
+                "finish_reason": "stop",
+                "max_tokens": 4000,
+                "cost_usd": 0.00007795
+              }
+            ]
+          },
+          "strategy_cost_usd": 0.00015211,
+          "environment_cost_usd": 0.00011193,
+          "error": null
+        }
+      ],
+      "strategy_cost_usd": 0.000368,
+      "environment_cost_usd": 0.000381
+    }
+  ],
+  "summary": {
+    "overall": {
+      "case_runs": 2,
+      "errors": 0,
+      "iterations": 6,
+      "mean_iterations": 3.0,
+      "stop_reasons": {
+        "max_iterations": 2
+      },
+      "answer_sources": {
+        "case_study": 3,
+        "literature": 2,
+        "unanswerable": 1
+      },
+      "mean_environment_seconds": 40.15,
+      "mean_case_run_seconds": 180.7,
+      "cost_usd": {
+        "strategy": 0.000768,
+        "environment": 0.002302,
+        "total": 0.00307
+      }
+    },
+    "by_strategy": {
+      "basic": {
+        "case_runs": 2,
+        "errors": 0,
+        "iterations": 6,
+        "mean_iterations": 3.0,
+        "stop_reasons": {
+          "max_iterations": 2
+        },
+        "answer_sources": {
+          "case_study": 3,
+          "literature": 2,
+          "unanswerable": 1
+        },
+        "mean_environment_seconds": 40.15,
+        "mean_case_run_seconds": 180.7,
+        "cost_usd": {
+          "strategy": 0.000768,
+          "environment": 0.002302,
+          "total": 0.00307
+        }
+      }
+    }
+  }
+}

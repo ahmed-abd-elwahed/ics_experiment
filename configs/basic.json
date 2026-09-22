@@ -1,0 +1,26 @@
+{
+  "name": "basic",
+  "cases_file": "cases/combined_272_whole_chunking.json",
+  "case_ids": null,
+  "max_cases": 5,
+  "initial_information": "none",
+  "environment": {
+    "cache_enabled": true
+  },
+  "strategies": [
+    {
+      "name": "basic",
+      "params": {
+        "model": null,
+        "temperature": 0.2,
+        "max_tokens": 4000
+      }
+    }
+  ],
+  "stopping": {
+    "max_iterations": 8,
+    "max_seconds": 600
+  },
+  "workers": 5,
+  "output": "records/{name}_{timestamp}.json"
+}

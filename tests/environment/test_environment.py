@@ -15,7 +15,7 @@ from medsim.errors import RetrieverError
 from medsim.models import CaseStudy, ChatMessage
 from medsim.retrieval.base import Retriever
 from tests.conftest import MODEL, ScriptedLLM, load_fixture, make_settings
-from tests.test_aggregator import FakeRetriever, _doc
+from tests.environment.test_aggregator import FakeRetriever, _doc
 
 TEMP_QUERY = "body temperature fever range common cold adults"
 EPMC_URL = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"

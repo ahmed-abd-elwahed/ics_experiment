@@ -22,7 +22,7 @@ from bench.text import (
 from bench.workspace import Workspace, read_models
 from medsim.models import LiteratureQuery, RetrievedDocument
 from tests.conftest import ScriptedLLM, make_settings
-from tests.test_aggregator import FakeRetriever
+from tests.environment.test_aggregator import FakeRetriever
 
 RECORD = {
     "case_id": "PMC123456_01",

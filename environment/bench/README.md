@@ -20,27 +20,27 @@ Each step appends JSONL to one workspace directory and resumes where it stopped.
 step retries failed records only.
 
 ```bash
-python -m bench --out results/retrieval_benchmark --workers 8 extract --limit 70
+python -m bench --out environment/results/retrieval_benchmark --workers 8 extract --limit 70
 ```
 
 ```bash
-python -m bench --out results/retrieval_benchmark --workers 8 redact --set-a 35 --set-b 15
+python -m bench --out environment/results/retrieval_benchmark --workers 8 redact --set-a 35 --set-b 15
 ```
 
 ```bash
-python -m bench --out results/retrieval_benchmark --workers 6 run --configs current,openrouter_search
+python -m bench --out environment/results/retrieval_benchmark --workers 6 run --configs current,openrouter_search
 ```
 
 ```bash
-python -m bench --out results/retrieval_benchmark --workers 8 judge
+python -m bench --out environment/results/retrieval_benchmark --workers 8 judge
 ```
 
 ```bash
-python -m bench --out results/retrieval_benchmark --workers 8 validate --controls 10 --flips 10
+python -m bench --out environment/results/retrieval_benchmark --workers 8 validate --controls 10 --flips 10
 ```
 
 ```bash
-python -m bench --out results/retrieval_benchmark report
+python -m bench --out environment/results/retrieval_benchmark report
 ```
 
 1. **extract**: an LLM lists every measured value in each case (variable, value, unit,

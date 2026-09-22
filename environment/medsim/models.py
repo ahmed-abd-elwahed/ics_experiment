@@ -10,9 +10,17 @@ SourceName = Literal["europe_pmc", "litsense", "openrouter_search"]
 AnswerSource = Literal["case_study", "literature", "unanswerable"]
 Confidence = Literal["high", "medium", "low"]
 # "reranker" is the optional LLM document selection (MEDSIM_LLM_RERANK); extractor, redactor and
-# judge are the retrieval benchmark's own calls (see bench/).
+# judge are the retrieval benchmark's own calls (see bench/); "strategy" is an information
+# gathering strategy's call in an experiment (see strategies/ at the project root).
 StageName = Literal[
-    "resolver", "query_builder", "synthesizer", "reranker", "extractor", "redactor", "judge"
+    "resolver",
+    "query_builder",
+    "synthesizer",
+    "reranker",
+    "extractor",
+    "redactor",
+    "judge",
+    "strategy",
 ]
 AgeGroup = Literal["neonate", "child", "adult"]
 

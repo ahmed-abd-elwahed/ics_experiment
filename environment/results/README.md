@@ -261,19 +261,19 @@ $1.83 of the $5 limit.
 Every step resumes from the saved data, and searches are cached in `.medsim_cache/`.
 
 ```bash
-python -m bench --out results/retrieval_benchmark run --configs current,current_fixed,improved_1to4,improved_1to5,improved_1to6,openrouter_search,openrouter_search_improved
+python -m bench --out environment/results/retrieval_benchmark run --configs current,current_fixed,improved_1to4,improved_1to5,improved_1to6,openrouter_search,openrouter_search_improved
 ```
 
 ```bash
-python -m bench --out results/retrieval_benchmark --workers 16 judge
+python -m bench --out environment/results/retrieval_benchmark --workers 16 judge
 ```
 
 ```bash
-python -m bench --out results/retrieval_benchmark report --baseline current_fixed --snapshot final_all_methods
+python -m bench --out environment/results/retrieval_benchmark report --baseline current_fixed --snapshot final_all_methods
 ```
 
 ```bash
-python results/scripts/make_tables.py
+python environment/results/scripts/make_tables.py
 ```
 
 ## Files
