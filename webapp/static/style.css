@@ -307,12 +307,9 @@ mark { background: var(--mark); color: inherit; border-radius: 3px; padding: 0 1
 .memory .q { font-weight: 600; }
 .memory li.current { background: var(--accent-soft); border-radius: 6px; padding: 3px 6px; margin-left: -6px; }
 .memory li.upcoming { color: var(--faint); }
-.grades { display: flex; gap: 4px; flex-wrap: wrap; }
-.grade-2, .grade-3 { background: var(--ok-soft); color: var(--ok); border-color: transparent; }
-.grade-1 { background: var(--case-soft); color: var(--case); border-color: transparent; }
 .truth { padding: 6px 8px; border-radius: 7px; background: var(--case-soft); margin: 6px 0; }
-.verdict-close, .verdict-same_category { color: var(--ok); }
-.verdict-different_category { color: var(--danger); }
+.verdict-exact, .verdict-same_category, .verdict-consistent { color: var(--ok); }
+.verdict-different_category, .verdict-inconsistent { color: var(--danger); }
 .asking { border-left: 3px solid var(--accent-strong); padding: 4px 8px; margin: 6px 0; background: var(--accent-soft); border-radius: 0 6px 6px 0; }
 .stop-banner { padding: 7px 9px; border-radius: 7px; background: var(--ok-soft); color: var(--ok); font-weight: 600; margin-bottom: 6px; }
 .stop-banner.error { background: var(--danger-soft); color: var(--danger); }

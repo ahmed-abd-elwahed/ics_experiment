@@ -45,16 +45,12 @@ class Workspace:
         return sorted(p.stem for p in (self.root / "runs").glob("*.jsonl"))
 
     @property
-    def pass1(self) -> Path:
-        return self.root / "judge" / "pass1.jsonl"
+    def masked_correctness(self) -> Path:
+        return self.root / "judge" / "masked_correctness.jsonl"
 
     @property
-    def pass2(self) -> Path:
-        return self.root / "judge" / "pass2.jsonl"
-
-    @property
-    def answers(self) -> Path:
-        return self.root / "judge" / "answers.jsonl"
+    def consistency(self) -> Path:
+        return self.root / "judge" / "factual_consistency.jsonl"
 
     @property
     def controls(self) -> Path:
@@ -63,14 +59,6 @@ class Workspace:
     @property
     def flips(self) -> Path:
         return self.root / "validate" / "flips.jsonl"
-
-    @property
-    def second_pass1(self) -> Path:
-        return self.root / "validate" / "second_pass1.jsonl"
-
-    @property
-    def second_pass2(self) -> Path:
-        return self.root / "validate" / "second_pass2.jsonl"
 
     @property
     def human_csv(self) -> Path:
@@ -105,7 +93,10 @@ def read_jsonl(path: Path) -> list[dict[str, Any]]:
     if not path.exists():
         return []
     records: list[dict[str, Any]] = []
-    for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+    # Split on "\n" only: str.splitlines() also breaks at U+2028, U+0085 and similar characters,
+    # which json.dumps(ensure_ascii=False) leaves unescaped inside strings (retrieved documents
+    # contain them), and would cut such a record in two.
+    for number, line in enumerate(path.read_text(encoding="utf-8").split("\n"), 1):
         if not line.strip():
             continue
         try:

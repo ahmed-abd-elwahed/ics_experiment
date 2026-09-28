@@ -60,6 +60,9 @@ class RunConfig:
     description: str
     update: Callable[[Settings], Settings] = field(default=lambda s: s)
     condition_blind: bool = False  # search for the variable's reference range, not the diagnosis
+    retrieval: bool = (
+        True  # False: no literature search; medsim answers from the case or not at all
+    )
 
     def settings(self, base: Settings) -> Settings:
         return self.update(base)
@@ -120,6 +123,31 @@ def _improved(
     return update
 
 
+def _web_search(engine: str, mode: str | None, model: str) -> Callable[[Settings], Settings]:
+    """The openrouter_search configuration with another search engine, mode, and search model."""
+
+    def update(s: Settings) -> Settings:
+        s = _original("openrouter_search")(s)
+        search = s.openrouter_search.model_copy(
+            update={"engine": engine, "mode": mode, "model": model}
+        )
+        return s.model_copy(update={"openrouter_search": search})
+
+    return update
+
+
+SEARCH_MODEL = "deepseek/deepseek-v4-flash-0731"
+ENVIRONMENT_MODEL = "deepseek/deepseek-v4-flash-0731"
+
+
+def _case_only(s: Settings) -> Settings:
+    """Every medsim stage on ENVIRONMENT_MODEL; retrieval is switched off by RunConfig."""
+    return s.model_copy(update={
+        "default_model": ENVIRONMENT_MODEL, "resolver_model": None,
+        "query_builder_model": None, "synthesizer_model": None, "llm_rerank": False,
+    })  # fmt: skip
+
+
 def _with(base: Callable[[Settings], Settings], **update: Any) -> Callable[[Settings], Settings]:
     return lambda s: base(s).model_copy(update=update)
 
@@ -178,6 +206,42 @@ CONFIGS: dict[str, RunConfig] = {
                     "fulltext_excerpts": True,
                 }
             ),
+        ),
+        RunConfig(
+            "openrouter_exa_instant",
+            f"openrouter_search with the Exa engine in instant mode; {SEARCH_MODEL} issues the "
+            "search",
+            _web_search("exa", "instant", SEARCH_MODEL),
+        ),
+        RunConfig(
+            "openrouter_parallel_basic",
+            f"openrouter_search with the Parallel engine in basic mode; {SEARCH_MODEL} issues "
+            "the search",
+            _web_search("parallel", "basic", SEARCH_MODEL),
+        ),
+        RunConfig(
+            "openrouter_perplexity",
+            f"openrouter_search with the Perplexity engine; {SEARCH_MODEL} issues the search",
+            _web_search("perplexity", None, SEARCH_MODEL),
+        ),
+        RunConfig(
+            "openrouter_google",
+            "openrouter_search with the model's native search, Google Search for "
+            "google/gemini-3.1-flash-lite, which issues the search",
+            _web_search("native", None, "google/gemini-3.1-flash-lite"),
+        ),
+        RunConfig(
+            "openrouter_openai",
+            "openrouter_search with the model's native search, OpenAI web search for "
+            "openai/gpt-6-luna, which issues the search",
+            _web_search("native", None, "openai/gpt-6-luna"),
+        ),
+        RunConfig(
+            "case_information",
+            f"no retrieval: medsim ({ENVIRONMENT_MODEL} for every stage) answers from the case "
+            "information, or does not answer (set C)",
+            _case_only,
+            retrieval=False,
         ),
         RunConfig(
             "sentences",
@@ -265,6 +329,34 @@ def condition_blind(lq: LiteratureQuery) -> LiteratureQuery:
             "context_terms": [],
         }
     )
+
+
+class NoRetriever:
+    """Stands in for the sources when retrieval is off; never searched (NoRetrievalAggregator)."""
+
+    name = "none"
+
+    def search(self, query: str, **params: Any) -> list[RetrievedDocument]:
+        return []
+
+    def parameters(self) -> dict[str, Any]:
+        return {"retrieval": "disabled"}
+
+
+class NoRetrievalAggregator(RetrievalAggregator):
+    """Retrieval switched off: every literature search returns no documents, without a request.
+
+    A question the case information cannot answer then ends on medsim's no_documents path.
+    """
+
+    def search(
+        self, query: LiteratureQuery | str, *, records: list[LLMCallRecord] | None = None
+    ) -> tuple[LiteratureSearchResult, dict[str, Any]]:
+        keywords = query.keywords if isinstance(query, LiteratureQuery) else query
+        result = LiteratureSearchResult(
+            query=keywords, documents=[], per_source_counts={}, errors=[], latency_ms=0.0
+        )
+        return result, {"retrieval": "disabled", "per_source": {}, "failed_sources": []}
 
 
 class ConditionBlindAggregator(RetrievalAggregator):
@@ -404,17 +496,25 @@ def run_one(
     settings = config.settings(base_settings)
     started_at = datetime.now(UTC).isoformat(timespec="seconds")
     started = time.perf_counter()
-    filters = [
-        SourceArticleFilter(r, pmcid=item.source_pmcid, pmid=item.source_pmid)
-        for r in retrievers(settings)
-    ]
-    aggregator = build_aggregator(
-        settings,
-        filters,
-        llm,
-        aggregator_cls=ConditionBlindAggregator if config.condition_blind else RetrievalAggregator,
-        fulltext=fulltext(settings) if fulltext and settings.fulltext_excerpts else None,
-    )
+    if config.retrieval:
+        filters = [
+            SourceArticleFilter(r, pmcid=item.source_pmcid, pmid=item.source_pmid)
+            for r in retrievers(settings)
+        ]
+        aggregator = build_aggregator(
+            settings,
+            filters,
+            llm,
+            aggregator_cls=(
+                ConditionBlindAggregator if config.condition_blind else RetrievalAggregator
+            ),
+            fulltext=fulltext(settings) if fulltext and settings.fulltext_excerpts else None,
+        )
+    else:
+        filters = [SourceArticleFilter(NoRetriever(), pmcid=None, pmid=None)]
+        aggregator = NoRetrievalAggregator(
+            filters, max_documents=settings.max_documents, max_doc_chars=settings.max_doc_chars
+        )
     env = MedicalEnvironment(
         case_study=item.case, llm=llm, retrievers=filters, settings=settings, aggregator=aggregator
     )

@@ -124,3 +124,11 @@ def test_query_error_continues_batch(llm: ScriptedLLM) -> None:
     assert code == 1
     assert "upstream down" in err.getvalue()
     assert "A: BP 118/76 mmHg." in out.getvalue()
+
+
+def test_case_file_may_be_a_dataset_record(tmp_path: Path) -> None:
+    path = tmp_path / "case.json"
+    record = {"case_id": "C1", "case_information": "Fever for two days.", "diagnosis": "Flu"}
+    path.write_text(json.dumps(record), encoding="utf-8")
+    case = load_case_study(path)
+    assert (case.case_id, case.narrative, case.diagnosis) == ("C1", "Fever for two days.", "Flu")

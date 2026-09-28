@@ -17,9 +17,11 @@ from bench.config import BenchSettings
 from bench.extract import run_extract, select_cases
 from bench.items import ItemBuilder, run_redact
 from bench.judge import Judge, run_judge
+from bench.pool import export_pool, run_pool, run_sample
 from bench.report import build_report, write_report
 from bench.run import CONFIGS, LiveRetrievers, run_configs
 from bench.schemas import Item
+from bench.set_c import SetCWriter, export_set_c, run_set_c
 from bench.text import load_cases
 from bench.validate import run_validate
 from bench.workspace import Workspace, load_manifest, read_models, update_manifest
@@ -27,10 +29,15 @@ from medsim.cli import RedactingFilter
 from medsim.config import Settings, load_settings
 from medsim.errors import ConfigError, MedSimError
 from medsim.llm.openrouter import OpenRouterClient
+from medsim.models import CaseStudy
 
 logger = logging.getLogger("bench")
 
 DEFAULT_CASES = Path("cases/combined_272_whole_chunking.json")
+DEFAULT_POOL_FACTS = Path("cases/combined_272_bench_facts.json")
+DEFAULT_POOL_ITEMS = Path("cases/combined_272_bench_items.json")
+DEFAULT_SET_C_ITEMS = Path("cases/combined_272_bench_set_c_items.json")
+DEFAULT_POOL_ALL_ITEMS = Path("cases/archive/combined_272_bench_items_all_candidates.json")
 
 
 def key_usage(settings: Settings) -> float | None:
@@ -51,7 +58,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="python -m bench",
         description="Retrieval benchmark for medsim. Steps: extract -> redact -> run -> judge -> "
-        "validate -> report. Each step resumes where it stopped.",
+        "validate -> report. Each step resumes where it stopped. 'pool' runs extract and redact "
+        "once over a whole dataset; 'sample' then replaces extract and redact.",
     )
     parser.add_argument("--out", type=Path, default=Path("bench_runs/default"),
                         help="Workspace directory (default: bench_runs/default).")  # fmt: skip
@@ -74,22 +82,57 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--per-case", type=int, default=1, help="Max set A questions per case.")
     p.add_argument("--seed", type=int, default=20260921)
 
+    p = sub.add_parser("pool", help="Extract and redact every case once; write reusable files.")
+    p.add_argument("--cases", type=Path, default=DEFAULT_CASES)
+    p.add_argument("--facts-file", type=Path, default=DEFAULT_POOL_FACTS)
+    p.add_argument("--items-file", type=Path, default=DEFAULT_POOL_ITEMS,
+                   help="One set A and one set B question per case.")  # fmt: skip
+    p.add_argument("--all-items-file", type=Path, default=DEFAULT_POOL_ALL_ITEMS,
+                   help="Archive of every candidate question.")  # fmt: skip
+    p.add_argument("--seed", type=int, default=20260921, help="Seed for the per-case selection.")
+    p.add_argument("--model", help="Extractor and redactor model (default: bench settings).")
+    p.add_argument("--note", action="append", default=[],
+                   help="A note to store in both files' metadata (repeatable).")  # fmt: skip
+
+    p = sub.add_parser("sample", help="Pick questions from pool files (replaces extract, redact).")
+    p.add_argument("--facts-file", type=Path, default=DEFAULT_POOL_FACTS)
+    p.add_argument("--items-file", type=Path, default=DEFAULT_POOL_ITEMS)
+    p.add_argument("--cases", type=Path, help="Defaults to the case file the pool was built from.")
+    p.add_argument("--set-a", type=int, default=35)
+    p.add_argument("--set-b", type=int, default=15)
+    p.add_argument("--per-case", type=int, default=1, help="Max set A questions per case.")
+    p.add_argument("--seed", type=int, default=20260921)
+
+    p = sub.add_parser("set-c", help="Write set C questions (information the case states).")
+    p.add_argument("--cases", type=Path, default=DEFAULT_CASES)
+    p.add_argument("--limit", type=int, help="Only the first N cases.")
+    p.add_argument("--model", help="Question-writer model (default: the main judge).")
+    p.add_argument("--export-file", type=Path, default=DEFAULT_SET_C_ITEMS,
+                   help="Also save the questions here (skipped with --limit).")  # fmt: skip
+
     p = sub.add_parser("run", help="Ask medsim every question under each configuration.")
     p.add_argument("--configs", default="current,openrouter_search",
                    help=f"Comma-separated, from: {', '.join(CONFIGS)}.")  # fmt: skip
     p.add_argument("--limit", type=int, help="Only the first N questions.")
     p.add_argument("--no-cache", action="store_true", help="Do not reuse cached search results.")
 
-    p = sub.add_parser("judge", help="LLM judge: relevance, usefulness, correctness.")
+    p = sub.add_parser(
+        "judge", help="Judge panel: masked correctness (A, C), factual consistency (B, C)."
+    )
     p.add_argument("--configs", help="Default: every configuration that has run results.")
+    p.add_argument("--cases", type=Path,
+                   help="Unredacted case file the judge reads (default: the one the questions "
+                   "were built from).")  # fmt: skip
 
-    p = sub.add_parser("validate", help="Controls, flipped truth, second judge, human sample.")
+    p = sub.add_parser("validate", help="Controls and flipped truth (judge panel), human sample.")
+    p.add_argument("--cases", type=Path,
+                   help="Unredacted case file the judge reads (default: the one the questions "
+                   "were built from).")  # fmt: skip
     p.add_argument("--configs")
     p.add_argument(
         "--controls", type=int, default=10, help="Set A questions to build controls for."
     )
     p.add_argument("--flips", type=int, default=10)
-    p.add_argument("--second-fraction", type=float, default=0.1)
     p.add_argument("--export-human", type=int, default=0, help="Rows to export for human labels.")
     p.add_argument("--seed", type=int, default=7)
 
@@ -106,6 +149,24 @@ def build_parser() -> argparse.ArgumentParser:
 
 def _configs(ws: Workspace, value: str | None) -> list[str]:
     return [c.strip() for c in value.split(",") if c.strip()] if value else ws.run_configs()
+
+
+def _full_cases(ws: Workspace, value: Path | None) -> dict[str, CaseStudy]:
+    """The unredacted cases the judge compares answers with."""
+    latest = load_manifest(ws).get("latest", {})
+    recorded = next(
+        (latest[step]["cases_file"] for step in ("extract", "sample", "set-c")
+         if (latest.get(step) or {}).get("cases_file")),
+        None,
+    )  # fmt: skip
+    return load_cases(value or Path(recorded or DEFAULT_CASES))
+
+
+def _judge(llm: OpenRouterClient, bench: BenchSettings, model: str) -> Judge:
+    return Judge(
+        llm, model, bench.judge_max_tokens, max_attempts=bench.judge_max_attempts,
+        backoff_s=bench.judge_retry_backoff_s,
+    )  # fmt: skip
 
 
 def _items(ws: Workspace) -> list[Item]:
@@ -157,6 +218,69 @@ def execute(args: argparse.Namespace, settings: Settings, bench: BenchSettings) 
             live.close()
         return {"set_a": args.set_a, "set_b": args.set_b, "seed": args.seed, **summary}
 
+    if args.command == "pool":
+        cases = load_cases(args.cases)
+        if args.model:
+            bench = bench.model_copy(
+                update={"extractor_model": args.model, "redactor_model": args.model}
+            )
+        live = LiveRetrievers(settings)
+        pool_models = {"extractor": bench.extractor(), "redactor": bench.redactor(),
+                  "stage_a_resolver": settings.model_for("resolver")}  # fmt: skip
+        try:
+            with _client(settings, list(pool_models.values()), verify) as llm:
+                builder = ItemBuilder(
+                    cases, llm=llm, pipeline_llm=llm, settings=settings,
+                    redactor_model=bench.redactor(), redactor_max_tokens=bench.redactor_max_tokens,
+                    lookup_pmid=lambda pmcid: live.lookup_pmid(settings, pmcid),
+                )  # fmt: skip
+                built = run_pool(
+                    ws, cases, llm=llm, builder=builder, extractor_model=bench.extractor(),
+                    extractor_max_tokens=bench.extractor_max_tokens, workers=args.workers,
+                )  # fmt: skip
+        finally:
+            live.close()
+        processing = {
+            "workspace": str(args.out), "parallel_workers": args.workers,
+            "temperature": 0.0, "structured_output": settings.json_mode,
+            "seed": settings.seed,
+            "max_tokens": {"extractor": bench.extractor_max_tokens,
+                           "redactor": bench.redactor_max_tokens,
+                           "stage_a_resolver": settings.resolver_max_tokens},
+            "truncated_reply": "retried once with double max_tokens",
+            "transient_error_retries": settings.llm_max_retries,
+            "llm_provider": settings.openrouter_base_url,
+            "llm_extra_body": settings.llm_extra_body,
+            "pmid_lookup": "Europe PMC search for PMCID:<id>",
+        }  # fmt: skip
+        exported = export_pool(
+            ws, cases, cases_file=args.cases, facts_file=args.facts_file,
+            items_file=args.items_file, all_items_file=args.all_items_file, models=pool_models,
+            processing=processing, notes=args.note, seed=args.seed,
+        )  # fmt: skip
+        return {"cases_file": str(args.cases), "models": pool_models, **built, **exported}
+
+    if args.command == "set-c":
+        cases = load_cases(args.cases)
+        if args.limit:
+            cases = dict(list(cases.items())[: args.limit])
+        model = args.model or bench.question_writer()
+        with _client(settings, [model], verify) as llm:
+            writer = SetCWriter(llm, model=model, max_tokens=bench.question_writer_max_tokens)
+            summary = run_set_c(ws, cases, writer, workers=args.workers)
+        summary |= {"cases_file": str(args.cases), "writer_model": model}
+        if not args.limit:
+            summary["export"] = export_set_c(
+                ws, cases_file=args.cases, out_file=args.export_file, model=model
+            )
+        return summary
+
+    if args.command == "sample":
+        return run_sample(
+            ws, facts_file=args.facts_file, items_file=args.items_file, set_a=args.set_a,
+            set_b=args.set_b, per_case=args.per_case, seed=args.seed, cases_file=args.cases,
+        )  # fmt: skip
+
     if args.command == "run":
         names = _configs(ws, args.configs)
         unknown = [n for n in names if n not in CONFIGS]
@@ -182,30 +306,32 @@ def execute(args: argparse.Namespace, settings: Settings, bench: BenchSettings) 
                 **summary}  # fmt: skip
 
     if args.command == "judge":
-        with _client(settings, [bench.judge_model], verify) as llm:
-            judge = Judge(llm, bench.judge_model, bench.judge_max_tokens)
+        with _client(settings, bench.judge_models, verify) as llm:
+            panel = [_judge(llm, bench, model) for model in bench.judge_models]
             summary = run_judge(
-                ws, _items(ws), _configs(ws, args.configs), judge, workers=args.workers
+                ws,
+                _items(ws),
+                _configs(ws, args.configs),
+                panel,
+                cases=_full_cases(ws, args.cases),
+                workers=args.workers,
             )
-        return {"judge_model": bench.judge_model, **summary}
+        return summary
 
     if args.command == "validate":
-        models = [bench.judge_model, bench.second_judge_model]
-        with _client(settings, models, verify) as llm:
-            judge = Judge(llm, bench.judge_model, bench.judge_max_tokens)
-            second = Judge(llm, bench.second_judge_model, bench.judge_max_tokens)
+        with _client(settings, bench.judge_models, verify) as llm:
+            panel = [_judge(llm, bench, model) for model in bench.judge_models]
             summary = run_validate(
-                ws, _items(ws), _configs(ws, args.configs), judge, second_judge=second,
-                controls=args.controls, flips=args.flips, second_fraction=args.second_fraction,
+                ws, _items(ws), _configs(ws, args.configs), panel,
+                cases=_full_cases(ws, args.cases), controls=args.controls, flips=args.flips,
                 export_human=args.export_human, seed=args.seed, workers=args.workers,
             )  # fmt: skip
-        return {"judge_model": bench.judge_model, "second_judge_model": bench.second_judge_model,
-                **summary}  # fmt: skip
+        return summary
 
     if args.command == "report":
         markdown, data = build_report(
-            ws, _items(ws), _configs(ws, args.configs), judge_model=bench.judge_model,
-            second_judge_model=bench.second_judge_model, baseline=args.baseline,
+            ws, _items(ws), _configs(ws, args.configs), judge_models=bench.judge_models,
+            baseline=args.baseline,
             n_boot=args.bootstrap, seed=args.seed,
         )  # fmt: skip
         write_report(ws, markdown, data)

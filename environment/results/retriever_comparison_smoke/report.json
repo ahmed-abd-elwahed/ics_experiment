@@ -1,0 +1,2732 @@
+{
+  "configs": [
+    "current",
+    "improved_1to4",
+    "openrouter_exa_instant",
+    "openrouter_google",
+    "openrouter_openai",
+    "openrouter_parallel_basic",
+    "openrouter_perplexity"
+  ],
+  "baseline": "current",
+  "judge_panel": [
+    "google/gemini-3.5-flash-lite",
+    "qwen/qwen3.8-flash",
+    "openai/gpt-6-luna"
+  ],
+  "not_run": {
+    "current": 0,
+    "improved_1to4": 0,
+    "openrouter_exa_instant": 0,
+    "openrouter_google": 0,
+    "openrouter_openai": 0,
+    "openrouter_parallel_basic": 0,
+    "openrouter_perplexity": 0
+  },
+  "all": {
+    "docs": {
+      "current": {
+        "mean": 8.0,
+        "low": 8.0,
+        "high": 8.0,
+        "n": 2
+      },
+      "improved_1to4": {
+        "mean": 8.0,
+        "low": 8.0,
+        "high": 8.0,
+        "n": 2
+      },
+      "openrouter_exa_instant": {
+        "mean": 8.0,
+        "low": 8.0,
+        "high": 8.0,
+        "n": 2
+      },
+      "openrouter_google": {
+        "mean": 3.5,
+        "low": 2.0,
+        "high": 5.0,
+        "n": 2
+      },
+      "openrouter_openai": {
+        "mean": 4.5,
+        "low": 4.0,
+        "high": 5.0,
+        "n": 2
+      },
+      "openrouter_parallel_basic": {
+        "mean": 8.0,
+        "low": 8.0,
+        "high": 8.0,
+        "n": 2
+      },
+      "openrouter_perplexity": {
+        "mean": 8.0,
+        "low": 8.0,
+        "high": 8.0,
+        "n": 2
+      },
+      "improved_1to4-current": {
+        "mean": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "n": 2
+      },
+      "openrouter_exa_instant-current": {
+        "mean": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "n": 2
+      },
+      "openrouter_google-current": {
+        "mean": -4.5,
+        "low": -6.0,
+        "high": -3.0,
+        "n": 2
+      },
+      "openrouter_openai-current": {
+        "mean": -3.5,
+        "low": -4.0,
+        "high": -3.0,
+        "n": 2
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "n": 2
+      },
+      "openrouter_perplexity-current": {
+        "mean": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "n": 2
+      }
+    },
+    "answered": {
+      "current": {
+        "mean": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "n": 2
+      },
+      "improved_1to4": {
+        "mean": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "n": 2
+      },
+      "openrouter_exa_instant": {
+        "mean": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "n": 2
+      },
+      "openrouter_google": {
+        "mean": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "n": 2
+      },
+      "openrouter_openai": {
+        "mean": 0.5,
+        "low": 0.0,
+        "high": 1.0,
+        "n": 2
+      },
+      "openrouter_parallel_basic": {
+        "mean": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "n": 2
+      },
+      "openrouter_perplexity": {
+        "mean": 0.5,
+        "low": 0.0,
+        "high": 1.0,
+        "n": 2
+      },
+      "improved_1to4-current": {
+        "mean": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "n": 2
+      },
+      "openrouter_exa_instant-current": {
+        "mean": -1.0,
+        "low": -1.0,
+        "high": -1.0,
+        "n": 2
+      },
+      "openrouter_google-current": {
+        "mean": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "n": 2
+      },
+      "openrouter_openai-current": {
+        "mean": -0.5,
+        "low": -1.0,
+        "high": 0.0,
+        "n": 2
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "n": 2
+      },
+      "openrouter_perplexity-current": {
+        "mean": -0.5,
+        "low": -1.0,
+        "high": 0.0,
+        "n": 2
+      }
+    },
+    "mc_exact": {
+      "current": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant-current": {
+        "mean": -1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google-current": {
+        "mean": -1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity-current": {
+        "mean": -1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      }
+    },
+    "mc_same_category": {
+      "current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      }
+    },
+    "mc_different_category": {
+      "current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google-current": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      }
+    },
+    "mc_not_comparable": {
+      "current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      }
+    },
+    "mc_no_label": {
+      "current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant-current": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity-current": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      }
+    },
+    "fc_consistent": {
+      "current": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant-current": {
+        "mean": -1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai-current": {
+        "mean": -1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      }
+    },
+    "fc_inconsistent": {
+      "current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      }
+    },
+    "fc_no_label": {
+      "current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant-current": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai-current": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      }
+    },
+    "retrieval_cost": {
+      "current": {
+        "mean": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "n": 2
+      },
+      "improved_1to4": {
+        "mean": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "n": 2
+      },
+      "openrouter_exa_instant": {
+        "mean": 0.0070965,
+        "low": 0.007095,
+        "high": 0.007098,
+        "n": 2
+      },
+      "openrouter_google": {
+        "mean": 0.049869,
+        "low": 0.04276,
+        "high": 0.056978,
+        "n": 2
+      },
+      "openrouter_openai": {
+        "mean": 0.0326205,
+        "low": 0.022116,
+        "high": 0.043125,
+        "n": 2
+      },
+      "openrouter_parallel_basic": {
+        "mean": 0.005122,
+        "low": 0.005111,
+        "high": 0.005133,
+        "n": 2
+      },
+      "openrouter_perplexity": {
+        "mean": 0.005105999999999999,
+        "low": 0.005083,
+        "high": 0.005129,
+        "n": 2
+      },
+      "improved_1to4-current": {
+        "mean": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "n": 2
+      },
+      "openrouter_exa_instant-current": {
+        "mean": 0.0070965,
+        "low": 0.007095,
+        "high": 0.007098,
+        "n": 2
+      },
+      "openrouter_google-current": {
+        "mean": 0.049869,
+        "low": 0.04276,
+        "high": 0.056978,
+        "n": 2
+      },
+      "openrouter_openai-current": {
+        "mean": 0.0326205,
+        "low": 0.022116,
+        "high": 0.043125,
+        "n": 2
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.005122,
+        "low": 0.005111,
+        "high": 0.005133,
+        "n": 2
+      },
+      "openrouter_perplexity-current": {
+        "mean": 0.005105999999999999,
+        "low": 0.005083,
+        "high": 0.005129,
+        "n": 2
+      }
+    },
+    "pipeline_cost": {
+      "current": {
+        "mean": 0.0013109805,
+        "low": 0.0009392535,
+        "high": 0.0016827074999999998,
+        "n": 2
+      },
+      "improved_1to4": {
+        "mean": 0.000922974112,
+        "low": 0.0005322084999999999,
+        "high": 0.0013137397240000001,
+        "n": 2
+      },
+      "openrouter_exa_instant": {
+        "mean": 0.000728205,
+        "low": 0.0007092735,
+        "high": 0.0007471365,
+        "n": 2
+      },
+      "openrouter_google": {
+        "mean": 0.0007616552500000001,
+        "low": 0.000677912,
+        "high": 0.0008453985,
+        "n": 2
+      },
+      "openrouter_openai": {
+        "mean": 0.0015798715,
+        "low": 0.000871807,
+        "high": 0.002287936,
+        "n": 2
+      },
+      "openrouter_parallel_basic": {
+        "mean": 0.002516073,
+        "low": 0.000500076,
+        "high": 0.00453207,
+        "n": 2
+      },
+      "openrouter_perplexity": {
+        "mean": 0.00147047925,
+        "low": 0.0009433875,
+        "high": 0.001997571,
+        "n": 2
+      },
+      "improved_1to4-current": {
+        "mean": -0.0003880063879999999,
+        "low": -0.0004070450000000001,
+        "high": -0.0003689677759999997,
+        "n": 2
+      },
+      "openrouter_exa_instant-current": {
+        "mean": -0.0005827755,
+        "low": -0.0009355709999999998,
+        "high": -0.00022997999999999996,
+        "n": 2
+      },
+      "openrouter_google-current": {
+        "mean": -0.0005493252499999999,
+        "low": -0.0008373089999999998,
+        "high": -0.00026134149999999996,
+        "n": 2
+      },
+      "openrouter_openai-current": {
+        "mean": 0.0002688910000000001,
+        "low": -6.744649999999993e-05,
+        "high": 0.0006052285000000001,
+        "n": 2
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.0012050925,
+        "low": -0.00043917749999999997,
+        "high": 0.0028493625,
+        "n": 2
+      },
+      "openrouter_perplexity-current": {
+        "mean": 0.00015949875000000014,
+        "low": 4.134000000000039e-06,
+        "high": 0.00031486350000000025,
+        "n": 2
+      }
+    },
+    "total_cost": {
+      "current": {
+        "mean": 0.0013109805,
+        "low": 0.0009392535,
+        "high": 0.0016827074999999998,
+        "n": 2
+      },
+      "improved_1to4": {
+        "mean": 0.000922974112,
+        "low": 0.0005322084999999999,
+        "high": 0.0013137397240000001,
+        "n": 2
+      },
+      "openrouter_exa_instant": {
+        "mean": 0.007824705000000001,
+        "low": 0.0078042735,
+        "high": 0.0078451365,
+        "n": 2
+      },
+      "openrouter_google": {
+        "mean": 0.05063065525,
+        "low": 0.043605398499999996,
+        "high": 0.057655912000000004,
+        "n": 2
+      },
+      "openrouter_openai": {
+        "mean": 0.03420037149999999,
+        "low": 0.022987807,
+        "high": 0.045412935999999994,
+        "n": 2
+      },
+      "openrouter_parallel_basic": {
+        "mean": 0.007638073,
+        "low": 0.005611076,
+        "high": 0.009665070000000001,
+        "n": 2
+      },
+      "openrouter_perplexity": {
+        "mean": 0.0065764792499999995,
+        "low": 0.0060723875,
+        "high": 0.007080571,
+        "n": 2
+      },
+      "improved_1to4-current": {
+        "mean": -0.0003880063879999999,
+        "low": -0.0004070450000000001,
+        "high": -0.0003689677759999997,
+        "n": 2
+      },
+      "openrouter_exa_instant-current": {
+        "mean": 0.0065137245,
+        "low": 0.0061624290000000005,
+        "high": 0.00686502,
+        "n": 2
+      },
+      "openrouter_google-current": {
+        "mean": 0.04931967475,
+        "low": 0.041922691,
+        "high": 0.0567166585,
+        "n": 2
+      },
+      "openrouter_openai-current": {
+        "mean": 0.032889391,
+        "low": 0.022048553499999998,
+        "high": 0.043730228499999996,
+        "n": 2
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.006327092500000001,
+        "low": 0.0046718225000000006,
+        "high": 0.007982362500000001,
+        "n": 2
+      },
+      "openrouter_perplexity-current": {
+        "mean": 0.00526549875,
+        "low": 0.005133134,
+        "high": 0.0053978635,
+        "n": 2
+      }
+    },
+    "wall_time": {
+      "current": {
+        "mean": 104.06,
+        "low": 43.87,
+        "high": 164.25,
+        "n": 2
+      },
+      "improved_1to4": {
+        "mean": 85.875,
+        "low": 60.15,
+        "high": 111.6,
+        "n": 2
+      },
+      "openrouter_exa_instant": {
+        "mean": 50.275,
+        "low": 27.61,
+        "high": 72.94,
+        "n": 2
+      },
+      "openrouter_google": {
+        "mean": 75.4,
+        "low": 64.84,
+        "high": 85.96,
+        "n": 2
+      },
+      "openrouter_openai": {
+        "mean": 165.305,
+        "low": 102.49,
+        "high": 228.12,
+        "n": 2
+      },
+      "openrouter_parallel_basic": {
+        "mean": 197.45000000000002,
+        "low": 37.55,
+        "high": 357.35,
+        "n": 2
+      },
+      "openrouter_perplexity": {
+        "mean": 89.175,
+        "low": 53.43,
+        "high": 124.92,
+        "n": 2
+      },
+      "improved_1to4-current": {
+        "mean": -18.185000000000002,
+        "low": -52.650000000000006,
+        "high": 16.28,
+        "n": 2
+      },
+      "openrouter_exa_instant-current": {
+        "mean": -53.785,
+        "low": -91.31,
+        "high": -16.259999999999998,
+        "n": 2
+      },
+      "openrouter_google-current": {
+        "mean": -28.66,
+        "low": -99.41,
+        "high": 42.089999999999996,
+        "n": 2
+      },
+      "openrouter_openai-current": {
+        "mean": 61.245000000000005,
+        "low": 58.62,
+        "high": 63.870000000000005,
+        "n": 2
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 93.39000000000001,
+        "low": -6.32,
+        "high": 193.10000000000002,
+        "n": 2
+      },
+      "openrouter_perplexity-current": {
+        "mean": -14.884999999999998,
+        "low": -39.33,
+        "high": 9.560000000000002,
+        "n": 2
+      }
+    },
+    "retrieval_time": {
+      "current": {
+        "mean": 9.18999141649925,
+        "low": 8.665691042003452,
+        "high": 9.714291790995048,
+        "n": 2
+      },
+      "improved_1to4": {
+        "mean": 19.519827958007223,
+        "low": 17.426805666016293,
+        "high": 21.612850249998154,
+        "n": 2
+      },
+      "openrouter_exa_instant": {
+        "mean": 7.1425337909880895,
+        "low": 3.6246263329952484,
+        "high": 10.66044124898093,
+        "n": 2
+      },
+      "openrouter_google": {
+        "mean": 9.647650687000713,
+        "low": 8.91720895801322,
+        "high": 10.378092415988206,
+        "n": 2
+      },
+      "openrouter_openai": {
+        "mean": 15.028981208997429,
+        "low": 13.386344709006366,
+        "high": 16.671617708988492,
+        "n": 2
+      },
+      "openrouter_parallel_basic": {
+        "mean": 6.986714916510401,
+        "low": 4.24104941601108,
+        "high": 9.732380417009722,
+        "n": 2
+      },
+      "openrouter_perplexity": {
+        "mean": 7.854123500005517,
+        "low": 7.288207167004586,
+        "high": 8.420039833006449,
+        "n": 2
+      },
+      "improved_1to4-current": {
+        "mean": 10.329836541507973,
+        "low": 7.712513875021244,
+        "high": 12.947159207994702,
+        "n": 2
+      },
+      "openrouter_exa_instant-current": {
+        "mean": -2.0474576255111607,
+        "low": -5.041064709008204,
+        "high": 0.9461494579858822,
+        "n": 2
+      },
+      "openrouter_google-current": {
+        "mean": 0.4576592705014626,
+        "low": -0.7970828329818289,
+        "high": 1.7124013739847541,
+        "n": 2
+      },
+      "openrouter_openai-current": {
+        "mean": 5.838989792498179,
+        "low": 4.720653667002914,
+        "high": 6.957325917993444,
+        "n": 2
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": -2.2032764999888492,
+        "low": -4.424641625992372,
+        "high": 0.018088626014673537,
+        "n": 2
+      },
+      "openrouter_perplexity-current": {
+        "mean": -1.3358679164937328,
+        "low": -2.4260846239904623,
+        "high": -0.24565120899700332,
+        "n": 2
+      }
+    }
+  },
+  "set_A": {
+    "docs": {
+      "current": {
+        "mean": 8.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4": {
+        "mean": 8.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant": {
+        "mean": 8.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google": {
+        "mean": 2.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai": {
+        "mean": 4.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic": {
+        "mean": 8.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity": {
+        "mean": 8.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google-current": {
+        "mean": -6.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai-current": {
+        "mean": -4.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      }
+    },
+    "answered": {
+      "current": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant-current": {
+        "mean": -1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity-current": {
+        "mean": -1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      }
+    },
+    "mc_exact": {
+      "current": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant-current": {
+        "mean": -1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google-current": {
+        "mean": -1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity-current": {
+        "mean": -1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      }
+    },
+    "mc_same_category": {
+      "current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      }
+    },
+    "mc_different_category": {
+      "current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google-current": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      }
+    },
+    "mc_not_comparable": {
+      "current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      }
+    },
+    "mc_no_label": {
+      "current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant-current": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity-current": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      }
+    }
+  },
+  "set_B": {
+    "docs": {
+      "current": {
+        "mean": 8.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4": {
+        "mean": 8.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant": {
+        "mean": 8.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google": {
+        "mean": 5.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai": {
+        "mean": 5.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic": {
+        "mean": 8.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity": {
+        "mean": 8.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google-current": {
+        "mean": -3.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai-current": {
+        "mean": -3.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      }
+    },
+    "answered": {
+      "current": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant-current": {
+        "mean": -1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai-current": {
+        "mean": -1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      }
+    },
+    "fc_consistent": {
+      "current": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant-current": {
+        "mean": -1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai-current": {
+        "mean": -1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      }
+    },
+    "fc_inconsistent": {
+      "current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      }
+    },
+    "fc_no_label": {
+      "current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "improved_1to4-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_exa_instant-current": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_google-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_openai-current": {
+        "mean": 1.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_parallel_basic-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      },
+      "openrouter_perplexity-current": {
+        "mean": 0.0,
+        "low": null,
+        "high": null,
+        "n": 1
+      }
+    }
+  },
+  "cost": {
+    "current": {
+      "questions": 2,
+      "retrieval_usd": 0.0,
+      "pipeline_llm_usd": 0.002621961,
+      "total_usd": 0.002621961,
+      "per_question_usd": 0.0013109805,
+      "median_wall_time_s": 104.06
+    },
+    "improved_1to4": {
+      "questions": 2,
+      "retrieval_usd": 0.0,
+      "pipeline_llm_usd": 0.001845948224,
+      "total_usd": 0.001845948224,
+      "per_question_usd": 0.000922974112,
+      "median_wall_time_s": 85.875
+    },
+    "openrouter_exa_instant": {
+      "questions": 2,
+      "retrieval_usd": 0.014193,
+      "pipeline_llm_usd": 0.00145641,
+      "total_usd": 0.015649410000000002,
+      "per_question_usd": 0.007824705000000001,
+      "median_wall_time_s": 50.275
+    },
+    "openrouter_google": {
+      "questions": 2,
+      "retrieval_usd": 0.099738,
+      "pipeline_llm_usd": 0.0015233105000000001,
+      "total_usd": 0.10126131049999999,
+      "per_question_usd": 0.050630655249999997,
+      "median_wall_time_s": 75.4
+    },
+    "openrouter_openai": {
+      "questions": 2,
+      "retrieval_usd": 0.065241,
+      "pipeline_llm_usd": 0.003159743,
+      "total_usd": 0.068400743,
+      "per_question_usd": 0.0342003715,
+      "median_wall_time_s": 165.305
+    },
+    "openrouter_parallel_basic": {
+      "questions": 2,
+      "retrieval_usd": 0.010244,
+      "pipeline_llm_usd": 0.005032146,
+      "total_usd": 0.015276146,
+      "per_question_usd": 0.007638073,
+      "median_wall_time_s": 197.45000000000002
+    },
+    "openrouter_perplexity": {
+      "questions": 2,
+      "retrieval_usd": 0.010211999999999999,
+      "pipeline_llm_usd": 0.0029409585,
+      "total_usd": 0.013152958499999999,
+      "per_question_usd": 0.0065764792499999995,
+      "median_wall_time_s": 89.175
+    }
+  },
+  "panel_agreement": {
+    "panel": [
+      "google/gemini-3.5-flash-lite",
+      "qwen/qwen3.8-flash",
+      "openai/gpt-6-luna"
+    ],
+    "masked correctness": {
+      "answers": 5,
+      "resolution": {
+        "majority": 1,
+        "tie_break_main_judge": 1,
+        "unanimous": 3
+      },
+      "fewer_votes": 0,
+      "pairs": {
+        "google/gemini-3.5-flash-lite | qwen/qwen3.8-flash": {
+          "n": 5,
+          "agree": 3,
+          "kappa": 0.16666666666666674
+        },
+        "google/gemini-3.5-flash-lite | openai/gpt-6-luna": {
+          "n": 5,
+          "agree": 3,
+          "kappa": 0.0
+        },
+        "qwen/qwen3.8-flash | openai/gpt-6-luna": {
+          "n": 5,
+          "agree": 4,
+          "kappa": 0.0
+        }
+      }
+    },
+    "factual consistency": {
+      "answers": 5,
+      "resolution": {
+        "unanimous": 5
+      },
+      "fewer_votes": 0,
+      "pairs": {
+        "google/gemini-3.5-flash-lite | qwen/qwen3.8-flash": {
+          "n": 5,
+          "agree": 5,
+          "kappa": 1.0
+        },
+        "google/gemini-3.5-flash-lite | openai/gpt-6-luna": {
+          "n": 5,
+          "agree": 5,
+          "kappa": 1.0
+        },
+        "qwen/qwen3.8-flash | openai/gpt-6-luna": {
+          "n": 5,
+          "agree": 5,
+          "kappa": 1.0
+        }
+      }
+    }
+  },
+  "validation": {},
+  "spend": {
+    "by_step": {
+      "extract (case facts)": 0,
+      "redact + Stage A checks (accepted)": 0,
+      "redact + Stage A checks (rejected)": 0,
+      "run (all methods; search fees included)": 0.218208477224,
+      "judge: masked correctness (google/gemini-3.5-flash-lite)": 0.0028185000000000003,
+      "judge: masked correctness (openai/gpt-6-luna)": 0.001308,
+      "judge: masked correctness (qwen/qwen3.8-flash)": 0.00518241,
+      "judge: factual consistency (google/gemini-3.5-flash-lite)": 0.0019472000000000003,
+      "judge: factual consistency (openai/gpt-6-luna)": 0.0005038999999999999,
+      "judge: factual consistency (qwen/qwen3.8-flash)": 0.0005429979999999999,
+      "validation: controls (panel)": 0,
+      "validation: flipped truth (panel)": 0
+    },
+    "total": 0.230511485224,
+    "key_usage_delta": 0.23354435200000045
+  },
+  "scores": [
+    {
+      "item_id": "A:PMC5477234_01-2:outer_canthal_distance",
+      "config": "current",
+      "question_set": "A",
+      "diagnosis": "Koolen-de Vries syndrome",
+      "category": "anthropometric",
+      "characteristic": true,
+      "path": "literature",
+      "n_docs": 8,
+      "has_answer": true,
+      "ran": true,
+      "truth_category": "high",
+      "masked_verdict": "exact",
+      "consistency": null,
+      "votes": {
+        "google/gemini-3.5-flash-lite": "exact",
+        "qwen/qwen3.8-flash": "exact",
+        "openai/gpt-6-luna": "exact"
+      },
+      "resolution": "unanimous",
+      "excluded_source_docs": 0,
+      "retrieval_cost": 0.0,
+      "stage_cost": {
+        "resolver": 0.0001281725,
+        "query_builder": 0.00098906,
+        "synthesizer": 0.000565475
+      },
+      "wall_time_s": 164.25,
+      "llm_time_s": 154.53570820900495
+    },
+    {
+      "item_id": "B:PMC6742864_01-2:oxygen_saturation",
+      "config": "current",
+      "question_set": "B",
+      "diagnosis": "Refracture of forearm",
+      "category": "vital_sign",
+      "characteristic": null,
+      "path": "literature",
+      "n_docs": 8,
+      "has_answer": true,
+      "ran": true,
+      "truth_category": null,
+      "masked_verdict": null,
+      "consistency": "consistent",
+      "votes": {
+        "google/gemini-3.5-flash-lite": "consistent",
+        "qwen/qwen3.8-flash": "consistent",
+        "openai/gpt-6-luna": "consistent"
+      },
+      "resolution": "unanimous",
+      "excluded_source_docs": 1,
+      "retrieval_cost": 0.0,
+      "stage_cost": {
+        "resolver": 6.5132e-05,
+        "query_builder": 0.0002606715,
+        "synthesizer": 0.00061345
+      },
+      "wall_time_s": 43.87,
+      "llm_time_s": 35.204308957996545
+    },
+    {
+      "item_id": "A:PMC5477234_01-2:outer_canthal_distance",
+      "config": "improved_1to4",
+      "question_set": "A",
+      "diagnosis": "Koolen-de Vries syndrome",
+      "category": "anthropometric",
+      "characteristic": true,
+      "path": "literature",
+      "n_docs": 8,
+      "has_answer": true,
+      "ran": true,
+      "truth_category": "high",
+      "masked_verdict": "exact",
+      "consistency": null,
+      "votes": {
+        "google/gemini-3.5-flash-lite": "same_category",
+        "qwen/qwen3.8-flash": "exact",
+        "openai/gpt-6-luna": "exact"
+      },
+      "resolution": "majority",
+      "excluded_source_docs": 0,
+      "retrieval_cost": 0.0,
+      "stage_cost": {
+        "resolver": 9.3891724e-05,
+        "query_builder": 0.0008326755,
+        "synthesizer": 0.0003871725
+      },
+      "wall_time_s": 111.6,
+      "llm_time_s": 94.1731943339837
+    },
+    {
+      "item_id": "B:PMC6742864_01-2:oxygen_saturation",
+      "config": "improved_1to4",
+      "question_set": "B",
+      "diagnosis": "Refracture of forearm",
+      "category": "vital_sign",
+      "characteristic": null,
+      "path": "literature",
+      "n_docs": 8,
+      "has_answer": true,
+      "ran": true,
+      "truth_category": null,
+      "masked_verdict": null,
+      "consistency": "consistent",
+      "votes": {
+        "google/gemini-3.5-flash-lite": "consistent",
+        "qwen/qwen3.8-flash": "consistent",
+        "openai/gpt-6-luna": "consistent"
+      },
+      "resolution": "unanimous",
+      "excluded_source_docs": 0,
+      "retrieval_cost": 0.0,
+      "stage_cost": {
+        "resolver": 0.00014845,
+        "query_builder": 0.0001657205,
+        "synthesizer": 0.000218038
+      },
+      "wall_time_s": 60.15,
+      "llm_time_s": 38.537149750001845
+    },
+    {
+      "item_id": "A:PMC5477234_01-2:outer_canthal_distance",
+      "config": "openrouter_exa_instant",
+      "question_set": "A",
+      "diagnosis": "Koolen-de Vries syndrome",
+      "category": "anthropometric",
+      "characteristic": true,
+      "path": "synthesizer_unanswerable",
+      "n_docs": 8,
+      "has_answer": false,
+      "ran": true,
+      "truth_category": null,
+      "masked_verdict": null,
+      "consistency": null,
+      "votes": {},
+      "resolution": null,
+      "excluded_source_docs": 0,
+      "retrieval_cost": 0.007098,
+      "stage_cost": {
+        "resolver": 0.00013885,
+        "query_builder": 0.0004263915,
+        "synthesizer": 0.000181895
+      },
+      "wall_time_s": 72.94,
+      "llm_time_s": 62.27955875101907
+    },
+    {
+      "item_id": "B:PMC6742864_01-2:oxygen_saturation",
+      "config": "openrouter_exa_instant",
+      "question_set": "B",
+      "diagnosis": "Refracture of forearm",
+      "category": "vital_sign",
+      "characteristic": null,
+      "path": "synthesizer_unanswerable",
+      "n_docs": 8,
+      "has_answer": false,
+      "ran": true,
+      "truth_category": null,
+      "masked_verdict": null,
+      "consistency": null,
+      "votes": {},
+      "resolution": null,
+      "excluded_source_docs": 0,
+      "retrieval_cost": 0.007095,
+      "stage_cost": {
+        "resolver": 6.6597e-05,
+        "query_builder": 0.0001444205,
+        "synthesizer": 0.000498256
+      },
+      "wall_time_s": 27.61,
+      "llm_time_s": 23.98537366700475
+    },
+    {
+      "item_id": "A:PMC5477234_01-2:outer_canthal_distance",
+      "config": "openrouter_google",
+      "question_set": "A",
+      "diagnosis": "Koolen-de Vries syndrome",
+      "category": "anthropometric",
+      "characteristic": true,
+      "path": "literature",
+      "n_docs": 2,
+      "has_answer": true,
+      "ran": true,
+      "truth_category": "high",
+      "masked_verdict": "different_category",
+      "consistency": null,
+      "votes": {
+        "google/gemini-3.5-flash-lite": "different_category",
+        "qwen/qwen3.8-flash": "same_category",
+        "openai/gpt-6-luna": "exact"
+      },
+      "resolution": "tie_break_main_judge",
+      "excluded_source_docs": 0,
+      "retrieval_cost": 0.04276,
+      "stage_cost": {
+        "resolver": 0.0003360145,
+        "query_builder": 0.0002584365,
+        "synthesizer": 0.0002509475
+      },
+      "wall_time_s": 64.84,
+      "llm_time_s": 55.922791041986784
+    },
+    {
+      "item_id": "B:PMC6742864_01-2:oxygen_saturation",
+      "config": "openrouter_google",
+      "question_set": "B",
+      "diagnosis": "Refracture of forearm",
+      "category": "vital_sign",
+      "characteristic": null,
+      "path": "literature",
+      "n_docs": 5,
+      "has_answer": true,
+      "ran": true,
+      "truth_category": null,
+      "masked_verdict": null,
+      "consistency": "consistent",
+      "votes": {
+        "google/gemini-3.5-flash-lite": "consistent",
+        "qwen/qwen3.8-flash": "consistent",
+        "openai/gpt-6-luna": "consistent"
+      },
+      "resolution": "unanimous",
+      "excluded_source_docs": 0,
+      "retrieval_cost": 0.056978,
+      "stage_cost": {
+        "resolver": 4.97295e-05,
+        "query_builder": 0.0004395915,
+        "synthesizer": 0.000188591
+      },
+      "wall_time_s": 85.96,
+      "llm_time_s": 75.58190758401179
+    },
+    {
+      "item_id": "A:PMC5477234_01-2:outer_canthal_distance",
+      "config": "openrouter_openai",
+      "question_set": "A",
+      "diagnosis": "Koolen-de Vries syndrome",
+      "category": "anthropometric",
+      "characteristic": true,
+      "path": "literature",
+      "n_docs": 4,
+      "has_answer": true,
+      "ran": true,
+      "truth_category": "high",
+      "masked_verdict": "exact",
+      "consistency": null,
+      "votes": {
+        "google/gemini-3.5-flash-lite": "exact",
+        "qwen/qwen3.8-flash": "exact",
+        "openai/gpt-6-luna": "exact"
+      },
+      "resolution": "unanimous",
+      "excluded_source_docs": 0,
+      "retrieval_cost": 0.043125,
+      "stage_cost": {
+        "resolver": 8.37885e-05,
+        "query_builder": 0.001641441,
+        "synthesizer": 0.0005627065
+      },
+      "wall_time_s": 228.12,
+      "llm_time_s": 211.4483822910115
+    },
+    {
+      "item_id": "B:PMC6742864_01-2:oxygen_saturation",
+      "config": "openrouter_openai",
+      "question_set": "B",
+      "diagnosis": "Refracture of forearm",
+      "category": "vital_sign",
+      "characteristic": null,
+      "path": "synthesizer_unanswerable",
+      "n_docs": 5,
+      "has_answer": false,
+      "ran": true,
+      "truth_category": null,
+      "masked_verdict": null,
+      "consistency": null,
+      "votes": {},
+      "resolution": null,
+      "excluded_source_docs": 0,
+      "retrieval_cost": 0.022116,
+      "stage_cost": {
+        "resolver": 6.26805e-05,
+        "query_builder": 0.0005004915,
+        "synthesizer": 0.000308635
+      },
+      "wall_time_s": 102.49,
+      "llm_time_s": 89.10365529099363
+    },
+    {
+      "item_id": "A:PMC5477234_01-2:outer_canthal_distance",
+      "config": "openrouter_parallel_basic",
+      "question_set": "A",
+      "diagnosis": "Koolen-de Vries syndrome",
+      "category": "anthropometric",
+      "characteristic": true,
+      "path": "literature",
+      "n_docs": 8,
+      "has_answer": true,
+      "ran": true,
+      "truth_category": "high",
+      "masked_verdict": "exact",
+      "consistency": null,
+      "votes": {
+        "google/gemini-3.5-flash-lite": "exact",
+        "qwen/qwen3.8-flash": "exact",
+        "openai/gpt-6-luna": "exact"
+      },
+      "resolution": "unanimous",
+      "excluded_source_docs": 0,
+      "retrieval_cost": 0.005133,
+      "stage_cost": {
+        "resolver": 6.9563e-05,
+        "query_builder": 0.0030630555,
+        "synthesizer": 0.0013994515
+      },
+      "wall_time_s": 357.35,
+      "llm_time_s": 347.6176195829903
+    },
+    {
+      "item_id": "B:PMC6742864_01-2:oxygen_saturation",
+      "config": "openrouter_parallel_basic",
+      "question_set": "B",
+      "diagnosis": "Refracture of forearm",
+      "category": "vital_sign",
+      "characteristic": null,
+      "path": "literature",
+      "n_docs": 8,
+      "has_answer": true,
+      "ran": true,
+      "truth_category": null,
+      "masked_verdict": null,
+      "consistency": "consistent",
+      "votes": {
+        "google/gemini-3.5-flash-lite": "consistent",
+        "qwen/qwen3.8-flash": "consistent",
+        "openai/gpt-6-luna": "consistent"
+      },
+      "resolution": "unanimous",
+      "excluded_source_docs": 0,
+      "retrieval_cost": 0.005111,
+      "stage_cost": {
+        "resolver": 5.30295e-05,
+        "query_builder": 0.0002203515,
+        "synthesizer": 0.000226695
+      },
+      "wall_time_s": 37.55,
+      "llm_time_s": 33.30895058398892
+    },
+    {
+      "item_id": "A:PMC5477234_01-2:outer_canthal_distance",
+      "config": "openrouter_perplexity",
+      "question_set": "A",
+      "diagnosis": "Koolen-de Vries syndrome",
+      "category": "anthropometric",
+      "characteristic": true,
+      "path": "synthesizer_unanswerable",
+      "n_docs": 8,
+      "has_answer": false,
+      "ran": true,
+      "truth_category": null,
+      "masked_verdict": null,
+      "consistency": null,
+      "votes": {},
+      "resolution": null,
+      "excluded_source_docs": 0,
+      "retrieval_cost": 0.005083,
+      "stage_cost": {
+        "resolver": 0.000105278,
+        "query_builder": 0.001469909,
+        "synthesizer": 0.000422384
+      },
+      "wall_time_s": 124.92,
+      "llm_time_s": 117.63179283299542
+    },
+    {
+      "item_id": "B:PMC6742864_01-2:oxygen_saturation",
+      "config": "openrouter_perplexity",
+      "question_set": "B",
+      "diagnosis": "Refracture of forearm",
+      "category": "vital_sign",
+      "characteristic": null,
+      "path": "literature",
+      "n_docs": 8,
+      "has_answer": true,
+      "ran": true,
+      "truth_category": null,
+      "masked_verdict": null,
+      "consistency": "consistent",
+      "votes": {
+        "google/gemini-3.5-flash-lite": "consistent",
+        "qwen/qwen3.8-flash": "consistent",
+        "openai/gpt-6-luna": "consistent"
+      },
+      "resolution": "unanimous",
+      "excluded_source_docs": 0,
+      "retrieval_cost": 0.005129,
+      "stage_cost": {
+        "resolver": 0.000207672,
+        "query_builder": 0.0001469155,
+        "synthesizer": 0.0005888
+      },
+      "wall_time_s": 53.43,
+      "llm_time_s": 45.00996016699355
+    }
+  ]
+}

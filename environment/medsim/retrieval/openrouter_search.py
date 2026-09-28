@@ -4,6 +4,13 @@ A small model is asked to run exactly one search with the query; OpenRouter exec
 the configured engine and returns every result as a ``url_citation`` annotation (url, title,
 excerpt). Verified by live request on 2026-09-21 (see NOTES.md). The response's
 ``usage.cost`` includes the search fee, and is reported as ``cost_usd`` in ``parameters()``.
+
+The ``native`` engine (the model provider's own search, e.g. Google Search for Gemini, OpenAI's
+web search for GPT models) returns citations only for sources the model cites in its reply, and
+without excerpts. For it, the model is asked to list and cite the sources it found; each
+document's text is the reply text its citation points to (the model's quotation or summary of the
+source, not the page itself), and Google's grounding redirect links are resolved to the real
+URL so the source article can be recognised. Verified by live request on 2026-09-29.
 """
 
 from __future__ import annotations
@@ -27,6 +34,18 @@ SEARCH_PROMPT = (
     "with the single word DONE. Do not answer the question yourself."
 )
 
+NATIVE_SEARCH_PROMPT = (
+    "You are a literature search tool. Search the web for the user's query, restricted to "
+    "biomedical literature and clinical references. Then list up to {n} relevant sources you "
+    "found, one per line: the title, then a verbatim excerpt of the passage most relevant to the "
+    "query (quote any numbers exactly). Cite every source with its link. Do not answer the "
+    "query yourself."
+)
+_GOOGLE_REDIRECT = re.compile(
+    r"^https://vertexaisearch\.cloud\.google\.com/grounding-api-redirect/"
+)
+
+_DOMAIN = re.compile(r"[\w-]+(\.[\w-]+)+")
 _PMCID = re.compile(r"\b(PMC\d+)\b", re.I)
 _PUBMED = re.compile(r"pubmed\.ncbi\.nlm\.nih\.gov/(\d+)", re.I)
 _EUROPEPMC_MED = re.compile(r"europepmc\.org/(?:article|abstract)/MED/(\d+)", re.I)
@@ -41,6 +60,17 @@ def identifiers_from_url(url: str) -> tuple[str | None, str | None]:
         pmid_match.group(1) if pmid_match else None,
         pmcid_match.group(1).upper() if pmcid_match else None,
     )
+
+
+def _cited_text(reply: str, start: Any, end: Any) -> str:
+    """The reply lines that contain the cited span, without the markdown link itself."""
+    if not isinstance(start, int) or not isinstance(end, int) or not 0 <= start <= end:
+        return ""
+    first = reply.rfind("\n", 0, start) + 1
+    last = reply.find("\n", end)
+    text = reply[first : last if last != -1 else len(reply)]
+    text = re.sub(r"\(?\[[^\]]*\]\(https?://[^)]*\)\)?", "", text)  # ([site](url)) links
+    return re.sub(r"^[\s*•-]+", "", text).replace("**", "").strip()
 
 
 def doc_id_for(url: str) -> str:
@@ -118,10 +148,14 @@ class OpenRouterSearchRetriever:
             tool["allowed_domains"] = list(cfg.allowed_domains)
         if cfg.excluded_domains:
             tool["excluded_domains"] = list(cfg.excluded_domains)
+        prompt = (
+            NATIVE_SEARCH_PROMPT.format(n=cfg.max_results) if cfg.engine == "native"
+            else SEARCH_PROMPT
+        )  # fmt: skip
         return {
             "model": cfg.model or self._default_model,
             "messages": [
-                {"role": "system", "content": SEARCH_PROMPT},
+                {"role": "system", "content": prompt},
                 {"role": "user", "content": query},
             ],
             "tools": [{"type": "openrouter:web_search", "parameters": tool}],
@@ -173,7 +207,27 @@ class OpenRouterSearchRetriever:
             "prompt_tokens": usage.get("prompt_tokens"),
             "completion_tokens": usage.get("completion_tokens"),
         }
-        return self.parse(payload)
+        documents = self.parse(payload)
+        return [self._resolve_redirect(doc) for doc in documents]
+
+    def _resolve_redirect(self, doc: RetrievedDocument) -> RetrievedDocument:
+        """Replace a Google grounding redirect link with the page it points to."""
+        if not doc.url or not _GOOGLE_REDIRECT.match(doc.url):
+            return doc
+        try:
+            response = self._client.head(doc.url, follow_redirects=False, timeout=20)
+        except httpx.HTTPError:
+            return doc
+        target = response.headers.get("location")
+        if not target or not target.startswith("http"):
+            return doc
+        pmid, pmcid = identifiers_from_url(target)
+        raw = doc.raw | {"url": target, "redirect_url": doc.url, "pmid": pmid, "pmcid": pmcid}
+        # Google gives the site's domain as the title ("nih.gov"); that is not a title.
+        title = None if doc.title and _DOMAIN.fullmatch(doc.title) else doc.title
+        return doc.model_copy(update={
+            "doc_id": doc_id_for(target), "url": target, "title": title, "raw": raw,
+        })  # fmt: skip
 
     def _headers(self) -> dict[str, str]:
         headers = {
@@ -222,17 +276,23 @@ class OpenRouterSearchRetriever:
         except (KeyError, IndexError, TypeError):
             raise RetrieverError(cls.name, "unexpected response shape (no choices)") from None
         documents: list[RetrievedDocument] = []
-        seen: set[str] = set()
+        seen: dict[str, int] = {}
+        reply = str(message.get("content") or "")
         for annotation in message.get("annotations") or []:
             citation = annotation.get("url_citation") if isinstance(annotation, dict) else None
             if not isinstance(citation, dict) or not citation.get("url"):
                 continue
             url = str(citation["url"])
-            if url in seen:
-                continue
-            seen.add(url)
             title = str(citation.get("title") or "").strip() or None
             text = _EXCERPT_BREAK.sub(" […] ", str(citation.get("content") or "")).strip()
+            if not text:  # native search: the reply text the citation points to
+                text = _cited_text(reply, citation.get("start_index"), citation.get("end_index"))
+            if url in seen:  # native search cites a source once per supported passage
+                doc = documents[seen[url]]
+                if text and text not in doc.text:
+                    documents[seen[url]] = doc.model_copy(update={"text": f"{doc.text} […] {text}"})
+                continue
+            seen[url] = len(documents)
             pmid, pmcid = identifiers_from_url(url)
             documents.append(
                 RetrievedDocument(

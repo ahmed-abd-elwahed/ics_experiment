@@ -28,18 +28,14 @@ HAS_MEASUREMENT = re.compile(
 # --- cases --------------------------------------------------------------------------------------
 
 
-def background(case: CaseStudy) -> str:
-    return str(case.metadata.get("background_and_presentation") or "")
-
-
 def case_text(case: CaseStudy) -> str:
-    """Everything a question could be answered from: background plus narrative."""
-    return f"{background(case)}\n\n{case.narrative}".strip()
+    """Everything a question could be answered from: the case information."""
+    return case.narrative.strip()
 
 
 def patient_summary(case: CaseStudy) -> str:
     """Short patient description for the judge (age, sex, setting)."""
-    text = background(case) or case.narrative
+    text = case_text(case)
     return text if len(text) <= 600 else text[:600].rsplit(" ", 1)[0] + " …"
 
 
@@ -48,11 +44,8 @@ def source_pmcid(case_id: str) -> str | None:
     return match.group(1).upper() if match else None
 
 
-def with_redacted_text(case: CaseStudy, narrative: str, background_text: str) -> CaseStudy:
-    metadata = dict(case.metadata)
-    if background_text or "background_and_presentation" in metadata:
-        metadata["background_and_presentation"] = background_text
-    return case.model_copy(update={"narrative": narrative, "metadata": metadata})
+def with_redacted_text(case: CaseStudy, narrative: str) -> CaseStudy:
+    return case.model_copy(update={"narrative": narrative})
 
 
 # --- normalisation and matching -----------------------------------------------------------------

@@ -76,14 +76,10 @@ class BasicSession(StrategySession):
 
     def prompt(self) -> str:
         context = self.context
-        if context.initial_information:
-            known = f"Initial information about the patient:\n{context.initial_information}"
-        else:
-            known = "You have no information about the patient yet."
         number = len(self.memory) + 1
         budget = f" of at most {context.max_iterations}" if context.max_iterations else ""
         return (
-            f"{known}\n\n"
+            "You have no information about the patient yet.\n\n"
             f"Questions asked so far and the answers received:\n{self.memory.render()}\n\n"
             f"This is question {number}{budget}. Ask the next question."
         )

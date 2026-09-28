@@ -133,6 +133,8 @@ class Settings(BaseSettings):
     reranker_model: str | None = None
     reranker_max_tokens: int = Field(default=4000, ge=1)
     rerank_candidates: int = Field(default=20, ge=1)
+    # Temporarily off: no reuse of earlier answers, no established facts in prompts.
+    ledger_enabled: bool = False
     cache_enabled: bool = False
     cache_dir: Path = Path(".medsim_cache")
     contact_email: str | None = None

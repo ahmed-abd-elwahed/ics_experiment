@@ -118,8 +118,7 @@ def build_aggregator(
 
 
 def case_text(case: CaseStudy) -> str:
-    background = str(case.metadata.get("background_and_presentation") or "")
-    return " ".join([background, case.narrative, *case.structured_findings.values()])
+    return " ".join([case.narrative, *case.structured_findings.values()])
 
 
 class MedicalEnvironment:
@@ -205,11 +204,12 @@ class MedicalEnvironment:
         records: list[LLMCallRecord] = []
         case_id = self.case_study.case_id
 
-        fact = self.ledger.lookup(query, case_id=case_id)
+        use_ledger = self.settings.ledger_enabled
+        fact = self.ledger.lookup(query, case_id=case_id) if use_ledger else None
         if fact is not None:
             return self._from_ledger(query, fact, records, path="ledger_hit")
 
-        established = self.ledger.prompt_block(case_id)
+        established = self.ledger.prompt_block(case_id) if use_ledger else "(none)"
         resolved = self.resolver.run(
             query, self.case_study, established_facts=established, records=records
         )
@@ -218,11 +218,12 @@ class MedicalEnvironment:
         if resolved.query_scope == "withheld":
             return self._unanswerable(query, "withheld", WITHHELD_ANSWER, records)
         if resolved.answerable_from_case and resolved.answer:
-            self.ledger.record(
-                case_id=case_id,
-                query=query, answer=resolved.answer, answer_source="case_study",
-                evidence=resolved.evidence_spans, confidence="high",
-            )  # fmt: skip
+            if use_ledger:
+                self.ledger.record(
+                    case_id=case_id,
+                    query=query, answer=resolved.answer, answer_source="case_study",
+                    evidence=resolved.evidence_spans, confidence="high",
+                )  # fmt: skip
             return _Outcome(
                 query=query, path="case_study", answer=resolved.answer,
                 answer_source="case_study", confidence="high",
@@ -238,7 +239,8 @@ class MedicalEnvironment:
                 query, "query_builder_declined", f"This cannot be answered: {reason}.", records
             )
 
-        fact = self.ledger.lookup(query, built.clinical_variable, case_id=case_id)
+        if use_ledger:
+            fact = self.ledger.lookup(query, built.clinical_variable, case_id=case_id)
         if fact is not None:
             return self._from_ledger(query, fact, records, path="ledger_hit_after_query_builder")
 
@@ -291,13 +293,14 @@ class MedicalEnvironment:
         if synthesized.literature_range:
             evidence.append(f"literature range: {synthesized.literature_range}")
         confidence: Confidence = synthesized.confidence if synthesized.supporting_doc_ids else "low"
-        self.ledger.record(
-            case_id=case_id,
-            query=query, answer=synthesized.answer, answer_source="literature",
-            clinical_variable=built.clinical_variable, value=synthesized.value,
-            unit=synthesized.unit, source_doc_ids=synthesized.supporting_doc_ids,
-            evidence=evidence, confidence=confidence,
-        )  # fmt: skip
+        if use_ledger:
+            self.ledger.record(
+                case_id=case_id,
+                query=query, answer=synthesized.answer, answer_source="literature",
+                clinical_variable=built.clinical_variable, value=synthesized.value,
+                unit=synthesized.unit, source_doc_ids=synthesized.supporting_doc_ids,
+                evidence=evidence, confidence=confidence,
+            )  # fmt: skip
         return _Outcome(
             query=query, path="literature", answer=synthesized.answer,
             answer_source="literature", confidence=confidence, evidence=evidence,

@@ -1,0 +1,1 @@
+2026-09-29 06:06:38,855 INFO bench: bench --out environment/results/retriever_comparison report --baseline current --configs current,improved_1to4,openrouter_exa_instant,openrouter_parallel_basic,openrouter_perplexity,openrouter_google,openrouter_openai

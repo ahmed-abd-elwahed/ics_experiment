@@ -1,0 +1,352 @@
+{
+  "steps": [
+    {
+      "step": "sample",
+      "at": "2026-09-28T16:44:04+00:00",
+      "facts_file": "cases/combined_272_bench_facts.json",
+      "items_file": "cases/combined_272_bench_items.json",
+      "seed": 20260921,
+      "per_case": 1,
+      "cases_file": "cases/combined_272_whole_chunking.json",
+      "A": {
+        "accepted": 141,
+        "rejected": 0,
+        "not_in_pool": 7
+      },
+      "B": {
+        "accepted": 272,
+        "rejected": 0,
+        "not_in_pool": 248
+      },
+      "key_usage_before": 3.266453695,
+      "key_usage_after": 3.266453695
+    },
+    {
+      "step": "run",
+      "at": "2026-09-28T19:37:18+00:00",
+      "configs": [
+        "current",
+        "improved_1to4",
+        "openrouter_exa_instant",
+        "openrouter_parallel_basic",
+        "openrouter_perplexity",
+        "openrouter_google",
+        "openrouter_openai"
+      ],
+      "items": 413,
+      "pipeline_models": [
+        "deepseek/deepseek-v4-flash-0731"
+      ],
+      "current": {
+        "todo": 413,
+        "ok": 413,
+        "path:literature": 356,
+        "path:synthesizer_unanswerable": 46,
+        "path:case_study": 2,
+        "path:query_builder_declined": 9,
+        "cost_usd": 0.4563,
+        "elapsed_s": 10383.3
+      },
+      "improved_1to4": {
+        "todo": 413,
+        "ok": 413,
+        "path:literature": 360,
+        "path:synthesizer_unanswerable": 45,
+        "path:case_study": 2,
+        "path:off_topic": 2,
+        "path:query_builder_declined": 4,
+        "cost_usd": 0.4303,
+        "elapsed_s": 10383.3
+      },
+      "openrouter_exa_instant": {
+        "todo": 413,
+        "ok": 413,
+        "path:literature": 263,
+        "path:synthesizer_unanswerable": 143,
+        "path:query_builder_declined": 6,
+        "path:off_topic": 1,
+        "cost_usd": 3.279,
+        "elapsed_s": 10383.3
+      },
+      "openrouter_parallel_basic": {
+        "todo": 413,
+        "ok": 412,
+        "path:literature": 341,
+        "path:synthesizer_unanswerable": 62,
+        "error": 1,
+        "path:None": 1,
+        "path:no_documents": 1,
+        "path:query_builder_declined": 7,
+        "path:off_topic": 1,
+        "cost_usd": 2.5159,
+        "elapsed_s": 10383.3
+      },
+      "openrouter_perplexity": {
+        "todo": 413,
+        "ok": 413,
+        "path:synthesizer_unanswerable": 16,
+        "path:literature": 388,
+        "path:case_study": 2,
+        "path:query_builder_declined": 7,
+        "cost_usd": 2.4675,
+        "elapsed_s": 10383.3
+      },
+      "openrouter_google": {
+        "todo": 413,
+        "ok": 411,
+        "path:literature": 325,
+        "path:no_documents": 39,
+        "path:synthesizer_unanswerable": 40,
+        "path:case_study": 1,
+        "path:query_builder_declined": 5,
+        "path:off_topic": 1,
+        "error": 2,
+        "path:None": 2,
+        "cost_usd": 19.152,
+        "elapsed_s": 10383.3
+      },
+      "openrouter_openai": {
+        "todo": 413,
+        "ok": 412,
+        "path:literature": 318,
+        "path:synthesizer_unanswerable": 76,
+        "path:case_study": 1,
+        "path:no_documents": 10,
+        "path:query_builder_declined": 7,
+        "error": 1,
+        "path:None": 1,
+        "cost_usd": 10.7665,
+        "elapsed_s": 10383.3
+      },
+      "key_usage_before": 3.266453695,
+      "key_usage_after": 41.27146166
+    },
+    {
+      "step": "run",
+      "at": "2026-09-28T19:43:25+00:00",
+      "configs": [
+        "current",
+        "improved_1to4",
+        "openrouter_exa_instant",
+        "openrouter_parallel_basic",
+        "openrouter_perplexity",
+        "openrouter_google",
+        "openrouter_openai"
+      ],
+      "items": 413,
+      "pipeline_models": [
+        "deepseek/deepseek-v4-flash-0731"
+      ],
+      "current": {
+        "todo": 0,
+        "cost_usd": 0.0,
+        "elapsed_s": 335.0
+      },
+      "improved_1to4": {
+        "todo": 0,
+        "cost_usd": 0.0,
+        "elapsed_s": 335.0
+      },
+      "openrouter_exa_instant": {
+        "todo": 0,
+        "cost_usd": 0.0,
+        "elapsed_s": 335.0
+      },
+      "openrouter_parallel_basic": {
+        "todo": 3,
+        "ok": 3,
+        "path:literature": 3,
+        "cost_usd": 0.0205,
+        "elapsed_s": 335.0
+      },
+      "openrouter_perplexity": {
+        "todo": 0,
+        "cost_usd": 0.0,
+        "elapsed_s": 335.0
+      },
+      "openrouter_google": {
+        "todo": 2,
+        "ok": 2,
+        "path:literature": 2,
+        "cost_usd": 0.103,
+        "elapsed_s": 335.0
+      },
+      "openrouter_openai": {
+        "todo": 1,
+        "ok": 1,
+        "path:literature": 1,
+        "cost_usd": 0.0324,
+        "elapsed_s": 335.0
+      },
+      "key_usage_before": 41.27146166,
+      "key_usage_after": 41.360286288
+    },
+    {
+      "step": "judge",
+      "at": "2026-09-28T20:06:27+00:00",
+      "panel": [
+        "google/gemini-3.5-flash-lite",
+        "qwen/qwen3.8-flash",
+        "openai/gpt-6-luna"
+      ],
+      "todo": 7089,
+      "masked_correctness [google/gemini-3.5-flash-lite]:ok": 902,
+      "masked_correctness [openai/gpt-6-luna]:ok": 902,
+      "masked_correctness [qwen/qwen3.8-flash]:ok": 902,
+      "factual_consistency [google/gemini-3.5-flash-lite]:ok": 1461,
+      "factual_consistency [openai/gpt-6-luna]:ok": 1461,
+      "factual_consistency [qwen/qwen3.8-flash]:ok": 1461,
+      "cost_usd": {
+        "masked_correctness [google/gemini-3.5-flash-lite]": 0.4989,
+        "masked_correctness [openai/gpt-6-luna]": 0.175,
+        "masked_correctness [qwen/qwen3.8-flash]": 0.3468,
+        "factual_consistency [google/gemini-3.5-flash-lite]": 0.6486,
+        "factual_consistency [openai/gpt-6-luna]": 0.1858,
+        "factual_consistency [qwen/qwen3.8-flash]": 0.2797
+      },
+      "key_usage_before": 41.360286288,
+      "key_usage_after": 43.472453574
+    },
+    {
+      "step": "report",
+      "at": "2026-09-28T20:07:06+00:00",
+      "report": "environment/results/retriever_comparison/report.md",
+      "configs": [
+        "current",
+        "improved_1to4",
+        "openrouter_exa_instant",
+        "openrouter_parallel_basic",
+        "openrouter_perplexity",
+        "openrouter_google",
+        "openrouter_openai"
+      ],
+      "key_usage_before": 43.496002102,
+      "key_usage_after": 43.494368346
+    }
+  ],
+  "latest": {
+    "sample": {
+      "step": "sample",
+      "at": "2026-09-28T16:44:04+00:00",
+      "facts_file": "cases/combined_272_bench_facts.json",
+      "items_file": "cases/combined_272_bench_items.json",
+      "seed": 20260921,
+      "per_case": 1,
+      "cases_file": "cases/combined_272_whole_chunking.json",
+      "A": {
+        "accepted": 141,
+        "rejected": 0,
+        "not_in_pool": 7
+      },
+      "B": {
+        "accepted": 272,
+        "rejected": 0,
+        "not_in_pool": 248
+      },
+      "key_usage_before": 3.266453695,
+      "key_usage_after": 3.266453695
+    },
+    "run": {
+      "step": "run",
+      "at": "2026-09-28T19:43:25+00:00",
+      "configs": [
+        "current",
+        "improved_1to4",
+        "openrouter_exa_instant",
+        "openrouter_parallel_basic",
+        "openrouter_perplexity",
+        "openrouter_google",
+        "openrouter_openai"
+      ],
+      "items": 413,
+      "pipeline_models": [
+        "deepseek/deepseek-v4-flash-0731"
+      ],
+      "current": {
+        "todo": 0,
+        "cost_usd": 0.0,
+        "elapsed_s": 335.0
+      },
+      "improved_1to4": {
+        "todo": 0,
+        "cost_usd": 0.0,
+        "elapsed_s": 335.0
+      },
+      "openrouter_exa_instant": {
+        "todo": 0,
+        "cost_usd": 0.0,
+        "elapsed_s": 335.0
+      },
+      "openrouter_parallel_basic": {
+        "todo": 3,
+        "ok": 3,
+        "path:literature": 3,
+        "cost_usd": 0.0205,
+        "elapsed_s": 335.0
+      },
+      "openrouter_perplexity": {
+        "todo": 0,
+        "cost_usd": 0.0,
+        "elapsed_s": 335.0
+      },
+      "openrouter_google": {
+        "todo": 2,
+        "ok": 2,
+        "path:literature": 2,
+        "cost_usd": 0.103,
+        "elapsed_s": 335.0
+      },
+      "openrouter_openai": {
+        "todo": 1,
+        "ok": 1,
+        "path:literature": 1,
+        "cost_usd": 0.0324,
+        "elapsed_s": 335.0
+      },
+      "key_usage_before": 41.27146166,
+      "key_usage_after": 41.360286288
+    },
+    "judge": {
+      "step": "judge",
+      "at": "2026-09-28T20:06:27+00:00",
+      "panel": [
+        "google/gemini-3.5-flash-lite",
+        "qwen/qwen3.8-flash",
+        "openai/gpt-6-luna"
+      ],
+      "todo": 7089,
+      "masked_correctness [google/gemini-3.5-flash-lite]:ok": 902,
+      "masked_correctness [openai/gpt-6-luna]:ok": 902,
+      "masked_correctness [qwen/qwen3.8-flash]:ok": 902,
+      "factual_consistency [google/gemini-3.5-flash-lite]:ok": 1461,
+      "factual_consistency [openai/gpt-6-luna]:ok": 1461,
+      "factual_consistency [qwen/qwen3.8-flash]:ok": 1461,
+      "cost_usd": {
+        "masked_correctness [google/gemini-3.5-flash-lite]": 0.4989,
+        "masked_correctness [openai/gpt-6-luna]": 0.175,
+        "masked_correctness [qwen/qwen3.8-flash]": 0.3468,
+        "factual_consistency [google/gemini-3.5-flash-lite]": 0.6486,
+        "factual_consistency [openai/gpt-6-luna]": 0.1858,
+        "factual_consistency [qwen/qwen3.8-flash]": 0.2797
+      },
+      "key_usage_before": 41.360286288,
+      "key_usage_after": 43.472453574
+    },
+    "report": {
+      "step": "report",
+      "at": "2026-09-28T20:07:06+00:00",
+      "report": "environment/results/retriever_comparison/report.md",
+      "configs": [
+        "current",
+        "improved_1to4",
+        "openrouter_exa_instant",
+        "openrouter_parallel_basic",
+        "openrouter_perplexity",
+        "openrouter_google",
+        "openrouter_openai"
+      ],
+      "key_usage_before": 43.496002102,
+      "key_usage_after": 43.494368346
+    }
+  }
+}

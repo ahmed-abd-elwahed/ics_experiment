@@ -1,0 +1,251 @@
+{
+  "steps": [
+    {
+      "step": "sample",
+      "at": "2026-09-28T16:27:10+00:00",
+      "facts_file": "cases/combined_272_bench_facts.json",
+      "items_file": "cases/combined_272_bench_items.json",
+      "seed": 20260921,
+      "per_case": 1,
+      "cases_file": "cases/combined_272_whole_chunking.json",
+      "A": {
+        "accepted": 1,
+        "rejected": 0,
+        "not_in_pool": 0
+      },
+      "B": {
+        "accepted": 1,
+        "rejected": 0,
+        "not_in_pool": 1
+      },
+      "key_usage_before": 2.822242814,
+      "key_usage_after": 2.822242814
+    },
+    {
+      "step": "run",
+      "at": "2026-09-28T16:33:11+00:00",
+      "configs": [
+        "current",
+        "improved_1to4",
+        "openrouter_exa_instant",
+        "openrouter_parallel_basic",
+        "openrouter_perplexity",
+        "openrouter_google"
+      ],
+      "items": 2,
+      "pipeline_models": [
+        "deepseek/deepseek-v4-flash-0731"
+      ],
+      "current": {
+        "todo": 2,
+        "ok": 2,
+        "path:literature": 2,
+        "cost_usd": 0.0026,
+        "elapsed_s": 357.4
+      },
+      "improved_1to4": {
+        "todo": 2,
+        "ok": 2,
+        "path:literature": 2,
+        "cost_usd": 0.0018,
+        "elapsed_s": 357.4
+      },
+      "openrouter_exa_instant": {
+        "todo": 2,
+        "ok": 2,
+        "path:synthesizer_unanswerable": 2,
+        "cost_usd": 0.0156,
+        "elapsed_s": 357.4
+      },
+      "openrouter_parallel_basic": {
+        "todo": 2,
+        "ok": 2,
+        "path:literature": 2,
+        "cost_usd": 0.0153,
+        "elapsed_s": 357.4
+      },
+      "openrouter_perplexity": {
+        "todo": 2,
+        "ok": 2,
+        "path:literature": 1,
+        "path:synthesizer_unanswerable": 1,
+        "cost_usd": 0.0132,
+        "elapsed_s": 357.4
+      },
+      "openrouter_google": {
+        "todo": 2,
+        "ok": 2,
+        "path:no_documents": 2,
+        "cost_usd": 0.005,
+        "elapsed_s": 357.4
+      },
+      "key_usage_before": 2.822242814,
+      "key_usage_after": 2.874351878
+    },
+    {
+      "step": "run",
+      "at": "2026-09-28T16:40:12+00:00",
+      "configs": [
+        "openrouter_google",
+        "openrouter_openai"
+      ],
+      "items": 2,
+      "pipeline_models": [
+        "deepseek/deepseek-v4-flash-0731"
+      ],
+      "openrouter_google": {
+        "todo": 2,
+        "ok": 2,
+        "path:literature": 2,
+        "cost_usd": 0.1013,
+        "elapsed_s": 228.1
+      },
+      "openrouter_openai": {
+        "todo": 2,
+        "ok": 2,
+        "path:synthesizer_unanswerable": 1,
+        "path:literature": 1,
+        "cost_usd": 0.0684,
+        "elapsed_s": 228.1
+      },
+      "key_usage_before": 3.084488509,
+      "key_usage_after": 3.253587981
+    },
+    {
+      "step": "judge",
+      "at": "2026-09-28T16:42:13+00:00",
+      "panel": [
+        "google/gemini-3.5-flash-lite",
+        "qwen/qwen3.8-flash",
+        "openai/gpt-6-luna"
+      ],
+      "todo": 30,
+      "factual_consistency [google/gemini-3.5-flash-lite]:ok": 5,
+      "factual_consistency [openai/gpt-6-luna]:ok": 5,
+      "masked_correctness [google/gemini-3.5-flash-lite]:ok": 5,
+      "masked_correctness [openai/gpt-6-luna]:ok": 5,
+      "factual_consistency [qwen/qwen3.8-flash]:ok": 5,
+      "masked_correctness [qwen/qwen3.8-flash]:ok": 5,
+      "cost_usd": {
+        "factual_consistency [google/gemini-3.5-flash-lite]": 0.0019,
+        "factual_consistency [openai/gpt-6-luna]": 0.0005,
+        "masked_correctness [google/gemini-3.5-flash-lite]": 0.0028,
+        "masked_correctness [openai/gpt-6-luna]": 0.0013,
+        "factual_consistency [qwen/qwen3.8-flash]": 0.0005,
+        "masked_correctness [qwen/qwen3.8-flash]": 0.0052
+      },
+      "key_usage_before": 3.253587981,
+      "key_usage_after": 3.265923797
+    },
+    {
+      "step": "report",
+      "at": "2026-09-28T16:42:15+00:00",
+      "report": "/private/tmp/claude-502/-Users-ahmed-ics-experiment/b408bf2e-bd80-4110-8f45-2c03ee26b20d/scratchpad/smoke/report.md",
+      "configs": [
+        "current",
+        "improved_1to4",
+        "openrouter_exa_instant",
+        "openrouter_google",
+        "openrouter_openai",
+        "openrouter_parallel_basic",
+        "openrouter_perplexity"
+      ],
+      "key_usage_before": 3.265923797,
+      "key_usage_after": 3.264020559
+    }
+  ],
+  "latest": {
+    "sample": {
+      "step": "sample",
+      "at": "2026-09-28T16:27:10+00:00",
+      "facts_file": "cases/combined_272_bench_facts.json",
+      "items_file": "cases/combined_272_bench_items.json",
+      "seed": 20260921,
+      "per_case": 1,
+      "cases_file": "cases/combined_272_whole_chunking.json",
+      "A": {
+        "accepted": 1,
+        "rejected": 0,
+        "not_in_pool": 0
+      },
+      "B": {
+        "accepted": 1,
+        "rejected": 0,
+        "not_in_pool": 1
+      },
+      "key_usage_before": 2.822242814,
+      "key_usage_after": 2.822242814
+    },
+    "run": {
+      "step": "run",
+      "at": "2026-09-28T16:40:12+00:00",
+      "configs": [
+        "openrouter_google",
+        "openrouter_openai"
+      ],
+      "items": 2,
+      "pipeline_models": [
+        "deepseek/deepseek-v4-flash-0731"
+      ],
+      "openrouter_google": {
+        "todo": 2,
+        "ok": 2,
+        "path:literature": 2,
+        "cost_usd": 0.1013,
+        "elapsed_s": 228.1
+      },
+      "openrouter_openai": {
+        "todo": 2,
+        "ok": 2,
+        "path:synthesizer_unanswerable": 1,
+        "path:literature": 1,
+        "cost_usd": 0.0684,
+        "elapsed_s": 228.1
+      },
+      "key_usage_before": 3.084488509,
+      "key_usage_after": 3.253587981
+    },
+    "judge": {
+      "step": "judge",
+      "at": "2026-09-28T16:42:13+00:00",
+      "panel": [
+        "google/gemini-3.5-flash-lite",
+        "qwen/qwen3.8-flash",
+        "openai/gpt-6-luna"
+      ],
+      "todo": 30,
+      "factual_consistency [google/gemini-3.5-flash-lite]:ok": 5,
+      "factual_consistency [openai/gpt-6-luna]:ok": 5,
+      "masked_correctness [google/gemini-3.5-flash-lite]:ok": 5,
+      "masked_correctness [openai/gpt-6-luna]:ok": 5,
+      "factual_consistency [qwen/qwen3.8-flash]:ok": 5,
+      "masked_correctness [qwen/qwen3.8-flash]:ok": 5,
+      "cost_usd": {
+        "factual_consistency [google/gemini-3.5-flash-lite]": 0.0019,
+        "factual_consistency [openai/gpt-6-luna]": 0.0005,
+        "masked_correctness [google/gemini-3.5-flash-lite]": 0.0028,
+        "masked_correctness [openai/gpt-6-luna]": 0.0013,
+        "factual_consistency [qwen/qwen3.8-flash]": 0.0005,
+        "masked_correctness [qwen/qwen3.8-flash]": 0.0052
+      },
+      "key_usage_before": 3.253587981,
+      "key_usage_after": 3.265923797
+    },
+    "report": {
+      "step": "report",
+      "at": "2026-09-28T16:42:15+00:00",
+      "report": "/private/tmp/claude-502/-Users-ahmed-ics-experiment/b408bf2e-bd80-4110-8f45-2c03ee26b20d/scratchpad/smoke/report.md",
+      "configs": [
+        "current",
+        "improved_1to4",
+        "openrouter_exa_instant",
+        "openrouter_google",
+        "openrouter_openai",
+        "openrouter_parallel_basic",
+        "openrouter_perplexity"
+      ],
+      "key_usage_before": 3.265923797,
+      "key_usage_after": 3.264020559
+    }
+  }
+}

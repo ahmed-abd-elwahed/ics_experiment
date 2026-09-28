@@ -6,7 +6,8 @@ Two kinds are stored:
   live checks, each with the full ``EnvironmentResponse``.
 - retrieval benchmark runs (``environment/results/<workspace>/runs/<method>.jsonl``): every
   benchmark question answered with one retrieval method, joined with the question set (the
-  hidden value, for set A) and the judge's grades of each retrieved document and the answer.
+  hidden value, for set A) and the judge's verdict on the answer: masked correctness for set A,
+  factual consistency for set B.
 
 Both become sessions, one per case, each a list of questions with the environment's response.
 """
@@ -18,13 +19,13 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-from bench.judge import answer_key, doc_key, ok_judgments
+from bench.config import BenchSettings
+from bench.judge import SET_METRICS, answer_key, panel_judgments, panel_votes
 from bench.schemas import (
-    AnswerJudgment,
+    ConsistencyJudgment,
     DocRecord,
     Item,
-    Pass1Judgment,
-    Pass2Judgment,
+    MaskedCorrectnessJudgment,
     RunRecord,
 )
 from bench.workspace import Workspace, latest_by, read_jsonl, read_models
@@ -200,53 +201,45 @@ def _response(item: Item, run: RunRecord) -> dict[str, Any]:
     }
 
 
-def _judge_model(path: Path) -> str | None:
-    models = Counter(str(r.get("judge_model")) for r in read_jsonl(path))
-    return models.most_common(1)[0][0] if models else None
-
-
 def _benchmark_runs(path: Path, root: Path) -> dict[str, Any]:
     ws = Workspace(path.parent.parent)
     method = path.stem
     items = latest_by(read_models(ws.items, Item), lambda i: i.item_id)
     runs = latest_by(read_models(path, RunRecord), lambda r: r.item_id)
-    judge_model = _judge_model(ws.pass1)
-    pass1: dict[str, Pass1Judgment] = {}
-    pass2: dict[str, Pass2Judgment] = {}
-    answers: dict[str, AnswerJudgment] = {}
-    if judge_model is not None:
-        pass1 = ok_judgments(ws.pass1, Pass1Judgment, judge_model)
-        pass2 = ok_judgments(ws.pass2, Pass2Judgment, judge_model)
-        answers = ok_judgments(ws.answers, AnswerJudgment, judge_model)
+    panel = BenchSettings().judge_models
+    masked = panel_judgments(ws.masked_correctness, MaskedCorrectnessJudgment, panel)
+    consistency = panel_judgments(ws.consistency, ConsistencyJudgment, panel)
 
     sessions: dict[tuple[str, str], dict[str, Any]] = {}
     for item in items.values():
         run = runs.get(item.item_id)
         if run is None:
             continue
-        grades: dict[str, dict[str, Any]] = {}
-        for doc in run.documents:
-            key = doc_key(item.item_id, doc.doc_id, doc.text)
-            first, second = pass1.get(key), pass2.get(key)
-            if first is None or first.output is None:
+        key = answer_key(item.item_id, method, run.output_answer or "")
+        verdicts = []  # per metric: the panel's label, and each judge's own verdict
+        for metric in SET_METRICS[item.question_set]:
+            judged: dict[str, Any] = (
+                masked if metric == "masked_correctness" else consistency
+            ).get(key, {})
+            voted = panel_votes(judged, panel)
+            if voted.label is None:
                 continue
-            grades[doc.doc_id] = {
-                "relevance": first.relevance,
-                "usefulness": first.usefulness,
-                "rationale": first.output.rationale,
-                "evidence_quote": first.output.evidence_quote,
-                "evidence_value": first.output.evidence_value,
-                "correctness": second.correctness if second else None,
-                "verdict": second.output.verdict if second and second.output else None,
-            }
-        judged = answers.get(answer_key(item.item_id, method, run.output_answer or ""))
-        verdict = None
-        if judged is not None and judged.output is not None:
-            verdict = judged.output.model_dump(mode="json")
-        if item.question_set == "A":
-            note = "Set A: the value this question asks for was removed from the case text."
-        else:
-            note = "Set B: the case never states the value this question asks for."
+            verdicts.append({
+                "metric": metric,
+                "verdict": voted.label,
+                "resolution": voted.resolution,
+                "judges": [
+                    {"judge_model": model, **j.output.model_dump(mode="json")}
+                    if (j := judged.get(model)) and j.output
+                    else {"judge_model": model, "verdict": None}
+                    for model in panel
+                ],
+            })  # fmt: skip
+        note = {
+            "A": "Set A: the value this question asks for was removed from the case text.",
+            "B": "Set B: the case never states the value this question asks for.",
+            "C": "Set C: the case states the answer; the environment answers without retrieval.",
+        }[item.question_set]
         session = sessions.setdefault(
             (item.case_id, item.question_set),
             {
@@ -268,14 +261,13 @@ def _benchmark_runs(path: Path, root: Path) -> dict[str, Any]:
                 "cost_usd": run.retrieval_cost_usd + sum(run.llm_cost_usd.values()),
                 "truth": item.truth.model_dump(mode="json") if item.truth else None,
                 "removed_text": item.removed_text,
-                "grades": grades,
-                "answer_verdict": verdict,
+                "answer_verdicts": verdicts,
                 "meta": {
                     "question_set": item.question_set,
                     "variable": item.variable,
                     "category": item.category,
                     "method": method,
-                    "judge_model": judge_model,
+                    "judge_panel": panel,
                 },
             }
         )
@@ -287,6 +279,7 @@ def _benchmark_runs(path: Path, root: Path) -> dict[str, Any]:
         "generated_at": None,
         "model": None,
         "description": f"Retrieval benchmark questions answered with the {method} method. "
-        f"Documents and answers are graded by {judge_model or 'no judge yet'}.",
+        f"Answers are graded by a panel of {len(panel)} judges ({', '.join(panel)}); the label "
+        f"shown is their majority vote.",
         "sessions": list(sessions.values()),
     }

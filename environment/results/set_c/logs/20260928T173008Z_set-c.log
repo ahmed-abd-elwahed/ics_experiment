@@ -1,0 +1,28 @@
+2026-09-29 03:30:08,004 INFO bench: bench --out environment/results/set_c --workers 16 set-c
+2026-09-29 03:30:11,015 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-09-29 03:30:11,512 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-09-29 03:30:11,521 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-09-29 03:30:11,533 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-09-29 03:30:11,773 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-09-29 03:30:11,797 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-09-29 03:30:11,799 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-09-29 03:30:11,801 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-09-29 03:30:11,801 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-09-29 03:30:11,810 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-09-29 03:30:11,841 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-09-29 03:30:12,028 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-09-29 03:30:12,054 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-09-29 03:30:12,089 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-09-29 03:30:12,292 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-09-29 03:30:12,348 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-09-29 03:30:15,915 INFO bench.set_c: set C: 25/272 cases
+2026-09-29 03:30:18,727 INFO bench.set_c: set C: 50/272 cases
+2026-09-29 03:30:20,906 INFO bench.set_c: set C: 75/272 cases
+2026-09-29 03:30:23,765 INFO bench.set_c: set C: 100/272 cases
+2026-09-29 03:30:26,649 INFO bench.set_c: set C: 125/272 cases
+2026-09-29 03:30:28,982 INFO bench.set_c: set C: 150/272 cases
+2026-09-29 03:30:31,351 INFO bench.set_c: set C: 175/272 cases
+2026-09-29 03:30:34,285 INFO bench.set_c: set C: 200/272 cases
+2026-09-29 03:30:36,826 INFO bench.set_c: set C: 225/272 cases
+2026-09-29 03:30:39,647 INFO bench.set_c: set C: 250/272 cases
+2026-09-29 03:30:42,198 INFO bench.set_c: set C: 272/272 cases

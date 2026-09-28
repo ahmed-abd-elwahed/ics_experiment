@@ -19,6 +19,7 @@ StageName = Literal[
     "reranker",
     "extractor",
     "redactor",
+    "question_writer",
     "judge",
     "strategy",
 ]

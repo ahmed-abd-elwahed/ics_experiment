@@ -214,11 +214,7 @@ def test_stored_environment_runs_are_listed_and_loaded() -> None:
     _, bench = call(app, "GET", f"/api/environment-run?path={benchmark}")
     questions = [q for s in bench["sessions"] for q in s["questions"]]
     assert len(questions) == 50
-    graded = [q for q in questions if q["grades"]]
-    assert graded and all(
-        set(g) >= {"relevance", "usefulness"} for q in graded for g in q["grades"].values()
-    )
-    assert any(q["truth"] and q["answer_verdict"] for q in questions)
+    assert any(q["truth"] for q in questions) and all("grades" not in q for q in questions)
     assert call(app, "GET", "/api/environment-run?path=pyproject.toml")[0] == 404
 
 

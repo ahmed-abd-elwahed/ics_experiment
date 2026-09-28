@@ -28,7 +28,6 @@ from bench.schemas import (
     Truth,
 )
 from bench.text import (
-    background,
     case_text,
     check_redaction,
     patient_summary,
@@ -52,8 +51,8 @@ PmidLookup = Callable[[str], str | None]
 REDACTOR_PROMPT = """\
 You remove one measured value from a case report so that a patient simulator cannot see it.
 
-You get the two text fields of the case and the TARGET measurement. Return both fields with \
-every statement of the target value removed:
+You get the case text (narrative) and the TARGET measurement. Return the narrative with every \
+statement of the target value removed:
 - Remove the value wherever it is stated for this measurement, including restatements (a heart \
 rate repeated in an ECG description, a value repeated in a summary).
 - Remove only what is needed: the number with its unit and label, and the clause if nothing \
@@ -63,8 +62,7 @@ or add anything.
 - Keep qualitative descriptions of the variable (e.g. "hypotensive", "anemic", "febrile") and \
 list them in qualitative_mentions_kept.
 - removed: the exact fragments you deleted.
-Return only a JSON object with keys narrative, background_and_presentation, removed, \
-qualitative_mentions_kept."""
+Return only a JSON object with keys narrative, removed, qualitative_mentions_kept."""
 
 # Set B variables: rules.VARIABLE_KEYWORDS key -> (question wording, category).
 OPEN_VARIABLES: dict[str, tuple[str, str]] = {
@@ -133,6 +131,37 @@ def order_set_a(facts: Iterable[CaseFacts], seed: int) -> list[_Candidate]:
     return ordered
 
 
+def mentioned_variables(
+    cases: dict[str, CaseStudy], facts: dict[str, CaseFacts]
+) -> dict[str, set[str]]:
+    """Per case, the ``OPEN_VARIABLES`` keys its text or its extracted facts mention."""
+    mentioned: dict[str, set[str]] = {}
+    for cid, case in cases.items():
+        found = {var for _, _, var in rules.find_variables(case_text(case))}
+        for fact in facts[cid].facts if cid in facts else []:
+            if key := rules.canonical_variable(fact.variable):
+                found.add(key)
+        mentioned[cid] = found
+    return mentioned
+
+
+def set_b_candidate(case_id: str, var: str) -> _Candidate:
+    name, category = OPEN_VARIABLES[var]
+    return _Candidate(item_id=f"B:{case_id}:{var}", question_set="B", case_id=case_id,
+                      variable=name, category=category)  # fmt: skip
+
+
+def all_set_b(cases: dict[str, CaseStudy], facts: dict[str, CaseFacts]) -> list[_Candidate]:
+    """Every (case, variable) pair where the case never mentions the variable."""
+    mentioned = mentioned_variables(cases, facts)
+    return [
+        set_b_candidate(cid, var)
+        for cid in cases
+        for var in OPEN_VARIABLES
+        if var not in mentioned[cid]
+    ]
+
+
 def order_set_b(
     cases: dict[str, CaseStudy], facts: dict[str, CaseFacts], seed: int
 ) -> list[_Candidate]:
@@ -140,14 +169,7 @@ def order_set_b(
     rng = random.Random(seed + 1)
     case_ids = sorted(cases)
     rng.shuffle(case_ids)
-    mentioned: dict[str, set[str]] = {}
-    for cid in case_ids:
-        text = case_text(cases[cid])
-        found = {var for _, _, var in rules.find_variables(text)}
-        for fact in facts[cid].facts if cid in facts else []:
-            if key := rules.canonical_variable(fact.variable):
-                found.add(key)
-        mentioned[cid] = found
+    mentioned = mentioned_variables(cases, facts)
     variables = list(OPEN_VARIABLES)
     rng.shuffle(variables)
     ordered: list[_Candidate] = []
@@ -161,11 +183,7 @@ def order_set_b(
                 continue
             used.add(pick)
             progress = True
-            name, category = OPEN_VARIABLES[var]
-            ordered.append(
-                _Candidate(item_id=f"B:{pick}:{var}", question_set="B", case_id=pick,
-                           variable=name, category=category)
-            )  # fmt: skip
+            ordered.append(set_b_candidate(pick, var))
     return ordered
 
 
@@ -242,7 +260,7 @@ class ItemBuilder:
         case = self.cases[cand.case_id]
         target = {"variable": fact.variable, "value": fact.value, "unit": fact.unit,
                   "timepoint": fact.timepoint, "span": fact.span}  # fmt: skip
-        fields = {"narrative": case.narrative, "background_and_presentation": background(case)}
+        fields = {"narrative": case.narrative}
         user = (
             f"TARGET MEASUREMENT:\n{json.dumps(target, ensure_ascii=False)}\n\n"
             f"CASE FIELDS:\n{json.dumps(fields, ensure_ascii=False, indent=1)}"
@@ -254,9 +272,7 @@ class ItemBuilder:
             output_model=RedactorOutput, temperature=0.0, max_tokens=self.redactor_max_tokens,
             model=self.redactor_model, records=records,
         )  # fmt: skip
-        redacted = with_redacted_text(
-            case, output.narrative, output.background_and_presentation.strip()
-        )
+        redacted = with_redacted_text(case, output.narrative)
         failure = check_redaction(case_text(case), case_text(redacted), fact.span, fact.value)
         if failure:
             return self._reject(cand, failure, records, removed=output.removed)

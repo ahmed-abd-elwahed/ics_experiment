@@ -56,7 +56,6 @@ class CaseRun(BaseModel):
     strategy: str  # the strategy's label in the config
     strategy_name: str
     case: CaseStudy  # what was loaded into the environment (the diagnosis is never shown)
-    initial_information: str | None = None  # what the strategy was told before asking
     status: CaseRunStatus
     stop_reason: StopReason
     error: str | None = None

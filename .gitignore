@@ -13,3 +13,6 @@ build/
 
 # Experiment records: finished case runs are appended here while a run is in progress
 *.partial.jsonl
+
+# Benchmark workspaces (intermediate JSONL; published results live in environment/results/)
+bench_runs/

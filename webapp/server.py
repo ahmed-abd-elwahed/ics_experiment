@@ -33,7 +33,6 @@ from experiment.config import (
     ExperimentConfig,
     environment_overrides,
     environment_settings,
-    initial_information,
     output_path,
     parse_config,
     public_settings,
@@ -266,7 +265,6 @@ class App:
             "configs": sorted(p.name for p in self.configs_dir.glob("*.json")),
             "case_files": sorted(relative(p, self.root) for p in self.cases_dir.glob("*.json")),
             "environment_settings": settings_in_effect(),
-            "initial_information": ["none", "background"],
         }
 
     def _config_file(self, name: str) -> Path:
@@ -308,10 +306,7 @@ class App:
             "workers": min(config.workers, n_runs),
             "output": relative(output_path(config, now=datetime.now(UTC)), self.root),
             "models": settings.stage_models(),
-            "first_case": {
-                "case_id": cases[0].case_id,
-                "initial_information": initial_information(cases[0], config.initial_information),
-            },
+            "first_case": {"case_id": cases[0].case_id},
         }
         return config, plan
 

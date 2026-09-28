@@ -327,6 +327,22 @@ def test_repeat_query_returns_ledger_value_without_llm(llm: ScriptedLLM, case: C
     assert fahrenheit.llm_calls == []
 
 
+def test_disabled_ledger_is_neither_read_nor_written(llm: ScriptedLLM, case: CaseStudy) -> None:
+    fakes = docs_retrievers()
+    env = MedicalEnvironment(
+        case_study=case, llm=llm, retrievers=list(fakes),
+        settings=make_settings(ledger_enabled=False),
+    )  # fmt: skip
+    llm.push(resolver(), builder(), synth(), resolver(), builder(), synth())
+    env.query("What is the patient's temperature on day 4?")
+    again = env.query("What is the patient's temperature on day 4?")
+
+    assert again.retriever_parameters["path"] == "literature"
+    assert fakes[0].queries == [TEMP_QUERY, TEMP_QUERY]
+    assert env.ledger.facts_for(case.case_id) == []
+    assert "(none)" in user_prompt(llm.calls[3])
+
+
 def test_paraphrase_caught_after_stage_b(llm: ScriptedLLM, case: CaseStudy) -> None:
     fakes = docs_retrievers()
     env = make_env(llm, case, list(fakes))

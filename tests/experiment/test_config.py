@@ -72,11 +72,26 @@ def test_case_selection(tmp_path: Path) -> None:
     ]  # fmt: skip
     picked = select_cases(make_config(cases_file, case_ids=["CASE4", "CASE2"], max_cases=1))
     assert [c.case_id for c in picked] == ["CASE4"]
-    assert picked[0].metadata["background_and_presentation"] == "A patient 4 presents with fever."
+    assert picked[0].narrative == "Patient 4 presented with fever. Case 4, second part."
+    assert picked[0].diagnosis == "Diagnosis 4"
     with pytest.raises(ConfigError, match="CASE9"):
         select_cases(make_config(cases_file, case_ids=["CASE9"]))
     with pytest.raises(ConfigError, match="does not exist"):
         select_cases(make_config(tmp_path / "missing.json"))
+
+
+def test_duplicate_case_ids_are_rejected(tmp_path: Path) -> None:
+    record = {"case_id": "CASE1", "case_information": "Fever.", "diagnosis": "Flu"}
+    cases_file = write_cases(tmp_path, [record, record | {"case_information": "Cough."}])
+    with pytest.raises(ConfigError, match="Duplicate case id 'CASE1'"):
+        select_cases(make_config(cases_file))
+
+
+def test_bundled_dataset_loads() -> None:
+    path = Path(__file__).resolve().parents[2] / "cases" / "combined_272_whole_chunking.json"
+    records = json.loads(path.read_text(encoding="utf-8"))
+    assert all(set(r) == {"case_id", "case_information", "diagnosis"} for r in records)
+    assert len(select_cases(make_config(path))) == len(records) == 272
 
 
 def test_the_real_dataset_loads() -> None:

@@ -31,17 +31,15 @@ def test_first_question_with_no_information(llm: ScriptedLLM) -> None:
     assert llm.calls[0]["response_format"]["json_schema"]["name"] == "strategy_output"
 
 
-def test_prompt_carries_initial_information_and_memory(llm: ScriptedLLM) -> None:
+def test_prompt_carries_memory(llm: ScriptedLLM) -> None:
     llm.push({"question": "Any cough?", "rationale": "Narrow down."})
-    session = basic(llm, model="other/model", temperature=0.7).new_session(
-        CaseContext(initial_information="A 40-year-old man with fever.")
-    )
+    session = basic(llm, model="other/model", temperature=0.7).new_session(CaseContext())
     session.remember("What is the chief complaint?", "Fever for two days.")
     session.remember("What is his temperature?", "38.9 °C.")
     session.next_question()
 
     prompt = llm.calls[0]["messages"][1].content
-    assert "Initial information about the patient:\nA 40-year-old man with fever." in prompt
+    assert prompt.startswith("You have no information about the patient yet.")
     assert (
         "1. Q: What is the chief complaint?\n   A: Fever for two days.\n"
         "2. Q: What is his temperature?\n   A: 38.9 °C."

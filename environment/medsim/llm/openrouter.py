@@ -18,6 +18,11 @@ from medsim.models import ChatMessage, LLMResponse, TokenUsage
 logger = logging.getLogger("medsim.llm")
 
 
+def _no_endpoint_for_parameters(response: httpx.Response) -> bool:
+    """OpenRouter's 404 when provider routing (require_parameters) leaves no endpoint."""
+    return response.status_code == 404 and "can handle the requested parameters" in response.text
+
+
 class _EmptyReplyError(Exception):
     """An empty reply not caused by max_tokens; retried by ``complete``."""
 
@@ -43,6 +48,8 @@ class OpenRouterClient:
         self._client = http_client or httpx.Client(timeout=settings.llm_timeout_s)
         self._sleep = sleep
         self._capabilities: dict[str, frozenset[str]] = {}
+        # Models whose reachable endpoints rejected ``temperature`` (see _complete_once).
+        self._no_temperature: set[str] = set()
         self.default_model = settings.default_model
 
     # -- lifecycle ------------------------------------------------------------------------------
@@ -164,33 +171,9 @@ class OpenRouterClient:
                 self._sleep(delay)
         raise AssertionError("unreachable")
 
-    def _complete_once(
-        self,
-        messages: Sequence[ChatMessage],
-        *,
-        response_format: dict[str, Any] | None,
-        temperature: float,
-        max_tokens: int,
-        model: str | None = None,
-    ) -> LLMResponse:
-        model = model or self.default_model
-        body: dict[str, Any] = {
-            "model": model,
-            "messages": [m.model_dump() for m in messages],
-            "temperature": temperature,
-            "max_tokens": max_tokens,
-        }
-        if self._settings.seed is not None and self._supports(model, "seed"):
-            body["seed"] = self._settings.seed
-        adapted = self._adapt_response_format(model, response_format)
-        if adapted is not None:
-            body["response_format"] = adapted
-            body["provider"] = {"require_parameters": True}
-        body.update(self._settings.llm_extra_body)
-
-        started = time.perf_counter()
+    def _post(self, body: dict[str, Any]) -> httpx.Response:
         try:
-            response = request_with_retries(
+            return request_with_retries(
                 self._client,
                 "POST",
                 f"{self._base_url}/chat/completions",
@@ -205,6 +188,47 @@ class OpenRouterClient:
             raise LLMError(
                 self._redact(f"OpenRouter request failed: {type(exc).__name__}: {exc}")
             ) from None
+
+    def _complete_once(
+        self,
+        messages: Sequence[ChatMessage],
+        *,
+        response_format: dict[str, Any] | None,
+        temperature: float,
+        max_tokens: int,
+        model: str | None = None,
+    ) -> LLMResponse:
+        model = model or self.default_model
+        body: dict[str, Any] = {
+            "model": model,
+            "messages": [m.model_dump() for m in messages],
+            "max_tokens": max_tokens,
+        }
+        # Reasoning models often do not accept ``temperature``; with require_parameters set,
+        # sending it anyway leaves OpenRouter no endpoint, so it is sent only where supported.
+        if self._supports(model, "temperature") and model not in self._no_temperature:
+            body["temperature"] = temperature
+        if self._settings.seed is not None and self._supports(model, "seed"):
+            body["seed"] = self._settings.seed
+        adapted = self._adapt_response_format(model, response_format)
+        if adapted is not None:
+            body["response_format"] = adapted
+            body["provider"] = {"require_parameters": True}
+        body.update(self._settings.llm_extra_body)
+
+        started = time.perf_counter()
+        response = self._post(body)
+        if "temperature" in body and _no_endpoint_for_parameters(response):
+            # The model lists temperature, but no endpoint this account can reach accepts it
+            # (e.g. after tier or data-retention filtering): retry once without it, and skip it
+            # for this model from now on.
+            logger.warning(
+                "OpenRouter has no endpoint for %s that accepts temperature; retrying without it",
+                model,
+            )
+            self._no_temperature.add(model)
+            body.pop("temperature")
+            response = self._post(body)
         latency_ms = (time.perf_counter() - started) * 1000
 
         if response.status_code >= 400:

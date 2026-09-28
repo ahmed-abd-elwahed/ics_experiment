@@ -176,7 +176,7 @@ function formToConfig() {
   config.max_cases = numberOrNull(f.max_cases.value);
   const ids = f.case_ids.value.split(/[\s,]+/).filter(Boolean);
   config.case_ids = ids.length ? ids : null;
-  config.initial_information = f.initial_information.value;
+  delete config.initial_information; // removed option; older configs may still carry it
   config.stopping = {
     max_iterations: numberOrNull(f.max_iterations.value),
     max_seconds: numberOrNull(f.max_seconds.value),
@@ -194,7 +194,6 @@ function configToForm(config) {
   f.cases_file.value = config.cases_file ?? "";
   f.max_cases.value = config.max_cases ?? "";
   f.case_ids.value = (config.case_ids || []).join(", ");
-  f.initial_information.value = config.initial_information || "none";
   f.max_iterations.value = config.stopping?.max_iterations ?? "";
   f.max_seconds.value = config.stopping?.max_seconds ?? "";
   f.workers.value = config.workers ?? 4;
@@ -676,8 +675,7 @@ function envRunAsRecord(data) {
       error: q.error || (q.response ? null : "The run of this question failed."),
       truth: q.truth || null,
       removed_text: q.removed_text || [],
-      grades: q.grades || {},
-      answer_verdict: q.answer_verdict || null,
+      answer_verdicts: q.answer_verdicts || [],
       meta: q.meta || {},
     }));
     return {
@@ -686,7 +684,6 @@ function envRunAsRecord(data) {
       strategy: null,
       case: session.case,
       note: session.note,
-      initial_information: null,
       status: iterations.some((it) => it.error) ? "error" : "completed",
       stop_reason: null,
       error: null,
@@ -835,7 +832,7 @@ function stepText(caseRun, step) {
   const response = step.iteration?.environment_response;
   if (step.kind === "start") {
     if (env) return ["Case loaded", `Case ${caseRun.case_id} is loaded into the environment; ${plural(total, "evaluation question")} follow.${caseRun.note ? ` ${caseRun.note}` : ""}`];
-    return ["Case loaded", `Case ${caseRun.case_id} is loaded into the environment. The strategy ${caseRun.initial_information ? "is given the case's presentation" : "starts with no information about the patient"}.`];
+    return ["Case loaded", `Case ${caseRun.case_id} is loaded into the environment. The strategy starts with no information about the patient.`];
   }
   if (step.kind === "query") {
     return [`${unit} ${step.i + 1} of ${total} · Query`, `${env ? "The evaluation asks" : "The strategy asks"}: “${step.iteration.question}”`];
@@ -957,34 +954,16 @@ function renderCaseBox(caseRun, step, response) {
     return;
   }
   const spans = step.kind === "answer" && step.iteration.answer_source === "case_study" ? response?.evidence || [] : [];
-  const background = study.metadata?.background_and_presentation;
   const hiddenFrom = isEnvRuns() ? "ground truth · never revealed by the environment" : "ground truth · never shown to the strategy";
   fill(box, 
     h("div", { class: "kv" }, h("span", { class: "k", text: "Case" }), h("span", { class: "mono", text: study.case_id })),
     caseRun.note ? h("p", { class: "muted", text: caseRun.note }) : null,
     h("div", { class: "diagnosis" }, h("span", { class: "badge", text: hiddenFrom }), h("strong", { text: study.diagnosis })),
-    background ? [h("h4", { text: "Background and presentation" }), highlighted(background, spans)] : null,
-    h("h4", { text: "Narrative" }),
+    h("h4", { text: "Case information" }),
     highlighted(study.narrative, spans),
   );
   const mark = $("mark", box);
   box.scrollTop = mark ? Math.max(0, mark.offsetTop - 60) : 0;
-}
-
-const GRADE_TITLES = {
-  relevance: "Relevance (0-3): same variable, condition, and population as the question",
-  usefulness: "Usefulness (0-2): gives a usable value for this variable",
-};
-
-function gradeBadges(grade) {
-  if (!grade) return null;
-  const badge = (name, value, max) =>
-    value == null ? null : h("span", { class: `badge grade-${Math.min(value, 3)}`, title: GRADE_TITLES[name], text: `${name} ${value}/${max}` });
-  return [
-    badge("relevance", grade.relevance, 3),
-    badge("usefulness", grade.usefulness, 2),
-    grade.verdict ? h("span", { class: "badge", title: "The document's value compared with the hidden value", text: `vs truth: ${grade.verdict.replace("_", " ")}` }) : null,
-  ];
 }
 
 function renderLiteratureBox(caseRun, step, response) {
@@ -1002,7 +981,6 @@ function renderLiteratureBox(caseRun, step, response) {
 
   const result = response.literature_search_result;
   const cited = new Set(response.evidence || []);
-  const grades = step.iteration.grades || {};
   const documents = result?.documents || [];
   const counts = Object.entries(result?.per_source_counts || {}).map(([source, n]) => `${source} ${n}`).join(", ");
   const excluded = response.retriever_parameters?.excluded_source_docs || [];
@@ -1016,24 +994,14 @@ function renderLiteratureBox(caseRun, step, response) {
       "ol",
       { class: "docs" },
       documents.map((doc) => {
-        const grade = grades[doc.doc_id];
         const link = /^https?:\/\//i.test(doc.url || "");
         return h(
           "li",
           null,
-          h("div", { class: "badges" }, h("span", { class: "badge", text: doc.source }), cited.has(doc.doc_id) ? h("span", { class: "badge cited", text: "cited" }) : null, gradeBadges(grade)),
+          h("div", { class: "badges" }, h("span", { class: "badge", text: doc.source }), cited.has(doc.doc_id) ? h("span", { class: "badge cited", text: "cited" }) : null),
           h("div", { class: "doc-title" }, link ? h("a", { href: doc.url, target: "_blank", rel: "noopener noreferrer", text: doc.title || doc.doc_id }) : doc.title || doc.doc_id),
           h("div", { class: "doc-meta mono", text: [doc.doc_id, doc.journal, doc.pub_year].filter(Boolean).join(" · ") }),
           h("details", null, h("summary", { text: doc.text.length > 140 ? `${doc.text.slice(0, 140)}…` : doc.text }), h("div", { class: "text", text: doc.full_text || doc.text })),
-          grade?.rationale
-            ? h(
-                "details",
-                null,
-                h("summary", { text: "Judge's reasoning" }),
-                h("div", { class: "text", text: grade.rationale }),
-                grade.evidence_quote ? h("div", { class: "muted text", text: `Quote: “${grade.evidence_quote}”` }) : null,
-              )
-            : null,
         );
       }),
     ),
@@ -1162,7 +1130,7 @@ function renderStrategyBox(caseRun, step) {
   fill(box, 
     h("div", { class: "kv" }, h("span", { class: "k", text: "Strategy" }), h("strong", { text: caseRun.strategy }), info.name && info.name !== caseRun.strategy ? h("span", { class: "muted", text: `(${info.name})` }) : null),
     params ? h("div", { class: "kv muted", text: params }) : null,
-    h("p", { class: "muted", text: caseRun.initial_information ? `Told at the start: ${caseRun.initial_information}` : "Started with no information about the patient." }),
+    h("p", { class: "muted", text: "Started with no information about the patient." }),
     current,
     h("h4", { text: `Memory · ${plural(memory.length, "answer")}` }),
     memory.length
@@ -1180,10 +1148,21 @@ function renderStrategyBox(caseRun, step) {
 }
 
 const VERDICT_LABELS = {
-  close: "close to the hidden value",
-  same_category: "same category as the hidden value (low / normal / high)",
-  different_category: "a different category from the hidden value",
-  not_comparable: "not comparable with the hidden value",
+  exact: "masked correctness: exact (the answer matches the hidden value)",
+  same_category: "masked correctness: same category (low / normal / high) as the hidden value",
+  different_category: "masked correctness: a different category from the hidden value",
+  not_comparable: "masked correctness: not comparable with the hidden value",
+  consistent: "factual consistency: consistent with the full case",
+  inconsistent: "factual consistency: inconsistent with the full case",
+};
+
+const METRIC_NAMES = { masked_correctness: "masked correctness", factual_consistency: "factual consistency" };
+
+const RESOLUTION_LABELS = {
+  unanimous: "All judges agree.",
+  majority: "Majority vote of the judge panel.",
+  tie_break_main_judge: "No majority: the main judge's label decides.",
+  tie_break_next_judge: "No majority and no verdict from the main judge: the next judge's label decides.",
 };
 
 // Environment runs: the questions were fixed in advance, so the right-hand panel lists them all
@@ -1198,7 +1177,8 @@ function renderQuestionsBox(caseRun, step) {
   if (it) {
     const meta = it.meta || {};
     const truth = it.truth;
-    const verdict = step.kind === "answer" ? it.answer_verdict : null;
+    const verdicts = step.kind === "answer" ? it.answer_verdicts || [] : [];
+    const stated = meta.question_set === "C";
     detail = [
       h("div", { class: "asking" }, h("strong", { text: "Asks: " }), it.question, it.label ? h("div", { class: "muted mono", text: it.label }) : null),
       meta.variable ? h("div", { class: "kv" }, h("span", { class: "k", text: "Variable" }), h("span", { text: `${meta.variable}${meta.category ? ` (${meta.category.replace("_", " ")})` : ""}` })) : null,
@@ -1206,23 +1186,32 @@ function renderQuestionsBox(caseRun, step) {
         ? h(
             "div",
             { class: "truth" },
-            h("strong", { text: "Hidden value: " }),
+            h("strong", { text: stated ? "Answer stated in the case: " : "Hidden value: " }),
             `${truth.value}${truth.unit ? ` ${truth.unit}` : ""}`,
-            h("div", { class: "muted text", text: `Removed from the case: “${truth.span}”` }),
+            h("div", { class: "muted text", text: `${stated ? "The case says" : "Removed from the case"}: “${truth.span}”` }),
           )
         : meta.question_set === "B"
           ? h("p", { class: "muted", text: "Set B: there is no hidden value; the case never states this." })
           : null,
-      verdict
-        ? h(
+      verdicts.map((verdict) =>
+        h(
             "div",
             null,
-            h("h4", { text: "Judge on the answer" }),
+            h("h4", { text: `Judge panel: ${METRIC_NAMES[verdict.metric] || verdict.metric}` }),
             h("div", { class: `verdict-${verdict.verdict}` }, h("strong", { text: VERDICT_LABELS[verdict.verdict] || verdict.verdict })),
-            verdict.reference_range ? h("div", { class: "muted", text: `Reference range: ${verdict.reference_range}` }) : null,
-            h("div", { class: "text", text: verdict.rationale }),
-          )
-        : null,
+            h("div", { class: "muted", text: RESOLUTION_LABELS[verdict.resolution] || verdict.resolution || "" }),
+            (verdict.judges || []).map((judge) =>
+              h(
+                "details",
+                null,
+                h("summary", null, h("span", { class: "mono", text: judge.judge_model }), ": ", h("span", { class: `verdict-${judge.verdict}`, text: judge.verdict ? judge.verdict.replace("_", " ") : "no verdict" })),
+                judge.reference_range ? h("div", { class: "muted", text: `Reference range: ${judge.reference_range}` }) : null,
+                (judge.conflicting_facts || []).map((fact) => h("div", { class: "muted text", text: `Conflicts with: “${fact}”` })),
+                judge.rationale ? h("div", { class: "text", text: judge.rationale }) : null,
+              ),
+            ),
+          ),
+      ),
     ];
   }
 

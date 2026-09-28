@@ -73,9 +73,8 @@ def test_each_case_runs_until_the_iteration_limit(tmp_path: Path) -> None:
         assert [it.answer for it in run.iterations] == [
             f"answer {n} for {run.case_id}" for n in (1, 2, 3)
         ]
-        assert run.case.narrative == f"Patient {run.case_id[-1]} presented with fever.\n\n" + (
-            f"Case {run.case_id[-1]}, second chunk."
-        )
+        n = run.case_id[-1]
+        assert run.case.narrative == f"Patient {n} presented with fever. Case {n}, second part."
         assert run.strategy_cost_usd == pytest.approx(0.0015)
         assert run.environment_cost_usd == pytest.approx(0.003)
     # every case got its own environment, and the strategy saw every earlier answer
@@ -205,15 +204,10 @@ def test_cancel_stops_running_and_pending_case_runs(tmp_path: Path) -> None:
     assert load_record(record.output).status == "cancelled"
 
 
-def test_background_can_be_given_to_the_strategy(tmp_path: Path) -> None:
+def test_strategy_context_carries_the_limits(tmp_path: Path) -> None:
     strategy = ScriptedStrategy()
-    runner, _ = runner_for(
-        tmp_path, strategies={"scripted": strategy}, max_cases=1,
-        initial_information="background",
-    )  # fmt: skip
-    run = runner.run().case_runs[0]
-    assert run.initial_information == "A patient 1 presents with fever."
-    assert strategy.sessions[0].context.initial_information == run.initial_information
+    runner, _ = runner_for(tmp_path, strategies={"scripted": strategy}, max_cases=1)
+    runner.run()
     assert strategy.sessions[0].context.max_iterations == 3
 
 

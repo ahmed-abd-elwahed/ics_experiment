@@ -152,3 +152,72 @@ def test_llm_call_records_carry_openrouter_cost() -> None:
             records=records,
         )  # fmt: skip
     assert records[0].cost_usd == pytest.approx(0.00012)
+
+
+def _native_reply(content: str, citations: list[dict[str, object]]) -> dict[str, object]:
+    annotations = [{"type": "url_citation", "url_citation": c} for c in citations]
+    return {
+        "choices": [{"message": {"content": content, "annotations": annotations}}],
+        "usage": {"cost": 0.01, "server_tool_use_details": {"web_search_requests": 1}},
+    }
+
+
+def test_native_search_asks_for_cited_sources_and_uses_the_cited_text(
+    respx_mock: respx.MockRouter,
+) -> None:
+    line1 = "- **Renal function in TR** — “Creatinine was 1.4 mg/dL.” ([pubmed](https://pubmed.ncbi.nlm.nih.gov/111/))"
+    line2 = "- **Another study** — “eGFR was 51.” ([pmc](https://pmc.ncbi.nlm.nih.gov/articles/PMC222/))"
+    content = f"{line1}\n{line2}"
+    reply = _native_reply(content, [
+        {"url": "https://pubmed.ncbi.nlm.nih.gov/111/", "title": "Renal function in TR",
+         "start_index": content.index("([pubmed"), "end_index": len(line1)},
+        {"url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC222/", "title": "Another study",
+         "start_index": content.index("([pmc"), "end_index": len(content)},
+    ])  # fmt: skip
+    route = respx_mock.post(URL).mock(return_value=httpx.Response(200, json=reply))
+    retriever = _retriever(
+        openrouter_search={"engine": "native", "model": "openai/gpt-6-luna", "max_results": 8}
+    )
+    docs = retriever.search("creatinine tricuspid regurgitation")
+    body = json.loads(route.calls.last.request.content)
+    assert "list up to 8 relevant sources" in body["messages"][0]["content"]
+    assert [d.doc_id for d in docs] == ["PMID:111", "PMCID:PMC222"]
+    assert docs[0].text == "Renal function in TR — “Creatinine was 1.4 mg/dL.”"
+    assert docs[1].text == "Another study — “eGFR was 51.”"
+
+
+def test_native_google_search_merges_passages_and_resolves_redirects(
+    respx_mock: respx.MockRouter,
+) -> None:
+    redirect = "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AbC="
+    content = "TR is linked to renal dysfunction.\nSevere TR had eGFR 51 mL/min."
+    reply = _native_reply(content, [
+        {"url": redirect, "title": "nih.gov", "start_index": 0, "end_index": 34},
+        {"url": redirect, "title": "nih.gov", "start_index": 35, "end_index": len(content)},
+    ])  # fmt: skip
+    respx_mock.post(URL).mock(return_value=httpx.Response(200, json=reply))
+    respx_mock.head(redirect).mock(
+        return_value=httpx.Response(
+            302, headers={"location": "https://pubmed.ncbi.nlm.nih.gov/19041045/"}
+        )
+    )
+    retriever = _retriever(
+        openrouter_search={"engine": "native", "model": "google/gemini-3.1-flash-lite"}
+    )
+    [doc] = retriever.search("creatinine tricuspid regurgitation")
+    assert (doc.doc_id, doc.url, doc.title) == (
+        "PMID:19041045", "https://pubmed.ncbi.nlm.nih.gov/19041045/", None
+    )  # fmt: skip
+    assert doc.raw["pmid"] == "19041045" and doc.raw["redirect_url"] == redirect
+    assert doc.text == "TR is linked to renal dysfunction. […] Severe TR had eGFR 51 mL/min."
+
+
+def test_other_engines_keep_the_single_search_prompt(respx_mock: respx.MockRouter) -> None:
+    route = respx_mock.post(URL).mock(
+        return_value=httpx.Response(200, json=load_fixture("openrouter_web_search.json"))
+    )
+    _retriever().search("creatinine tricuspid regurgitation")
+    assert (
+        "reply with the single word DONE"
+        in json.loads(route.calls.last.request.content)["messages"][0]["content"]
+    )

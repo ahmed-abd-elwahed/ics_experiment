@@ -1,0 +1,13 @@
+2026-09-29 02:27:10,343 INFO bench: bench --out /private/tmp/claude-502/-Users-ahmed-ics-experiment/b408bf2e-bd80-4110-8f45-2c03ee26b20d/scratchpad/smoke --workers 12 run --configs current,improved_1to4,openrouter_exa_instant,openrouter_parallel_basic,openrouter_perplexity,openrouter_google
+2026-09-29 02:27:38,439 INFO bench.run: run openrouter_google B:PMC6742864_01-2:oxygen_saturation: ok no_documents, 0 docs, 25.1s, $0.0003 [1/12]
+2026-09-29 02:27:40,917 INFO bench.run: run openrouter_exa_instant B:PMC6742864_01-2:oxygen_saturation: ok synthesizer_unanswerable, 8 docs, 27.6s, $0.0078 [2/12]
+2026-09-29 02:27:50,861 INFO bench.run: run openrouter_parallel_basic B:PMC6742864_01-2:oxygen_saturation: ok literature, 8 docs, 37.5s, $0.0056 [3/12]
+2026-09-29 02:27:57,171 INFO bench.run: run current B:PMC6742864_01-2:oxygen_saturation: ok literature, 8 docs, 43.9s, $0.0009 [4/12]
+2026-09-29 02:28:06,742 INFO bench.run: run openrouter_perplexity B:PMC6742864_01-2:oxygen_saturation: ok literature, 8 docs, 53.4s, $0.0061 [5/12]
+2026-09-29 02:28:13,457 INFO bench.run: run improved_1to4 B:PMC6742864_01-2:oxygen_saturation: ok literature, 8 docs, 60.1s, $0.0005 [6/12]
+2026-09-29 02:28:26,241 INFO bench.run: run openrouter_exa_instant A:PMC5477234_01-2:outer_canthal_distance: ok synthesizer_unanswerable, 8 docs, 72.9s, $0.0078 [7/12]
+2026-09-29 02:29:04,903 INFO bench.run: run improved_1to4 A:PMC5477234_01-2:outer_canthal_distance: ok literature, 8 docs, 111.6s, $0.0013 [8/12]
+2026-09-29 02:29:18,218 INFO bench.run: run openrouter_perplexity A:PMC5477234_01-2:outer_canthal_distance: ok synthesizer_unanswerable, 8 docs, 124.9s, $0.0071 [9/12]
+2026-09-29 02:29:57,548 INFO bench.run: run current A:PMC5477234_01-2:outer_canthal_distance: ok literature, 8 docs, 164.2s, $0.0017 [10/12]
+2026-09-29 02:32:26,266 INFO bench.run: run openrouter_google A:PMC5477234_01-2:outer_canthal_distance: ok no_documents, 0 docs, 313.0s, $0.0046 [11/12]
+2026-09-29 02:33:10,653 INFO bench.run: run openrouter_parallel_basic A:PMC5477234_01-2:outer_canthal_distance: ok literature, 8 docs, 357.4s, $0.0097 [12/12]

@@ -1,4 +1,102 @@
-# Retrieval comparison: medsim retrieval vs. OpenRouter web search
+# Environment benchmark results
+
+## 2026-09-29: seven retrieval configurations, and set C
+
+The table: [retriever_comparison.pdf](retriever_comparison.pdf) (also
+[.md](retriever_comparison.md), [.html](retriever_comparison.html), and
+[.json](retriever_comparison.json) with the exact numbers). Built by
+[scripts/make_retriever_comparison.py](scripts/make_retriever_comparison.py) from the two
+workspaces below; no API calls.
+
+- **Questions:** all 141 set A (a value hidden from the case) and 272 set B (a value the case
+  never states) questions of `cases/combined_272_bench_items.json`, the same for every retrieval
+  configuration, plus 272 set C questions (information the case states, one per case, written by
+  `google/gemini-3.5-flash-lite`; `cases/combined_272_bench_set_c_items.json`).
+- **Environment:** medsim with `deepseek/deepseek-v4-flash-0731` for every stage.
+- **Judges:** a panel of `google/gemini-3.5-flash-lite`, `qwen/qwen3.8-flash`, and
+  `openai/gpt-6-luna`; each answer's label is the majority vote (the first judge breaks ties).
+  Each label's percentage is out of all questions in its set, so each metric sums to 100% with
+  "no label" (no answer, or a failed run).
+
+| # | Configuration | Set A: exact | Set A: different category | Set B: consistent | Cost (all questions) | Mean time per answer |
+|---|---|---|---|---|---|---|
+| 1 | `current`: Europe PMC + LitSense, without changes 1–4 | 37.6% | 12.1% | 84.2% | $0.46 | 87 s |
+| 2 | `improved_1to4`: with changes 1–4 | 34.8% | 14.9% | 83.8% | $0.43 | 96 s |
+| 3 | `openrouter_exa_instant` | 35.5% | 10.6% | 52.6% | $3.28 | 78 s |
+| 4 | `openrouter_parallel_basic` | 27.7% | 18.4% | 77.9% | $2.53 | 87 s |
+| 5 | `openrouter_perplexity` | 39.0% | 14.9% | 92.6% | $2.47 | 78 s |
+| 6 | `openrouter_google` (native, Gemini 3.1 Flash Lite) | 38.3% | 14.2% | 75.0% | $19.26 | 77 s |
+| 7 | `openrouter_openai` (native, GPT-6-luna) | 34.8% | 14.9% | 70.2% | $10.80 | 80 s |
+| 8 | `case_information` (set C, no retrieval) | set C: 98.5% exact | 0.0% | set C: 98.5% consistent | $0.03 (272 questions) | 7.5 s |
+
+What the numbers show (95% intervals from a bootstrap over diagnoses, paired per question,
+against configuration 1; [retriever_comparison/report.md](retriever_comparison/report.md)):
+
+- **Set A: no configuration finds the hidden value clearly more often than the original
+  method.** Exact answers range from 27.7% to 39.0%; every difference from configuration 1 is
+  within its interval (e.g. Perplexity +1.4 points, −6.7 to +10.6; changes 1–4 −2.8, −11.4 to
+  +5.3). Parallel basic is the only one that is worse: more answers in a different category
+  than the true value (+6.4 points, +0.7 to +12.7), and fewer exact (−9.9, −19.6 to 0.0).
+- **Set B: factual consistency here measures how often medsim answers.** The judges found almost
+  no answer inconsistent with the case (at most 0.4%); the rest is "no label", questions medsim
+  declined because the documents did not support an answer. Perplexity leads (92.6%, +8.5 points,
+  +3.5 to +13.7); Exa instant trails (52.6%, −31.6, −38.5 to −24.6: medsim declined 143 of its
+  413 questions); native Google (−9.2) and OpenAI (−14.0) search are also clearly lower.
+- **Cost:** medsim's own retrieval (configurations 1–2) costs about $0.001 per question;
+  OpenRouter search engines $0.006–0.008; native search $0.026 (OpenAI) and $0.047 (Google,
+  about four Google searches per call). Time is 77–96 s per answer everywhere, almost all of it
+  medsim's own LLM calls.
+- **Set C: when the case states the answer, medsim returns it.** 268 of 272 answers were exact
+  and consistent (unanimous across the three judges); the other 4 were questions medsim's case
+  lookup (Stage A) judged unanswerable from the case.
+- **Judge agreement:** masked correctness unanimous for 75% of set A answers, majority for 25%,
+  tie broken for 1%; pairwise κ 0.63–0.86. Factual consistency unanimous for 99% (κ is low only
+  because almost every label is "consistent").
+
+Spend: $40.23 on the OpenRouter key for this evaluation (runs $38.10, judging $2.14, set C
+$0.58 including the question writer, smoke tests about $0.4), from per-call `usage.cost`.
+Every run record keeps the answer, the documents, and every LLM call with its cost and latency;
+every judge's verdict is stored; each step's log is in the workspace's `logs/`.
+
+Notes:
+
+- Configurations 6 and 7 use the model provider's own search; their documents are the search
+  model's quotations or summaries of the sources it cites, not page excerpts, and Google's
+  redirect links are resolved so the case's own article is still removed.
+- 4 of 2,891 runs failed on the first pass (the environment's DeepSeek replies ran out of
+  their doubled token budget, or came back empty) and succeeded on the retry; both attempts are
+  recorded. A reading bug (records containing U+2028 were split in two) made the retry also
+  re-answer 2 already answered Parallel questions; the later answers are the ones scored.
+- Smoke tests before the full run are kept in
+  [retriever_comparison_smoke/](retriever_comparison_smoke/) (2 questions × 7 configurations).
+
+| Workspace | Contents |
+|---|---|
+| [retriever_comparison/](retriever_comparison/) | sets A and B, configurations 1–7: questions, runs, judgments, report, logs |
+| [set_c/](set_c/) | set C, configuration 8 |
+| [retriever_comparison_smoke/](retriever_comparison_smoke/) | the smoke tests |
+
+Reproduce (paid API calls; about $40):
+
+```bash
+python -m bench --out environment/results/retriever_comparison sample --set-a 141 --set-b 272
+python -m bench --out environment/results/retriever_comparison --workers 24 run --configs current,improved_1to4,openrouter_exa_instant,openrouter_parallel_basic,openrouter_perplexity,openrouter_google,openrouter_openai
+python -m bench --out environment/results/retriever_comparison --workers 32 judge
+python -m bench --out environment/results/retriever_comparison report --baseline current
+python -m bench --out environment/results/set_c --workers 16 set-c
+python -m bench --out environment/results/set_c --workers 16 run --configs case_information
+python -m bench --out environment/results/set_c --workers 24 judge
+python -m bench --out environment/results/set_c report --baseline case_information
+PYTHONPATH=environment python environment/results/scripts/make_retriever_comparison.py
+```
+
+---
+
+## 2026-09-21: medsim retrieval vs. OpenRouter web search (50 questions, earlier metrics)
+
+This earlier evaluation used the retired document-level metrics (relevance, usefulness,
+correctness); its table script, `scripts/make_tables.py`, no longer runs against the current
+code.
 
 Seven retrieval methods, evaluated on the same 50 questions built from
 `cases/combined_272_whole_chunking.json` (2026-09-21, UTC). The benchmark is described in

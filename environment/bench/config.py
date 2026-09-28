@@ -6,15 +6,15 @@ MEDSIM_<STAGE>_MAX_TOKENS"), because the bench stages are named extractor, redac
 
 from __future__ import annotations
 
-from pydantic import Field
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-# Judges come from model families other than the pipeline's (DeepSeek by default), so no judge
-# grades its own family's search terms. Chosen on 2026-09-21 by probing one pass-1 judgment:
-# gemini-3.5-flash-lite $0.0007 and 2 s; qwen3.8-flash $0.0006 but 22 s of reasoning (used as
-# the second judge on a sample); gpt-5.6-luna could not be routed with medsim's parameters.
-DEFAULT_JUDGE_MODEL = "google/gemini-3.5-flash-lite"
-DEFAULT_SECOND_JUDGE_MODEL = "qwen/qwen3.8-flash"
+# The judge panel: three models from three families other than the pipeline's (DeepSeek by
+# default), so no judge grades its own family's answers. Every answer is judged by each model and
+# the final label is the majority vote; with no majority, the first (main) judge decides. The
+# first two were chosen on 2026-09-21 by probing one judgment (gemini-3.5-flash-lite $0.0007 and
+# 2 s; qwen3.8-flash $0.0006 but 22 s of reasoning); gpt-6-luna was added on 2026-09-29.
+DEFAULT_JUDGE_MODELS = ("google/gemini-3.5-flash-lite", "qwen/qwen3.8-flash", "openai/gpt-6-luna")
 
 
 class BenchSettings(BaseSettings):
@@ -22,16 +22,36 @@ class BenchSettings(BaseSettings):
         env_prefix="MEDSIM_", env_file=".env", env_file_encoding="utf-8", extra="ignore"
     )
 
-    judge_model: str = DEFAULT_JUDGE_MODEL
-    second_judge_model: str = DEFAULT_SECOND_JUDGE_MODEL
-    extractor_model: str | None = None  # None = judge_model
-    redactor_model: str | None = None  # None = judge_model
+    # MEDSIM_JUDGE_MODELS as a JSON list; the first is the main judge (breaks ties).
+    judge_models: list[str] = Field(default_factory=lambda: list(DEFAULT_JUDGE_MODELS))
+    extractor_model: str | None = None  # None = the main judge
+    redactor_model: str | None = None  # None = the main judge
+    question_writer_model: str | None = None  # set C questions; None = the main judge
     judge_max_tokens: int = Field(default=4000, ge=1)
+    # Whole-judgment retries when a judge call fails or its reply is unusable (see bench.judge).
+    judge_max_attempts: int = Field(default=3, ge=1)
+    judge_retry_backoff_s: float = Field(default=2.0, ge=0.0)
     extractor_max_tokens: int = Field(default=8000, ge=1)
     redactor_max_tokens: int = Field(default=8000, ge=1)
+    question_writer_max_tokens: int = Field(default=4000, ge=1)
+
+    @field_validator("judge_models")
+    @classmethod
+    def _distinct_models(cls, models: list[str]) -> list[str]:
+        if not models or len(set(models)) != len(models):
+            raise ValueError("judge_models must list at least one model, each once")
+        return models
+
+    @property
+    def judge_model(self) -> str:
+        """The main judge: breaks ties, and extracts and redacts by default."""
+        return self.judge_models[0]
 
     def extractor(self) -> str:
         return self.extractor_model or self.judge_model
 
     def redactor(self) -> str:
         return self.redactor_model or self.judge_model
+
+    def question_writer(self) -> str:
+        return self.question_writer_model or self.judge_model

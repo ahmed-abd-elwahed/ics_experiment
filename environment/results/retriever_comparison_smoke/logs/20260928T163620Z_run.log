@@ -1,0 +1,5 @@
+2026-09-29 02:36:20,264 INFO bench: bench --out /private/tmp/claude-502/-Users-ahmed-ics-experiment/b408bf2e-bd80-4110-8f45-2c03ee26b20d/scratchpad/smoke --workers 12 run --configs openrouter_google,openrouter_openai
+2026-09-29 02:37:27,955 INFO bench.run: run openrouter_google A:PMC5477234_01-2:outer_canthal_distance: ok literature, 2 docs, 64.8s, $0.0436 [1/4]
+2026-09-29 02:37:49,075 INFO bench.run: run openrouter_google B:PMC6742864_01-2:oxygen_saturation: ok literature, 5 docs, 86.0s, $0.0577 [2/4]
+2026-09-29 02:38:05,609 INFO bench.run: run openrouter_openai B:PMC6742864_01-2:oxygen_saturation: ok synthesizer_unanswerable, 5 docs, 102.5s, $0.0230 [3/4]
+2026-09-29 02:40:11,238 INFO bench.run: run openrouter_openai A:PMC5477234_01-2:outer_canthal_distance: ok literature, 4 docs, 228.1s, $0.0454 [4/4]

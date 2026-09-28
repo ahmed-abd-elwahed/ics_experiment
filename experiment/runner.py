@@ -23,7 +23,6 @@ from typing import Any
 from experiment.config import (
     ExperimentConfig,
     environment_settings,
-    initial_information,
     output_path,
     public_settings,
     select_cases,
@@ -313,7 +312,6 @@ class ExperimentRunner:
         plan = self._plan
         strategy = plan.strategies[key]
         stopping = self.config.stopping
-        initial = initial_information(case, self.config.initial_information)
         self._emit("case_started", index, case.case_id, key)
         started_at, started = utc_now(), self._clock()
         iterations: list[Iteration] = []
@@ -323,7 +321,7 @@ class ExperimentRunner:
         try:
             environment = plan.environment_factory(case)
             session = strategy.new_session(
-                CaseContext(initial, stopping.max_iterations, stopping.max_seconds)
+                CaseContext(stopping.max_iterations, stopping.max_seconds)
             )
             while True:
                 if self._cancel.is_set():
@@ -355,7 +353,6 @@ class ExperimentRunner:
             strategy=key,
             strategy_name=strategy.name,
             case=case,
-            initial_information=initial,
             status=status,
             stop_reason=stop_reason,
             error=error,

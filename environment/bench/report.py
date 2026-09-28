@@ -9,16 +9,23 @@ from collections.abc import Callable, Sequence
 from dataclasses import asdict, dataclass, field
 from typing import Any
 
-from bench.judge import answer_key, doc_key, latest_runs, ok_judgments
+from bench.judge import (
+    RUBRIC,
+    SET_METRICS,
+    answer_key,
+    judgeable,
+    latest_runs,
+    panel_judgments,
+    panel_votes,
+)
 from bench.run import CONFIGS, RETRIEVAL_STAGES
 from bench.schemas import (
-    AnswerJudgment,
     CaseFacts,
+    ConsistencyJudgment,
     ControlResult,
     FlipResult,
     Item,
-    Pass1Judgment,
-    Pass2Judgment,
+    MaskedCorrectnessJudgment,
     RejectedItem,
     RunRecord,
     calls_cost,
@@ -30,7 +37,8 @@ from bench.workspace import Workspace, load_manifest, read_models
 
 @dataclass
 class Score:
-    """One question under one configuration."""
+    """One question under one configuration (a question whose run is missing or failed is kept,
+    unlabelled, so every label's share is over the full question set)."""
 
     item_id: str
     config: str
@@ -40,13 +48,16 @@ class Score:
     characteristic: bool | None
     path: str | None
     n_docs: int
-    n_judged: int
-    relevance: list[int] = field(default_factory=list)
-    usefulness: list[int] = field(default_factory=list)
-    correctness: list[int] = field(default_factory=list)  # comparable verdicts, docs with U >= 1
-    sources: list[str] = field(default_factory=list)
+    has_answer: bool  # medsim generated an answer, so the judge grades it
+    ran: bool = True  # False: no successful run for this question under this configuration
     truth_category: str | None = None
-    answer_verdict: str | None = None
+    # The panel's voted label (the one the metrics count), and each judge's own label.
+    masked_verdict: str | None = None  # set A: exact / same_category / different_category / ...
+    consistency: str | None = None  # set B: consistent / inconsistent with the full case
+    # Per metric (masked_correctness, factual_consistency): judge model -> label, and how the
+    # vote went (unanimous / majority / tie_break_main_judge / tie_break_next_judge).
+    votes: dict[str, dict[str, str | None]] = field(default_factory=dict)
+    resolution: dict[str, str | None] = field(default_factory=dict)
     excluded_source_docs: int = 0
     retrieval_cost: float = 0.0
     stage_cost: dict[str, float] = field(default_factory=dict)
@@ -66,123 +77,98 @@ def _mean(values: Sequence[float]) -> float | None:
     return sum(values) / len(values) if values else None
 
 
+def _ran(value: Callable[[Score], float]) -> Callable[[Score], float | None]:
+    """A run statistic (documents, cost, time): undefined for questions that did not run."""
+    return lambda s: value(s) if s.ran else None
+
+
+def _label(field_name: str, label: str | None) -> Callable[[Score], float]:
+    """1 if the judge gave this question this label, else 0 (None = no label)."""
+    return lambda s: float(getattr(s, field_name) == label)
+
+
+def _label_metrics(
+    key: str, name: str, field_name: str, labels: Sequence[str], question_set: str
+) -> dict[str, tuple[str, Callable[[Score], float | None], str]]:
+    """One metric per judge label, each a share of every question in the set; plus the share
+    without a label (no answer, failed run, or not judged yet), so the rows sum to 100%."""
+    metrics: dict[str, tuple[str, Callable[[Score], float | None], str]] = {
+        f"{key}_{label}": (
+            f"{name}: {label.replace('_', ' ')} (% of set {question_set} questions)",
+            _label(field_name, label),
+            question_set,
+        )
+        for label in labels
+    }
+    metrics[f"{key}_no_label"] = (
+        f"{name}: no label — not answered, run failed, or not judged "
+        f"(% of set {question_set} questions)",
+        _label(field_name, None),
+        question_set,
+    )
+    return metrics
+
+
+MASKED_LABELS = ("exact", "same_category", "different_category", "not_comparable")
+CONSISTENCY_LABELS = ("consistent", "inconsistent")
+
 # Per-question metrics. None = undefined for this question (excluded from that mean).
 Metric = Callable[[Score], float | None]
 METRICS: dict[str, tuple[str, Metric, str]] = {
     # key: (label, function, question sets)
-    "docs": ("Documents returned per question", lambda s: float(s.n_docs), "AB"),
-    "mean_relevance": ("Mean relevance grade (0–3)", lambda s: _mean(s.relevance), "AB"),
-    "p_relevant": (
-        "Relevant documents (grade ≥ 2), share",
-        lambda s: _mean([r >= 2 for r in s.relevance]),
-        "AB",
-    ),
-    "u_hit": (
-        "Questions with ≥ 1 useful document (usefulness 2)",
-        lambda s: float(any(u == 2 for u in s.usefulness)),
-        "AB",
-    ),
-    "u_precision": (
-        "Useful documents (usefulness 2), share",
-        lambda s: _mean([u == 2 for u in s.usefulness]),
-        "AB",
-    ),
-    "c_hit": (
-        "Questions with ≥ 1 document containing the true value (correctness 2)",
-        lambda s: float(any(c == 2 for c in s.correctness)),
-        "A",
-    ),
-    "c_precision": (
-        "Number-giving documents pointing the right way (correctness ≥ 1), share",
-        lambda s: _mean([c >= 1 for c in s.correctness]),
-        "A",
-    ),
-    "majority_correct": (
-        "Questions where most number-giving documents point the right way",
-        lambda s: float(bool(s.correctness) and _mean([c >= 1 for c in s.correctness]) > 0.5),  # type: ignore[operator]
-        "A",
-    ),
+    "docs": ("Documents returned per question", _ran(lambda s: float(s.n_docs)), "ABC"),
     "answered": (
         "Questions answered from literature",
-        lambda s: float(s.path == "literature"),
-        "AB",
+        _ran(lambda s: float(s.path == "literature")),
+        "ABC",
     ),
-    "answer_close": (
-        "Final answer close to the true value",
-        lambda s: float(s.answer_verdict == "close"),
-        "A",
-    ),
-    "answer_category": (
-        "Final answer in the true value's category (low/normal/high)",
-        lambda s: float(s.answer_verdict in ("close", "same_category")),
-        "A",
-    ),
+    **_label_metrics("mc", "Masked correctness", "masked_verdict", MASKED_LABELS, "A"),
+    **_label_metrics("fc", "Factual consistency", "consistency", CONSISTENCY_LABELS, "B"),
+    **_label_metrics("mc_c", "Masked correctness", "masked_verdict", MASKED_LABELS, "C"),
+    **_label_metrics("fc_c", "Factual consistency", "consistency", CONSISTENCY_LABELS, "C"),
     "retrieval_cost": (
         "Retrieval cost per question (search fees, search/rerank LLM; USD)",
-        lambda s: s.retrieval_cost,
-        "AB",
+        _ran(lambda s: s.retrieval_cost),
+        "ABC",
     ),
     "pipeline_cost": (
         "medsim LLM cost per question (Stages A–C, USD)",
-        lambda s: s.pipeline_cost,
-        "AB",
+        _ran(lambda s: s.pipeline_cost),
+        "ABC",
     ),
-    "total_cost": ("Total cost per question (USD)", lambda s: s.total_cost, "AB"),
-    "wall_time": ("Wall time per question (s)", lambda s: s.wall_time_s, "AB"),
+    "total_cost": ("Total cost per question (USD)", _ran(lambda s: s.total_cost), "ABC"),
+    "wall_time": ("Wall time per question (s)", _ran(lambda s: s.wall_time_s), "ABC"),
     "retrieval_time": (
         "Time outside medsim's LLM calls per question (≈ retrieval; s)",
-        lambda s: max(s.wall_time_s - s.llm_time_s, 0.0),
-        "AB",
+        _ran(lambda s: max(s.wall_time_s - s.llm_time_s, 0.0)),
+        "ABC",
     ),
 }
-PERCENT = {"p_relevant", "u_hit", "u_precision", "c_hit", "c_precision", "majority_correct",
-           "answered", "answer_close", "answer_category"}  # fmt: skip
+LABEL_METRICS = [k for k in METRICS if k.startswith(("mc_", "fc_"))]
+PERCENT = {"answered", *LABEL_METRICS}
 MONEY = {"retrieval_cost", "pipeline_cost", "total_cost"}
 
 
-# Paths on which medsim answered without retrieving anything.
-NO_RETRIEVAL = {"case_study", "off_topic", "withheld", "ledger_hit", "empty_query",
-                "query_builder_declined"}  # fmt: skip
-
-
-def comparable(
-    scores: Sequence[Score], configs: Sequence[str]
-) -> tuple[list[Score], dict[str, dict[str, str]]]:
-    """Scores for questions on which every configuration ran and retrieved.
-
-    Stage A is not perfectly deterministic: now and then it answers a set A question from the
-    redacted case (e.g. from a kept qualitative mention), so no retrieval runs. Comparing such a
-    question would penalise one method by chance, so it is excluded and listed instead.
-    """
-    by_item: dict[str, dict[str, Score]] = defaultdict(dict)
-    for s in scores:
-        by_item[s.item_id][s.config] = s
-    kept: list[Score] = []
-    excluded: dict[str, dict[str, str]] = {}
-    for item_id, per_config in by_item.items():
-        paths = {c: (per_config[c].path or "?") if c in per_config else "missing" for c in configs}
-        if any(p == "missing" or p in NO_RETRIEVAL for p in paths.values()):
-            excluded[item_id] = paths
-        else:
-            kept.extend(per_config[c] for c in configs)
-    return kept, excluded
-
-
 def build_scores(
-    ws: Workspace, items: Sequence[Item], configs: Sequence[str], judge_model: str
+    ws: Workspace, items: Sequence[Item], configs: Sequence[str], panel: Sequence[str]
 ) -> list[Score]:
     by_id = {i.item_id: i for i in items}
-    pass1 = ok_judgments(ws.pass1, Pass1Judgment, judge_model)
-    pass2 = ok_judgments(ws.pass2, Pass2Judgment, judge_model)
-    answers = ok_judgments(ws.answers, AnswerJudgment, judge_model)
+    masked = panel_judgments(ws.masked_correctness, MaskedCorrectnessJudgment, panel)
+    consistency = panel_judgments(ws.consistency, ConsistencyJudgment, panel)
     scores: list[Score] = []
     for config, per_item in latest_runs(ws, configs).items():
-        for item_id, run in per_item.items():
-            item = by_id.get(item_id)
-            if item is None:
-                continue
-            score = _score(item, run, pass1, pass2, answers)
-            score.config = config
+        for item in by_id.values():
+            run = per_item.get(item.item_id)
+            if run is None:  # never run, or failed: counted, without a label
+                score = Score(
+                    item_id=item.item_id, config=config, question_set=item.question_set,
+                    diagnosis=item.diagnosis, category=item.category,
+                    characteristic=item.characteristic_of_diagnosis, path=None, n_docs=0,
+                    has_answer=False, ran=False,
+                )  # fmt: skip
+            else:
+                score = _score(item, run, masked, consistency, panel)
+                score.config = config
             scores.append(score)
     return scores
 
@@ -190,9 +176,9 @@ def build_scores(
 def _score(
     item: Item,
     run: RunRecord,
-    pass1: dict[str, Pass1Judgment],
-    pass2: dict[str, Pass2Judgment],
-    answers: dict[str, AnswerJudgment],
+    masked: dict[str, dict[str, MaskedCorrectnessJudgment]],
+    consistency: dict[str, dict[str, ConsistencyJudgment]],
+    panel: Sequence[str],
 ) -> Score:
     stage_cost: dict[str, float] = {}
     for call in run.llm_calls:
@@ -202,7 +188,7 @@ def _score(
         item_id=item.item_id, config=run.config, question_set=item.question_set,
         diagnosis=item.diagnosis, category=item.category,
         characteristic=item.characteristic_of_diagnosis, path=run.path,
-        n_docs=len(run.documents), n_judged=0,
+        n_docs=len(run.documents), has_answer=judgeable(run),
         excluded_source_docs=len(run.excluded_source_docs),
         retrieval_cost=run.retrieval_cost_usd, stage_cost=dict(stage_cost),
         wall_time_s=run.wall_time_s,
@@ -210,28 +196,22 @@ def _score(
             c.latency_ms for c in run.llm_calls if c.stage not in RETRIEVAL_STAGES
         ) / 1000,
     )  # fmt: skip
-    truth_categories: list[str] = []
-    for doc in run.documents:
-        key = doc_key(item.item_id, doc.doc_id, doc.text)
-        judged = pass1.get(key)
-        if judged is None or judged.relevance is None or judged.usefulness is None:
-            continue
-        score.n_judged += 1
-        score.relevance.append(judged.relevance)
-        score.usefulness.append(judged.usefulness)
-        score.sources.append(doc.source)
-        second = pass2.get(key)
-        if item.truth is not None and judged.usefulness >= 1 and second and second.output:
-            truth_categories.append(second.output.truth_category)
-            if second.correctness is not None:
-                score.correctness.append(second.correctness)
-    if item.truth is not None and run.answer_source == "literature":
-        judged_answer = answers.get(answer_key(item.item_id, run.config, run.output_answer or ""))
-        if judged_answer and judged_answer.output:
-            score.answer_verdict = judged_answer.output.verdict
-            truth_categories.append(judged_answer.output.truth_category)
-    if truth_categories:
-        score.truth_category = Counter(truth_categories).most_common(1)[0][0]
+    if not score.has_answer:
+        return score
+    key = answer_key(item.item_id, run.config, run.output_answer or "")
+    metrics = SET_METRICS[item.question_set]
+    if "masked_correctness" in metrics:
+        judged: dict[str, Any] = masked.get(key, {})
+        result = panel_votes(judged, panel)
+        score.votes["masked_correctness"] = result.votes
+        score.resolution["masked_correctness"] = result.resolution
+        score.masked_verdict = result.label
+        score.truth_category = panel_votes(judged, panel, "truth_category").label
+    if "factual_consistency" in metrics:
+        result = panel_votes(consistency.get(key, {}), panel)
+        score.votes["factual_consistency"] = result.votes
+        score.resolution["factual_consistency"] = result.resolution
+        score.consistency = result.label
     return score
 
 
@@ -379,34 +359,58 @@ def strata_table(
     return lines
 
 
-def source_table(scores: Sequence[Score]) -> list[str]:
-    """Document-level grades by the source that returned the document."""
-    rel: dict[str, list[int]] = defaultdict(list)
-    use: dict[str, list[int]] = defaultdict(list)
-    for s in scores:
-        for source, grade_r, grade_u in zip(s.sources, s.relevance, s.usefulness, strict=True):
-            rel[source].append(grade_r)
-            use[source].append(grade_u)
-    lines = ["| Source | Documents judged | Mean relevance | Relevant (≥ 2) | Useful (= 2) |",
-             "|---|---|---|---|---|"]  # fmt: skip
-    for source in sorted(rel):
-        r, u = rel[source], use[source]
-        relevant = sum(x >= 2 for x in r) / len(r) * 100
-        useful = sum(x == 2 for x in u) / len(u) * 100
+def panel_agreement(ws: Workspace, panel: Sequence[str]) -> tuple[list[str], dict[str, Any]]:
+    """How the panel reached its labels, and how often each pair of judges agrees."""
+    lines = ["| Metric | Answers | Unanimous | Majority | Tie broken by the main judge "
+             "| Tie broken by the next judge | Fewer than all votes |",
+             "|---|---|---|---|---|---|---|"]  # fmt: skip
+    pair_lines: list[str] = []
+    data: dict[str, Any] = {"panel": list(panel)}
+    by_metric: list[tuple[str, dict[str, dict[str, Any]]]] = [
+        ("masked correctness",
+         panel_judgments(ws.masked_correctness, MaskedCorrectnessJudgment, panel)),
+        ("factual consistency", panel_judgments(ws.consistency, ConsistencyJudgment, panel)),
+    ]  # fmt: skip
+    for label, judged in by_metric:
+        if not judged:
+            continue
+        results = [panel_votes(j, panel) for j in judged.values()]
+        how = Counter(r.resolution for r in results)
+        partial = sum(r.n_votes < len(panel) for r in results)
+        n = len(results)
+        data[label] = {"answers": n, "resolution": dict(how), "fewer_votes": partial, "pairs": {}}
         lines.append(
-            f"| {source} | {len(r)} | {sum(r) / len(r):.2f} | {relevant:.0f}% | {useful:.0f}% |"
+            f"| {label} | {n} | {how['unanimous'] / n:.0%} | {how['majority'] / n:.0%} "
+            f"| {how['tie_break_main_judge'] / n:.0%} | {how['tie_break_next_judge'] / n:.0%} "
+            f"| {partial} |"
         )
-    return lines
+        for i, a in enumerate(panel):
+            for b in panel[i + 1 :]:
+                pairs = [(x, y) for r in results
+                         if (x := r.votes.get(a)) is not None
+                         and (y := r.votes.get(b)) is not None]  # fmt: skip
+                if not pairs:
+                    continue
+                kappa = cohen_kappa([x for x, _ in pairs], [y for _, y in pairs])
+                agree = sum(x == y for x, y in pairs)
+                data[label]["pairs"][f"{a} | {b}"] = {"n": len(pairs), "agree": agree,
+                                                      "kappa": kappa}  # fmt: skip
+                pair_lines.append(
+                    f"- **{label}, `{a}` vs `{b}`:** {agree}/{len(pairs)} identical labels, "
+                    f"Cohen's κ = {kappa:.2f}."
+                )
+    if len(lines) == 2:
+        return [], data
+    return [*lines, "", *pair_lines], data
 
 
-def validation_section(
-    ws: Workspace, judge_model: str, second_model: str | None
-) -> tuple[list[str], dict[str, Any]]:
+def validation_section(ws: Workspace, panel: Sequence[str]) -> tuple[list[str], dict[str, Any]]:
     lines: list[str] = []
     data: dict[str, Any] = {}
-    controls = [c for c in read_models(ws.controls, ControlResult) if c.judge_model == judge_model]
+    controls = [c for c in read_models(ws.controls, ControlResult)
+                if c.judges == list(panel) and c.rubric == RUBRIC]  # fmt: skip
     if controls:
-        lines += ["| Control document | Expected | Passed |", "|---|---|---|"]
+        lines += ["| Control answer | Expected voted label | Passed |", "|---|---|---|"]
         by_kind: dict[str, list[ControlResult]] = defaultdict(list)
         for c in controls:
             by_kind[c.control].append(c)
@@ -419,72 +423,38 @@ def validation_section(
     flips = [
         f
         for f in read_models(ws.flips, FlipResult)
-        if f.judge_model == judge_model and f.passed is not None
+        if f.judges == list(panel) and f.rubric == RUBRIC and f.passed is not None
     ]
     if flips:
         passed = sum(bool(f.passed) for f in flips)
         data["flipped_truth"] = {"changed": passed, "n": len(flips)}
         lines.append(
-            f"- **Flipped true value:** after moving the true value far away, {passed} of "
-            f'{len(flips)} "within" verdicts changed. An unchanged verdict is not always an '
-            f"error: when a document reports a wide range, the moved value can still be inside it "
-            f"(see validate/flips.jsonl)."
+            f"- **Flipped true value:** after moving the true value far away, the voted label "
+            f'of {passed} of {len(flips)} "exact" answers changed. An unchanged label is not '
+            f"always an error: when an answer states a wide range, the moved value can still be "
+            f"inside it (see validate/flips.jsonl)."
         )
-    if second_model:
-        primary1 = ok_judgments(ws.pass1, Pass1Judgment, judge_model)
-        second1 = ok_judgments(ws.second_pass1, Pass1Judgment, second_model)
-        shared = [k for k in second1 if k in primary1]
-        if shared:
-            rel = cohen_kappa(
-                [primary1[k].relevance or 0 for k in shared],
-                [second1[k].relevance or 0 for k in shared],
-                weights="quadratic",
-            )
-            use = cohen_kappa(
-                [primary1[k].usefulness or 0 for k in shared],
-                [second1[k].usefulness or 0 for k in shared],
-                weights="quadratic",
-            )
-            data["second_judge_pass1"] = {
-                "n": len(shared),
-                "kappa_relevance": rel,
-                "kappa_usefulness": use,
-            }
-            lines.append(
-                f"- **Second judge ({second_model}), {len(shared)} documents:** quadratic-weighted "
-                f"κ = {rel:.2f} for relevance, {use:.2f} for usefulness."
-            )
-        primary2 = ok_judgments(ws.pass2, Pass2Judgment, judge_model)
-        second2 = ok_judgments(ws.second_pass2, Pass2Judgment, second_model)
-        pairs = [
-            (p.output.verdict, q.output.verdict)
-            for k, q in second2.items()
-            if (p := primary2.get(k)) is not None and p.output and q.output
-        ]
-        if pairs:
-            shared2 = pairs
-            kappa = cohen_kappa([a for a, _ in pairs], [b for _, b in pairs])
-            agree = sum(a == b for a, b in pairs)
-            data["second_judge_pass2"] = {
-                "n": len(shared2),
-                "kappa_verdict": kappa,
-                "agreement": agree,
-            }
-            lines.append(
-                f"- **Second judge, correctness verdicts ({len(shared2)} documents):** "
-                f"{agree}/{len(shared2)} identical, Cohen's κ = {kappa:.2f}."
-            )
     human = read_human_labels(ws)
     if human:
-        primary1 = ok_judgments(ws.pass1, Pass1Judgment, judge_model)
-        rows = [h for h in human if h["doc_key"] in primary1]
-        kappa = cohen_kappa(
-            [int(h["human_relevance_0_3"]) for h in rows],
-            [primary1[h["doc_key"]].relevance or 0 for h in rows],
-            weights="quadratic",
-        )
-        data["human_relevance"] = {"n": len(rows), "kappa": kappa}
-        lines.append(f"- **Human labels ({len(rows)} documents):** relevance κ = {kappa:.2f}.")
+        masked = panel_judgments(ws.masked_correctness, MaskedCorrectnessJudgment, panel)
+        consistency = panel_judgments(ws.consistency, ConsistencyJudgment, panel)
+        for label, column, judged in (
+            ("masked correctness", "human_masked_verdict", masked),
+            ("factual consistency", "human_consistency", consistency),
+        ):
+            rows = [
+                (h[column].strip(), voted)
+                for h in human
+                if h[column].strip()
+                and (voted := panel_votes(judged.get(h["answer_key"], {}), panel).label) is not None
+            ]
+            if rows:
+                kappa = cohen_kappa([a for a, _ in rows], [b for _, b in rows])
+                data[f"human_{label.replace(' ', '_')}"] = {"n": len(rows), "kappa": kappa}
+                lines.append(
+                    f"- **Human labels vs the voted label, {label} ({len(rows)} answers):** "
+                    f"κ = {kappa:.2f}."
+                )
     return lines, data
 
 
@@ -494,16 +464,26 @@ def spend_section(ws: Workspace, scores: Sequence[Score]) -> tuple[list[str], di
         ("extract (case facts)", ws.facts, CaseFacts),
         ("redact + Stage A checks (accepted)", ws.items, Item),
         ("redact + Stage A checks (rejected)", ws.rejected, RejectedItem),
-        ("judge pass 1", ws.pass1, Pass1Judgment),
-        ("judge pass 2", ws.pass2, Pass2Judgment),
-        ("judge answer check", ws.answers, AnswerJudgment),
-        ("validation: controls", ws.controls, ControlResult),
-        ("validation: flipped truth", ws.flips, FlipResult),
-        ("validation: second judge, pass 1", ws.second_pass1, Pass1Judgment),
-        ("validation: second judge, pass 2", ws.second_pass2, Pass2Judgment),
     ]
-    rows = [(label, sum(calls_cost(r.llm_calls) for r in read_models(path, model)))
-            for label, path, model in sources]  # fmt: skip
+    rows: list[tuple[str, float]] = [
+        (label, sum(calls_cost(r.llm_calls) for r in read_models(path, model)))
+        for label, path, model in sources
+    ]
+    judge_files: list[tuple[str, Any, Any]] = [
+        ("masked correctness", ws.masked_correctness, MaskedCorrectnessJudgment),
+        ("factual consistency", ws.consistency, ConsistencyJudgment),
+    ]
+    for metric, path, cls in judge_files:
+        by_model: dict[str, float] = defaultdict(float)
+        for r in read_models(path, cls):
+            by_model[r.judge_model] += calls_cost(r.llm_calls)
+        rows += [(f"judge: {metric} ({model})", cost) for model, cost in by_model.items()]
+    rows += [
+        ("validation: controls (panel)",
+         sum(calls_cost(r.llm_calls) for r in read_models(ws.controls, ControlResult))),
+        ("validation: flipped truth (panel)",
+         sum(calls_cost(r.llm_calls) for r in read_models(ws.flips, FlipResult))),
+    ]  # fmt: skip
     rows.insert(3, ("run (all methods; search fees included)", sum(s.total_cost for s in scores)))
     total = sum(v for _, v in rows)
     lines = ["| Step | Cost (USD, OpenRouter usage.cost) |", "|---|---|"]
@@ -525,40 +505,47 @@ def spend_section(ws: Workspace, scores: Sequence[Score]) -> tuple[list[str], di
 
 
 def diagnostics(
-    scores: Sequence[Score], configs: Sequence[str], ws: Workspace, judge_model: str
+    scores: Sequence[Score], configs: Sequence[str], ws: Workspace, panel: Sequence[str]
 ) -> list[str]:
     lines = []
     for config in configs:
         rows = [s for s in scores if s.config == config]
-        paths = Counter(s.path for s in rows)
+        paths = Counter(s.path if s.ran else "not run" for s in rows)
         excluded = sum(1 for s in rows if s.excluded_source_docs)
-        unjudged = sum(s.n_docs - s.n_judged for s in rows)
+        verdicts = {"masked_correctness": "masked_verdict", "factual_consistency": "consistency"}
+        unjudged = sum(
+            1
+            for s in rows
+            if s.has_answer
+            and any(getattr(s, verdicts[m]) is None for m in SET_METRICS[s.question_set])
+        )
+        short = sum(
+            1
+            for s in rows
+            if any(sum(v is not None for v in by.values()) < len(panel) for by in s.votes.values())
+        )
         lines.append(
             f"- **{config}:** answer paths {dict(paths)}; source article removed for {excluded} "
-            f"question(s); {unjudged} document(s) without a judgment."
+            f"question(s); {unjudged} answer(s) without any judge's verdict; "
+            f"{short} answer(s) voted on by fewer than all {len(panel)} judges."
         )
-    pass1 = [
-        j
-        for j in read_models(ws.pass1, Pass1Judgment)
-        if j.judge_model == judge_model and j.status == "ok"
-    ]
-    quote_fail = sum(1 for j in pass1 if j.quote_ok is False)
+    voted_a = [s for s in scores if s.question_set == "A" and s.masked_verdict is not None]
+    not_comparable = sum(s.masked_verdict == "not_comparable" for s in voted_a)
     lines.append(
-        f"- **Quote check:** {quote_fail} of {len(pass1)} pass-1 judgments quoted text that is not "
-        f"in the document (usefulness forced to 0)."
+        f'- **Masked correctness:** {not_comparable} of {len(voted_a)} voted labels were "not '
+        f'comparable" (reported as their own label).'
     )
-    pass2 = [
-        j
-        for j in read_models(ws.pass2, Pass2Judgment)
-        if j.judge_model == judge_model and j.status == "ok" and j.truth_override is None
-    ]
-    not_comparable = sum(1 for j in pass2 if j.output and j.output.verdict == "not_comparable")
+    errors = sum(
+        1
+        for path, cls in ((ws.masked_correctness, MaskedCorrectnessJudgment),
+                          (ws.consistency, ConsistencyJudgment))
+        for j in read_models(path, cls)
+        if j.status == "error"
+    )  # fmt: skip
     lines.append(
-        f'- **Pass 2:** {not_comparable} of {len(pass2)} verdicts were "not comparable" '
-        f"(excluded from correctness)."
+        f"- **Judge errors (all attempts, all judges):** {errors} judgment(s) failed; rerun the "
+        f"judge step to retry them."
     )
-    errors = sum(1 for j in read_models(ws.pass1, Pass1Judgment) if j.status == "error")
-    lines.append(f"- **Judge errors (all attempts):** {errors} pass-1 call(s) failed.")
     return lines
 
 
@@ -574,6 +561,15 @@ def funnel(ws: Workspace, items: Sequence[Item]) -> list[str]:
     )
     a = sum(i.question_set == "A" for i in items)
     b = sum(i.question_set == "B" for i in items)
+    c = sum(i.question_set == "C" for i in items)
+    rejected_c = Counter(
+        r.reason for r in read_models(ws.rejected, RejectedItem) if r.question_set == "C"
+    )
+    set_c = [
+        f"- Set C (information the case states): {c} questions accepted; rejected "
+        f"{sum(rejected_c.values())} "
+        f"({', '.join(f'{k}: {v}' for k, v in rejected_c.most_common()) or 'none'})."
+    ]
     return [
         f"- Cases extracted: {len(facts)}; measured values found: {n_facts}; eligible as hidden "
         f"values: {eligible}.",
@@ -582,14 +578,13 @@ def funnel(ws: Workspace, items: Sequence[Item]) -> list[str]:
         f"- Set B (value never stated): {b} questions accepted; rejected "
         f"{sum(rejected_b.values())} "
         f"({', '.join(f'{k}: {v}' for k, v in rejected_b.most_common()) or 'none'}).",
+        *(set_c if c or rejected_c else []),
     ]
 
 
 COST_TIME = {"retrieval_cost", "pipeline_cost", "total_cost", "wall_time", "retrieval_time"}
-MAIN_METRICS = ["docs", "mean_relevance", "p_relevant", "u_hit", "u_precision", "c_hit",
-                "c_precision", "majority_correct", "answered", "answer_close", "answer_category",
-                "retrieval_cost", "pipeline_cost", "total_cost", "wall_time",
-                "retrieval_time"]  # fmt: skip
+MAIN_METRICS = ["docs", "answered", *LABEL_METRICS, "retrieval_cost", "pipeline_cost",
+                "total_cost", "wall_time", "retrieval_time"]  # fmt: skip
 
 
 def build_report(
@@ -597,21 +592,25 @@ def build_report(
     items: Sequence[Item],
     configs: Sequence[str],
     *,
-    judge_model: str,
-    second_judge_model: str | None,
+    judge_models: Sequence[str],
     baseline: str,
     n_boot: int = 2000,
     seed: int = 11,
 ) -> tuple[str, dict[str, Any]]:
-    all_scores = build_scores(ws, items, configs, judge_model)
-    configs = [c for c in configs if any(s.config == c for s in all_scores)]
+    panel = list(judge_models)
+    all_scores = build_scores(ws, items, configs, panel)
+    configs = [c for c in configs if any(s.config == c and s.ran for s in all_scores)]
     if baseline not in configs:
         baseline = configs[0]
-    scores, excluded = comparable(all_scores, configs)
+    scores = [s for s in all_scores if s.config in configs]
     manifest = load_manifest(ws)
-    data: dict[str, Any] = {"configs": configs, "baseline": baseline, "judge_model": judge_model}
+    data: dict[str, Any] = {"configs": configs, "baseline": baseline, "judge_panel": panel}
     md: list[str] = ["# Retrieval benchmark report", ""]
-    md += [f"- Workspace: `{ws.root}`", f"- Judge: `{judge_model}`"]
+    md += [
+        f"- Workspace: `{ws.root}`",
+        f"- Judge panel: {', '.join(f'`{m}`' for m in panel)}. Each answer's label is the "
+        f"panel's majority vote; with no majority, the first (main) judge's label decides.",
+    ]
     pipeline = (manifest.get("latest", {}).get("run") or {}).get("pipeline_models")
     if pipeline:
         md.append(f"- medsim models: `{', '.join(pipeline)}`")
@@ -619,25 +618,29 @@ def build_report(
         desc = CONFIGS[config].description if config in CONFIGS else ""
         md.append(f"- `{config}`: {desc}")
     md += ["", "## Question sets", "", *funnel(ws, items)]
-    compared = len({s.item_id for s in scores})
-    listed = "; ".join(
-        f"`{k}` ({', '.join(f'{c}: {p}' for c, p in v.items())})"
-        for k, v in sorted(excluded.items())
-    )
+    not_run = {c: sum(1 for s in scores if s.config == c and not s.ran) for c in configs}
     md.append(
-        f"- Compared: {compared} questions on which every method ran retrieval; excluded "
-        f"{len(excluded)}: {listed or 'none'}."
+        "- Every question is scored under every method: each label's percentage is out of all "
+        "questions in its set. Questions without a successful run (counted as no label): "
+        + ", ".join(f"{c}: {n}" for c, n in not_run.items())
+        + "."
     )
     md.append("")
-    data["excluded"] = excluded
+    data["not_run"] = not_run
 
-    md += ["## All questions (sets A and B)", ""]
+    sets = "".join(q for q in "ABC" if any(s.question_set == q for s in scores))
+    md += [f"## All questions (sets {', '.join(sets)})", ""]
     lines, data["all"] = comparison_table(
-        scores, configs, "AB", MAIN_METRICS, baseline, n_boot=n_boot, seed=seed
+        scores, configs, sets, MAIN_METRICS, baseline, n_boot=n_boot, seed=seed
     )
     md += [*lines, ""]
-    for question_set, title in (("A", "Set A only (hidden value; correctness defined)"),
-                                ("B", "Set B only (value never stated)")):  # fmt: skip
+    for question_set, title in (
+        ("A", "Set A only (hidden value; masked correctness)"),
+        ("B", "Set B only (value never stated; factual consistency)"),
+        ("C", "Set C only (information the case states; both metrics)"),
+    ):
+        if question_set not in sets:
+            continue
         lines, data[f"set_{question_set}"] = comparison_table(
             scores,
             configs,
@@ -652,10 +655,10 @@ def build_report(
     md += [
         "## Cost",
         "",
-        "All runs, including the excluded questions (their calls were paid for).",
+        "All questions that ran.",
         "",
     ]
-    lines, data["cost"] = cost_table(all_scores, configs)
+    lines, data["cost"] = cost_table([s for s in scores if s.ran], configs)
     md += [*lines, ""]
 
     md += ["## By subgroup (set A)", ""]
@@ -668,14 +671,17 @@ def build_report(
             lambda s: {True: "yes", False: "no", None: "?"}[s.characteristic],
         ),
     ):
-        md += [f"### {title}", "", *strata_table(set_a, configs, key, ["u_hit", "c_hit"]), ""]
-    md += ["### Documents by source", "", *source_table(scores), ""]
+        strata = strata_table(set_a, configs, key, ["mc_exact", "mc_different_category"])
+        md += [f"### {title}", "", *strata, ""]
 
-    md += ["## Diagnostics", "", *diagnostics(scores, configs, ws, judge_model), ""]
-    lines, data["validation"] = validation_section(ws, judge_model, second_judge_model)
+    md += ["## Diagnostics", "", *diagnostics(scores, configs, ws, panel), ""]
+    lines, data["panel_agreement"] = panel_agreement(ws, panel)
+    if lines:
+        md += ["## Judge panel agreement", "", *lines, ""]
+    lines, data["validation"] = validation_section(ws, panel)
     if lines:
         md += ["## Judge validation", "", *lines, ""]
-    lines, data["spend"] = spend_section(ws, all_scores)
+    lines, data["spend"] = spend_section(ws, [s for s in all_scores if s.ran])
     md += ["## Benchmark spend", "", *lines, ""]
     data["scores"] = [asdict(s) for s in all_scores]
     return "\n".join(md), data

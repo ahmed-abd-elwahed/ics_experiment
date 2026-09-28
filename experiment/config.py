@@ -11,7 +11,7 @@ import json
 import re
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Literal
+from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator, model_validator
 
@@ -21,7 +21,6 @@ from medsim.errors import ConfigError
 from medsim.models import CaseStudy
 
 DEFAULT_OUTPUT = "records/{name}_{timestamp}.json"
-InitialInformation = Literal["none", "background"]
 # Settings that must come from .env, never from a config file that gets copied into the record.
 SECRET_SETTINGS = frozenset({"openrouter_api_key", "OPENROUTER_API_KEY"})
 
@@ -64,8 +63,6 @@ class ExperimentConfig(BaseModel):
     cases_file: str
     case_ids: list[str] | None = None  # None = every case in the file, in file order
     max_cases: int | None = Field(default=None, ge=1)  # after case_ids; None = no limit
-    # "background": the strategy starts with the case's background_and_presentation text.
-    initial_information: InitialInformation = "none"
     # medsim settings overrides (see environment/README.md), or the path of a JSON file of them.
     environment: dict[str, Any] | str = Field(default_factory=dict)
     strategies: list[StrategySpec] = Field(min_length=1)
@@ -181,13 +178,6 @@ def select_cases(config: ExperimentConfig) -> list[CaseStudy]:
     if not selected:
         raise ConfigError(f"No cases selected from {path}.")
     return selected
-
-
-def initial_information(case: CaseStudy, mode: InitialInformation) -> str | None:
-    if mode == "background":
-        text = str(case.metadata.get("background_and_presentation") or "").strip()
-        return text or None
-    return None
 
 
 # --- output -----------------------------------------------------------------------------------

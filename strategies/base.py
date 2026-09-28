@@ -27,7 +27,6 @@ from medsim.models import LLMCallRecord
 class CaseContext:
     """What a strategy may know about a case before it asks anything."""
 
-    initial_information: str | None = None  # e.g. the presenting complaint, if the config gives it
     max_iterations: int | None = None
     max_seconds: float | None = None
 

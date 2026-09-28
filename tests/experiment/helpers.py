@@ -24,8 +24,7 @@ CASES = [
     {
         "case_id": f"CASE{i}",
         "diagnosis": f"Diagnosis {i}",
-        "chunked_case_info": [f"Patient {i} presented with fever.", f"Case {i}, second chunk."],
-        "background_and_presentation": f"A patient {i} presents with fever.",
+        "case_information": f"Patient {i} presented with fever. Case {i}, second part.",
     }
     for i in range(1, 7)
 ]

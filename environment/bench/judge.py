@@ -1,153 +1,126 @@
-"""Step 4: LLM judge.
+"""Step 4: a panel of LLM judges grades medsim's generated answers against the full case.
 
-Pass 1 (never sees the true value) records facets for one document at a time; code turns them
-into relevance (0-3) and usefulness (0-2), and a verbatim-quote check guards against invented
-evidence. Pass 2 (set A only, documents with usefulness >= 1) compares the document's evidence
-with the hidden true value: correctness 0-2. The answer check grades Stage C's final value.
-Documents retrieved by several configurations for the same question are judged once.
+Every answer is judged independently by each panel model (all calls run in parallel), each
+verdict is stored, and the answer's final label is the panel's majority vote; with no majority,
+the main (first) judge's label decides. Both metrics' judges see the full, unredacted case
+(diagnosis included) and the answer. Masked
+correctness (set A) grades the answer against the value that was hidden from medsim: exact,
+same category, or different category. Factual consistency (set B) labels the answer consistent or
+inconsistent with everything the case states. Retrieved documents are not judged.
 """
 
 from __future__ import annotations
 
 import hashlib
 import logging
+import time
 from collections import Counter
-from collections.abc import Callable, Iterable, Sequence
+from collections.abc import Callable, Iterable, Mapping, Sequence
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from functools import partial
-from typing import Any
+from typing import Any, TypeVar
 
 from bench.schemas import (
-    AnswerJudgment,
-    AnswerOutput,
-    DocRecord,
+    ConsistencyJudgment,
+    ConsistencyOutput,
     Item,
-    Pass1Judgment,
-    Pass1Output,
-    Pass2Judgment,
-    Pass2Output,
+    MaskedCorrectnessJudgment,
+    MaskedCorrectnessOutput,
     RunRecord,
     calls_cost,
 )
-from bench.text import quote_found
+from bench.text import count_value
 from bench.workspace import JsonlWriter, Workspace, latest_by, read_models
-from medsim.errors import MedSimError
+from medsim.errors import ConfigError, LLMError, MedSimError
 from medsim.llm.base import LLMClient
 from medsim.llm.structured import call_structured
-from medsim.models import ChatMessage, LLMCallRecord
+from medsim.models import CaseStudy, ChatMessage, LLMCallRecord
 
 logger = logging.getLogger("bench.judge")
 
-RUBRIC = "v1"
+RUBRIC = "v2"
 
-PASS1_PROMPT = """\
-You grade ONE retrieved biomedical document for a patient simulator. The simulator's record \
-lacks a value for the TARGET VARIABLE; it retrieved literature to estimate a plausible value for \
-this PATIENT. Grade only what the DOCUMENT text itself says; never fill gaps with your own \
-knowledge.
-
-Fields:
-- rationale: one or two sentences on how the document relates to the target and patient.
-- evidence_quote: the shortest verbatim span of the DOCUMENT (at most ~300 characters) that \
-carries the evidence about the target variable, copied exactly; "" if there is none.
-- evidence_value: the value, range, or frequency with its unit, exactly as the document gives \
-it; "" if none.
-- evidence_population: who that evidence describes (e.g. "42 adults with severe TR"); "" if none.
-- variable_match: "exact" = the document reports the same measurement as the TARGET VARIABLE \
-(synonyms, abbreviations, and named abnormalities of it count, e.g. "hyperbilirubinemia" for \
-serum bilirubin); "related" = a different but physiologically linked measurement (e.g. \
-creatinine clearance for serum creatinine); "absent" = neither.
-- condition_match: "exact" = the patient's DIAGNOSIS or a synonym; "related" = a condition \
-sharing its mechanism, organ-level syndrome, parent category, or a direct complication; \
-"unrelated" = anything else, including healthy or general populations.
-- population_match: "match" = humans comparable to the PATIENT (age group, sex where relevant, \
-setting); patients with the condition and no further detail count as "match"; "partial" = \
-humans differing in a way that may shift the value (other age band, severity, setting); \
-"unstated" = no population described at all; "mismatch" = animals, in-vitro work, or a clearly \
-incompatible population (e.g. neonates for an adult).
-- evidence_type: "quantitative" = a value, range, mean±SD, median/IQR, cut-off, or % of \
-patients abnormal for the TARGET VARIABLE; "qualitative" = only a direction or presence \
-("elevated", "usually normal"); "none".
-Return only a JSON object with exactly these keys."""
-
-PASS2_PROMPT = """\
-You compare literature evidence with a patient's TRUE value, which was hidden from a patient \
-simulator. Decide whether the DOCUMENT's evidence points to the TRUE value.
+MASKED_CORRECTNESS_PROMPT = """\
+A patient simulator answered a question about a patient. The value it was asked for is stated \
+in the patient's case report but was hidden from the simulator, so it synthesized one. You see \
+the FULL CASE REPORT, including the true DIAGNOSIS and the TRUE value, which is also given \
+separately. Decide whether the SIMULATED ANSWER points to the TRUE value, reading the TRUE value \
+in the context of the whole case (the patient, the timepoint, and the other findings).
 
 Fields:
 - reference_range: the usual reference range you use for this variable in this kind of patient, \
 with unit.
 - truth_category: the TRUE value relative to that range: "low", "normal", or "high" (for blood \
 pressure, use the more abnormal component).
-- document_prediction: what the document implies this patient's value would be (a range or a \
-direction), in one short phrase.
+- answer_value: the value or range the simulated answer states, with unit ("" if none).
 - rationale: one or two sentences.
-- verdict: "within" = the TRUE value lies inside the range the document reports for a \
-comparable population (a stated range, mean ± 2 SD, or IQR); "direction" = outside that range \
-but in the same category (low/normal/high) the document implies, or the document gives only a \
-direction and it matches; "contradicts" = the document implies a different category than the \
-TRUE value; "not_comparable" = the evidence cannot be compared with the TRUE value (another \
-variable, units that cannot be converted, or no value for this variable).
+- verdict: "exact" = the TRUE value lies inside the range the answer states, or the answer \
+states a single value that is clinically the same finding as the TRUE value (within about 10-15% \
+or the measurement's usual variability); "same_category" = not exact, but the answer implies the \
+same category (low/normal/high) as the TRUE value, including an answer that gives only a \
+matching direction (e.g. "elevated"); "different_category" = the answer implies a different \
+category than the TRUE value; "not_comparable" = the answer gives no value or direction for \
+this variable, gives another variable, or uses units that cannot be converted.
 Convert units when needed. Return only a JSON object with exactly these keys."""
 
-ANSWER_PROMPT = """\
-A patient simulator did not know a patient's TRUE value and synthesized one from literature. \
-Compare the SIMULATED ANSWER with the TRUE value.
+FACTUAL_CONSISTENCY_PROMPT = """\
+A patient simulator answered a question about a patient. The case report never states the value \
+asked for, so the simulator synthesized one. You see the FULL CASE REPORT, including the true \
+DIAGNOSIS. Decide whether the SIMULATED ANSWER is factually consistent with everything the case \
+report states.
 
 Fields:
-- reference_range: the usual reference range for this variable in this kind of patient, with \
-unit.
-- truth_category: the TRUE value relative to that range: "low", "normal", or "high".
-- answer_value: the value the simulated answer states, with unit ("" if none).
+- answer_value: the value, range, or finding the simulated answer states, with unit ("" if none).
+- conflicting_facts: the verbatim spans of the case report that the answer conflicts with, \
+copied exactly; [] if none.
 - rationale: one or two sentences.
-- verdict: "close" = clinically the same finding (same category and within about 10-15% or the \
-measurement's usual variability); "same_category" = same low/normal/high category but not close; \
-"different_category"; "not_comparable" = no value, or a different variable.
+- verdict: "consistent" = nothing in the case report contradicts the answer, and the answer is \
+physiologically plausible for this patient given the diagnosis, findings, treatments, and \
+timeline, even if it is not the most typical value; "inconsistent" = the answer contradicts \
+something the case report states (a finding, measurement, test result, complication, treatment \
+response, or the course of illness), or it is implausible for this patient given the diagnosis \
+and findings (e.g. a normal blood pressure in a patient described as in shock, or an adult value \
+for an infant).
+Judge only against the case report and established physiology; do not require the answer to \
+match the value you would have guessed. Return only a JSON object with exactly these keys."""
+
+
+# Set C: the answer is stated in the case the simulator could read, and need not be a number.
+CASE_CORRECTNESS_PROMPT = """\
+A patient simulator answered a question about a patient. The answer is stated in the patient's \
+case report, which the simulator could read. You see the FULL CASE REPORT, including the true \
+DIAGNOSIS, and the TRUE answer as the case states it, which is also given separately. Decide \
+whether the SIMULATED ANSWER matches the TRUE answer.
+
+Fields:
+- reference_range: for a measurement, the usual reference range you use for this variable in \
+this kind of patient, with unit; "" for a finding or history item.
+- truth_category: for a measurement, the TRUE value relative to that range: "low", "normal", or \
+"high" (for blood pressure, use the more abnormal component); "not_applicable" for a finding or \
+history item.
+- answer_value: the value, range, or finding the simulated answer states, with unit ("" if none).
+- rationale: one or two sentences.
+- verdict: "exact" = the answer states the TRUE answer: the same value (a stated range that \
+contains it, or a single value within about 10-15% or the measurement's usual variability), or \
+the same finding with the details that matter clinically; "same_category" = not exact, but \
+consistent with it: the same category (low/normal/high) for a measurement, or the same finding \
+with a wrong or missing detail (location, severity, timing) that does not change its meaning; \
+"different_category" = the answer contradicts the TRUE answer (another category, a finding the \
+case reports as absent, or the reverse); "not_comparable" = the answer does not address this \
+question.
 Convert units when needed. Return only a JSON object with exactly these keys."""
 
-
-# --- grading ------------------------------------------------------------------------------------
-
-
-def relevance_grade(out: Pass1Output) -> int:
-    """3: exact variable, exact condition, matching population. 2: exact variable with a related
-    condition or a partly matching population. 1: only the variable or only the condition.
-    0: neither, or a mismatched population (animals, in vitro)."""
-    if out.population_match == "mismatch":
-        return 0
-    v, c = out.variable_match, out.condition_match
-    if v == "exact" and c == "exact" and out.population_match == "match":
-        return 3
-    if v == "exact" and c in ("exact", "related"):
-        return 2
-    if (v == "exact") or (v == "related" and c != "unrelated") or (v == "absent" and c == "exact"):
-        return 1
-    return 0
-
-
-def usefulness_grade(out: Pass1Output, quote_ok: bool) -> int:
-    """2: a number for the exact variable in the exact or a related condition. 1: a number from
-    a population without the condition (e.g. a reference range) or for a related variable, or a
-    direction in the right condition. 0: nothing usable, a mismatched population, or a quote
-    that is not in the document."""
-    if out.evidence_type == "none" or out.variable_match == "absent":
-        return 0
-    if out.population_match == "mismatch" or not quote_ok:
-        return 0
-    on_condition = out.condition_match in ("exact", "related")
-    if out.evidence_type == "quantitative":
-        if out.variable_match == "exact" and on_condition:
-            return 2
-        return 1
-    return 1 if on_condition else 0
-
-
-CORRECTNESS = {"within": 2, "direction": 1, "contradicts": 0}
-
-
-def correctness_grade(out: Pass2Output) -> int | None:
-    return CORRECTNESS.get(out.verdict)
+_CONSISTENCY_INTRO_B = """\
+A patient simulator answered a question about a patient. The case report never states the value \
+asked for, so the simulator synthesized one."""
+_CONSISTENCY_INTRO_C = """\
+A patient simulator answered a question about a patient from the patient's case report, which \
+it could read."""
+assert FACTUAL_CONSISTENCY_PROMPT.startswith(_CONSISTENCY_INTRO_B)
+FACTUAL_CONSISTENCY_PROMPT_C = FACTUAL_CONSISTENCY_PROMPT.replace(
+    _CONSISTENCY_INTRO_B, _CONSISTENCY_INTRO_C, 1
+)
 
 
 # --- prompts ------------------------------------------------------------------------------------
@@ -166,44 +139,36 @@ def _truth(item: Item, override: str | None = None) -> str:
     return f'{item.truth.value}{unit} (case report: "{item.truth.span}")'
 
 
-def _document(title: str | None, text: str) -> str:
-    return f"Title: {title or '(none)'}\nText: {text}"
+def _full_case(case: CaseStudy) -> str:
+    findings = "".join(f"\n- {k}: {v}" for k, v in case.structured_findings.items())
+    return case.narrative.strip() + (f"\n\nStructured findings:{findings}" if findings else "")
 
 
-def pass1_messages(item: Item, title: str | None, text: str) -> list[ChatMessage]:
-    user = (
-        f"TARGET VARIABLE: {_target(item)}\nDIAGNOSIS: {item.diagnosis}\n"
-        f"PATIENT: {item.patient}\n\nDOCUMENT:\n{_document(title, text)}"
-    )
-    return [
-        ChatMessage(role="system", content=PASS1_PROMPT),
-        ChatMessage(role="user", content=user),
-    ]
-
-
-def pass2_messages(
-    item: Item, title: str | None, text: str, evidence: Pass1Output, truth: str | None = None
+def masked_correctness_messages(
+    item: Item, case: CaseStudy, answer: str, truth: str | None = None
 ) -> list[ChatMessage]:
     user = (
-        f"TARGET VARIABLE: {_target(item)}\nDIAGNOSIS: {item.diagnosis}\n"
-        f"PATIENT: {item.patient}\nTRUE VALUE: {_truth(item, truth)}\n\n"
-        f"EVIDENCE FOUND IN THE DOCUMENT:\n- quote: {evidence.evidence_quote}\n"
-        f"- value: {evidence.evidence_value}\n- population: {evidence.evidence_population}\n\n"
-        f"DOCUMENT:\n{_document(title, text)}"
+        f"QUESTION: {item.question}\nTARGET VARIABLE: {_target(item)}\n"
+        f"TRUE VALUE: {_truth(item, truth)}\nDIAGNOSIS: {case.diagnosis}\n\n"
+        f"FULL CASE REPORT:\n{_full_case(case)}\n\nSIMULATED ANSWER: {answer}"
     )
+    prompt = CASE_CORRECTNESS_PROMPT if item.question_set == "C" else MASKED_CORRECTNESS_PROMPT
     return [
-        ChatMessage(role="system", content=PASS2_PROMPT),
+        ChatMessage(role="system", content=prompt),
         ChatMessage(role="user", content=user),
     ]
 
 
-def answer_messages(item: Item, answer: str) -> list[ChatMessage]:
+def consistency_messages(item: Item, case: CaseStudy, answer: str) -> list[ChatMessage]:
     user = (
-        f"TARGET VARIABLE: {_target(item)}\nDIAGNOSIS: {item.diagnosis}\n"
-        f"PATIENT: {item.patient}\nTRUE VALUE: {_truth(item)}\n\nSIMULATED ANSWER: {answer}"
+        f"QUESTION: {item.question}\nTARGET VARIABLE: {_target(item)}\n"
+        f"DIAGNOSIS: {case.diagnosis}\n\nFULL CASE REPORT:\n{_full_case(case)}\n\n"
+        f"SIMULATED ANSWER: {answer}"
     )
+    c = item.question_set == "C"
+    prompt = FACTUAL_CONSISTENCY_PROMPT_C if c else FACTUAL_CONSISTENCY_PROMPT
     return [
-        ChatMessage(role="system", content=ANSWER_PROMPT),
+        ChatMessage(role="system", content=prompt),
         ChatMessage(role="user", content=user),
     ]
 
@@ -211,83 +176,198 @@ def answer_messages(item: Item, answer: str) -> list[ChatMessage]:
 # --- judge calls --------------------------------------------------------------------------------
 
 
-def doc_key(item_id: str, doc_id: str, text: str) -> str:
-    blob = f"{item_id}\x1f{doc_id}\x1f{text}".encode()
-    return hashlib.sha256(blob).hexdigest()[:20]
-
-
 def answer_key(item_id: str, config: str, answer: str) -> str:
     return hashlib.sha256(f"{item_id}\x1f{config}\x1f{answer}".encode()).hexdigest()[:20]
 
 
+def judgeable(run: RunRecord) -> bool:
+    """medsim generated an answer (from the case or from literature)."""
+    return run.answer_source in ("case_study", "literature") and bool(run.output_answer)
+
+
+def full_cases(items: Iterable[Item], cases: Mapping[str, CaseStudy]) -> dict[str, CaseStudy]:
+    """The unredacted case for each item, by item id.
+
+    Set A items store the redacted case, so theirs comes from the case file, which must still
+    state the hidden value (a check that it is the right file; the wording around the value may
+    have been edited since the questions were built). Set B and C items already store the
+    original case.
+    """
+    full: dict[str, CaseStudy] = {}
+    problems: list[str] = []
+    for item in items:
+        case = cases.get(item.case_id)
+        if item.question_set in ("B", "C"):
+            full[item.item_id] = case or item.case
+        elif case is None:
+            problems.append(f"{item.item_id}: case {item.case_id} is not in the case file")
+        elif item.truth is None or not count_value(case.narrative, item.truth.value):
+            problems.append(f"{item.item_id}: the case file does not state the hidden value")
+        else:
+            full[item.item_id] = case
+    if problems:
+        raise ConfigError(
+            "Full case information is missing for set A question(s); pass the case file the "
+            "questions were built from with --cases. " + "; ".join(problems[:5])
+        )
+    return full
+
+
 @dataclass
 class Judge:
+    """One judge model.
+
+    Each judgment is retried as a whole, up to ``max_attempts`` times with exponential backoff,
+    when the call fails or its reply is unusable. Within an attempt, the client already retries
+    transport errors, HTTP 429/5xx and empty replies, and ``call_structured`` retries a cut-off
+    reply with double the budget and repairs invalid JSON (including a label outside the
+    allowed set) once. A judgment that still fails is stored with ``status="error"`` and is
+    retried the next time the step runs.
+    """
+
     llm: LLMClient
     model: str
     max_tokens: int
+    max_attempts: int = 3
+    backoff_s: float = 2.0
+    sleep: Callable[[float], None] = field(default=time.sleep, repr=False)
 
     def _call(
         self, messages: list[ChatMessage], output: type[Any], records: list[LLMCallRecord]
     ) -> Any:
-        return call_structured(
-            self.llm, stage="judge", messages=messages, output_model=output, temperature=0.0,
-            max_tokens=self.max_tokens, model=self.model, records=records,
-        )  # fmt: skip
+        """``records`` collects every call of every attempt, so failed attempts are costed."""
+        for attempt in range(1, max(1, self.max_attempts) + 1):
+            try:
+                return call_structured(
+                    self.llm, stage="judge", messages=messages, output_model=output,
+                    temperature=0.0, max_tokens=self.max_tokens, model=self.model,
+                    records=records,
+                )  # fmt: skip
+            except LLMError as exc:
+                if attempt >= self.max_attempts:
+                    raise
+                delay = self.backoff_s * 2 ** (attempt - 1)
+                logger.warning(
+                    "judge %s: attempt %d/%d failed (%s); retrying in %.0fs",
+                    self.model, attempt, self.max_attempts, str(exc)[:200], delay,
+                )  # fmt: skip
+                self.sleep(delay)
+        raise AssertionError("unreachable")
 
-    def _doc_fields(self, item: Item, doc: DocRecord) -> dict[str, Any]:
-        return {
-            "doc_key": doc_key(item.item_id, doc.doc_id, doc.text),
-            "item_id": item.item_id,
-            "doc_id": doc.doc_id,
-            "source": doc.source,
-            "judge_model": self.model,
-            "rubric": RUBRIC,
-        }
-
-    def pass1(self, item: Item, doc: DocRecord, *, text: str | None = None) -> Pass1Judgment:
-        text = doc.text if text is None else text
-        records: list[LLMCallRecord] = []
-        base = self._doc_fields(item, doc)
-        try:
-            out: Pass1Output = self._call(
-                pass1_messages(item, doc.title, text), Pass1Output, records
-            )
-        except MedSimError as exc:
-            return Pass1Judgment(**base, status="error", error=str(exc)[:300], llm_calls=records)
-        ok = out.evidence_type == "none" or quote_found(
-            out.evidence_quote, f"{doc.title or ''} {text}"
-        )
-        return Pass1Judgment(
-            **base, status="ok", output=out, quote_ok=ok, relevance=relevance_grade(out),
-            usefulness=usefulness_grade(out, ok), llm_calls=records,
-        )  # fmt: skip
-
-    def pass2(
-        self, item: Item, doc: DocRecord, evidence: Pass1Output, *, truth: str | None = None
-    ) -> Pass2Judgment:
-        records: list[LLMCallRecord] = []
-        base = self._doc_fields(item, doc) | {"truth_override": truth}
-        try:
-            out: Pass2Output = self._call(
-                pass2_messages(item, doc.title, doc.text, evidence, truth), Pass2Output, records
-            )
-        except MedSimError as exc:
-            return Pass2Judgment(**base, status="error", error=str(exc)[:300], llm_calls=records)
-        return Pass2Judgment(
-            **base, status="ok", output=out, correctness=correctness_grade(out), llm_calls=records
-        )
-
-    def answer(self, item: Item, run: RunRecord) -> AnswerJudgment:
-        records: list[LLMCallRecord] = []
-        answer = run.output_answer or ""
-        base: dict[str, Any] = {"item_id": item.item_id, "config": run.config,
-                "answer_key": answer_key(item.item_id, run.config, answer),
+    def _base(self, item: Item, config: str, answer: str) -> dict[str, Any]:
+        return {"item_id": item.item_id, "config": config,
+                "answer_key": answer_key(item.item_id, config, answer),
                 "judge_model": self.model, "rubric": RUBRIC}  # fmt: skip
+
+    def masked_correctness(
+        self, item: Item, case: CaseStudy, config: str, answer: str, *, truth: str | None = None
+    ) -> MaskedCorrectnessJudgment:
+        records: list[LLMCallRecord] = []
+        base = self._base(item, config, answer) | {"truth_override": truth}
         try:
-            out: AnswerOutput = self._call(answer_messages(item, answer), AnswerOutput, records)
+            out: MaskedCorrectnessOutput = self._call(
+                masked_correctness_messages(item, case, answer, truth),
+                MaskedCorrectnessOutput,
+                records,
+            )
         except MedSimError as exc:
-            return AnswerJudgment(**base, status="error", error=str(exc)[:300], llm_calls=records)
-        return AnswerJudgment(**base, status="ok", output=out, llm_calls=records)
+            return MaskedCorrectnessJudgment(
+                **base, status="error", error=str(exc)[:300], llm_calls=records
+            )
+        return MaskedCorrectnessJudgment(**base, status="ok", output=out, llm_calls=records)
+
+    def consistency(
+        self, item: Item, case: CaseStudy, config: str, answer: str
+    ) -> ConsistencyJudgment:
+        records: list[LLMCallRecord] = []
+        base = self._base(item, config, answer)
+        try:
+            out: ConsistencyOutput = self._call(
+                consistency_messages(item, case, answer), ConsistencyOutput, records
+            )
+        except MedSimError as exc:
+            return ConsistencyJudgment(
+                **base, status="error", error=str(exc)[:300], llm_calls=records
+            )
+        return ConsistencyJudgment(**base, status="ok", output=out, llm_calls=records)
+
+    def judge_answer(
+        self, item: Item, case: CaseStudy, config: str, answer: str, metric: str | None = None
+    ) -> MaskedCorrectnessJudgment | ConsistencyJudgment:
+        """One metric's judgment; by default the set's metric (set C needs ``metric``)."""
+        metric = metric or SET_METRICS[item.question_set][0]
+        if metric == "masked_correctness":
+            return self.masked_correctness(item, case, config, answer)
+        return self.consistency(item, case, config, answer)
+
+
+# Which metrics grade each question set's answers.
+SET_METRICS: dict[str, tuple[str, ...]] = {
+    "A": ("masked_correctness",),
+    "B": ("factual_consistency",),
+    "C": ("masked_correctness", "factual_consistency"),
+}
+
+
+# --- panel vote --------------------------------------------------------------------------------
+
+J = TypeVar("J", MaskedCorrectnessJudgment, ConsistencyJudgment)
+
+
+@dataclass(frozen=True)
+class Vote:
+    """The panel's final label for one answer, and how it was reached."""
+
+    label: str | None  # None: no judge has a verdict yet
+    # unanimous / majority / tie_break_main_judge / tie_break_next_judge (main judge had none)
+    resolution: str | None
+    votes: dict[str, str | None]  # judge model -> its label (None: no verdict), panel order
+
+    @property
+    def n_votes(self) -> int:
+        return sum(v is not None for v in self.votes.values())
+
+
+def vote(votes: Mapping[str, str | None]) -> Vote:
+    """Majority vote over ``votes`` (judge model -> label), given in panel order.
+
+    A label chosen by more than half of the panel wins. Otherwise (three different labels, or a
+    1-1 split because a judge has no verdict) the tie is broken in panel order: the main judge's
+    label decides, or, if the main judge has no verdict, the next judge's.
+    """
+    ordered = dict(votes)
+    cast = [label for label in ordered.values() if label is not None]
+    if not cast:
+        return Vote(None, None, ordered)
+    counts = Counter(cast)
+    top_label, top = counts.most_common(1)[0]
+    if top * 2 > len(ordered):
+        resolution = "unanimous" if top == len(ordered) else "majority"
+        return Vote(top_label, resolution, ordered)
+    leader = next(label for label in cast if counts[label] == top)  # panel order
+    main = next(iter(ordered.values()))
+    return Vote(
+        leader, "tie_break_main_judge" if leader == main else "tie_break_next_judge", ordered
+    )
+
+
+def panel_judgments(path: Any, model_cls: type[J], panel: Sequence[str]) -> dict[str, dict[str, J]]:
+    """Successful judgments by each panel model: answer key -> {judge model: judgment}."""
+    by_key: dict[str, dict[str, J]] = {}
+    for model in panel:
+        for key, judged in ok_judgments(path, model_cls, model).items():
+            by_key.setdefault(key, {})[model] = judged
+    return by_key
+
+
+def panel_votes(
+    judged: Mapping[str, Any], panel: Sequence[str], field_name: str = "verdict"
+) -> Vote:
+    """The vote on one output field (``verdict`` or, for masked correctness, ``truth_category``)."""
+    return vote({
+        model: getattr(j.output, field_name) if (j := judged.get(model)) and j.output else None
+        for model in panel
+    })  # fmt: skip
 
 
 # --- step ---------------------------------------------------------------------------------------
@@ -302,75 +382,74 @@ def latest_runs(ws: Workspace, configs: Iterable[str]) -> dict[str, dict[str, Ru
     return runs
 
 
-def ok_judgments(path: Any, model_cls: type[Any], judge_model: str) -> dict[str, Any]:
-    records = [r for r in read_models(path, model_cls) if r.judge_model == judge_model]
-    records = [
-        r for r in records if r.rubric == RUBRIC and getattr(r, "truth_override", None) is None
-    ]
-    key = "answer_key" if model_cls is AnswerJudgment else "doc_key"
-    return {getattr(k, key): k for k in records if k.status == "ok"}
+def ok_judgments(path: Any, model_cls: type[J], judge_model: str) -> dict[str, J]:
+    """Successful judgments by one model under the current rubric, by answer key."""
+    return {
+        r.answer_key: r
+        for r in read_models(path, model_cls)
+        if r.judge_model == judge_model and r.rubric == RUBRIC and r.status == "ok"
+        and getattr(r, "truth_override", None) is None
+    }  # fmt: skip
 
 
 def run_judge(
     ws: Workspace,
     items: Sequence[Item],
     configs: Sequence[str],
-    judge: Judge,
+    panel: Sequence[Judge],
     *,
+    cases: Mapping[str, CaseStudy],
     workers: int = 8,
 ) -> dict[str, Any]:
-    """Pass 1 and the answer check run together (they are independent); pass 2 follows,
-    because it needs pass 1's usefulness grades."""
+    """Every generated answer, by every panel judge, against the full case: masked correctness
+    for set A, factual consistency for set B, both for set C. ``cases`` is the unredacted case
+    file, by case id.
+
+    Each (answer, judge) pair is one independent job; all of them run in one thread pool, so the
+    judges work in parallel with each other and across answers. Pairs already judged are skipped,
+    so a rerun retries only the failed ones (or judges added to the panel).
+    """
     by_id = {i.item_id: i for i in items}
-    runs = latest_runs(ws, configs)
-
-    # Pass 1: unique documents per question, pooled across configurations.
-    docs: dict[str, tuple[Item, DocRecord]] = {}
-    for per_item in runs.values():
+    full = full_cases(items, cases)
+    paths = {"masked_correctness": ws.masked_correctness, "factual_consistency": ws.consistency}
+    classes: dict[str, Any] = {
+        "masked_correctness": MaskedCorrectnessJudgment,
+        "factual_consistency": ConsistencyJudgment,
+    }
+    done = {
+        (metric, judge.model): ok_judgments(paths[metric], classes[metric], judge.model)
+        for metric in paths
+        for judge in panel
+    }
+    writers = {metric: JsonlWriter(path) for metric, path in paths.items()}
+    jobs = []
+    for per_item in latest_runs(ws, configs).values():
         for item_id, run in per_item.items():
-            if item_id in by_id:
-                for doc in run.documents:
-                    docs.setdefault(doc_key(item_id, doc.doc_id, doc.text), (by_id[item_id], doc))
-    done1 = ok_judgments(ws.pass1, Pass1Judgment, judge.model)
-    todo1 = [pair for key, pair in docs.items() if key not in done1]
-
-    # Answer check: set A questions that got a literature answer.
-    done3 = ok_judgments(ws.answers, AnswerJudgment, judge.model)
-    todo3 = [
-        (by_id[item_id], run)
-        for per_item in runs.values()
-        for item_id, run in per_item.items()
-        if item_id in by_id
-        and by_id[item_id].truth is not None
-        and run.answer_source == "literature"
-        and answer_key(item_id, run.config, run.output_answer or "") not in done3
-    ]
+            item = by_id.get(item_id)
+            if item is None or not judgeable(run):
+                continue
+            answer = run.output_answer or ""
+            key = answer_key(item_id, run.config, answer)
+            for metric in SET_METRICS[item.question_set]:
+                if metric == "masked_correctness" and item.truth is None:
+                    continue
+                for judge in panel:
+                    if key in done[(metric, judge.model)]:
+                        continue
+                    job = partial(
+                        judge.judge_answer, item, full[item_id], run.config, answer, metric
+                    )
+                    jobs.append((f"{metric} [{judge.model}]", job, writers[metric]))
     counts: Counter[str] = Counter()
     costs: dict[str, float] = {}
-    pass1_writer, answer_writer = JsonlWriter(ws.pass1), JsonlWriter(ws.answers)
-    _run_parallel(
-        [("pass1", partial(judge.pass1, *pair), pass1_writer) for pair in todo1]
-        + [("answer", partial(judge.answer, *pair), answer_writer) for pair in todo3],
-        counts, costs, workers,
-    )  # fmt: skip
-
-    # Pass 2: set A documents with usefulness >= 1.
-    done1 = ok_judgments(ws.pass1, Pass1Judgment, judge.model)
-    done2 = ok_judgments(ws.pass2, Pass2Judgment, judge.model)
-    todo2 = []
-    for key, (item, doc) in docs.items():
-        judged = done1.get(key)
-        if item.truth is None or judged is None or key in done2:
-            continue
-        if (judged.usefulness or 0) >= 1 and judged.output is not None:
-            todo2.append((item, doc, judged.output))
-    pass2_writer = JsonlWriter(ws.pass2)
-    _run_parallel(
-        [("pass2", partial(judge.pass2, *triple), pass2_writer) for triple in todo2],
-        counts, costs, workers,
-    )  # fmt: skip
-    return {"documents": len(docs), "pass1_todo": len(todo1), "pass2_todo": len(todo2),
-            "answer_todo": len(todo3), **counts,
+    _run_parallel(jobs, counts, costs, workers)
+    failed = sum(n for label, n in counts.items() if label.endswith(":error"))
+    if failed:
+        logger.warning(
+            "%d judgment(s) still failed after %d attempts each; run the judge step again to "
+            "retry only those", failed, max(j.max_attempts for j in panel),
+        )  # fmt: skip
+    return {"panel": [j.model for j in panel], "todo": len(jobs), **counts,
             "cost_usd": {k: round(v, 4) for k, v in costs.items()}}  # fmt: skip
 
 

@@ -52,6 +52,7 @@ def make_settings(**overrides: Any) -> Settings:
         "litsense": LitSenseSettings(backoff_base_s=0.0, max_retries=1, min_interval_s=0.0),
         "max_documents": 6,
         "max_doc_chars": 600,
+        "ledger_enabled": True,  # off by default for now; tests still cover it
     }
     values.update(overrides)
     return load_settings(_env_file=None, **values)

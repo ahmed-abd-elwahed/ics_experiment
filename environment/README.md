@@ -59,6 +59,7 @@ All tunables live in `medsim.config.Settings` and are read from the environment 
 | `MEDSIM_LITSENSE__MODE`, `__RERANK`, `__MAX_RESULTS` | `passages`, `true`, `30` | LitSense search (max results is the candidate pool before reranking) |
 | `MEDSIM_RERANK_DOCUMENTS` | `true` | Rank each source's documents by variable/condition term matches before merging |
 | `MEDSIM_RELAX_MIN_RELEVANT` | `3` | Broaden a source's query while fewer documents than this mention the variable |
+| `MEDSIM_LEDGER_ENABLED` | `false` | Fact ledger (temporarily off): reuse earlier answers and inject established facts into prompts |
 | `MEDSIM_CACHE_ENABLED` / `MEDSIM_CACHE_DIR` | `false` / `.medsim_cache` | On-disk retrieval cache for reproducible reruns |
 | `MEDSIM_RANK_FOR_VALUES`, `MEDSIM_MERGE_STRATEGY` | `true`, `global` | Retrieval change 1: documents stating a value rank first; `global` ranks all sources in one list |
 | `MEDSIM_POPULATION_FILTER` | `true` | Change 2: drop animal studies (MeSH, LitSense species tags, title); rank other age groups lower |
@@ -70,7 +71,9 @@ All tunables live in `medsim.config.Settings` and are read from the environment 
 
 ## Quick start
 
-A case study is a JSON file matching `CaseStudy`:
+A case study is a JSON file with one dataset record, `{"case_id", "case_information",
+"diagnosis"}` (the format of `cases/combined_272_whole_chunking.json`, where `case_information`
+becomes the narrative), or one matching `CaseStudy`:
 
 ```json
 {
@@ -339,7 +342,7 @@ abbreviated.*
   once with the conflict named. If the retry also fails, the result is `unanswerable`.
 - **Concrete values.** The answer states a patient value such as "Temperature is 38.1 °C". A range
   from the literature is recorded in `evidence`.
-- **Cross-query coherence.** `FactLedger` stores every answered fact as
+- **Cross-query coherence** (only with `ledger_enabled`, which is off for now). `FactLedger` stores every answered fact as
   `(case_id, clinical_variable, value, unit, source_doc_ids)`. Facts are scoped by the case id and
   keyed by `variable@timepoint` within a case. A question is a ledger hit only when it matches a
   fact recorded for the same case id, so one ledger can be shared or reloaded across cases
@@ -376,6 +379,7 @@ abbreviated.*
    ```python
    class MyRetriever:
        name = "my_source"
+
        def search(self, query: str, **params: Any) -> list[RetrievedDocument]: ...
        def parameters(self) -> dict[str, Any]: ...  # params actually used by the last search
    ```
@@ -425,8 +429,9 @@ designed from the benchmark's failure analysis and measured with it; see
 
 ## Retrieval benchmark
 
-`bench/` measures whether retrieved documents are relevant, useful, and correct with an LLM judge,
-and compares retrieval methods, including cost. See [bench/README.md](bench/README.md) and the
+`bench/` grades medsim's literature answers with an LLM judge (masked correctness against a hidden
+case value; factual consistency with the full case) and compares retrieval methods, including
+cost. See [bench/README.md](bench/README.md) and the
 results in [results/](results/).
 
 ## Swapping the model

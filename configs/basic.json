@@ -3,7 +3,6 @@
   "cases_file": "cases/combined_272_whole_chunking.json",
   "case_ids": null,
   "max_cases": 5,
-  "initial_information": "none",
   "environment": {
     "cache_enabled": true
   },

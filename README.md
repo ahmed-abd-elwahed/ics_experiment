@@ -120,7 +120,6 @@ mostly model reasoning time. That trial cost $0.0031 in total. `configs/basic.js
   "cases_file": "cases/combined_272_whole_chunking.json",
   "case_ids": null,
   "max_cases": 5,
-  "initial_information": "none",
   "environment": { "cache_enabled": true },
   "strategies": [
     { "name": "basic", "params": { "model": null, "temperature": 0.2, "max_tokens": 4000 } }
@@ -134,9 +133,8 @@ mostly model reasoning time. That trial cost $0.0031 in total. `configs/basic.js
 | Field | Meaning |
 |---|---|
 | `name` | Experiment name; also fills `{name}` in `output` |
-| `cases_file` | Case dataset (the combined format or `CaseStudy` records) |
+| `cases_file` | Case dataset: a JSON list of `{case_id, case_information, diagnosis}` records (or `CaseStudy` records). Case ids must be unique |
 | `case_ids`, `max_cases` | Which cases (`null` = all, in file order), then at most this many |
-| `initial_information` | `none`: the strategy starts blank. `background`: it is given the case's `background_and_presentation` |
 | `environment` | Environment settings to override (see [environment/README.md](environment/README.md)), or the path of a JSON file of them. The API key always comes from `.env` |
 | `strategies` | `{name, label?, params}` entries, or plain names. Use labels to run one strategy twice with different params |
 | `stopping` | `max_iterations` and/or `max_seconds` per case run; at least one |

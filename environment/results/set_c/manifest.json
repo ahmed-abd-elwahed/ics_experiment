@@ -1,0 +1,156 @@
+{
+  "steps": [
+    {
+      "step": "set-c",
+      "at": "2026-09-28T17:30:43+00:00",
+      "cases": 272,
+      "todo": 272,
+      "accepted": 272,
+      "rejected": 0,
+      "total_accepted": 272,
+      "cases_file": "cases/combined_272_whole_chunking.json",
+      "writer_model": "google/gemini-3.5-flash-lite",
+      "export": {
+        "file": "cases/combined_272_bench_set_c_items.json",
+        "accepted": 272,
+        "rejected": 0
+      },
+      "key_usage_before": 12.870853627,
+      "key_usage_after": 12.969953094
+    },
+    {
+      "step": "run",
+      "at": "2026-09-28T17:33:28+00:00",
+      "configs": [
+        "case_information"
+      ],
+      "items": 272,
+      "pipeline_models": [
+        "deepseek/deepseek-v4-flash-0731"
+      ],
+      "case_information": {
+        "todo": 272,
+        "ok": 272,
+        "path:case_study": 268,
+        "path:no_documents": 4,
+        "cost_usd": 0.0257,
+        "elapsed_s": 149.6
+      },
+      "key_usage_before": 13.093412803,
+      "key_usage_after": 13.728253737
+    },
+    {
+      "step": "judge",
+      "at": "2026-09-28T17:39:14+00:00",
+      "panel": [
+        "google/gemini-3.5-flash-lite",
+        "qwen/qwen3.8-flash",
+        "openai/gpt-6-luna"
+      ],
+      "todo": 1608,
+      "masked_correctness [google/gemini-3.5-flash-lite]:ok": 268,
+      "factual_consistency [openai/gpt-6-luna]:ok": 268,
+      "factual_consistency [google/gemini-3.5-flash-lite]:ok": 268,
+      "masked_correctness [openai/gpt-6-luna]:ok": 268,
+      "factual_consistency [qwen/qwen3.8-flash]:ok": 268,
+      "masked_correctness [qwen/qwen3.8-flash]:ok": 268,
+      "cost_usd": {
+        "masked_correctness [google/gemini-3.5-flash-lite]": 0.13,
+        "factual_consistency [openai/gpt-6-luna]": 0.0295,
+        "factual_consistency [google/gemini-3.5-flash-lite]": 0.1071,
+        "masked_correctness [openai/gpt-6-luna]": 0.0398,
+        "factual_consistency [qwen/qwen3.8-flash]": 0.0424,
+        "masked_correctness [qwen/qwen3.8-flash]": 0.0697
+      },
+      "key_usage_before": 13.78356202,
+      "key_usage_after": 15.149198444
+    },
+    {
+      "step": "report",
+      "at": "2026-09-28T17:39:29+00:00",
+      "report": "environment/results/set_c/report.md",
+      "configs": [
+        "case_information"
+      ],
+      "key_usage_before": 15.158346927,
+      "key_usage_after": 15.151051902
+    }
+  ],
+  "latest": {
+    "set-c": {
+      "step": "set-c",
+      "at": "2026-09-28T17:30:43+00:00",
+      "cases": 272,
+      "todo": 272,
+      "accepted": 272,
+      "rejected": 0,
+      "total_accepted": 272,
+      "cases_file": "cases/combined_272_whole_chunking.json",
+      "writer_model": "google/gemini-3.5-flash-lite",
+      "export": {
+        "file": "cases/combined_272_bench_set_c_items.json",
+        "accepted": 272,
+        "rejected": 0
+      },
+      "key_usage_before": 12.870853627,
+      "key_usage_after": 12.969953094
+    },
+    "run": {
+      "step": "run",
+      "at": "2026-09-28T17:33:28+00:00",
+      "configs": [
+        "case_information"
+      ],
+      "items": 272,
+      "pipeline_models": [
+        "deepseek/deepseek-v4-flash-0731"
+      ],
+      "case_information": {
+        "todo": 272,
+        "ok": 272,
+        "path:case_study": 268,
+        "path:no_documents": 4,
+        "cost_usd": 0.0257,
+        "elapsed_s": 149.6
+      },
+      "key_usage_before": 13.093412803,
+      "key_usage_after": 13.728253737
+    },
+    "judge": {
+      "step": "judge",
+      "at": "2026-09-28T17:39:14+00:00",
+      "panel": [
+        "google/gemini-3.5-flash-lite",
+        "qwen/qwen3.8-flash",
+        "openai/gpt-6-luna"
+      ],
+      "todo": 1608,
+      "masked_correctness [google/gemini-3.5-flash-lite]:ok": 268,
+      "factual_consistency [openai/gpt-6-luna]:ok": 268,
+      "factual_consistency [google/gemini-3.5-flash-lite]:ok": 268,
+      "masked_correctness [openai/gpt-6-luna]:ok": 268,
+      "factual_consistency [qwen/qwen3.8-flash]:ok": 268,
+      "masked_correctness [qwen/qwen3.8-flash]:ok": 268,
+      "cost_usd": {
+        "masked_correctness [google/gemini-3.5-flash-lite]": 0.13,
+        "factual_consistency [openai/gpt-6-luna]": 0.0295,
+        "factual_consistency [google/gemini-3.5-flash-lite]": 0.1071,
+        "masked_correctness [openai/gpt-6-luna]": 0.0398,
+        "factual_consistency [qwen/qwen3.8-flash]": 0.0424,
+        "masked_correctness [qwen/qwen3.8-flash]": 0.0697
+      },
+      "key_usage_before": 13.78356202,
+      "key_usage_after": 15.149198444
+    },
+    "report": {
+      "step": "report",
+      "at": "2026-09-28T17:39:29+00:00",
+      "report": "environment/results/set_c/report.md",
+      "configs": [
+        "case_information"
+      ],
+      "key_usage_before": 15.158346927,
+      "key_usage_after": 15.151051902
+    }
+  }
+}

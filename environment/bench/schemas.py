@@ -8,7 +8,8 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from medsim.models import CaseStudy, LLMCallRecord
 
-QuestionSet = Literal["A", "B"]  # A: hidden value from the case; B: value the case never states
+# A: a value hidden from the case; B: a value the case never states; C: information the case states
+QuestionSet = Literal["A", "B", "C"]
 Status = Literal["ok", "error"]
 
 FactCategory = Literal[
@@ -59,7 +60,6 @@ class CaseFacts(BaseModel):
 
 class RedactorOutput(_LLMOutput):
     narrative: str
-    background_and_presentation: str
     removed: list[str]
     qualitative_mentions_kept: list[str]
 
@@ -98,6 +98,20 @@ class RejectedItem(BaseModel):
     reason: str
     detail: dict[str, Any] = Field(default_factory=dict)
     llm_calls: list[LLMCallRecord] = Field(default_factory=list)
+
+
+# --- set C --------------------------------------------------------------------------------------
+
+
+class SetCQuestionOutput(_LLMOutput):
+    question: str
+    variable: str
+    answer: str
+    unit: str | None
+    timepoint: str | None
+    span: str
+    answer_type: Literal["numeric", "finding", "history"]
+    category: str
 
 
 # --- run ----------------------------------------------------------------------------------------
@@ -149,74 +163,27 @@ class RunRecord(BaseModel):
 
 # --- judge --------------------------------------------------------------------------------------
 
-VariableMatch = Literal["exact", "related", "absent"]
-ConditionMatch = Literal["exact", "related", "unrelated"]
-PopulationMatch = Literal["match", "partial", "unstated", "mismatch"]
-EvidenceType = Literal["quantitative", "qualitative", "none"]
-Category = Literal["low", "normal", "high"]
-DocVerdict = Literal["within", "direction", "contradicts", "not_comparable"]
-AnswerVerdict = Literal["close", "same_category", "different_category", "not_comparable"]
+Category = Literal["low", "normal", "high", "not_applicable"]  # not_applicable: not a measurement
+MaskedVerdict = Literal["exact", "same_category", "different_category", "not_comparable"]
+ConsistencyVerdict = Literal["consistent", "inconsistent"]
 
 
-class Pass1Output(_LLMOutput):
-    rationale: str
-    evidence_quote: str
-    evidence_value: str
-    evidence_population: str
-    variable_match: VariableMatch
-    condition_match: ConditionMatch
-    population_match: PopulationMatch
-    evidence_type: EvidenceType
-
-
-class Pass2Output(_LLMOutput):
-    reference_range: str
-    truth_category: Category
-    document_prediction: str
-    rationale: str
-    verdict: DocVerdict
-
-
-class AnswerOutput(_LLMOutput):
+class MaskedCorrectnessOutput(_LLMOutput):
     reference_range: str
     truth_category: Category
     answer_value: str
     rationale: str
-    verdict: AnswerVerdict
+    verdict: MaskedVerdict
 
 
-class Pass1Judgment(BaseModel):
-    doc_key: str
-    item_id: str
-    doc_id: str
-    source: str
-    judge_model: str
-    rubric: str
-    status: Status
-    error: str | None = None
-    output: Pass1Output | None = None
-    quote_ok: bool | None = None
-    relevance: int | None = None
-    usefulness: int | None = None
-    llm_calls: list[LLMCallRecord] = Field(default_factory=list)
+class ConsistencyOutput(_LLMOutput):
+    answer_value: str
+    conflicting_facts: list[str]
+    rationale: str
+    verdict: ConsistencyVerdict
 
 
-class Pass2Judgment(BaseModel):
-    doc_key: str
-    item_id: str
-    doc_id: str
-    source: str
-    judge_model: str
-    rubric: str
-    truth_override: str | None = None  # set by the flipped-truth validation
-    status: Status
-    error: str | None = None
-    output: Pass2Output | None = None
-    correctness: int | None = None
-    llm_calls: list[LLMCallRecord] = Field(default_factory=list)
-
-
-class AnswerJudgment(BaseModel):
+class _AnswerJudgment(BaseModel):
     item_id: str
     config: str
     answer_key: str
@@ -224,42 +191,59 @@ class AnswerJudgment(BaseModel):
     rubric: str
     status: Status
     error: str | None = None
-    output: AnswerOutput | None = None
     llm_calls: list[LLMCallRecord] = Field(default_factory=list)
+
+
+class MaskedCorrectnessJudgment(_AnswerJudgment):
+    """Set A: the generated answer compared with the hidden true value."""
+
+    truth_override: str | None = None  # set by the flipped-truth validation
+    output: MaskedCorrectnessOutput | None = None
+
+
+class ConsistencyJudgment(_AnswerJudgment):
+    """Set B: the generated answer compared with the full case, diagnosis included."""
+
+    output: ConsistencyOutput | None = None
 
 
 # --- validate -----------------------------------------------------------------------------------
 
-ControlKind = Literal["positive", "far_range", "off_topic", "veterinary"]
+ControlKind = Literal["true_value", "far_value"]
 
 
 class ControlResult(BaseModel):
+    """One synthetic answer judged by the whole panel; pass/fail is decided on the voted label."""
+
     item_id: str
     control: ControlKind
-    judge_model: str
+    judges: list[str]  # the panel, main judge first
     rubric: str
-    document: str
+    answer: str
     expected: str
+    votes: dict[str, str | None] = Field(default_factory=dict)  # judge model -> its label
+    verdict: str | None = None  # the voted label
+    resolution: str | None = None  # how the vote was reached (bench.judge.Vote)
     passed: bool | None
-    relevance: int | None = None
-    usefulness: int | None = None
-    correctness: int | None = None
-    pass1: Pass1Output | None = None
-    pass2: Pass2Output | None = None
-    error: str | None = None
+    outputs: dict[str, MaskedCorrectnessOutput] = Field(default_factory=dict)
+    errors: dict[str, str] = Field(default_factory=dict)
     llm_calls: list[LLMCallRecord] = Field(default_factory=list)
 
 
 class FlipResult(BaseModel):
-    doc_key: str
+    """An answer the panel voted exact, re-judged by the panel with the true value moved away."""
+
+    answer_key: str
     item_id: str
-    judge_model: str
+    judges: list[str]
     rubric: str
     original_verdict: str
     flipped_truth: str
-    new_verdict: str | None
+    votes: dict[str, str | None] = Field(default_factory=dict)
+    new_verdict: str | None  # the voted label
+    resolution: str | None = None
     passed: bool | None
-    error: str | None = None
+    errors: dict[str, str] = Field(default_factory=dict)
     llm_calls: list[LLMCallRecord] = Field(default_factory=list)
 
 

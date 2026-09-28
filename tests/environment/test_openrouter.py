@@ -142,6 +142,41 @@ def test_response_format_downgrades_without_structured_outputs(
     assert "seed" not in body  # not in the model's supported_parameters
 
 
+def test_temperature_is_sent_only_where_an_endpoint_accepts_it(
+    respx_mock: respx.MockRouter,
+) -> None:
+    respx_mock.get(f"{BASE}/models").mock(
+        return_value=httpx.Response(200, json={"data": [
+            {"id": "acme/reasoner", "supported_parameters": ["response_format", "seed"]},
+            {"id": "acme/listed", "supported_parameters": ["response_format", "temperature"]},
+        ]})
+    )  # fmt: skip
+    no_endpoint = httpx.Response(
+        404, json={"error": {"message": "No endpoints found that can handle the requested "
+                             "parameters.", "code": 404}},
+    )  # fmt: skip
+    route = respx_mock.post(f"{BASE}/chat/completions").mock(
+        side_effect=[
+            httpx.Response(200, json=completion_body("{}", model="acme/reasoner")),
+            no_endpoint,  # acme/listed lists temperature, but no reachable endpoint takes it
+            httpx.Response(200, json=completion_body("{}", model="acme/listed")),
+            httpx.Response(200, json=completion_body("{}", model="acme/listed")),
+        ]
+    )
+    client = _client()
+    client.verify_models(["acme/reasoner", "acme/listed"])
+    client.complete(MESSAGES, response_format=None, temperature=0, max_tokens=5,
+                    model="acme/reasoner")  # fmt: skip
+    assert "temperature" not in json.loads(route.calls[0].request.content)
+    client.complete(MESSAGES, response_format=None, temperature=0, max_tokens=5,
+                    model="acme/listed")  # fmt: skip
+    sent = [json.loads(call.request.content) for call in route.calls[1:3]]
+    assert ["temperature" in body for body in sent] == [True, False]
+    client.complete(MESSAGES, response_format=None, temperature=0, max_tokens=5,
+                    model="acme/listed")  # fmt: skip
+    assert "temperature" not in json.loads(route.calls[3].request.content)  # remembered
+
+
 def test_missing_key_fails_fast_with_actionable_message() -> None:
     with pytest.raises(ConfigError, match=r"OPENROUTER_API_KEY.*\.env"):
         load_settings(_env_file=None)
