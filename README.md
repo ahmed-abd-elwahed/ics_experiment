@@ -94,6 +94,9 @@ the web app in your browser at `http://127.0.0.1:8765/`.
 5. The case run stops at whichever limit it reaches first: `max_iterations`, or `max_seconds`
    since it started. The time limit is checked before each iteration, so the question in
    progress when time runs out is allowed to finish. The finished case run is then saved.
+   `configs/basic.json` sets no time limit: its default model runs through OpenRouter's Batch
+   API, where each LLM call waits for an asynchronous batch (see
+   [environment/README.md](environment/README.md#batch-api)), so elapsed time says little.
 6. Case runs are independent, so they run in parallel threads (`workers`). Iterations inside a
    case run are sequential, because each question depends on the answers before it. With
    `workers: 1` the cases run strictly one after another. All threads share one LLM client,
@@ -124,7 +127,7 @@ mostly model reasoning time. That trial cost $0.0031 in total. `configs/basic.js
   "strategies": [
     { "name": "basic", "params": { "model": null, "temperature": 0.2, "max_tokens": 4000 } }
   ],
-  "stopping": { "max_iterations": 8, "max_seconds": 600 },
+  "stopping": { "max_iterations": 8, "max_seconds": null },
   "workers": 5,
   "output": "records/{name}_{timestamp}.json"
 }

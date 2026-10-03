@@ -18,7 +18,7 @@
   ],
   "stopping": {
     "max_iterations": 8,
-    "max_seconds": 600
+    "max_seconds": null
   },
   "workers": 5,
   "output": "records/{name}_{timestamp}.json"

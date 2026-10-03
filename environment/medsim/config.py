@@ -11,7 +11,9 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from medsim.errors import ConfigError
 from medsim.models import SourceName
 
-DEFAULT_MODEL = "deepseek/deepseek-v4-flash-0731"
+# A ":batch" model runs through OpenRouter's asynchronous Batch API at batch prices (see
+# llm/batch.py); requests that cannot be batched use its synchronous endpoint.
+DEFAULT_MODEL = "deepseek/deepseek-v4.1-flash:batch"
 
 
 def _default_sources() -> list[SourceName]:
@@ -109,6 +111,14 @@ class Settings(BaseSettings):
     llm_max_retries: int = Field(default=2, ge=0)
     llm_backoff_base_s: float = 1.0
     llm_extra_body: dict[str, Any] = Field(default_factory=dict)
+    # Batch API (":batch" models): concurrent requests are submitted together once none has
+    # arrived for batch_window_s, or the first has waited batch_max_wait_s.
+    batch_window_s: float = Field(default=2.0, ge=0.0)
+    batch_max_wait_s: float = Field(default=30.0, ge=0.0)
+    batch_max_requests: int = Field(default=5000, ge=1)
+    batch_poll_interval_s: float = Field(default=5.0, gt=0.0)  # grows 1.5x per poll
+    batch_poll_max_interval_s: float = Field(default=60.0, gt=0.0)
+    batch_timeout_s: float = Field(default=90_000.0, gt=0.0)  # the completion window is 24 h
 
     # Retrieval
     enabled_sources: list[SourceName] = Field(default_factory=_default_sources)

@@ -14,7 +14,9 @@ from medsim.models import CaseStudy, ChatMessage, LLMResponse, TokenUsage
 
 FIXTURES = Path(__file__).parent / "fixtures"
 TEST_KEY = "sk-or-v1-TESTSECRET-0123456789abcdef"
-MODEL = "deepseek/deepseek-v4-flash-0731"
+# The synchronous endpoint of the default model: the tests' settings use it, so that calls go
+# to /chat/completions. tests/environment/test_batch.py covers the ":batch" default.
+MODEL = "deepseek/deepseek-v4.1-flash"
 
 
 def pytest_addoption(parser: pytest.Parser) -> None:
@@ -45,6 +47,7 @@ def _isolate_env(monkeypatch: pytest.MonkeyPatch, request: pytest.FixtureRequest
 def make_settings(**overrides: Any) -> Settings:
     values: dict[str, Any] = {
         "openrouter_api_key": TEST_KEY,
+        "default_model": MODEL,
         "verify_models_on_startup": False,
         "llm_backoff_base_s": 0.0,
         "llm_max_retries": 1,

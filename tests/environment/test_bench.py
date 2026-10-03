@@ -571,7 +571,7 @@ def test_set_c_end_to_end_without_retrieval(tmp_path: Path) -> None:
     runs = {r.item_id: r for r in read_models(ws.run_file("case_information"), RunRecord)}
     assert runs[items[0].item_id].path == "case_study"
     assert runs[items[1].item_id].path == "no_documents" and not runs[items[1].item_id].documents
-    assert {c["model"] for c in llm.calls[-3:]} == {"deepseek/deepseek-v4-flash-0731"}
+    assert {c["model"] for c in llm.calls[-3:]} == {"deepseek/deepseek-v4.1-flash:batch"}
 
     # the one answer gets both metrics from all three judges
     llm.push(*[{**MASKED, "verdict": "exact", "truth_category": "normal"}] * 3,

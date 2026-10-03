@@ -136,8 +136,10 @@ def _web_search(engine: str, mode: str | None, model: str) -> Callable[[Settings
     return update
 
 
-SEARCH_MODEL = "deepseek/deepseek-v4-flash-0731"
-ENVIRONMENT_MODEL = "deepseek/deepseek-v4-flash-0731"
+# Web search runs inside the chat request, which the Batch API does not offer: the search is
+# issued from the model's synchronous endpoint.
+SEARCH_MODEL = "deepseek/deepseek-v4.1-flash"
+ENVIRONMENT_MODEL = "deepseek/deepseek-v4.1-flash:batch"
 
 
 def _case_only(s: Settings) -> Settings:

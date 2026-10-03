@@ -13,6 +13,7 @@ import httpx
 from medsim.config import Settings
 from medsim.errors import ConfigError, LLMError, redact
 from medsim.http_utils import Sleep, backoff_delay, request_with_retries
+from medsim.llm.batch import BatchQueue, is_batch_model
 from medsim.models import ChatMessage, LLMResponse, TokenUsage
 
 logger = logging.getLogger("medsim.llm")
@@ -28,7 +29,8 @@ class _EmptyReplyError(Exception):
 
 
 class OpenRouterClient:
-    """Implements :class:`medsim.llm.base.LLMClient` against ``/chat/completions``."""
+    """Implements :class:`medsim.llm.base.LLMClient` against ``/chat/completions``, and against
+    the Batch API for ``:batch`` models (see :mod:`medsim.llm.batch`)."""
 
     def __init__(
         self,
@@ -50,6 +52,9 @@ class OpenRouterClient:
         self._capabilities: dict[str, frozenset[str]] = {}
         # Models whose reachable endpoints rejected ``temperature`` (see _complete_once).
         self._no_temperature: set[str] = set()
+        self._batches = BatchQueue(
+            settings, http_client=self._client, headers=self._headers, sleep=sleep
+        )
         self.default_model = settings.default_model
 
     # -- lifecycle ------------------------------------------------------------------------------
@@ -189,6 +194,27 @@ class OpenRouterClient:
                 self._redact(f"OpenRouter request failed: {type(exc).__name__}: {exc}")
             ) from None
 
+    def _post_sync(self, model: str, body: dict[str, Any]) -> dict[str, Any]:
+        response = self._post(body)
+        if "temperature" in body and _no_endpoint_for_parameters(response):
+            # The model lists temperature, but no endpoint this account can reach accepts it
+            # (e.g. after tier or data-retention filtering): retry once without it, and skip it
+            # for this model from now on.
+            logger.warning(
+                "OpenRouter has no endpoint for %s that accepts temperature; retrying without it",
+                model,
+            )
+            self._no_temperature.add(model)
+            body.pop("temperature")
+            response = self._post(body)
+        if response.status_code >= 400:
+            raise LLMError(f"OpenRouter HTTP {response.status_code}: {response.text[:500]}")
+        try:
+            data: dict[str, Any] = response.json()
+        except ValueError:
+            raise LLMError(f"OpenRouter returned non-JSON body: {response.text[:200]}") from None
+        return data
+
     def _complete_once(
         self,
         messages: Sequence[ChatMessage],
@@ -217,30 +243,14 @@ class OpenRouterClient:
         body.update(self._settings.llm_extra_body)
 
         started = time.perf_counter()
-        response = self._post(body)
-        if "temperature" in body and _no_endpoint_for_parameters(response):
-            # The model lists temperature, but no endpoint this account can reach accepts it
-            # (e.g. after tier or data-retention filtering): retry once without it, and skip it
-            # for this model from now on.
-            logger.warning(
-                "OpenRouter has no endpoint for %s that accepts temperature; retrying without it",
-                model,
-            )
-            self._no_temperature.add(model)
-            body.pop("temperature")
-            response = self._post(body)
-        latency_ms = (time.perf_counter() - started) * 1000
-
-        if response.status_code >= 400:
-            raise LLMError(
-                self._redact(f"OpenRouter HTTP {response.status_code}: {response.text[:500]}")
-            )
         try:
-            data: dict[str, Any] = response.json()
-        except ValueError:
-            raise LLMError(
-                self._redact(f"OpenRouter returned non-JSON body: {response.text[:200]}")
-            ) from None
+            data = (
+                self._batches.submit(model, body) if is_batch_model(model)
+                else self._post_sync(model, body)
+            )  # fmt: skip
+        except LLMError as exc:
+            raise LLMError(self._redact(str(exc))) from None
+        latency_ms = (time.perf_counter() - started) * 1000
         if data.get("error"):
             raise LLMError(self._redact(f"OpenRouter error: {data['error']}"))
         try:

@@ -26,6 +26,7 @@ evaluators.
 |---|---|---|
 | `GET https://openrouter.ai/api/v1/models` → `{"data":[{"id", "supported_parameters", ...}]}` | Live request | — |
 | Model `deepseek/deepseek-v4-flash-0731` exists; supports `response_format`, `structured_outputs`, `seed`, `temperature`, `max_tokens` | Live request (`supported_parameters`) | — |
+| Model `deepseek/deepseek-v4.1-flash:batch` (the default since 2026-10-04) exists with the same parameters; `/chat/completions` rejects it (404 "cannot be used with the chat/completions endpoint"), `POST /batches` accepts it (202, `status: "validating"`) | Live requests, 2026-10-04 | — |
 | `POST /api/v1/chat/completions`, `Authorization: Bearer`, `usage.prompt_tokens/completion_tokens/total_tokens`, integer `seed` | Docs | [API overview](https://openrouter.ai/docs/api-reference/overview) |
 | Attribution headers: `HTTP-Referer`, `X-OpenRouter-Title` (also accepts `X-Title`) | Docs. The spec named `X-Title`; both are sent. | [API overview](https://openrouter.ai/docs/api-reference/overview) |
 | `response_format: {"type":"json_schema","json_schema":{"name","strict","schema"}}`; `provider.require_parameters: true` | Docs | [Structured outputs](https://openrouter.ai/docs/features/structured-outputs) |

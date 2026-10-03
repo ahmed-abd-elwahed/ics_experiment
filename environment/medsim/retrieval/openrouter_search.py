@@ -25,6 +25,7 @@ from pydantic import ValidationError
 from medsim.config import OpenRouterSearchSettings, Settings
 from medsim.errors import RetrieverError, redact
 from medsim.http_utils import Sleep, request_with_retries
+from medsim.llm.batch import sync_model
 from medsim.models import RetrievedDocument
 from medsim.retrieval.cache import ResponseCache
 
@@ -130,6 +131,11 @@ class OpenRouterSearchRetriever:
             cache=cache,
         )
 
+    def _model(self, cfg: OpenRouterSearchSettings) -> str:
+        # OpenRouter-run web search is not available in the Batch API: a ":batch" model issues
+        # the search from its synchronous endpoint.
+        return sync_model(cfg.model or self._default_model)
+
     def _effective(self, overrides: dict[str, Any]) -> OpenRouterSearchSettings:
         try:
             return OpenRouterSearchSettings.model_validate(
@@ -153,7 +159,7 @@ class OpenRouterSearchRetriever:
             else SEARCH_PROMPT
         )  # fmt: skip
         return {
-            "model": cfg.model or self._default_model,
+            "model": self._model(cfg),
             "messages": [
                 {"role": "system", "content": prompt},
                 {"role": "user", "content": query},
@@ -170,7 +176,7 @@ class OpenRouterSearchRetriever:
             "endpoint": f"{self._base_url}/chat/completions",
             "tool": "openrouter:web_search",
             "tool_parameters": body["tools"][0]["parameters"] if body else None,
-            "model": cfg.model or self._default_model,
+            "model": self._model(cfg),
             "engine": cfg.engine,
             "max_results": cfg.max_results,
             "timeout_s": cfg.timeout_s,

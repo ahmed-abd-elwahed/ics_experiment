@@ -42,12 +42,39 @@ User-Agent sent to Europe PMC and LitSense. If the key is missing, construction 
 with an actionable `ConfigError`. `.env` is git-ignored, and the key is redacted from exceptions
 and logs.
 
+### Batch API
+
+The default model is a `:batch` endpoint. OpenRouter serves these only through its
+[Batch API](https://openrouter.ai/docs/batch-quickstart) (`POST /batches`, then polling
+`GET /batches/{id}`), at batch prices: for `deepseek/deepseek-v4.1-flash`, $0.112 instead of
+$0.30 per million input tokens and $0.336 instead of $1.20 per million output tokens (2026-10-04).
+
+`medsim.llm.batch.BatchQueue` does this inside `OpenRouterClient.complete`, for every caller
+(the environment's stages, strategies, the benchmark's judges if given a `:batch` model): calls
+made by parallel workers within `MEDSIM_BATCH_WINDOW_S` are submitted as one batch per model and
+response format, and each caller blocks until its own result is back. So:
+
+- **It is asynchronous.** A batch has a 24-hour completion window; a call can take minutes or
+  longer, and stages that depend on each other (resolver, query builder, synthesizer; a
+  strategy's iterations) each wait for their own batch. Use more parallel workers to make the
+  batches larger, not to send more requests. For immediate answers at the standard price, set
+  `MEDSIM_DEFAULT_MODEL=deepseek/deepseek-v4.1-flash`.
+- **Web search is not batched.** The Batch API does not run OpenRouter's `web_search` tool, so
+  the `openrouter_search` retriever issues its search from the model's synchronous endpoint
+  (the slug without `:batch`).
+- **Costs.** When a batch reports only its total cost, it is divided over the batch's requests in
+  proportion to their tokens, so per-call costs still add up to what was charged.
+- A request that fails inside a batch raises `LLMError` for its caller only; a batch that fails,
+  expires or is cancelled raises it for all of its callers.
+
 All tunables live in `medsim.config.Settings` and are read from the environment with the prefix
 `MEDSIM_`. Nested retriever settings use `__`. Common ones:
 
 | Variable | Default | Meaning |
 |---|---|---|
-| `MEDSIM_DEFAULT_MODEL` | `deepseek/deepseek-v4-flash-0731` | Model for all stages |
+| `MEDSIM_DEFAULT_MODEL` | `deepseek/deepseek-v4.1-flash:batch` | Model for all stages. A `:batch` model runs through the Batch API (see below) |
+| `MEDSIM_BATCH_WINDOW_S` / `_BATCH_MAX_WAIT_S` | `2` / `30` | Batch API: requests are submitted together once none has arrived for the window, or the first has waited the maximum |
+| `MEDSIM_BATCH_POLL_INTERVAL_S` / `_BATCH_POLL_MAX_INTERVAL_S` / `_BATCH_TIMEOUT_S` | `5` / `60` / `90000` | Batch API: polling (the interval grows 1.5x per poll) and the longest wait for a batch |
 | `MEDSIM_RESOLVER_MODEL` / `_QUERY_BUILDER_MODEL` / `_SYNTHESIZER_MODEL` | unset | Per-stage override |
 | `MEDSIM_SYNTHESIZER_TEMPERATURE` | `0.2` | Stages A and B always use `0` |
 | `MEDSIM_SEED` | `7` | Sent when the model supports `seed` |

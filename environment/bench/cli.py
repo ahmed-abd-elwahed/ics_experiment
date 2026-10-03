@@ -28,6 +28,7 @@ from bench.workspace import Workspace, load_manifest, read_models, update_manife
 from medsim.cli import RedactingFilter
 from medsim.config import Settings, load_settings
 from medsim.errors import ConfigError, MedSimError
+from medsim.llm.batch import sync_model
 from medsim.llm.openrouter import OpenRouterClient
 from medsim.models import CaseStudy
 
@@ -290,7 +291,7 @@ def execute(args: argparse.Namespace, settings: Settings, bench: BenchSettings) 
         run_settings = settings.model_copy(update={"cache_enabled": not args.no_cache})
         models = [
             *settings.stage_models(),
-            settings.openrouter_search.model or settings.default_model,
+            sync_model(settings.openrouter_search.model or settings.default_model),
             settings.model_for("reranker"),
         ]
         live = LiveRetrievers(run_settings, cache=not args.no_cache)

@@ -118,9 +118,9 @@ Every command also writes its full log to `logs/<UTC time>_<step>.log` in the wo
 | `improved_1to5` | plus natural-language LitSense queries |
 | `improved_1to6` | plus LLM selection of the final 8 documents |
 | `openrouter_search` | OpenRouter's web search server tool (Exa) |
-| `openrouter_exa_instant`, `openrouter_parallel_basic`, `openrouter_perplexity` | `openrouter_search` with the Exa (instant mode), Parallel (basic mode) or Perplexity engine; `deepseek/deepseek-v4-flash-0731` issues the search |
+| `openrouter_exa_instant`, `openrouter_parallel_basic`, `openrouter_perplexity` | `openrouter_search` with the Exa (instant mode), Parallel (basic mode) or Perplexity engine; `deepseek/deepseek-v4.1-flash` issues the search (web search cannot run in the Batch API, so not the `:batch` endpoint) |
 | `openrouter_google`, `openrouter_openai` | `openrouter_search` with the model's own (native) search: Google Search via `google/gemini-3.1-flash-lite`, OpenAI web search via `openai/gpt-6-luna`. The documents are the search model's quotations or summaries of the sources it cites |
-| `case_information` | no retrieval: medsim answers from the case or not at all (a question the case cannot answer ends on `no_documents`); every stage on `deepseek/deepseek-v4-flash-0731`. For set C |
+| `case_information` | no retrieval: medsim answers from the case or not at all (a question the case cannot answer ends on `no_documents`); every stage on `deepseek/deepseek-v4.1-flash:batch`. For set C |
 | `sentences`, `no_rerank`, `reference_only` | ablations of the default method |
 
 ### Set C questions (`set-c`)
