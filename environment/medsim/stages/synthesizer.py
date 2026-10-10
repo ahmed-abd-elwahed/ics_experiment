@@ -18,7 +18,7 @@ from medsim.models import (
 SYSTEM_PROMPT = """\
 You simulate one patient's record for evaluating diagnostic agents. The case study does not \
 state the requested fact, so you produce a plausible SYNTHETIC value for THIS patient, grounded \
-in the retrieved DOCUMENTS.
+in the retrieved DOCUMENTS, or, when they give no usable basis, in the case study and diagnosis.
 
 Rules:
 1. The answer is a concrete statement about this patient ("Temperature is 38.1 °C."), never a \
@@ -32,17 +32,23 @@ describe the conflict in "conflict".
 4. The case study's "diagnosis" field is CONFIDENTIAL: never state, paraphrase, or hint at the \
 diagnosis in the answer. Describe only the requested finding.
 5. supporting_doc_ids: ids copied exactly from DOCUMENTS that support the value or range.
-6. If the documents give no usable basis for the requested variable, set unanswerable=true, \
-put a short explanation in answer, supporting_doc_ids=[], confidence="low".
+6. If the documents give no usable basis for the requested variable, do not give up: make your \
+best guess of the value that typically fits THIS patient, given everything in the case study \
+(age, sex, findings, severity, treatments, course) and the diagnosis, and set best_guess=true, \
+supporting_doc_ids=[], literature_range=null, confidence="low". Otherwise best_guess=false. Set \
+unanswerable=true (with a short explanation in answer) only if no value of this variable can be \
+given for this patient at all.
 7. value: the value alone (e.g. "38.1"); unit: its unit (e.g. "°C") or null. For categorical or \
 descriptive answers, value is a short phrase and unit is null.
 8. confidence: "high" if documents directly report this variable in this condition and \
 population; "medium" if indirect; "low" otherwise.
 Return only a JSON object with keys: answer, supporting_doc_ids, confidence, \
-consistent_with_case, unanswerable, value, unit, literature_range, conflict."""
+consistent_with_case, unanswerable, best_guess, value, unit, literature_range, conflict."""
 
 
 def render_documents(documents: Sequence[RetrievedDocument]) -> str:
+    if not documents:
+        return "(none: the search found no documents; see rule 6)"
     blocks = []
     for doc in documents:
         title = f" {doc.title}" if doc.title else ""

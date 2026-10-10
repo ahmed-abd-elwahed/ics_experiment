@@ -200,14 +200,25 @@ def test_one_source_fails_still_answers(llm: ScriptedLLM, case: CaseStudy) -> No
     assert response.literature_search_result.errors == ["litsense: HTTP 503"]
 
 
-def test_zero_results(llm: ScriptedLLM, case: CaseStudy) -> None:
+def test_zero_results_fall_back_to_a_best_guess(llm: ScriptedLLM, case: CaseStudy) -> None:
     env = make_env(llm, case, [FakeRetriever("europe_pmc", []), FakeRetriever("litsense", [])])
-    llm.push(resolver(), builder())
+    guess = synth("Temperature is 37.8 °C.", [], confidence="low", rng=None) | {"best_guess": True}
+    llm.push(resolver(), builder(), guess)
     response = env.query("What is the temperature on day 4?")
-    assert response.answer_source == "unanswerable"
-    assert response.literature_search is True
+    assert response.answer_source == "literature"
+    assert response.output_answer == "Temperature is 37.8 °C."
     assert response.literature_search_result is not None
     assert response.literature_search_result.documents == []
+    assert response.retriever_parameters["path"] == "best_guess"
+    synthesizer_prompt = llm.calls[-1]["messages"][1].content
+    assert "(none: the search found no documents" in synthesizer_prompt
+
+
+def test_zero_results_the_synthesizer_can_still_decline(llm: ScriptedLLM, case: CaseStudy) -> None:
+    env = make_env(llm, case, [FakeRetriever("europe_pmc", []), FakeRetriever("litsense", [])])
+    llm.push(resolver(), builder(), synth("No value can be given.", [], unanswerable=True))
+    response = env.query("What is the temperature on day 4?")
+    assert response.answer_source == "unanswerable"
     assert response.retriever_parameters["path"] == "no_documents"
 
 

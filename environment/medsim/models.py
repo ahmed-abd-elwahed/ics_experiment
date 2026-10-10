@@ -6,7 +6,9 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
-SourceName = Literal["europe_pmc", "litsense", "openrouter_search"]
+# llm_knowledge: an LLM's own knowledge used as a source, without search (the benchmark's
+# gemini_knowledge configuration).
+SourceName = Literal["europe_pmc", "litsense", "openrouter_search", "llm_knowledge"]
 AnswerSource = Literal["case_study", "literature", "unanswerable"]
 Confidence = Literal["high", "medium", "low"]
 # "reranker" is the optional LLM document selection (MEDSIM_LLM_RERANK); extractor, redactor and
@@ -20,6 +22,7 @@ StageName = Literal[
     "extractor",
     "redactor",
     "question_writer",
+    "knowledge_source",
     "judge",
     "strategy",
 ]
@@ -147,6 +150,9 @@ class SynthesizerOutput(_StageOutput):
     confidence: Confidence
     consistent_with_case: bool
     unanswerable: bool
+    # True: the documents gave no usable basis, so the value is a best guess from the case study
+    # and diagnosis (path "best_guess").
+    best_guess: bool = False
     # Extensions (see NOTES.md): needed for the ledger and range instantiation.
     value: str | None = None
     unit: str | None = None

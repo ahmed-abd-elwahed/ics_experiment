@@ -94,6 +94,7 @@ const STOP_LABELS = {
 const PATH_LABELS = {
   case_study: "Answered from the case study",
   literature: "Synthesized from the literature (a simulation artifact, not a clinical claim)",
+  best_guess: "Best guess from the case and diagnosis: the documents gave no usable basis (a simulation artifact)",
   ledger_hit: "Asked before: the stored answer was reused",
   ledger_hit_after_query_builder: "Asked before (same variable): the stored answer was reused",
   off_topic: "Not a question about the patient",

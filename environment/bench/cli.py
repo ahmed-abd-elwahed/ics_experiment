@@ -18,8 +18,9 @@ from bench.extract import run_extract, select_cases
 from bench.items import ItemBuilder, run_redact
 from bench.judge import Judge, run_judge
 from bench.pool import export_pool, run_pool, run_sample
+from bench.repeat import run_repeats
 from bench.report import build_report, write_report
-from bench.run import CONFIGS, LiveRetrievers, run_configs
+from bench.run import CONFIGS, LiveRetrievers, replay_runs, run_configs
 from bench.schemas import Item
 from bench.set_c import SetCWriter, export_set_c, run_set_c
 from bench.text import load_cases
@@ -116,6 +117,33 @@ def build_parser() -> argparse.ArgumentParser:
                    help=f"Comma-separated, from: {', '.join(CONFIGS)}.")  # fmt: skip
     p.add_argument("--limit", type=int, help="Only the first N questions.")
     p.add_argument("--no-cache", action="store_true", help="Do not reuse cached search results.")
+
+    p = sub.add_parser(
+        "repeat",
+        help="Run the same questions again, N times, into run_XX workspaces under --out.",
+    )
+    p.add_argument("--runs", default="2-10", help="Run numbers, e.g. 2-10 or 2,3 (default 2-10).")
+    p.add_argument("--source-ab", type=Path,
+                   default=Path("environment/results/retriever_comparison"),
+                   help="Workspace with the set A and B questions (run 1).")  # fmt: skip
+    p.add_argument("--source-c", type=Path, default=Path("environment/results/set_c"),
+                   help="Workspace with the set C questions (run 1).")  # fmt: skip
+    p.add_argument("--configs", required=True, help="Configurations for sets A and B.")
+    p.add_argument("--set-c-configs", default="case_information",
+                   help="Configurations for set C (empty: none).")  # fmt: skip
+    p.add_argument("--cache", action="store_true",
+                   help="Reuse cached search results (default: search anew).")  # fmt: skip
+
+    p = sub.add_parser(
+        "replay",
+        help="Rerun medsim's stages on stored documents for answers on the given paths.",
+    )
+    p.add_argument("--configs", help="Default: every configuration that has run results.")
+    p.add_argument("--paths", default="synthesizer_unanswerable",
+                   help="Comma-separated answer paths to replay (default: "
+                   "synthesizer_unanswerable).")  # fmt: skip
+    p.add_argument("--search", action="store_true",
+                   help="Search anew instead of reusing the stored documents.")  # fmt: skip
 
     p = sub.add_parser(
         "judge", help="Judge panel: masked correctness (A, C), factual consistency (B, C)."
@@ -304,6 +332,65 @@ def execute(args: argparse.Namespace, settings: Settings, bench: BenchSettings) 
         finally:
             live.close()
         return {"configs": names, "items": len(items), "pipeline_models": settings.stage_models(),
+                **summary}  # fmt: skip
+
+    if args.command == "repeat":
+
+        def parse_runs(value: str) -> list[int]:
+            runs: list[int] = []
+            for part in value.split(","):
+                lo, _, hi = part.strip().partition("-")
+                runs += list(range(int(lo), int(hi or lo) + 1))
+            return runs
+
+        names_ab = [n.strip() for n in args.configs.split(",") if n.strip()]
+        names_c = [n.strip() for n in args.set_c_configs.split(",") if n.strip()]
+        unknown = [n for n in [*names_ab, *names_c] if n not in CONFIGS]
+        if unknown:
+            raise ConfigError(f"Unknown configuration(s): {', '.join(unknown)}")
+        runs = parse_runs(args.runs)
+        repeat_settings = settings.model_copy(update={"cache_enabled": args.cache})
+        repeat_models: list[str] = list(settings.stage_models())
+        for n in names_ab:
+            config_settings = CONFIGS[n].settings(settings)
+            repeat_models.append(
+                sync_model(config_settings.openrouter_search.model or config_settings.default_model)
+            )
+            if CONFIGS[n].knowledge_model:
+                repeat_models.append(CONFIGS[n].knowledge_model or "")
+        repeat_search = LiveRetrievers(repeat_settings, cache=args.cache)
+        try:
+            with _client(settings, [m for m in repeat_models if m], verify) as llm:
+                summary = run_repeats(
+                    args.out, runs, source_ab=Workspace(args.source_ab),
+                    source_c=Workspace(args.source_c),
+                    configs_ab=[CONFIGS[n] for n in names_ab],
+                    configs_c=[CONFIGS[n] for n in names_c], llm=llm,
+                    base_settings=repeat_settings, retrievers=repeat_search,
+                    fulltext=repeat_search.fulltext, workers=args.workers,
+                    search_cache=args.cache,
+                )  # fmt: skip
+        finally:
+            repeat_search.close()
+        return {"runs": runs, "configs_ab": names_ab, "configs_c": names_c,
+                "search_cache": args.cache, **summary}  # fmt: skip
+
+    if args.command == "replay":
+        names = _configs(ws, args.configs)
+        paths = [p.strip() for p in args.paths.split(",") if p.strip()]
+        searcher = LiveRetrievers(settings) if args.search else None
+        try:
+            with _client(settings, settings.stage_models(), verify) as llm:
+                summary = replay_runs(
+                    ws, _items(ws), [CONFIGS[n] for n in names], paths=paths, llm=llm,
+                    base_settings=settings, workers=args.workers, retrievers=searcher,
+                    fulltext=searcher.fulltext if searcher else None,
+                )  # fmt: skip
+        finally:
+            if searcher is not None:
+                searcher.close()
+        return {"configs": names, "paths": paths, "search": args.search,
+                "pipeline_models": settings.stage_models(),
                 **summary}  # fmt: skip
 
     if args.command == "judge":

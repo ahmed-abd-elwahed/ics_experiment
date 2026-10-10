@@ -291,9 +291,13 @@ class RetrievalAggregator:
                 "new": added,
                 "relevant_total": relevant,
             }
-            cost = retriever.parameters().get("cost_usd")  # paid sources report their fee
+            reported = retriever.parameters()
+            cost = reported.get("cost_usd")  # paid sources report their fee
             if isinstance(cost, int | float):
                 entry["cost_usd"] = cost
+            for key in ("web_search_requests", "skipped_searches"):  # web search sources
+                if reported.get(key) is not None:
+                    entry[key] = reported[key]
             attempts.append(entry)
             if relevant >= self.relax_min_relevant:
                 break

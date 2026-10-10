@@ -257,11 +257,8 @@ class MedicalEnvironment:
                 query, "all_sources_failed",
                 "Literature sources are unavailable, so this cannot be answered.", records, **base,
             )  # fmt: skip
-        if not result.documents:
-            return self._unanswerable(
-                query, "no_documents",
-                "No relevant literature was found, so this cannot be answered.", records, **base,
-            )  # fmt: skip
+        # No documents at all: the synthesizer still runs, and its fallback makes a best guess
+        # from the case study and diagnosis (it can still decline: path no_documents).
 
         synth_kwargs: dict[str, Any] = {
             "established_facts": established,
@@ -286,6 +283,12 @@ class MedicalEnvironment:
                     records, **base,
                 )  # fmt: skip
         if synthesized.unanswerable:
+            if not result.documents:
+                return self._unanswerable(
+                    query, "no_documents",
+                    "No relevant literature was found, so this cannot be answered.", records,
+                    **base,
+                )  # fmt: skip
             answer = synthesized.answer.strip() or "The literature does not support an answer."
             return self._unanswerable(query, "synthesizer_unanswerable", answer, records, **base)
 
@@ -301,10 +304,13 @@ class MedicalEnvironment:
                 unit=synthesized.unit, source_doc_ids=synthesized.supporting_doc_ids,
                 evidence=evidence, confidence=confidence,
             )  # fmt: skip
+        # A best guess (no usable basis in the documents) is still a synthesized answer; its path
+        # records that it came from the case study and diagnosis, not from the literature.
         return _Outcome(
-            query=query, path="literature", answer=synthesized.answer,
-            answer_source="literature", confidence=confidence, evidence=evidence,
-            llm_calls=records, **base,
+            query=query,
+            path="best_guess" if synthesized.best_guess or not result.documents else "literature",
+            answer=synthesized.answer, answer_source="literature", confidence=confidence,
+            evidence=evidence, llm_calls=records, **base,
         )  # fmt: skip
 
     def _from_ledger(

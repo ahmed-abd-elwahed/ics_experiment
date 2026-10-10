@@ -87,19 +87,34 @@ def _label(field_name: str, label: str | None) -> Callable[[Score], float]:
     return lambda s: float(getattr(s, field_name) == label)
 
 
+# Reported labels that also count other labels: masked correctness "same category" is reported
+# as exact + same category (the answer is at least in the true value's category).
+CUMULATIVE = {"same_category": ("exact", "same_category")}
+
+
+def _labels(field_name: str, labels: Sequence[str]) -> Callable[[Score], float]:
+    """1 if the judge gave this question any of these labels, else 0."""
+    return lambda s: float(getattr(s, field_name) in labels)
+
+
 def _label_metrics(
     key: str, name: str, field_name: str, labels: Sequence[str], question_set: str
 ) -> dict[str, tuple[str, Callable[[Score], float | None], str]]:
     """One metric per judge label, each a share of every question in the set; plus the share
-    without a label (no answer, failed run, or not judged yet), so the rows sum to 100%."""
-    metrics: dict[str, tuple[str, Callable[[Score], float | None], str]] = {
-        f"{key}_{label}": (
-            f"{name}: {label.replace('_', ' ')} (% of set {question_set} questions)",
-            _label(field_name, label),
-            question_set,
-        )
-        for label in labels
-    }
+    without a label (no answer, failed run, or not judged yet). A cumulative label
+    (``CUMULATIVE``: same category = exact + same category) includes the labels it names, so the
+    rows sum to 100% without the included ones (without exact)."""
+    metrics: dict[str, tuple[str, Callable[[Score], float | None], str]] = {}
+    for label in labels:
+        name_part = label.replace("_", " ")
+        fn = _label(field_name, label)
+        if label in CUMULATIVE:
+            included = CUMULATIVE[label]
+            name_part += " (incl. " + ", ".join(x for x in included if x != label) + ")"
+            fn = _labels(field_name, included)
+        metrics[f"{key}_{label}"] = (
+            f"{name}: {name_part} (% of set {question_set} questions)", fn, question_set,
+        )  # fmt: skip
     metrics[f"{key}_no_label"] = (
         f"{name}: no label — not answered, run failed, or not judged "
         f"(% of set {question_set} questions)",
@@ -120,6 +135,11 @@ METRICS: dict[str, tuple[str, Metric, str]] = {
     "answered": (
         "Questions answered from literature",
         _ran(lambda s: float(s.path == "literature")),
+        "ABC",
+    ),
+    "best_guess": (
+        "Questions answered with a best guess (documents gave no usable basis)",
+        _ran(lambda s: float(s.path == "best_guess")),
         "ABC",
     ),
     **_label_metrics("mc", "Masked correctness", "masked_verdict", MASKED_LABELS, "A"),
@@ -145,7 +165,7 @@ METRICS: dict[str, tuple[str, Metric, str]] = {
     ),
 }
 LABEL_METRICS = [k for k in METRICS if k.startswith(("mc_", "fc_"))]
-PERCENT = {"answered", *LABEL_METRICS}
+PERCENT = {"answered", "best_guess", *LABEL_METRICS}
 MONEY = {"retrieval_cost", "pipeline_cost", "total_cost"}
 
 
@@ -583,7 +603,7 @@ def funnel(ws: Workspace, items: Sequence[Item]) -> list[str]:
 
 
 COST_TIME = {"retrieval_cost", "pipeline_cost", "total_cost", "wall_time", "retrieval_time"}
-MAIN_METRICS = ["docs", "answered", *LABEL_METRICS, "retrieval_cost", "pipeline_cost",
+MAIN_METRICS = ["docs", "answered", "best_guess", *LABEL_METRICS, "retrieval_cost", "pipeline_cost",
                 "total_cost", "wall_time", "retrieval_time"]  # fmt: skip
 
 

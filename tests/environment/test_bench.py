@@ -10,17 +10,20 @@ from bench.extract import check_facts, run_extract
 from bench.items import ItemBuilder, all_set_b, question_for, run_redact
 from bench.judge import Judge, answer_key, full_cases, run_judge, vote
 from bench.pool import export_pool, run_pool, run_sample
+from bench.repeat import run_repeats
 from bench.report import build_report
-from bench.run import CONFIGS, SourceArticleFilter, condition_blind, run_configs
+from bench.run import CONFIGS, SourceArticleFilter, condition_blind, replay_runs, run_configs
 from bench.schemas import (
     CaseFacts,
     ConsistencyJudgment,
     ControlResult,
+    DocRecord,
     ExtractedFact,
     FlipResult,
     Item,
     RunRecord,
     SetCQuestionOutput,
+    Truth,
 )
 from bench.set_c import SetCWriter, check_question, run_set_c
 from bench.stats import cluster_bootstrap, cohen_kappa
@@ -34,7 +37,7 @@ from bench.text import (
 from bench.validate import run_validate
 from bench.workspace import JsonlWriter, Workspace, read_jsonl, read_models
 from medsim.errors import ConfigError, LLMError
-from medsim.models import LiteratureQuery, RetrievedDocument
+from medsim.models import LiteratureQuery, LLMCallRecord, RetrievedDocument
 from tests.conftest import ScriptedLLM, make_settings
 from tests.environment.test_aggregator import FakeRetriever
 
@@ -400,7 +403,7 @@ def test_full_benchmark_offline(tmp_path: Path) -> None:
     )  # fmt: skip
     set_a = data["set_A"]
     assert set_a["mc_exact"]["current"]["mean"] == 1.0
-    assert set_a["mc_same_category"]["current"]["mean"] == 0.0
+    assert set_a["mc_same_category"]["current"]["mean"] == 1.0  # reported as exact + same category
     assert set_a["mc_different_category"]["current"]["mean"] == 0.0
     assert set_a["mc_not_comparable"]["current"]["mean"] == 0.0
     assert set_a["mc_no_label"]["current"]["mean"] == 0.0
@@ -563,23 +566,28 @@ def test_set_c_end_to_end_without_retrieval(tmp_path: Path) -> None:
     # the environment answers the first from the case; the second finds no answer, no search
     resolved = {**RESOLVER_NO, "answerable_from_case": True, "answer": "Pulse 80/min.",
                 "evidence_spans": ["pulse 80/min"]}  # fmt: skip
-    llm.push(resolved, RESOLVER_NO, BUILDER)
+    guess = {**SYNTH, "answer": "Serum creatinine is 1.1 mg/dL.", "supporting_doc_ids": [],
+             "confidence": "low", "best_guess": True}  # fmt: skip
+    llm.push(resolved, RESOLVER_NO, BUILDER, guess)
     run_configs(
         ws, items, [CONFIGS["case_information"]], llm=llm, base_settings=make_settings(),
         retrievers=lambda s: pytest.fail("set C must not search"), workers=1,
     )  # fmt: skip
     runs = {r.item_id: r for r in read_models(ws.run_file("case_information"), RunRecord)}
     assert runs[items[0].item_id].path == "case_study"
-    assert runs[items[1].item_id].path == "no_documents" and not runs[items[1].item_id].documents
-    assert {c["model"] for c in llm.calls[-3:]} == {"deepseek/deepseek-v4.1-flash:batch"}
+    second = runs[items[1].item_id]
+    assert second.path == "best_guess" and not second.documents  # no search: a best guess
+    assert second.output_answer == "Serum creatinine is 1.1 mg/dL."
+    assert {c["model"] for c in llm.calls[-4:]} == {"deepseek/deepseek-v4.1-flash:batch"}
 
-    # the one answer gets both metrics from all three judges
-    llm.push(*[{**MASKED, "verdict": "exact", "truth_category": "normal"}] * 3,
-             *[CONSISTENT] * 3)  # fmt: skip
+    # both answers get both metrics from all three judges
+    exact = {**MASKED, "verdict": "exact", "truth_category": "normal"}
+    different = {**MASKED, "verdict": "different_category"}
+    llm.push(*[exact] * 3, *[CONSISTENT] * 3, *[different] * 3, *[CONSISTENT] * 3)
     panel = [Judge(llm, model, 100) for model in PANEL]
     judged = run_judge(ws, items, ["case_information"], panel, cases={}, workers=1)
-    assert judged["todo"] == 6
-    prompts = [c["messages"][0].content for c in llm.calls[-6:]]
+    assert judged["todo"] == 12
+    prompts = [c["messages"][0].content for c in llm.calls[-12:-6]]
     assert all("which the simulator could read" in p for p in prompts[:3])
     assert all("from the patient's case report, which" in p for p in prompts[3:])
     _, data = build_report(
@@ -588,8 +596,9 @@ def test_set_c_end_to_end_without_retrieval(tmp_path: Path) -> None:
     )  # fmt: skip
     set_c = data["set_C"]
     assert set_c["mc_c_exact"]["case_information"]["mean"] == 0.5
-    assert set_c["mc_c_no_label"]["case_information"]["mean"] == 0.5
-    assert set_c["fc_c_consistent"]["case_information"]["mean"] == 0.5
+    assert set_c["mc_c_different_category"]["case_information"]["mean"] == 0.5
+    assert set_c["mc_c_no_label"]["case_information"]["mean"] == 0.0
+    assert set_c["fc_c_consistent"]["case_information"]["mean"] == 1.0
     assert "set_A" not in data and "set_B" not in data
 
 
@@ -600,3 +609,157 @@ def test_jsonl_records_with_unicode_line_separators_round_trip(tmp_path: Path) -
     for text in texts:
         writer.write({"text": text})
     assert [r["text"] for r in read_jsonl(path)] == texts
+
+
+# --- best-guess fallback, replay, and the knowledge configuration ---------------------------------
+
+
+def _unanswered_run(item: Item) -> RunRecord:
+    """A stored run whose synthesizer found no usable basis in its two documents."""
+    return RunRecord(
+        item_id=item.item_id, config="current", question_set=item.question_set, status="ok",
+        started_at="2026-09-28T17:00:00+00:00", wall_time_s=40.0,
+        path="synthesizer_unanswerable", answer_source="unanswerable",
+        output_answer="No usable basis in the documents.",
+        literature_query="heart rate tricuspid regurgitation",
+        documents=[DocRecord(rank=1, source="europe_pmc", doc_id="PMID:7", title="TR outcomes",
+                             text="Tricuspid regurgitation outcomes in adults."),
+                   DocRecord(rank=2, source="litsense", doc_id="PMID:8", title=None,
+                             text="Right heart failure after valve surgery.")],
+        query_attempts={"europe_pmc": [{"level": "exact", "query": "q", "returned": 2}]},
+        retrieval_cost_usd=0.004,
+        llm_calls=[LLMCallRecord(stage="synthesizer", model="m", prompt_tokens=1,
+                                 completion_tokens=1, latency_ms=10_000.0)],
+    )  # fmt: skip
+
+
+BEST_GUESS: dict[str, Any] = {
+    **SYNTH, "answer": "Heart rate is 96/min.", "supporting_doc_ids": [], "confidence": "low",
+    "best_guess": True, "value": "96", "unit": "/min", "literature_range": None,
+}  # fmt: skip
+
+
+def test_replay_reruns_the_stages_on_the_stored_documents_with_the_fallback(
+    tmp_path: Path,
+) -> None:
+    ws = Workspace(tmp_path / "ws")
+    item, _ = _set_b_item()
+    original = _unanswered_run(item)
+    ws.run_file("current").parent.mkdir(parents=True)
+    ws.run_file("current").write_text(original.model_dump_json() + "\n", encoding="utf-8")
+    llm = ScriptedLLM([RESOLVER_NO, BUILDER, BEST_GUESS])
+    summary = replay_runs(
+        ws, [item], [CONFIGS["current"]], paths=["synthesizer_unanswerable"], llm=llm,
+        base_settings=make_settings(), workers=1,
+    )  # fmt: skip
+    assert summary == {"current": {"todo": 1, "ok": 1, "path:best_guess": 1}}
+    assert "do not give up: make your best guess" in llm.calls[-1]["messages"][0].content
+    assert "[PMID:7] (europe_pmc) TR outcomes" in llm.calls[-1]["messages"][1].content
+    records = read_models(ws.run_file("current"), RunRecord)
+    assert len(records) == 2  # the original stays, the replay supersedes it
+    replayed = records[-1]
+    assert (replayed.path, replayed.answer_source) == ("best_guess", "literature")
+    assert replayed.output_answer == "Heart rate is 96/min."
+    assert [d.doc_id for d in replayed.documents] == ["PMID:7", "PMID:8"]
+    assert replayed.query_attempts == original.query_attempts
+    assert replayed.retrieval_cost_usd == pytest.approx(0.004)  # reused, not searched again
+    assert replayed.replay is not None and replayed.replay["original_path"] == (
+        "synthesizer_unanswerable"
+    )
+    assert replayed.wall_time_s >= 30.0  # the original's 30 s of retrieval time is added
+    # a replayed record is not replayed again
+    assert replay_runs(
+        ws, [item], [CONFIGS["current"]], paths=["best_guess", "synthesizer_unanswerable"],
+        llm=llm, base_settings=make_settings(), workers=1,
+    ) == {}  # fmt: skip
+
+
+def test_knowledge_configuration_asks_the_llm_without_searching(tmp_path: Path) -> None:
+    ws = Workspace(tmp_path / "ws")
+    item, case = _set_b_item()
+    knowledge = {"answer": "Heart rate is about 90/min.", "value": "90", "unit": "/min",
+                 "typical_range": "80-100/min", "rationale": "Right heart failure."}  # fmt: skip
+    llm = ScriptedLLM([RESOLVER_NO, BUILDER, knowledge, {**SYNTH, "supporting_doc_ids": [
+        "LLM:google/gemini-3-flash-preview"]}])  # fmt: skip
+    run_configs(
+        ws, [item], [CONFIGS["gemini_knowledge"]], llm=llm, base_settings=make_settings(),
+        retrievers=lambda s: pytest.fail("the knowledge configuration must not search"),
+        workers=1,
+    )  # fmt: skip
+    [run] = read_models(ws.run_file("gemini_knowledge"), RunRecord)
+    asked = llm.calls[2]
+    assert asked["model"] == "google/gemini-3-flash-preview"
+    assert case.diagnosis in asked["messages"][1].content
+    assert item.question in asked["messages"][1].content
+    assert run.path == "literature"
+    [doc] = run.documents
+    assert doc.source == "llm_knowledge" and "80-100/min" in doc.text
+    knowledge_cost = sum(c.cost_usd or 0 for c in run.llm_calls if c.stage == "knowledge_source")
+    assert run.retrieval_cost_usd == pytest.approx(knowledge_cost)
+
+
+def test_replay_can_search_again_and_keeps_the_earlier_search_cost(tmp_path: Path) -> None:
+    ws = Workspace(tmp_path / "ws")
+    item, _ = _set_b_item()
+    original = _unanswered_run(item).model_copy(
+        update={"path": "no_documents", "documents": [], "retrieval_cost_usd": 0.002}
+    )
+    ws.run_file("current").parent.mkdir(parents=True)
+    ws.run_file("current").write_text(original.model_dump_json() + "\n", encoding="utf-8")
+    llm = ScriptedLLM([RESOLVER_NO, BUILDER, SYNTH])
+    docs = [_doc("PMID:2", "In tricuspid regurgitation, heart rate 80-100/min.", pmid="2")]
+    summary = replay_runs(
+        ws, [item], [CONFIGS["current"]], paths=["no_documents"], llm=llm,
+        base_settings=make_settings(), retrievers=lambda s: [FakeRetriever("europe_pmc", docs)],
+        workers=1,
+    )  # fmt: skip
+    assert summary == {"current": {"todo": 1, "ok": 1, "path:literature": 1}}
+    rerun = read_models(ws.run_file("current"), RunRecord)[-1]
+    assert [d.doc_id for d in rerun.documents] == ["PMID:2"]
+    assert rerun.replay is not None and rerun.replay["searched_again"] is True
+    assert rerun.retrieval_cost_usd == pytest.approx(0.002)  # the earlier search's cost
+    assert rerun.wall_time_s >= 30.0  # plus its time
+
+
+def test_repeats_copy_the_questions_and_run_every_run_in_one_pool(tmp_path: Path) -> None:
+    source_ab, source_c = Workspace(tmp_path / "ab"), Workspace(tmp_path / "c")
+    item_b, _ = _set_b_item()
+    truth = Truth(value="80", unit="/min", span="pulse 80")
+    item_c = item_b.model_copy(update={"item_id": "C:1", "question_set": "C", "truth": truth})
+    for ws, item in ((source_ab, item_b), (source_c, item_c)):
+        ws.root.mkdir(parents=True)
+        ws.items.write_text(item.model_dump_json() + "\n", encoding="utf-8")
+    resolved = {**RESOLVER_NO, "answerable_from_case": True, "answer": "Pulse 80/min.",
+                "evidence_spans": ["pulse 80/min"]}  # fmt: skip
+    # per run: set B under `current` (resolver, builder, synthesizer), set C answered from the case
+    llm = ScriptedLLM([RESOLVER_NO, BUILDER, SYNTH, resolved] * 2)
+    docs = [_doc("PMID:2", "In tricuspid regurgitation, heart rate 80-100/min.", pmid="2")]
+    root = tmp_path / "repeats"
+    summary = run_repeats(
+        root, [2, 3], source_ab=source_ab, source_c=source_c,
+        configs_ab=[CONFIGS["current"]], configs_c=[CONFIGS["case_information"]], llm=llm,
+        base_settings=make_settings(), retrievers=lambda s: [FakeRetriever("europe_pmc", docs)],
+        workers=1,
+    )  # fmt: skip
+    assert summary["todo"] == 4
+    index = json.loads((root / "index.json").read_text())
+    assert index["runs"]["1"]["sets_ab"] == str(source_ab.root)
+    assert set(index["runs"]) == {"1", "2", "3"}
+    for run in (2, 3):
+        ab, c = (
+            Workspace(root / f"run_0{run}" / "sets_ab"),
+            Workspace(root / f"run_0{run}" / "set_c"),
+        )
+        assert [i.item_id for i in read_models(ab.items, Item)] == [item_b.item_id]
+        assert [r.path for r in read_models(ab.run_file("current"), RunRecord)] == ["literature"]
+        assert [r.path for r in read_models(c.run_file("case_information"), RunRecord)] == [
+            "case_study"
+        ]
+        assert not c.run_file("current").exists()  # set C runs only its own configurations
+    again = run_repeats(
+        root, [2, 3], source_ab=source_ab, source_c=source_c,
+        configs_ab=[CONFIGS["current"]], configs_c=[CONFIGS["case_information"]], llm=llm,
+        base_settings=make_settings(), retrievers=lambda s: pytest.fail("nothing left to run"),
+        workers=1,
+    )  # fmt: skip
+    assert again["todo"] == 0

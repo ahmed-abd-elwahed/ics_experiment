@@ -74,6 +74,9 @@ class OpenRouterSearchSettings(BaseModel):
     timeout_s: float = 120.0
     max_retries: int = Field(default=2, ge=0)
     backoff_base_s: float = 1.0
+    # Native search: the model decides whether to search, and sometimes answers from memory
+    # instead (no search, no citations). Such a reply is asked again this many times.
+    skipped_search_retries: int = Field(default=2, ge=0)
 
 
 class Settings(BaseSettings):

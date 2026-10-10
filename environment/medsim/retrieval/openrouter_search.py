@@ -63,6 +63,25 @@ def identifiers_from_url(url: str) -> tuple[str | None, str | None]:
     )
 
 
+def _cost(payload: Any) -> float:
+    usage = (payload.get("usage") or {}) if isinstance(payload, dict) else {}
+    cost = usage.get("cost")
+    return float(cost) if isinstance(cost, int | float) else 0.0
+
+
+def skipped_search(payload: Any) -> bool:
+    """A reply in which the model ran no web search and cited nothing (it answered from memory)."""
+    if not isinstance(payload, dict):
+        return False
+    usage = payload.get("usage") or {}
+    details = usage.get("server_tool_use_details") or usage.get("server_tool_use") or {}
+    try:
+        annotations = payload["choices"][0]["message"].get("annotations") or []
+    except (KeyError, IndexError, TypeError, AttributeError):
+        return False
+    return not details.get("web_search_requests") and not annotations
+
+
 def _cited_text(reply: str, start: Any, end: Any) -> str:
     """The reply lines that contain the cited span, without the markdown link itself."""
     if not isinstance(start, int) or not isinstance(end, int) or not 0 <= start <= end:
@@ -197,21 +216,40 @@ class OpenRouterSearchRetriever:
         payload: Any = None
         if self._cache is not None:
             payload = self._cache.get(self.name, query, body)
+            if payload is not None and skipped_search(payload):
+                payload = None  # a reply without a search is not a result; ask again
             self._last["cache_hit"] = payload is not None
+        skipped_cost = 0.0
+        skipped = 0
         if payload is None:
             payload = self._fetch(body, cfg)
-            if self._cache is not None:
+            # Native search is the model's choice: a reply without any search or citation is
+            # asked again (billed, and added to this search's cost), and never cached.
+            while (
+                cfg.engine == "native" and skipped_search(payload)
+                and skipped < cfg.skipped_search_retries
+            ):  # fmt: skip
+                skipped += 1
+                skipped_cost += _cost(payload)
+                payload = self._fetch(body, cfg)
+            if self._cache is not None and not skipped_search(payload):
                 self._cache.set(self.name, query, body, payload)
 
         usage = (payload.get("usage") or {}) if isinstance(payload, dict) else {}
         cost = usage.get("cost")
         details = usage.get("server_tool_use_details") or usage.get("server_tool_use") or {}
-        # cost_usd is what producing this result cost, even when it was replayed from cache.
+        # cost_usd is what producing this result cost (skipped searches included), even when it
+        # was replayed from cache.
+        final_cost = float(cost) if isinstance(cost, int | float) else None
+        total_cost = (
+            None if final_cost is None and not skipped else (final_cost or 0.0) + skipped_cost
+        )
         self._last |= {
-            "cost_usd": float(cost) if isinstance(cost, int | float) else None,
+            "cost_usd": total_cost,
             "web_search_requests": details.get("web_search_requests"),
             "prompt_tokens": usage.get("prompt_tokens"),
             "completion_tokens": usage.get("completion_tokens"),
+            "skipped_searches": skipped,
         }
         documents = self.parse(payload)
         return [self._resolve_redirect(doc) for doc in documents]

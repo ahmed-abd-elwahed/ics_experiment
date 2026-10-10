@@ -18,14 +18,17 @@ from typing import Any
 
 import httpx
 
-from bench.schemas import DocRecord, Item, RunRecord, calls_cost
+from bench.schemas import DocRecord, Item, KnowledgeOutput, RunRecord
 from bench.workspace import JsonlWriter, Workspace, latest_by, read_models
 from medsim.config import Settings
 from medsim.environment import MedicalEnvironment, build_aggregator
 from medsim.errors import MedSimError
 from medsim.http_utils import RateLimiter
 from medsim.llm.base import LLMClient
+from medsim.llm.structured import call_structured
 from medsim.models import (
+    CaseStudy,
+    ChatMessage,
     EnvironmentResponse,
     LiteratureQuery,
     LiteratureSearchResult,
@@ -47,7 +50,7 @@ RetrieverFactory = Callable[[Settings], list[Retriever]]
 FullTextFactory = Callable[[Settings], FullTextFetcher]
 
 # LLM calls made during retrieval: their cost is retrieval cost, not medsim Stage A-C cost.
-RETRIEVAL_STAGES = frozenset({"reranker"})
+RETRIEVAL_STAGES = frozenset({"reranker", "knowledge_source"})
 RETRIEVAL_NOTES = ("population_filtered", "patient_age_group", "excerpts", "llm_rerank")
 
 
@@ -60,9 +63,10 @@ class RunConfig:
     description: str
     update: Callable[[Settings], Settings] = field(default=lambda s: s)
     condition_blind: bool = False  # search for the variable's reference range, not the diagnosis
-    retrieval: bool = (
-        True  # False: no literature search; medsim answers from the case or not at all
-    )
+    # False: no literature search; medsim answers from the case or not at all.
+    retrieval: bool = True
+    # An LLM that answers from its own knowledge (no search) replaces the literature sources.
+    knowledge_model: str | None = None
 
     def settings(self, base: Settings) -> Settings:
         return self.update(base)
@@ -139,6 +143,7 @@ def _web_search(engine: str, mode: str | None, model: str) -> Callable[[Settings
 # Web search runs inside the chat request, which the Batch API does not offer: the search is
 # issued from the model's synchronous endpoint.
 SEARCH_MODEL = "deepseek/deepseek-v4.1-flash"
+KNOWLEDGE_MODEL = "google/gemini-3-flash-preview"
 ENVIRONMENT_MODEL = "deepseek/deepseek-v4.1-flash:batch"
 
 
@@ -244,6 +249,13 @@ CONFIGS: dict[str, RunConfig] = {
             "information, or does not answer (set C)",
             _case_only,
             retrieval=False,
+        ),
+        RunConfig(
+            "gemini_knowledge",
+            f"no search: {KNOWLEDGE_MODEL} is the source, given the question, the case information "
+            "(as medsim sees it), and the diagnosis, and asked for the value that typically fits; "
+            "medsim's stages as usual",
+            knowledge_model=KNOWLEDGE_MODEL,
         ),
         RunConfig(
             "sentences",
@@ -359,6 +371,112 @@ class NoRetrievalAggregator(RetrievalAggregator):
             query=keywords, documents=[], per_source_counts={}, errors=[], latency_ms=0.0
         )
         return result, {"retrieval": "disabled", "per_source": {}, "failed_sources": []}
+
+
+KNOWLEDGE_PROMPT = """\
+You are a clinical knowledge source for a patient simulator. The simulator must answer a \
+QUESTION about a patient whose case information does not state the answer. You see the CASE \
+INFORMATION the simulator has and the patient's DIAGNOSIS. Without searching, give the answer \
+that typically fits this patient: what a clinician would expect given the diagnosis, the \
+patient's age and sex, and the other findings, severity, treatments, and course in the case.
+
+Fields:
+- answer: one sentence stating the expected value or finding for this patient.
+- value: the value alone (e.g. "138"), or a short phrase for a finding.
+- unit: its unit, or null.
+- typical_range: the range usually seen in comparable patients, with unit ("" if not applicable).
+- rationale: one to three sentences on the case findings and knowledge of the diagnosis behind it.
+Return only a JSON object with exactly these keys."""
+
+
+class KnowledgeAggregator(RetrievalAggregator):
+    """An LLM's own knowledge instead of a literature search: one document, its expected value.
+
+    The LLM sees the question, the case as medsim sees it (redacted for set A), and the
+    diagnosis; its call is recorded under the knowledge_source stage (a retrieval cost).
+    """
+
+    def __init__(
+        self, llm: LLMClient, *, model: str, case: CaseStudy, question: str,
+        max_tokens: int = 4000,
+    ) -> None:  # fmt: skip
+        super().__init__([NoRetriever()], max_documents=1, max_doc_chars=4000)
+        self.llm, self.model, self.case, self.question = llm, model, case, question
+        self.max_tokens = max_tokens
+
+    def search(
+        self, query: LiteratureQuery | str, *, records: list[LLMCallRecord] | None = None
+    ) -> tuple[LiteratureSearchResult, dict[str, Any]]:
+        started = time.perf_counter()
+        user = (
+            f"QUESTION: {self.question}\nDIAGNOSIS: {self.case.diagnosis}\n\n"
+            f"CASE INFORMATION:\n{self.case.narrative.strip()}"
+        )
+        calls = records if records is not None else []
+        attempt: dict[str, Any] = {"level": "knowledge", "query": self.question}
+        try:
+            out: KnowledgeOutput = call_structured(
+                self.llm, stage="knowledge_source",
+                messages=[ChatMessage(role="system", content=KNOWLEDGE_PROMPT),
+                          ChatMessage(role="user", content=user)],
+                output_model=KnowledgeOutput, temperature=0.0, max_tokens=self.max_tokens,
+                model=self.model, records=calls,
+            )  # fmt: skip
+        except MedSimError as exc:
+            failed = LiteratureSearchResult(
+                query=self.question, documents=[], per_source_counts={},
+                errors=[f"llm_knowledge: {exc}"[:300]], latency_ms=0.0,
+            )  # fmt: skip
+            per_source = {"llm_knowledge": {"query_attempts": [attempt | {"returned": 0}]}}
+            return failed, {"per_source": per_source, "failed_sources": ["llm_knowledge"]}
+        typical = out.typical_range.strip()
+        text = f"{out.answer}" + (
+            f" Typical range in comparable patients: {typical}." if typical else ""
+        ) + f" {out.rationale}"  # fmt: skip
+        doc = RetrievedDocument(
+            source="llm_knowledge", doc_id=f"LLM:{self.model}",
+            title=f"Expected value for this patient ({self.model}, no search)",
+            text=text.strip(), url=None, score=None, raw=out.model_dump(mode="json"),
+        )  # fmt: skip
+        result = LiteratureSearchResult(
+            query=self.question, documents=[doc], per_source_counts={"llm_knowledge": 1},
+            errors=[], latency_ms=(time.perf_counter() - started) * 1000,
+        )  # fmt: skip
+        per_source = {"llm_knowledge": {"query_attempts": [attempt | {"returned": 1}]}}
+        return result, {"per_source": per_source, "failed_sources": [], "model": self.model}
+
+
+class ReplayAggregator(RetrievalAggregator):
+    """Returns an earlier run's documents (exactly what Stage C saw) without searching again."""
+
+    def __init__(self, original: RunRecord) -> None:
+        super().__init__([NoRetriever()], max_documents=max(len(original.documents), 1),
+                         max_doc_chars=100_000)  # fmt: skip
+        self.original = original
+
+    def search(
+        self, query: LiteratureQuery | str, *, records: list[LLMCallRecord] | None = None
+    ) -> tuple[LiteratureSearchResult, dict[str, Any]]:
+        docs = [
+            RetrievedDocument.model_validate(
+                {
+                    "source": d.source,
+                    "doc_id": d.doc_id,
+                    "title": d.title,
+                    "text": d.text,
+                    "url": d.url,
+                    "score": None,
+                    "raw": {"pmid": d.pmid, "pmcid": d.pmcid, "replayed": True},
+                }
+            )
+            for d in self.original.documents
+        ]
+        result = LiteratureSearchResult(
+            query=self.original.literature_query or "", documents=docs,
+            per_source_counts=dict(Counter(d.source for d in docs)),
+            errors=list(self.original.source_errors), latency_ms=0.0,
+        )  # fmt: skip
+        return result, {"per_source": {}, "failed_sources": [], "replayed": True}
 
 
 class ConditionBlindAggregator(RetrievalAggregator):
@@ -498,7 +616,12 @@ def run_one(
     settings = config.settings(base_settings)
     started_at = datetime.now(UTC).isoformat(timespec="seconds")
     started = time.perf_counter()
-    if config.retrieval:
+    if config.knowledge_model:
+        filters = [SourceArticleFilter(NoRetriever(), pmcid=None, pmid=None)]
+        aggregator: RetrievalAggregator = KnowledgeAggregator(
+            llm, model=config.knowledge_model, case=item.case, question=item.question
+        )
+    elif config.retrieval:
         filters = [
             SourceArticleFilter(r, pmcid=item.source_pmcid, pmid=item.source_pmid)
             for r in retrievers(settings)
@@ -579,7 +702,9 @@ def run_configs(
             writers[record.config].write(record)
             counts[record.config][record.status] += 1
             counts[record.config][f"path:{record.path}"] += 1
-            spent = record.retrieval_cost_usd + calls_cost(record.llm_calls)
+            # retrieval_cost_usd already includes retrieval-stage LLM calls (reranker, knowledge
+            # source); llm_cost_usd holds the other stages.
+            spent = record.retrieval_cost_usd + sum(record.llm_cost_usd.values())
             cost[record.config] += spent
             logger.info(
                 "run %s %s: %s %s, %d docs, %.1fs, $%.4f [%d/%d]",
@@ -591,3 +716,149 @@ def run_configs(
         name: {**counts[name], "cost_usd": round(cost[name], 4), "elapsed_s": elapsed}
         for name in counts
     }
+
+
+# --- replay: rerun medsim's stages on an earlier run's documents ---------------------------------
+
+
+def _llm_time_s(record: RunRecord) -> float:
+    return sum(c.latency_ms for c in record.llm_calls if c.stage not in RETRIEVAL_STAGES) / 1000
+
+
+def replay_one(
+    item: Item, config: RunConfig, original: RunRecord, *, llm: LLMClient, base_settings: Settings
+) -> RunRecord:
+    """medsim's stages again, with the retrieval replaced by the original run's documents.
+
+    Stages A-C run anew (with the current prompts); nothing is searched. The new record keeps the
+    original's retrieval (documents, query attempts, source article exclusions) and its cost, and
+    adds the original's retrieval time to the new wall time, so cost and time stay comparable
+    with records that were not replayed.
+    """
+    settings = config.settings(base_settings)
+    started_at = datetime.now(UTC).isoformat(timespec="seconds")
+    started = time.perf_counter()
+    filters = [SourceArticleFilter(NoRetriever(), pmcid=None, pmid=None)]
+    env = MedicalEnvironment(
+        case_study=item.case, llm=llm, retrievers=filters, settings=settings,
+        aggregator=ReplayAggregator(original),
+    )  # fmt: skip
+    retrieval_time = max(original.wall_time_s - _llm_time_s(original), 0.0)
+    replay = {
+        "of_started_at": original.started_at, "original_path": original.path,
+        "original_answer": original.output_answer,
+        "reused_retrieval_cost_usd": original.retrieval_cost_usd,
+        "reused_retrieval_time_s": round(retrieval_time, 2),
+    }  # fmt: skip
+    try:
+        response = env.query(item.question)
+    except MedSimError as exc:
+        return RunRecord(
+            item_id=item.item_id, config=config.name, question_set=item.question_set,
+            status="error", error=f"{type(exc).__name__}: {exc}"[:500], started_at=started_at,
+            wall_time_s=round(time.perf_counter() - started, 2), replay=replay,
+        )  # fmt: skip
+    record = record_from_response(
+        item, config.name, response, env, list(original.excluded_source_docs), started_at,
+        time.perf_counter() - started + retrieval_time,
+    )  # fmt: skip
+    searched = record.documents or record.literature_query
+    return record.model_copy(update={
+        "replay": replay,
+        # The reused retrieval, as the original recorded it (a Stage A answer searches nothing).
+        "documents": original.documents if searched else [],
+        "literature_query": original.literature_query if searched else None,
+        "query_attempts": original.query_attempts if searched else {},
+        "failed_sources": original.failed_sources if searched else [],
+        "source_errors": original.source_errors if searched else [],
+        "retrieval_notes": original.retrieval_notes if searched else {},
+        "retrieval_cost_usd": original.retrieval_cost_usd + record.retrieval_cost_usd,
+    })  # fmt: skip
+
+
+def rerun_one(
+    item: Item,
+    config: RunConfig,
+    original: RunRecord,
+    *,
+    llm: LLMClient,
+    base_settings: Settings,
+    retrievers: RetrieverFactory,
+    fulltext: FullTextFactory | None = None,
+) -> RunRecord:
+    """The question again, searching anew (for an original whose search gave nothing usable).
+
+    The earlier search's cost and time are added to the new record's, as for a retry inside a
+    retriever: both were spent getting this answer.
+    """
+    record = run_one(
+        item, config, llm=llm, base_settings=base_settings, retrievers=retrievers,
+        fulltext=fulltext,
+    )  # fmt: skip
+    retrieval_time = max(original.wall_time_s - _llm_time_s(original), 0.0)
+    replay = {
+        "of_started_at": original.started_at, "original_path": original.path,
+        "original_answer": original.output_answer, "searched_again": True,
+        "earlier_retrieval_cost_usd": original.retrieval_cost_usd,
+        "earlier_retrieval_time_s": round(retrieval_time, 2),
+    }  # fmt: skip
+    return record.model_copy(update={
+        "replay": replay,
+        "retrieval_cost_usd": record.retrieval_cost_usd + original.retrieval_cost_usd,
+        "wall_time_s": round(record.wall_time_s + retrieval_time, 2),
+    })  # fmt: skip
+
+
+def replay_runs(
+    ws: Workspace,
+    items: Sequence[Item],
+    configs: Sequence[RunConfig],
+    *,
+    paths: Sequence[str],
+    llm: LLMClient,
+    base_settings: Settings,
+    workers: int = 8,
+    retrievers: RetrieverFactory | None = None,
+    fulltext: FullTextFactory | None = None,
+) -> dict[str, dict[str, Any]]:
+    """Replay every latest successful record on one of ``paths`` that is not a replay itself.
+
+    Without ``retrievers``, medsim's stages run again on the original's documents; with them,
+    the question is searched anew (``rerun_one``). All (configuration, question) pairs share one
+    thread pool. The new records are appended, so they supersede the originals, which stay in
+    the file.
+    """
+    by_id = {i.item_id: i for i in items}
+    todo: list[tuple[RunConfig, Item, RunRecord]] = []
+    for config in configs:
+        latest = latest_by(read_models(ws.run_file(config.name), RunRecord), lambda r: r.item_id)
+        todo += [
+            (config, by_id[r.item_id], r)
+            for r in latest.values()
+            if r.status == "ok" and r.path in paths and r.replay is None and r.item_id in by_id
+        ]
+    writers = {c.name: JsonlWriter(ws.run_file(c.name)) for c in configs}
+    counts: dict[str, Counter[str]] = {c.name: Counter() for c in configs}
+    for config, _, _ in todo:
+        counts[config.name]["todo"] += 1
+    with ThreadPoolExecutor(max_workers=max(1, workers)) as pool:
+        futures = [
+            pool.submit(
+                rerun_one, item, config, original, llm=llm, base_settings=base_settings,
+                retrievers=retrievers, fulltext=fulltext,
+            )
+            if retrievers is not None
+            else pool.submit(
+                replay_one, item, config, original, llm=llm, base_settings=base_settings
+            )
+            for config, item, original in todo
+        ]  # fmt: skip
+        for n, record in enumerate((f.result() for f in as_completed(futures)), 1):
+            writers[record.config].write(record)
+            counts[record.config][record.status] += 1
+            counts[record.config][f"path:{record.path}"] += 1
+            logger.info(
+                "replay %s %s: %s %s [%d/%d]", record.config, record.item_id, record.status,
+                record.path or record.error, n, len(todo),
+            )  # fmt: skip
+    return {name: dict(c) for name, c in counts.items() if c}

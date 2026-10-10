@@ -119,9 +119,34 @@ Every command also writes its full log to `logs/<UTC time>_<step>.log` in the wo
 | `improved_1to6` | plus LLM selection of the final 8 documents |
 | `openrouter_search` | OpenRouter's web search server tool (Exa) |
 | `openrouter_exa_instant`, `openrouter_parallel_basic`, `openrouter_perplexity` | `openrouter_search` with the Exa (instant mode), Parallel (basic mode) or Perplexity engine; `deepseek/deepseek-v4.1-flash` issues the search (web search cannot run in the Batch API, so not the `:batch` endpoint) |
-| `openrouter_google`, `openrouter_openai` | `openrouter_search` with the model's own (native) search: Google Search via `google/gemini-3.1-flash-lite`, OpenAI web search via `openai/gpt-6-luna`. The documents are the search model's quotations or summaries of the sources it cites |
+| `openrouter_google`, `openrouter_openai` | `openrouter_search` with the model's own (native) search: Google Search via `google/gemini-3.1-flash-lite`, OpenAI web search via `openai/gpt-6-luna`. The documents are the search model's quotations or summaries of the sources it cites. The model decides whether to search: a reply with no search and no citation (it answered from memory) is asked again up to twice (`skipped_search_retries`), is never cached, and its cost is added to the search's |
 | `case_information` | no retrieval: medsim answers from the case or not at all (a question the case cannot answer ends on `no_documents`); every stage on `deepseek/deepseek-v4.1-flash:batch`. For set C |
+| `gemini_knowledge` | no search: `google/gemini-3-flash-preview` gets the question, the case information as medsim sees it (redacted for set A), and the diagnosis, and gives the value that typically fits; that answer is the one document medsim's stages use. Its cost counts as retrieval (stage `knowledge_source`) |
 | `sentences`, `no_rerank`, `reference_only` | ablations of the default method |
+
+### Best-guess fallback and replay
+
+Since 2026-09-29, when the documents give no usable basis for the variable, or the search found
+no documents at all, medsim's synthesizer (Stage C) makes its best guess of the value that fits
+the patient from the case study and diagnosis instead of declining
+(`medsim/stages/synthesizer.py`, rule 6; `medsim/environment.py`). Such an answer takes the
+path `best_guess` (answer source `literature`, confidence low, no supporting documents), so the
+report can count it separately ("Questions answered with a best guess").
+
+`replay` reruns medsim's stages A-C on an earlier run's documents, without searching again, for
+the answers on the given paths:
+
+```bash
+python -m bench --out WORKSPACE --workers 24 replay --configs current,... --paths synthesizer_unanswerable
+```
+
+With `--search`, the question is searched anew instead (for an original whose search gave
+nothing usable, e.g. a skipped native search); the earlier search's cost and time are added to the
+new record, as for a retry. The new record is appended (it supersedes the original, which stays in
+the file) and records the replay in `replay`: the original's start time, path, and answer, and the retrieval cost and time
+it reuses. The retrieval cost is kept and the original retrieval time is added to the new wall
+time, so cost and time remain comparable with records that were not replayed. A replayed record
+is not replayed again. Then `judge` grades the new answers.
 
 ### Set C questions (`set-c`)
 
@@ -190,12 +215,14 @@ for 60% of all set A questions.
 
 | Metric (question set) | Labels reported |
 |---|---|
-| Masked correctness (A, C) | exact, same category, different category, not comparable, no label |
+| Masked correctness (A, C) | exact, same category (reported as exact + same category), different category, not comparable, no label |
 | Factual consistency (B, C) | consistent, inconsistent, no label |
 
 "No label" is not a judge label. It counts questions without a voted label (medsim gave no
 answer, the run failed or is missing, or no judge has a verdict yet), so each metric's
-rows sum to 100%. Intervals are 95% from a bootstrap that resamples diagnoses (questions about
+labels sum to 100%. Masked correctness "same category" is reported as exact + same category (the
+share of answers at least in the true value's category; `bench/report.py:CUMULATIVE`), so exact
+is a part of it: same category, different category, not comparable, and no label sum to 100%. Intervals are 95% from a bootstrap that resamples diagnoses (questions about
 the same diagnosis are not independent); differences between methods are paired per question.
 
 - **Cost:** OpenRouter's `usage.cost` for every call (search fees included), per method and step.

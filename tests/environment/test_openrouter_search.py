@@ -221,3 +221,47 @@ def test_other_engines_keep_the_single_search_prompt(respx_mock: respx.MockRoute
         "reply with the single word DONE"
         in json.loads(route.calls.last.request.content)["messages"][0]["content"]
     )
+
+
+def test_native_search_that_was_skipped_is_asked_again_and_not_cached(
+    respx_mock: respx.MockRouter, tmp_path: Path
+) -> None:
+    content = (
+        "- **Study** — “Sodium was 138 mmol/L.” ([pubmed](https://pubmed.ncbi.nlm.nih.gov/5/))"
+    )
+    skipped = {  # answered from memory: no search request, no citation
+        "choices": [{"message": {"content": "- **A remembered study** — “Sodium 140.”"}}],
+        "usage": {"cost": 0.002},
+    }
+    searched = _native_reply(content, [{
+        "url": "https://pubmed.ncbi.nlm.nih.gov/5/", "title": "Study",
+        "start_index": content.index("([pubmed"), "end_index": len(content),
+    }])  # fmt: skip
+    route = respx_mock.post(URL).mock(
+        side_effect=[httpx.Response(200, json=skipped), httpx.Response(200, json=searched)]
+    )
+    cache = ResponseCache(tmp_path / "cache")
+    retriever = _retriever(
+        openrouter_search={"engine": "native", "model": "google/gemini-3.1-flash-lite"}
+    )
+    retriever._cache = cache
+    [doc] = retriever.search("sodium in postpartum depression")
+    assert doc.doc_id == "PMID:5" and route.call_count == 2
+    params = retriever.parameters()
+    assert params["skipped_searches"] == 1
+    assert params["cost_usd"] == pytest.approx(0.012)  # the skipped reply's cost is included
+
+    # a skipped reply found in the cache is not reused
+    body = retriever.build_request("sodium", retriever.settings)
+    cache.set("openrouter_search", "sodium", body, skipped)
+    route.side_effect = [httpx.Response(200, json=searched)]
+    assert [d.doc_id for d in retriever.search("sodium")] == ["PMID:5"]
+    assert route.call_count == 3
+
+
+def test_skipped_native_search_gives_up_after_the_retries(respx_mock: respx.MockRouter) -> None:
+    skipped = {"choices": [{"message": {"content": "From memory."}}], "usage": {"cost": 0.001}}
+    route = respx_mock.post(URL).mock(return_value=httpx.Response(200, json=skipped))
+    retriever = _retriever(openrouter_search={"engine": "native", "skipped_search_retries": 2})
+    assert retriever.search("sodium") == []
+    assert route.call_count == 3

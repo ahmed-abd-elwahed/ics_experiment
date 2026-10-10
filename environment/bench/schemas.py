@@ -114,6 +114,16 @@ class SetCQuestionOutput(_LLMOutput):
     category: str
 
 
+class KnowledgeOutput(_LLMOutput):
+    """The gemini_knowledge configuration's source: an LLM's expected value, without search."""
+
+    answer: str
+    value: str
+    unit: str | None
+    typical_range: str
+    rationale: str
+
+
 # --- run ----------------------------------------------------------------------------------------
 
 
@@ -159,6 +169,9 @@ class RunRecord(BaseModel):
     # population_filtered, excerpts, llm_rerank, patient_age_group, as reported by the aggregator
     retrieval_notes: dict[str, Any] = Field(default_factory=dict)
     llm_cost_usd: dict[str, float] = Field(default_factory=dict)  # per pipeline stage
+    # Set when this record replays an earlier one (bench.run.replay_runs): the original record's
+    # started_at, path, and cost and time of the retrieval it reused.
+    replay: dict[str, Any] | None = None
 
 
 # --- judge --------------------------------------------------------------------------------------
