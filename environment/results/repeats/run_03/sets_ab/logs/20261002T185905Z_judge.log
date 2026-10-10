@@ -1,0 +1,1048 @@
+2026-10-03 04:59:05,490 INFO bench: bench --out environment/results/repeats/run_03/sets_ab --workers 28 judge
+2026-10-03 04:59:09,506 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-10-03 04:59:14,263 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:14,571 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:15,003 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:15,384 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:15,402 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:15,543 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:15,566 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:15,567 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:15,811 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:15,855 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:16,334 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:16,408 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:16,583 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:16,946 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:17,242 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:17,331 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:17,807 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:18,309 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:18,385 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:20,483 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:21,074 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:22,685 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:23,308 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:23,531 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:24,289 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:24,311 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:24,423 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:24,806 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:25,280 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:25,551 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:25,552 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:26,051 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:27,089 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:28,901 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:29,369 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:29,471 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:30,163 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 04:59:30,307 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:30,805 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 04:59:30,976 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:31,696 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:31,932 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:32,268 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:32,276 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 04:59:32,416 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 04:59:32,894 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 04:59:33,097 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:33,221 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:34,097 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 04:59:34,461 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 04:59:34,467 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:35,234 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:36,336 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:37,666 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:37,667 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:38,584 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:39,674 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:39,870 WARNING bench.judge: judge google/gemini-3.5-flash-lite: attempt 1/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 2s
+2026-10-03 04:59:40,132 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 04:59:40,401 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 04:59:40,744 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:40,941 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:41,015 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:41,184 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 04:59:41,222 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:41,769 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:42,732 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 04:59:43,429 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 04:59:44,336 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:44,534 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:45,397 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 25/735
+2026-10-03 04:59:45,511 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:46,297 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 04:59:46,751 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 04:59:48,060 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:48,083 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:48,283 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:48,363 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 04:59:49,325 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:50,717 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:51,253 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 04:59:51,471 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:51,588 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:51,945 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:52,083 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:52,596 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:53,178 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:53,874 WARNING bench.judge: judge google/gemini-3.5-flash-lite: attempt 1/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 2s
+2026-10-03 04:59:54,777 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:55,178 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:55,183 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:55,554 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:55,757 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 04:59:56,217 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:56,403 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 04:59:57,502 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:57,592 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:59:58,784 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:00,049 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:00,336 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:00,720 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:01,591 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:00:01,936 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:04,317 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:04,453 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:05,282 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:00:05,303 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:06,346 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:00:06,925 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:00:09,991 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:10,002 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:11,067 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:11,881 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:12,325 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:12,552 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:12,968 WARNING bench.judge: judge google/gemini-3.5-flash-lite: attempt 2/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 4s
+2026-10-03 05:00:14,313 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:00:14,885 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:15,563 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:15,693 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:16,925 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:17,845 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:18,359 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:18,421 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:00:18,975 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:19,341 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:19,839 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:20,470 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:00:21,753 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:21,947 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:22,002 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:22,927 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 50/735
+2026-10-03 05:00:23,617 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:23,874 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:24,050 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:24,920 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:25,523 WARNING bench.judge: judge google/gemini-3.5-flash-lite: attempt 2/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 4s
+2026-10-03 05:00:26,507 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:00:26,553 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:26,809 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:27,039 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:27,810 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:27,994 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:00:28,004 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:28,763 INFO bench.judge: judge factual_consistency [google/gemini-3.5-flash-lite]: 25/687
+2026-10-03 05:00:30,219 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:30,264 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:31,248 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:00:31,476 INFO bench.judge: judge factual_consistency [openai/gpt-6-luna]: 25/688
+2026-10-03 05:00:32,166 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:32,296 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:32,339 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:32,407 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:32,898 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:32,981 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:34,987 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:35,223 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:35,388 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:36,685 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:37,374 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:00:38,240 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:39,149 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:39,773 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:40,358 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:00:40,424 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:40,776 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:41,273 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:41,405 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:00:43,209 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:00:45,661 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:45,935 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:00:46,468 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:47,743 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:48,016 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:48,322 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:00:48,758 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:49,138 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:49,370 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:52,033 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:52,745 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:00:52,954 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:53,034 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 75/735
+2026-10-03 05:00:54,683 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:54,772 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:54,917 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:56,306 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:57,357 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:57,919 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:00:58,151 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:00:58,222 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:58,766 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:59,076 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:00:59,396 INFO bench.judge: judge factual_consistency [google/gemini-3.5-flash-lite]: 50/687
+2026-10-03 05:00:59,522 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:00:59,826 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:00,097 INFO bench.judge: judge factual_consistency [openai/gpt-6-luna]: 50/688
+2026-10-03 05:01:00,262 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:01,049 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:01,493 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:02,237 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:02,773 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:01:05,127 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:01:05,419 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:05,471 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:05,671 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:06,778 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:06,916 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:07,223 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:07,382 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:01:07,879 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:08,358 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:09,033 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:01:09,760 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:12,384 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:13,137 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:13,755 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:14,124 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:14,359 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:14,719 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:15,548 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:15,558 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:16,197 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:16,256 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:16,599 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:16,829 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:17,073 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:01:19,301 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:01:19,449 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:20,896 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:21,138 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:21,251 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:21,295 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:22,757 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:22,821 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:01:23,382 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:01:23,983 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:24,130 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:25,056 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:01:26,093 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:26,373 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:27,389 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 100/735
+2026-10-03 05:01:27,643 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:27,968 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:28,383 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:28,722 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:29,428 INFO bench.judge: judge factual_consistency [google/gemini-3.5-flash-lite]: 75/687
+2026-10-03 05:01:29,558 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:29,589 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:01:29,880 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:30,132 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:30,138 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:31,484 INFO bench.judge: judge factual_consistency [openai/gpt-6-luna]: 75/688
+2026-10-03 05:01:32,266 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:33,142 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:33,461 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:01:33,827 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:36,373 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:36,623 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:37,390 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:37,511 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:38,031 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:01:38,447 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:40,011 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:40,979 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:40,983 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:41,733 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:41,782 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:01:42,704 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:43,386 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:01:44,072 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:01:44,583 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:44,791 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:01:45,851 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:46,147 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:48,268 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:48,431 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:01:48,697 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:01:48,737 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:49,025 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:51,140 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 125/735
+2026-10-03 05:01:51,297 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:51,607 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:51,827 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:52,501 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:53,305 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:54,590 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:54,787 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:56,468 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:56,553 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:56,950 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:57,062 INFO bench.judge: judge factual_consistency [google/gemini-3.5-flash-lite]: 100/687
+2026-10-03 05:01:57,410 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:01:57,714 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:57,972 INFO bench.judge: judge factual_consistency [openai/gpt-6-luna]: 100/688
+2026-10-03 05:01:58,087 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:01:58,344 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:01:58,484 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:00,589 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:01,371 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:02,586 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:02,734 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:02:03,014 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:04,097 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:04,852 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:04,930 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:05,952 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:06,359 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:06,844 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:06,913 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:02:08,562 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:08,877 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:09,368 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:09,774 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:02:10,813 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:10,991 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:11,470 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:11,647 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:12,270 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:02:12,793 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:12,960 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:13,485 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:13,659 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:13,692 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:02:14,793 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:15,952 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:17,457 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:17,669 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:17,912 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:18,272 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:18,382 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:18,535 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:19,209 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:19,666 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 150/735
+2026-10-03 05:02:20,625 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:02:20,724 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:21,037 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:22,131 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:22,204 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:22,451 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:02:22,836 INFO bench.judge: judge factual_consistency [google/gemini-3.5-flash-lite]: 125/687
+2026-10-03 05:02:23,409 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:23,525 INFO bench.judge: judge factual_consistency [openai/gpt-6-luna]: 125/688
+2026-10-03 05:02:24,444 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:24,490 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:25,442 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:02:26,556 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:26,982 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:27,009 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:02:27,706 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:28,002 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:02:28,368 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:28,425 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:28,519 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:28,693 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:02:29,903 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:30,141 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:32,554 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:33,114 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:33,362 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:34,686 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:35,133 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:02:35,300 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:35,634 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:35,992 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:36,050 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:36,793 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:37,225 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:37,287 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:38,063 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:39,396 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:40,734 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:41,041 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:41,742 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:42,670 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:42,713 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:42,722 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:43,299 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:44,213 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:45,131 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:45,446 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:46,132 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:02:46,321 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:46,361 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:46,626 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:47,484 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 175/735
+2026-10-03 05:02:48,002 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:49,788 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:02:49,891 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:50,179 INFO bench.judge: judge factual_consistency [google/gemini-3.5-flash-lite]: 150/687
+2026-10-03 05:02:50,442 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:02:51,449 INFO bench.judge: judge factual_consistency [openai/gpt-6-luna]: 150/688
+2026-10-03 05:02:51,711 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:52,165 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:52,276 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:02:52,502 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:02:53,272 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:53,278 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:53,663 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:53,932 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:54,517 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:54,886 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:55,206 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:57,050 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:02:57,579 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:02:59,138 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:00,167 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:00,641 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:01,055 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:01,075 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:01,163 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:03:01,172 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:03:02,866 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:02,998 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:03,542 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:03,647 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:03:04,422 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:05,712 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:06,884 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:07,035 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:03:08,978 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:09,069 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:03:09,258 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:10,526 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:10,941 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:11,217 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:11,246 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:03:11,248 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:11,320 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:12,033 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:12,656 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:14,861 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:14,983 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:15,853 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:17,019 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:17,085 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:17,382 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:17,865 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:17,926 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:18,285 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:18,713 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:19,438 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:20,447 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:20,510 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:20,870 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:21,051 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:03:21,344 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:21,589 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:23,093 INFO bench.judge: judge masked_correctness [google/gemini-3.5-flash-lite]: 25/286
+2026-10-03 05:03:23,552 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:03:24,865 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:24,871 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:03:24,952 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:03:25,249 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:26,230 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:26,428 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:27,222 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:03:27,831 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:29,388 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:03:30,032 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:03:30,363 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:30,465 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:03:30,878 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:31,358 INFO bench.judge: judge masked_correctness [openai/gpt-6-luna]: 25/284
+2026-10-03 05:03:32,214 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:03:32,456 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:32,570 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:33,034 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:34,761 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 200/735
+2026-10-03 05:03:35,028 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:03:35,110 INFO bench.judge: judge masked_correctness [qwen/qwen3.8-flash]: 25/298
+2026-10-03 05:03:35,450 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:03:36,102 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:37,413 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:38,769 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:40,161 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:40,458 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:41,623 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:42,429 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:42,502 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:43,392 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:43,424 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:43,542 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:43,923 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:44,453 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:46,168 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:46,374 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:46,833 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:46,896 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:47,902 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:48,146 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:03:48,398 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:49,794 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:50,797 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:50,915 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:03:51,206 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:51,547 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:51,692 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:52,100 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:03:53,736 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:53,742 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:54,576 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:03:55,603 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:55,927 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:56,591 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:57,086 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:57,363 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:03:58,045 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:03:58,100 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:03:58,227 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:59,149 INFO bench.judge: judge masked_correctness [google/gemini-3.5-flash-lite]: 50/286
+2026-10-03 05:03:59,603 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:03:59,770 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:03:59,911 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:00,364 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:04:01,253 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:03,302 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:04,292 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:05,242 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:04:05,784 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:04:06,233 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:06,619 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:07,588 INFO bench.judge: judge masked_correctness [openai/gpt-6-luna]: 50/284
+2026-10-03 05:04:08,873 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:09,288 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:09,673 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:09,917 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:13,172 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:13,778 INFO bench.judge: judge masked_correctness [qwen/qwen3.8-flash]: 50/298
+2026-10-03 05:04:14,021 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:04:14,688 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:14,696 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:15,793 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:17,012 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:18,321 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:18,395 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:18,564 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:04:19,547 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:19,573 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:20,431 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:21,023 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:21,383 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:22,568 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:23,521 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:23,710 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:24,867 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:25,465 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:04:25,993 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:26,367 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:26,719 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:27,719 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:04:28,878 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:29,245 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:04:29,813 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:04:30,121 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:30,266 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:31,146 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:32,032 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:32,081 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:32,298 INFO bench.judge: judge masked_correctness [google/gemini-3.5-flash-lite]: 75/286
+2026-10-03 05:04:32,651 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:32,701 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:35,466 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:35,495 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:04:35,730 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:36,399 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:36,625 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:37,002 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:37,326 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:04:37,452 INFO bench.judge: judge masked_correctness [openai/gpt-6-luna]: 75/284
+2026-10-03 05:04:38,287 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:39,330 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:39,495 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:04:39,610 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:40,022 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:40,184 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:04:40,686 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:41,188 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:43,210 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:43,669 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:04:44,018 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:44,046 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:44,694 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:44,835 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:45,742 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:45,861 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:45,904 INFO bench.judge: judge masked_correctness [qwen/qwen3.8-flash]: 75/298
+2026-10-03 05:04:47,837 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:48,228 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:49,293 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:49,551 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:51,438 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:52,312 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:52,324 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:52,722 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:04:52,767 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:53,133 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:04:53,996 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:54,009 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:04:54,035 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:54,819 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:54,879 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:04:55,159 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:04:56,653 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:57,379 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:04:59,385 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:00,406 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:01,304 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:02,289 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:05:02,345 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:02,767 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:03,062 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:03,247 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:05:03,690 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:04,089 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:04,194 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:05,338 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:05,980 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:06,589 INFO bench.judge: judge masked_correctness [google/gemini-3.5-flash-lite]: 100/286
+2026-10-03 05:05:08,029 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:05:09,497 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:09,664 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:10,796 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:11,301 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:11,512 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:11,793 INFO bench.judge: judge masked_correctness [openai/gpt-6-luna]: 100/284
+2026-10-03 05:05:11,851 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:05:12,849 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:14,247 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:14,863 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:14,971 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:15,361 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:15,381 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:16,771 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:17,829 INFO bench.judge: judge masked_correctness [qwen/qwen3.8-flash]: 100/298
+2026-10-03 05:05:18,011 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:18,265 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:19,905 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:20,203 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:05:20,407 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:05:20,551 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:20,787 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:21,811 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:22,110 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:22,113 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:22,372 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:22,870 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:05:22,944 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:23,447 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:24,359 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:25,530 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:05:25,815 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:27,312 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:27,538 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:27,783 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:27,784 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:28,811 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:29,028 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:29,502 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:29,775 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:05:29,829 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:29,997 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:30,359 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:30,683 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:05:32,073 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:05:32,904 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:05:33,004 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:33,577 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:34,327 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:35,078 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:05:36,084 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:36,188 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:05:36,906 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:37,058 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:37,412 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:05:38,388 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:38,569 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:05:39,183 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:39,830 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:40,066 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:41,775 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:41,946 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:43,319 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:43,778 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:43,904 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:44,850 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:05:45,253 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:05:45,732 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:45,870 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:05:46,224 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:05:46,542 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:46,840 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:05:47,455 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:48,527 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:49,355 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:50,099 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:51,194 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:52,326 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:05:52,813 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:52,928 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:55,061 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:55,335 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:55,491 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:56,131 INFO bench.judge: judge masked_correctness [google/gemini-3.5-flash-lite]: 125/286
+2026-10-03 05:05:56,601 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:05:56,708 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:57,037 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:57,075 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:05:57,081 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:05:58,630 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:00,711 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:00,846 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:02,618 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:03,239 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:03,497 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:03,585 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:03,839 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:03,908 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:04,091 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:04,525 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:05,400 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:05,506 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:07,810 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:06:08,039 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:08,137 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:06:10,866 INFO bench.judge: judge masked_correctness [qwen/qwen3.8-flash]: 125/298
+2026-10-03 05:06:11,526 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:06:12,070 INFO bench.judge: judge masked_correctness [openai/gpt-6-luna]: 125/284
+2026-10-03 05:06:12,356 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:06:12,496 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:13,347 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:13,442 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:13,671 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:14,544 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:14,774 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:17,127 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:17,250 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:17,712 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:18,557 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:19,177 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:20,713 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:20,888 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:06:20,950 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:21,354 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:21,376 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:21,385 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:21,440 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:06:21,633 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:23,295 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:23,325 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:23,333 INFO bench.judge: judge factual_consistency [google/gemini-3.5-flash-lite]: 175/687
+2026-10-03 05:06:23,630 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:23,720 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:24,196 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:24,785 INFO bench.judge: judge factual_consistency [openai/gpt-6-luna]: 175/688
+2026-10-03 05:06:25,850 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:27,318 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:27,821 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:28,289 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:28,782 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:28,875 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:06:30,370 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:30,504 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:06:30,535 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:31,899 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:32,709 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:32,928 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:06:33,040 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:33,249 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:35,340 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:06:37,065 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:37,444 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:06:37,782 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:38,848 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:39,220 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:06:40,216 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:40,903 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 225/735
+2026-10-03 05:06:40,996 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:41,230 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:41,934 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:06:42,740 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:44,584 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:45,056 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:45,460 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:45,624 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:46,211 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:46,713 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:47,459 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:48,202 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:48,312 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:48,546 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:48,635 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:50,084 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:50,245 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:06:50,787 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:51,270 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:52,369 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:52,999 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:53,104 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:54,018 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:54,246 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:54,916 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:06:55,253 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:55,810 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:06:56,127 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:56,159 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:56,292 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:06:57,017 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:57,483 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:58,110 INFO bench.judge: judge factual_consistency [google/gemini-3.5-flash-lite]: 200/687
+2026-10-03 05:06:58,535 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:06:59,082 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:59,456 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:06:59,664 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:06:59,798 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:00,125 INFO bench.judge: judge factual_consistency [openai/gpt-6-luna]: 200/688
+2026-10-03 05:07:00,154 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:00,290 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:07:01,424 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:07:01,879 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:01,961 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:02,573 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:02,628 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:02,892 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:03,585 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:07:03,975 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:07:04,099 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:05,024 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:07:05,026 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:05,557 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:05,818 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:05,861 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:06,354 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:07:07,560 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:07,681 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:07,913 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:08,402 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:09,154 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:07:09,370 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:07:09,579 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:10,014 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:10,117 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:10,387 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:10,755 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:11,626 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:11,915 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:12,157 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:13,261 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:14,210 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:15,162 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:15,324 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:15,735 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:07:16,772 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:17,135 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:17,291 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:18,071 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:07:18,200 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:18,646 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:19,175 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:19,815 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:20,793 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:20,825 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:22,840 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:22,847 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:23,058 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:24,324 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:07:24,890 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:25,155 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:25,255 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:07:26,140 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:26,178 INFO bench.judge: judge masked_correctness [qwen/qwen3.8-flash]: 150/298
+2026-10-03 05:07:26,617 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:26,815 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:26,839 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:07:27,360 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:07:29,675 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:29,874 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:29,934 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:07:30,709 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:30,937 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 250/735
+2026-10-03 05:07:32,447 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:32,821 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:32,961 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:07:33,408 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:33,775 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:34,656 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:34,748 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:35,167 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:35,411 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:36,916 INFO bench.judge: judge factual_consistency [google/gemini-3.5-flash-lite]: 225/687
+2026-10-03 05:07:37,078 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:37,799 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:38,058 INFO bench.judge: judge factual_consistency [openai/gpt-6-luna]: 225/688
+2026-10-03 05:07:38,453 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:38,854 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:39,437 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:07:39,481 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:40,251 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:41,032 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:42,326 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:42,349 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:42,460 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:42,507 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:42,545 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:43,526 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:45,126 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:45,925 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:46,786 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:48,002 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:07:48,033 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:48,034 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:48,796 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:48,834 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:49,364 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:50,795 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:50,895 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:07:50,979 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:07:51,101 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:07:51,488 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:53,207 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:53,222 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:54,750 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:55,320 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:07:55,609 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:56,219 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:56,870 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:07:57,056 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:07:57,660 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 275/735
+2026-10-03 05:07:59,312 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:07:59,533 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:07:59,847 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:00,030 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:00,398 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:00,536 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:01,176 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:01,513 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:01,646 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:03,564 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:08:04,325 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:04,809 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:04,966 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:08:05,480 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:06,076 INFO bench.judge: judge factual_consistency [google/gemini-3.5-flash-lite]: 250/687
+2026-10-03 05:08:06,505 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:07,121 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:07,586 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:07,782 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:07,782 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:08:07,784 INFO bench.judge: judge factual_consistency [openai/gpt-6-luna]: 250/688
+2026-10-03 05:08:08,486 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:08,683 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:08,899 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:09,054 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:09,137 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:10,173 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:08:10,386 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:11,803 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:13,662 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:14,151 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:14,455 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:14,790 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:15,192 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:17,322 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:08:17,666 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:17,768 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:17,858 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:17,926 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:18,705 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:08:19,085 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:19,716 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:20,159 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:20,935 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:08:21,681 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:22,174 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:08:22,399 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:24,060 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:24,162 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:08:25,443 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:25,919 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:25,982 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:27,117 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:27,278 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:28,476 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:28,740 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:29,119 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:30,328 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:31,176 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:08:31,273 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:31,310 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:32,503 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:32,578 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 300/735
+2026-10-03 05:08:32,687 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:32,817 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:33,051 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:08:33,140 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:08:33,829 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:08:34,727 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:34,753 INFO bench.judge: judge factual_consistency [google/gemini-3.5-flash-lite]: 275/687
+2026-10-03 05:08:35,193 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:35,948 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:36,574 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:36,759 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:08:36,894 INFO bench.judge: judge factual_consistency [openai/gpt-6-luna]: 275/688
+2026-10-03 05:08:37,448 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:38,239 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:38,294 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:38,580 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:38,688 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:38,927 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:39,115 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:39,243 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:08:40,758 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:40,829 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:40,867 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:40,892 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:41,949 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:42,014 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:43,854 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:08:44,368 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:44,995 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:45,815 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:08:47,523 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:48,357 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:49,021 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:49,116 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:49,386 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:49,424 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:49,807 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:51,121 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:51,945 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:52,268 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:08:52,804 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:54,414 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:54,531 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:55,668 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:55,953 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:56,035 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:56,776 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 325/735
+2026-10-03 05:08:57,055 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 1/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 2s
+2026-10-03 05:08:57,085 WARNING bench.judge: judge qwen/qwen3.8-flash: attempt 2/3 failed (OpenRouter HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3.8-flash is temporarily rate-limited upstream. Please retry shortly, or add your own key to a); retrying in 4s
+2026-10-03 05:08:57,178 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:58,980 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:08:59,300 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:08:59,481 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:09:00,260 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:09:00,282 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:09:00,454 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s

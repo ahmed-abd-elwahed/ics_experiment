@@ -28,27 +28,35 @@
         "n": 272
       }
     },
+    "best_guess": {
+      "case_information": {
+        "mean": 0.011029411764705883,
+        "low": 0.0,
+        "high": 0.025547445255474453,
+        "n": 272
+      }
+    },
     "mc_c_exact": {
       "case_information": {
-        "mean": 0.9852941176470589,
-        "low": 0.9699248120300752,
-        "high": 0.9965753424657534,
+        "mean": 0.9889705882352942,
+        "low": 0.9743589743589743,
+        "high": 1.0,
         "n": 272
       }
     },
     "mc_c_same_category": {
       "case_information": {
-        "mean": 0.0,
-        "low": 0.0,
-        "high": 0.0,
+        "mean": 0.9963235294117647,
+        "low": 0.9884615384615385,
+        "high": 1.0,
         "n": 272
       }
     },
     "mc_c_different_category": {
       "case_information": {
-        "mean": 0.0,
+        "mean": 0.003676470588235294,
         "low": 0.0,
-        "high": 0.0,
+        "high": 0.011538461538461539,
         "n": 272
       }
     },
@@ -62,17 +70,17 @@
     },
     "mc_c_no_label": {
       "case_information": {
-        "mean": 0.014705882352941176,
-        "low": 0.0034129692832764505,
-        "high": 0.03007518796992481,
+        "mean": 0.0,
+        "low": 0.0,
+        "high": 0.0,
         "n": 272
       }
     },
     "fc_c_consistent": {
       "case_information": {
-        "mean": 0.9852941176470589,
-        "low": 0.9699248120300752,
-        "high": 0.9965753424657534,
+        "mean": 1.0,
+        "low": 1.0,
+        "high": 1.0,
         "n": 272
       }
     },
@@ -86,9 +94,9 @@
     },
     "fc_c_no_label": {
       "case_information": {
-        "mean": 0.014705882352941176,
-        "low": 0.0034129692832764505,
-        "high": 0.03007518796992481,
+        "mean": 0.0,
+        "low": 0.0,
+        "high": 0.0,
         "n": 272
       }
     },
@@ -102,33 +110,33 @@
     },
     "pipeline_cost": {
       "case_information": {
-        "mean": 9.430940172426476e-05,
-        "low": 8.399404044280436e-05,
-        "high": 0.00010798532162500009,
+        "mean": 9.718188753308831e-05,
+        "low": 8.388274837545124e-05,
+        "high": 0.00011473210108802812,
         "n": 272
       }
     },
     "total_cost": {
       "case_information": {
-        "mean": 9.430940172426476e-05,
-        "low": 8.399404044280436e-05,
-        "high": 0.00010798532162500009,
+        "mean": 9.718188753308831e-05,
+        "low": 8.388274837545124e-05,
+        "high": 0.00011473210108802812,
         "n": 272
       }
     },
     "wall_time": {
       "case_information": {
-        "mean": 7.477058823529416,
-        "low": 6.759263157894739,
-        "high": 8.420500000000006,
+        "mean": 7.711691176470589,
+        "low": 6.746690647482019,
+        "high": 8.934964028776976,
         "n": 272
       }
     },
     "retrieval_time": {
       "case_information": {
-        "mean": 0.00313765305430397,
-        "low": 0.002815410786273657,
-        "high": 0.003465825708181495,
+        "mean": 0.003165800709094164,
+        "low": 0.002841965382554694,
+        "high": 0.003496768292882063,
         "n": 272
       }
     }
@@ -150,27 +158,35 @@
         "n": 272
       }
     },
+    "best_guess": {
+      "case_information": {
+        "mean": 0.011029411764705883,
+        "low": 0.0,
+        "high": 0.025547445255474453,
+        "n": 272
+      }
+    },
     "mc_c_exact": {
       "case_information": {
-        "mean": 0.9852941176470589,
-        "low": 0.9699248120300752,
-        "high": 0.9965753424657534,
+        "mean": 0.9889705882352942,
+        "low": 0.9743589743589743,
+        "high": 1.0,
         "n": 272
       }
     },
     "mc_c_same_category": {
       "case_information": {
-        "mean": 0.0,
-        "low": 0.0,
-        "high": 0.0,
+        "mean": 0.9963235294117647,
+        "low": 0.9884615384615385,
+        "high": 1.0,
         "n": 272
       }
     },
     "mc_c_different_category": {
       "case_information": {
-        "mean": 0.0,
+        "mean": 0.003676470588235294,
         "low": 0.0,
-        "high": 0.0,
+        "high": 0.011538461538461539,
         "n": 272
       }
     },
@@ -184,17 +200,17 @@
     },
     "mc_c_no_label": {
       "case_information": {
-        "mean": 0.014705882352941176,
-        "low": 0.0034129692832764505,
-        "high": 0.03007518796992481,
+        "mean": 0.0,
+        "low": 0.0,
+        "high": 0.0,
         "n": 272
       }
     },
     "fc_c_consistent": {
       "case_information": {
-        "mean": 0.9852941176470589,
-        "low": 0.9699248120300752,
-        "high": 0.9965753424657534,
+        "mean": 1.0,
+        "low": 1.0,
+        "high": 1.0,
         "n": 272
       }
     },
@@ -208,9 +224,9 @@
     },
     "fc_c_no_label": {
       "case_information": {
-        "mean": 0.014705882352941176,
-        "low": 0.0034129692832764505,
-        "high": 0.03007518796992481,
+        "mean": 0.0,
+        "low": 0.0,
+        "high": 0.0,
         "n": 272
       }
     }
@@ -219,9 +235,9 @@
     "case_information": {
       "questions": 272,
       "retrieval_usd": 0.0,
-      "pipeline_llm_usd": 0.025652157269000005,
-      "total_usd": 0.025652157269000005,
-      "per_question_usd": 9.430940172426473e-05,
+      "pipeline_llm_usd": 0.026433473409000006,
+      "total_usd": 0.026433473409000006,
+      "per_question_usd": 9.718188753308826e-05,
       "median_wall_time_s": 5.595
     }
   },
@@ -232,49 +248,51 @@
       "openai/gpt-6-luna"
     ],
     "masked correctness": {
-      "answers": 268,
+      "answers": 272,
       "resolution": {
-        "unanimous": 268
+        "unanimous": 270,
+        "majority": 2
       },
       "fewer_votes": 0,
       "pairs": {
         "google/gemini-3.5-flash-lite | qwen/qwen3.8-flash": {
-          "n": 268,
-          "agree": 268,
-          "kappa": 1.0
+          "n": 272,
+          "agree": 270,
+          "kappa": 0.49722735674676366
         },
         "google/gemini-3.5-flash-lite | openai/gpt-6-luna": {
-          "n": 268,
-          "agree": 268,
-          "kappa": 1.0
+          "n": 272,
+          "agree": 271,
+          "kappa": 0.7986676535899327
         },
         "qwen/qwen3.8-flash | openai/gpt-6-luna": {
-          "n": 268,
-          "agree": 268,
-          "kappa": 1.0
+          "n": 272,
+          "agree": 271,
+          "kappa": 0.7986676535899327
         }
       }
     },
     "factual consistency": {
-      "answers": 268,
+      "answers": 272,
       "resolution": {
-        "unanimous": 268
+        "unanimous": 270,
+        "majority": 2
       },
       "fewer_votes": 0,
       "pairs": {
         "google/gemini-3.5-flash-lite | qwen/qwen3.8-flash": {
-          "n": 268,
-          "agree": 268,
-          "kappa": 1.0
+          "n": 272,
+          "agree": 270,
+          "kappa": -3.1086244689504383e-15
         },
         "google/gemini-3.5-flash-lite | openai/gpt-6-luna": {
-          "n": 268,
-          "agree": 268,
-          "kappa": 1.0
+          "n": 272,
+          "agree": 270,
+          "kappa": -3.1086244689504383e-15
         },
         "qwen/qwen3.8-flash | openai/gpt-6-luna": {
-          "n": 268,
-          "agree": 268,
+          "n": 272,
+          "agree": 272,
           "kappa": 1.0
         }
       }
@@ -286,18 +304,18 @@
       "extract (case facts)": 0,
       "redact + Stage A checks (accepted)": 0.13827459999999997,
       "redact + Stage A checks (rejected)": 0,
-      "run (all methods; search fees included)": 0.025652157269000005,
-      "judge: masked correctness (google/gemini-3.5-flash-lite)": 0.13002240000000007,
-      "judge: masked correctness (openai/gpt-6-luna)": 0.03975522499999999,
-      "judge: masked correctness (qwen/qwen3.8-flash)": 0.0696524080000001,
-      "judge: factual consistency (openai/gpt-6-luna)": 0.029467975000000004,
-      "judge: factual consistency (google/gemini-3.5-flash-lite)": 0.10711780000000003,
-      "judge: factual consistency (qwen/qwen3.8-flash)": 0.042403286,
+      "run (all methods; search fees included)": 0.026433473409000006,
+      "judge: masked correctness (google/gemini-3.5-flash-lite)": 0.13200730000000005,
+      "judge: masked correctness (openai/gpt-6-luna)": 0.040528425,
+      "judge: masked correctness (qwen/qwen3.8-flash)": 0.07123726600000009,
+      "judge: factual consistency (openai/gpt-6-luna)": 0.030144975000000008,
+      "judge: factual consistency (google/gemini-3.5-flash-lite)": 0.10914250000000002,
+      "judge: factual consistency (qwen/qwen3.8-flash)": 0.044231264,
       "validation: controls (panel)": 0,
       "validation: flipped truth (panel)": 0
     },
-    "total": 0.5823458512690002,
-    "key_usage_delta": 2.099576824999998
+    "total": 0.591999803409,
+    "key_usage_delta": 2.2018197270000037
   },
   "scores": [
     {
@@ -1371,23 +1389,36 @@
       "diagnosis": "Drug-induced Sweet syndrome",
       "category": "laboratory",
       "characteristic": null,
-      "path": "no_documents",
+      "path": "case_study",
       "n_docs": 0,
-      "has_answer": false,
+      "has_answer": true,
       "ran": true,
-      "truth_category": null,
-      "masked_verdict": null,
-      "consistency": null,
-      "votes": {},
-      "resolution": {},
+      "truth_category": "normal",
+      "masked_verdict": "exact",
+      "consistency": "consistent",
+      "votes": {
+        "masked_correctness": {
+          "google/gemini-3.5-flash-lite": "exact",
+          "qwen/qwen3.8-flash": "exact",
+          "openai/gpt-6-luna": "exact"
+        },
+        "factual_consistency": {
+          "google/gemini-3.5-flash-lite": "consistent",
+          "qwen/qwen3.8-flash": "consistent",
+          "openai/gpt-6-luna": "consistent"
+        }
+      },
+      "resolution": {
+        "masked_correctness": "unanimous",
+        "factual_consistency": "unanimous"
+      },
       "excluded_source_docs": 0,
       "retrieval_cost": 0.0,
       "stage_cost": {
-        "resolver": 0.00010688026,
-        "query_builder": 0.0002169285
+        "resolver": 6.3316e-05
       },
-      "wall_time_s": 21.36,
-      "llm_time_s": 21.34981758199865
+      "wall_time_s": 9.29,
+      "llm_time_s": 9.282545291993301
     },
     {
       "item_id": "C:PMC7791350_02-2",
@@ -4512,23 +4543,38 @@
       "diagnosis": "Nocardiosis",
       "category": "history",
       "characteristic": null,
-      "path": "no_documents",
+      "path": "best_guess",
       "n_docs": 0,
-      "has_answer": false,
+      "has_answer": true,
       "ran": true,
-      "truth_category": null,
-      "masked_verdict": null,
-      "consistency": null,
-      "votes": {},
-      "resolution": {},
+      "truth_category": "not_applicable",
+      "masked_verdict": "same_category",
+      "consistency": "consistent",
+      "votes": {
+        "masked_correctness": {
+          "google/gemini-3.5-flash-lite": "same_category",
+          "qwen/qwen3.8-flash": "exact",
+          "openai/gpt-6-luna": "same_category"
+        },
+        "factual_consistency": {
+          "google/gemini-3.5-flash-lite": "inconsistent",
+          "qwen/qwen3.8-flash": "consistent",
+          "openai/gpt-6-luna": "consistent"
+        }
+      },
+      "resolution": {
+        "masked_correctness": "majority",
+        "factual_consistency": "majority"
+      },
       "excluded_source_docs": 0,
       "retrieval_cost": 0.0,
       "stage_cost": {
-        "resolver": 0.0001890465,
-        "query_builder": 0.0011976135
+        "resolver": 0.000129087,
+        "query_builder": 0.000899944,
+        "synthesizer": 0.0006515015
       },
-      "wall_time_s": 103.22,
-      "llm_time_s": 103.21062591602094
+      "wall_time_s": 104.38,
+      "llm_time_s": 104.37052616800065
     },
     {
       "item_id": "C:PMC10880484_01",
@@ -6817,23 +6863,38 @@
       "diagnosis": "Hodgkin Lymphoma",
       "category": "anthropometric",
       "characteristic": null,
-      "path": "no_documents",
+      "path": "best_guess",
       "n_docs": 0,
-      "has_answer": false,
+      "has_answer": true,
       "ran": true,
-      "truth_category": null,
-      "masked_verdict": null,
-      "consistency": null,
-      "votes": {},
-      "resolution": {},
+      "truth_category": "not_applicable",
+      "masked_verdict": "different_category",
+      "consistency": "consistent",
+      "votes": {
+        "masked_correctness": {
+          "google/gemini-3.5-flash-lite": "different_category",
+          "qwen/qwen3.8-flash": "different_category",
+          "openai/gpt-6-luna": "different_category"
+        },
+        "factual_consistency": {
+          "google/gemini-3.5-flash-lite": "inconsistent",
+          "qwen/qwen3.8-flash": "consistent",
+          "openai/gpt-6-luna": "consistent"
+        }
+      },
+      "resolution": {
+        "masked_correctness": "unanimous",
+        "factual_consistency": "majority"
+      },
       "excluded_source_docs": 0,
       "retrieval_cost": 0.0,
       "stage_cost": {
-        "resolver": 0.0001117445,
-        "query_builder": 0.0003172935
+        "resolver": 0.000139317,
+        "query_builder": 0.000281073,
+        "synthesizer": 0.000732248
       },
-      "wall_time_s": 34.72,
-      "llm_time_s": 34.7174032079929
+      "wall_time_s": 119.16,
+      "llm_time_s": 119.14713212498464
     },
     {
       "item_id": "C:PMC7362981_01-2",
@@ -9540,23 +9601,38 @@
       "diagnosis": "Acquired Premature Ejaculation",
       "category": "laboratory",
       "characteristic": null,
-      "path": "no_documents",
+      "path": "best_guess",
       "n_docs": 0,
-      "has_answer": false,
+      "has_answer": true,
       "ran": true,
-      "truth_category": null,
-      "masked_verdict": null,
-      "consistency": null,
-      "votes": {},
-      "resolution": {},
+      "truth_category": "high",
+      "masked_verdict": "same_category",
+      "consistency": "consistent",
+      "votes": {
+        "masked_correctness": {
+          "google/gemini-3.5-flash-lite": "exact",
+          "qwen/qwen3.8-flash": "same_category",
+          "openai/gpt-6-luna": "same_category"
+        },
+        "factual_consistency": {
+          "google/gemini-3.5-flash-lite": "consistent",
+          "qwen/qwen3.8-flash": "consistent",
+          "openai/gpt-6-luna": "consistent"
+        }
+      },
+      "resolution": {
+        "masked_correctness": "majority",
+        "factual_consistency": "unanimous"
+      },
       "excluded_source_docs": 0,
       "retrieval_cost": 0.0,
       "stage_cost": {
-        "resolver": 6.66225e-05,
-        "query_builder": 0.0006161665
+        "resolver": 0.0001645,
+        "query_builder": 0.0004246534,
+        "synthesizer": 0.000117972
       },
-      "wall_time_s": 29.87,
-      "llm_time_s": 29.86466850002762
+      "wall_time_s": 20.16,
+      "llm_time_s": 20.154655458958587
     },
     {
       "item_id": "C:PMC5468565_01",

@@ -1,0 +1,686 @@
+{
+  "steps": [
+    {
+      "step": "repeat",
+      "at": "2026-10-01T23:43:53+00:00",
+      "runs": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "configs_ab": [
+        "gemini_knowledge",
+        "current",
+        "improved_1to4",
+        "openrouter_exa_instant",
+        "openrouter_parallel_basic",
+        "openrouter_perplexity"
+      ],
+      "configs_c": [
+        "case_information"
+      ],
+      "search_cache": false,
+      "todo": 24750,
+      "stopped_out_of_credit": false,
+      "not_run": 0,
+      "elapsed_s": 34294.5,
+      "run_02/gemini_knowledge": {
+        "ok": 413
+      },
+      "run_02/current": {
+        "ok": 412,
+        "error": 1
+      },
+      "run_02/improved_1to4": {
+        "ok": 410,
+        "error": 3
+      },
+      "run_02/openrouter_exa_instant": {
+        "ok": 412,
+        "error": 1
+      },
+      "run_02/openrouter_parallel_basic": {
+        "ok": 410,
+        "error": 3
+      },
+      "run_02/openrouter_perplexity": {
+        "ok": 411,
+        "error": 2
+      },
+      "run_02/case_information": {
+        "ok": 271,
+        "error": 1
+      },
+      "run_03/gemini_knowledge": {
+        "ok": 411,
+        "error": 2
+      },
+      "run_03/current": {
+        "ok": 409,
+        "error": 4
+      },
+      "run_03/improved_1to4": {
+        "ok": 410,
+        "error": 3
+      },
+      "run_03/openrouter_exa_instant": {
+        "ok": 407,
+        "error": 6
+      },
+      "run_03/openrouter_parallel_basic": {
+        "ok": 407,
+        "error": 6
+      },
+      "run_03/openrouter_perplexity": {
+        "ok": 403,
+        "error": 10
+      },
+      "run_03/case_information": {
+        "ok": 271,
+        "error": 1
+      },
+      "run_04/gemini_knowledge": {
+        "ok": 405,
+        "error": 8
+      },
+      "run_04/current": {
+        "ok": 411,
+        "error": 2
+      },
+      "run_04/improved_1to4": {
+        "ok": 411,
+        "error": 2
+      },
+      "run_04/openrouter_exa_instant": {
+        "ok": 409,
+        "error": 4
+      },
+      "run_04/openrouter_parallel_basic": {
+        "ok": 412,
+        "error": 1
+      },
+      "run_04/openrouter_perplexity": {
+        "ok": 408,
+        "error": 5
+      },
+      "run_04/case_information": {
+        "ok": 271,
+        "error": 1
+      },
+      "run_05/gemini_knowledge": {
+        "ok": 409,
+        "error": 4
+      },
+      "run_05/current": {
+        "ok": 408,
+        "error": 5
+      },
+      "run_05/improved_1to4": {
+        "ok": 409,
+        "error": 4
+      },
+      "run_05/openrouter_exa_instant": {
+        "ok": 411,
+        "error": 2
+      },
+      "run_05/openrouter_parallel_basic": {
+        "ok": 409,
+        "error": 4
+      },
+      "run_05/openrouter_perplexity": {
+        "ok": 410,
+        "error": 3
+      },
+      "run_05/case_information": {
+        "ok": 272
+      },
+      "run_06/gemini_knowledge": {
+        "ok": 409,
+        "error": 4
+      },
+      "run_06/current": {
+        "ok": 405,
+        "error": 8
+      },
+      "run_06/improved_1to4": {
+        "ok": 409,
+        "error": 4
+      },
+      "run_06/openrouter_exa_instant": {
+        "ok": 410,
+        "error": 3
+      },
+      "run_06/openrouter_parallel_basic": {
+        "ok": 410,
+        "error": 3
+      },
+      "run_06/openrouter_perplexity": {
+        "ok": 409,
+        "error": 4
+      },
+      "run_06/case_information": {
+        "ok": 271,
+        "error": 1
+      },
+      "run_07/gemini_knowledge": {
+        "ok": 411,
+        "error": 2
+      },
+      "run_07/current": {
+        "ok": 408,
+        "error": 5
+      },
+      "run_07/improved_1to4": {
+        "ok": 406,
+        "error": 7
+      },
+      "run_07/openrouter_exa_instant": {
+        "ok": 411,
+        "error": 2
+      },
+      "run_07/openrouter_parallel_basic": {
+        "ok": 404,
+        "error": 9
+      },
+      "run_07/openrouter_perplexity": {
+        "ok": 406,
+        "error": 7
+      },
+      "run_07/case_information": {
+        "ok": 272
+      },
+      "run_08/gemini_knowledge": {
+        "ok": 408,
+        "error": 5
+      },
+      "run_08/current": {
+        "ok": 410,
+        "error": 3
+      },
+      "run_08/improved_1to4": {
+        "ok": 407,
+        "error": 6
+      },
+      "run_08/openrouter_exa_instant": {
+        "ok": 409,
+        "error": 4
+      },
+      "run_08/openrouter_parallel_basic": {
+        "ok": 406,
+        "error": 7
+      },
+      "run_08/openrouter_perplexity": {
+        "ok": 406,
+        "error": 7
+      },
+      "run_08/case_information": {
+        "ok": 271,
+        "error": 1
+      },
+      "run_09/gemini_knowledge": {
+        "ok": 408,
+        "error": 5
+      },
+      "run_09/current": {
+        "ok": 410,
+        "error": 3
+      },
+      "run_09/improved_1to4": {
+        "ok": 412,
+        "error": 1
+      },
+      "run_09/openrouter_exa_instant": {
+        "ok": 411,
+        "error": 2
+      },
+      "run_09/openrouter_parallel_basic": {
+        "ok": 412,
+        "error": 1
+      },
+      "run_09/openrouter_perplexity": {
+        "ok": 412,
+        "error": 1
+      },
+      "run_09/case_information": {
+        "ok": 271,
+        "error": 1
+      },
+      "run_10/gemini_knowledge": {
+        "ok": 413
+      },
+      "run_10/current": {
+        "ok": 413
+      },
+      "run_10/improved_1to4": {
+        "ok": 413
+      },
+      "run_10/openrouter_exa_instant": {
+        "ok": 412,
+        "error": 1
+      },
+      "run_10/openrouter_parallel_basic": {
+        "ok": 412,
+        "error": 1
+      },
+      "run_10/openrouter_perplexity": {
+        "ok": 411,
+        "error": 2
+      },
+      "run_10/case_information": {
+        "ok": 272
+      },
+      "key_usage_before": 47.201322419,
+      "key_usage_after": 166.534713653
+    },
+    {
+      "step": "repeat",
+      "at": "2026-10-02T18:27:37+00:00",
+      "runs": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "configs_ab": [
+        "gemini_knowledge",
+        "current",
+        "improved_1to4",
+        "openrouter_exa_instant",
+        "openrouter_parallel_basic",
+        "openrouter_perplexity"
+      ],
+      "configs_c": [
+        "case_information"
+      ],
+      "search_cache": false,
+      "todo": 198,
+      "stopped_out_of_credit": false,
+      "not_run": 0,
+      "elapsed_s": 545.4,
+      "run_02/case_information": {
+        "ok": 1
+      },
+      "run_03/current": {
+        "ok": 4
+      },
+      "run_03/case_information": {
+        "ok": 1
+      },
+      "run_03/openrouter_parallel_basic": {
+        "ok": 6
+      },
+      "run_02/openrouter_perplexity": {
+        "ok": 2
+      },
+      "run_03/openrouter_perplexity": {
+        "ok": 10
+      },
+      "run_04/gemini_knowledge": {
+        "ok": 8
+      },
+      "run_02/openrouter_parallel_basic": {
+        "ok": 3
+      },
+      "run_03/openrouter_exa_instant": {
+        "ok": 6
+      },
+      "run_03/improved_1to4": {
+        "ok": 3
+      },
+      "run_02/openrouter_exa_instant": {
+        "ok": 1
+      },
+      "run_03/gemini_knowledge": {
+        "ok": 2
+      },
+      "run_02/improved_1to4": {
+        "ok": 3
+      },
+      "run_04/case_information": {
+        "ok": 1
+      },
+      "run_04/current": {
+        "ok": 2
+      },
+      "run_04/openrouter_exa_instant": {
+        "ok": 4
+      },
+      "run_04/improved_1to4": {
+        "ok": 2
+      },
+      "run_05/current": {
+        "ok": 5
+      },
+      "run_02/current": {
+        "ok": 1
+      },
+      "run_04/openrouter_perplexity": {
+        "ok": 5
+      },
+      "run_05/openrouter_exa_instant": {
+        "ok": 2
+      },
+      "run_05/gemini_knowledge": {
+        "ok": 4
+      },
+      "run_05/openrouter_perplexity": {
+        "ok": 3
+      },
+      "run_05/openrouter_parallel_basic": {
+        "ok": 4
+      },
+      "run_06/gemini_knowledge": {
+        "ok": 4
+      },
+      "run_05/improved_1to4": {
+        "ok": 4
+      },
+      "run_06/case_information": {
+        "ok": 1
+      },
+      "run_06/current": {
+        "ok": 8
+      },
+      "run_07/gemini_knowledge": {
+        "ok": 2
+      },
+      "run_06/openrouter_exa_instant": {
+        "ok": 3
+      },
+      "run_04/openrouter_parallel_basic": {
+        "ok": 1
+      },
+      "run_06/improved_1to4": {
+        "ok": 4
+      },
+      "run_06/openrouter_perplexity": {
+        "ok": 4
+      },
+      "run_07/current": {
+        "ok": 5
+      },
+      "run_07/improved_1to4": {
+        "ok": 7
+      },
+      "run_06/openrouter_parallel_basic": {
+        "ok": 3
+      },
+      "run_07/openrouter_exa_instant": {
+        "ok": 2
+      },
+      "run_07/openrouter_parallel_basic": {
+        "ok": 9
+      },
+      "run_07/openrouter_perplexity": {
+        "ok": 7
+      },
+      "run_08/gemini_knowledge": {
+        "ok": 5
+      },
+      "run_08/current": {
+        "ok": 3
+      },
+      "run_08/case_information": {
+        "ok": 1
+      },
+      "run_08/improved_1to4": {
+        "ok": 6
+      },
+      "run_09/case_information": {
+        "ok": 1
+      },
+      "run_08/openrouter_exa_instant": {
+        "ok": 4
+      },
+      "run_08/openrouter_parallel_basic": {
+        "ok": 7
+      },
+      "run_09/gemini_knowledge": {
+        "ok": 5
+      },
+      "run_08/openrouter_perplexity": {
+        "ok": 7
+      },
+      "run_09/openrouter_parallel_basic": {
+        "ok": 1
+      },
+      "run_09/openrouter_exa_instant": {
+        "ok": 2
+      },
+      "run_09/current": {
+        "ok": 3
+      },
+      "run_09/openrouter_perplexity": {
+        "ok": 1
+      },
+      "run_10/openrouter_exa_instant": {
+        "ok": 1
+      },
+      "run_09/improved_1to4": {
+        "ok": 1
+      },
+      "run_10/openrouter_perplexity": {
+        "ok": 2
+      },
+      "run_10/openrouter_parallel_basic": {
+        "ok": 1
+      },
+      "key_usage_before": 166.537959037,
+      "key_usage_after": 167.355960967
+    }
+  ],
+  "latest": {
+    "repeat": {
+      "step": "repeat",
+      "at": "2026-10-02T18:27:37+00:00",
+      "runs": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "configs_ab": [
+        "gemini_knowledge",
+        "current",
+        "improved_1to4",
+        "openrouter_exa_instant",
+        "openrouter_parallel_basic",
+        "openrouter_perplexity"
+      ],
+      "configs_c": [
+        "case_information"
+      ],
+      "search_cache": false,
+      "todo": 198,
+      "stopped_out_of_credit": false,
+      "not_run": 0,
+      "elapsed_s": 545.4,
+      "run_02/case_information": {
+        "ok": 1
+      },
+      "run_03/current": {
+        "ok": 4
+      },
+      "run_03/case_information": {
+        "ok": 1
+      },
+      "run_03/openrouter_parallel_basic": {
+        "ok": 6
+      },
+      "run_02/openrouter_perplexity": {
+        "ok": 2
+      },
+      "run_03/openrouter_perplexity": {
+        "ok": 10
+      },
+      "run_04/gemini_knowledge": {
+        "ok": 8
+      },
+      "run_02/openrouter_parallel_basic": {
+        "ok": 3
+      },
+      "run_03/openrouter_exa_instant": {
+        "ok": 6
+      },
+      "run_03/improved_1to4": {
+        "ok": 3
+      },
+      "run_02/openrouter_exa_instant": {
+        "ok": 1
+      },
+      "run_03/gemini_knowledge": {
+        "ok": 2
+      },
+      "run_02/improved_1to4": {
+        "ok": 3
+      },
+      "run_04/case_information": {
+        "ok": 1
+      },
+      "run_04/current": {
+        "ok": 2
+      },
+      "run_04/openrouter_exa_instant": {
+        "ok": 4
+      },
+      "run_04/improved_1to4": {
+        "ok": 2
+      },
+      "run_05/current": {
+        "ok": 5
+      },
+      "run_02/current": {
+        "ok": 1
+      },
+      "run_04/openrouter_perplexity": {
+        "ok": 5
+      },
+      "run_05/openrouter_exa_instant": {
+        "ok": 2
+      },
+      "run_05/gemini_knowledge": {
+        "ok": 4
+      },
+      "run_05/openrouter_perplexity": {
+        "ok": 3
+      },
+      "run_05/openrouter_parallel_basic": {
+        "ok": 4
+      },
+      "run_06/gemini_knowledge": {
+        "ok": 4
+      },
+      "run_05/improved_1to4": {
+        "ok": 4
+      },
+      "run_06/case_information": {
+        "ok": 1
+      },
+      "run_06/current": {
+        "ok": 8
+      },
+      "run_07/gemini_knowledge": {
+        "ok": 2
+      },
+      "run_06/openrouter_exa_instant": {
+        "ok": 3
+      },
+      "run_04/openrouter_parallel_basic": {
+        "ok": 1
+      },
+      "run_06/improved_1to4": {
+        "ok": 4
+      },
+      "run_06/openrouter_perplexity": {
+        "ok": 4
+      },
+      "run_07/current": {
+        "ok": 5
+      },
+      "run_07/improved_1to4": {
+        "ok": 7
+      },
+      "run_06/openrouter_parallel_basic": {
+        "ok": 3
+      },
+      "run_07/openrouter_exa_instant": {
+        "ok": 2
+      },
+      "run_07/openrouter_parallel_basic": {
+        "ok": 9
+      },
+      "run_07/openrouter_perplexity": {
+        "ok": 7
+      },
+      "run_08/gemini_knowledge": {
+        "ok": 5
+      },
+      "run_08/current": {
+        "ok": 3
+      },
+      "run_08/case_information": {
+        "ok": 1
+      },
+      "run_08/improved_1to4": {
+        "ok": 6
+      },
+      "run_09/case_information": {
+        "ok": 1
+      },
+      "run_08/openrouter_exa_instant": {
+        "ok": 4
+      },
+      "run_08/openrouter_parallel_basic": {
+        "ok": 7
+      },
+      "run_09/gemini_knowledge": {
+        "ok": 5
+      },
+      "run_08/openrouter_perplexity": {
+        "ok": 7
+      },
+      "run_09/openrouter_parallel_basic": {
+        "ok": 1
+      },
+      "run_09/openrouter_exa_instant": {
+        "ok": 2
+      },
+      "run_09/current": {
+        "ok": 3
+      },
+      "run_09/openrouter_perplexity": {
+        "ok": 1
+      },
+      "run_10/openrouter_exa_instant": {
+        "ok": 1
+      },
+      "run_09/improved_1to4": {
+        "ok": 1
+      },
+      "run_10/openrouter_perplexity": {
+        "ok": 2
+      },
+      "run_10/openrouter_parallel_basic": {
+        "ok": 1
+      },
+      "key_usage_before": 166.537959037,
+      "key_usage_after": 167.355960967
+    }
+  }
+}

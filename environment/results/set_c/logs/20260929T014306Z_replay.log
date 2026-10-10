@@ -1,0 +1,5 @@
+2026-09-29 11:43:06,975 INFO bench: bench --out environment/results/set_c --workers 8 replay --configs case_information --paths no_documents
+2026-09-29 11:43:19,022 INFO bench.run: replay case_information C:PMC7083188_01: ok case_study [1/4]
+2026-09-29 11:43:29,900 INFO bench.run: replay case_information C:PMC8165827_04: ok best_guess [2/4]
+2026-09-29 11:44:54,119 INFO bench.run: replay case_information C:PMC2817494_01: ok best_guess [3/4]
+2026-09-29 11:45:08,898 INFO bench.run: replay case_information C:PMC6685107_01: ok best_guess [4/4]

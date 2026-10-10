@@ -1,0 +1,134 @@
+{
+  "description": "Repeated runs of the benchmark on the same questions; run 1 is the original evaluation.",
+  "runs": {
+    "1": {
+      "sets_ab": "environment/results/retriever_comparison",
+      "set_c": "environment/results/set_c"
+    },
+    "2": {
+      "sets_ab": "environment/results/repeats/run_02/sets_ab",
+      "set_c": "environment/results/repeats/run_02/set_c"
+    },
+    "3": {
+      "sets_ab": "environment/results/repeats/run_03/sets_ab",
+      "set_c": "environment/results/repeats/run_03/set_c"
+    },
+    "4": {
+      "sets_ab": "environment/results/repeats/run_04/sets_ab",
+      "set_c": "environment/results/repeats/run_04/set_c"
+    },
+    "5": {
+      "sets_ab": "environment/results/repeats/run_05/sets_ab",
+      "set_c": "environment/results/repeats/run_05/set_c"
+    },
+    "6": {
+      "sets_ab": "environment/results/repeats/run_06/sets_ab",
+      "set_c": "environment/results/repeats/run_06/set_c"
+    },
+    "7": {
+      "sets_ab": "environment/results/repeats/run_07/sets_ab",
+      "set_c": "environment/results/repeats/run_07/set_c"
+    },
+    "8": {
+      "sets_ab": "environment/results/repeats/run_08/sets_ab",
+      "set_c": "environment/results/repeats/run_08/set_c"
+    },
+    "9": {
+      "sets_ab": "environment/results/repeats/run_09/sets_ab",
+      "set_c": "environment/results/repeats/run_09/set_c"
+    },
+    "10": {
+      "sets_ab": "environment/results/repeats/run_10/sets_ab",
+      "set_c": "environment/results/repeats/run_10/set_c"
+    }
+  },
+  "configs_ab": [
+    "current",
+    "gemini_knowledge",
+    "improved_1to4",
+    "openrouter_exa_instant",
+    "openrouter_parallel_basic",
+    "openrouter_perplexity"
+  ],
+  "configs_c": [
+    "case_information"
+  ],
+  "search_cache": false,
+  "history": [
+    {
+      "at": "2026-09-29T10:57:30+00:00",
+      "runs": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "configs_ab": [
+        "gemini_knowledge",
+        "current",
+        "improved_1to4",
+        "openrouter_exa_instant",
+        "openrouter_parallel_basic",
+        "openrouter_perplexity"
+      ],
+      "configs_c": [
+        "case_information"
+      ]
+    },
+    {
+      "at": "2026-10-01T14:12:17+00:00",
+      "runs": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "configs_ab": [
+        "gemini_knowledge",
+        "current",
+        "improved_1to4",
+        "openrouter_exa_instant",
+        "openrouter_parallel_basic",
+        "openrouter_perplexity"
+      ],
+      "configs_c": [
+        "case_information"
+      ]
+    },
+    {
+      "at": "2026-10-02T18:18:28+00:00",
+      "runs": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "configs_ab": [
+        "gemini_knowledge",
+        "current",
+        "improved_1to4",
+        "openrouter_exa_instant",
+        "openrouter_parallel_basic",
+        "openrouter_perplexity"
+      ],
+      "configs_c": [
+        "case_information"
+      ]
+    }
+  ]
+}

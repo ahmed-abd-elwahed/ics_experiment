@@ -15,46 +15,179 @@ workspaces below; no API calls.
 - **Environment:** medsim with `deepseek/deepseek-v4-flash-0731` for every stage.
 - **Judges:** a panel of `google/gemini-3.5-flash-lite`, `qwen/qwen3.8-flash`, and
   `openai/gpt-6-luna`; each answer's label is the majority vote (the first judge breaks ties).
-  Each label's percentage is out of all questions in its set, so each metric sums to 100% with
-  "no label" (no answer, or a failed run).
+  Each label's percentage is out of all questions in its set. Masked correctness "same category"
+  is reported as exact + same category (at least the true value's category), so exact is a part
+  of it: same category, different category, not comparable, and "no label" (no answer, or a
+  failed run) sum to 100%, as do factual consistency's labels.
 
-| # | Configuration | Set A: exact | Set A: different category | Set B: consistent | Cost (all questions) | Mean time per answer |
-|---|---|---|---|---|---|---|
-| 1 | `current`: Europe PMC + LitSense, without changes 1–4 | 37.6% | 12.1% | 84.2% | $0.46 | 87 s |
-| 2 | `improved_1to4`: with changes 1–4 | 34.8% | 14.9% | 83.8% | $0.43 | 96 s |
-| 3 | `openrouter_exa_instant` | 35.5% | 10.6% | 52.6% | $3.28 | 78 s |
-| 4 | `openrouter_parallel_basic` | 27.7% | 18.4% | 77.9% | $2.53 | 87 s |
-| 5 | `openrouter_perplexity` | 39.0% | 14.9% | 92.6% | $2.47 | 78 s |
-| 6 | `openrouter_google` (native, Gemini 3.1 Flash Lite) | 38.3% | 14.2% | 75.0% | $19.26 | 77 s |
-| 7 | `openrouter_openai` (native, GPT-6-luna) | 34.8% | 14.9% | 70.2% | $10.80 | 80 s |
-| 8 | `case_information` (set C, no retrieval) | set C: 98.5% exact | 0.0% | set C: 98.5% consistent | $0.03 (272 questions) | 7.5 s |
+Current results: the declined answers were replayed with the best-guess fallback, and a ninth
+configuration answers from an LLM's own knowledge (see below). Configurations 1–7 and 9 answered
+the same 141 set A and 272 set B questions.
+
+| # | Configuration | Set A: exact | Set A: same category (incl. exact) | Set A: different category | Set A: no label | Set B: consistent | Set B: no label | Best guesses (A + B) | Cost (all questions) | Mean time per answer |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | `current`: Europe PMC + LitSense, without changes 1–4 | 42.6% | 87.2% | 12.8% | 0.0% | 95.2% | 4.8% | 11 + 30 | $0.44 | 86 s |
+| 2 | `improved_1to4`: with changes 1–4 | 36.9% | 82.3% | 17.0% | 0.7% | 97.1% | 2.6% | 7 + 36 | $0.42 | 94 s |
+| 3 | `openrouter_exa_instant` | 42.6% | 85.8% | 13.5% | 0.0% | 96.0% | 4.0% | 20 + 117 | $3.26 | 74 s |
+| 4 | `openrouter_parallel_basic` | 33.3% | 80.9% | 19.1% | 0.0% | 96.3% | 3.3% | 12 + 50 | $2.52 | 84 s |
+| 5 | `openrouter_perplexity` | 39.0% | 84.4% | 14.9% | 0.0% | 97.4% | 2.6% | 3 + 13 | $2.47 | 79 s |
+| 6 | `openrouter_google` (native, Gemini 3.1 Flash Lite) | 41.1% | 83.0% | 16.3% | 0.0% | 96.7% | 3.3% | 63 in total | $21.09 | 82 s |
+| 7 | `openrouter_openai` (native, GPT-6-luna) | 41.8% | 85.1% | 14.9% | 0.0% | 95.6% | 4.4% | 80 in total | $10.80 | 80 s |
+| 8 | `case_information` (set C, no retrieval) | set C: 98.9% | set C: 99.6% | set C: 0.4% | set C: 0.0% | set C: 100.0% | set C: 0.0% | 3 | $0.03 (272 questions) | 7.7 s |
+| 9 | `gemini_knowledge` (Gemini 3 Flash, no search) | 43.3% | 86.5% | 13.5% | 0.0% | 96.7% | 3.3% | 5 + 8 | $0.66 | 73 s |
 
 What the numbers show (95% intervals from a bootstrap over diagnoses, paired per question,
 against configuration 1; [retriever_comparison/report.md](retriever_comparison/report.md)):
 
 - **Set A: no configuration finds the hidden value clearly more often than the original
-  method.** Exact answers range from 27.7% to 39.0%; every difference from configuration 1 is
-  within its interval (e.g. Perplexity +1.4 points, −6.7 to +10.6; changes 1–4 −2.8, −11.4 to
-  +5.3). Parallel basic is the only one that is worse: more answers in a different category
-  than the true value (+6.4 points, +0.7 to +12.7), and fewer exact (−9.9, −19.6 to 0.0).
-- **Set B: factual consistency here measures how often medsim answers.** The judges found almost
-  no answer inconsistent with the case (at most 0.4%); the rest is "no label", questions medsim
-  declined because the documents did not support an answer. Perplexity leads (92.6%, +8.5 points,
-  +3.5 to +13.7); Exa instant trails (52.6%, −31.6, −38.5 to −24.6: medsim declined 143 of its
-  413 questions); native Google (−9.2) and OpenAI (−14.0) search are also clearly lower.
-- **Cost:** medsim's own retrieval (configurations 1–2) costs about $0.001 per question;
-  OpenRouter search engines $0.006–0.008; native search $0.026 (OpenAI) and $0.047 (Google,
-  about four Google searches per call). Time is 77–96 s per answer everywhere, almost all of it
-  medsim's own LLM calls.
-- **Set C: when the case states the answer, medsim returns it.** 268 of 272 answers were exact
-  and consistent (unanimous across the three judges); the other 4 were questions medsim's case
-  lookup (Stage A) judged unanswerable from the case.
-- **Judge agreement:** masked correctness unanimous for 75% of set A answers, majority for 25%,
-  tie broken for 1%; pairwise κ 0.63–0.86. Factual consistency unanimous for 99% (κ is low only
-  because almost every label is "consistent").
+  method.** Exact answers range from 33.3% to 43.3%, answers at least in the right category from
+  80.9% to 87.2%. Only Parallel basic is clearly worse than configuration 1 (exact −9.2 points,
+  −17 to −1; right category −6.4, −12 to −1). Gemini 3 Flash without any search does as well as
+  configuration 1 (exact +0.7, −7 to +7), and so does native Google search now that its skipped
+  searches are retried (right category −4.3, −10 to +1).
+- **Set B: with the fallback, almost every question is answered and consistent with the case**
+  (95–97% for every configuration; no difference from configuration 1 is clear). The remaining
+  no labels (2.6–4.8%) are almost all questions the query builder refuses.
+- **Best guesses** (the documents gave no usable basis, or there were none): from 16 answers
+  (Perplexity) to 137 (Exa instant) of 413. Exa instant's short snippets gave the synthesizer the
+  least to use.
+- **Cost:** medsim's own retrieval (1–2) about $0.001 per question; Gemini 3 Flash knowledge
+  $0.0016; OpenRouter search engines $0.006–0.008; native search $0.026 (OpenAI) and $0.047
+  (Google). Time is 73–94 s per answer, almost all of it medsim's own LLM calls.
+- **Set C: when the case states the answer, medsim returns it** (98.9% exact, 100% consistent).
+- **Judge agreement** (all 1,112 set A and 2,066 set B answers judged, including the replaced
+  ones): masked correctness unanimous 74%, majority 25%, tie broken 1%; pairwise κ 0.63–0.86.
+  Factual consistency unanimous 99% (κ is low only because almost every label is "consistent").
+
+### The best-guess fallback and the replay (2026-09-29)
+
+When the documents give no usable basis for the variable, medsim's synthesizer now makes its best
+guess of the value that fits the patient from the case study and the diagnosis, instead of
+declining (`medsim/stages/synthesizer.py`, rule 6); the answer takes the path `best_guess`. This
+is now how medsim works.
+
+The 428 answers configurations 1–7 had declined this way were replayed with `bench replay`:
+medsim's stages A–C ran again on the same stored documents, without searching again. Result:
+407 best guesses, 3 answers from the documents, 1 from the case, and 17 the query builder now
+refused (it runs again, and is not fully deterministic). All 428 replays and the 2,445 judgments
+of the new answers succeeded. Each replayed record keeps the original's documents and retrieval
+cost, adds the original's retrieval time to its wall time, and records the replay (original
+path, answer, and time) in `replay`; the original records stay in the run files.
+
+### Why native Google search still had no labels, and the fixes (2026-09-29)
+
+After the fallback, native Google search still left 8.5% of set A and 12.9% of set B without a
+label: 39 questions whose search returned no documents, so medsim stopped before the synthesizer.
+
+- **Gemini did not search.** With native search the model decides whether to use its search
+  tool. In 37 of its 384 queries (10%) the cached reply shows no web search request: Gemini wrote
+  a list of "sources" with titles and quote-like excerpts from memory, which carry no citations,
+  so the retriever found no documents (no search fee was charged in these calls). The ladder for
+  web search has one rung (every search is billed), so nothing retried. Sent again, the same
+  queries were searched (3 requests, 8–9 citations); forcing the tool (`tool_choice: required`)
+  is refused by the provider (HTTP 502).
+- **Native OpenAI search** searched in 380 of 382 queries; 8 of its 10 empty questions were ones
+  whose only citation was the case's own source article, which the benchmark removes on purpose.
+
+Fixes, now part of medsim:
+
+1. The OpenRouter search retriever asks a native search again (up to twice) when the reply has
+   no search and no citation; such replies are never cached, and their cost is added
+   (`skipped_search_retries`; each attempt now also records `web_search_requests` and
+   `skipped_searches`).
+2. The best-guess fallback also applies when the search found no documents at all.
+3. The empty questions were rerun: Google's 39 searched again (`replay --search`: 13 answered
+   from the new documents, 25 best guesses, 1 refused by the query builder; every one got
+   documents, 2–8 each), and OpenAI's 10, Parallel's 1, and set C's 4 replayed on their (empty)
+   documents (13 best guesses, 1 refusal, 1 answered from the case). Whether the Google reruns
+   needed the retry is not recorded (the attempt fields were added after them).
+
+### Configuration 9: Gemini 3 Flash knowledge, no search
+
+`google/gemini-3-flash-preview` is given the question, the case information as medsim sees it
+(redacted for set A), and the diagnosis, and asked for the value that typically fits this
+patient, with a typical range and a short rationale; that answer is the one "document" medsim's
+stages use (`bench/run.py:KnowledgeAggregator`). All 413 questions ran without errors: 389
+answered from Gemini's document, 13 best guesses, 9 refused by the query builder, 2 answered from
+the case.
+
+### Before the fallback (first pass)
+
+| # | Configuration | Set A: exact | Set A: same category (incl. exact) | Set A: different category | Set A: no label | Set B: consistent | Set B: no label | Cost (all questions) | Mean time per answer |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | `current`: Europe PMC + LitSense, without changes 1–4 | 37.6% | 79.4% | 12.1% | 8.5% | 84.2% | 15.8% | $0.46 | 87 s |
+| 2 | `improved_1to4`: with changes 1–4 | 34.8% | 79.4% | 14.9% | 5.7% | 83.8% | 15.8% | $0.43 | 96 s |
+| 3 | `openrouter_exa_instant` | 35.5% | 74.5% | 10.6% | 14.9% | 52.6% | 47.4% | $3.28 | 78 s |
+| 4 | `openrouter_parallel_basic` | 27.7% | 73.0% | 18.4% | 8.5% | 77.9% | 21.7% | $2.53 | 87 s |
+| 5 | `openrouter_perplexity` | 39.0% | 82.3% | 14.9% | 2.1% | 92.6% | 7.4% | $2.47 | 78 s |
+| 6 | `openrouter_google` (native, Gemini 3.1 Flash Lite) | 38.3% | 73.0% | 14.2% | 12.1% | 75.0% | 25.0% | $19.26 | 77 s |
+| 7 | `openrouter_openai` (native, GPT-6-luna) | 34.8% | 76.6% | 14.9% | 8.5% | 70.2% | 29.8% | $10.80 | 80 s |
+| 8 | `case_information` (set C, no retrieval) | set C: 98.5% | set C: 98.5% | set C: 0.0% | set C: 1.5% | set C: 98.5% | set C: 1.5% | $0.03 (272 questions) | 7.5 s |
+
+These first-pass records are still in the run files (superseded by the replays); the original
+report is in git history (commit `08bf546`).
+
+### Why so many questions had no label (first pass)
+
+No label is never a failed run or an answer the judges skipped: every run succeeded (after the
+retry) and every answer has three verdicts. It is always a question **medsim declined to
+answer**, on one of four paths:
+
+| Configuration | Set A no label | Set B no label | Synthesizer: documents give no basis | Query builder: no literature answer | Search returned nothing | Stage A: off topic |
+|---|---|---|---|---|---|---|
+| 1. current | 12 (8.5%) | 43 (15.8%) | 12 + 34 | 0 + 9 | – | – |
+| 2. improved_1to4 | 8 (5.7%) | 43 (15.8%) | 7 + 38 | 0 + 4 | – | 1 + 1 |
+| 3. exa_instant | 21 (14.9%) | 129 (47.4%) | 21 + 122 | 0 + 6 | – | 0 + 1 |
+| 4. parallel_basic | 12 (8.5%) | 59 (21.7%) | 12 + 50 | 0 + 7 | 0 + 1 | 0 + 1 |
+| 5. perplexity | 3 (2.1%) | 20 (7.4%) | 3 + 13 | 0 + 7 | – | – |
+| 6. google | 17 (12.1%) | 68 (25.0%) | 5 + 35 | 0 + 5 | 12 + 27 | 0 + 1 |
+| 7. openai | 12 (8.5%) | 81 (29.8%) | 9 + 67 | 0 + 7 | 3 + 7 | – |
+| 8. case_information (set C) | 4 (1.5%) | – | – | – | 4 (Stage A found no answer in the case; retrieval off) | – |
+
+(Counts are set A + set B.) The root causes:
+
+1. **The synthesizer declines when the documents do not report the variable (all
+   configurations, 428 of the 528 no labels in configurations 1–7).** Stage C is told to set `unanswerable` when "the
+   documents give no usable basis for the requested variable", and it does not fall back to an
+   ordinary value for the patient. Set B asks for routine vitals and labs (oxygen saturation,
+   lactate, blood pressure, glucose) that case literature on a specific condition rarely
+   reports, which is why set B has about twice as many no labels as set A. Its explanations say
+   so: "No usable basis in the provided documents to determine the patient's oxygen
+   saturation."
+2. **Short or off-target documents make it worse for some engines.** In the declined questions,
+   Exa instant's documents average 360 characters (medsim's own retrieval 850–1,150) and only
+   1.2 of 8 even name the variable; OpenAI native search returns about 4 documents of 240
+   characters (the model's quotations), 0.9 naming the variable. Medsim's own retrieval still
+   has 5–6 documents naming the variable when it declines: the literature mentions it without a
+   value.
+3. **The query builder refuses questions whose variable has no link to the diagnosis (set B
+   only, 22 distinct questions).** E.g. "Oxygen saturation is a physiological measurement with no
+   established or meaningful literature association with Prolonged Grief Disorder."
+4. **Native Google search does not always search (configuration 6: 39 questions).** Gemini
+   decides whether to run the search; in these calls it ran none (no search fee was charged)
+   and cited nothing, so there were no documents. OpenAI native search had 10 such questions.
+5. **Occasional contradictions in the synthesizer (6 answers).** It wrote a concrete value
+   ("Oxygen saturation is 98% on room air.") but also set `unanswerable`, so medsim discarded
+   the answer.
+6. **Set C:** 4 questions where Stage A judged the case does not state the answer; with
+   retrieval off, medsim then has no answer.
+7. **Stage A off-topic misclassifications:** 5 questions in total.
+
+The best-guess fallback removes cause 1 (and cause 5, which the replay reran); the skipped-search
+retry and the fallback for no documents remove causes 4 and 6. What remains is the query
+builder's refusals (cause 3: 6–13 set B questions per configuration) and a few off-topic
+questions (cause 7).
+
+Causes 1, 3, and 5 were medsim design choices, not retrieval quality: a simulator that gave a
+typical value for routine variables unrelated to the diagnosis (or kept an answer the
+synthesizer did write) would leave far fewer questions unanswered.
 
 Spend: $40.23 on the OpenRouter key for this evaluation (runs $38.10, judging $2.14, set C
 $0.58 including the question writer, smoke tests about $0.4), from per-call `usage.cost`.
+The fallback replay and configuration 9 added $1.74 on the key (replay $0.37, Gemini 3 Flash
+knowledge run $0.66, judging the new answers $0.67, smoke tests and calls lost when the first
+replay attempt was stopped at its time limit about $0.04), and the Google fixes $1.96 more
+(Google re-search $1.86, judging $0.04, diagnostic calls about $0.06), for $43.93 in total.
 Every run record keeps the answer, the documents, and every LLM call with its cost and latency;
 every judge's verdict is stored; each step's log is in the workspace's `logs/`.
 
@@ -76,11 +209,13 @@ Notes:
 | [set_c/](set_c/) | set C, configuration 8 |
 | [retriever_comparison_smoke/](retriever_comparison_smoke/) | the smoke tests |
 
-Reproduce (paid API calls; about $40):
+Reproduce (paid API calls; about $42). With the current code the synthesizer already falls back
+to a best guess, so the first run gives the replayed answers directly (retrieval and LLM output
+vary between runs, so the numbers will differ somewhat):
 
 ```bash
 python -m bench --out environment/results/retriever_comparison sample --set-a 141 --set-b 272
-python -m bench --out environment/results/retriever_comparison --workers 24 run --configs current,improved_1to4,openrouter_exa_instant,openrouter_parallel_basic,openrouter_perplexity,openrouter_google,openrouter_openai
+python -m bench --out environment/results/retriever_comparison --workers 24 run --configs current,improved_1to4,openrouter_exa_instant,openrouter_parallel_basic,openrouter_perplexity,openrouter_google,openrouter_openai,gemini_knowledge
 python -m bench --out environment/results/retriever_comparison --workers 32 judge
 python -m bench --out environment/results/retriever_comparison report --baseline current
 python -m bench --out environment/results/set_c --workers 16 set-c
@@ -89,6 +224,10 @@ python -m bench --out environment/results/set_c --workers 24 judge
 python -m bench --out environment/results/set_c report --baseline case_information
 PYTHONPATH=environment python environment/results/scripts/make_retriever_comparison.py
 ```
+
+How this evaluation actually ran: the run, judge, and report steps without `gemini_knowledge`
+(before the fallback existed), then `replay --configs current,...,openrouter_openai` (the
+declined answers), `run --configs gemini_knowledge`, `judge`, and `report`.
 
 ---
 

@@ -1,0 +1,1 @@
+2026-10-03 09:18:23,558 INFO bench: bench --out environment/results/repeats/run_02/sets_ab report --baseline current --configs gemini_knowledge,current,improved_1to4,openrouter_exa_instant,openrouter_parallel_basic,openrouter_perplexity --bootstrap 1000

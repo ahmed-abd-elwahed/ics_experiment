@@ -1,0 +1,267 @@
+{
+  "steps": [
+    {
+      "step": "questions",
+      "at": "2026-09-29T10:57:30+00:00",
+      "run": 3,
+      "copied_from": "environment/results/retriever_comparison",
+      "files": [
+        "items.jsonl",
+        "facts.jsonl"
+      ]
+    },
+    {
+      "step": "repeat_run",
+      "at": "2026-10-01T23:43:51+00:00",
+      "run": 3,
+      "results": {
+        "run_03/gemini_knowledge": {
+          "ok": 411,
+          "error": 2
+        },
+        "run_03/current": {
+          "ok": 409,
+          "error": 4
+        },
+        "run_03/improved_1to4": {
+          "ok": 410,
+          "error": 3
+        },
+        "run_03/openrouter_exa_instant": {
+          "ok": 407,
+          "error": 6
+        },
+        "run_03/openrouter_parallel_basic": {
+          "ok": 407,
+          "error": 6
+        },
+        "run_03/openrouter_perplexity": {
+          "ok": 403,
+          "error": 10
+        },
+        "run_03/case_information": {
+          "ok": 271,
+          "error": 1
+        }
+      }
+    },
+    {
+      "step": "repeat_run",
+      "at": "2026-10-02T18:27:36+00:00",
+      "run": 3,
+      "results": {
+        "run_03/current": {
+          "ok": 4
+        },
+        "run_03/case_information": {
+          "ok": 1
+        },
+        "run_03/openrouter_parallel_basic": {
+          "ok": 6
+        },
+        "run_03/openrouter_perplexity": {
+          "ok": 10
+        },
+        "run_03/openrouter_exa_instant": {
+          "ok": 6
+        },
+        "run_03/improved_1to4": {
+          "ok": 3
+        },
+        "run_03/gemini_knowledge": {
+          "ok": 2
+        }
+      }
+    },
+    {
+      "step": "judge",
+      "at": "2026-10-02T19:22:24+00:00",
+      "panel": [
+        "google/gemini-3.5-flash-lite",
+        "qwen/qwen3.8-flash",
+        "openai/gpt-6-luna"
+      ],
+      "todo": 1642,
+      "factual_consistency [qwen/qwen3.8-flash]:ok": 408,
+      "masked_correctness [qwen/qwen3.8-flash]:ok": 145,
+      "factual_consistency [openai/gpt-6-luna]:ok": 393,
+      "masked_correctness [openai/gpt-6-luna]:ok": 144,
+      "factual_consistency [google/gemini-3.5-flash-lite]:ok": 389,
+      "masked_correctness [google/gemini-3.5-flash-lite]:ok": 143,
+      "masked_correctness [google/gemini-3.5-flash-lite]:error": 2,
+      "factual_consistency [qwen/qwen3.8-flash]:error": 10,
+      "masked_correctness [qwen/qwen3.8-flash]:error": 8,
+      "cost_usd": {
+        "factual_consistency [qwen/qwen3.8-flash]": 0.0753,
+        "masked_correctness [qwen/qwen3.8-flash]": 0.056,
+        "factual_consistency [openai/gpt-6-luna]": 0.0503,
+        "masked_correctness [openai/gpt-6-luna]": 0.0278,
+        "factual_consistency [google/gemini-3.5-flash-lite]": 0.1713,
+        "masked_correctness [google/gemini-3.5-flash-lite]": 0.2619
+      },
+      "key_usage_before": 174.180095028,
+      "key_usage_after": 175.923795975
+    },
+    {
+      "step": "judge",
+      "at": "2026-10-02T19:51:25+00:00",
+      "panel": [
+        "google/gemini-3.5-flash-lite",
+        "qwen/qwen3.8-flash",
+        "openai/gpt-6-luna"
+      ],
+      "todo": 20,
+      "factual_consistency [qwen/qwen3.8-flash]:ok": 10,
+      "masked_correctness [qwen/qwen3.8-flash]:ok": 8,
+      "masked_correctness [google/gemini-3.5-flash-lite]:error": 2,
+      "cost_usd": {
+        "factual_consistency [qwen/qwen3.8-flash]": 0.0025,
+        "masked_correctness [qwen/qwen3.8-flash]": 0.002,
+        "masked_correctness [google/gemini-3.5-flash-lite]": 0.1827
+      },
+      "key_usage_before": 178.970084167,
+      "key_usage_after": 179.133966833
+    },
+    {
+      "step": "judge",
+      "at": "2026-10-02T20:31:41+00:00",
+      "panel": [
+        "google/gemini-3.5-flash-lite",
+        "qwen/qwen3.8-flash",
+        "openai/gpt-6-luna"
+      ],
+      "todo": 2,
+      "masked_correctness [google/gemini-3.5-flash-lite]:error": 2,
+      "cost_usd": {
+        "masked_correctness [google/gemini-3.5-flash-lite]": 0.1827
+      },
+      "key_usage_before": 183.954453918,
+      "key_usage_after": 184.218877578
+    },
+    {
+      "step": "judge",
+      "at": "2026-10-02T21:11:58+00:00",
+      "panel": [
+        "google/gemini-3.5-flash-lite",
+        "qwen/qwen3.8-flash",
+        "openai/gpt-6-luna"
+      ],
+      "todo": 2,
+      "masked_correctness [google/gemini-3.5-flash-lite]:ok": 2,
+      "cost_usd": {
+        "masked_correctness [google/gemini-3.5-flash-lite]": 0.1349
+      },
+      "key_usage_before": 187.555194788,
+      "key_usage_after": 187.730359188
+    },
+    {
+      "step": "judge",
+      "at": "2026-10-02T21:50:55+00:00",
+      "panel": [
+        "google/gemini-3.5-flash-lite",
+        "qwen/qwen3.8-flash",
+        "openai/gpt-6-luna"
+      ],
+      "todo": 0,
+      "cost_usd": {},
+      "key_usage_before": 188.812994809,
+      "key_usage_after": 188.812994809
+    },
+    {
+      "step": "judge",
+      "at": "2026-10-02T22:31:05+00:00",
+      "panel": [
+        "google/gemini-3.5-flash-lite",
+        "qwen/qwen3.8-flash",
+        "openai/gpt-6-luna"
+      ],
+      "todo": 0,
+      "cost_usd": {},
+      "key_usage_before": 188.963509847,
+      "key_usage_after": 188.963509847
+    },
+    {
+      "step": "report",
+      "at": "2026-10-02T23:18:53+00:00",
+      "report": "environment/results/repeats/run_03/sets_ab/report.md",
+      "configs": [
+        "gemini_knowledge",
+        "current",
+        "improved_1to4",
+        "openrouter_exa_instant",
+        "openrouter_parallel_basic",
+        "openrouter_perplexity"
+      ],
+      "key_usage_before": 193.153725032,
+      "key_usage_after": 193.153860064
+    }
+  ],
+  "latest": {
+    "questions": {
+      "step": "questions",
+      "at": "2026-09-29T10:57:30+00:00",
+      "run": 3,
+      "copied_from": "environment/results/retriever_comparison",
+      "files": [
+        "items.jsonl",
+        "facts.jsonl"
+      ]
+    },
+    "repeat_run": {
+      "step": "repeat_run",
+      "at": "2026-10-02T18:27:36+00:00",
+      "run": 3,
+      "results": {
+        "run_03/current": {
+          "ok": 4
+        },
+        "run_03/case_information": {
+          "ok": 1
+        },
+        "run_03/openrouter_parallel_basic": {
+          "ok": 6
+        },
+        "run_03/openrouter_perplexity": {
+          "ok": 10
+        },
+        "run_03/openrouter_exa_instant": {
+          "ok": 6
+        },
+        "run_03/improved_1to4": {
+          "ok": 3
+        },
+        "run_03/gemini_knowledge": {
+          "ok": 2
+        }
+      }
+    },
+    "judge": {
+      "step": "judge",
+      "at": "2026-10-02T22:31:05+00:00",
+      "panel": [
+        "google/gemini-3.5-flash-lite",
+        "qwen/qwen3.8-flash",
+        "openai/gpt-6-luna"
+      ],
+      "todo": 0,
+      "cost_usd": {},
+      "key_usage_before": 188.963509847,
+      "key_usage_after": 188.963509847
+    },
+    "report": {
+      "step": "report",
+      "at": "2026-10-02T23:18:53+00:00",
+      "report": "environment/results/repeats/run_03/sets_ab/report.md",
+      "configs": [
+        "gemini_knowledge",
+        "current",
+        "improved_1to4",
+        "openrouter_exa_instant",
+        "openrouter_parallel_basic",
+        "openrouter_perplexity"
+      ],
+      "key_usage_before": 193.153725032,
+      "key_usage_after": 193.153860064
+    }
+  }
+}

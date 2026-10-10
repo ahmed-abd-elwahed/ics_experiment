@@ -1,0 +1,79 @@
+2026-10-03 04:33:14,003 INFO bench: bench --out environment/results/repeats/run_04/set_c --workers 28 judge
+2026-10-03 04:33:17,568 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-10-03 04:33:18,098 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-10-03 04:33:18,644 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions failed (ConnectError); retrying in 1.0s
+2026-10-03 04:33:18,648 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-10-03 04:33:19,034 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-10-03 04:33:19,184 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-10-03 04:33:19,418 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-10-03 04:33:19,799 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-10-03 04:33:19,803 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-10-03 04:33:19,927 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-10-03 04:33:19,956 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-10-03 04:33:40,400 INFO bench.judge: judge masked_correctness [google/gemini-3.5-flash-lite]: 25/272
+2026-10-03 04:33:40,907 INFO bench.judge: judge factual_consistency [google/gemini-3.5-flash-lite]: 25/272
+2026-10-03 04:33:42,252 INFO bench.judge: judge factual_consistency [openai/gpt-6-luna]: 25/272
+2026-10-03 04:33:43,522 INFO bench.judge: judge masked_correctness [openai/gpt-6-luna]: 25/272
+2026-10-03 04:33:43,532 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 25/272
+2026-10-03 04:33:45,229 INFO bench.judge: judge masked_correctness [qwen/qwen3.8-flash]: 25/272
+2026-10-03 04:34:02,852 INFO bench.judge: judge masked_correctness [google/gemini-3.5-flash-lite]: 50/272
+2026-10-03 04:34:03,975 INFO bench.judge: judge factual_consistency [google/gemini-3.5-flash-lite]: 50/272
+2026-10-03 04:34:05,020 INFO bench.judge: judge factual_consistency [openai/gpt-6-luna]: 50/272
+2026-10-03 04:34:06,367 INFO bench.judge: judge masked_correctness [openai/gpt-6-luna]: 50/272
+2026-10-03 04:34:08,464 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 50/272
+2026-10-03 04:34:10,340 INFO bench.judge: judge masked_correctness [qwen/qwen3.8-flash]: 50/272
+2026-10-03 04:34:27,956 INFO bench.judge: judge masked_correctness [google/gemini-3.5-flash-lite]: 75/272
+2026-10-03 04:34:28,179 INFO bench.judge: judge factual_consistency [google/gemini-3.5-flash-lite]: 75/272
+2026-10-03 04:34:29,917 INFO bench.judge: judge factual_consistency [openai/gpt-6-luna]: 75/272
+2026-10-03 04:34:30,426 INFO bench.judge: judge masked_correctness [openai/gpt-6-luna]: 75/272
+2026-10-03 04:34:31,587 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 75/272
+2026-10-03 04:34:34,846 INFO bench.judge: judge masked_correctness [qwen/qwen3.8-flash]: 75/272
+2026-10-03 04:34:53,189 INFO bench.judge: judge masked_correctness [google/gemini-3.5-flash-lite]: 100/272
+2026-10-03 04:34:53,472 INFO bench.judge: judge factual_consistency [google/gemini-3.5-flash-lite]: 100/272
+2026-10-03 04:34:55,142 INFO bench.judge: judge factual_consistency [openai/gpt-6-luna]: 100/272
+2026-10-03 04:34:55,479 INFO bench.judge: judge masked_correctness [openai/gpt-6-luna]: 100/272
+2026-10-03 04:34:58,104 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 100/272
+2026-10-03 04:35:02,645 INFO bench.judge: judge masked_correctness [qwen/qwen3.8-flash]: 100/272
+2026-10-03 04:35:17,252 INFO bench.judge: judge masked_correctness [google/gemini-3.5-flash-lite]: 125/272
+2026-10-03 04:35:17,678 INFO bench.judge: judge factual_consistency [google/gemini-3.5-flash-lite]: 125/272
+2026-10-03 04:35:19,809 INFO bench.judge: judge factual_consistency [openai/gpt-6-luna]: 125/272
+2026-10-03 04:35:20,766 INFO bench.judge: judge masked_correctness [openai/gpt-6-luna]: 125/272
+2026-10-03 04:35:20,972 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 125/272
+2026-10-03 04:35:23,686 INFO bench.judge: judge masked_correctness [qwen/qwen3.8-flash]: 125/272
+2026-10-03 04:35:41,740 INFO bench.judge: judge masked_correctness [google/gemini-3.5-flash-lite]: 150/272
+2026-10-03 04:35:42,200 INFO bench.judge: judge factual_consistency [google/gemini-3.5-flash-lite]: 150/272
+2026-10-03 04:35:44,728 INFO bench.judge: judge factual_consistency [openai/gpt-6-luna]: 150/272
+2026-10-03 04:35:44,751 INFO bench.judge: judge masked_correctness [openai/gpt-6-luna]: 150/272
+2026-10-03 04:35:48,200 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 150/272
+2026-10-03 04:35:49,179 INFO bench.judge: judge masked_correctness [qwen/qwen3.8-flash]: 150/272
+2026-10-03 04:36:07,558 INFO bench.judge: judge masked_correctness [google/gemini-3.5-flash-lite]: 175/272
+2026-10-03 04:36:08,064 INFO bench.judge: judge factual_consistency [google/gemini-3.5-flash-lite]: 175/272
+2026-10-03 04:36:10,474 INFO bench.judge: judge masked_correctness [openai/gpt-6-luna]: 175/272
+2026-10-03 04:36:10,647 INFO bench.judge: judge factual_consistency [openai/gpt-6-luna]: 175/272
+2026-10-03 04:36:11,831 INFO bench.judge: judge masked_correctness [qwen/qwen3.8-flash]: 175/272
+2026-10-03 04:36:13,861 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 175/272
+2026-10-03 04:36:31,592 INFO bench.judge: judge masked_correctness [google/gemini-3.5-flash-lite]: 200/272
+2026-10-03 04:36:32,237 INFO bench.judge: judge factual_consistency [google/gemini-3.5-flash-lite]: 200/272
+2026-10-03 04:36:33,261 INFO bench.judge: judge masked_correctness [openai/gpt-6-luna]: 200/272
+2026-10-03 04:36:33,796 INFO bench.judge: judge factual_consistency [openai/gpt-6-luna]: 200/272
+2026-10-03 04:36:35,589 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 200/272
+2026-10-03 04:36:38,370 INFO bench.judge: judge masked_correctness [qwen/qwen3.8-flash]: 200/272
+2026-10-03 04:36:53,714 INFO bench.judge: judge masked_correctness [google/gemini-3.5-flash-lite]: 225/272
+2026-10-03 04:36:53,973 INFO bench.judge: judge factual_consistency [google/gemini-3.5-flash-lite]: 225/272
+2026-10-03 04:36:56,417 INFO bench.judge: judge masked_correctness [openai/gpt-6-luna]: 225/272
+2026-10-03 04:36:56,826 INFO bench.judge: judge factual_consistency [openai/gpt-6-luna]: 225/272
+2026-10-03 04:36:58,071 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 225/272
+2026-10-03 04:37:00,125 INFO bench.judge: judge masked_correctness [qwen/qwen3.8-flash]: 225/272
+2026-10-03 04:37:16,913 INFO bench.judge: judge masked_correctness [google/gemini-3.5-flash-lite]: 250/272
+2026-10-03 04:37:17,006 INFO bench.judge: judge factual_consistency [google/gemini-3.5-flash-lite]: 250/272
+2026-10-03 04:37:18,008 INFO bench.judge: judge masked_correctness [openai/gpt-6-luna]: 250/272
+2026-10-03 04:37:19,468 INFO bench.judge: judge factual_consistency [openai/gpt-6-luna]: 250/272
+2026-10-03 04:37:21,686 INFO bench.judge: judge masked_correctness [qwen/qwen3.8-flash]: 250/272
+2026-10-03 04:37:21,988 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 250/272
+2026-10-03 04:37:29,894 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 04:37:36,467 INFO bench.judge: judge factual_consistency [google/gemini-3.5-flash-lite]: 272/272
+2026-10-03 04:37:36,745 INFO bench.judge: judge masked_correctness [google/gemini-3.5-flash-lite]: 272/272
+2026-10-03 04:37:39,782 INFO bench.judge: judge masked_correctness [openai/gpt-6-luna]: 272/272
+2026-10-03 04:37:41,218 INFO bench.judge: judge factual_consistency [openai/gpt-6-luna]: 272/272
+2026-10-03 04:37:51,987 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 272/272
+2026-10-03 04:37:53,507 INFO bench.judge: judge masked_correctness [qwen/qwen3.8-flash]: 272/272

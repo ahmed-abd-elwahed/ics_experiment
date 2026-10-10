@@ -74,6 +74,74 @@
       ],
       "key_usage_before": 15.158346927,
       "key_usage_after": 15.151051902
+    },
+    {
+      "step": "report",
+      "at": "2026-09-28T22:11:34+00:00",
+      "report": "environment/results/set_c/report.md",
+      "configs": [
+        "case_information"
+      ],
+      "key_usage_before": 43.496002102,
+      "key_usage_after": 43.496002102
+    },
+    {
+      "step": "replay",
+      "at": "2026-09-29T01:45:10+00:00",
+      "configs": [
+        "case_information"
+      ],
+      "paths": [
+        "no_documents"
+      ],
+      "search": false,
+      "pipeline_models": [
+        "deepseek/deepseek-v4-flash-0731"
+      ],
+      "case_information": {
+        "todo": 4,
+        "ok": 4,
+        "path:case_study": 1,
+        "path:best_guess": 3
+      },
+      "key_usage_before": 47.032724171,
+      "key_usage_after": 47.142262098
+    },
+    {
+      "step": "judge",
+      "at": "2026-09-29T01:48:47+00:00",
+      "panel": [
+        "google/gemini-3.5-flash-lite",
+        "qwen/qwen3.8-flash",
+        "openai/gpt-6-luna"
+      ],
+      "todo": 24,
+      "masked_correctness [google/gemini-3.5-flash-lite]:ok": 4,
+      "factual_consistency [google/gemini-3.5-flash-lite]:ok": 4,
+      "masked_correctness [openai/gpt-6-luna]:ok": 4,
+      "factual_consistency [openai/gpt-6-luna]:ok": 4,
+      "factual_consistency [qwen/qwen3.8-flash]:ok": 4,
+      "masked_correctness [qwen/qwen3.8-flash]:ok": 4,
+      "cost_usd": {
+        "masked_correctness [google/gemini-3.5-flash-lite]": 0.002,
+        "factual_consistency [google/gemini-3.5-flash-lite]": 0.002,
+        "masked_correctness [openai/gpt-6-luna]": 0.0008,
+        "factual_consistency [openai/gpt-6-luna]": 0.0007,
+        "factual_consistency [qwen/qwen3.8-flash]": 0.0018,
+        "masked_correctness [qwen/qwen3.8-flash]": 0.0016
+      },
+      "key_usage_before": 47.191656611,
+      "key_usage_after": 47.191656611
+    },
+    {
+      "step": "report",
+      "at": "2026-09-29T01:49:27+00:00",
+      "report": "environment/results/set_c/report.md",
+      "configs": [
+        "case_information"
+      ],
+      "key_usage_before": 47.201322419,
+      "key_usage_after": 47.201322419
     }
   ],
   "latest": {
@@ -118,39 +186,61 @@
     },
     "judge": {
       "step": "judge",
-      "at": "2026-09-28T17:39:14+00:00",
+      "at": "2026-09-29T01:48:47+00:00",
       "panel": [
         "google/gemini-3.5-flash-lite",
         "qwen/qwen3.8-flash",
         "openai/gpt-6-luna"
       ],
-      "todo": 1608,
-      "masked_correctness [google/gemini-3.5-flash-lite]:ok": 268,
-      "factual_consistency [openai/gpt-6-luna]:ok": 268,
-      "factual_consistency [google/gemini-3.5-flash-lite]:ok": 268,
-      "masked_correctness [openai/gpt-6-luna]:ok": 268,
-      "factual_consistency [qwen/qwen3.8-flash]:ok": 268,
-      "masked_correctness [qwen/qwen3.8-flash]:ok": 268,
+      "todo": 24,
+      "masked_correctness [google/gemini-3.5-flash-lite]:ok": 4,
+      "factual_consistency [google/gemini-3.5-flash-lite]:ok": 4,
+      "masked_correctness [openai/gpt-6-luna]:ok": 4,
+      "factual_consistency [openai/gpt-6-luna]:ok": 4,
+      "factual_consistency [qwen/qwen3.8-flash]:ok": 4,
+      "masked_correctness [qwen/qwen3.8-flash]:ok": 4,
       "cost_usd": {
-        "masked_correctness [google/gemini-3.5-flash-lite]": 0.13,
-        "factual_consistency [openai/gpt-6-luna]": 0.0295,
-        "factual_consistency [google/gemini-3.5-flash-lite]": 0.1071,
-        "masked_correctness [openai/gpt-6-luna]": 0.0398,
-        "factual_consistency [qwen/qwen3.8-flash]": 0.0424,
-        "masked_correctness [qwen/qwen3.8-flash]": 0.0697
+        "masked_correctness [google/gemini-3.5-flash-lite]": 0.002,
+        "factual_consistency [google/gemini-3.5-flash-lite]": 0.002,
+        "masked_correctness [openai/gpt-6-luna]": 0.0008,
+        "factual_consistency [openai/gpt-6-luna]": 0.0007,
+        "factual_consistency [qwen/qwen3.8-flash]": 0.0018,
+        "masked_correctness [qwen/qwen3.8-flash]": 0.0016
       },
-      "key_usage_before": 13.78356202,
-      "key_usage_after": 15.149198444
+      "key_usage_before": 47.191656611,
+      "key_usage_after": 47.191656611
     },
     "report": {
       "step": "report",
-      "at": "2026-09-28T17:39:29+00:00",
+      "at": "2026-09-29T01:49:27+00:00",
       "report": "environment/results/set_c/report.md",
       "configs": [
         "case_information"
       ],
-      "key_usage_before": 15.158346927,
-      "key_usage_after": 15.151051902
+      "key_usage_before": 47.201322419,
+      "key_usage_after": 47.201322419
+    },
+    "replay": {
+      "step": "replay",
+      "at": "2026-09-29T01:45:10+00:00",
+      "configs": [
+        "case_information"
+      ],
+      "paths": [
+        "no_documents"
+      ],
+      "search": false,
+      "pipeline_models": [
+        "deepseek/deepseek-v4-flash-0731"
+      ],
+      "case_information": {
+        "todo": 4,
+        "ok": 4,
+        "path:case_study": 1,
+        "path:best_guess": 3
+      },
+      "key_usage_before": 47.032724171,
+      "key_usage_after": 47.142262098
     }
   }
 }

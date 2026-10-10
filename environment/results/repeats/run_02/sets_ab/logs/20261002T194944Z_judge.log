@@ -1,0 +1,12 @@
+2026-10-03 05:49:44,426 INFO bench: bench --out environment/results/repeats/run_02/sets_ab --workers 28 judge
+2026-10-03 05:49:48,280 WARNING medsim.llm: OpenRouter has no endpoint for google/gemini-3.5-flash-lite that accepts temperature; retrying without it
+2026-10-03 05:49:53,175 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:49:53,682 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:49:55,572 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 05:50:00,078 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:50:00,194 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 05:50:08,998 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 4/4
+2026-10-03 05:50:17,600 WARNING bench.judge: judge google/gemini-3.5-flash-lite: attempt 1/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 2s
+2026-10-03 05:50:48,425 WARNING bench.judge: judge google/gemini-3.5-flash-lite: attempt 2/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 4s
+2026-10-03 05:51:21,502 INFO bench.judge: judge masked_correctness [google/gemini-3.5-flash-lite]: 1/1
+2026-10-03 05:51:21,502 WARNING bench.judge: 1 judgment(s) still failed after 3 attempts each; run the judge step again to retry only those

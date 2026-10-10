@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Environment benchmark summary</title>
+<style>
+  @page { size: A4 landscape; margin: 12mm; }
+  body { font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; color: #1b1b1b;
+         font-size: 11.5px; }
+  h1 { font-size: 19px; margin: 0 0 4px; }
+  p.sub { margin: 0 0 12px; color: #555; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { border: 1px solid #cfcfcf; padding: 6px 6px; text-align: center; }
+  thead tr:first-child th { background: #e9eef6; font-size: 12.5px; }
+  thead tr:nth-child(2) th { background: #f4f6fa; font-weight: 600; }
+  th.group, td.first { border-left: 2px solid #8a94a6; }
+  td.cfg, th.cfg { text-align: left; }
+  td.cfg { font-weight: 600; min-width: 250px; }
+  td.cfg div.set { font-weight: 400; color: #777; font-size: 10.5px; }
+  td.nolabel { color: #777; }
+  td.top { font-weight: 700; background: #eaf6ec; }
+  tbody tr:nth-child(even) td { background-color: #fafafa; }
+  tbody tr:nth-child(even) td.top { background: #eaf6ec; }
+  tr.setc td { border-top: 2px solid #8a94a6; }
+  ul { margin: 12px 0 0; padding-left: 16px; color: #333; }
+  li { margin: 3px 0; }
+</style></head><body>
+<h1>Environment benchmark: masked correctness and factual consistency</h1>
+<p class="sub">Percent of all questions in the set each row was scored on, by the judge panel's
+voted label. Configurations 1–7: masked correctness on set A (141 questions with a value
+hidden from the case), factual consistency on set B (272 questions the case never
+answers).
+Configuration 8: both on set C (272 questions the case answers). Each metric's labels
+sum to 100%.</p>
+<table><thead><tr><th rowspan="2" class="cfg">Environment configuration</th><th colspan="4" class="group">Masked correctness</th><th colspan="3" class="group">Factual consistency</th><th colspan="2" class="group">Environment cost and time</th></tr><tr><th>same category (incl. exact)†</th><th>different category</th><th>not comparable</th><th>no label*</th><th>consistent</th><th>inconsistent</th><th>no label*</th><th>Total cost (USD)</th><th>Average answer time (s)</th></tr></thead>
+<tbody><tr><td class="cfg">1. Gemini 3 Flash knowledge, no search (gemini-3-flash-preview)<div class="set">set A / B</div></td><td class="top first">86.5%</td><td class="">13.5%</td><td class="">0.0%</td><td class="nolabel">0.0%</td><td class="first">96.7%</td><td class="">0.0%</td><td class="nolabel">3.3%</td><td class="first">$0.660</td><td>72.8</td></tr><tr><td class="cfg">2. Current with changes 1–4 (Europe PMC + LitSense)<div class="set">set A / B</div></td><td class="first">82.3%</td><td class="">17.0%</td><td class="">0.0%</td><td class="nolabel">0.7%</td><td class="first">97.1%</td><td class="">0.4%</td><td class="nolabel">2.6%</td><td class="first">$0.416</td><td>94.3</td></tr><tr><td class="cfg">3. OpenRouter search: Exa instant, DeepSeek v4 Flash<div class="set">set A / B</div></td><td class="first">85.8%</td><td class="">13.5%</td><td class="">0.7%</td><td class="nolabel">0.0%</td><td class="first">96.0%</td><td class="">0.0%</td><td class="nolabel">4.0%</td><td class="first">$3.258</td><td>74.2</td></tr><tr><td class="cfg">4. OpenRouter search: Parallel basic, DeepSeek v4 Flash<div class="set">set A / B</div></td><td class="first">80.9%</td><td class="">19.1%</td><td class="">0.0%</td><td class="nolabel">0.0%</td><td class="first">96.3%</td><td class="">0.4%</td><td class="nolabel">3.3%</td><td class="first">$2.516</td><td>84.2</td></tr><tr><td class="cfg">5. OpenRouter search: Perplexity, DeepSeek v4 Flash<div class="set">set A / B</div></td><td class="first">84.4%</td><td class="">14.9%</td><td class="">0.7%</td><td class="nolabel">0.0%</td><td class="top first">97.4%</td><td class="">0.0%</td><td class="nolabel">2.6%</td><td class="first">$2.470</td><td>78.8</td></tr><tr><td class="cfg">6. OpenRouter search: Google (native), Gemini 3.1 Flash Lite<div class="set">set A / B</div></td><td class="first">83.0%</td><td class="">16.3%</td><td class="">0.7%</td><td class="nolabel">0.0%</td><td class="first">96.7%</td><td class="">0.0%</td><td class="nolabel">3.3%</td><td class="first">$21.086</td><td>82.4</td></tr><tr><td class="cfg">7. OpenRouter search: OpenAI (native), GPT-6-luna<div class="set">set A / B</div></td><td class="first">85.1%</td><td class="">14.9%</td><td class="">0.0%</td><td class="nolabel">0.0%</td><td class="first">95.6%</td><td class="">0.0%</td><td class="nolabel">4.4%</td><td class="first">$10.800</td><td>79.9</td></tr><tr class="setc"><td class="cfg">8. Case information only, no retrieval (DeepSeek v4 Flash 0731)<div class="set">set C</div></td><td class="first">99.6%</td><td class="">0.4%</td><td class="">0.0%</td><td class="nolabel">0.0%</td><td class="first">100.0%</td><td class="">0.0%</td><td class="nolabel">0.0%</td><td class="first">$0.026</td><td>7.7</td></tr></tbody></table>
+<ul><li>Judge panel: google/gemini-3.5-flash-lite, qwen/qwen3.8-flash, openai/gpt-6-luna; each answer&#x27;s label is the majority vote (with no majority, the first judge decides). Judging cost $3.30 in total, not included in the costs above.</li><li>† Same category (incl. exact): answers at least in the true value&#x27;s category (exact + same category). With different category, not comparable, and no label it sums to 100%.</li><li>* No label: medsim gave no answer (almost all are questions its query builder refuses), or the run failed; it is not a judge label.</li><li>Total cost: every environment component for all questions of the configuration (medsim Stages A–C, search fees, the search or knowledge model&#x27;s tokens), from OpenRouter&#x27;s usage.cost. Average answer time: mean wall time per question, all components included.</li><li>When the documents give no usable basis, or there are none, medsim&#x27;s synthesizer makes a best guess from the case and diagnosis.</li><li>Configuration 1 has no search: google/gemini-3-flash-preview gets the question, the case information as medsim sees it, and the diagnosis, and gives the value that typically fits. Configurations 6 and 7 use the model provider&#x27;s own search; their documents are the search model&#x27;s quotations of the sources it cites. Configuration 8 has retrieval switched off.</li></ul>
+</body></html>

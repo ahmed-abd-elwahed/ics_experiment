@@ -1,0 +1,4 @@
+2026-10-03 08:31:09,815 INFO bench: bench --out environment/results/repeats/run_06/sets_ab --workers 32 judge
+2026-10-03 08:31:20,058 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+2026-10-03 08:31:27,238 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 2.0s
+2026-10-03 08:31:35,288 INFO bench.judge: judge factual_consistency [qwen/qwen3.8-flash]: 2/2

@@ -1,0 +1,230 @@
+{
+  "steps": [
+    {
+      "step": "questions",
+      "at": "2026-09-29T10:57:30+00:00",
+      "run": 8,
+      "copied_from": "environment/results/set_c",
+      "files": [
+        "items.jsonl"
+      ]
+    },
+    {
+      "step": "repeat_run",
+      "at": "2026-10-01T23:43:51+00:00",
+      "run": 8,
+      "results": {
+        "run_08/gemini_knowledge": {
+          "ok": 408,
+          "error": 5
+        },
+        "run_08/current": {
+          "ok": 410,
+          "error": 3
+        },
+        "run_08/improved_1to4": {
+          "ok": 407,
+          "error": 6
+        },
+        "run_08/openrouter_exa_instant": {
+          "ok": 409,
+          "error": 4
+        },
+        "run_08/openrouter_parallel_basic": {
+          "ok": 406,
+          "error": 7
+        },
+        "run_08/openrouter_perplexity": {
+          "ok": 406,
+          "error": 7
+        },
+        "run_08/case_information": {
+          "ok": 271,
+          "error": 1
+        }
+      }
+    },
+    {
+      "step": "repeat_run",
+      "at": "2026-10-02T18:27:36+00:00",
+      "run": 8,
+      "results": {
+        "run_08/gemini_knowledge": {
+          "ok": 5
+        },
+        "run_08/current": {
+          "ok": 3
+        },
+        "run_08/case_information": {
+          "ok": 1
+        },
+        "run_08/improved_1to4": {
+          "ok": 6
+        },
+        "run_08/openrouter_exa_instant": {
+          "ok": 4
+        },
+        "run_08/openrouter_parallel_basic": {
+          "ok": 7
+        },
+        "run_08/openrouter_perplexity": {
+          "ok": 7
+        }
+      }
+    },
+    {
+      "step": "judge",
+      "at": "2026-10-02T20:37:48+00:00",
+      "panel": [
+        "google/gemini-3.5-flash-lite",
+        "qwen/qwen3.8-flash",
+        "openai/gpt-6-luna"
+      ],
+      "todo": 327,
+      "factual_consistency [qwen/qwen3.8-flash]:ok": 63,
+      "masked_correctness [qwen/qwen3.8-flash]:ok": 62,
+      "masked_correctness [openai/gpt-6-luna]:ok": 49,
+      "factual_consistency [openai/gpt-6-luna]:ok": 49,
+      "masked_correctness [google/gemini-3.5-flash-lite]:ok": 48,
+      "factual_consistency [google/gemini-3.5-flash-lite]:ok": 48,
+      "masked_correctness [qwen/qwen3.8-flash]:error": 7,
+      "factual_consistency [qwen/qwen3.8-flash]:error": 1,
+      "cost_usd": {
+        "factual_consistency [qwen/qwen3.8-flash]": 0.0109,
+        "masked_correctness [qwen/qwen3.8-flash]": 0.0157,
+        "masked_correctness [openai/gpt-6-luna]": 0.0071,
+        "factual_consistency [openai/gpt-6-luna]": 0.0058,
+        "masked_correctness [google/gemini-3.5-flash-lite]": 0.0234,
+        "factual_consistency [google/gemini-3.5-flash-lite]": 0.0197
+      },
+      "key_usage_before": 184.58409316,
+      "key_usage_after": 184.964640238
+    },
+    {
+      "step": "judge",
+      "at": "2026-10-02T21:13:18+00:00",
+      "panel": [
+        "google/gemini-3.5-flash-lite",
+        "qwen/qwen3.8-flash",
+        "openai/gpt-6-luna"
+      ],
+      "todo": 8,
+      "factual_consistency [qwen/qwen3.8-flash]:ok": 1,
+      "masked_correctness [qwen/qwen3.8-flash]:ok": 6,
+      "masked_correctness [qwen/qwen3.8-flash]:error": 1,
+      "cost_usd": {
+        "factual_consistency [qwen/qwen3.8-flash]": 0.0001,
+        "masked_correctness [qwen/qwen3.8-flash]": 0.0017
+      },
+      "key_usage_before": 187.730359188,
+      "key_usage_after": 187.860587082
+    },
+    {
+      "step": "judge",
+      "at": "2026-10-02T21:52:22+00:00",
+      "panel": [
+        "google/gemini-3.5-flash-lite",
+        "qwen/qwen3.8-flash",
+        "openai/gpt-6-luna"
+      ],
+      "todo": 1,
+      "masked_correctness [qwen/qwen3.8-flash]:error": 1,
+      "cost_usd": {
+        "masked_correctness [qwen/qwen3.8-flash]": 0.0
+      },
+      "key_usage_before": 188.812994809,
+      "key_usage_after": 188.812994809
+    },
+    {
+      "step": "judge",
+      "at": "2026-10-02T22:32:32+00:00",
+      "panel": [
+        "google/gemini-3.5-flash-lite",
+        "qwen/qwen3.8-flash",
+        "openai/gpt-6-luna"
+      ],
+      "todo": 1,
+      "masked_correctness [qwen/qwen3.8-flash]:error": 1,
+      "cost_usd": {
+        "masked_correctness [qwen/qwen3.8-flash]": 0.0
+      },
+      "key_usage_before": 188.963509847,
+      "key_usage_after": 188.963509847
+    },
+    {
+      "step": "report",
+      "at": "2026-10-02T23:20:20+00:00",
+      "report": "environment/results/repeats/run_08/set_c/report.md",
+      "configs": [
+        "case_information"
+      ],
+      "key_usage_before": 193.163832992,
+      "key_usage_after": 193.164211888
+    }
+  ],
+  "latest": {
+    "questions": {
+      "step": "questions",
+      "at": "2026-09-29T10:57:30+00:00",
+      "run": 8,
+      "copied_from": "environment/results/set_c",
+      "files": [
+        "items.jsonl"
+      ]
+    },
+    "repeat_run": {
+      "step": "repeat_run",
+      "at": "2026-10-02T18:27:36+00:00",
+      "run": 8,
+      "results": {
+        "run_08/gemini_knowledge": {
+          "ok": 5
+        },
+        "run_08/current": {
+          "ok": 3
+        },
+        "run_08/case_information": {
+          "ok": 1
+        },
+        "run_08/improved_1to4": {
+          "ok": 6
+        },
+        "run_08/openrouter_exa_instant": {
+          "ok": 4
+        },
+        "run_08/openrouter_parallel_basic": {
+          "ok": 7
+        },
+        "run_08/openrouter_perplexity": {
+          "ok": 7
+        }
+      }
+    },
+    "judge": {
+      "step": "judge",
+      "at": "2026-10-02T22:32:32+00:00",
+      "panel": [
+        "google/gemini-3.5-flash-lite",
+        "qwen/qwen3.8-flash",
+        "openai/gpt-6-luna"
+      ],
+      "todo": 1,
+      "masked_correctness [qwen/qwen3.8-flash]:error": 1,
+      "cost_usd": {
+        "masked_correctness [qwen/qwen3.8-flash]": 0.0
+      },
+      "key_usage_before": 188.963509847,
+      "key_usage_after": 188.963509847
+    },
+    "report": {
+      "step": "report",
+      "at": "2026-10-02T23:20:20+00:00",
+      "report": "environment/results/repeats/run_08/set_c/report.md",
+      "configs": [
+        "case_information"
+      ],
+      "key_usage_before": 193.163832992,
+      "key_usage_after": 193.164211888
+    }
+  }
+}

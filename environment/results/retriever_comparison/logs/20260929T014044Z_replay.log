@@ -1,0 +1,12 @@
+2026-09-29 11:40:44,537 INFO bench: bench --out environment/results/retriever_comparison --workers 16 replay --configs openrouter_openai,openrouter_parallel_basic --paths no_documents
+2026-09-29 11:41:05,070 INFO bench.run: replay openrouter_openai B:PMC3645620_04:creatinine: ok query_builder_declined [1/11]
+2026-09-29 11:41:10,058 INFO bench.run: replay openrouter_parallel_basic B:PMC7412905_01-2:respiratory_rate: ok best_guess [2/11]
+2026-09-29 11:41:24,406 INFO bench.run: replay openrouter_openai A:PMC4518021_01:body_temperature: ok best_guess [3/11]
+2026-09-29 11:41:35,050 INFO bench.run: replay openrouter_openai A:PMC10724032_01:mean_bmi: ok best_guess [4/11]
+2026-09-29 11:41:35,078 INFO bench.run: replay openrouter_openai B:PMC3016773_01-2:respiratory_rate: ok best_guess [5/11]
+2026-09-29 11:41:35,551 INFO bench.run: replay openrouter_openai B:PMC8851600_09-2:sodium: ok best_guess [6/11]
+2026-09-29 11:41:36,209 INFO bench.run: replay openrouter_openai B:PMC3016773_01:hemoglobin: ok best_guess [7/11]
+2026-09-29 11:41:53,534 INFO bench.run: replay openrouter_openai B:PMC4518021_01:platelet_count: ok best_guess [8/11]
+2026-09-29 11:42:06,859 INFO bench.run: replay openrouter_openai A:PMC4518021_01-2:white_blood_cell_count: ok best_guess [9/11]
+2026-09-29 11:42:12,415 INFO bench.run: replay openrouter_openai B:PMC3745877_01-2:respiratory_rate: ok best_guess [10/11]
+2026-09-29 11:43:05,591 INFO bench.run: replay openrouter_openai B:PMC11802409_01-2:white_cell_count: ok best_guess [11/11]

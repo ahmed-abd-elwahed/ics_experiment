@@ -1,0 +1,2 @@
+2026-10-03 06:31:41,931 INFO bench: bench --out environment/results/repeats/run_06/set_c --workers 28 judge
+2026-10-03 06:31:57,631 INFO bench.judge: judge masked_correctness [qwen/qwen3.8-flash]: 1/1

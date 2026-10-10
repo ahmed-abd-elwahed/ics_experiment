@@ -1,0 +1,1293 @@
+{
+  "panel": [
+    "google/gemini-3.5-flash-lite",
+    "qwen/qwen3.8-flash",
+    "openai/gpt-6-luna"
+  ],
+  "question_counts": {
+    "A": 141,
+    "B": 272,
+    "C": 272
+  },
+  "incomplete": {},
+  "configs": {
+    "gemini_knowledge": {
+      "runs": {
+        "1": {
+          "mc_same_category": 86.52482269503547,
+          "mc_different_category": 13.47517730496454,
+          "mc_not_comparable": 0.0,
+          "mc_no_label": 0.0,
+          "fc_consistent": 96.69117647058823,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 3.3088235294117645,
+          "total_cost_usd": 0.6603505641449999,
+          "mean_time_s": 72.84738498789346,
+          "best_guesses": 13.0
+        },
+        "2": {
+          "mc_same_category": 85.1063829787234,
+          "mc_different_category": 13.47517730496454,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 0.7092198581560284,
+          "fc_consistent": 97.05882352941177,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 2.9411764705882355,
+          "total_cost_usd": 0.8393639142000003,
+          "mean_time_s": 54.54871670702179,
+          "best_guesses": 22.0
+        },
+        "3": {
+          "mc_same_category": 85.1063829787234,
+          "mc_different_category": 14.184397163120567,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 0.0,
+          "fc_consistent": 99.26470588235294,
+          "fc_inconsistent": 0.36764705882352944,
+          "fc_no_label": 0.36764705882352944,
+          "total_cost_usd": 1.0838659268000004,
+          "mean_time_s": 76.3239225181598,
+          "best_guesses": 28.0
+        },
+        "4": {
+          "mc_same_category": 85.81560283687944,
+          "mc_different_category": 13.47517730496454,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 0.0,
+          "fc_consistent": 97.79411764705883,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 2.2058823529411766,
+          "total_cost_usd": 1.1176842517000003,
+          "mean_time_s": 69.68748184019371,
+          "best_guesses": 32.0
+        },
+        "5": {
+          "mc_same_category": 81.56028368794327,
+          "mc_different_category": 14.184397163120567,
+          "mc_not_comparable": 3.5460992907801416,
+          "mc_no_label": 0.7092198581560284,
+          "fc_consistent": 96.69117647058823,
+          "fc_inconsistent": 0.36764705882352944,
+          "fc_no_label": 2.9411764705882355,
+          "total_cost_usd": 0.9542853808750003,
+          "mean_time_s": 67.07021791767555,
+          "best_guesses": 23.0
+        },
+        "6": {
+          "mc_same_category": 80.85106382978724,
+          "mc_different_category": 13.47517730496454,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 4.964539007092198,
+          "fc_consistent": 93.75,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 6.25,
+          "total_cost_usd": 1.0264507235000007,
+          "mean_time_s": 66.21256658595642,
+          "best_guesses": 30.0
+        },
+        "7": {
+          "mc_same_category": 83.68794326241135,
+          "mc_different_category": 15.602836879432624,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 0.0,
+          "fc_consistent": 97.05882352941177,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 2.9411764705882355,
+          "total_cost_usd": 1.0662307730000005,
+          "mean_time_s": 63.86438256658596,
+          "best_guesses": 30.0
+        },
+        "8": {
+          "mc_same_category": 85.1063829787234,
+          "mc_different_category": 12.76595744680851,
+          "mc_not_comparable": 2.127659574468085,
+          "mc_no_label": 0.0,
+          "fc_consistent": 98.52941176470588,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 1.4705882352941178,
+          "total_cost_usd": 1.1241843040000008,
+          "mean_time_s": 76.99171912832931,
+          "best_guesses": 25.0
+        },
+        "9": {
+          "mc_same_category": 83.68794326241135,
+          "mc_different_category": 15.602836879432624,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 0.0,
+          "fc_consistent": 98.16176470588235,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 1.838235294117647,
+          "total_cost_usd": 1.142610188999999,
+          "mean_time_s": 77.37910411622276,
+          "best_guesses": 33.0
+        },
+        "10": {
+          "mc_same_category": 86.52482269503547,
+          "mc_different_category": 12.056737588652481,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 0.7092198581560284,
+          "fc_consistent": 97.79411764705883,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 2.2058823529411766,
+          "total_cost_usd": 1.246533125,
+          "mean_time_s": 77.99583535108958,
+          "best_guesses": 15.0
+        }
+      },
+      "summary": {
+        "mc_same_category": {
+          "mean": 84.39716312056738,
+          "sd": 1.9494589246419198
+        },
+        "mc_different_category": {
+          "mean": 13.829787234042552,
+          "sd": 1.1213750567972978
+        },
+        "mc_not_comparable": {
+          "mean": 1.0638297872340425,
+          "sd": 1.0168233176173318
+        },
+        "mc_no_label": {
+          "mean": 0.7092198581560283,
+          "sd": 1.5320899996236075
+        },
+        "fc_consistent": {
+          "mean": 97.27941176470588,
+          "sd": 1.492886503219712
+        },
+        "fc_inconsistent": {
+          "mean": 0.07352941176470588,
+          "sd": 0.15501361079256762
+        },
+        "fc_no_label": {
+          "mean": 2.647058823529412,
+          "sd": 1.5384661594583544
+        },
+        "total_cost_usd": {
+          "mean": 1.0261559152220001,
+          "sd": 0.16961440605070885
+        },
+        "mean_time_s": {
+          "mean": 70.29213317191284,
+          "sd": 7.556665751197566
+        },
+        "best_guesses": {
+          "mean": 25.1,
+          "sd": 6.903300337922112
+        }
+      }
+    },
+    "current": {
+      "runs": {
+        "1": {
+          "mc_same_category": 87.23404255319149,
+          "mc_different_category": 12.76595744680851,
+          "mc_not_comparable": 0.0,
+          "mc_no_label": 0.0,
+          "fc_consistent": 95.22058823529412,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 4.779411764705882,
+          "total_cost_usd": 0.44260123931,
+          "mean_time_s": 86.06491525423728,
+          "best_guesses": 41.0
+        },
+        "2": {
+          "mc_same_category": 87.94326241134752,
+          "mc_different_category": 11.347517730496454,
+          "mc_not_comparable": 0.0,
+          "mc_no_label": 0.7092198581560284,
+          "fc_consistent": 97.42647058823529,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 2.573529411764706,
+          "total_cost_usd": 0.7337975323999997,
+          "mean_time_s": 128.4271186440678,
+          "best_guesses": 259.0
+        },
+        "3": {
+          "mc_same_category": 86.52482269503547,
+          "mc_different_category": 12.056737588652481,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 0.7092198581560284,
+          "fc_consistent": 95.95588235294117,
+          "fc_inconsistent": 0.36764705882352944,
+          "fc_no_label": 3.676470588235294,
+          "total_cost_usd": 1.0568172364500017,
+          "mean_time_s": 123.16305084745761,
+          "best_guesses": 278.0
+        },
+        "4": {
+          "mc_same_category": 84.39716312056737,
+          "mc_different_category": 15.602836879432624,
+          "mc_not_comparable": 0.0,
+          "mc_no_label": 0.0,
+          "fc_consistent": 96.69117647058823,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 3.3088235294117645,
+          "total_cost_usd": 0.9038101484000003,
+          "mean_time_s": 126.78581113801452,
+          "best_guesses": 272.0
+        },
+        "5": {
+          "mc_same_category": 84.39716312056737,
+          "mc_different_category": 13.47517730496454,
+          "mc_not_comparable": 2.127659574468085,
+          "mc_no_label": 0.0,
+          "fc_consistent": 95.58823529411765,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 4.411764705882353,
+          "total_cost_usd": 0.8653726890500004,
+          "mean_time_s": 120.55958837772397,
+          "best_guesses": 271.0
+        },
+        "6": {
+          "mc_same_category": 87.23404255319149,
+          "mc_different_category": 11.347517730496454,
+          "mc_not_comparable": 0.0,
+          "mc_no_label": 1.4184397163120568,
+          "fc_consistent": 96.32352941176471,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 3.676470588235294,
+          "total_cost_usd": 0.9232727569999999,
+          "mean_time_s": 125.26171912832929,
+          "best_guesses": 270.0
+        },
+        "7": {
+          "mc_same_category": 83.68794326241135,
+          "mc_different_category": 14.184397163120567,
+          "mc_not_comparable": 2.127659574468085,
+          "mc_no_label": 0.0,
+          "fc_consistent": 98.8970588235294,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 1.1029411764705883,
+          "total_cost_usd": 0.9682203569999998,
+          "mean_time_s": 127.06481840193703,
+          "best_guesses": 268.0
+        },
+        "8": {
+          "mc_same_category": 87.23404255319149,
+          "mc_different_category": 11.347517730496454,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 0.7092198581560284,
+          "fc_consistent": 97.79411764705883,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 2.2058823529411766,
+          "total_cost_usd": 1.0660224321999998,
+          "mean_time_s": 130.8867554479419,
+          "best_guesses": 277.0
+        },
+        "9": {
+          "mc_same_category": 86.52482269503547,
+          "mc_different_category": 11.347517730496454,
+          "mc_not_comparable": 2.127659574468085,
+          "mc_no_label": 0.0,
+          "fc_consistent": 97.42647058823529,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 2.573529411764706,
+          "total_cost_usd": 1.085498785,
+          "mean_time_s": 128.3593946731235,
+          "best_guesses": 277.0
+        },
+        "10": {
+          "mc_same_category": 84.39716312056737,
+          "mc_different_category": 14.893617021276595,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 0.0,
+          "fc_consistent": 98.52941176470588,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 1.4705882352941178,
+          "total_cost_usd": 1.1566532780000005,
+          "mean_time_s": 130.8969491525424,
+          "best_guesses": 283.0
+        }
+      },
+      "summary": {
+        "mc_same_category": {
+          "mean": 85.95744680851064,
+          "sd": 1.5609999072547696
+        },
+        "mc_different_category": {
+          "mean": 12.836879432624112,
+          "sd": 1.6189970371880786
+        },
+        "mc_not_comparable": {
+          "mean": 0.851063829787234,
+          "sd": 0.9337313313537352
+        },
+        "mc_no_label": {
+          "mean": 0.3546099290780142,
+          "sd": 0.5014941710542891
+        },
+        "fc_consistent": {
+          "mean": 96.98529411764706,
+          "sd": 1.2352552125837393
+        },
+        "fc_inconsistent": {
+          "mean": 0.03676470588235294,
+          "sd": 0.11626020809442572
+        },
+        "fc_no_label": {
+          "mean": 2.9779411764705883,
+          "sd": 1.2063455590514425
+        },
+        "total_cost_usd": {
+          "mean": 0.9202066454810002,
+          "sd": 0.2085928531611592
+        },
+        "mean_time_s": {
+          "mean": 122.74701210653753,
+          "sd": 13.284295592000312
+        },
+        "best_guesses": {
+          "mean": 249.6,
+          "sd": 73.5907602895907
+        }
+      }
+    },
+    "improved_1to4": {
+      "runs": {
+        "1": {
+          "mc_same_category": 82.26950354609929,
+          "mc_different_category": 17.02127659574468,
+          "mc_not_comparable": 0.0,
+          "mc_no_label": 0.7092198581560284,
+          "fc_consistent": 97.05882352941177,
+          "fc_inconsistent": 0.36764705882352944,
+          "fc_no_label": 2.573529411764706,
+          "total_cost_usd": 0.41637526750000003,
+          "mean_time_s": 94.3128813559322,
+          "best_guesses": 43.0
+        },
+        "2": {
+          "mc_same_category": 86.52482269503547,
+          "mc_different_category": 12.76595744680851,
+          "mc_not_comparable": 0.0,
+          "mc_no_label": 0.7092198581560284,
+          "fc_consistent": 96.69117647058823,
+          "fc_inconsistent": 0.36764705882352944,
+          "fc_no_label": 2.9411764705882355,
+          "total_cost_usd": 0.8488498172749991,
+          "mean_time_s": 106.46099273607749,
+          "best_guesses": 208.0
+        },
+        "3": {
+          "mc_same_category": 84.39716312056737,
+          "mc_different_category": 13.47517730496454,
+          "mc_not_comparable": 1.4184397163120568,
+          "mc_no_label": 0.7092198581560284,
+          "fc_consistent": 97.42647058823529,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 2.573529411764706,
+          "total_cost_usd": 1.136518001599999,
+          "mean_time_s": 108.68276029055691,
+          "best_guesses": 218.0
+        },
+        "4": {
+          "mc_same_category": 83.68794326241135,
+          "mc_different_category": 15.602836879432624,
+          "mc_not_comparable": 0.0,
+          "mc_no_label": 0.7092198581560284,
+          "fc_consistent": 97.79411764705883,
+          "fc_inconsistent": 0.36764705882352944,
+          "fc_no_label": 1.838235294117647,
+          "total_cost_usd": 0.7267632822000001,
+          "mean_time_s": 108.8352784503632,
+          "best_guesses": 233.0
+        },
+        "5": {
+          "mc_same_category": 83.68794326241135,
+          "mc_different_category": 14.893617021276595,
+          "mc_not_comparable": 1.4184397163120568,
+          "mc_no_label": 0.0,
+          "fc_consistent": 95.58823529411765,
+          "fc_inconsistent": 1.1029411764705883,
+          "fc_no_label": 3.3088235294117645,
+          "total_cost_usd": 0.9347922108000005,
+          "mean_time_s": 104.82278450363195,
+          "best_guesses": 210.0
+        },
+        "6": {
+          "mc_same_category": 87.23404255319149,
+          "mc_different_category": 12.76595744680851,
+          "mc_not_comparable": 0.0,
+          "mc_no_label": 0.0,
+          "fc_consistent": 98.16176470588235,
+          "fc_inconsistent": 0.36764705882352944,
+          "fc_no_label": 1.4705882352941178,
+          "total_cost_usd": 1.0150572283749997,
+          "mean_time_s": 113.00699757869249,
+          "best_guesses": 195.0
+        },
+        "7": {
+          "mc_same_category": 84.39716312056737,
+          "mc_different_category": 14.184397163120567,
+          "mc_not_comparable": 1.4184397163120568,
+          "mc_no_label": 0.0,
+          "fc_consistent": 98.52941176470588,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 1.4705882352941178,
+          "total_cost_usd": 1.0364252720000007,
+          "mean_time_s": 106.56363196125908,
+          "best_guesses": 201.0
+        },
+        "8": {
+          "mc_same_category": 84.39716312056737,
+          "mc_different_category": 13.47517730496454,
+          "mc_not_comparable": 1.4184397163120568,
+          "mc_no_label": 0.7092198581560284,
+          "fc_consistent": 96.69117647058823,
+          "fc_inconsistent": 0.7352941176470589,
+          "fc_no_label": 2.573529411764706,
+          "total_cost_usd": 1.1044409273499995,
+          "mean_time_s": 105.23569007263923,
+          "best_guesses": 216.0
+        },
+        "9": {
+          "mc_same_category": 86.52482269503547,
+          "mc_different_category": 12.76595744680851,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 0.0,
+          "fc_consistent": 97.42647058823529,
+          "fc_inconsistent": 0.36764705882352944,
+          "fc_no_label": 2.2058823529411766,
+          "total_cost_usd": 1.1915517449999988,
+          "mean_time_s": 109.76697336561743,
+          "best_guesses": 203.0
+        },
+        "10": {
+          "mc_same_category": 86.52482269503547,
+          "mc_different_category": 12.76595744680851,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 0.0,
+          "fc_consistent": 95.58823529411765,
+          "fc_inconsistent": 0.36764705882352944,
+          "fc_no_label": 4.044117647058823,
+          "total_cost_usd": 1.2960639216,
+          "mean_time_s": 110.50213075060532,
+          "best_guesses": 201.0
+        }
+      },
+      "summary": {
+        "mc_same_category": {
+          "mean": 84.9645390070922,
+          "sd": 1.6310343556180014
+        },
+        "mc_different_category": {
+          "mean": 13.97163120567376,
+          "sd": 1.4592245259584837
+        },
+        "mc_not_comparable": {
+          "mean": 0.7092198581560284,
+          "sd": 0.668658894739052
+        },
+        "mc_no_label": {
+          "mean": 0.3546099290780142,
+          "sd": 0.3737916855990992
+        },
+        "fc_consistent": {
+          "mean": 97.09558823529412,
+          "sd": 0.9872614735844506
+        },
+        "fc_inconsistent": {
+          "mean": 0.4044117647058824,
+          "sd": 0.32190993962165926
+        },
+        "fc_no_label": {
+          "mean": 2.5,
+          "sd": 0.8091948048636851
+        },
+        "total_cost_usd": {
+          "mean": 0.9706837673699997,
+          "sd": 0.2558699018843397
+        },
+        "mean_time_s": {
+          "mean": 106.81901210653753,
+          "sd": 5.068140427576189
+        },
+        "best_guesses": {
+          "mean": 192.8,
+          "sd": 53.7479715379515
+        }
+      }
+    },
+    "openrouter_exa_instant": {
+      "runs": {
+        "1": {
+          "mc_same_category": 85.81560283687944,
+          "mc_different_category": 13.47517730496454,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 0.0,
+          "fc_consistent": 95.95588235294117,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 4.044117647058823,
+          "total_cost_usd": 3.257881955028999,
+          "mean_time_s": 74.21152542372882,
+          "best_guesses": 137.0
+        },
+        "2": {
+          "mc_same_category": 86.52482269503547,
+          "mc_different_category": 12.76595744680851,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 0.0,
+          "fc_consistent": 97.05882352941177,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 2.9411764705882355,
+          "total_cost_usd": 3.6659594612000026,
+          "mean_time_s": 78.24823244552059,
+          "best_guesses": 289.0
+        },
+        "3": {
+          "mc_same_category": 85.1063829787234,
+          "mc_different_category": 12.76595744680851,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 1.4184397163120568,
+          "fc_consistent": 96.69117647058823,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 3.3088235294117645,
+          "total_cost_usd": 3.8038470056749984,
+          "mean_time_s": 75.87360774818401,
+          "best_guesses": 287.0
+        },
+        "4": {
+          "mc_same_category": 85.1063829787234,
+          "mc_different_category": 13.47517730496454,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 0.7092198581560284,
+          "fc_consistent": 97.05882352941177,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 2.9411764705882355,
+          "total_cost_usd": 3.518155208799999,
+          "mean_time_s": 65.15256658595641,
+          "best_guesses": 274.0
+        },
+        "5": {
+          "mc_same_category": 88.65248226950355,
+          "mc_different_category": 9.929078014184396,
+          "mc_not_comparable": 1.4184397163120568,
+          "mc_no_label": 0.0,
+          "fc_consistent": 97.05882352941177,
+          "fc_inconsistent": 0.36764705882352944,
+          "fc_no_label": 2.573529411764706,
+          "total_cost_usd": 3.6923030516750006,
+          "mean_time_s": 70.5458353510896,
+          "best_guesses": 281.0
+        },
+        "6": {
+          "mc_same_category": 85.1063829787234,
+          "mc_different_category": 14.893617021276595,
+          "mc_not_comparable": 0.0,
+          "mc_no_label": 0.0,
+          "fc_consistent": 96.69117647058823,
+          "fc_inconsistent": 0.36764705882352944,
+          "fc_no_label": 2.9411764705882355,
+          "total_cost_usd": 3.788013840999997,
+          "mean_time_s": 74.61886198547215,
+          "best_guesses": 278.0
+        },
+        "7": {
+          "mc_same_category": 85.1063829787234,
+          "mc_different_category": 13.47517730496454,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 0.7092198581560284,
+          "fc_consistent": 98.16176470588235,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 1.838235294117647,
+          "total_cost_usd": 3.8085359999999953,
+          "mean_time_s": 81.4250847457627,
+          "best_guesses": 285.0
+        },
+        "8": {
+          "mc_same_category": 81.56028368794327,
+          "mc_different_category": 17.73049645390071,
+          "mc_not_comparable": 0.0,
+          "mc_no_label": 0.7092198581560284,
+          "fc_consistent": 97.05882352941177,
+          "fc_inconsistent": 0.7352941176470589,
+          "fc_no_label": 2.2058823529411766,
+          "total_cost_usd": 3.906619325,
+          "mean_time_s": 78.22903147699758,
+          "best_guesses": 286.0
+        },
+        "9": {
+          "mc_same_category": 87.94326241134752,
+          "mc_different_category": 11.347517730496454,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 0.0,
+          "fc_consistent": 99.26470588235294,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 0.7352941176470589,
+          "total_cost_usd": 4.119344902000002,
+          "mean_time_s": 105.84065375302664,
+          "best_guesses": 271.0
+        },
+        "10": {
+          "mc_same_category": 87.23404255319149,
+          "mc_different_category": 12.056737588652481,
+          "mc_not_comparable": 0.0,
+          "mc_no_label": 0.7092198581560284,
+          "fc_consistent": 97.05882352941177,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 2.9411764705882355,
+          "total_cost_usd": 3.919652283599999,
+          "mean_time_s": 84.38690072639226,
+          "best_guesses": 277.0
+        }
+      },
+      "summary": {
+        "mc_same_category": {
+          "mean": 85.81560283687944,
+          "sd": 1.9779196844777196
+        },
+        "mc_different_category": {
+          "mean": 13.191489361702128,
+          "sd": 2.0932334393549556
+        },
+        "mc_not_comparable": {
+          "mean": 0.5673758865248227,
+          "sd": 0.4485500227189191
+        },
+        "mc_no_label": {
+          "mean": 0.425531914893617,
+          "sd": 0.4958907083546816
+        },
+        "fc_consistent": {
+          "mean": 97.20588235294117,
+          "sd": 0.9038769075777342
+        },
+        "fc_inconsistent": {
+          "mean": 0.14705882352941177,
+          "sd": 0.2570609921985666
+        },
+        "fc_no_label": {
+          "mean": 2.647058823529412,
+          "sd": 0.8972061381236827
+        },
+        "total_cost_usd": {
+          "mean": 3.7480313033978994,
+          "sd": 0.23659232449478937
+        },
+        "mean_time_s": {
+          "mean": 78.85323002421308,
+          "sd": 10.910683152360921
+        },
+        "best_guesses": {
+          "mean": 266.5,
+          "sd": 45.88451687540024
+        }
+      }
+    },
+    "openrouter_parallel_basic": {
+      "runs": {
+        "1": {
+          "mc_same_category": 80.85106382978724,
+          "mc_different_category": 19.148936170212767,
+          "mc_not_comparable": 0.0,
+          "mc_no_label": 0.0,
+          "fc_consistent": 96.32352941176471,
+          "fc_inconsistent": 0.36764705882352944,
+          "fc_no_label": 3.3088235294117645,
+          "total_cost_usd": 2.515982052071,
+          "mean_time_s": 84.24365617433413,
+          "best_guesses": 62.0
+        },
+        "2": {
+          "mc_same_category": 87.94326241134752,
+          "mc_different_category": 11.347517730496454,
+          "mc_not_comparable": 0.0,
+          "mc_no_label": 0.7092198581560284,
+          "fc_consistent": 97.79411764705883,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 2.2058823529411766,
+          "total_cost_usd": 2.926674307099996,
+          "mean_time_s": 76.14956416464891,
+          "best_guesses": 279.0
+        },
+        "3": {
+          "mc_same_category": 79.43262411347517,
+          "mc_different_category": 18.43971631205674,
+          "mc_not_comparable": 2.127659574468085,
+          "mc_no_label": 0.0,
+          "fc_consistent": 97.05882352941177,
+          "fc_inconsistent": 0.36764705882352944,
+          "fc_no_label": 2.573529411764706,
+          "total_cost_usd": 3.0963090315999993,
+          "mean_time_s": 85.42249394673124,
+          "best_guesses": 264.0
+        },
+        "4": {
+          "mc_same_category": 82.97872340425532,
+          "mc_different_category": 13.47517730496454,
+          "mc_not_comparable": 2.8368794326241136,
+          "mc_no_label": 0.7092198581560284,
+          "fc_consistent": 95.58823529411765,
+          "fc_inconsistent": 0.7352941176470589,
+          "fc_no_label": 3.676470588235294,
+          "total_cost_usd": 2.858982177500001,
+          "mean_time_s": 87.72738498789347,
+          "best_guesses": 259.0
+        },
+        "5": {
+          "mc_same_category": 82.97872340425532,
+          "mc_different_category": 14.893617021276595,
+          "mc_not_comparable": 1.4184397163120568,
+          "mc_no_label": 0.7092198581560284,
+          "fc_consistent": 96.32352941176471,
+          "fc_inconsistent": 0.36764705882352944,
+          "fc_no_label": 3.3088235294117645,
+          "total_cost_usd": 2.918805937800001,
+          "mean_time_s": 77.59372881355932,
+          "best_guesses": 285.0
+        },
+        "6": {
+          "mc_same_category": 85.1063829787234,
+          "mc_different_category": 14.184397163120567,
+          "mc_not_comparable": 0.0,
+          "mc_no_label": 0.7092198581560284,
+          "fc_consistent": 98.8970588235294,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 1.1029411764705883,
+          "total_cost_usd": 3.0603016570000006,
+          "mean_time_s": 83.10210653753026,
+          "best_guesses": 275.0
+        },
+        "7": {
+          "mc_same_category": 81.56028368794327,
+          "mc_different_category": 17.02127659574468,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 0.7092198581560284,
+          "fc_consistent": 96.69117647058823,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 3.3088235294117645,
+          "total_cost_usd": 3.055496405999999,
+          "mean_time_s": 81.59152542372883,
+          "best_guesses": 280.0
+        },
+        "8": {
+          "mc_same_category": 85.1063829787234,
+          "mc_different_category": 12.76595744680851,
+          "mc_not_comparable": 1.4184397163120568,
+          "mc_no_label": 0.7092198581560284,
+          "fc_consistent": 97.42647058823529,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 2.573529411764706,
+          "total_cost_usd": 3.206826458000002,
+          "mean_time_s": 91.28123486682809,
+          "best_guesses": 270.0
+        },
+        "9": {
+          "mc_same_category": 82.97872340425532,
+          "mc_different_category": 16.31205673758865,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 0.0,
+          "fc_consistent": 97.79411764705883,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 2.2058823529411766,
+          "total_cost_usd": 3.2476305959999983,
+          "mean_time_s": 92.20767554479418,
+          "best_guesses": 258.0
+        },
+        "10": {
+          "mc_same_category": 84.39716312056737,
+          "mc_different_category": 14.184397163120567,
+          "mc_not_comparable": 1.4184397163120568,
+          "mc_no_label": 0.0,
+          "fc_consistent": 98.16176470588235,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 1.838235294117647,
+          "total_cost_usd": 3.1850605699999988,
+          "mean_time_s": 78.44869249394674,
+          "best_guesses": 266.0
+        }
+      },
+      "summary": {
+        "mc_same_category": {
+          "mean": 83.33333333333334,
+          "sd": 2.439688822760082
+        },
+        "mc_different_category": {
+          "mean": 15.177304964539008,
+          "sd": 2.5063561760186426
+        },
+        "mc_not_comparable": {
+          "mean": 1.0638297872340425,
+          "sd": 0.9602882274983405
+        },
+        "mc_no_label": {
+          "mean": 0.425531914893617,
+          "sd": 0.36623955992505125
+        },
+        "fc_consistent": {
+          "mean": 97.20588235294117,
+          "sd": 0.9986053327187893
+        },
+        "fc_inconsistent": {
+          "mean": 0.18382352941176472,
+          "sd": 0.2599657283774072
+        },
+        "fc_no_label": {
+          "mean": 2.610294117647059,
+          "sd": 0.802672690873177
+        },
+        "total_cost_usd": {
+          "mean": 3.0072069193070994,
+          "sd": 0.2160108580484147
+        },
+        "mean_time_s": {
+          "mean": 83.77680629539951,
+          "sd": 5.537288262768889
+        },
+        "best_guesses": {
+          "mean": 249.8,
+          "sd": 66.60964227831016
+        }
+      }
+    },
+    "openrouter_perplexity": {
+      "runs": {
+        "1": {
+          "mc_same_category": 84.39716312056737,
+          "mc_different_category": 14.893617021276595,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 0.0,
+          "fc_consistent": 97.42647058823529,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 2.573529411764706,
+          "total_cost_usd": 2.4697505736490015,
+          "mean_time_s": 78.79070217917676,
+          "best_guesses": 16.0
+        },
+        "2": {
+          "mc_same_category": 83.68794326241135,
+          "mc_different_category": 14.184397163120567,
+          "mc_not_comparable": 1.4184397163120568,
+          "mc_no_label": 0.7092198581560284,
+          "fc_consistent": 98.52941176470588,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 1.4705882352941178,
+          "total_cost_usd": 3.096745856199999,
+          "mean_time_s": 92.16891041162228,
+          "best_guesses": 159.0
+        },
+        "3": {
+          "mc_same_category": 83.68794326241135,
+          "mc_different_category": 14.893617021276595,
+          "mc_not_comparable": 1.4184397163120568,
+          "mc_no_label": 0.0,
+          "fc_consistent": 98.16176470588235,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 1.838235294117647,
+          "total_cost_usd": 3.3023724277000017,
+          "mean_time_s": 98.10728813559321,
+          "best_guesses": 145.0
+        },
+        "4": {
+          "mc_same_category": 82.97872340425532,
+          "mc_different_category": 15.602836879432624,
+          "mc_not_comparable": 1.4184397163120568,
+          "mc_no_label": 0.0,
+          "fc_consistent": 97.79411764705883,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 2.2058823529411766,
+          "total_cost_usd": 3.0112249029999973,
+          "mean_time_s": 93.52893462469733,
+          "best_guesses": 149.0
+        },
+        "5": {
+          "mc_same_category": 81.56028368794327,
+          "mc_different_category": 16.31205673758865,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 1.4184397163120568,
+          "fc_consistent": 96.32352941176471,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 3.676470588235294,
+          "total_cost_usd": 3.083468298425005,
+          "mean_time_s": 92.48087167070217,
+          "best_guesses": 145.0
+        },
+        "6": {
+          "mc_same_category": 87.94326241134752,
+          "mc_different_category": 11.347517730496454,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 0.0,
+          "fc_consistent": 97.42647058823529,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 2.573529411764706,
+          "total_cost_usd": 3.1669508585999995,
+          "mean_time_s": 85.18016949152543,
+          "best_guesses": 161.0
+        },
+        "7": {
+          "mc_same_category": 83.68794326241135,
+          "mc_different_category": 15.602836879432624,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 0.0,
+          "fc_consistent": 97.79411764705883,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 2.2058823529411766,
+          "total_cost_usd": 3.1858383599999973,
+          "mean_time_s": 90.8557627118644,
+          "best_guesses": 152.0
+        },
+        "8": {
+          "mc_same_category": 79.43262411347517,
+          "mc_different_category": 19.858156028368793,
+          "mc_not_comparable": 0.0,
+          "mc_no_label": 0.7092198581560284,
+          "fc_consistent": 97.79411764705883,
+          "fc_inconsistent": 0.36764705882352944,
+          "fc_no_label": 1.838235294117647,
+          "total_cost_usd": 3.4183783330000015,
+          "mean_time_s": 109.12997578692494,
+          "best_guesses": 141.0
+        },
+        "9": {
+          "mc_same_category": 85.1063829787234,
+          "mc_different_category": 14.184397163120567,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 0.0,
+          "fc_consistent": 97.05882352941177,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 2.9411764705882355,
+          "total_cost_usd": 3.4200818395999986,
+          "mean_time_s": 100.73854721549635,
+          "best_guesses": 147.0
+        },
+        "10": {
+          "mc_same_category": 82.26950354609929,
+          "mc_different_category": 17.73049645390071,
+          "mc_not_comparable": 0.0,
+          "mc_no_label": 0.0,
+          "fc_consistent": 96.69117647058823,
+          "fc_inconsistent": 0.36764705882352944,
+          "fc_no_label": 2.9411764705882355,
+          "total_cost_usd": 3.2919028256000034,
+          "mean_time_s": 92.60794188861986,
+          "best_guesses": 146.0
+        }
+      },
+      "summary": {
+        "mc_same_category": {
+          "mean": 83.47517730496455,
+          "sd": 2.24399573996866
+        },
+        "mc_different_category": {
+          "mean": 15.460992907801417,
+          "sd": 2.262597846620406
+        },
+        "mc_not_comparable": {
+          "mean": 0.7801418439716312,
+          "sd": 0.5233083598387389
+        },
+        "mc_no_label": {
+          "mean": 0.28368794326241137,
+          "sd": 0.4958907083546816
+        },
+        "fc_consistent": {
+          "mean": 97.5,
+          "sd": 0.6667387504282076
+        },
+        "fc_inconsistent": {
+          "mean": 0.07352941176470588,
+          "sd": 0.15501361079256762
+        },
+        "fc_no_label": {
+          "mean": 2.4264705882352944,
+          "sd": 0.653083950709521
+        },
+        "total_cost_usd": {
+          "mean": 3.144671427577401,
+          "sd": 0.27464582483642697
+        },
+        "mean_time_s": {
+          "mean": 93.35891041162228,
+          "sd": 8.259020590128904
+        },
+        "best_guesses": {
+          "mean": 136.1,
+          "sd": 42.670442541256435
+        }
+      }
+    },
+    "openrouter_google": {
+      "runs": {
+        "1": {
+          "mc_same_category": 82.97872340425532,
+          "mc_different_category": 16.31205673758865,
+          "mc_not_comparable": 0.7092198581560284,
+          "mc_no_label": 0.0,
+          "fc_consistent": 96.69117647058823,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 3.3088235294117645,
+          "total_cost_usd": 21.08620035683198,
+          "mean_time_s": 82.42329297820824,
+          "best_guesses": 63.0
+        }
+      },
+      "summary": {
+        "mc_same_category": {
+          "mean": 82.97872340425532,
+          "sd": null
+        },
+        "mc_different_category": {
+          "mean": 16.31205673758865,
+          "sd": null
+        },
+        "mc_not_comparable": {
+          "mean": 0.7092198581560284,
+          "sd": null
+        },
+        "mc_no_label": {
+          "mean": 0.0,
+          "sd": null
+        },
+        "fc_consistent": {
+          "mean": 96.69117647058823,
+          "sd": null
+        },
+        "fc_inconsistent": {
+          "mean": 0.0,
+          "sd": null
+        },
+        "fc_no_label": {
+          "mean": 3.3088235294117645,
+          "sd": null
+        },
+        "total_cost_usd": {
+          "mean": 21.08620035683198,
+          "sd": null
+        },
+        "mean_time_s": {
+          "mean": 82.42329297820824,
+          "sd": null
+        },
+        "best_guesses": {
+          "mean": 63.0,
+          "sd": null
+        }
+      }
+    },
+    "openrouter_openai": {
+      "runs": {
+        "1": {
+          "mc_same_category": 85.1063829787234,
+          "mc_different_category": 14.893617021276595,
+          "mc_not_comparable": 0.0,
+          "mc_no_label": 0.0,
+          "fc_consistent": 95.58823529411765,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 4.411764705882353,
+          "total_cost_usd": 10.800068421684996,
+          "mean_time_s": 79.93755447941888,
+          "best_guesses": 80.0
+        }
+      },
+      "summary": {
+        "mc_same_category": {
+          "mean": 85.1063829787234,
+          "sd": null
+        },
+        "mc_different_category": {
+          "mean": 14.893617021276595,
+          "sd": null
+        },
+        "mc_not_comparable": {
+          "mean": 0.0,
+          "sd": null
+        },
+        "mc_no_label": {
+          "mean": 0.0,
+          "sd": null
+        },
+        "fc_consistent": {
+          "mean": 95.58823529411765,
+          "sd": null
+        },
+        "fc_inconsistent": {
+          "mean": 0.0,
+          "sd": null
+        },
+        "fc_no_label": {
+          "mean": 4.411764705882353,
+          "sd": null
+        },
+        "total_cost_usd": {
+          "mean": 10.800068421684996,
+          "sd": null
+        },
+        "mean_time_s": {
+          "mean": 79.93755447941888,
+          "sd": null
+        },
+        "best_guesses": {
+          "mean": 80.0,
+          "sd": null
+        }
+      }
+    },
+    "case_information": {
+      "runs": {
+        "1": {
+          "mc_same_category": 99.63235294117646,
+          "mc_different_category": 0.36764705882352944,
+          "mc_not_comparable": 0.0,
+          "mc_no_label": 0.0,
+          "fc_consistent": 100.0,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 0.0,
+          "total_cost_usd": 0.026433473409000006,
+          "mean_time_s": 7.7116911764705875,
+          "best_guesses": 3.0
+        },
+        "2": {
+          "mc_same_category": 99.26470588235294,
+          "mc_different_category": 0.36764705882352944,
+          "mc_not_comparable": 0.36764705882352944,
+          "mc_no_label": 0.0,
+          "fc_consistent": 99.63235294117646,
+          "fc_inconsistent": 0.36764705882352944,
+          "fc_no_label": 0.0,
+          "total_cost_usd": 0.05665396505000004,
+          "mean_time_s": 8.765404411764706,
+          "best_guesses": 7.0
+        },
+        "3": {
+          "mc_same_category": 99.26470588235294,
+          "mc_different_category": 0.36764705882352944,
+          "mc_not_comparable": 0.36764705882352944,
+          "mc_no_label": 0.0,
+          "fc_consistent": 100.0,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 0.0,
+          "total_cost_usd": 0.0486715592,
+          "mean_time_s": 6.768235294117647,
+          "best_guesses": 8.0
+        },
+        "4": {
+          "mc_same_category": 99.26470588235294,
+          "mc_different_category": 0.7352941176470589,
+          "mc_not_comparable": 0.0,
+          "mc_no_label": 0.0,
+          "fc_consistent": 99.63235294117646,
+          "fc_inconsistent": 0.36764705882352944,
+          "fc_no_label": 0.0,
+          "total_cost_usd": 0.051758227,
+          "mean_time_s": 7.726580882352941,
+          "best_guesses": 5.0
+        },
+        "5": {
+          "mc_same_category": 98.52941176470588,
+          "mc_different_category": 0.36764705882352944,
+          "mc_not_comparable": 0.7352941176470589,
+          "mc_no_label": 0.36764705882352944,
+          "fc_consistent": 99.26470588235294,
+          "fc_inconsistent": 0.36764705882352944,
+          "fc_no_label": 0.36764705882352944,
+          "total_cost_usd": 0.05229976900000002,
+          "mean_time_s": 7.433088235294117,
+          "best_guesses": 7.0
+        },
+        "6": {
+          "mc_same_category": 99.63235294117646,
+          "mc_different_category": 0.36764705882352944,
+          "mc_not_comparable": 0.0,
+          "mc_no_label": 0.0,
+          "fc_consistent": 99.63235294117646,
+          "fc_inconsistent": 0.36764705882352944,
+          "fc_no_label": 0.0,
+          "total_cost_usd": 0.04455428299999998,
+          "mean_time_s": 6.779926470588236,
+          "best_guesses": 3.0
+        },
+        "7": {
+          "mc_same_category": 98.52941176470588,
+          "mc_different_category": 0.7352941176470589,
+          "mc_not_comparable": 0.7352941176470589,
+          "mc_no_label": 0.0,
+          "fc_consistent": 99.26470588235294,
+          "fc_inconsistent": 0.7352941176470589,
+          "fc_no_label": 0.0,
+          "total_cost_usd": 0.05884339899999998,
+          "mean_time_s": 8.948786764705883,
+          "best_guesses": 7.0
+        },
+        "8": {
+          "mc_same_category": 99.26470588235294,
+          "mc_different_category": 0.36764705882352944,
+          "mc_not_comparable": 0.36764705882352944,
+          "mc_no_label": 0.0,
+          "fc_consistent": 99.63235294117646,
+          "fc_inconsistent": 0.36764705882352944,
+          "fc_no_label": 0.0,
+          "total_cost_usd": 0.04879864959999997,
+          "mean_time_s": 7.241213235294118,
+          "best_guesses": 4.0
+        },
+        "9": {
+          "mc_same_category": 99.26470588235294,
+          "mc_different_category": 0.36764705882352944,
+          "mc_not_comparable": 0.0,
+          "mc_no_label": 0.36764705882352944,
+          "fc_consistent": 99.63235294117646,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 0.36764705882352944,
+          "total_cost_usd": 0.060345752799999985,
+          "mean_time_s": 8.097830882352941,
+          "best_guesses": 5.0
+        },
+        "10": {
+          "mc_same_category": 99.63235294117646,
+          "mc_different_category": 0.36764705882352944,
+          "mc_not_comparable": 0.0,
+          "mc_no_label": 0.0,
+          "fc_consistent": 100.0,
+          "fc_inconsistent": 0.0,
+          "fc_no_label": 0.0,
+          "total_cost_usd": 0.058632969,
+          "mean_time_s": 8.452904411764706,
+          "best_guesses": 3.0
+        }
+      },
+      "summary": {
+        "mc_same_category": {
+          "mean": 99.22794117647058,
+          "sd": 0.4045974024318398
+        },
+        "mc_different_category": {
+          "mean": 0.44117647058823534,
+          "sd": 0.15501361079256762
+        },
+        "mc_not_comparable": {
+          "mean": 0.2573529411764706,
+          "sd": 0.3026737508634429
+        },
+        "mc_no_label": {
+          "mean": 0.07352941176470588,
+          "sd": 0.15501361079256762
+        },
+        "fc_consistent": {
+          "mean": 99.66911764705881,
+          "sd": 0.27127381888699353
+        },
+        "fc_inconsistent": {
+          "mean": 0.2573529411764706,
+          "sd": 0.248142852099468
+        },
+        "fc_no_label": {
+          "mean": 0.07352941176470588,
+          "sd": 0.15501361079256762
+        },
+        "total_cost_usd": {
+          "mean": 0.05069920470589999,
+          "sd": 0.009976528821265875
+        },
+        "mean_time_s": {
+          "mean": 7.792566176470588,
+          "sd": 0.7696532853918918
+        },
+        "best_guesses": {
+          "mean": 5.2,
+          "sd": 1.9321835661585918
+        }
+      }
+    }
+  }
+}
