@@ -36,12 +36,12 @@
   <text x="434" y="83" text-anchor="middle">Simulated environment</text>
 
   <!-- Case study -->
-  <rect x="77" y="114" width="226" height="54" rx="12" fill="#FCE5B4" stroke="#141413" stroke-width="2"/>
-  <text x="190" y="152" text-anchor="middle">Case study</text>
+  <rect x="77" y="164" width="226" height="54" rx="12" fill="#FCE5B4" stroke="#141413" stroke-width="2"/>
+  <text x="190" y="202" text-anchor="middle">Case study</text>
   <g stroke="#141413" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M130,192 H218 L250,224 V342 H130 Z" fill="#C9C8E0"/>
-    <path d="M218,192 V224 H250" fill="#FFFFFF"/>
-    <path d="M152,248 H190 M152,272 H228 M152,296 H228 M152,320 H228" fill="none"/>
+    <path d="M130,242 H218 L250,274 V392 H130 Z" fill="#C9C8E0"/>
+    <path d="M218,242 V274 H250" fill="#FFFFFF"/>
+    <path d="M152,298 H190 M152,322 H228 M152,346 H228 M152,370 H228" fill="none"/>
   </g>
 
   <!-- The literature -->
@@ -58,7 +58,7 @@
 
   <!-- LLM reads the case study and the literature -->
   <g stroke="#141413" stroke-width="3" fill="none" marker-start="url(#arrow)" marker-end="url(#arrow)">
-    <line x1="278" y1="278" x2="500" y2="376"/>
+    <line x1="278" y1="328" x2="500" y2="376"/>
     <line x1="258" y1="566" x2="500" y2="456"/>
   </g>
 
