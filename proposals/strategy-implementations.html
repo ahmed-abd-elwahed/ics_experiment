@@ -1,32 +1,21 @@
 <title>Strategy Implementation Proposal</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600&display=swap">
 <style>
 /* Layout: one reading column; each strategy is a section with a full-width flow diagram,
    a detail panel for the selected step, then proposal notes beside a code sketch. */
 :root {
-  --bg: #f5f6f8; --surface: #ffffff; --surface-2: #eef0f4;
-  --text: #1a1d21; --muted: #5b6470; --border: #d8dce2; --line: #3a4150;
+  color-scheme: light;  /* one light look, whatever the system theme */
+  --bg: #ffffff; --surface: #ffffff; --surface-2: #f1f2f4;
+  --text: #141413; --muted: #5b6470; --border: #d8dce2; --line: #141413; --label: #FCE5B4; --envfill: #ECEDEE;
   --llm: #2f45b5; --llm-soft: #e5e9f8;
-  --env: #4f8a36; --env-soft: #eef6ea;
   --code-stroke: #6b7482;
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --bg: #14171c; --surface: #1c2027; --surface-2: #262b34;
-  --text: #e6e8ec; --muted: #a2aab5; --border: #363c48; --line: #b4bbc6;
-  --llm: #96a5f5; --llm-soft: #232c52;
-  --env: #86c46a; --env-soft: #1c2a18;
-  --code-stroke: #8b94a1; color-scheme: dark } }
-:root[data-theme="dark"] {
-  --bg: #14171c; --surface: #1c2027; --surface-2: #262b34;
-  --text: #e6e8ec; --muted: #a2aab5; --border: #363c48; --line: #b4bbc6;
-  --llm: #96a5f5; --llm-soft: #232c52;
-  --env: #86c46a; --env-soft: #1c2a18;
-  --code-stroke: #8b94a1; color-scheme: dark }
 
 * { box-sizing: border-box; }
 body { background: var(--bg); color: var(--text); font: 15px/1.55 var(--sans); padding-inline: 16px; padding-block: 0 64px; }
-.wrap { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+.wrap { max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
 header.top { padding-top: 36px; display: flex; flex-direction: column; gap: 10px; }
 .eyebrow { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 h1 { font-size: 30px; line-height: 1.2; margin: 0; text-wrap: balance; }
@@ -45,35 +34,34 @@ ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 
 
 figure { margin: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; }
 .scroll { overflow-x: auto; padding: 8px; }
-.scroll svg { display: block; width: 100%; min-width: 900px; height: auto; }
+.scroll svg { display: block; width: 100%; min-width: 900px; height: auto; margin: 0 auto; }
 figcaption { border-top: 1px solid var(--border); padding: 10px 14px; font-size: 13.5px; color: var(--muted); }
 .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--muted); align-items: center; }
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
 .sw { width: 22px; height: 14px; border-radius: 3px; border: 1.5px solid var(--code-stroke); background: var(--surface); }
 .sw.llm { border-color: var(--llm); background: var(--llm-soft); }
-.sw.env { border-color: var(--env); background: var(--env-soft); border-style: dashed; }
+.sw.env { border-color: var(--line); background: var(--envfill); border-style: dashed; }
 .sw.dec { width: 14px; height: 14px; transform: rotate(45deg); border-radius: 1px; margin-inline: 4px; }
 
 /* diagram */
-svg text { font-family: var(--sans); fill: var(--text); }
-.lane { fill: none; stroke: var(--border); stroke-width: 1.2; }
-.lane.envl { fill: var(--env-soft); stroke: var(--env); stroke-dasharray: 6 5; }
+.fig > text, .fig .node text { font-family: var(--sans); fill: var(--text); }
+.panel { fill: var(--surface); stroke: var(--line); stroke-width: 1.8; }
 .band { fill: var(--surface-2); stroke: none; }
-.lanelabel { font-size: 11px; fill: var(--muted); letter-spacing: .05em; text-transform: uppercase; }
-.bandlabel { font-size: 12px; font-weight: 600; fill: var(--muted); }
+.bandlabel { font-size: 12px; font-weight: 600; fill: var(--muted) !important; }
+.chip-box { fill: var(--label); stroke: var(--line); stroke-width: 1.2; }
+.chip-text, .qalabel { font-family: 'DM Sans', system-ui, sans-serif !important; font-weight: 500; font-size: 18px; }
+.qa { fill: none; stroke: var(--line); stroke-width: 1.8; }
 .edge { fill: none; stroke: var(--line); stroke-width: 1.4; }
 .ah { fill: var(--line); }
-.elabel { font-size: 11.5px; fill: var(--muted); }
-.statetxt { font-family: var(--mono); font-size: 11px; fill: var(--muted); }
+.elabel { font-size: 11.5px; fill: var(--muted) !important; }
+.statetxt { display: block; margin-top: 4px; font-family: var(--mono); font-size: 12px; }
 .node { cursor: pointer; outline: none; }
 .node .shape { fill: var(--surface); stroke: var(--code-stroke); stroke-width: 1.4; }
 .node.llm .shape { fill: var(--llm-soft); stroke: var(--llm); }
-.node.env .shape { fill: var(--surface); stroke: var(--env); }
 .node.end .shape { fill: var(--text); stroke: var(--text); }
 .node.end text { fill: var(--bg); }
 .node .tag { font-size: 9px; letter-spacing: .08em; fill: var(--muted); }
 .node.llm .tag { fill: var(--llm); }
-.node.env .tag { fill: var(--env); }
 .node .ttl { font-size: 12.5px; font-weight: 600; }
 .node .sub { font-size: 10.5px; fill: var(--muted); }
 .node .dtx { font-size: 11.5px; font-weight: 600; }
@@ -85,7 +73,6 @@ svg text { font-family: var(--sans); fill: var(--text); }
 .detail .head strong { font-size: 15px; }
 .chip { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; border: 1px solid var(--border); border-radius: 999px; padding: 1px 8px; color: var(--muted); }
 .chip.llm { color: var(--llm); border-color: var(--llm); }
-.chip.env { color: var(--env); border-color: var(--env); }
 .detail dl { margin: 0; display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 4px 12px; font-size: 14px; }
 .detail dt { color: var(--muted); }
 .detail dd { margin: 0; overflow-wrap: anywhere; }
@@ -107,12 +94,12 @@ ol.open { margin: 0; padding-left: 20px; display: flex; flex-direction: column; 
 <header class="top">
   <div class="eyebrow">Information Collection Strategies Experiment · proposal</div>
   <h1>How I would implement the five strategies from Meeting 63</h1>
-  <p>Slides 8 to 12 of <code>Meeting 63.pptx</code> each draw one strategy as a flowchart. Below, every box on those slides becomes either an LLM call or a rule in code, on top of the existing <code>StrategySession</code> interface. Nothing here is built yet. Select any step in a diagram to see what it reads and returns.</p>
+  <p>Slides 8 to 12 of <code>Meeting 63.pptx</code> each draw one strategy as a flowchart. Below, every box on those slides becomes either an LLM call or a rule in code, on top of the existing <code>StrategySession</code> interface. Each figure is the project's overview diagram with the strategy robot replaced by that strategy's proposed flow. Nothing here is built yet. Select any step in a diagram to see what it reads and returns.</p>
   <div class="legend" aria-label="Legend">
     <span><i class="sw llm"></i>LLM call (structured JSON out)</span>
     <span><i class="sw"></i>Code</span>
     <span><i class="sw dec"></i>Stop rule, decided in code</span>
-    <span><i class="sw env"></i>Simulated environment (existing)</span>
+    <span><i class="sw env"></i>Simulated environment (existing, from the overview diagram)</span>
   </div>
 </header>
 
@@ -350,32 +337,82 @@ ol.open { margin: 0; padding-left: 20px; display: flex; flex-direction: column; 
 </section>
 </div>
 
+<!-- The environment half of .claude/rules/framework-overview.svg, copied as it is and reused by every figure. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,1 L10,5 L0,9 Z" fill="#141413"/>
+    </marker>
+    <g id="robot" stroke="#141413" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="0" y1="-127" x2="0" y2="-104"/>
+      <circle cx="0" cy="-136" r="9" fill="#FFFFFF"/>
+      <rect x="-48" y="-104" width="96" height="72" rx="16" fill="#FFFFFF"/>
+      <circle cx="-20" cy="-68" r="11" fill="#FFFFFF"/>
+      <circle cx="20" cy="-68" r="11" fill="#FFFFFF"/>
+      <circle cx="-20" cy="-68" r="4" fill="#141413" stroke="none"/>
+      <circle cx="20" cy="-68" r="4" fill="#141413" stroke="none"/>
+      <rect x="-14" y="-32" width="28" height="12" fill="#FFFFFF"/>
+      <path d="M-60,0 H-86 V-40" fill="none"/>
+      <path d="M-100,-58 a14,14 0 0 0 28,0" fill="none"/>
+      <path d="M60,0 H86 V44" fill="none"/>
+      <path d="M72,62 a14,14 0 0 1 28,0" fill="none"/>
+      <rect x="-60" y="-20" width="120" height="100" rx="8" fill="currentColor"/>
+      <polyline points="-44,30 -24,30 -12,8 2,52 14,22 24,30 44,30" fill="none"/>
+      <rect x="-82" y="88" width="164" height="48" rx="24" fill="#FFFFFF"/>
+      <circle cx="-44" cy="112" r="6" fill="#141413" stroke="none"/>
+      <circle cx="0" cy="112" r="6" fill="#141413" stroke="none"/>
+      <circle cx="44" cy="112" r="6" fill="#141413" stroke="none"/>
+    </g>
+    <g id="env-overview" font-family="'DM Sans', system-ui, sans-serif" font-size="34" font-weight="500" fill="#141413">
+      <rect x="24" y="72" width="820" height="680" rx="24" fill="#ECEDEE" stroke="#141413" stroke-width="3" stroke-dasharray="14 12"/>
+      <rect x="219" y="45" width="430" height="54" rx="12" fill="#FCE5B4" stroke="#141413" stroke-width="2"/>
+      <text x="434" y="83" text-anchor="middle">Simulated environment</text>
+      <rect x="77" y="164" width="226" height="54" rx="12" fill="#FCE5B4" stroke="#141413" stroke-width="2"/>
+      <text x="190" y="202" text-anchor="middle">Case study</text>
+      <g stroke="#141413" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M130,242 H218 L250,274 V392 H130 Z" fill="#C9C8E0"/>
+        <path d="M218,242 V274 H250" fill="#FFFFFF"/>
+        <path d="M152,298 H190 M152,322 H228 M152,346 H228 M152,370 H228" fill="none"/>
+      </g>
+      <rect x="40" y="470" width="300" height="54" rx="12" fill="#FCE5B4" stroke="#141413" stroke-width="2"/>
+      <text x="190" y="508" text-anchor="middle">The literature</text>
+      <line x1="222" y1="642" x2="262" y2="682" stroke="#141413" stroke-width="24" stroke-linecap="round"/>
+      <line x1="222" y1="642" x2="262" y2="682" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round"/>
+      <circle cx="180" cy="600" r="54" fill="#B3DFE2" stroke="#141413" stroke-width="3"/>
+      <rect x="564" y="192" width="112" height="54" rx="12" fill="#FCE5B4" stroke="#141413" stroke-width="2"/>
+      <text x="620" y="230" text-anchor="middle">LLM</text>
+      <use href="#robot" x="620" y="410" color="#B8D0C6"/>
+      <g stroke="#141413" stroke-width="3" fill="none" marker-start="url(#arrow)" marker-end="url(#arrow)">
+        <line x1="278" y1="328" x2="500" y2="376"/>
+        <line x1="258" y1="566" x2="500" y2="456"/>
+      </g>
+    </g>
+  </defs>
+</svg>
+
 <script>
 (function () {
-  var ENV = { kind: "env", tag: "ENVIRONMENT", t: "Environment.query()", s: "case study, else literature",
-    d: { does: "Existing code, unchanged. Answers the question from the case study, or synthesises an answer from the literature when the case is silent.",
-         reads: "The question text.", returns: "<code>output_answer</code>. The strategy never sees the retrieval details.", rule: "Each query is one iteration and counts toward <code>max_iterations</code>." } };
   var END = { kind: "end", t: "Diagnosis",
     d: { does: "What <code>final_diagnosis()</code> hands to the runner. New: the runner does not ask for a diagnosis today.",
          reads: "The session's state at the stop.", returns: "<code>Diagnosis(name, llm_calls)</code>, saved in the case run.", rule: "Graded afterwards against the case's hidden diagnosis." } };
+  var QUERY = [[634, 160], [575, 160], [575, 260], [452, 260]];
 
-  // The shared loop: ask -> environment -> update -> stop? -> diagnose.
+  // The shared loop: ask -> (environment) -> update -> stop? -> diagnose.
   function loop(o) {
-    return { W: 1190, H: 360, sel: "upd", state: o.state,
+    return { W: 1070, px: 1056, sel: "upd", title: o.title, state: o.state,
       nodes: {
-        ask: Object.assign({ x: 120, y: 200 }, o.ask), env: Object.assign({ x: 310, y: 62 }, ENV),
-        upd: Object.assign({ x: 500, y: 200 }, o.upd), stop: Object.assign({ x: 710, y: 200, kind: "dec" }, o.stop),
-        dx: Object.assign({ x: 960, y: 200 }, o.dx), end: Object.assign({ x: 1116, y: 200 }, END) },
-      edges: [
-        [[120, 169], [120, 62], [215, 62]], [[405, 62], [500, 62], [500, 169]],
-        [[586, 200], [618, 200]], [[802, 200], [874, 200]],
-        [[710, 246], [710, 292], [120, 292], [120, 231]], [[1046, 200], [1066, 200]] ],
-      labels: [[128, 122, "question"], [508, 122, "answer"], [838, 191, o.yes || "yes", "middle"], [415, 285, o.no || "no", "middle"]] };
+        ask: Object.assign({ x: 720, y: 160 }, o.ask), upd: Object.assign({ x: 720, y: 307 }, o.upd),
+        stop: Object.assign({ x: 944, y: 307, kind: "dec" }, o.stop),
+        dx: Object.assign({ x: 944, y: 430 }, o.dx), end: Object.assign({ x: 720, y: 430 }, END) },
+      qa: [QUERY, [[452, 307], [634, 307]]],
+      edges: [[[806, 307], [852, 307]], [[944, 261], [944, 160], [806, 160]], [[944, 353], [944, 399]], [[858, 430], [770, 430]]],
+      labels: [[875, 152, o.no || "no", "middle"], [952, 381, o.yes || "yes"]] };
   }
 
   var D = {
     s1: loop({
-      state: "state: memory + differential [{diagnosis, p, evidence_for, evidence_against}]",
+      title: "1. Hypothesis-driven search",
+      state: "memory + differential [{diagnosis, p, evidence_for, evidence_against}]",
       ask: { kind: "llm", tag: "LLM", t: "Pick the question", s: "that splits the top two",
         d: { does: "Chooses the question whose answer would most change the ranking of the differential.", reads: "Memory and the current differential. On the first turn there is no differential, so it asks for the presenting complaint.",
              returns: "<code>{question, separates: [diagnosis, diagnosis], rationale}</code>", rule: "Slide box: “Collect new information”." } },
@@ -389,7 +426,8 @@ ol.open { margin: 0; padding-left: 20px; display: flex; flex-direction: column; 
         d: { does: "Returns the highest-ranked hypothesis as the diagnosis.", reads: "The differential. After a forced stop it is updated once more with the last answer first.", returns: "The diagnosis name.", rule: "Slide box: “Return diagnosis”." } } }),
 
     s2: loop({
-      state: "state: memory + picture {findings, patterns [{name, present, missing}], basics_covered}",
+      title: "2. Knowledge-driven search",
+      state: "memory + picture {findings, patterns [{name, present, missing}], basics_covered}",
       ask: { kind: "llm", tag: "LLM", t: "Ask what is missing", s: "no diagnosis named",
         d: { does: "Asks for the most informative finding that is still unknown.", reads: "Memory and the picture's <code>missing</code> lists. On the first turn, a fixed intake order: complaint, history, vitals.",
              returns: "<code>{question, fills: finding, rationale}</code>", rule: "The prompt forbids naming or implying a diagnosis. Slide box: “Collect new information”." } },
@@ -403,8 +441,9 @@ ol.open { margin: 0; padding-left: 20px; display: flex; flex-direction: column; 
         d: { does: "Names the diagnosis that the completed pattern fits.", reads: "Memory and the final picture.", returns: "<code>{diagnosis}</code>", rule: "Slide box: “Return diagnosis”." } } }),
 
     s3: loop({
+      title: "3. Gut feeling",
       yes: "reassurance", no: "alarm",
-      state: "state: memory only (no differential, no summary)",
+      state: "memory only (no differential, no summary)",
       ask: { kind: "llm", tag: "LLM · FAST", t: "Ask what comes to mind", s: "no reasoning, no rationale",
         d: { does: "Asks the next question on impulse.", reads: "Memory only.", returns: "<code>{question}</code>",
              rule: "Reasoning off and a small token limit, so the model cannot deliberate. Slide box: “Collect new information”." } },
@@ -417,51 +456,44 @@ ol.open { margin: 0; padding-left: 20px; display: flex; flex-direction: column; 
       dx: { kind: "llm", tag: "LLM · FAST", t: "First impression", s: "one line, no reasoning",
         d: { does: "States the diagnosis the model would bet on.", reads: "Memory only.", returns: "<code>{diagnosis}</code>", rule: "Slide box: “Return diagnosis”." } } }),
 
-    s4: { W: 1164, H: 430, sel: "sure", state: "state: memory + channel (interview | exam) + last {diagnosis, confidence}",
+    s4: { W: 1294, px: 1280, sel: "sure", title: "4. Channel-based", state: "memory + channel (interview | exam) + last {diagnosis, confidence}",
       nodes: {
-        ask: { x: 120, y: 200, kind: "llm", tag: "LLM ×2", t: "Ask within the channel", s: "then check its channel",
+        ask: { x: 720, y: 160, kind: "llm", tag: "LLM ×2", t: "Ask within the channel", s: "then check its channel",
           d: { does: "Asks the next question allowed in the current channel. A second, short call labels the question as history, examination or test.", reads: "Memory and the current channel's prompt.",
                returns: "<code>{question, rationale, nothing_left}</code>, then <code>{channel}</code> from the classifier.", rule: "Code rejects a question whose label is not the current channel and asks again, twice at most. Slide boxes: “Conduct patient interview” and “Physical exam”." } },
-        env: Object.assign({ x: 310, y: 62 }, ENV),
-        more: { x: 500, y: 200, kind: "dec", t: "channel", s: "used up?",
+        more: { x: 720, y: 307, kind: "dec", t: "channel", s: "used up?",
           d: { does: "Decides whether to keep asking in this channel.", reads: "Questions asked in this channel, and the LLM's <code>nothing_left</code> flag.", returns: "Continue in the channel, or move on to the confidence check. No LLM call.",
                rule: "<code>asked ≥ cap[channel] or nothing_left</code>. The caps are params." } },
-        conf: { x: 710, y: 200, kind: "llm", tag: "LLM", t: "Diagnose and rate", s: "diagnosis + confidence",
+        conf: { x: 944, y: 307, kind: "llm", tag: "LLM", t: "Diagnose and rate", s: "diagnosis + confidence",
           d: { does: "Commits to a working diagnosis and says how confident it is.", reads: "Memory.", returns: "<code>{diagnosis, confidence}</code> with confidence from 0 to 1.", rule: "Runs once per channel, when the channel is used up." } },
-        sure: { x: 920, y: 200, kind: "dec", t: "confident, or", s: "no channel left?",
+        sure: { x: 1168, y: 307, kind: "dec", t: "confident, or", s: "no channel left?",
           d: { does: "Decides between returning the diagnosis and opening the next channel.", reads: "The confidence and the position in the channel list.", returns: "Stop or switch. No LLM call.",
                rule: "<code>confidence ≥ confident or channel is last</code>; 0.80 is my starting value. Slide diamond: “Confident in diagnosis?”." } },
-        sw: { x: 500, y: 356, kind: "code", tag: "CODE", t: "Switch channel", s: "interview → physical exam",
+        sw: { x: 1168, y: 160, kind: "code", tag: "CODE", t: "Switch channel", s: "interview → physical exam",
           d: { does: "Moves to the next channel in the list and resets its question count.", reads: "<code>params.channels</code>, by default <code>[\"interview\", \"exam\"]</code>.", returns: "The new current channel.", rule: "A third channel for tests would be one more list entry; see the open questions." } },
-        end: Object.assign({ x: 1090, y: 200 }, END) },
-      edges: [
-        [[120, 169], [120, 62], [215, 62]], [[405, 62], [500, 62], [500, 154]],
-        [[500, 246], [500, 286], [140, 286], [140, 231]], [[592, 200], [624, 200]],
-        [[796, 200], [828, 200]], [[1012, 200], [1040, 200]],
-        [[920, 246], [920, 356], [586, 356]], [[414, 356], [100, 356], [100, 231]] ],
-      labels: [[128, 122, "question"], [508, 122, "answer"], [320, 279, "no", "middle"], [608, 191, "yes", "middle"], [1026, 191, "yes", "middle"], [750, 349, "no", "middle"], [250, 349, "ask in the new channel", "middle"]] },
+        end: Object.assign({ x: 1168, y: 430 }, END) },
+      qa: [QUERY, [[452, 307], [628, 307]]],
+      edges: [[[720, 261], [720, 191]], [[812, 307], [858, 307]], [[1030, 307], [1076, 307]], [[1168, 353], [1168, 408]], [[1168, 261], [1168, 191]], [[1082, 160], [806, 160]]],
+      labels: [[728, 231, "no"], [835, 299, "yes", "middle"], [1176, 385, "yes"], [1176, 231, "no"], [944, 152, "ask in the new channel", "middle"]] },
 
-    s5: { W: 1164, H: 380, sel: "refine", envLabel: false, state: "state: memory + phase (init | refine | final) + candidates [diagnosis]",
-      bands: [[34, 458, "Phase 1 · Initialization of diagnosis"], [470, 810, "Phase 2 · Refinement of diagnosis"], [822, 1000, "Phase 3 · Final diagnosis"]],
+    s5: { W: 1094, px: 1080, sel: "refine", title: "5. Sequence-based", state: "memory + phase (init | refine | final) + candidates [diagnosis]",
+      bands: [[105, "Phase 1 · Initialization of diagnosis"], [225, "Phase 2 · Refinement of diagnosis"], [345, "Phase 3 · Defining the final diagnosis"]],
+      rail: true,
       nodes: {
-        env: Object.assign({}, ENV, { x: 582, y: 62, hw: 520, t: "Simulated environment · query()" }),
-        open: { x: 140, y: 230, kind: "llm", tag: "LLM", t: "Ask opening questions", s: "complaint, history, vitals",
+        open: { x: 742, y: 160, kind: "llm", tag: "LLM", t: "Ask opening questions", s: "complaint, history, vitals",
           d: { does: "Asks broad questions before any diagnosis is considered.", reads: "Memory.", returns: "<code>{question, rationale}</code>", rule: "Runs <code>opening</code> times (3 by default)." } },
-        draft: { x: 360, y: 230, kind: "llm", tag: "LLM", t: "Draft the differential", s: "at most 5 candidates",
+        draft: { x: 960, y: 160, kind: "llm", tag: "LLM", t: "Draft the differential", s: "at most 5 candidates",
           d: { does: "Turns the opening answers into the first list of candidate diagnoses.", reads: "Memory.", returns: "<code>{candidates: [diagnosis]}</code>, ordered by likelihood.", rule: "Runs once. This is the slide's “Initialization of diagnosis”." } },
-        refine: { x: 640, y: 230, kind: "llm", tag: "LLM ×2", t: "Ask, then prune", s: "one candidate at a time",
+        refine: { x: 742, y: 280, kind: "llm", tag: "LLM ×2", t: "Ask, then prune", s: "one candidate at a time",
           d: { does: "Asks a question meant to rule a candidate out, then rewrites the list with the answer.", reads: "Memory and the candidate list.", returns: "<code>{question, targets, rationale}</code>, then <code>{candidates}</code>. The list may shrink, reorder, or gain one entry.",
                rule: "Leaves the phase when two candidates remain or 75% of the question budget is used. Slide box: “Refinement of diagnosis”." } },
-        confirm: { x: 900, y: 230, kind: "llm", tag: "LLM ×2", t: "Test the leader", s: "confirm or exclude",
+        confirm: { x: 742, y: 400, kind: "llm", tag: "LLM ×2", t: "Test the leader", s: "confirm or exclude",
           d: { does: "Asks for the finding that would confirm or exclude the leading candidate, then judges the result.", reads: "Memory and the remaining candidates.", returns: "<code>{question, rationale}</code>, then <code>{diagnosis, settled}</code>.",
                rule: "Stops when <code>settled</code> or the budget is spent. If the leader is excluded, the runner-up becomes the diagnosis. Slide box: “Defining the final diagnosis”." } },
-        end: Object.assign({ x: 1090, y: 230 }, END) },
-      edges: [
-        [[128, 199], [128, 93]], [[152, 93], [152, 199]], [[628, 199], [628, 93]], [[652, 93], [652, 199]],
-        [[888, 199], [888, 93]], [[912, 93], [912, 199]],
-        [[226, 230], [274, 230]], [[446, 230], [554, 230]], [[726, 230], [814, 230]], [[986, 230], [1040, 230]] ],
-      labels: [[122, 146, "question", "end"], [158, 146, "answer"], [622, 146, "question", "end"], [658, 146, "answer"], [882, 146, "question", "end"], [918, 146, "answer"],
-        [250, 221, "after 3", "middle"], [500, 221, "list ready", "middle"], [770, 221, "2 left", "middle"], [770, 246, "or 75% used", "middle"], [1013, 221, "settled", "middle"], [1013, 246, "or spent", "middle"]] }
+        end: Object.assign({ x: 960, y: 400 }, END) },
+      qa: [[[622, 260], [452, 260]], [[452, 307], [622, 307]]],
+      edges: [[[828, 160], [874, 160]], [[960, 191], [960, 280], [828, 280]], [[742, 311], [742, 369]], [[828, 400], [910, 400]]],
+      labels: [[851, 152, "after 3", "middle"], [968, 250, "list ready"], [750, 344, "2 left, or 75% used"], [869, 392, "settled", "middle"], [869, 416, "or spent", "middle"]] }
   };
 
   var CAPTION = {
@@ -471,26 +503,31 @@ ol.open { margin: 0; padding-left: 20px; display: flex; flex-direction: column; 
     s4: "Questions are confined to one channel at a time; confidence is checked when a channel is used up, and low confidence opens the next channel.",
     s5: "Three phases in a fixed order, each with its own prompt; code moves on when the candidate list is short enough or the phase's budget is used."
   };
-  var KIND = { llm: "LLM call", code: "Code", dec: "Stop rule in code", env: "Environment", end: "Output" };
+  var KIND = { llm: "LLM call", code: "Code", dec: "Stop rule in code", end: "Output" };
 
   function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+  function pts(p) { return p.map(function (q) { return q.join(","); }).join(" "); }
 
   function draw(id, spec) {
-    var W = spec.W, H = spec.H, m = "ah-" + id, s = "";
-    s += '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + esc(CAPTION[id]) + '">';
-    s += '<defs><marker id="' + m + '" viewBox="0 0 8 8" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" refX="8" refY="4" orient="auto"><path class="ah" d="M0,0 L8,4 L0,8 z"/></marker></defs>';
-    s += '<rect class="lane envl" x="14" y="14" width="' + (W - 28) + '" height="96" rx="10"/>';
-    if (spec.envLabel !== false) s += '<text class="lanelabel" x="28" y="34">Simulated environment</text>';
-    s += '<rect class="lane" x="14" y="124" width="' + (W - 28) + '" height="' + (H - 138) + '" rx="10"/>';
-    s += '<text class="lanelabel" x="' + (W - 28) + '" y="144" text-anchor="end">Strategy session</text>';
+    var W = spec.W, m = "ah-" + id, s = "", cx = (600 + spec.px) / 2, cw = spec.title.length * 9.6 + 44;
+    s += '<svg class="fig" viewBox="0 0 ' + W + ' 500" style="max-width:' + W + 'px" role="img" aria-label="' + esc(CAPTION[id]) + '">';
+    s += '<defs><marker id="' + m + '" viewBox="0 0 10 10" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" refX="9" refY="5" orient="auto-start-reverse"><path class="ah" d="M0,1 L10,5 L0,9 Z"/></marker></defs>';
+    // The strategy panel stands where the overview diagram has the strategy robot.
+    s += '<rect class="panel" x="600" y="73" width="' + (spec.px - 600) + '" height="408" rx="14"/>';
+    s += '<use href="#env-overview" transform="translate(0,30) scale(0.6)"/>';
     (spec.bands || []).forEach(function (b) {
-      s += '<rect class="band" x="' + b[0] + '" y="154" width="' + (b[1] - b[0]) + '" height="168" rx="8"/>';
-      s += '<text class="bandlabel" x="' + (b[0] + 12) + '" y="308">' + esc(b[2]) + "</text>";
+      s += '<rect class="band" x="640" y="' + b[0] + '" width="' + (spec.px - 656) + '" height="110" rx="8"/>';
+      s += '<text class="bandlabel" x="' + (spec.px - 28) + '" y="' + (b[0] + 100) + '" text-anchor="end">' + esc(b[1]) + "</text>";
     });
-    s += '<text class="statetxt" x="28" y="' + (H - 28) + '">' + esc(spec.state) + "</text>";
-    spec.edges.forEach(function (p) {
-      s += '<polyline class="edge" marker-end="url(#' + m + ')" points="' + p.map(function (q) { return q.join(","); }).join(" ") + '"/>';
-    });
+    if (spec.rail) {
+      s += '<line class="qa" x1="622" y1="160" x2="622" y2="400"/>';
+      [160, 280, 400].forEach(function (y) {
+        s += '<line class="edge" x1="624" y1="' + y + '" x2="656" y2="' + y + '" marker-start="url(#' + m + ')" marker-end="url(#' + m + ')"/>';
+      });
+    }
+    spec.qa.forEach(function (p) { s += '<polyline class="qa" marker-end="url(#' + m + ')" points="' + pts(p) + '"/>'; });
+    s += '<text class="qalabel" x="541" y="250" text-anchor="middle">Query</text><text class="qalabel" x="553" y="297" text-anchor="middle">Answer</text>';
+    spec.edges.forEach(function (p) { s += '<polyline class="edge" marker-end="url(#' + m + ')" points="' + pts(p) + '"/>'; });
     spec.labels.forEach(function (l) {
       s += '<text class="elabel" x="' + l[0] + '" y="' + l[1] + '" text-anchor="' + (l[3] || "start") + '">' + esc(l[2]) + "</text>";
     });
@@ -505,21 +542,24 @@ ol.open { margin: 0; padding-left: 20px; display: flex; flex-direction: column; 
         s += '<rect class="shape" x="' + (x - 50) + '" y="' + (y - 22) + '" width="100" height="44" rx="22"/>';
         s += '<text class="ttl" x="' + x + '" y="' + (y + 4) + '" text-anchor="middle">' + esc(n.t) + "</text>";
       } else {
-        var hw = n.hw || (n.kind === "env" ? 95 : 86);
-        s += '<rect class="shape" x="' + (x - hw) + '" y="' + (y - 31) + '" width="' + 2 * hw + '" height="62" rx="8"' + (n.kind === "env" ? ' stroke-dasharray="5 4"' : "") + "/>";
+        s += '<rect class="shape" x="' + (x - 86) + '" y="' + (y - 31) + '" width="172" height="62" rx="8"/>';
         s += '<text class="tag" x="' + x + '" y="' + (y - 16) + '" text-anchor="middle">' + esc(n.tag) + "</text>";
         s += '<text class="ttl" x="' + x + '" y="' + (y + 2) + '" text-anchor="middle">' + esc(n.t) + "</text>";
         s += '<text class="sub" x="' + x + '" y="' + (y + 18) + '" text-anchor="middle">' + esc(n.s) + "</text>";
       }
       s += "</g>";
     });
+    // Strategy name, in the overview diagram's label style, centred on the panel's top edge.
+    s += '<rect class="chip-box" x="' + (cx - cw / 2) + '" y="57" width="' + cw + '" height="32" rx="7"/>';
+    s += '<text class="chip-text" x="' + cx + '" y="80" text-anchor="middle">' + esc(spec.title) + "</text>";
     return s + "</svg>";
   }
 
   document.querySelectorAll("[data-diagram]").forEach(function (host) {
     var id = host.getAttribute("data-diagram"), spec = D[id];
     host.style.display = "flex"; host.style.flexDirection = "column"; host.style.gap = "12px";
-    host.innerHTML = '<figure><div class="scroll">' + draw(id, spec) + "</div><figcaption>" + esc(CAPTION[id]) + '</figcaption></figure><div class="detail" aria-live="polite"></div>';
+    host.innerHTML = '<figure><div class="scroll">' + draw(id, spec) + "</div><figcaption>" + esc(CAPTION[id]) +
+      '<span class="statetxt">State kept between questions: ' + esc(spec.state) + '</span></figcaption></figure><div class="detail" aria-live="polite"></div>';
     var panel = host.querySelector(".detail");
     function select(k) {
       var n = spec.nodes[k], d = n.d;

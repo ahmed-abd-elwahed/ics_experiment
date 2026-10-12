@@ -134,3 +134,12 @@ in [environment/NOTES.md](environment/NOTES.md).
 | Channel-based: after the physical exam, confidence is checked again and the diagnosis is returned either way. | The slide draws no arrow out of "Physical exam" and has no further channel. Flagged as an open question, with whether tests are a third channel. |
 | Sequence-based: 3 opening questions, refinement until 2 candidates or 75% of the budget, then the final phase. | The slide gives the order of the phases but no conditions. Flagged as an open question. |
 | All thresholds (0.80, 0.30, 4 of 5, 75%) are starting values of mine. | The slides give none; they need a pilot before a real run. |
+
+### Proposal page: overview diagram in every figure
+
+| Decision | Why |
+|---|---|
+| Each strategy's figure is the environment half of `framework-overview.svg`, copied unchanged, with a panel holding that strategy's flow where the strategy robot stood. | "Replace the ICS with the proposed diagram for each strategy." |
+| The strategy's name sits on the panel's top edge in the overview's label style, and the Query and Answer arrows run between the environment's LLM and the steps that send and receive them. | It keeps the overview's reading: the strategy queries the LLM and gets an answer. |
+| The flows were re-laid out to fit beside the environment; the separate environment box in each flow was removed. | The overview's environment now plays that part. |
+| The page has one light theme with a white background and no dark variant. | A light background was asked for, and the overview diagram's colours are drawn for a light ground. |
