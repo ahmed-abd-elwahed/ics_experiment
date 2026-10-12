@@ -203,3 +203,7 @@ in [environment/NOTES.md](environment/NOTES.md).
 | The pilot's record, evaluation and report are kept in `records/` under a `pilot_` name. | "Record everything about the runs." |
 | The report is built by `evaluation/report.py` as HTML and printed to PDF by headless Chrome, like the benchmark reports. | Same method as the existing reports; no new dependency. |
 | The report adds 95% Wilson intervals for hit rate at 1 and at 10. | One run per case and strategy; the intervals show which differences this run can support. |
+| The full run's 11 failed case runs (all channel-based, the classifier's 50-token limit) were run again with the limit at 300, and the results use `strategies_272_20261012T165402Z_merged.json`. | A failed run scores zero, which would have lowered channel-based by a fault of the code, not of the strategy. The first record is kept unchanged, and the merged record lists the replaced runs under `reruns`. |
+| `experiment/rerun.py` does this: it reruns a record's failed case runs with the record's own config and writes a merged record. It has no test of its own yet. | Written while the run was in progress; it was exercised on the real record. |
+| The report adds an exact McNemar test for every pair of strategies, with a Bonferroni threshold. | The strategies ran on the same cases, so a paired test is the right comparison; ten pairs need a correction. |
+| Both 84 MB records (first pass and merged) are committed. | "Record everything"; each is under GitHub's 100 MB file limit. |

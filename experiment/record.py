@@ -107,6 +107,9 @@ class ExperimentRecord(BaseModel):
     case_runs_total: int
     case_runs: list[CaseRun] = Field(default_factory=list)
     summary: dict[str, Any] = Field(default_factory=dict)
+    # Failed case runs that were run again and replaced (see experiment/rerun.py): the case,
+    # the strategy, the first attempt's error, and the record the replacement came from.
+    reruns: list[dict[str, Any]] = Field(default_factory=list)
 
 
 # --- costs and compaction ---------------------------------------------------------------------

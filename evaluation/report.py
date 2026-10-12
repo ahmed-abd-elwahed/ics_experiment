@@ -59,6 +59,45 @@ def wilson(p: float, n: int) -> tuple[float, float]:
     return max(0.0, centre - half), min(1.0, centre + half)
 
 
+def mcnemar(a: dict[str, bool], b: dict[str, bool]) -> tuple[int, int, float]:
+    """Cases only ``a`` hit, cases only ``b`` hit, and the exact two-sided McNemar p-value."""
+    only_a = sum(a[c] and not b[c] for c in a)
+    only_b = sum(b[c] and not a[c] for c in a)
+    n = only_a + only_b
+    if n == 0:
+        return 0, 0, 1.0
+    tail = sum(math.comb(n, i) for i in range(min(only_a, only_b) + 1)) / 2**n
+    return only_a, only_b, min(1.0, 2 * tail)
+
+
+def paired(evaluation: dict[str, Any]) -> str:
+    """Every pair of strategies compared on the same cases, at k = 1 and k = 10."""
+    keys = list(evaluation["by_strategy"])
+    hits: dict[int, dict[str, dict[str, bool]]] = {k: {key: {} for key in keys} for k in (1, 10)}
+    for row in evaluation["case_runs"]:
+        for k in (1, 10):
+            hit = row["rank"] is not None and row["rank"] <= k
+            hits[k][row["strategy"]][row["case_id"]] = hit
+    pairs = [(a, b) for i, a in enumerate(keys) for b in keys[i + 1 :]]
+    rows = ""
+    for a, b in pairs:
+        cells = ""
+        for k in (1, 10):
+            only_a, only_b, p = mcnemar(hits[k][a], hits[k][b])
+            mark = ' class="best"' if p < 0.05 / max(1, len(pairs)) else ""
+            cells += f"<td>{only_a} / {only_b}</td><td{mark}>{p:.3f}</td>"
+        rows += f"<tr><td>{html.escape(title(a))} vs {html.escape(title(b))}</td>{cells}</tr>"
+    return (
+        "<table><tr><th>Pair (first vs second)</th><th>@1: cases only the first / only the "
+        "second hit</th><th>p</th><th>@10: only the first / only the second</th><th>p</th></tr>"
+        f"{rows}</table>"
+        f'<p class="note">Exact McNemar test on the same {len(hits[1][keys[0]])} cases. With '
+        f"{len(pairs)} comparisons, a p-value below {0.05 / max(1, len(pairs)):.3f} (bold) "
+        "holds after a Bonferroni correction; values between that and 0.05 are suggestive only."
+        "</p>"
+    )
+
+
 def pct(value: float) -> str:
     return f"{100 * value:.1f}%"
 
@@ -192,6 +231,14 @@ def build(record: ExperimentRecord, evaluation: dict[str, Any]) -> str:
     took = f"{minutes / 60:.1f} h" if minutes >= 90 else f"{minutes:.0f} min"
     limit = record.config.stopping.max_iterations
     coded = evaluation["coding"]
+    reruns = ""
+    if record.reruns:
+        again = Counter(str(r["strategy"]) for r in record.reruns)
+        listed = ", ".join(f"{count} of {title(key)}" for key, count in again.items())
+        reruns = (
+            f"<li>{len(record.reruns)} case runs failed on a token limit in the first pass and "
+            f"were run again ({e(listed)}); the results use the second attempt.</li>"
+        )
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <title>Information collection strategies: results</title><style>{CSS}</style></head><body>
 <h1>Information Collection Strategies Experiment</h1>
@@ -211,8 +258,9 @@ a true diagnosis placed higher. Every case counts in the denominator.</p>
 <h2>How sure the differences are</h2>
 <table><tr><th>Strategy</th><th>Hit rate@1 (95% interval)</th><th>Hit rate@10 (95% interval)</th>
 </tr>{intervals}</table>
-<p class="note">Wilson intervals over the cases of this single run. Strategies whose intervals
-overlap widely are not separated by this run.</p>
+<p class="note">Wilson intervals over the cases of this single run. The strategies ran on the
+same cases, so the paired comparison below is the sharper test.</p>
+{paired(evaluation)}
 
 <h2>What was run</h2>
 <ul>
@@ -225,7 +273,7 @@ When it stopped, it gave a differential of up to 10 diagnoses with probabilities
 {e(", ".join(record.environment_settings.get("enabled_sources", [])))}.</li>
 <li>Coding: {e(coded["system"])}, {e(coded["method"])}. A prediction counts as a hit only when
 its code equals the true diagnosis code exactly.</li>
-<li>Total time {took}; total cost ${cost.get("total", 0):.2f}
+{reruns}<li>Total time {took}; total cost ${cost.get("total", 0):.2f}
 (strategies ${cost.get("strategy", 0):.2f}, environment ${cost.get("environment", 0):.2f}).</li>
 </ul>
 

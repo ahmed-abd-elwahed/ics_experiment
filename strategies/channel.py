@@ -148,7 +148,7 @@ class ChannelSession(LLMSession):
             question = turn.question.strip()
             if turn.nothing_left or not question:
                 return None
-            kind = self.call(CLASSIFY, f"Question: {question}", Kind, records, max_tokens=50).kind
+            kind = self.call(CLASSIFY, f"Question: {question}", Kind, records, max_tokens=300).kind
             if kind == self.channel:
                 return turn
             self.rejected.append({"channel": self.channel, "question": question, "kind": kind})
