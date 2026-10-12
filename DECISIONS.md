@@ -191,3 +191,15 @@ in [environment/NOTES.md](environment/NOTES.md).
 | The LLM-judged appropriateness and comprehensiveness scores of `evaluation.py` are not implemented. | They are off by default in `run_experiment.py`, and the request was to compare by ICD code. |
 | `basic` gives no diagnosis and is not in the run. | Only the five strategies were asked for. |
 | The other uncommitted changes in the working tree (bench files, results, part of this log) were left out of the commit. | They belong to other work in progress. |
+
+### Running the five strategies on the 272 cases
+
+| Decision | Why |
+|---|---|
+| The ICD cache of `DDx-Experiment` (113,386 names) was merged into `.icd_cache/`; this project's own 208 lookups agreed with it on every shared name. | Asked for, to speed up coding. Its 188 "no match" entries are kept as they are. |
+| The environment runs on `openai/gpt-6-luna`. | Asked for. It is the synchronous endpoint, $0.10 / $0.50 per million tokens. |
+| A 5-case pilot ran before the full run ($0.13, 2.5 minutes). | Nothing had touched the live APIs yet; the cost was within the approved estimate. |
+| The gut strategy's limit for one reading went from 50 to 300 tokens. | In the pilot one reading ran past 100 tokens and failed its case run; a normal reading is 13. |
+| The pilot's record, evaluation and report are kept in `records/` under a `pilot_` name. | "Record everything about the runs." |
+| The report is built by `evaluation/report.py` as HTML and printed to PDF by headless Chrome, like the benchmark reports. | Same method as the existing reports; no new dependency. |
+| The report adds 95% Wilson intervals for hit rate at 1 and at 10. | One run per case and strategy; the intervals show which differences this run can support. |

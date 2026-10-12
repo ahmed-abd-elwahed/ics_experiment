@@ -61,6 +61,8 @@ class GutParams(LLMStrategyParams):
     # One word carries no confidence, so the readings must differ for their agreement to mean
     # anything; a model that honours the environment's seed would return the same word each time.
     vote_temperature: float = Field(default=1.0, ge=0.0, le=2.0)
+    # A reading is about 13 tokens, but in the pilot one reply ran past 100.
+    vote_max_tokens: int = Field(default=300, ge=1)
     question_max_tokens: int = Field(default=300, ge=1)
 
     @model_validator(mode="after")
@@ -98,7 +100,8 @@ class GutSession(LLMSession):
         if len(self.memory):
             votes = self.call_many(
                 SENSE, self.transcript(), Sense, records,
-                n=params.votes, temperature=params.vote_temperature, max_tokens=50,
+                n=params.votes, temperature=params.vote_temperature,
+                max_tokens=params.vote_max_tokens,
             )  # fmt: skip
             self.senses.append([v.sense for v in votes])
             if self.senses[-1].count("reassurance") >= params.needed:

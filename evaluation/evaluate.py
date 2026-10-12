@@ -127,7 +127,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--output", type=Path, help="default: <record>.eval.json")
     parser.add_argument("--workers", type=int, default=10, help="parallel ICD lookups")
     args = parser.parse_args(argv)
-    load_dotenv()
+    load_dotenv(".env")  # the project root, where this is run from
     try:
         record = load_record(args.record)
         coder = ICDCoder(*credentials(), workers=args.workers)

@@ -96,7 +96,7 @@ def test_gut_reads_the_sense_several_times_and_stops_on_reassurance(llm: Scripte
     assert len(question.llm_calls) == 6
     assert sorted(question.trace["senses"][0]) == ["alarm"] * 2 + ["reassurance"] * 3
     votes = llm.calls[:5]
-    assert {(c["temperature"], c["max_tokens"]) for c in votes} == {(1.0, 50)}
+    assert {(c["temperature"], c["max_tokens"]) for c in votes} == {(1.0, 300)}
     s.remember(question.text, "No.")
 
     llm.push(*[{"sense": "reassurance"}] * 4, {"sense": "alarm"})

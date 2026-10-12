@@ -3,7 +3,7 @@
   "cases_file": "cases/combined_272_whole_chunking.json",
   "case_ids": null,
   "max_cases": null,
-  "environment": { "default_model": "deepseek/deepseek-v4.1-flash", "cache_enabled": true },
+  "environment": { "default_model": "openai/gpt-6-luna", "cache_enabled": true },
   "strategies": [
     { "name": "hypothesis", "params": { "model": "anthropic/claude-haiku-5.5" } },
     { "name": "knowledge", "params": { "model": "anthropic/claude-haiku-5.5" } },

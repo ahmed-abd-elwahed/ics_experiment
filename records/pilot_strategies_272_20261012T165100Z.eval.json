@@ -1,0 +1,2322 @@
+{
+  "format": "ics-experiment-evaluation",
+  "record": "/Users/ahmed/ics_experiment/records/pilot_strategies_272_20261012T165100Z.json",
+  "record_status": "completed",
+  "evaluated_at": "2026-10-12T16:53:46+00:00",
+  "coding": {
+    "system": "ICD-11 MMS 2024-01",
+    "endpoint": "https://id.who.int/icd/release/11/2024-01/mms/search",
+    "method": "first result of the flexible search for the diagnosis name",
+    "names": 183,
+    "names_uncoded": 0
+  },
+  "metrics": [
+    "hit_rate@1",
+    "hit_rate@2",
+    "hit_rate@3",
+    "hit_rate@4",
+    "hit_rate@5",
+    "hit_rate@6",
+    "hit_rate@7",
+    "hit_rate@8",
+    "hit_rate@9",
+    "hit_rate@10",
+    "ndcg@10",
+    "mrr"
+  ],
+  "by_strategy": {
+    "hypothesis": {
+      "case_runs": 5,
+      "metrics": {
+        "hit_rate@1": 0.0,
+        "hit_rate@2": 0.2,
+        "hit_rate@3": 0.4,
+        "hit_rate@4": 0.4,
+        "hit_rate@5": 0.4,
+        "hit_rate@6": 0.4,
+        "hit_rate@7": 0.4,
+        "hit_rate@8": 0.4,
+        "hit_rate@9": 0.4,
+        "hit_rate@10": 0.4,
+        "ndcg@10": 0.2261859507142915,
+        "mrr": 0.16666666666666666
+      },
+      "without_differential": 0,
+      "without_coded_prediction": 0,
+      "true_diagnosis_uncoded": 0,
+      "predictions_uncoded": 0,
+      "predictions": 50,
+      "mean_questions": 4.0,
+      "stop_reasons": {
+        "max_iterations": 5
+      },
+      "cost_usd": 0.036459,
+      "mean_case_run_seconds": 116.32
+    },
+    "knowledge": {
+      "case_runs": 5,
+      "metrics": {
+        "hit_rate@1": 0.2,
+        "hit_rate@2": 0.2,
+        "hit_rate@3": 0.4,
+        "hit_rate@4": 0.4,
+        "hit_rate@5": 0.4,
+        "hit_rate@6": 0.4,
+        "hit_rate@7": 0.4,
+        "hit_rate@8": 0.4,
+        "hit_rate@9": 0.4,
+        "hit_rate@10": 0.4,
+        "ndcg@10": 0.3,
+        "mrr": 0.26666666666666666
+      },
+      "without_differential": 0,
+      "without_coded_prediction": 0,
+      "true_diagnosis_uncoded": 0,
+      "predictions_uncoded": 0,
+      "predictions": 50,
+      "mean_questions": 4.0,
+      "stop_reasons": {
+        "max_iterations": 5
+      },
+      "cost_usd": 0.030774,
+      "mean_case_run_seconds": 110.5
+    },
+    "gut": {
+      "case_runs": 5,
+      "metrics": {
+        "hit_rate@1": 0.4,
+        "hit_rate@2": 0.4,
+        "hit_rate@3": 0.4,
+        "hit_rate@4": 0.4,
+        "hit_rate@5": 0.4,
+        "hit_rate@6": 0.4,
+        "hit_rate@7": 0.4,
+        "hit_rate@8": 0.4,
+        "hit_rate@9": 0.4,
+        "hit_rate@10": 0.4,
+        "ndcg@10": 0.4,
+        "mrr": 0.4
+      },
+      "without_differential": 1,
+      "without_coded_prediction": 1,
+      "true_diagnosis_uncoded": 0,
+      "predictions_uncoded": 0,
+      "predictions": 40,
+      "mean_questions": 3.6,
+      "stop_reasons": {
+        "error": 1,
+        "max_iterations": 3,
+        "strategy_done": 1
+      },
+      "cost_usd": 0.018549,
+      "mean_case_run_seconds": 74.35
+    },
+    "channel": {
+      "case_runs": 5,
+      "metrics": {
+        "hit_rate@1": 0.0,
+        "hit_rate@2": 0.2,
+        "hit_rate@3": 0.2,
+        "hit_rate@4": 0.2,
+        "hit_rate@5": 0.2,
+        "hit_rate@6": 0.2,
+        "hit_rate@7": 0.2,
+        "hit_rate@8": 0.2,
+        "hit_rate@9": 0.2,
+        "hit_rate@10": 0.2,
+        "ndcg@10": 0.1261859507142915,
+        "mrr": 0.1
+      },
+      "without_differential": 0,
+      "without_coded_prediction": 0,
+      "true_diagnosis_uncoded": 0,
+      "predictions_uncoded": 0,
+      "predictions": 50,
+      "mean_questions": 4.0,
+      "stop_reasons": {
+        "max_iterations": 5
+      },
+      "cost_usd": 0.022481,
+      "mean_case_run_seconds": 97.89
+    },
+    "sequence": {
+      "case_runs": 5,
+      "metrics": {
+        "hit_rate@1": 0.4,
+        "hit_rate@2": 0.4,
+        "hit_rate@3": 0.4,
+        "hit_rate@4": 0.4,
+        "hit_rate@5": 0.4,
+        "hit_rate@6": 0.4,
+        "hit_rate@7": 0.4,
+        "hit_rate@8": 0.4,
+        "hit_rate@9": 0.4,
+        "hit_rate@10": 0.4,
+        "ndcg@10": 0.4,
+        "mrr": 0.4
+      },
+      "without_differential": 0,
+      "without_coded_prediction": 0,
+      "true_diagnosis_uncoded": 0,
+      "predictions_uncoded": 0,
+      "predictions": 50,
+      "mean_questions": 4.0,
+      "stop_reasons": {
+        "max_iterations": 5
+      },
+      "cost_usd": 0.023814,
+      "mean_case_run_seconds": 94.41
+    }
+  },
+  "case_runs": [
+    {
+      "index": 0,
+      "case_id": "PMC6796688_01",
+      "strategy": "hypothesis",
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "questions": 4,
+      "true_diagnosis": "Traumatic injury of left subclavian artery",
+      "true_icd_code": "NB30.1Z&XK8G",
+      "predictions": [
+        {
+          "name": "Injury of femoral artery",
+          "probability": 0.22,
+          "icd_code": "NC75.0Z"
+        },
+        {
+          "name": "Acute posthaemorrhagic anaemia",
+          "probability": 0.15,
+          "icd_code": "3A94"
+        },
+        {
+          "name": "Open wound of lower limb",
+          "probability": 0.13,
+          "icd_code": "ND56.1"
+        },
+        {
+          "name": "Hypovolaemic shock",
+          "probability": 0.1,
+          "icd_code": "MG40.1"
+        },
+        {
+          "name": "Injury of peripheral nerve of lower limb",
+          "probability": 0.09,
+          "icd_code": "ND5Z"
+        },
+        {
+          "name": "Fracture of femur",
+          "probability": 0.07,
+          "icd_code": "NC72.Z"
+        },
+        {
+          "name": "Haemothorax",
+          "probability": 0.06,
+          "icd_code": "CB26"
+        },
+        {
+          "name": "Acute compartment syndrome",
+          "probability": 0.05,
+          "icd_code": "NF0A.6"
+        },
+        {
+          "name": "Injury of peripheral nerve of upper limb",
+          "probability": 0.04,
+          "icd_code": "ND5Z"
+        },
+        {
+          "name": "Fracture of humerus",
+          "probability": 0.03,
+          "icd_code": "NC12.3"
+        }
+      ],
+      "ranked_codes": [
+        "NC75.0Z",
+        "3A94",
+        "ND56.1",
+        "MG40.1",
+        "ND5Z",
+        "NC72.Z",
+        "CB26",
+        "NF0A.6",
+        "NC12.3"
+      ],
+      "rank": null,
+      "scores": {
+        "hit_rate@1": 0.0,
+        "hit_rate@2": 0.0,
+        "hit_rate@3": 0.0,
+        "hit_rate@4": 0.0,
+        "hit_rate@5": 0.0,
+        "hit_rate@6": 0.0,
+        "hit_rate@7": 0.0,
+        "hit_rate@8": 0.0,
+        "hit_rate@9": 0.0,
+        "hit_rate@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    {
+      "index": 1,
+      "case_id": "PMC6796688_01",
+      "strategy": "knowledge",
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "questions": 4,
+      "true_diagnosis": "Traumatic injury of left subclavian artery",
+      "true_icd_code": "NB30.1Z&XK8G",
+      "predictions": [
+        {
+          "name": "Injury of femoral artery",
+          "probability": 0.27,
+          "icd_code": "NC75.0Z"
+        },
+        {
+          "name": "Gunshot wound of left lower limb",
+          "probability": 0.2,
+          "icd_code": "PA80.2"
+        },
+        {
+          "name": "Injury of popliteal artery",
+          "probability": 0.13,
+          "icd_code": "NC95.0Z"
+        },
+        {
+          "name": "Gunshot wound of left upper limb",
+          "probability": 0.09,
+          "icd_code": "PA80.2"
+        },
+        {
+          "name": "Injury of brachial artery",
+          "probability": 0.07,
+          "icd_code": "NC15.1Z"
+        },
+        {
+          "name": "Hypovolaemic shock",
+          "probability": 0.06,
+          "icd_code": "MG40.1"
+        },
+        {
+          "name": "Injury of tibial artery",
+          "probability": 0.045,
+          "icd_code": "NC95.1Z"
+        },
+        {
+          "name": "Acute posthaemorrhagic anaemia",
+          "probability": 0.035,
+          "icd_code": "3A94"
+        },
+        {
+          "name": "Traumatic pseudoaneurysm of artery",
+          "probability": 0.025,
+          "icd_code": "BD51.Z"
+        },
+        {
+          "name": "Traumatic arteriovenous fistula",
+          "probability": 0.015,
+          "icd_code": "ND56.5"
+        }
+      ],
+      "ranked_codes": [
+        "NC75.0Z",
+        "PA80.2",
+        "NC95.0Z",
+        "NC15.1Z",
+        "MG40.1",
+        "NC95.1Z",
+        "3A94",
+        "BD51.Z",
+        "ND56.5"
+      ],
+      "rank": null,
+      "scores": {
+        "hit_rate@1": 0.0,
+        "hit_rate@2": 0.0,
+        "hit_rate@3": 0.0,
+        "hit_rate@4": 0.0,
+        "hit_rate@5": 0.0,
+        "hit_rate@6": 0.0,
+        "hit_rate@7": 0.0,
+        "hit_rate@8": 0.0,
+        "hit_rate@9": 0.0,
+        "hit_rate@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    {
+      "index": 2,
+      "case_id": "PMC6796688_01",
+      "strategy": "gut",
+      "status": "completed",
+      "stop_reason": "strategy_done",
+      "questions": 3,
+      "true_diagnosis": "Traumatic injury of left subclavian artery",
+      "true_icd_code": "NB30.1Z&XK8G",
+      "predictions": [
+        {
+          "name": "Injury of blood vessels of lower limb",
+          "probability": 0.3,
+          "icd_code": "ND56.5"
+        },
+        {
+          "name": "Fracture of femur",
+          "probability": 0.2,
+          "icd_code": "NC72.Z"
+        },
+        {
+          "name": "Open wound of lower limb",
+          "probability": 0.15,
+          "icd_code": "ND56.1"
+        },
+        {
+          "name": "Injury of blood vessels of upper limb",
+          "probability": 0.1,
+          "icd_code": "ND56.5"
+        },
+        {
+          "name": "Fracture of tibia",
+          "probability": 0.08,
+          "icd_code": "NC92.2"
+        },
+        {
+          "name": "Gunshot wound of lower limb",
+          "probability": 0.06,
+          "icd_code": "PA80.2"
+        },
+        {
+          "name": "Fracture of humerus",
+          "probability": 0.04,
+          "icd_code": "NC12.3"
+        },
+        {
+          "name": "Injury of nerves of lower limb",
+          "probability": 0.03,
+          "icd_code": "ND5Z"
+        },
+        {
+          "name": "Compartment syndrome of lower limb",
+          "probability": 0.025,
+          "icd_code": "NF0A.6"
+        },
+        {
+          "name": "Hypovolaemic shock",
+          "probability": 0.02,
+          "icd_code": "MG40.1"
+        }
+      ],
+      "ranked_codes": [
+        "ND56.5",
+        "NC72.Z",
+        "ND56.1",
+        "NC92.2",
+        "PA80.2",
+        "NC12.3",
+        "ND5Z",
+        "NF0A.6",
+        "MG40.1"
+      ],
+      "rank": null,
+      "scores": {
+        "hit_rate@1": 0.0,
+        "hit_rate@2": 0.0,
+        "hit_rate@3": 0.0,
+        "hit_rate@4": 0.0,
+        "hit_rate@5": 0.0,
+        "hit_rate@6": 0.0,
+        "hit_rate@7": 0.0,
+        "hit_rate@8": 0.0,
+        "hit_rate@9": 0.0,
+        "hit_rate@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    {
+      "index": 3,
+      "case_id": "PMC6796688_01",
+      "strategy": "channel",
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "questions": 4,
+      "true_diagnosis": "Traumatic injury of left subclavian artery",
+      "true_icd_code": "NB30.1Z&XK8G",
+      "predictions": [
+        {
+          "name": "Traumatic injury of brachial artery",
+          "probability": 0.42,
+          "icd_code": "NC15.1Z"
+        },
+        {
+          "name": "Traumatic injury of subclavian artery",
+          "probability": 0.14,
+          "icd_code": "NB30.1Z"
+        },
+        {
+          "name": "Traumatic injury of axillary artery",
+          "probability": 0.1,
+          "icd_code": "NC15.0Z"
+        },
+        {
+          "name": "Traumatic arteriovenous fistula of upper limb",
+          "probability": 0.07,
+          "icd_code": "ND56.5"
+        },
+        {
+          "name": "Traumatic pseudoaneurysm of upper limb artery",
+          "probability": 0.06,
+          "icd_code": "BD51.Z"
+        },
+        {
+          "name": "Acute limb ischaemia",
+          "probability": 0.05,
+          "icd_code": "DD30.Z"
+        },
+        {
+          "name": "Traumatic injury of brachial plexus",
+          "probability": 0.04,
+          "icd_code": "NA41.Z"
+        },
+        {
+          "name": "Traumatic injury of ulnar artery",
+          "probability": 0.03,
+          "icd_code": "ND56.Z"
+        },
+        {
+          "name": "Traumatic injury of radial artery",
+          "probability": 0.02,
+          "icd_code": "ND56.Z"
+        },
+        {
+          "name": "Compartment syndrome of upper limb",
+          "probability": 0.01,
+          "icd_code": "NF0A.6"
+        }
+      ],
+      "ranked_codes": [
+        "NC15.1Z",
+        "NB30.1Z",
+        "NC15.0Z",
+        "ND56.5",
+        "BD51.Z",
+        "DD30.Z",
+        "NA41.Z",
+        "ND56.Z",
+        "NF0A.6"
+      ],
+      "rank": null,
+      "scores": {
+        "hit_rate@1": 0.0,
+        "hit_rate@2": 0.0,
+        "hit_rate@3": 0.0,
+        "hit_rate@4": 0.0,
+        "hit_rate@5": 0.0,
+        "hit_rate@6": 0.0,
+        "hit_rate@7": 0.0,
+        "hit_rate@8": 0.0,
+        "hit_rate@9": 0.0,
+        "hit_rate@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    {
+      "index": 4,
+      "case_id": "PMC6796688_01",
+      "strategy": "sequence",
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "questions": 4,
+      "true_diagnosis": "Traumatic injury of left subclavian artery",
+      "true_icd_code": "NB30.1Z&XK8G",
+      "predictions": [
+        {
+          "name": "Gunshot wound of left lower limb",
+          "probability": 0.22,
+          "icd_code": "PA80.2"
+        },
+        {
+          "name": "Gunshot wound of left upper limb",
+          "probability": 0.18,
+          "icd_code": "PA80.2"
+        },
+        {
+          "name": "Gunshot wound of left thigh",
+          "probability": 0.13,
+          "icd_code": "PA80.2"
+        },
+        {
+          "name": "Open wound of left lower leg",
+          "probability": 0.1,
+          "icd_code": "NC91.5&XK8G"
+        },
+        {
+          "name": "Gunshot wound of left forearm",
+          "probability": 0.08,
+          "icd_code": "PA80.2"
+        },
+        {
+          "name": "Gunshot wound of left lower leg",
+          "probability": 0.07,
+          "icd_code": "PA80.2"
+        },
+        {
+          "name": "Contusion of left lower limb",
+          "probability": 0.06,
+          "icd_code": "ND56.0"
+        },
+        {
+          "name": "Laceration of left upper arm",
+          "probability": 0.05,
+          "icd_code": "NC11.Y&XA6809"
+        },
+        {
+          "name": "Compartment syndrome of left lower leg",
+          "probability": 0.04,
+          "icd_code": "NF0A.6"
+        },
+        {
+          "name": "Injury of femoral artery at left thigh",
+          "probability": 0.03,
+          "icd_code": "NC75.0Z"
+        }
+      ],
+      "ranked_codes": [
+        "PA80.2",
+        "NC91.5&XK8G",
+        "ND56.0",
+        "NC11.Y&XA6809",
+        "NF0A.6",
+        "NC75.0Z"
+      ],
+      "rank": null,
+      "scores": {
+        "hit_rate@1": 0.0,
+        "hit_rate@2": 0.0,
+        "hit_rate@3": 0.0,
+        "hit_rate@4": 0.0,
+        "hit_rate@5": 0.0,
+        "hit_rate@6": 0.0,
+        "hit_rate@7": 0.0,
+        "hit_rate@8": 0.0,
+        "hit_rate@9": 0.0,
+        "hit_rate@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    {
+      "index": 5,
+      "case_id": "PMC3056427_01",
+      "strategy": "hypothesis",
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "questions": 4,
+      "true_diagnosis": "Tricuspid Valve Regurgitation",
+      "true_icd_code": "BB81.Z",
+      "predictions": [
+        {
+          "name": "Right heart failure",
+          "probability": 0.4,
+          "icd_code": "BD13"
+        },
+        {
+          "name": "Heart failure with preserved ejection fraction",
+          "probability": 0.31,
+          "icd_code": "BD11.0"
+        },
+        {
+          "name": "Tricuspid valve regurgitation",
+          "probability": 0.24,
+          "icd_code": "BB81.Z"
+        },
+        {
+          "name": "Cardiac amyloidosis",
+          "probability": 0.17,
+          "icd_code": "5D00.0&XA6H07"
+        },
+        {
+          "name": "Constrictive pericarditis",
+          "probability": 0.13,
+          "icd_code": "BB22"
+        },
+        {
+          "name": "Chronic cor pulmonale",
+          "probability": 0.1,
+          "icd_code": "BB01.5&XT8W"
+        },
+        {
+          "name": "Pulmonary hypertension",
+          "probability": 0.08,
+          "icd_code": "BB01.Z"
+        },
+        {
+          "name": "Atrial fibrillation",
+          "probability": 0.06,
+          "icd_code": "BC81.3Z"
+        },
+        {
+          "name": "Pulmonary embolism",
+          "probability": 0.04,
+          "icd_code": "BB00.Z"
+        },
+        {
+          "name": "Restrictive cardiomyopathy",
+          "probability": 0.03,
+          "icd_code": "BC43.2Z"
+        }
+      ],
+      "ranked_codes": [
+        "BD13",
+        "BD11.0",
+        "BB81.Z",
+        "5D00.0&XA6H07",
+        "BB22",
+        "BB01.5&XT8W",
+        "BB01.Z",
+        "BC81.3Z",
+        "BB00.Z",
+        "BC43.2Z"
+      ],
+      "rank": 3,
+      "scores": {
+        "hit_rate@1": 0.0,
+        "hit_rate@2": 0.0,
+        "hit_rate@3": 1.0,
+        "hit_rate@4": 1.0,
+        "hit_rate@5": 1.0,
+        "hit_rate@6": 1.0,
+        "hit_rate@7": 1.0,
+        "hit_rate@8": 1.0,
+        "hit_rate@9": 1.0,
+        "hit_rate@10": 1.0,
+        "ndcg@10": 0.5,
+        "mrr": 0.3333333333333333
+      }
+    },
+    {
+      "index": 6,
+      "case_id": "PMC3056427_01",
+      "strategy": "knowledge",
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "questions": 4,
+      "true_diagnosis": "Tricuspid Valve Regurgitation",
+      "true_icd_code": "BB81.Z",
+      "predictions": [
+        {
+          "name": "Tricuspid valve incompetence",
+          "probability": 0.62,
+          "icd_code": "BB81.Z"
+        },
+        {
+          "name": "Atrial fibrillation",
+          "probability": 0.55,
+          "icd_code": "BC81.3Z"
+        },
+        {
+          "name": "Right ventricular failure",
+          "probability": 0.45,
+          "icd_code": "BD13"
+        },
+        {
+          "name": "Pulmonary hypertension",
+          "probability": 0.38,
+          "icd_code": "BB01.Z"
+        },
+        {
+          "name": "Chronic cor pulmonale",
+          "probability": 0.3,
+          "icd_code": "BB01.5&XT8W"
+        },
+        {
+          "name": "Dilated cardiomyopathy",
+          "probability": 0.24,
+          "icd_code": "BC43.0Z"
+        },
+        {
+          "name": "Rheumatic tricuspid valve disease",
+          "probability": 0.18,
+          "icd_code": "BB80.0"
+        },
+        {
+          "name": "Infective endocarditis",
+          "probability": 0.14,
+          "icd_code": "BB40"
+        },
+        {
+          "name": "Ebstein anomaly",
+          "probability": 0.09,
+          "icd_code": "LA87.03"
+        },
+        {
+          "name": "Tricuspid valve prolapse",
+          "probability": 0.06,
+          "icd_code": "BB8Y"
+        }
+      ],
+      "ranked_codes": [
+        "BB81.Z",
+        "BC81.3Z",
+        "BD13",
+        "BB01.Z",
+        "BB01.5&XT8W",
+        "BC43.0Z",
+        "BB80.0",
+        "BB40",
+        "LA87.03",
+        "BB8Y"
+      ],
+      "rank": 1,
+      "scores": {
+        "hit_rate@1": 1.0,
+        "hit_rate@2": 1.0,
+        "hit_rate@3": 1.0,
+        "hit_rate@4": 1.0,
+        "hit_rate@5": 1.0,
+        "hit_rate@6": 1.0,
+        "hit_rate@7": 1.0,
+        "hit_rate@8": 1.0,
+        "hit_rate@9": 1.0,
+        "hit_rate@10": 1.0,
+        "ndcg@10": 1.0,
+        "mrr": 1.0
+      }
+    },
+    {
+      "index": 7,
+      "case_id": "PMC3056427_01",
+      "strategy": "gut",
+      "status": "error",
+      "stop_reason": "error",
+      "questions": 3,
+      "true_diagnosis": "Tricuspid Valve Regurgitation",
+      "true_icd_code": "BB81.Z",
+      "predictions": [],
+      "ranked_codes": [],
+      "rank": null,
+      "scores": {
+        "hit_rate@1": 0.0,
+        "hit_rate@2": 0.0,
+        "hit_rate@3": 0.0,
+        "hit_rate@4": 0.0,
+        "hit_rate@5": 0.0,
+        "hit_rate@6": 0.0,
+        "hit_rate@7": 0.0,
+        "hit_rate@8": 0.0,
+        "hit_rate@9": 0.0,
+        "hit_rate@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    {
+      "index": 8,
+      "case_id": "PMC3056427_01",
+      "strategy": "channel",
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "questions": 4,
+      "true_diagnosis": "Tricuspid Valve Regurgitation",
+      "true_icd_code": "BB81.Z",
+      "predictions": [
+        {
+          "name": "Chronic heart failure with reduced ejection fraction",
+          "probability": 0.42,
+          "icd_code": "BD11.2"
+        },
+        {
+          "name": "Atrial fibrillation",
+          "probability": 0.16,
+          "icd_code": "BC81.3Z"
+        },
+        {
+          "name": "Dilated cardiomyopathy",
+          "probability": 0.1,
+          "icd_code": "BC43.0Z"
+        },
+        {
+          "name": "Ischaemic cardiomyopathy",
+          "probability": 0.08,
+          "icd_code": "BA51.Z"
+        },
+        {
+          "name": "Rheumatic mitral valve disease",
+          "probability": 0.06,
+          "icd_code": "BB60.0"
+        },
+        {
+          "name": "Chronic heart failure with preserved ejection fraction",
+          "probability": 0.05,
+          "icd_code": "BD11.0"
+        },
+        {
+          "name": "Hypertensive heart disease",
+          "probability": 0.04,
+          "icd_code": "BA01"
+        },
+        {
+          "name": "Tachycardia-induced cardiomyopathy",
+          "probability": 0.03,
+          "icd_code": "BC43.01"
+        },
+        {
+          "name": "Pulmonary arterial hypertension",
+          "probability": 0.02,
+          "icd_code": "BB01.0"
+        },
+        {
+          "name": "Constrictive pericarditis",
+          "probability": 0.015,
+          "icd_code": "BB22"
+        }
+      ],
+      "ranked_codes": [
+        "BD11.2",
+        "BC81.3Z",
+        "BC43.0Z",
+        "BA51.Z",
+        "BB60.0",
+        "BD11.0",
+        "BA01",
+        "BC43.01",
+        "BB01.0",
+        "BB22"
+      ],
+      "rank": null,
+      "scores": {
+        "hit_rate@1": 0.0,
+        "hit_rate@2": 0.0,
+        "hit_rate@3": 0.0,
+        "hit_rate@4": 0.0,
+        "hit_rate@5": 0.0,
+        "hit_rate@6": 0.0,
+        "hit_rate@7": 0.0,
+        "hit_rate@8": 0.0,
+        "hit_rate@9": 0.0,
+        "hit_rate@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    {
+      "index": 9,
+      "case_id": "PMC3056427_01",
+      "strategy": "sequence",
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "questions": 4,
+      "true_diagnosis": "Tricuspid Valve Regurgitation",
+      "true_icd_code": "BB81.Z",
+      "predictions": [
+        {
+          "name": "Atrial fibrillation",
+          "probability": 0.72,
+          "icd_code": "BC81.3Z"
+        },
+        {
+          "name": "Heart failure with preserved ejection fraction",
+          "probability": 0.65,
+          "icd_code": "BD11.0"
+        },
+        {
+          "name": "Acute heart failure",
+          "probability": 0.45,
+          "icd_code": "BD1Z&XT5R"
+        },
+        {
+          "name": "Mitral valve disease",
+          "probability": 0.3,
+          "icd_code": "BB6Z"
+        },
+        {
+          "name": "Hypertensive heart disease",
+          "probability": 0.25,
+          "icd_code": "BA01"
+        },
+        {
+          "name": "Hyperthyroidism",
+          "probability": 0.18,
+          "icd_code": "5A02.Z"
+        },
+        {
+          "name": "Pulmonary embolism",
+          "probability": 0.12,
+          "icd_code": "BB00.Z"
+        },
+        {
+          "name": "Acute myocardial infarction",
+          "probability": 0.08,
+          "icd_code": "BA41.Z"
+        },
+        {
+          "name": "Dilated cardiomyopathy",
+          "probability": 0.06,
+          "icd_code": "BC43.0Z"
+        },
+        {
+          "name": "Pericardial effusion",
+          "probability": 0.04,
+          "icd_code": "BB25"
+        }
+      ],
+      "ranked_codes": [
+        "BC81.3Z",
+        "BD11.0",
+        "BD1Z&XT5R",
+        "BB6Z",
+        "BA01",
+        "5A02.Z",
+        "BB00.Z",
+        "BA41.Z",
+        "BC43.0Z",
+        "BB25"
+      ],
+      "rank": null,
+      "scores": {
+        "hit_rate@1": 0.0,
+        "hit_rate@2": 0.0,
+        "hit_rate@3": 0.0,
+        "hit_rate@4": 0.0,
+        "hit_rate@5": 0.0,
+        "hit_rate@6": 0.0,
+        "hit_rate@7": 0.0,
+        "hit_rate@8": 0.0,
+        "hit_rate@9": 0.0,
+        "hit_rate@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    {
+      "index": 10,
+      "case_id": "PMC6056777_01",
+      "strategy": "hypothesis",
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "questions": 4,
+      "true_diagnosis": "Left subclavian artery aneurysm",
+      "true_icd_code": "BD51.3&XA5D68",
+      "predictions": [
+        {
+          "name": "Thoracic aortic aneurysm",
+          "probability": 0.45,
+          "icd_code": "BD50.3Z"
+        },
+        {
+          "name": "Left subclavian artery aneurysm",
+          "probability": 0.15,
+          "icd_code": "BD51.3&XA5D68"
+        },
+        {
+          "name": "Brachiocephalic artery aneurysm",
+          "probability": 0.1,
+          "icd_code": "LA8B.24"
+        },
+        {
+          "name": "Malignant neoplasm of thyroid gland",
+          "probability": 0.08,
+          "icd_code": "2D10.Z"
+        },
+        {
+          "name": "Malignant neoplasm of upper lobe of lung",
+          "probability": 0.06,
+          "icd_code": "2C25.Z"
+        },
+        {
+          "name": "Non-Hodgkin lymphoma",
+          "probability": 0.05,
+          "icd_code": "2B33.5"
+        },
+        {
+          "name": "Thoracic aortic dissection",
+          "probability": 0.04,
+          "icd_code": "BD50.3Z"
+        },
+        {
+          "name": "Goitre",
+          "probability": 0.03,
+          "icd_code": "5A01.Z"
+        },
+        {
+          "name": "Sarcoidosis",
+          "probability": 0.02,
+          "icd_code": "4B20.Z"
+        },
+        {
+          "name": "Thoracic outlet syndrome",
+          "probability": 0.01,
+          "icd_code": "8B91.Z"
+        }
+      ],
+      "ranked_codes": [
+        "BD50.3Z",
+        "BD51.3&XA5D68",
+        "LA8B.24",
+        "2D10.Z",
+        "2C25.Z",
+        "2B33.5",
+        "5A01.Z",
+        "4B20.Z",
+        "8B91.Z"
+      ],
+      "rank": 2,
+      "scores": {
+        "hit_rate@1": 0.0,
+        "hit_rate@2": 1.0,
+        "hit_rate@3": 1.0,
+        "hit_rate@4": 1.0,
+        "hit_rate@5": 1.0,
+        "hit_rate@6": 1.0,
+        "hit_rate@7": 1.0,
+        "hit_rate@8": 1.0,
+        "hit_rate@9": 1.0,
+        "hit_rate@10": 1.0,
+        "ndcg@10": 0.6309297535714575,
+        "mrr": 0.5
+      }
+    },
+    {
+      "index": 11,
+      "case_id": "PMC6056777_01",
+      "strategy": "knowledge",
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "questions": 4,
+      "true_diagnosis": "Left subclavian artery aneurysm",
+      "true_icd_code": "BD51.3&XA5D68",
+      "predictions": [
+        {
+          "name": "Aneurysm of aortic arch",
+          "probability": 0.36,
+          "icd_code": "BD50.3Z&XA75Z8"
+        },
+        {
+          "name": "Vascular Ehlers-Danlos syndrome",
+          "probability": 0.2,
+          "icd_code": "LD28.1Y"
+        },
+        {
+          "name": "Aneurysm of left subclavian artery",
+          "probability": 0.12,
+          "icd_code": "BD51.3&XA5D68"
+        },
+        {
+          "name": "Vocal cord paralysis",
+          "probability": 0.09,
+          "icd_code": "CA0H.0"
+        },
+        {
+          "name": "Pseudoaneurysm of artery",
+          "probability": 0.07,
+          "icd_code": "BD51.Z"
+        },
+        {
+          "name": "Aortic dissection",
+          "probability": 0.05,
+          "icd_code": "BD50.Z"
+        },
+        {
+          "name": "Aneurysm of left common carotid artery",
+          "probability": 0.04,
+          "icd_code": "BD51.0&XK8G&XA1V84"
+        },
+        {
+          "name": "Paraganglioma of head and neck",
+          "probability": 0.03,
+          "icd_code": "2E92.2"
+        },
+        {
+          "name": "Goitre",
+          "probability": 0.025,
+          "icd_code": "5A01.Z"
+        },
+        {
+          "name": "Lymphadenopathy of supraclavicular region",
+          "probability": 0.015,
+          "icd_code": "MA01.0"
+        }
+      ],
+      "ranked_codes": [
+        "BD50.3Z&XA75Z8",
+        "LD28.1Y",
+        "BD51.3&XA5D68",
+        "CA0H.0",
+        "BD51.Z",
+        "BD50.Z",
+        "BD51.0&XK8G&XA1V84",
+        "2E92.2",
+        "5A01.Z",
+        "MA01.0"
+      ],
+      "rank": 3,
+      "scores": {
+        "hit_rate@1": 0.0,
+        "hit_rate@2": 0.0,
+        "hit_rate@3": 1.0,
+        "hit_rate@4": 1.0,
+        "hit_rate@5": 1.0,
+        "hit_rate@6": 1.0,
+        "hit_rate@7": 1.0,
+        "hit_rate@8": 1.0,
+        "hit_rate@9": 1.0,
+        "hit_rate@10": 1.0,
+        "ndcg@10": 0.5,
+        "mrr": 0.3333333333333333
+      }
+    },
+    {
+      "index": 12,
+      "case_id": "PMC6056777_01",
+      "strategy": "gut",
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "questions": 4,
+      "true_diagnosis": "Left subclavian artery aneurysm",
+      "true_icd_code": "BD51.3&XA5D68",
+      "predictions": [
+        {
+          "name": "Aneurysm of left subclavian artery",
+          "probability": 0.3,
+          "icd_code": "BD51.3&XA5D68"
+        },
+        {
+          "name": "Pseudoaneurysm of aorta following surgical repair",
+          "probability": 0.2,
+          "icd_code": "BD51.Z"
+        },
+        {
+          "name": "Left recurrent laryngeal nerve palsy caused by mediastinal compression",
+          "probability": 0.13,
+          "icd_code": "CA0H.0"
+        },
+        {
+          "name": "Dissection of left subclavian artery",
+          "probability": 0.09,
+          "icd_code": "LA8B.24"
+        },
+        {
+          "name": "Aortic dissection",
+          "probability": 0.07,
+          "icd_code": "BD50.Z"
+        },
+        {
+          "name": "Thoracic outlet syndrome",
+          "probability": 0.05,
+          "icd_code": "8B91.Z"
+        },
+        {
+          "name": "Carotid-subclavian bypass graft pseudoaneurysm",
+          "probability": 0.04,
+          "icd_code": "BD51.Z"
+        },
+        {
+          "name": "Malignant neoplasm of thyroid gland",
+          "probability": 0.03,
+          "icd_code": "2D10.Z"
+        },
+        {
+          "name": "Laryngeal paralysis",
+          "probability": 0.02,
+          "icd_code": "CA0H.0"
+        },
+        {
+          "name": "Mediastinal fibrosis",
+          "probability": 0.01,
+          "icd_code": "CB22.0"
+        }
+      ],
+      "ranked_codes": [
+        "BD51.3&XA5D68",
+        "BD51.Z",
+        "CA0H.0",
+        "LA8B.24",
+        "BD50.Z",
+        "8B91.Z",
+        "2D10.Z",
+        "CB22.0"
+      ],
+      "rank": 1,
+      "scores": {
+        "hit_rate@1": 1.0,
+        "hit_rate@2": 1.0,
+        "hit_rate@3": 1.0,
+        "hit_rate@4": 1.0,
+        "hit_rate@5": 1.0,
+        "hit_rate@6": 1.0,
+        "hit_rate@7": 1.0,
+        "hit_rate@8": 1.0,
+        "hit_rate@9": 1.0,
+        "hit_rate@10": 1.0,
+        "ndcg@10": 1.0,
+        "mrr": 1.0
+      }
+    },
+    {
+      "index": 13,
+      "case_id": "PMC6056777_01",
+      "strategy": "channel",
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "questions": 4,
+      "true_diagnosis": "Left subclavian artery aneurysm",
+      "true_icd_code": "BD51.3&XA5D68",
+      "predictions": [
+        {
+          "name": "Thoracic aortic aneurysm",
+          "probability": 0.5,
+          "icd_code": "BD50.3Z"
+        },
+        {
+          "name": "Aneurysm of left subclavian artery",
+          "probability": 0.14,
+          "icd_code": "BD51.3&XA5D68"
+        },
+        {
+          "name": "Unilateral vocal cord paralysis",
+          "probability": 0.09,
+          "icd_code": "CA0H.0"
+        },
+        {
+          "name": "Thoracic aortic dissection",
+          "probability": 0.07,
+          "icd_code": "BD50.3Z"
+        },
+        {
+          "name": "Malignant neoplasm of thyroid gland",
+          "probability": 0.05,
+          "icd_code": "2D10.Z"
+        },
+        {
+          "name": "Malignant neoplasm of bronchus or lung",
+          "probability": 0.04,
+          "icd_code": "2C25.Z"
+        },
+        {
+          "name": "Lymphoma of lymph nodes of neck",
+          "probability": 0.03,
+          "icd_code": "BD9Y"
+        },
+        {
+          "name": "Metastatic malignant neoplasm to supraclavicular lymph nodes",
+          "probability": 0.02,
+          "icd_code": "2D6Z"
+        },
+        {
+          "name": "Thyroid nodule",
+          "probability": 0.015,
+          "icd_code": "5A01.1"
+        },
+        {
+          "name": "Mediastinal goitre",
+          "probability": 0.01,
+          "icd_code": "5A01.Z"
+        }
+      ],
+      "ranked_codes": [
+        "BD50.3Z",
+        "BD51.3&XA5D68",
+        "CA0H.0",
+        "2D10.Z",
+        "2C25.Z",
+        "BD9Y",
+        "2D6Z",
+        "5A01.1",
+        "5A01.Z"
+      ],
+      "rank": 2,
+      "scores": {
+        "hit_rate@1": 0.0,
+        "hit_rate@2": 1.0,
+        "hit_rate@3": 1.0,
+        "hit_rate@4": 1.0,
+        "hit_rate@5": 1.0,
+        "hit_rate@6": 1.0,
+        "hit_rate@7": 1.0,
+        "hit_rate@8": 1.0,
+        "hit_rate@9": 1.0,
+        "hit_rate@10": 1.0,
+        "ndcg@10": 0.6309297535714575,
+        "mrr": 0.5
+      }
+    },
+    {
+      "index": 14,
+      "case_id": "PMC6056777_01",
+      "strategy": "sequence",
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "questions": 4,
+      "true_diagnosis": "Left subclavian artery aneurysm",
+      "true_icd_code": "BD51.3&XA5D68",
+      "predictions": [
+        {
+          "name": "Aneurysm of subclavian artery",
+          "probability": 0.55,
+          "icd_code": "BD51.3&XA5D68"
+        },
+        {
+          "name": "Aneurysm of aortic arch",
+          "probability": 0.1,
+          "icd_code": "BD50.3Z&XA75Z8"
+        },
+        {
+          "name": "Pseudoaneurysm of subclavian artery",
+          "probability": 0.08,
+          "icd_code": "BD51.3&XA5D68"
+        },
+        {
+          "name": "Malignant neoplasm of thyroid gland",
+          "probability": 0.06,
+          "icd_code": "2D10.Z"
+        },
+        {
+          "name": "Malignant neoplasm of bronchus or lung",
+          "probability": 0.05,
+          "icd_code": "2C25.Z"
+        },
+        {
+          "name": "Paraganglioma",
+          "probability": 0.04,
+          "icd_code": "2E92.2"
+        },
+        {
+          "name": "Laryngeal paralysis",
+          "probability": 0.035,
+          "icd_code": "CA0H.0"
+        },
+        {
+          "name": "Benign neoplasm of mediastinum",
+          "probability": 0.03,
+          "icd_code": "2F01"
+        },
+        {
+          "name": "Thoracic outlet syndrome",
+          "probability": 0.02,
+          "icd_code": "8B91.Z"
+        },
+        {
+          "name": "Arteriovenous malformation",
+          "probability": 0.015,
+          "icd_code": "LA90.3Z"
+        }
+      ],
+      "ranked_codes": [
+        "BD51.3&XA5D68",
+        "BD50.3Z&XA75Z8",
+        "2D10.Z",
+        "2C25.Z",
+        "2E92.2",
+        "CA0H.0",
+        "2F01",
+        "8B91.Z",
+        "LA90.3Z"
+      ],
+      "rank": 1,
+      "scores": {
+        "hit_rate@1": 1.0,
+        "hit_rate@2": 1.0,
+        "hit_rate@3": 1.0,
+        "hit_rate@4": 1.0,
+        "hit_rate@5": 1.0,
+        "hit_rate@6": 1.0,
+        "hit_rate@7": 1.0,
+        "hit_rate@8": 1.0,
+        "hit_rate@9": 1.0,
+        "hit_rate@10": 1.0,
+        "ndcg@10": 1.0,
+        "mrr": 1.0
+      }
+    },
+    {
+      "index": 15,
+      "case_id": "PMC11249570_01",
+      "strategy": "hypothesis",
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "questions": 4,
+      "true_diagnosis": "Salbutamol poisoning",
+      "true_icd_code": "NE60",
+      "predictions": [
+        {
+          "name": "Pneumococcal pneumonia",
+          "probability": 0.36,
+          "icd_code": "CA40.07"
+        },
+        {
+          "name": "Aspiration pneumonia",
+          "probability": 0.14,
+          "icd_code": "CA71.0"
+        },
+        {
+          "name": "Viral pneumonia with secondary bacterial infection",
+          "probability": 0.12,
+          "icd_code": "CA40.Z"
+        },
+        {
+          "name": "Staphylococcus aureus pneumonia",
+          "probability": 0.1,
+          "icd_code": "CA40.06"
+        },
+        {
+          "name": "Pseudomonas aeruginosa pneumonia",
+          "probability": 0.09,
+          "icd_code": "CA40.05"
+        },
+        {
+          "name": "Klebsiella pneumoniae pneumonia",
+          "probability": 0.07,
+          "icd_code": "CA40.03"
+        },
+        {
+          "name": "Acute respiratory distress syndrome",
+          "probability": 0.05,
+          "icd_code": "CB00"
+        },
+        {
+          "name": "Haemophilus influenzae pneumonia",
+          "probability": 0.045,
+          "icd_code": "CA40.02"
+        },
+        {
+          "name": "Legionella pneumonia",
+          "probability": 0.03,
+          "icd_code": "1C19.1"
+        },
+        {
+          "name": "Mycoplasma pneumoniae pneumonia",
+          "probability": 0.025,
+          "icd_code": "CA40.04"
+        }
+      ],
+      "ranked_codes": [
+        "CA40.07",
+        "CA71.0",
+        "CA40.Z",
+        "CA40.06",
+        "CA40.05",
+        "CA40.03",
+        "CB00",
+        "CA40.02",
+        "1C19.1",
+        "CA40.04"
+      ],
+      "rank": null,
+      "scores": {
+        "hit_rate@1": 0.0,
+        "hit_rate@2": 0.0,
+        "hit_rate@3": 0.0,
+        "hit_rate@4": 0.0,
+        "hit_rate@5": 0.0,
+        "hit_rate@6": 0.0,
+        "hit_rate@7": 0.0,
+        "hit_rate@8": 0.0,
+        "hit_rate@9": 0.0,
+        "hit_rate@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    {
+      "index": 16,
+      "case_id": "PMC11249570_01",
+      "strategy": "knowledge",
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "questions": 4,
+      "true_diagnosis": "Salbutamol poisoning",
+      "true_icd_code": "NE60",
+      "predictions": [
+        {
+          "name": "Septic shock",
+          "probability": 0.82,
+          "icd_code": "1G41"
+        },
+        {
+          "name": "Sepsis",
+          "probability": 0.74,
+          "icd_code": "1G40"
+        },
+        {
+          "name": "Acute respiratory distress syndrome",
+          "probability": 0.61,
+          "icd_code": "CB00"
+        },
+        {
+          "name": "Pneumonia",
+          "probability": 0.55,
+          "icd_code": "CA40.Z"
+        },
+        {
+          "name": "Hospital-acquired pneumonia",
+          "probability": 0.42,
+          "icd_code": "CA40.Z&XB25"
+        },
+        {
+          "name": "Acute respiratory failure",
+          "probability": 0.36,
+          "icd_code": "CB41.0Z"
+        },
+        {
+          "name": "Aspiration pneumonia",
+          "probability": 0.27,
+          "icd_code": "CA71.0"
+        },
+        {
+          "name": "Pneumococcal pneumonia",
+          "probability": 0.21,
+          "icd_code": "CA40.07"
+        },
+        {
+          "name": "Gram-negative sepsis",
+          "probability": 0.16,
+          "icd_code": "1C41&XN5PZ/1G40"
+        },
+        {
+          "name": "Pseudomonal pneumonia",
+          "probability": 0.12,
+          "icd_code": "CA40.05"
+        }
+      ],
+      "ranked_codes": [
+        "1G41",
+        "1G40",
+        "CB00",
+        "CA40.Z",
+        "CA40.Z&XB25",
+        "CB41.0Z",
+        "CA71.0",
+        "CA40.07",
+        "1C41&XN5PZ/1G40",
+        "CA40.05"
+      ],
+      "rank": null,
+      "scores": {
+        "hit_rate@1": 0.0,
+        "hit_rate@2": 0.0,
+        "hit_rate@3": 0.0,
+        "hit_rate@4": 0.0,
+        "hit_rate@5": 0.0,
+        "hit_rate@6": 0.0,
+        "hit_rate@7": 0.0,
+        "hit_rate@8": 0.0,
+        "hit_rate@9": 0.0,
+        "hit_rate@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    {
+      "index": 17,
+      "case_id": "PMC11249570_01",
+      "strategy": "gut",
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "questions": 4,
+      "true_diagnosis": "Salbutamol poisoning",
+      "true_icd_code": "NE60",
+      "predictions": [
+        {
+          "name": "Pneumonia due to Streptococcus pneumoniae",
+          "probability": 0.3,
+          "icd_code": "CA40.07"
+        },
+        {
+          "name": "Sepsis due to pneumonia",
+          "probability": 0.2,
+          "icd_code": "1C41&XN3PW/1G40"
+        },
+        {
+          "name": "Acute respiratory distress syndrome",
+          "probability": 0.15,
+          "icd_code": "CB00"
+        },
+        {
+          "name": "Pneumonia due to Staphylococcus aureus",
+          "probability": 0.08,
+          "icd_code": "CA40.06"
+        },
+        {
+          "name": "Pneumonia due to Legionella pneumophila",
+          "probability": 0.06,
+          "icd_code": "1C19.1"
+        },
+        {
+          "name": "Pneumonia due to Klebsiella pneumoniae",
+          "probability": 0.05,
+          "icd_code": "CA40.03"
+        },
+        {
+          "name": "Pneumonia due to Pseudomonas aeruginosa",
+          "probability": 0.04,
+          "icd_code": "CA40.05"
+        },
+        {
+          "name": "Septic shock",
+          "probability": 0.03,
+          "icd_code": "1G41"
+        },
+        {
+          "name": "Acute kidney injury",
+          "probability": 0.025,
+          "icd_code": "NB92.0Z"
+        },
+        {
+          "name": "Pneumonia due to influenza virus",
+          "probability": 0.02,
+          "icd_code": "1E32"
+        }
+      ],
+      "ranked_codes": [
+        "CA40.07",
+        "1C41&XN3PW/1G40",
+        "CB00",
+        "CA40.06",
+        "1C19.1",
+        "CA40.03",
+        "CA40.05",
+        "1G41",
+        "NB92.0Z",
+        "1E32"
+      ],
+      "rank": null,
+      "scores": {
+        "hit_rate@1": 0.0,
+        "hit_rate@2": 0.0,
+        "hit_rate@3": 0.0,
+        "hit_rate@4": 0.0,
+        "hit_rate@5": 0.0,
+        "hit_rate@6": 0.0,
+        "hit_rate@7": 0.0,
+        "hit_rate@8": 0.0,
+        "hit_rate@9": 0.0,
+        "hit_rate@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    {
+      "index": 18,
+      "case_id": "PMC11249570_01",
+      "strategy": "channel",
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "questions": 4,
+      "true_diagnosis": "Salbutamol poisoning",
+      "true_icd_code": "NE60",
+      "predictions": [
+        {
+          "name": "Pneumonia due to Streptococcus pneumoniae",
+          "probability": 0.42,
+          "icd_code": "CA40.07"
+        },
+        {
+          "name": "Sepsis with septic shock",
+          "probability": 0.38,
+          "icd_code": "1G41"
+        },
+        {
+          "name": "Aspiration pneumonia",
+          "probability": 0.3,
+          "icd_code": "CA71.0"
+        },
+        {
+          "name": "Acute respiratory failure with hypoxia",
+          "probability": 0.27,
+          "icd_code": "CB41.20"
+        },
+        {
+          "name": "Acute on chronic heart failure",
+          "probability": 0.2,
+          "icd_code": "BD1Z&XT8W"
+        },
+        {
+          "name": "Hospital-acquired pneumonia",
+          "probability": 0.16,
+          "icd_code": "CA40.Z&XB25"
+        },
+        {
+          "name": "Pneumonia due to Staphylococcus aureus",
+          "probability": 0.13,
+          "icd_code": "CA40.06"
+        },
+        {
+          "name": "Chronic obstructive pulmonary disease with acute exacerbation",
+          "probability": 0.11,
+          "icd_code": "CA22.0"
+        },
+        {
+          "name": "Prosthetic heart valve infection",
+          "probability": 0.08,
+          "icd_code": "QB50.2"
+        },
+        {
+          "name": "Acute liver failure",
+          "probability": 0.05,
+          "icd_code": "DB91.Z"
+        }
+      ],
+      "ranked_codes": [
+        "CA40.07",
+        "1G41",
+        "CA71.0",
+        "CB41.20",
+        "BD1Z&XT8W",
+        "CA40.Z&XB25",
+        "CA40.06",
+        "CA22.0",
+        "QB50.2",
+        "DB91.Z"
+      ],
+      "rank": null,
+      "scores": {
+        "hit_rate@1": 0.0,
+        "hit_rate@2": 0.0,
+        "hit_rate@3": 0.0,
+        "hit_rate@4": 0.0,
+        "hit_rate@5": 0.0,
+        "hit_rate@6": 0.0,
+        "hit_rate@7": 0.0,
+        "hit_rate@8": 0.0,
+        "hit_rate@9": 0.0,
+        "hit_rate@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    {
+      "index": 19,
+      "case_id": "PMC11249570_01",
+      "strategy": "sequence",
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "questions": 4,
+      "true_diagnosis": "Salbutamol poisoning",
+      "true_icd_code": "NE60",
+      "predictions": [
+        {
+          "name": "Sepsis with septic shock due to Streptococcus dysgalactiae infection",
+          "probability": 0.6,
+          "icd_code": "1C41"
+        },
+        {
+          "name": "Streptococcal pneumonia",
+          "probability": 0.12,
+          "icd_code": "CA40.07"
+        },
+        {
+          "name": "Acute respiratory distress syndrome",
+          "probability": 0.08,
+          "icd_code": "CB00"
+        },
+        {
+          "name": "Multiple organ dysfunction syndrome due to sepsis",
+          "probability": 0.06,
+          "icd_code": "1G40"
+        },
+        {
+          "name": "Bacteraemia due to Streptococcus dysgalactiae",
+          "probability": 0.04,
+          "icd_code": "MA15.0"
+        },
+        {
+          "name": "Acute respiratory failure with hypercapnia",
+          "probability": 0.03,
+          "icd_code": "CB41.0Z"
+        },
+        {
+          "name": "Adverse effect of intravenous medication causing cardiovascular collapse",
+          "probability": 0.025,
+          "icd_code": "MG40.Z"
+        },
+        {
+          "name": "Bacterial pneumonia, unspecified",
+          "probability": 0.02,
+          "icd_code": "CA40.0Z"
+        },
+        {
+          "name": "Acute kidney injury secondary to sepsis",
+          "probability": 0.012,
+          "icd_code": "ND57"
+        },
+        {
+          "name": "Disseminated intravascular coagulation",
+          "probability": 0.008,
+          "icd_code": "3B20"
+        }
+      ],
+      "ranked_codes": [
+        "1C41",
+        "CA40.07",
+        "CB00",
+        "1G40",
+        "MA15.0",
+        "CB41.0Z",
+        "MG40.Z",
+        "CA40.0Z",
+        "ND57",
+        "3B20"
+      ],
+      "rank": null,
+      "scores": {
+        "hit_rate@1": 0.0,
+        "hit_rate@2": 0.0,
+        "hit_rate@3": 0.0,
+        "hit_rate@4": 0.0,
+        "hit_rate@5": 0.0,
+        "hit_rate@6": 0.0,
+        "hit_rate@7": 0.0,
+        "hit_rate@8": 0.0,
+        "hit_rate@9": 0.0,
+        "hit_rate@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    {
+      "index": 20,
+      "case_id": "PMC5468569_01",
+      "strategy": "hypothesis",
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "questions": 4,
+      "true_diagnosis": "Trisomy 18",
+      "true_icd_code": "LD40.2",
+      "predictions": [
+        {
+          "name": "Acute myocarditis",
+          "probability": 0.22,
+          "icd_code": "BC42.Z&XT5R"
+        },
+        {
+          "name": "Congenital complete atrioventricular block",
+          "probability": 0.18,
+          "icd_code": "BC63.20"
+        },
+        {
+          "name": "Congenital long QT syndrome",
+          "probability": 0.14,
+          "icd_code": "BC65.0"
+        },
+        {
+          "name": "Hypocalcaemia",
+          "probability": 0.11,
+          "icd_code": "5B5K.1Z"
+        },
+        {
+          "name": "Congenital hypothyroidism",
+          "probability": 0.08,
+          "icd_code": "5A00.0Z"
+        },
+        {
+          "name": "Poisoning by cardiotoxic agent",
+          "probability": 0.07,
+          "icd_code": "NE6Z"
+        },
+        {
+          "name": "Sepsis",
+          "probability": 0.06,
+          "icd_code": "1G40"
+        },
+        {
+          "name": "Hypothermia",
+          "probability": 0.05,
+          "icd_code": "NF02"
+        },
+        {
+          "name": "Sick sinus syndrome",
+          "probability": 0.04,
+          "icd_code": "BC80.20"
+        },
+        {
+          "name": "Congenital malformation of the heart",
+          "probability": 0.03,
+          "icd_code": "LA8Z"
+        }
+      ],
+      "ranked_codes": [
+        "BC42.Z&XT5R",
+        "BC63.20",
+        "BC65.0",
+        "5B5K.1Z",
+        "5A00.0Z",
+        "NE6Z",
+        "1G40",
+        "NF02",
+        "BC80.20",
+        "LA8Z"
+      ],
+      "rank": null,
+      "scores": {
+        "hit_rate@1": 0.0,
+        "hit_rate@2": 0.0,
+        "hit_rate@3": 0.0,
+        "hit_rate@4": 0.0,
+        "hit_rate@5": 0.0,
+        "hit_rate@6": 0.0,
+        "hit_rate@7": 0.0,
+        "hit_rate@8": 0.0,
+        "hit_rate@9": 0.0,
+        "hit_rate@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    {
+      "index": 21,
+      "case_id": "PMC5468569_01",
+      "strategy": "knowledge",
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "questions": 4,
+      "true_diagnosis": "Trisomy 18",
+      "true_icd_code": "LD40.2",
+      "predictions": [
+        {
+          "name": "Congenital long QT syndrome",
+          "probability": 0.22,
+          "icd_code": "BC65.0"
+        },
+        {
+          "name": "Congenital complete atrioventricular block",
+          "probability": 0.16,
+          "icd_code": "BC63.20"
+        },
+        {
+          "name": "Congenital heart block",
+          "probability": 0.12,
+          "icd_code": "LA8Y"
+        },
+        {
+          "name": "Acute myocarditis",
+          "probability": 0.1,
+          "icd_code": "BC42.Z&XT5R"
+        },
+        {
+          "name": "Drug-induced long QT syndrome",
+          "probability": 0.08,
+          "icd_code": "BC65.0"
+        },
+        {
+          "name": "Second degree atrioventricular block",
+          "probability": 0.07,
+          "icd_code": "BC63.1Z"
+        },
+        {
+          "name": "Catecholaminergic polymorphic ventricular tachycardia",
+          "probability": 0.06,
+          "icd_code": "BC65.5"
+        },
+        {
+          "name": "Sick sinus syndrome",
+          "probability": 0.05,
+          "icd_code": "BC80.20"
+        },
+        {
+          "name": "Brugada syndrome",
+          "probability": 0.04,
+          "icd_code": "BC65.1"
+        },
+        {
+          "name": "Hypertrophic cardiomyopathy",
+          "probability": 0.03,
+          "icd_code": "BC43.1Z"
+        }
+      ],
+      "ranked_codes": [
+        "BC65.0",
+        "BC63.20",
+        "LA8Y",
+        "BC42.Z&XT5R",
+        "BC63.1Z",
+        "BC65.5",
+        "BC80.20",
+        "BC65.1",
+        "BC43.1Z"
+      ],
+      "rank": null,
+      "scores": {
+        "hit_rate@1": 0.0,
+        "hit_rate@2": 0.0,
+        "hit_rate@3": 0.0,
+        "hit_rate@4": 0.0,
+        "hit_rate@5": 0.0,
+        "hit_rate@6": 0.0,
+        "hit_rate@7": 0.0,
+        "hit_rate@8": 0.0,
+        "hit_rate@9": 0.0,
+        "hit_rate@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    {
+      "index": 22,
+      "case_id": "PMC5468569_01",
+      "strategy": "gut",
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "questions": 4,
+      "true_diagnosis": "Trisomy 18",
+      "true_icd_code": "LD40.2",
+      "predictions": [
+        {
+          "name": "Trisomy 18",
+          "probability": 0.4,
+          "icd_code": "LD40.2"
+        },
+        {
+          "name": "Congenital complete atrioventricular block",
+          "probability": 0.2,
+          "icd_code": "BC63.20"
+        },
+        {
+          "name": "Congenital long QT syndrome",
+          "probability": 0.08,
+          "icd_code": "BC65.0"
+        },
+        {
+          "name": "Congenital hypothyroidism",
+          "probability": 0.06,
+          "icd_code": "5A00.0Z"
+        },
+        {
+          "name": "Sick sinus syndrome",
+          "probability": 0.05,
+          "icd_code": "BC80.20"
+        },
+        {
+          "name": "Intraventricular haemorrhage of newborn",
+          "probability": 0.04,
+          "icd_code": "KA82.Z"
+        },
+        {
+          "name": "Hypoxic-ischaemic encephalopathy of newborn",
+          "probability": 0.03,
+          "icd_code": "KB04"
+        },
+        {
+          "name": "Congenital malformation of heart",
+          "probability": 0.025,
+          "icd_code": "LA8Z"
+        },
+        {
+          "name": "Hypothermia of newborn",
+          "probability": 0.02,
+          "icd_code": "KD12.Z"
+        },
+        {
+          "name": "Hyperkalaemia of newborn",
+          "probability": 0.015,
+          "icd_code": "KB63.31"
+        }
+      ],
+      "ranked_codes": [
+        "LD40.2",
+        "BC63.20",
+        "BC65.0",
+        "5A00.0Z",
+        "BC80.20",
+        "KA82.Z",
+        "KB04",
+        "LA8Z",
+        "KD12.Z",
+        "KB63.31"
+      ],
+      "rank": 1,
+      "scores": {
+        "hit_rate@1": 1.0,
+        "hit_rate@2": 1.0,
+        "hit_rate@3": 1.0,
+        "hit_rate@4": 1.0,
+        "hit_rate@5": 1.0,
+        "hit_rate@6": 1.0,
+        "hit_rate@7": 1.0,
+        "hit_rate@8": 1.0,
+        "hit_rate@9": 1.0,
+        "hit_rate@10": 1.0,
+        "ndcg@10": 1.0,
+        "mrr": 1.0
+      }
+    },
+    {
+      "index": 23,
+      "case_id": "PMC5468569_01",
+      "strategy": "channel",
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "questions": 4,
+      "true_diagnosis": "Trisomy 18",
+      "true_icd_code": "LD40.2",
+      "predictions": [
+        {
+          "name": "Congenital complete atrioventricular block",
+          "probability": 0.5,
+          "icd_code": "BC63.20"
+        },
+        {
+          "name": "Dilated cardiomyopathy",
+          "probability": 0.14,
+          "icd_code": "BC43.0Z"
+        },
+        {
+          "name": "Myocarditis",
+          "probability": 0.09,
+          "icd_code": "BC42.Z"
+        },
+        {
+          "name": "Sick sinus syndrome",
+          "probability": 0.06,
+          "icd_code": "BC80.20"
+        },
+        {
+          "name": "Congenital hypothyroidism",
+          "probability": 0.05,
+          "icd_code": "5A00.0Z"
+        },
+        {
+          "name": "Hyperkalaemia",
+          "probability": 0.04,
+          "icd_code": "5C76"
+        },
+        {
+          "name": "Congenital long QT syndrome",
+          "probability": 0.03,
+          "icd_code": "BC65.0"
+        },
+        {
+          "name": "Neonatal sepsis",
+          "probability": 0.03,
+          "icd_code": "KA60"
+        },
+        {
+          "name": "Glycogen storage disease type II",
+          "probability": 0.02,
+          "icd_code": "5C51.3"
+        },
+        {
+          "name": "Congenital hypoplastic left heart syndrome",
+          "probability": 0.01,
+          "icd_code": "LA89.3"
+        }
+      ],
+      "ranked_codes": [
+        "BC63.20",
+        "BC43.0Z",
+        "BC42.Z",
+        "BC80.20",
+        "5A00.0Z",
+        "5C76",
+        "BC65.0",
+        "KA60",
+        "5C51.3",
+        "LA89.3"
+      ],
+      "rank": null,
+      "scores": {
+        "hit_rate@1": 0.0,
+        "hit_rate@2": 0.0,
+        "hit_rate@3": 0.0,
+        "hit_rate@4": 0.0,
+        "hit_rate@5": 0.0,
+        "hit_rate@6": 0.0,
+        "hit_rate@7": 0.0,
+        "hit_rate@8": 0.0,
+        "hit_rate@9": 0.0,
+        "hit_rate@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    {
+      "index": 24,
+      "case_id": "PMC5468569_01",
+      "strategy": "sequence",
+      "status": "completed",
+      "stop_reason": "max_iterations",
+      "questions": 4,
+      "true_diagnosis": "Trisomy 18",
+      "true_icd_code": "LD40.2",
+      "predictions": [
+        {
+          "name": "Edwards syndrome",
+          "probability": 0.3,
+          "icd_code": "LD40.2"
+        },
+        {
+          "name": "Triploidy",
+          "probability": 0.2,
+          "icd_code": "LD42.0"
+        },
+        {
+          "name": "Congenital heart block",
+          "probability": 0.14,
+          "icd_code": "LA8Y"
+        },
+        {
+          "name": "Patau syndrome",
+          "probability": 0.09,
+          "icd_code": "LD40.1"
+        },
+        {
+          "name": "Pena-Shokeir syndrome",
+          "probability": 0.06,
+          "icd_code": "LD2B"
+        },
+        {
+          "name": "Smith-Lemli-Opitz syndrome",
+          "probability": 0.04,
+          "icd_code": "5C52.10"
+        },
+        {
+          "name": "Congenital long QT syndrome",
+          "probability": 0.03,
+          "icd_code": "BC65.0"
+        },
+        {
+          "name": "Noonan syndrome",
+          "probability": 0.025,
+          "icd_code": "LD2F.15"
+        },
+        {
+          "name": "Potter sequence",
+          "probability": 0.02,
+          "icd_code": "LB30.00"
+        },
+        {
+          "name": "Congenital myotonic dystrophy",
+          "probability": 0.01,
+          "icd_code": "8C71.0"
+        }
+      ],
+      "ranked_codes": [
+        "LD40.2",
+        "LD42.0",
+        "LA8Y",
+        "LD40.1",
+        "LD2B",
+        "5C52.10",
+        "BC65.0",
+        "LD2F.15",
+        "LB30.00",
+        "8C71.0"
+      ],
+      "rank": 1,
+      "scores": {
+        "hit_rate@1": 1.0,
+        "hit_rate@2": 1.0,
+        "hit_rate@3": 1.0,
+        "hit_rate@4": 1.0,
+        "hit_rate@5": 1.0,
+        "hit_rate@6": 1.0,
+        "hit_rate@7": 1.0,
+        "hit_rate@8": 1.0,
+        "hit_rate@9": 1.0,
+        "hit_rate@10": 1.0,
+        "ndcg@10": 1.0,
+        "mrr": 1.0
+      }
+    }
+  ]
+}
