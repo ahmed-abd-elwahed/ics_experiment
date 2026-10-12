@@ -11,10 +11,13 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 # The judge panel: three models from three families other than the pipeline's (DeepSeek by
 # default), so no judge grades its own family's answers. Every answer is judged by each model and
-# the final label is the majority vote; with no majority, the first (main) judge decides. The
-# first two were chosen on 2026-09-21 by probing one judgment (gemini-3.5-flash-lite $0.0007 and
-# 2 s; qwen3.8-flash $0.0006 but 22 s of reasoning); gpt-6-luna was added on 2026-09-29.
-DEFAULT_JUDGE_MODELS = ("google/gemini-3.5-flash-lite", "qwen/qwen3.8-flash", "openai/gpt-6-luna")
+# the final label is the majority vote; with no majority, the first (main) judge decides.
+# Since 2026-10-13: claude-haiku-5.5 replaced gemini-3.5-flash-lite (the most expensive judge,
+# and Google's family also answers in the gemini_knowledge configuration) and glm-5.3-flash
+# replaced qwen3.8-flash (9-13 s per call and rate-limited); both were chosen by re-judging 40
+# stored answers. The earlier panel's verdicts stay in the judgment files.
+DEFAULT_JUDGE_MODELS = ("anthropic/claude-haiku-5.5", "z-ai/glm-5.3-flash", "openai/gpt-6-luna")
+PREVIOUS_JUDGE_MODELS = ("google/gemini-3.5-flash-lite", "qwen/qwen3.8-flash", "openai/gpt-6-luna")
 
 
 class BenchSettings(BaseSettings):

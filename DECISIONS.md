@@ -144,6 +144,36 @@ in [environment/NOTES.md](environment/NOTES.md).
 | The flows were re-laid out to fit beside the environment; the separate environment box in each flow was removed. | The overview's environment now plays that part. |
 | The page has one light theme with a white background and no dark variant. | A light background was asked for, and the overview diagram's colours are drawn for a light ground. |
 
+### Judge panel and the Jev decision model
+
+| Decision | Why |
+|---|---|
+| The panel is now Claude Haiku 5.5 (main judge), GLM 5.3 Flash, and GPT-6 Luna; `bench/config.py` holds it as the default. | The project owner replaced Gemini with Haiku and asked for a replacement for Qwen. Gemini's batch endpoint is refused under the account's Zero Data Retention setting and it was the dearest judge; Qwen took 9–13 s per call and was rate-limited. |
+| GLM 5.3 Flash was proposed for Qwen's place. | Of four candidates re-judging the same 40 stored answers it finished every call, agreed best with the stored judges (15–17 of 20 on masked correctness), and was the cheapest; both Mistral models were rate-limited at ten parallel calls. |
+| Haiku takes Gemini's roles: first in the list, so tie-breaker, and the single judge of the test. | "Replace Gemini with Haiku" was read as a like-for-like replacement. |
+| The Gemini and Qwen verdicts stay in the judgment files; the earlier panel is kept as `PREVIOUS_JUDGE_MODELS`. | Nothing is deleted, and the earlier table can be rebuilt. |
+| The account's privacy setting was not changed. | It is a data-retention decision for the account owner. |
+| The Batch API is not used. | Two GPT batches of 20 and 300 requests had completed nothing after 25 minutes; the same calls take under a minute on the standard API. |
+| "Jev" is `typesafe/jev-1.13`, called through OpenRouter's decisions endpoint, one answer per request. | The project owner named it. Its documentation and endpoint take one item of at most 32,000 tokens per request, not a dataset. |
+| Jev judges the two existing metrics, faithfulness, and case alignment, but not the zlog z-score; its faithfulness and case alignment labels are not quote-checked. | It returns a typed choice with probabilities and no text, so it can neither read out a number nor quote a passage. |
+| Jev's verdicts on the existing metrics are stored in the panel's judgment files with rubric `v2`, its probabilities in `rationale`. | The existing vote and report code can then count it as a fourth judge; its criteria are the rubric's own wording. |
+| Jev is not in the default panel; the report shows the table with three judges and again with Jev added. | Requested. With four judges a 2–2 split is decided by the main judge, as an absent majority already is. |
+
+### Building the new metrics
+
+| Decision | Why |
+|---|---|
+| The new metrics live in `bench/answer_metrics.py`, with their own command, and write to `<workspace>/judge/<metric>.jsonl`. | The existing judge and report steps stay as they were, and each new judgment is stored the way the old ones are. |
+| Each judge has its own pool of workers. | A slow or rate-limited judge then cannot hold back the others. |
+| Reference limits and the reading of the true value are asked once per question, from all three judges, and combined by the median; a limit that at least half of the judges leave empty is left empty. | Every method and run is scored on the same scale; a median resists one judge's outlier. |
+| An answer's zlog score is the median of the judges' scores; a judge that finds no comparable number gives 3. | Consistent with the cap for unanswered questions; the median plays the part the majority vote plays for labels. |
+| For blood pressure the systolic value is scored. | One number is needed; the alternative, scoring both components, doubles the rules for 8 questions. |
+| A true value given as a range or bound ("60–70", "> 1000") scores 0 for an answer inside it, otherwise the distance to its nearest end. | 32 of 141 set A true values are not a single number. |
+| Questions whose true value is not numeric are left out of the zlog z-score and counted. | "3+" or "diminished" has no place on the scale. |
+| The zlog z-score and case alignment also run on set C. | The case-study configuration then has values in the final table. |
+| A faithfulness "yes" without a quote found in the documents counts as not supported; a case alignment label without a quote found in the case counts as neutral. | As planned: a claimed link must be checkable. |
+| The run stops starting new calls when OpenRouter answers HTTP 402. | The balance is close to the estimate; a clean stop keeps what is done. |
+
 ### Implementing and evaluating the five strategies
 
 | Decision | Why |

@@ -6,7 +6,14 @@ import math
 
 import pytest
 
-from bench.zlog import SCORE_CAP, crps_uniform, rating, zlog, zlog_score
+from bench.zlog import (
+    SCORE_CAP,
+    crps_uniform,
+    rating,
+    zlog,
+    zlog_score,
+    zlog_score_truth_range,
+)
 
 
 def test_reference_limits_map_to_plus_minus_1_96() -> None:
@@ -121,3 +128,43 @@ def test_rating_limits() -> None:
         "unsatisfactory",
         "unsatisfactory",
     ]
+
+
+def test_true_value_given_as_a_range_or_a_bound() -> None:
+    inside = zlog_score_truth_range(98, 99, 98.5, lower=95, upper=100)
+    below = zlog_score_truth_range(98, 99, 92, lower=95, upper=100)
+    assert inside is not None and below is not None
+    assert inside.score == 0.0
+    assert below.z == pytest.approx(math.log(92 / 98) / (math.log(100 / 95) / 3.92))
+    # "> 1000": any answer above the bound is right; below it, the distance to the bound counts.
+    above = zlog_score_truth_range(1000, None, 2400, lower=140, upper=280)
+    short = zlog_score_truth_range(1000, None, 600, lower=140, upper=280)
+    assert above is not None and short is not None
+    assert above.score == 0.0 and short.z < 0
+    # A single true value is the ordinary score; no true value at all has none.
+    assert zlog_score_truth_range(2.6, 2.6, 2.0, lower=0.6, upper=1.2) == zlog_score(
+        2.6, 2.0, lower=0.6, upper=1.2
+    )
+    assert zlog_score_truth_range(None, None, 5.0) is None
+
+
+def test_revised_scale_grows_with_the_true_values_distance_from_normal() -> None:
+    # Inside the reference interval nothing changes.
+    inside = zlog_score(1.0, 1.1, lower=0.8, upper=1.2, scale_with_truth=True)
+    assert inside == zlog_score(1.0, 1.1, lower=0.8, upper=1.2)
+    # Haemoglobin 4 g/dL answered as 6.8: both far below 12-16.
+    plain = zlog_score(4.0, 6.8, lower=12.0, upper=16.0)
+    revised = zlog_score(4.0, 6.8, lower=12.0, upper=16.0, scale_with_truth=True)
+    assert plain is not None and revised is not None
+    assert plain.score == SCORE_CAP
+    factor = abs(zlog(4.0, 12.0, 16.0)) / 3.92
+    assert revised.z == pytest.approx(plain.z / factor)
+    assert revised.rating == "satisfactory"
+    # Missing the abnormality is still a miss.
+    missed = zlog_score(4.0, 13.5, lower=12.0, upper=16.0, scale_with_truth=True)
+    assert missed is not None and missed.z > revised.z and missed.rating == "unsatisfactory"
+    # Without a reference interval there is no distance from normal to scale by.
+    assert zlog_score(9.6, 10.5, scale_with_truth=True) == zlog_score(9.6, 10.5)
+    # Linear scale (values at or below zero).
+    linear = zlog_score(-8.0, -6.0, lower=-2.0, upper=2.0, scale_with_truth=True)
+    assert linear is not None and linear.z == pytest.approx(2.0 / (8.0 / 3.92))

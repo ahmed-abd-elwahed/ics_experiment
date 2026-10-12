@@ -81,11 +81,22 @@ def zlog_score(
     *,
     lower: float | None = None,
     upper: float | None = None,
+    scale_with_truth: bool = False,
 ) -> ZlogScore | None:
     """Score an answer (a value, or a range ``answer_low``-``answer_high``) against ``truth``.
 
     ``lower`` and ``upper`` are the variable's reference limits for this patient. Returns None
     when no scale can be set: a value at or below zero without a two-sided reference interval.
+
+    ``scale_with_truth`` (the revised score): the standard deviation grows with the true
+    value's own distance from the middle of the reference interval, by the factor
+    ``max(1, |zlog(truth)| / 3.92)``. ISO 13528 lets the standard deviation for proficiency
+    assessment depend on the level of the assigned value; here an error is judged against the
+    healthy spread for a true value near the reference interval, and against the true
+    value's own deviation for one far outside it (more than 3.92 on the zlog scale), so a very
+    abnormal true value answered with a similarly abnormal one is no longer scored like a
+    miss. An answer in the middle of the reference interval then scores 3.92, never
+    satisfactory, however abnormal the true value is.
     """
     high = answer_low if answer_high is None else answer_high
     low, high = min(answer_low, high), max(answer_low, high)
@@ -102,6 +113,13 @@ def zlog_score(
         else:
             sigma = FALLBACK_RELATIVE_SD
             basis = "fallback_relative_sd"
+        if scale_with_truth and basis != "fallback_relative_sd":
+            middle = (
+                (math.log(lower) + math.log(upper)) / 2
+                if basis == "reference_interval" and lower is not None and upper is not None
+                else math.log(upper * math.sqrt(ONE_SIDED_LOWER_SHARE))  # type: ignore[operator]
+            )
+            sigma *= max(1.0, abs(math.log(truth) - middle) / sigma / INTERVAL_SDS)
         z_low, z_high = math.log(low / truth) / sigma, math.log(high / truth) / sigma
     else:
         # Values at or below zero (base excess, a change from baseline) have no logarithm.
@@ -109,6 +127,8 @@ def zlog_score(
             return None
         sigma = (upper - lower) / INTERVAL_SDS
         basis = "reference_interval"
+        if scale_with_truth:
+            sigma *= max(1.0, abs(truth - (lower + upper) / 2) / sigma / INTERVAL_SDS)
         z_low, z_high = (low - truth) / sigma, (high - truth) / sigma
 
     z = z_low if z_low == z_high else crps_uniform(z_low, z_high, 0.0)
@@ -119,3 +139,38 @@ def zlog_score(
         scale="log" if log_scale else "linear",
         sigma_basis=basis,
     )
+
+
+def zlog_score_truth_range(
+    truth_low: float | None,
+    truth_high: float | None,
+    answer_low: float,
+    answer_high: float | None = None,
+    *,
+    lower: float | None = None,
+    upper: float | None = None,
+    scale_with_truth: bool = False,
+) -> ZlogScore | None:
+    """As :func:`zlog_score`, for a true value given as a range or a bound.
+
+    ``None`` is an open side ("> 1000" is ``truth_low=1000, truth_high=None``). An answer inside
+    the true range scores 0; outside it, its distance to the nearest end counts. An answer
+    given as a range is taken at its midpoint (geometric when positive).
+    """
+    if truth_low is None and truth_high is None:
+        return None
+    if truth_low is not None and truth_low == truth_high:
+        return zlog_score(
+            truth_low, answer_low, answer_high, lower=lower, upper=upper,
+            scale_with_truth=scale_with_truth,
+        )  # fmt: skip
+    high = answer_low if answer_high is None else answer_high
+    low, high = min(answer_low, high), max(answer_low, high)
+    point = math.sqrt(low * high) if low > 0 else (low + high) / 2
+    if truth_low is not None and point < truth_low:
+        nearest = truth_low
+    elif truth_high is not None and point > truth_high:
+        nearest = truth_high
+    else:
+        nearest = point
+    return zlog_score(nearest, point, lower=lower, upper=upper, scale_with_truth=scale_with_truth)
