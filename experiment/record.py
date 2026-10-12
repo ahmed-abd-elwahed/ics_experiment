@@ -42,11 +42,28 @@ class Iteration(BaseModel):
     strategy_seconds: float
     environment_seconds: float | None = None
     strategy_llm_calls: list[LLMCallRecord] = Field(default_factory=list)
+    strategy_trace: dict[str, Any] = Field(default_factory=dict)  # the strategy's state
     # The full response, for evaluators. Retrieved documents are kept without their raw source
     # records to keep the file small.
     environment_response: EnvironmentResponse | None = None
     strategy_cost_usd: float = 0.0
     environment_cost_usd: float = 0.0
+    error: str | None = None
+
+
+class RankedDiagnosisRecord(BaseModel):
+    name: str
+    probability: float
+
+
+class DiagnosisRecord(BaseModel):
+    """The strategy's final differential for a case run, most likely first."""
+
+    differential: list[RankedDiagnosisRecord] = Field(default_factory=list)
+    seconds: float = 0.0
+    llm_calls: list[LLMCallRecord] = Field(default_factory=list)
+    trace: dict[str, Any] = Field(default_factory=dict)
+    cost_usd: float = 0.0
     error: str | None = None
 
 
@@ -63,7 +80,8 @@ class CaseRun(BaseModel):
     finished_at: str
     elapsed_s: float
     iterations: list[Iteration] = Field(default_factory=list)
-    strategy_cost_usd: float = 0.0
+    diagnosis: DiagnosisRecord | None = None  # None: the strategy gives none, or the run failed
+    strategy_cost_usd: float = 0.0  # questions and the diagnosis
     environment_cost_usd: float = 0.0
 
     @property
@@ -133,6 +151,7 @@ def _group_summary(runs: list[CaseRun]) -> dict[str, Any]:
     return {
         "case_runs": len(runs),
         "errors": sum(run.status == "error" for run in runs),
+        "diagnosed": sum(bool(run.diagnosis and run.diagnosis.differential) for run in runs),
         "iterations": len(iterations),
         "mean_iterations": round(len(iterations) / len(runs), 2) if runs else 0.0,
         "stop_reasons": dict(Counter(run.stop_reason for run in runs)),

@@ -31,8 +31,10 @@ from experiment.environment import Environment, EnvironmentFactory, MedsimEnviro
 from experiment.record import (
     CaseRun,
     CaseRunStatus,
+    DiagnosisRecord,
     ExperimentRecord,
     Iteration,
+    RankedDiagnosisRecord,
     RecordStatus,
     RecordWriter,
     StopReason,
@@ -227,6 +229,7 @@ class ExperimentRunner:
                     "description": strategy.description,
                     "params": strategy.params.model_dump(mode="json"),
                     "models": strategy.models(),
+                    "prompts": strategy.prompts(),
                 }
                 for key, strategy in plan.strategies.items()
             },
@@ -318,6 +321,7 @@ class ExperimentRunner:
         status: CaseRunStatus = "completed"
         stop_reason: StopReason
         error: str | None = None
+        diagnosis: DiagnosisRecord | None = None
         try:
             environment = plan.environment_factory(case)
             session = strategy.new_session(
@@ -340,6 +344,8 @@ class ExperimentRunner:
                 if not self._iterate(index, session, environment, iterations):
                     stop_reason = "strategy_done"
                     break
+            if status == "completed":
+                diagnosis = self._diagnose(case.case_id, key, session)
         except Exception as exc:  # one failed case run must not stop the experiment
             status, stop_reason = "error", "error"
             error = f"{type(exc).__name__}: {exc}"[:2000]
@@ -360,8 +366,38 @@ class ExperimentRunner:
             finished_at=utc_now(),
             elapsed_s=round(self._clock() - started, 2),
             iterations=iterations,
-            strategy_cost_usd=round(sum(it.strategy_cost_usd for it in iterations), 6),
+            diagnosis=diagnosis,
+            strategy_cost_usd=round(
+                sum(it.strategy_cost_usd for it in iterations)
+                + (diagnosis.cost_usd if diagnosis else 0.0),
+                6,
+            ),
             environment_cost_usd=round(sum(it.environment_cost_usd for it in iterations), 6),
+        )
+
+    def _diagnose(
+        self, case_id: str, key: str, session: StrategySession
+    ) -> DiagnosisRecord | None:
+        """The strategy's final differential. A failure is recorded on the diagnosis, and the
+        case run keeps its questions and answers."""
+        started = self._clock()
+        try:
+            diagnosis = session.final_diagnosis()
+        except Exception as exc:
+            error = f"{type(exc).__name__}: {exc}"[:2000]
+            logger.warning("diagnosis of %s / %s failed: %s", case_id, key, error)
+            return DiagnosisRecord(seconds=round(self._clock() - started, 3), error=error)
+        if diagnosis is None:
+            return None
+        return DiagnosisRecord(
+            differential=[
+                RankedDiagnosisRecord(name=d.name, probability=d.probability)
+                for d in diagnosis.differential
+            ],
+            seconds=round(self._clock() - started, 3),
+            llm_calls=diagnosis.llm_calls,
+            trace=diagnosis.trace,
+            cost_usd=round(calls_cost(diagnosis.llm_calls), 6),
         )
 
     def _iterate(
@@ -385,6 +421,7 @@ class ExperimentRunner:
             rationale=question.rationale,
             strategy_seconds=round(answered - asked, 3),
             strategy_llm_calls=question.llm_calls,
+            strategy_trace=question.trace,
             strategy_cost_usd=calls_cost(question.llm_calls),
         )
         iterations.append(iteration)

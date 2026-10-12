@@ -14,7 +14,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from collections.abc import Iterator
 from dataclasses import dataclass, field
-from typing import ClassVar, Generic, TypeVar
+from typing import Any, ClassVar, Generic, TypeVar
 
 from pydantic import BaseModel, ConfigDict
 
@@ -70,6 +70,24 @@ class Question:
     text: str
     rationale: str | None = None
     llm_calls: list[LLMCallRecord] = field(default_factory=list)
+    # The strategy's internal state behind this question (its differential, votes, phase, ...),
+    # saved with the iteration.
+    trace: dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass(frozen=True)
+class RankedDiagnosis:
+    name: str
+    probability: float
+
+
+@dataclass
+class Diagnosis:
+    """What a strategy concludes when its case run ends: a differential, most likely first."""
+
+    differential: list[RankedDiagnosis]
+    llm_calls: list[LLMCallRecord] = field(default_factory=list)
+    trace: dict[str, Any] = field(default_factory=dict)
 
 
 class StrategyParams(BaseModel):
@@ -95,6 +113,11 @@ class StrategySession(ABC):
     def remember(self, question: str, answer: str) -> None:
         self.memory.add(question, answer)
 
+    def final_diagnosis(self) -> Diagnosis | None:
+        """The diagnosis once the case run has stopped, whatever stopped it; None if the
+        strategy only gathers information."""
+        return None
+
 
 class InformationGatheringStrategy(ABC, Generic[P]):
     name: ClassVar[str]
@@ -109,6 +132,10 @@ class InformationGatheringStrategy(ABC, Generic[P]):
     def models(self) -> list[str]:
         """OpenRouter model slugs this strategy calls; checked before an experiment starts."""
         return []
+
+    def prompts(self) -> dict[str, str]:
+        """The strategy's fixed prompt texts by name, saved once in the experiment record."""
+        return {}
 
     @abstractmethod
     def new_session(self, context: CaseContext) -> StrategySession:

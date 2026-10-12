@@ -16,3 +16,6 @@ build/
 
 # Benchmark workspaces (intermediate JSONL; published results live in environment/results/)
 bench_runs/
+
+# ICD-11 codes looked up by the evaluation (every code used is saved in <record>.eval.json)
+.icd_cache/

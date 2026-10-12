@@ -31,7 +31,7 @@ ics-webapp = "webapp.server:main"
 # The environment's packages live under environment/ and install as top-level "medsim" and
 # "bench", next to the experiment's own packages.
 [tool.hatch.build.targets.wheel]
-packages = ["environment/medsim", "environment/bench", "experiment", "strategies", "webapp"]
+packages = ["environment/medsim", "environment/bench", "experiment", "strategies", "evaluation", "webapp"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -42,7 +42,7 @@ markers = ["live: hits real external APIs (requires --live and OPENROUTER_API_KE
 python_version = "3.11"
 strict = true
 mypy_path = "environment"
-files = ["environment/medsim", "environment/bench", "experiment", "strategies", "webapp", "scripts", "tests"]
+files = ["environment/medsim", "environment/bench", "experiment", "strategies", "evaluation", "webapp", "scripts", "tests"]
 
 [[tool.mypy.overrides]]
 module = ["respx", "respx.*"]

@@ -76,6 +76,6 @@ def test_unknown_strategy_and_bad_params_are_config_errors() -> None:
 
 
 def test_describe_strategies_lists_basic_with_default_params() -> None:
-    (entry,) = describe_strategies()
+    entry = describe_strategies()[0]
     assert entry["name"] == "basic"
     assert entry["params"] == {"model": None, "temperature": 0.2, "max_tokens": 4000}

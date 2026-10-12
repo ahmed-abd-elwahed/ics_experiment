@@ -143,3 +143,21 @@ in [environment/NOTES.md](environment/NOTES.md).
 | The strategy's name sits on the panel's top edge in the overview's label style, and the Query and Answer arrows run between the environment's LLM and the steps that send and receive them. | It keeps the overview's reading: the strategy queries the LLM and gets an answer. |
 | The flows were re-laid out to fit beside the environment; the separate environment box in each flow was removed. | The overview's environment now plays that part. |
 | The page has one light theme with a white background and no dark variant. | A light background was asked for, and the overview diagram's colours are drawn for a light ground. |
+
+### Implementing and evaluating the five strategies
+
+| Decision | Why |
+|---|---|
+| Every strategy ends with a differential of up to 10 diagnoses with probabilities, from one shared final LLM call. | The metrics in `DDx-Experiment/evaluation.py` are hit rate at 1 to 10, nDCG@10 and MRR, which need a ranked list; the proposal's single diagnosis would only give hit rate at 1. |
+| The strategies run on `anthropic/claude-haiku-5.5`; the environment on `deepseek/deepseek-v4.1-flash` without `:batch`. | "Cheap and fast": Haiku 5.5 is $0.10 / $0.50 per million tokens and answers without reasoning. The environment keeps the model family it was benchmarked with, but synchronously, because a batch per sequential step would take hours each. |
+| Haiku 5.5 does not accept `temperature` on OpenRouter, so strategy calls run at the provider's default sampling. | Found when checking the config; the gut strategy's five readings therefore differ only as far as the default sampling lets them. |
+| "4 iterations" is `max_iterations: 4` for all five strategies, with each strategy's own stop rule still active. | The same question budget for every strategy; a strategy that is satisfied earlier stops earlier, which is what the slides draw. |
+| Channel-based: 2 questions per channel under that limit. Sequence-based: 1 opening question, 2 refining, 1 final. | The budget is divided evenly over the channels, and by shares of 25% / 50% / 25% over the phases. |
+| Channel-based: no confidence check after the last channel. | Nothing can follow it, so the check would be a call whose result changes nothing. |
+| Calls made while deciding to stop are saved with the diagnosis; each question saves the strategy's state. | "Record everything": a stopping decision has no question to attach its calls to. |
+| The metrics are computed in `evaluation/metrics.py`, not with ranx. | With one true code per case they are three one-line formulas; ranx would add numba to the project. The definitions are the same. |
+| ICD coding follows `DDx-Experiment/utils.py`: ICD-11 MMS 2024-01, flexible search, first result, a cache keyed by the normalized name. A lookup that fails after retries is not cached as "no match". | Same codes as the earlier project; caching a network failure as "no code" would silently lower scores. |
+| The WHO ICD API credentials were copied from `DDx-Experiment/utils.py` into `.env`, which is ignored by git. | They are needed for the coding and must not be committed. |
+| The LLM-judged appropriateness and comprehensiveness scores of `evaluation.py` are not implemented. | They are off by default in `run_experiment.py`, and the request was to compare by ICD code. |
+| `basic` gives no diagnosis and is not in the run. | Only the five strategies were asked for. |
+| The other uncommitted changes in the working tree (bench files, results, part of this log) were left out of the commit. | They belong to other work in progress. |
