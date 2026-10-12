@@ -1,0 +1,537 @@
+<title>Strategy Implementation Proposal</title>
+<style>
+/* Layout: one reading column; each strategy is a section with a full-width flow diagram,
+   a detail panel for the selected step, then proposal notes beside a code sketch. */
+:root {
+  --bg: #f5f6f8; --surface: #ffffff; --surface-2: #eef0f4;
+  --text: #1a1d21; --muted: #5b6470; --border: #d8dce2; --line: #3a4150;
+  --llm: #2f45b5; --llm-soft: #e5e9f8;
+  --env: #4f8a36; --env-soft: #eef6ea;
+  --code-stroke: #6b7482;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #14171c; --surface: #1c2027; --surface-2: #262b34;
+  --text: #e6e8ec; --muted: #a2aab5; --border: #363c48; --line: #b4bbc6;
+  --llm: #96a5f5; --llm-soft: #232c52;
+  --env: #86c46a; --env-soft: #1c2a18;
+  --code-stroke: #8b94a1; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #14171c; --surface: #1c2027; --surface-2: #262b34;
+  --text: #e6e8ec; --muted: #a2aab5; --border: #363c48; --line: #b4bbc6;
+  --llm: #96a5f5; --llm-soft: #232c52;
+  --env: #86c46a; --env-soft: #1c2a18;
+  --code-stroke: #8b94a1; color-scheme: dark }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font: 15px/1.55 var(--sans); padding-inline: 16px; padding-block: 0 64px; }
+.wrap { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+header.top { padding-top: 36px; display: flex; flex-direction: column; gap: 10px; }
+.eyebrow { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+h1 { font-size: 30px; line-height: 1.2; margin: 0; text-wrap: balance; }
+h2 { font-size: 22px; line-height: 1.25; margin: 0; text-wrap: balance; }
+h3 { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0; font-weight: 600; }
+p { margin: 0; max-width: 72ch; }
+code, pre { font-family: var(--mono); font-size: 12.5px; }
+code { background: var(--surface-2); padding: 1px 5px; border-radius: 4px; }
+nav.jump { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 2; background: var(--bg); border-bottom: 1px solid var(--border); padding-block: 10px; display: flex; flex-wrap: wrap; gap: 6px 16px; }
+nav.jump a { color: var(--text); text-decoration: none; font-size: 13.5px; }
+nav.jump a:hover, nav.jump a:focus-visible { color: var(--llm); text-decoration: underline; }
+section { display: flex; flex-direction: column; gap: 16px; scroll-margin-top: 56px; }
+.slide { color: var(--muted); font-size: 13.5px; }
+.slide b { color: var(--text); font-weight: 600; }
+ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; max-width: 72ch; }
+
+figure { margin: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; }
+.scroll { overflow-x: auto; padding: 8px; }
+.scroll svg { display: block; width: 100%; min-width: 900px; height: auto; }
+figcaption { border-top: 1px solid var(--border); padding: 10px 14px; font-size: 13.5px; color: var(--muted); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--muted); align-items: center; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { width: 22px; height: 14px; border-radius: 3px; border: 1.5px solid var(--code-stroke); background: var(--surface); }
+.sw.llm { border-color: var(--llm); background: var(--llm-soft); }
+.sw.env { border-color: var(--env); background: var(--env-soft); border-style: dashed; }
+.sw.dec { width: 14px; height: 14px; transform: rotate(45deg); border-radius: 1px; margin-inline: 4px; }
+
+/* diagram */
+svg text { font-family: var(--sans); fill: var(--text); }
+.lane { fill: none; stroke: var(--border); stroke-width: 1.2; }
+.lane.envl { fill: var(--env-soft); stroke: var(--env); stroke-dasharray: 6 5; }
+.band { fill: var(--surface-2); stroke: none; }
+.lanelabel { font-size: 11px; fill: var(--muted); letter-spacing: .05em; text-transform: uppercase; }
+.bandlabel { font-size: 12px; font-weight: 600; fill: var(--muted); }
+.edge { fill: none; stroke: var(--line); stroke-width: 1.4; }
+.ah { fill: var(--line); }
+.elabel { font-size: 11.5px; fill: var(--muted); }
+.statetxt { font-family: var(--mono); font-size: 11px; fill: var(--muted); }
+.node { cursor: pointer; outline: none; }
+.node .shape { fill: var(--surface); stroke: var(--code-stroke); stroke-width: 1.4; }
+.node.llm .shape { fill: var(--llm-soft); stroke: var(--llm); }
+.node.env .shape { fill: var(--surface); stroke: var(--env); }
+.node.end .shape { fill: var(--text); stroke: var(--text); }
+.node.end text { fill: var(--bg); }
+.node .tag { font-size: 9px; letter-spacing: .08em; fill: var(--muted); }
+.node.llm .tag { fill: var(--llm); }
+.node.env .tag { fill: var(--env); }
+.node .ttl { font-size: 12.5px; font-weight: 600; }
+.node .sub { font-size: 10.5px; fill: var(--muted); }
+.node .dtx { font-size: 11.5px; font-weight: 600; }
+.node:hover .shape, .node.sel .shape { stroke-width: 2.8; }
+.node:focus-visible .shape { stroke-width: 3.6; }
+
+.detail { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+.detail .head { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; }
+.detail .head strong { font-size: 15px; }
+.chip { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; border: 1px solid var(--border); border-radius: 999px; padding: 1px 8px; color: var(--muted); }
+.chip.llm { color: var(--llm); border-color: var(--llm); }
+.chip.env { color: var(--env); border-color: var(--env); }
+.detail dl { margin: 0; display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 4px 12px; font-size: 14px; }
+.detail dt { color: var(--muted); }
+.detail dd { margin: 0; overflow-wrap: anywhere; }
+.hint { font-size: 12.5px; color: var(--muted); }
+
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+.two > div { min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+pre { margin: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; overflow-x: auto; line-height: 1.5; }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 13.5px; }
+th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+th { font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+ol.open { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; max-width: 76ch; }
+@media (max-width: 760px) { .two { grid-template-columns: minmax(0, 1fr); } h1 { font-size: 24px; } }
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">Information Collection Strategies Experiment · proposal</div>
+  <h1>How I would implement the five strategies from Meeting 63</h1>
+  <p>Slides 8 to 12 of <code>Meeting 63.pptx</code> each draw one strategy as a flowchart. Below, every box on those slides becomes either an LLM call or a rule in code, on top of the existing <code>StrategySession</code> interface. Nothing here is built yet. Select any step in a diagram to see what it reads and returns.</p>
+  <div class="legend" aria-label="Legend">
+    <span><i class="sw llm"></i>LLM call (structured JSON out)</span>
+    <span><i class="sw"></i>Code</span>
+    <span><i class="sw dec"></i>Stop rule, decided in code</span>
+    <span><i class="sw env"></i>Simulated environment (existing)</span>
+  </div>
+</header>
+
+<nav class="jump" aria-label="Sections">
+  <a href="#shared">Shared design</a>
+  <a href="#s1">1 Hypothesis-driven</a>
+  <a href="#s2">2 Knowledge-driven</a>
+  <a href="#s3">3 Gut feeling</a>
+  <a href="#s4">4 Channel-based</a>
+  <a href="#s5">5 Sequence-based</a>
+  <a href="#compare">Side by side</a>
+  <a href="#open">Open questions</a>
+</nav>
+
+<section id="shared">
+  <h2>What all five share</h2>
+  <div class="two">
+    <div>
+      <h3>Kept from the current code</h3>
+      <ul>
+        <li>Each strategy is a <code>StrategySession</code> subclass registered in <code>strategies.STRATEGIES</code>. <code>next_question()</code> returns a <code>Question</code>, or <code>None</code> to stop (the runner already records this as <code>strategy_done</code>).</li>
+        <li>Every LLM call goes through <code>call_structured</code> with a pydantic model, so replies are validated and each call lands in the record with its tokens and cost.</li>
+        <li>The strategy sees only <code>output_answer</code>. <code>max_iterations</code> stays as a ceiling for every strategy.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>New for all five</h3>
+      <ul>
+        <li><b>A diagnosis step.</b> Every slide ends in "Return diagnosis", but the runner never asks a strategy for one. I would add <code>final_diagnosis()</code> to the session, called after any stop, including a forced stop at <code>max_iterations</code>.</li>
+        <li><b>Grading.</b> A judge compares that diagnosis with the case's hidden one. The research question asks for the most accurate strategy, so this is the outcome measure.</li>
+        <li><b>The LLM estimates, code decides.</b> The model returns numbers or labels; the stop rule is a plain comparison against thresholds in the strategy's <code>params</code>. The thresholds can then be tuned and reported.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="s1">
+  <h2>1. Hypothesis-driven search</h2>
+  <p class="slide"><b>Slide 8:</b> Collect new information → Update your hypothesis → Satisficing hypothesis? → No: collect again · Yes: return diagnosis</p>
+  <div data-diagram="s1"></div>
+  <div class="two">
+    <div>
+      <h3>Proposal</h3>
+      <ul>
+        <li>The session keeps a ranked differential. After each answer one LLM call rewrites it, with a probability and the evidence for and against each diagnosis.</li>
+        <li>A second call picks the question whose answer would most change the ranking, and names the diagnoses it separates.</li>
+        <li>"Satisficing" becomes: the leader's probability is at least <code>accept</code> and it leads the runner-up by at least <code>margin</code>.</li>
+        <li>The diagnosis is the top of the differential, with no extra LLM call.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Sketch</h3>
+<pre>class HypothesisSession(StrategySession):
+    def next_question(self) -> Question | None:
+        if self.memory:  # nothing to update before the first answer
+            self.differential = self.call(UPDATE, Differential)
+            top, second = self.differential.ranked()[:2]
+            if top.p >= self.p.accept and top.p - second.p >= self.p.margin:
+                return None          # satisficing hypothesis
+        turn = self.call(ASK, SplittingQuestion)
+        return Question(turn.question, turn.rationale)
+
+    def final_diagnosis(self) -> Diagnosis:
+        return Diagnosis(self.differential.ranked()[0].name)</pre>
+    </div>
+  </div>
+</section>
+
+<section id="s2">
+  <h2>2. Knowledge-driven search</h2>
+  <p class="slide"><b>Slide 9:</b> Collect new information → Recognize patterns → Satisficing information? → No: collect again · Yes: return diagnosis</p>
+  <div data-diagram="s2"></div>
+  <div class="two">
+    <div>
+      <h3>Proposal</h3>
+      <ul>
+        <li>Questions are driven by gaps in the data, never by a candidate diagnosis. The prompts forbid naming a diagnosis until the last step, which is what separates this from strategy 1.</li>
+        <li>After each answer a "recognise patterns" call groups the findings into syndromes (for example "febrile illness with a new murmur") and lists the key findings each pattern still lacks.</li>
+        <li>"Satisficing information" becomes: one pattern has no key finding missing, and the basic history, examination and vitals are covered.</li>
+        <li>Only then does an LLM call match the completed pattern to a diagnosis.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Sketch</h3>
+<pre>class KnowledgeSession(StrategySession):
+    def next_question(self) -> Question | None:
+        if self.memory:
+            self.picture = self.call(RECOGNISE, ClinicalPicture)
+            complete = [p for p in self.picture.patterns if not p.missing]
+            if complete and self.picture.basics_covered:
+                return None          # satisficing information
+        turn = self.call(ASK_MISSING, GapQuestion)  # reads picture.missing
+        return Question(turn.question, turn.rationale)
+
+    def final_diagnosis(self) -> Diagnosis:
+        return self.call(MATCH, Diagnosis)  # first time a diagnosis is named</pre>
+    </div>
+  </div>
+</section>
+
+<section id="s3">
+  <h2>3. Gut feeling</h2>
+  <p class="slide"><b>Slide 10:</b> Collect new information → Current sense? → Alarm: collect again · Reassurance: return diagnosis</p>
+  <div data-diagram="s3"></div>
+  <div class="two">
+    <div>
+      <h3>Proposal</h3>
+      <ul>
+        <li>Everything is a fast, unreasoned call: reasoning switched off, a few output tokens, no rationale requested. No differential or summary is kept; the only state is the memory.</li>
+        <li>After each answer the model is asked for one word, <code>alarm</code> or <code>reassurance</code>, <code>votes</code> times in parallel at temperature 1. Repeating it measures how steady the sense is, since a single word carries no confidence.</li>
+        <li>The run stops when at least <code>needed</code> of the votes say reassurance. Otherwise the model asks whatever it wants to know next.</li>
+        <li>The diagnosis is a one-line first impression, again without reasoning.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Sketch</h3>
+<pre>class GutSession(StrategySession):
+    def next_question(self) -> Question | None:
+        if self.memory:
+            senses = self.call_many(SENSE, Sense, n=self.p.votes,
+                                    temperature=1.0, reasoning=None)
+            calm = sum(s.sense == "reassurance" for s in senses)
+            if calm >= self.p.needed:
+                return None          # sense of reassurance
+        turn = self.call(ASK_FAST, BareQuestion, reasoning=None)
+        return Question(turn.question)   # no rationale by design
+
+    def final_diagnosis(self) -> Diagnosis:
+        return self.call(IMPRESSION, Diagnosis, reasoning=None)</pre>
+    </div>
+  </div>
+</section>
+
+<section id="s4">
+  <h2>4. Channel-based</h2>
+  <p class="slide"><b>Slide 11:</b> Conduct patient interview → Confident in diagnosis? → Yes: return diagnosis · No: physical exam</p>
+  <div data-diagram="s4"></div>
+  <div class="two">
+    <div>
+      <h3>Proposal</h3>
+      <ul>
+        <li>A channel is a kind of source. The session works through an ordered list, <code>["interview", "exam"]</code>, and each channel has its own prompt and its own question cap.</li>
+        <li>The environment answers anything, so the restriction has to sit on the strategy's side. A short classifier call labels each question; code rejects one that falls outside the current channel and asks for another.</li>
+        <li>Confidence is checked once per channel, when the channel is used up, not after every answer. That matches the slide, where the check follows the whole interview.</li>
+        <li>The slide draws no arrow out of "Physical exam". I would check confidence again and return the diagnosis either way, because no channel is left.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Sketch</h3>
+<pre>class ChannelSession(StrategySession):
+    def next_question(self) -> Question | None:
+        while True:
+            if self.channel_done():      # cap reached, or the LLM had nothing left
+                self.view = self.call(ASSESS, DiagnosisWithConfidence)
+                last = self.channel == self.p.channels[-1]
+                if self.view.confidence >= self.p.confident or last:
+                    return None
+                self.channel = self.next_channel()
+            turn = self.call(ASK[self.channel], ChannelQuestion)
+            if turn.nothing_left:
+                self.exhausted = True; continue
+            if self.classify(turn.question) == self.channel:   # else re-ask
+                return Question(turn.question, turn.rationale)
+
+    def final_diagnosis(self) -> Diagnosis:
+        return self.view.diagnosis</pre>
+    </div>
+  </div>
+</section>
+
+<section id="s5">
+  <h2>5. Sequence-based</h2>
+  <p class="slide"><b>Slide 12:</b> Initialization of diagnosis → Refinement of diagnosis → Defining the final diagnosis</p>
+  <div data-diagram="s5"></div>
+  <div class="two">
+    <div>
+      <h3>Proposal</h3>
+      <ul>
+        <li>Three phases in a fixed order, each with its own prompt and goal. Unlike strategies 1 to 3 there is no early exit: every run passes through all three.</li>
+        <li><b>Initialization:</b> a few open questions, then one call drafts a differential of at most five diagnoses.</li>
+        <li><b>Refinement:</b> each question aims to remove a candidate; after each answer the list is pruned or reordered.</li>
+        <li><b>Final diagnosis:</b> ask for the finding that would confirm or exclude the leader, then commit.</li>
+        <li>Code moves between phases on the list's length or on each phase's share of the question budget.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Sketch</h3>
+<pre>class SequenceSession(StrategySession):
+    def next_question(self) -> Question | None:
+        n = len(self.memory)
+        if self.phase == "init":
+            if n >= self.p.opening:
+                self.candidates = self.call(DRAFT, Candidates)
+                self.phase = "refine"
+        elif self.phase == "refine":
+            self.candidates = self.call(PRUNE, Candidates)
+            if len(self.candidates) &lt;= 2 or n >= self.refine_until:
+                self.phase = "final"
+        else:
+            self.verdict = self.call(SETTLE, Verdict)
+            if self.verdict.settled:
+                return None
+        turn = self.call(ASK[self.phase], PhaseQuestion)
+        return Question(turn.question, turn.rationale)</pre>
+    </div>
+  </div>
+</section>
+
+<section id="compare">
+  <h2>Side by side</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Strategy</th><th>What picks the next question</th><th>State between questions</th><th>Stops when</th><th>LLM calls per question</th></tr></thead>
+    <tbody>
+      <tr><td>1 Hypothesis-driven</td><td>The two leading diagnoses it would separate</td><td>Ranked differential with probabilities</td><td>Leader ≥ 0.80 and ahead by ≥ 0.30</td><td class="num">2</td></tr>
+      <tr><td>2 Knowledge-driven</td><td>The findings a pattern still lacks</td><td>Findings, patterns, missing findings</td><td>A pattern has nothing missing</td><td class="num">2</td></tr>
+      <tr><td>3 Gut feeling</td><td>Whatever the model wants to know, unreasoned</td><td>None beyond the memory</td><td>4 of 5 votes say reassurance</td><td class="num">1 + 5 one-word</td></tr>
+      <tr><td>4 Channel-based</td><td>The current channel's prompt</td><td>Current channel, last confidence</td><td>Confident at the end of a channel, or no channel left</td><td class="num">2, + 1 per channel</td></tr>
+      <tr><td>5 Sequence-based</td><td>The current phase's goal</td><td>Phase, candidate list</td><td>Final phase settles the leader</td><td class="num">1 to 2</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="hint">The numbers in "Stops when" are starting values I chose, not values from the slides.</p>
+</section>
+
+<section id="open">
+  <h2>Open questions for you</h2>
+  <ol class="open">
+    <li><b>Channel-based: are tests a channel?</b> The slide has only the interview and the physical exam. With only those two, this strategy can never ask for a lab result or imaging, while the other four can. Either add a third channel, or accept that as part of what the strategy is.</li>
+    <li><b>Channel-based: what follows the physical exam?</b> The slide draws no arrow out of it. I assumed a second confidence check, then the diagnosis.</li>
+    <li><b>Sequence-based: when does a phase end?</b> The slide gives the order but no conditions. I assumed 3 opening questions, refinement until 2 candidates remain or 75% of the budget is used, then the final phase.</li>
+    <li><b>Thresholds need a pilot.</b> A probability or confidence that an LLM states is not calibrated. I would run a few cases, look at where each strategy stops, and set the thresholds before the real run.</li>
+    <li><b>Reporting.</b> The strategies stop after different numbers of questions, so accuracy should be reported next to questions asked and cost. All five should use the same model and the same <code>max_iterations</code>.</li>
+  </ol>
+</section>
+</div>
+
+<script>
+(function () {
+  var ENV = { kind: "env", tag: "ENVIRONMENT", t: "Environment.query()", s: "case study, else literature",
+    d: { does: "Existing code, unchanged. Answers the question from the case study, or synthesises an answer from the literature when the case is silent.",
+         reads: "The question text.", returns: "<code>output_answer</code>. The strategy never sees the retrieval details.", rule: "Each query is one iteration and counts toward <code>max_iterations</code>." } };
+  var END = { kind: "end", t: "Diagnosis",
+    d: { does: "What <code>final_diagnosis()</code> hands to the runner. New: the runner does not ask for a diagnosis today.",
+         reads: "The session's state at the stop.", returns: "<code>Diagnosis(name, llm_calls)</code>, saved in the case run.", rule: "Graded afterwards against the case's hidden diagnosis." } };
+
+  // The shared loop: ask -> environment -> update -> stop? -> diagnose.
+  function loop(o) {
+    return { W: 1190, H: 360, sel: "upd", state: o.state,
+      nodes: {
+        ask: Object.assign({ x: 120, y: 200 }, o.ask), env: Object.assign({ x: 310, y: 62 }, ENV),
+        upd: Object.assign({ x: 500, y: 200 }, o.upd), stop: Object.assign({ x: 710, y: 200, kind: "dec" }, o.stop),
+        dx: Object.assign({ x: 960, y: 200 }, o.dx), end: Object.assign({ x: 1116, y: 200 }, END) },
+      edges: [
+        [[120, 169], [120, 62], [215, 62]], [[405, 62], [500, 62], [500, 169]],
+        [[586, 200], [618, 200]], [[802, 200], [874, 200]],
+        [[710, 246], [710, 292], [120, 292], [120, 231]], [[1046, 200], [1066, 200]] ],
+      labels: [[128, 122, "question"], [508, 122, "answer"], [838, 191, o.yes || "yes", "middle"], [415, 285, o.no || "no", "middle"]] };
+  }
+
+  var D = {
+    s1: loop({
+      state: "state: memory + differential [{diagnosis, p, evidence_for, evidence_against}]",
+      ask: { kind: "llm", tag: "LLM", t: "Pick the question", s: "that splits the top two",
+        d: { does: "Chooses the question whose answer would most change the ranking of the differential.", reads: "Memory and the current differential. On the first turn there is no differential, so it asks for the presenting complaint.",
+             returns: "<code>{question, separates: [diagnosis, diagnosis], rationale}</code>", rule: "Slide box: “Collect new information”." } },
+      upd: { kind: "llm", tag: "LLM", t: "Update the differential", s: "probability per diagnosis",
+        d: { does: "Rewrites the differential in the light of the newest answer.", reads: "Memory and the previous differential.",
+             returns: "<code>{hypotheses: [{diagnosis, p, evidence_for, evidence_against}]}</code>, at most 5, probabilities summing to 1 (code renormalises).", rule: "Slide box: “Update your hypothesis”." } },
+      stop: { t: "leader ≥ 0.80 and", s: "ahead by ≥ 0.30?",
+        d: { does: "Decides whether the leading hypothesis is good enough to stop on.", reads: "The two highest probabilities in the differential.", returns: "Stop or continue. No LLM call.",
+             rule: "<code>top.p ≥ accept and top.p − second.p ≥ margin</code>. Both are params; 0.80 and 0.30 are my starting values. Slide diamond: “Satisficing hypothesis?”." } },
+      dx: { kind: "code", tag: "CODE", t: "Take the leader", s: "top of the differential",
+        d: { does: "Returns the highest-ranked hypothesis as the diagnosis.", reads: "The differential. After a forced stop it is updated once more with the last answer first.", returns: "The diagnosis name.", rule: "Slide box: “Return diagnosis”." } } }),
+
+    s2: loop({
+      state: "state: memory + picture {findings, patterns [{name, present, missing}], basics_covered}",
+      ask: { kind: "llm", tag: "LLM", t: "Ask what is missing", s: "no diagnosis named",
+        d: { does: "Asks for the most informative finding that is still unknown.", reads: "Memory and the picture's <code>missing</code> lists. On the first turn, a fixed intake order: complaint, history, vitals.",
+             returns: "<code>{question, fills: finding, rationale}</code>", rule: "The prompt forbids naming or implying a diagnosis. Slide box: “Collect new information”." } },
+      upd: { kind: "llm", tag: "LLM", t: "Recognise patterns", s: "findings → syndromes",
+        d: { does: "Groups what is known into clinical patterns and says what each pattern would still need.", reads: "Memory and the previous picture.",
+             returns: "<code>{findings, patterns: [{name, present, missing}], basics_covered}</code>. Patterns are syndromes, not diseases.", rule: "Slide box: “Recognize patterns”." } },
+      stop: { t: "a pattern with", s: "nothing missing?",
+        d: { does: "Decides whether enough information has been collected.", reads: "The patterns' <code>missing</code> lists and <code>basics_covered</code>.", returns: "Stop or continue. No LLM call.",
+             rule: "<code>any(not p.missing) and basics_covered</code>. Slide diamond: “Satisficing information?”." } },
+      dx: { kind: "llm", tag: "LLM", t: "Match to a diagnosis", s: "first time one is named",
+        d: { does: "Names the diagnosis that the completed pattern fits.", reads: "Memory and the final picture.", returns: "<code>{diagnosis}</code>", rule: "Slide box: “Return diagnosis”." } } }),
+
+    s3: loop({
+      yes: "reassurance", no: "alarm",
+      state: "state: memory only (no differential, no summary)",
+      ask: { kind: "llm", tag: "LLM · FAST", t: "Ask what comes to mind", s: "no reasoning, no rationale",
+        d: { does: "Asks the next question on impulse.", reads: "Memory only.", returns: "<code>{question}</code>",
+             rule: "Reasoning off and a small token limit, so the model cannot deliberate. Slide box: “Collect new information”." } },
+      upd: { kind: "llm", tag: "LLM · FAST ×5", t: "Read the sense", s: "alarm or reassurance",
+        d: { does: "Asks for the gut feeling about this patient, as one word.", reads: "Memory only.", returns: "<code>{sense: \"alarm\" | \"reassurance\"}</code>, five times in parallel at temperature 1.",
+             rule: "Five samples because one word has no confidence attached; agreement between samples stands in for it." } },
+      stop: { t: "≥ 4 of 5 say", s: "reassurance?",
+        d: { does: "Turns the five votes into the current sense.", reads: "The five votes.", returns: "Stop or continue. No LLM call.",
+             rule: "<code>count(reassurance) ≥ needed</code>; <code>votes</code> = 5 and <code>needed</code> = 4 are my starting values. Slide diamond: “Current sense?”." } },
+      dx: { kind: "llm", tag: "LLM · FAST", t: "First impression", s: "one line, no reasoning",
+        d: { does: "States the diagnosis the model would bet on.", reads: "Memory only.", returns: "<code>{diagnosis}</code>", rule: "Slide box: “Return diagnosis”." } } }),
+
+    s4: { W: 1164, H: 430, sel: "sure", state: "state: memory + channel (interview | exam) + last {diagnosis, confidence}",
+      nodes: {
+        ask: { x: 120, y: 200, kind: "llm", tag: "LLM ×2", t: "Ask within the channel", s: "then check its channel",
+          d: { does: "Asks the next question allowed in the current channel. A second, short call labels the question as history, examination or test.", reads: "Memory and the current channel's prompt.",
+               returns: "<code>{question, rationale, nothing_left}</code>, then <code>{channel}</code> from the classifier.", rule: "Code rejects a question whose label is not the current channel and asks again, twice at most. Slide boxes: “Conduct patient interview” and “Physical exam”." } },
+        env: Object.assign({ x: 310, y: 62 }, ENV),
+        more: { x: 500, y: 200, kind: "dec", t: "channel", s: "used up?",
+          d: { does: "Decides whether to keep asking in this channel.", reads: "Questions asked in this channel, and the LLM's <code>nothing_left</code> flag.", returns: "Continue in the channel, or move on to the confidence check. No LLM call.",
+               rule: "<code>asked ≥ cap[channel] or nothing_left</code>. The caps are params." } },
+        conf: { x: 710, y: 200, kind: "llm", tag: "LLM", t: "Diagnose and rate", s: "diagnosis + confidence",
+          d: { does: "Commits to a working diagnosis and says how confident it is.", reads: "Memory.", returns: "<code>{diagnosis, confidence}</code> with confidence from 0 to 1.", rule: "Runs once per channel, when the channel is used up." } },
+        sure: { x: 920, y: 200, kind: "dec", t: "confident, or", s: "no channel left?",
+          d: { does: "Decides between returning the diagnosis and opening the next channel.", reads: "The confidence and the position in the channel list.", returns: "Stop or switch. No LLM call.",
+               rule: "<code>confidence ≥ confident or channel is last</code>; 0.80 is my starting value. Slide diamond: “Confident in diagnosis?”." } },
+        sw: { x: 500, y: 356, kind: "code", tag: "CODE", t: "Switch channel", s: "interview → physical exam",
+          d: { does: "Moves to the next channel in the list and resets its question count.", reads: "<code>params.channels</code>, by default <code>[\"interview\", \"exam\"]</code>.", returns: "The new current channel.", rule: "A third channel for tests would be one more list entry; see the open questions." } },
+        end: Object.assign({ x: 1090, y: 200 }, END) },
+      edges: [
+        [[120, 169], [120, 62], [215, 62]], [[405, 62], [500, 62], [500, 154]],
+        [[500, 246], [500, 286], [140, 286], [140, 231]], [[592, 200], [624, 200]],
+        [[796, 200], [828, 200]], [[1012, 200], [1040, 200]],
+        [[920, 246], [920, 356], [586, 356]], [[414, 356], [100, 356], [100, 231]] ],
+      labels: [[128, 122, "question"], [508, 122, "answer"], [320, 279, "no", "middle"], [608, 191, "yes", "middle"], [1026, 191, "yes", "middle"], [750, 349, "no", "middle"], [250, 349, "ask in the new channel", "middle"]] },
+
+    s5: { W: 1164, H: 380, sel: "refine", envLabel: false, state: "state: memory + phase (init | refine | final) + candidates [diagnosis]",
+      bands: [[34, 458, "Phase 1 · Initialization of diagnosis"], [470, 810, "Phase 2 · Refinement of diagnosis"], [822, 1000, "Phase 3 · Final diagnosis"]],
+      nodes: {
+        env: Object.assign({}, ENV, { x: 582, y: 62, hw: 520, t: "Simulated environment · query()" }),
+        open: { x: 140, y: 230, kind: "llm", tag: "LLM", t: "Ask opening questions", s: "complaint, history, vitals",
+          d: { does: "Asks broad questions before any diagnosis is considered.", reads: "Memory.", returns: "<code>{question, rationale}</code>", rule: "Runs <code>opening</code> times (3 by default)." } },
+        draft: { x: 360, y: 230, kind: "llm", tag: "LLM", t: "Draft the differential", s: "at most 5 candidates",
+          d: { does: "Turns the opening answers into the first list of candidate diagnoses.", reads: "Memory.", returns: "<code>{candidates: [diagnosis]}</code>, ordered by likelihood.", rule: "Runs once. This is the slide's “Initialization of diagnosis”." } },
+        refine: { x: 640, y: 230, kind: "llm", tag: "LLM ×2", t: "Ask, then prune", s: "one candidate at a time",
+          d: { does: "Asks a question meant to rule a candidate out, then rewrites the list with the answer.", reads: "Memory and the candidate list.", returns: "<code>{question, targets, rationale}</code>, then <code>{candidates}</code>. The list may shrink, reorder, or gain one entry.",
+               rule: "Leaves the phase when two candidates remain or 75% of the question budget is used. Slide box: “Refinement of diagnosis”." } },
+        confirm: { x: 900, y: 230, kind: "llm", tag: "LLM ×2", t: "Test the leader", s: "confirm or exclude",
+          d: { does: "Asks for the finding that would confirm or exclude the leading candidate, then judges the result.", reads: "Memory and the remaining candidates.", returns: "<code>{question, rationale}</code>, then <code>{diagnosis, settled}</code>.",
+               rule: "Stops when <code>settled</code> or the budget is spent. If the leader is excluded, the runner-up becomes the diagnosis. Slide box: “Defining the final diagnosis”." } },
+        end: Object.assign({ x: 1090, y: 230 }, END) },
+      edges: [
+        [[128, 199], [128, 93]], [[152, 93], [152, 199]], [[628, 199], [628, 93]], [[652, 93], [652, 199]],
+        [[888, 199], [888, 93]], [[912, 93], [912, 199]],
+        [[226, 230], [274, 230]], [[446, 230], [554, 230]], [[726, 230], [814, 230]], [[986, 230], [1040, 230]] ],
+      labels: [[122, 146, "question", "end"], [158, 146, "answer"], [622, 146, "question", "end"], [658, 146, "answer"], [882, 146, "question", "end"], [918, 146, "answer"],
+        [250, 221, "after 3", "middle"], [500, 221, "list ready", "middle"], [770, 221, "2 left", "middle"], [770, 246, "or 75% used", "middle"], [1013, 221, "settled", "middle"], [1013, 246, "or spent", "middle"]] }
+  };
+
+  var CAPTION = {
+    s1: "After every answer the differential is rewritten; code stops the loop once one hypothesis clearly leads.",
+    s2: "The loop asks only for missing findings; a diagnosis is named once, after a pattern is complete.",
+    s3: "Unreasoned calls throughout; five one-word votes decide between alarm (keep asking) and reassurance (stop).",
+    s4: "Questions are confined to one channel at a time; confidence is checked when a channel is used up, and low confidence opens the next channel.",
+    s5: "Three phases in a fixed order, each with its own prompt; code moves on when the candidate list is short enough or the phase's budget is used."
+  };
+  var KIND = { llm: "LLM call", code: "Code", dec: "Stop rule in code", env: "Environment", end: "Output" };
+
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+
+  function draw(id, spec) {
+    var W = spec.W, H = spec.H, m = "ah-" + id, s = "";
+    s += '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + esc(CAPTION[id]) + '">';
+    s += '<defs><marker id="' + m + '" viewBox="0 0 8 8" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" refX="8" refY="4" orient="auto"><path class="ah" d="M0,0 L8,4 L0,8 z"/></marker></defs>';
+    s += '<rect class="lane envl" x="14" y="14" width="' + (W - 28) + '" height="96" rx="10"/>';
+    if (spec.envLabel !== false) s += '<text class="lanelabel" x="28" y="34">Simulated environment</text>';
+    s += '<rect class="lane" x="14" y="124" width="' + (W - 28) + '" height="' + (H - 138) + '" rx="10"/>';
+    s += '<text class="lanelabel" x="' + (W - 28) + '" y="144" text-anchor="end">Strategy session</text>';
+    (spec.bands || []).forEach(function (b) {
+      s += '<rect class="band" x="' + b[0] + '" y="154" width="' + (b[1] - b[0]) + '" height="168" rx="8"/>';
+      s += '<text class="bandlabel" x="' + (b[0] + 12) + '" y="308">' + esc(b[2]) + "</text>";
+    });
+    s += '<text class="statetxt" x="28" y="' + (H - 28) + '">' + esc(spec.state) + "</text>";
+    spec.edges.forEach(function (p) {
+      s += '<polyline class="edge" marker-end="url(#' + m + ')" points="' + p.map(function (q) { return q.join(","); }).join(" ") + '"/>';
+    });
+    spec.labels.forEach(function (l) {
+      s += '<text class="elabel" x="' + l[0] + '" y="' + l[1] + '" text-anchor="' + (l[3] || "start") + '">' + esc(l[2]) + "</text>";
+    });
+    Object.keys(spec.nodes).forEach(function (k) {
+      var n = spec.nodes[k], x = n.x, y = n.y;
+      s += '<g class="node ' + n.kind + '" data-k="' + k + '" tabindex="0" role="button" aria-label="' + esc(n.t + (n.s ? " " + n.s : "")) + '">';
+      if (n.kind === "dec") {
+        s += '<polygon class="shape" points="' + [x - 92, y, x, y - 46, x + 92, y, x, y + 46].join(",") + '"/>';
+        s += '<text class="dtx" x="' + x + '" y="' + (y - 2) + '" text-anchor="middle">' + esc(n.t) + "</text>";
+        s += '<text class="dtx" x="' + x + '" y="' + (y + 13) + '" text-anchor="middle">' + esc(n.s) + "</text>";
+      } else if (n.kind === "end") {
+        s += '<rect class="shape" x="' + (x - 50) + '" y="' + (y - 22) + '" width="100" height="44" rx="22"/>';
+        s += '<text class="ttl" x="' + x + '" y="' + (y + 4) + '" text-anchor="middle">' + esc(n.t) + "</text>";
+      } else {
+        var hw = n.hw || (n.kind === "env" ? 95 : 86);
+        s += '<rect class="shape" x="' + (x - hw) + '" y="' + (y - 31) + '" width="' + 2 * hw + '" height="62" rx="8"' + (n.kind === "env" ? ' stroke-dasharray="5 4"' : "") + "/>";
+        s += '<text class="tag" x="' + x + '" y="' + (y - 16) + '" text-anchor="middle">' + esc(n.tag) + "</text>";
+        s += '<text class="ttl" x="' + x + '" y="' + (y + 2) + '" text-anchor="middle">' + esc(n.t) + "</text>";
+        s += '<text class="sub" x="' + x + '" y="' + (y + 18) + '" text-anchor="middle">' + esc(n.s) + "</text>";
+      }
+      s += "</g>";
+    });
+    return s + "</svg>";
+  }
+
+  document.querySelectorAll("[data-diagram]").forEach(function (host) {
+    var id = host.getAttribute("data-diagram"), spec = D[id];
+    host.style.display = "flex"; host.style.flexDirection = "column"; host.style.gap = "12px";
+    host.innerHTML = '<figure><div class="scroll">' + draw(id, spec) + "</div><figcaption>" + esc(CAPTION[id]) + '</figcaption></figure><div class="detail" aria-live="polite"></div>';
+    var panel = host.querySelector(".detail");
+    function select(k) {
+      var n = spec.nodes[k], d = n.d;
+      host.querySelectorAll(".node").forEach(function (g) { g.classList.toggle("sel", g.getAttribute("data-k") === k); });
+      panel.innerHTML = '<div class="head"><strong>' + esc(n.t + (n.kind === "dec" ? " " + n.s : "")) + '</strong><span class="chip ' + n.kind + '">' + KIND[n.kind] + '</span><span class="hint">Select another step in the diagram to change this panel.</span></div>' +
+        "<dl><dt>Does</dt><dd>" + d.does + "</dd><dt>Reads</dt><dd>" + d.reads + "</dd><dt>Returns</dt><dd>" + d.returns + "</dd><dt>Rule</dt><dd>" + d.rule + "</dd></dl>";
+    }
+    host.querySelectorAll(".node").forEach(function (g) {
+      g.addEventListener("click", function () { select(g.getAttribute("data-k")); });
+      g.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); select(g.getAttribute("data-k")); } });
+    });
+    select(spec.sel);
+  });
+})();
+</script>

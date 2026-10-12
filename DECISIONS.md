@@ -119,3 +119,18 @@ in [environment/NOTES.md](environment/NOTES.md).
 | The test uses run 2 and the main judge. | Run 2 is the first run made with medsim's current behaviour; the main judge breaks ties in the panel. |
 | Sensitivity is the SD of the method means over their standard error, plus the number of method pairs whose 95% interval excludes zero, computed for the current metrics on the same data too. | "More sensitive" needs one number that can be compared between a new metric and the one it would complement. |
 | Cost estimates use run 2's stored token counts and today's listed prices, not the earlier rough figures. | The earlier estimates ($8 for the zlog z-score, $45–55 for faithfulness) were guesses made before the prompts were sized. |
+
+### Proposal: implementing the five strategies
+
+| Decision | Why |
+|---|---|
+| "The presentation file" was read as `Meeting 63.pptx`; the strategies are its slides 8 to 12. | It is the only deck in the repo, and those slides are titled "Information Collection Strategies". |
+| The "webapp" is a standalone page, `proposals/strategy-implementations.html`, also published as an artifact; the project's own web app was not changed. | The request was for a proposal with diagrams, and nothing is implemented yet, so a tab in the experiment app would show strategies that cannot be run. |
+| The page reuses the project web app's colours (navy for the LLM, dashed green for the environment). | So the proposal reads as part of the same project. |
+| Every strategy keeps the `StrategySession` interface and stops by returning `None`. | The runner already supports it (`strategy_done`). |
+| A `final_diagnosis()` step and a graded diagnosis are proposed for all strategies. | Every slide ends in "Return diagnosis" and the research question is about accuracy, but the runner never asks a strategy for a diagnosis. |
+| Stop rules are comparisons in code on values the LLM returns, with thresholds in `params`. | The thresholds can then be tuned and reported; an LLM asked "should I stop?" cannot be. |
+| Gut feeling uses unreasoned calls and five one-word votes. | A single word carries no confidence; agreement between samples stands in for it. |
+| Channel-based: after the physical exam, confidence is checked again and the diagnosis is returned either way. | The slide draws no arrow out of "Physical exam" and has no further channel. Flagged as an open question, with whether tests are a third channel. |
+| Sequence-based: 3 opening questions, refinement until 2 candidates or 75% of the budget, then the final phase. | The slide gives the order of the phases but no conditions. Flagged as an open question. |
+| All thresholds (0.80, 0.30, 4 of 5, 75%) are starting values of mine. | The slides give none; they need a pilot before a real run. |
