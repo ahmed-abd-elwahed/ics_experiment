@@ -63,3 +63,18 @@ in [environment/NOTES.md](environment/NOTES.md).
 |---|---|
 | `experiment-framework` was merged into `main` as a fast-forward, with no merge commit. | `main` had no commits of its own: it was the first two commits of `experiment-framework`, so moving it forward loses nothing and keeps the history linear. |
 | The `experiment-framework` branch was kept, pointing at the same commit as `main`. | Only a merge was asked for; deleting a branch is a separate choice. |
+
+### New answer metrics: the zlog z-score
+
+| Decision | Why |
+|---|---|
+| The closeness metric is the zlog z-score: Hoffmann's zlog transformation with the ISO 13528 proficiency-testing z-score, the hidden true value as the assigned value. | The metric was to be based on a published method in its naming and equations; an earlier formula of my own (a tolerance from the reference range, halving per unit) was set aside for that reason. |
+| The headline is the mean of \|z\| capped at 3; unanswered and not comparable answers score 3. | 3 is ISO 13528's unsatisfactory limit; the cap keeps a few wild answers from dominating the mean, and unanswered questions stay in the denominator as "no label" does. |
+| Range answers use the continuous ranked probability score of a uniform forecast. | It is a proper scoring rule that equals the absolute error for a single value. |
+| One-sided reference ranges take LL = 15% of UL; variables without an interval take σ = 0.15; values at or below zero use the z-score without logarithms. | zlog needs two positive limits. These three are my choices; the 15% lower limit is recalled from the literature and not confirmed (the search was rate-limited). |
+| Reference limits are to be fixed once per question (median of the judges), not taken per answer. | Every method is then scored with the same σ, so a difference between methods cannot come from differing reference ranges. |
+| The metric was tested without API calls: unit tests, then run 2's stored answers with numbers parsed from the stored judge text. | Testing "across multiple examples" was asked for, and no spending had been approved. |
+| The arithmetic is in `bench/zlog.py`; it is not wired into `judge` or `report` yet. | The second metric and the budget are still under discussion. |
+| The stored judgments are not reused for the real evaluation. | Their reference ranges and answer values are free text; a third of the ranges are not a clean two-sided interval and units are often unconverted. |
+| The check's weaknesses (narrow intervals far from normal, non-numeric true values, little separation between methods) are recorded in `environment/bench/README.md` rather than fixed. | Fixing the first would mean leaving the published formula; that is a choice for the project owner. |
+| Later commits go to `experiment-framework` and `main` is fast-forwarded with each push. | The two branches were merged on request; keeping them at the same commit keeps that true. |

@@ -227,6 +227,85 @@ the same diagnosis are not independent); differences between methods are paired 
 
 - **Cost:** OpenRouter's `usage.cost` for every call (search fees included), per method and step.
 
+## Zlog z-score (proposed third metric, 2026-10-13)
+
+A continuous score for set A, proposed because the four masked-correctness labels separate
+retrieval methods poorly. The arithmetic is in `bench/zlog.py` (tested in
+`tests/environment/test_zlog.py`); it is **not yet wired into `judge` or `report`**, and no
+judge prompt extracts its inputs yet.
+
+**Method.** Two published methods combined:
+
+- The zlog transformation (Hoffmann et al. 2017, *LaboratoriumsMedizin*) puts any result on one
+  scale from the variable's lower and upper reference limits (LL, UL) alone, assuming healthy
+  values are log-normal; the reference interval is always −1.96 to +1.96:
+  `zlog(x) = (ln x − (ln LL + ln UL)/2) · 3.92 / (ln UL − ln LL)`.
+- The proficiency-testing z-score (ISO 13528) grades a result by its distance from an assigned
+  value over a set standard deviation: `z = (x − x_assigned) / σ`, with |z| ≤ 2 satisfactory,
+  2 < |z| < 3 questionable, |z| ≥ 3 unsatisfactory.
+
+The assigned value is the hidden true value and both values are on the zlog scale:
+
+`z = zlog(answer) − zlog(truth) = (ln answer − ln truth) / σ`, `σ = (ln UL − ln LL) / 3.92`
+
+So z is the answer's error in units of the healthy population's spread. Only the ratio UL / LL
+enters: the reference limits may be in any unit, but the answer and the true value must share
+one.
+
+**Reported.** The mean of |z| capped at 3 (lower is better; an unanswered or not comparable
+answer scores 3), and the share of answers rated satisfactory.
+
+**Rules beyond the two methods** (this project's choices):
+
+| Case | Rule |
+|---|---|
+| Answer given as a range | Continuous ranked probability score of a uniform forecast on the zlog scale (Gneiting and Raftery 2007); it is \|z\| for a single value |
+| One-sided reference range ("< 5") | LL = 15% of UL (a convention recalled from the laboratory literature, not confirmed) |
+| No reference interval | σ = 0.15 (a fixed relative standard deviation, as proficiency schemes also set one) |
+| Truth or answer at or below zero | The same z without logarithms, σ = (UL − LL) / 3.92; no score without a two-sided interval |
+| Cap and unanswered questions | \|z\| capped at 3, the unsatisfactory limit |
+
+**Planned computation.** Reference limits once per question (each judge gives LL and UL for
+the patient; the median is fixed for the question, so every method is scored with the same σ),
+then one extraction per answer: the answer's value in the true value's unit. Code computes z.
+
+**Checks so far (no API calls).**
+
+- 17 unit tests: the reference limits map to ±1.96, z equals the difference of zlog values,
+  unit invariance, symmetry for the same ratio over and under, monotonicity, the cap, and each
+  rule in the table.
+- Run 2's stored set A answers, with numbers parsed crudely from the main judge's stored
+  `reference_range` and `answer_value` text (645 of 841 answers; 446 with the answer in the
+  true value's unit). In the same-unit subset the score follows the voted label:
+
+  | Voted label | Answers | Median \|z\| | Mean score | Satisfactory | Unsatisfactory |
+  |---|---|---|---|---|---|
+  | exact | 204 | 0.31 | 0.52 | 97% | 1% |
+  | same category | 192 | 1.82 | 1.91 | 54% | 33% |
+  | different category | 50 | 2.95 | 2.30 | 32% | 50% |
+
+  It adds what the labels hide: "same category" covers platelets 120 answered as 15 (z −7.4)
+  and haemoglobin 4 answered as 6.8 (z +8.1), and "different category" covers heart rate 98
+  answered as 108 (z +0.7).
+
+**Problems the check found.**
+
+1. **Units.** Answers often use another unit than the case (°C for °F, g for kg, ng/mL for
+   mg/L); unconverted, z is meaningless (−144 for a correct temperature). The extraction must
+   convert, and code should reject implausible ratios.
+2. **Narrow reference intervals far from normal.** Oxygen saturation 79% answered as 74% is
+   "exact" to the judges but z = −5.0 (reference 95–100%); temperature 39.2 °C answered as
+   40.0 °C is z = +2.9. The scale is the healthy spread, which is strict for very abnormal
+   values of tightly regulated variables. The zlog authors name the log-normal assumption as
+   its limit. Temperature is also not a ratio scale, so its z depends on the unit.
+3. **True values that are not one number:** 32 of 141 questions. Thousands separators (5),
+   blood pressure pairs (8), ranges, censored values ("> 1000"), and one "3+". They need rules
+   (score systolic and diastolic separately; a range or bound scores 0 when the answer
+   satisfies it) or exclusion.
+4. **Little separation between methods in this preview.** Mean score per configuration:
+   1.29–1.38 in the same-unit subset (71–76 answers each), 1.50–1.61 over all parsed answers.
+   One run, partial data, so not conclusive, but closeness may simply be similar across methods.
+
 ## Judge validation
 
 Controls and flips are judged by the whole panel and pass or fail on the voted label; each
