@@ -88,3 +88,13 @@ in [environment/NOTES.md](environment/NOTES.md).
 | Every answer that has documents is judged, whatever medsim's `path` says. | Some `best_guess` answers cite a literature range, so the label is not reliable. |
 | `gemini_knowledge` is left out of this metric. | Its only document is the model's own statement, so support is trivial. |
 | The metric is recorded in `environment/bench/README.md` but not implemented. | The budget for judging has not been approved. |
+
+### New answer metrics: faithfulness
+
+| Decision | Why |
+|---|---|
+| The second metric is faithfulness (RAGAs): whether the retrieved documents support the answer's value. | The zlog check showed closeness is similar across methods, while the share of answers taken from the documents differs by 30 points; a metric that reads the documents is the one likely to separate methods. |
+| It is graded as one yes/no question with a verbatim quote that code checks, and the panel's majority decides. | The first design (claim splitting, extracting the documents' numbers, a zlog compatibility test, a tally by kind of support) was judged over-complicated by the project owner, who confirmed this simple form. |
+| Every answer with documents is judged, not only those medsim labels as taken from the literature. | That label is the synthesizer's own claim, and some best-guess answers cite a literature range. |
+| `gemini_knowledge` is left out of this metric. | Its one document is the model's own statement, so support would be trivial. |
+| The medsim path label was used as a free preview of the metric's sensitivity. | It needs no API calls and shows whether the documents are where methods differ. |
