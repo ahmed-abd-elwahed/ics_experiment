@@ -78,3 +78,13 @@ in [environment/NOTES.md](environment/NOTES.md).
 | The stored judgments are not reused for the real evaluation. | Their reference ranges and answer values are free text; a third of the ranges are not a clean two-sided interval and units are often unconverted. |
 | The check's weaknesses (narrow intervals far from normal, non-numeric true values, little separation between methods) are recorded in `environment/bench/README.md` rather than fixed. | Fixing the first would mean leaving the published formula; that is a choice for the project owner. |
 | Later commits go to `experiment-framework` and `main` is fast-forwarded with each push. | The two branches were merged on request; keeping them at the same commit keeps that true. |
+
+### New answer metrics: faithfulness
+
+| Decision | Why |
+|---|---|
+| The second metric is faithfulness: the share of answers whose value the retrieved documents support (after RAGAs). | The current metrics and the zlog z-score compare the answer with the case only; the stored runs suggest the methods differ in how often the documents back the answer (30% to 61% by medsim's own label), not in how close the answer is. |
+| One yes/no question per answer with a verbatim quote that code checks; no claim splitting, no numeric compatibility test, no tally by kind of support. | A first design with those parts was judged over-complicated by the project owner, who confirmed this version. |
+| Every answer that has documents is judged, whatever medsim's `path` says. | Some `best_guess` answers cite a literature range, so the label is not reliable. |
+| `gemini_knowledge` is left out of this metric. | Its only document is the model's own statement, so support is trivial. |
+| The metric is recorded in `environment/bench/README.md` but not implemented. | The budget for judging has not been approved. |

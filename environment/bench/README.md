@@ -306,6 +306,38 @@ then one extraction per answer: the answer's value in the true value's unit. Cod
    1.29–1.38 in the same-unit subset (71–76 answers each), 1.50–1.61 over all parsed answers.
    One run, partial data, so not conclusive, but closeness may simply be similar across methods.
 
+## Faithfulness (confirmed fourth metric, 2026-10-13)
+
+Whether the retrieved documents support the answer, for sets A and B. It follows the
+faithfulness metric of retrieval-augmented generation evaluation (RAGAs, Es et al. 2023): the
+share of an answer's claims that the retrieved context supports. A medsim answer is one claim
+(one value), so each answer is supported or not. **Not yet implemented.**
+
+1. The judge sees the question, the diagnosis, the answer, and the documents medsim retrieved
+   for the question (not the true value, and not the configuration).
+2. It answers one thing: do the documents support the answer's value, yes or no? If yes, it
+   quotes the supporting passage verbatim. Supported means a document gives a value or range
+   for the same variable, in a comparable patient, that agrees with the answer.
+3. Code checks that the quote is verbatim in the documents; if it is not, the answer counts as
+   not supported.
+4. The metric is the share of set A and set B questions whose answer is supported; with the
+   panel, the majority decides.
+
+- A question without an answer, or an answer without documents, scores 0 without a judge call.
+  Every answer that has documents is judged, whatever medsim's own `path` says (some
+  `best_guess` answers cite a literature range).
+- `gemini_knowledge` is left out: its one document is the model's own statement.
+- Sanity check: given the documents of another question, the judge should say not supported.
+- It rewards grounding, not truth, and a method that returns more text has more chances of
+  containing an agreeing value (about 9,400 characters per question for `current`, 2,800 for
+  `openrouter_exa_instant`).
+
+A free preview from medsim's own labels (runs 2–10, sets A and B, mean ± SD of the share of
+answers on the path `literature`): `openrouter_perplexity` 61.4 ± 1.5%, `improved_1to4`
+47.0 ± 3.1%, `openrouter_parallel_basic` 32.0 ± 2.4%, `current` 31.3 ± 1.9%,
+`openrouter_exa_instant` 29.8 ± 1.9%. This is the synthesizer's own claim, which the metric is
+meant to verify.
+
 ## Judge validation
 
 Controls and flips are judged by the whole panel and pass or fail on the voted label; each
