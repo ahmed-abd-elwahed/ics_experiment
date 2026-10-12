@@ -54,3 +54,12 @@ in [environment/NOTES.md](environment/NOTES.md).
 | Changed files were scanned for API keys before pushing. | `check_credits.command` handles an OpenRouter key; it reads it from `.env`, which stays ignored. |
 | Tests were not run before those commits. | The request was to commit and push existing work as it was. |
 | This log is `DECISIONS.md` at the repo root, and it starts with this session's decisions. | The only existing notes file, `environment/NOTES.md`, is specific to `medsim`. |
+
+## 2026-10-13
+
+### Merging the branches
+
+| Decision | Why |
+|---|---|
+| `experiment-framework` was merged into `main` as a fast-forward, with no merge commit. | `main` had no commits of its own: it was the first two commits of `experiment-framework`, so moving it forward loses nothing and keeps the history linear. |
+| The `experiment-framework` branch was kept, pointing at the same commit as `main`. | Only a merge was asked for; deleting a branch is a separate choice. |
