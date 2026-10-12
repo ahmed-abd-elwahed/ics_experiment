@@ -306,44 +306,45 @@ then one extraction per answer: the answer's value in the true value's unit. Cod
    1.29–1.38 in the same-unit subset (71–76 answers each), 1.50–1.61 over all parsed answers.
    One run, partial data, so not conclusive, but closeness may simply be similar across methods.
 
-## Faithfulness (confirmed fourth metric, 2026-10-13)
+## Faithfulness (proposed fourth metric, confirmed 2026-10-13)
 
-Whether the retrieved documents support the answer's value. Proposed because neither existing
-metric looks at the documents, so an answer the synthesizer filled in from its own knowledge
-scores like one taken from the literature. Confirmed by the project owner in its simple form;
-**not implemented yet**.
-
-**Method.** The faithfulness metric of retrieval-augmented generation evaluation (RAGAs, Es
-et al. 2023): claims in the answer supported by the retrieved context ÷ claims in the answer.
-An answer here is one claim (a value), so each answer is supported or not.
+Whether the retrieved documents support the answer's value, for sets A and B. It follows the
+faithfulness metric of retrieval-augmented generation evaluation (Es et al. 2023, RAGAs):
+claims in the answer supported by the retrieved context ÷ claims in the answer. An answer here
+is one claim (one value), so each answer is supported or not. Not built yet.
 
 1. The judge sees the question, the diagnosis, the answer, and the documents the environment
-   retrieved for the question (not the true value, not the configuration).
+   retrieved for it (as the synthesizer saw them); not the true value or the configuration.
 2. It answers one thing: do the documents support the answer's value, yes or no? If yes, it
    quotes the supporting passage verbatim. "Supported" means a document gives a value or range
    for the same variable, in a comparable patient, that agrees with the answer.
-3. Code checks that the quote appears in the documents; if not, the answer is not supported.
-4. The score is the share of set A and B questions whose answer is supported; with the panel,
-   the majority decides.
+3. Code checks that the quote is in the documents; if not, the answer is not supported.
+4. The score is the share of set A and B answers that are supported; the panel's majority
+   decides. Unanswered questions and answers without documents score 0 without a judge call.
 
-**Rules.** An unanswered question, or an answer with no documents, scores 0 without a judge
-call. Every answer with documents is judged, whatever path medsim reports (some `best_guess`
-answers cite a literature range). `gemini_knowledge` is left out: its one document is the
-model's own statement.
+Every answer with documents is judged, whatever path medsim reports: some `best_guess` answers
+cite a literature range. `gemini_knowledge` is left out (its one document is the model's own
+statement). One sanity check: given another question's documents, the judge should say "not
+supported".
 
-**Check.** Given the documents of a different question, the judge should say "not supported".
+Why it should separate methods: the share of set A and B answers medsim itself reports as
+answered from the documents (path `literature`), mean ± SD over runs 2–10, is 61.4 ± 1.5%
+(Perplexity), 47.0 ± 3.1% (changes 1–4), 32.0 ± 2.4% (Parallel basic), 31.3 ± 1.9% (current),
+29.8 ± 1.9% (Exa instant). That is the synthesizer's own claim; this metric has it verified.
 
-**Limits.** It rewards grounding, not truth: an answer can be faithful to a document that is
-wrong for this patient. Configurations that return more text have more chances of containing an
-agreeing number.
+Limits: it rewards grounding, not truth, and a method that returns more text has more chances
+of containing an agreeing number.
 
-**Preview (no API calls).** The share of set A and B answers medsim itself reports as taken
-from the documents (path `literature`), mean ± SD over runs 2–10: Perplexity 61.4 ± 1.5%,
-changes 1–4 47.0 ± 3.1%, Parallel basic 32.0 ± 2.4%, without changes 1–4 31.3 ± 1.9%, Exa
-instant 29.8 ± 1.9%. This is the synthesizer's own claim, which faithfulness is meant to verify.
+### Set B answers barely differ between methods (2026-10-13, no API calls)
 
-**Estimated cost.** About $3–4 for one run with the main judge; roughly $45–55 for ten runs
-with the panel (the documents are in every prompt).
+For each set B question, the answers' numbers were compared across the six repeated
+configurations and runs 2–10 (265 questions; numbers parsed from the answer text, so platelet
+count and glucose, where units vary, are unreliable). The methods' mean answers to the same
+question differ by a median of 4.6% of the value; one method's answers vary by 5.5% from run
+to run. The differences are systematic (on 78% of questions the methods' means differ by more
+than run noise explains) but small, and the judges found a contradiction with the case in 5 of
+4,773 set B judgments of run 2. A metric that checks set B answers against the case therefore
+has little to detect.
 
 ## Judge validation
 
