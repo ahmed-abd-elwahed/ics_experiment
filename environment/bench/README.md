@@ -346,6 +346,52 @@ than run noise explains) but small, and the judges found a contradiction with th
 4,773 set B judgments of run 2. A metric that checks set B answers against the case therefore
 has little to detect.
 
+## Case alignment (proposed fifth metric, 2026-10-13)
+
+Whether the rest of the case bears on a set B answer, and which way. It is the three-way
+labelling of natural language inference (entailment / neutral / contradiction), the standard
+check of a generated text against its source (Kryscinski et al. 2019; Sciré et al. 2024), with
+the project's own names. It splits today's "consistent" in two. Not built yet.
+
+1. The judge sees the full case, the diagnosis, the question, and the answer.
+2. It gives one label: **aligned** (the case implies the answer, e.g. "metabolic panel
+   unremarkable" and a sodium of 140), **neutral** (the case says nothing that bears on it), or
+   **contradicted** (the case conflicts with it, e.g. "hemodynamically stable" and a heart rate
+   of 108).
+3. For aligned or contradicted it quotes the case passage verbatim; code checks the quote is in
+   the case, and a missing quote makes the label neutral.
+4. Reported: the share aligned and the share contradicted, of all set B questions; the panel's
+   majority decides.
+
+Expectation, to be tested: whether a case holds a clue about a variable depends on the
+question, not on the retrieval method, so the aligned share may be about the same for every
+method (see the comparison of set B answers above).
+
+## Planned evaluation of the three proposed metrics (2026-10-13)
+
+1. **Test:** run 2, the main judge only, all three metrics, the six repeated configurations
+   (five for faithfulness). Sensitivity of each new metric and of the two current ones on the
+   same run and judge: the SD of the method means over their mean bootstrap standard error, and
+   the number of method pairs whose paired 95% interval excludes zero.
+2. **One revision** of a metric that is not clearly more sensitive than its current
+   counterpart, tested the same way; the more sensitive version is kept.
+3. **Full run:** runs 1–10, three judges. Sensitivity from the run-to-run SD.
+4. A PDF report.
+
+Estimates (prices of 2026-10-13; token counts from run 2's stored judge calls and documents):
+
+| | Judge calls | Standard API | Batch API where offered | Time, standard | Time, batch |
+|---|---|---|---|---|---|
+| Test | about 4,600 | $2.8 | $1.4 | about 15 min | not measured (24 h window) |
+| Full run: zlog z-score | 25,800 | $4 | $3 | | |
+| Full run: faithfulness | 60,700 | $33 | $21 | | |
+| Full run: case alignment | 47,700 | $13 | $8 | | |
+| Full run, total | about 134,000 | $50 | $32 | 6–9 h | 6–9 h, at worst 24 h |
+
+`google/gemini-3.5-flash-lite` and `openai/gpt-6-luna` have `:batch` endpoints at half price;
+`qwen/qwen3.8-flash` has none, and its rate limits set the pace either way (the last judging,
+80,355 calls, took about 5 hours).
+
 ## Judge validation
 
 Controls and flips are judged by the whole panel and pass or fail on the voted label; each

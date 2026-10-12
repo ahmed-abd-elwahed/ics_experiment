@@ -108,3 +108,14 @@ in [environment/NOTES.md](environment/NOTES.md).
 | Every answer with documents is judged, whatever path medsim reports. | Some `best_guess` answers cite a literature range, so the path label is not reliable. |
 | `gemini_knowledge` is left out of this metric. | Its one "document" is the model's own statement, so support would be trivial. |
 | Before proposing a set B case-alignment metric, the stored set B answers were compared between methods and between runs. | It is free, and it shows whether such a metric has anything to detect. |
+
+### New answer metrics: case alignment and the evaluation plan
+
+| Decision | Why |
+|---|---|
+| A third metric, case alignment, is added to the test: three labels for a set B answer against the rest of the case. | Requested, although the stored answers suggest it will not separate methods; the test settles it for about $1. |
+| It is named "case alignment" and its labels are aligned, neutral, and contradicted. | The project owner asked for "aligned" in place of natural language inference's "entailed", in the name and the label. |
+| A label without a quote that is verbatim in the case becomes neutral. | The same guard as for faithfulness: a claimed link to the case must be checkable. |
+| The test uses run 2 and the main judge. | Run 2 is the first run made with medsim's current behaviour; the main judge breaks ties in the panel. |
+| Sensitivity is the SD of the method means over their standard error, plus the number of method pairs whose 95% interval excludes zero, computed for the current metrics on the same data too. | "More sensitive" needs one number that can be compared between a new metric and the one it would complement. |
+| Cost estimates use run 2's stored token counts and today's listed prices, not the earlier rough figures. | The earlier estimates ($8 for the zlog z-score, $45–55 for faithfulness) were guesses made before the prompts were sized. |
