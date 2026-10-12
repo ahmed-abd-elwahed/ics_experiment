@@ -1,0 +1,23 @@
+2026-10-13 03:52:14,022 INFO bench: bench --out environment/results/repeats/run_02/set_c --workers 48 judge
+2026-10-13 03:52:17,980 INFO bench.judge: judge masked_correctness [z-ai/glm-5.3-flash]: 25/272
+2026-10-13 03:52:17,994 INFO bench.judge: judge factual_consistency [z-ai/glm-5.3-flash]: 25/272
+2026-10-13 03:52:19,677 INFO bench.judge: judge factual_consistency [z-ai/glm-5.3-flash]: 50/272
+2026-10-13 03:52:20,455 INFO bench.judge: judge masked_correctness [z-ai/glm-5.3-flash]: 50/272
+2026-10-13 03:52:22,097 INFO bench.judge: judge factual_consistency [z-ai/glm-5.3-flash]: 75/272
+2026-10-13 03:52:22,845 INFO bench.judge: judge masked_correctness [z-ai/glm-5.3-flash]: 75/272
+2026-10-13 03:52:24,423 INFO bench.judge: judge factual_consistency [z-ai/glm-5.3-flash]: 100/272
+2026-10-13 03:52:25,404 INFO bench.judge: judge masked_correctness [z-ai/glm-5.3-flash]: 100/272
+2026-10-13 03:52:26,973 INFO bench.judge: judge factual_consistency [z-ai/glm-5.3-flash]: 125/272
+2026-10-13 03:52:27,661 INFO bench.judge: judge masked_correctness [z-ai/glm-5.3-flash]: 125/272
+2026-10-13 03:52:29,633 INFO bench.judge: judge factual_consistency [z-ai/glm-5.3-flash]: 150/272
+2026-10-13 03:52:30,121 INFO bench.judge: judge masked_correctness [z-ai/glm-5.3-flash]: 150/272
+2026-10-13 03:52:31,818 INFO bench.judge: judge factual_consistency [z-ai/glm-5.3-flash]: 175/272
+2026-10-13 03:52:32,146 INFO bench.judge: judge masked_correctness [z-ai/glm-5.3-flash]: 175/272
+2026-10-13 03:52:34,216 INFO bench.judge: judge factual_consistency [z-ai/glm-5.3-flash]: 200/272
+2026-10-13 03:52:34,747 INFO bench.judge: judge masked_correctness [z-ai/glm-5.3-flash]: 200/272
+2026-10-13 03:52:36,644 INFO bench.judge: judge factual_consistency [z-ai/glm-5.3-flash]: 225/272
+2026-10-13 03:52:37,096 INFO bench.judge: judge masked_correctness [z-ai/glm-5.3-flash]: 225/272
+2026-10-13 03:52:39,084 INFO bench.judge: judge factual_consistency [z-ai/glm-5.3-flash]: 250/272
+2026-10-13 03:52:40,008 INFO bench.judge: judge masked_correctness [z-ai/glm-5.3-flash]: 250/272
+2026-10-13 03:52:50,922 INFO bench.judge: judge masked_correctness [z-ai/glm-5.3-flash]: 272/272
+2026-10-13 03:53:05,925 INFO bench.judge: judge factual_consistency [z-ai/glm-5.3-flash]: 272/272

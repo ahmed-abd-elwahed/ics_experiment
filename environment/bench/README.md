@@ -227,170 +227,115 @@ the same diagnosis are not independent); differences between methods are paired 
 
 - **Cost:** OpenRouter's `usage.cost` for every call (search fees included), per method and step.
 
-## Zlog z-score (proposed third metric, 2026-10-13)
+## Three more answer metrics (2026-10-13)
 
-A continuous score for set A, proposed because the four masked-correctness labels separate
-retrieval methods poorly. The arithmetic is in `bench/zlog.py` (tested in
-`tests/environment/test_zlog.py`); it is **not yet wired into `judge` or `report`**, and no
-judge prompt extracts its inputs yet.
+Added because the two metrics above separate retrieval methods poorly: their labels are
+coarse, factual consistency sits at a ceiling of about 97%, and neither looks at the retrieved
+documents. Code: `bench/answer_metrics.py` (judging), `bench/zlog.py` (arithmetic),
+`results/scripts/make_answer_metrics.py` (scoring). Results and the report:
+[../results/answer_metrics/](../results/answer_metrics/).
 
-**Method.** Two published methods combined:
+| | Zlog z-score | Faithfulness | Case alignment |
+|---|---|---|---|
+| Question | How far is the answer's value from the true value? | Do the retrieved documents support the answer's value? | Does the rest of the case bear on the answer, and which way? |
+| Sets | A and C (numeric true values) | A and B | B and C |
+| Based on | zlog transformation (Hoffmann et al. 2017) and the proficiency-testing z-score (ISO 13528) | Faithfulness of retrieval-augmented generation (Es et al. 2023, RAGAs) | The three labels of natural language inference (Kryscinski et al. 2019; Sciré et al. 2024) |
+| Judge | Reads numbers: per question the reference limits and the true value, per answer the answer's value in the true value's unit | Yes or no, with a verbatim quote from the documents | The level the case leads one to expect, the level the answer states, and a verbatim quote from the case |
+| Code | Computes z; the median of the judges' scores | Looks for the quote in the documents (`bench.text.quote_found`); not found = not supported | Looks for the quote in the case; aligned if the levels match, contradicted if not, neutral without an expectation |
+| Reported | Mean \|z\| capped at 3; share satisfactory (\|z\| ≤ 2) | Share supported, of all questions | Share aligned, share contradicted, of all questions |
 
-- The zlog transformation (Hoffmann et al. 2017, *LaboratoriumsMedizin*) puts any result on one
-  scale from the variable's lower and upper reference limits (LL, UL) alone, assuming healthy
-  values are log-normal; the reference interval is always −1.96 to +1.96:
-  `zlog(x) = (ln x − (ln LL + ln UL)/2) · 3.92 / (ln UL − ln LL)`.
-- The proficiency-testing z-score (ISO 13528) grades a result by its distance from an assigned
-  value over a set standard deviation: `z = (x − x_assigned) / σ`, with |z| ≤ 2 satisfactory,
-  2 < |z| < 3 questionable, |z| ≥ 3 unsatisfactory.
+A question medsim did not answer counts as 0 (as 3 for the zlog z-score). Faithfulness has no
+value for `gemini_knowledge` and `case_information`, which retrieve no documents.
 
-The assigned value is the hidden true value and both values are on the zlog scale:
+### Zlog z-score
+
+`zlog(x) = (ln x − (ln LL + ln UL)/2) · 3.92 / (ln UL − ln LL)` puts any result on one scale from
+the variable's reference limits, so that the reference interval is −1.96 to +1.96. With the true
+value as the assigned value of a proficiency test:
 
 `z = zlog(answer) − zlog(truth) = (ln answer − ln truth) / σ`, `σ = (ln UL − ln LL) / 3.92`
 
-So z is the answer's error in units of the healthy population's spread. Only the ratio UL / LL
-enters: the reference limits may be in any unit, but the answer and the true value must share
-one.
+Only the ratio UL / LL enters, so the limits' unit does not matter; the answer and the true
+value must share one. ISO 13528 rates |z| ≤ 2 satisfactory and |z| ≥ 3 unsatisfactory.
 
-**Reported.** The mean of |z| capped at 3 (lower is better; an unanswered or not comparable
-answer scores 3), and the share of answers rated satisfactory.
+**Revised scale (the version in use):** σ is multiplied by `max(1, |zlog(truth)| / 3.92)`. In the
+first version 22% of scores sat at the cap, many for a very abnormal true value answered with a
+similarly abnormal one (haemoglobin 4 g/dL answered as 6.8 scored like a miss). The revision
+judges the error against the true value's own deviation when that is far outside the reference
+interval; an answer in the middle of the interval still scores 3.92, never satisfactory.
+`zlog_score(scale_with_truth=False)` gives the first version.
 
-**Rules beyond the two methods** (this project's choices):
+Rules beyond the two methods (this project's choices):
 
 | Case | Rule |
 |---|---|
-| Answer given as a range | Continuous ranked probability score of a uniform forecast on the zlog scale (Gneiting and Raftery 2007); it is \|z\| for a single value |
-| One-sided reference range ("< 5") | LL = 15% of UL (a convention recalled from the laboratory literature, not confirmed) |
-| No reference interval | σ = 0.15 (a fixed relative standard deviation, as proficiency schemes also set one) |
-| Truth or answer at or below zero | The same z without logarithms, σ = (UL − LL) / 3.92; no score without a two-sided interval |
-| Cap and unanswered questions | \|z\| capped at 3, the unsatisfactory limit |
+| Reference limits | Asked once per question from every chat judge and combined by the median (a limit at least half of them leave empty stays empty), so every method and run is scored with the same σ; stored in `results/answer_metrics/zlog_reference.jsonl` |
+| Answer given as a range | Continuous ranked probability score of a uniform forecast (Gneiting and Raftery 2007); \|z\| for a single value |
+| True value given as a range or bound ("60–70", "> 1000") | 0 for an answer inside it, otherwise the distance to its nearest end |
+| One-sided reference range ("< 5") | LL = 15% of UL (recalled from the laboratory literature, not confirmed) |
+| No reference interval | σ = 0.15 |
+| Truth or answer at or below zero | The same z without logarithms |
+| Blood pressure | The systolic value |
+| Non-numeric true value ("3+") | Left out (1 of 141 set A questions; 18 of 272 set C questions) |
+| Answer without a comparable number, or no answer | 3 |
 
-**Planned computation.** Reference limits once per question (each judge gives LL and UL for
-the patient; the median is fixed for the question, so every method is scored with the same σ),
-then one extraction per answer: the answer's value in the true value's unit. Code computes z.
+### Case alignment: two versions
 
-**Checks so far (no API calls).**
+The first version (rubric `m1`) asked for one verdict, aligned / neutral / contradicted, and
+counted only explicit statements: 96% of set B answers came back neutral and none contradicted.
+The version in use (`m2`) lets the clinical picture set an expectation: the judge gives the
+expected level (low / normal / high, or present / absent for a finding; "none" when the case
+gives no reason to expect one) and the level the answer states; code compares them. Both
+versions' judgments are in `judge/case_alignment.jsonl`, told apart by `rubric`.
 
-- 17 unit tests: the reference limits map to ±1.96, z equals the difference of zlog values,
-  unit invariance, symmetry for the same ratio over and under, monotonicity, the cap, and each
-  rule in the table.
-- Run 2's stored set A answers, with numbers parsed crudely from the main judge's stored
-  `reference_range` and `answer_value` text (645 of 841 answers; 446 with the answer in the
-  true value's unit). In the same-unit subset the score follows the voted label:
+### The Jev decision model
 
-  | Voted label | Answers | Median \|z\| | Mean score | Satisfactory | Unsatisfactory |
-  |---|---|---|---|---|---|
-  | exact | 204 | 0.31 | 0.52 | 97% | 1% |
-  | same category | 192 | 1.82 | 1.91 | 54% | 33% |
-  | different category | 50 | 2.95 | 2.30 | 32% | 50% |
+`typesafe/jev-1.13` returns a typed choice with probabilities through OpenRouter's decisions
+endpoint (`POST /api/alpha/decisions`, one item per request), and no text. `JevClient` runs it
+as a fourth judge of masked correctness, factual consistency, faithfulness, and case alignment.
+It cannot read out a number (no zlog z-score) or quote a passage (no quote check). Its verdicts
+on the two existing metrics are stored in the panel's judgment files, its probabilities in
+`rationale`. It is not in the default panel; `make_answer_metrics.py` scores every table with
+the three judges and again with Jev added.
 
-  It adds what the labels hide: "same category" covers platelets 120 answered as 15 (z −7.4)
-  and haemoglobin 4 answered as 6.8 (z +8.1), and "different category" covers heart rate 98
-  answered as 108 (z +0.7).
+### Running it
 
-**Problems the check found.**
+```bash
+python -m bench.answer_metrics --metrics reference                      # reference limits, once
+python -m bench.answer_metrics --runs 1-10 --metrics zlog_value,faithfulness,case_alignment
+python -m bench.answer_metrics --runs 1-10 --judges typesafe/jev-1.13 \
+  --metrics masked_correctness,factual_consistency,faithfulness,case_alignment
+PYTHONPATH=environment python environment/results/scripts/make_answer_metrics.py full
+PYTHONPATH=environment python environment/results/scripts/make_answer_metrics_report.py
+```
 
-1. **Units.** Answers often use another unit than the case (°C for °F, g for kg, ng/mL for
-   mg/L); unconverted, z is meaningless (−144 for a correct temperature). The extraction must
-   convert, and code should reject implausible ratios.
-2. **Narrow reference intervals far from normal.** Oxygen saturation 79% answered as 74% is
-   "exact" to the judges but z = −5.0 (reference 95–100%); temperature 39.2 °C answered as
-   40.0 °C is z = +2.9. The scale is the healthy spread, which is strict for very abnormal
-   values of tightly regulated variables. The zlog authors name the log-normal assumption as
-   its limit. Temperature is also not a ratio scale, so its z depends on the unit.
-3. **True values that are not one number:** 32 of 141 questions. Thousands separators (5),
-   blood pressure pairs (8), ranges, censored values ("> 1000"), and one "3+". They need rules
-   (score systolic and diastolic separately; a range or bound scores 0 when the answer
-   satisfies it) or exclusion.
-4. **Little separation between methods in this preview.** Mean score per configuration:
-   1.29–1.38 in the same-unit subset (71–76 answers each), 1.50–1.61 over all parsed answers.
-   One run, partial data, so not conclusive, but closeness may simply be similar across methods.
+Each judge works in its own pool (`--workers` per judge); jobs already done are skipped; the
+step stops starting calls on HTTP 402. `make_answer_metrics.py test --run 2 --panel MODEL` gives
+one run's sensitivity (the spread of the configurations' means over their bootstrap standard
+error, and the pairs whose paired 95% interval excludes zero).
 
-## Faithfulness (proposed fourth metric, confirmed 2026-10-13)
+### Result (2026-10-13)
 
-Whether the retrieved documents support the answer's value, for sets A and B. It follows the
-faithfulness metric of retrieval-augmented generation evaluation (Es et al. 2023, RAGAs):
-claims in the answer supported by the retrieved context ÷ claims in the answer. An answer here
-is one claim (one value), so each answer is supported or not. Not built yet.
+Sensitivity over the judged runs, three judges (spread of the six repeated configurations'
+means ÷ pooled run-to-run SD; pairs separated at 2.3 standard errors):
 
-1. The judge sees the question, the diagnosis, the answer, and the documents the environment
-   retrieved for it (as the synthesizer saw them); not the true value or the configuration.
-2. It answers one thing: do the documents support the answer's value, yes or no? If yes, it
-   quotes the supporting passage verbatim. "Supported" means a document gives a value or range
-   for the same variable, in a comparable patient, that agrees with the answer.
-3. Code checks that the quote is in the documents; if not, the answer is not supported.
-4. The score is the share of set A and B answers that are supported; the panel's majority
-   decides. Unanswered questions and answers without documents score 0 without a judge call.
+| Metric | Runs | Signal ÷ noise | Pairs separated |
+|---|---|---|---|
+| Masked correctness: same category | 10 | 0.58 | 3 of 15 |
+| Factual consistency: consistent | 10 | 0.22 | 0 of 15 |
+| Zlog z-score: mean \|z\| | 10 | 0.52 | 2 of 15 |
+| Faithfulness: supported | 9 | 8.13 | 10 of 10 |
+| Case alignment: aligned | 9 | 1.05 | 8 of 15 |
+| Case alignment: contradicted | 9 | 1.39 | 9 of 15 |
 
-Every answer with documents is judged, whatever path medsim reports: some `best_guess` answers
-cite a literature range. `gemini_knowledge` is left out (its one document is the model's own
-statement). One sanity check: given another question's documents, the judge should say "not
-supported".
+Faithfulness is the metric that separates retrieval methods (21–59% supported); the zlog
+z-score shows the answers are equally close whatever the method. Faithfulness and case
+alignment by the chat judges cover runs 1–9: the API key reached its total limit during run 10.
+The scores are in `results/answer_metrics/answer_metrics.md`; the full account is
+`answer_metrics_report.pdf`.
 
-Why it should separate methods: the share of set A and B answers medsim itself reports as
-answered from the documents (path `literature`), mean ± SD over runs 2–10, is 61.4 ± 1.5%
-(Perplexity), 47.0 ± 3.1% (changes 1–4), 32.0 ± 2.4% (Parallel basic), 31.3 ± 1.9% (current),
-29.8 ± 1.9% (Exa instant). That is the synthesizer's own claim; this metric has it verified.
-
-Limits: it rewards grounding, not truth, and a method that returns more text has more chances
-of containing an agreeing number.
-
-### Set B answers barely differ between methods (2026-10-13, no API calls)
-
-For each set B question, the answers' numbers were compared across the six repeated
-configurations and runs 2–10 (265 questions; numbers parsed from the answer text, so platelet
-count and glucose, where units vary, are unreliable). The methods' mean answers to the same
-question differ by a median of 4.6% of the value; one method's answers vary by 5.5% from run
-to run. The differences are systematic (on 78% of questions the methods' means differ by more
-than run noise explains) but small, and the judges found a contradiction with the case in 5 of
-4,773 set B judgments of run 2. A metric that checks set B answers against the case therefore
-has little to detect.
-
-## Case alignment (proposed fifth metric, 2026-10-13)
-
-Whether the rest of the case bears on a set B answer, and which way. It is the three-way
-labelling of natural language inference (entailment / neutral / contradiction), the standard
-check of a generated text against its source (Kryscinski et al. 2019; Sciré et al. 2024), with
-the project's own names. It splits today's "consistent" in two. Not built yet.
-
-1. The judge sees the full case, the diagnosis, the question, and the answer.
-2. It gives one label: **aligned** (the case implies the answer, e.g. "metabolic panel
-   unremarkable" and a sodium of 140), **neutral** (the case says nothing that bears on it), or
-   **contradicted** (the case conflicts with it, e.g. "hemodynamically stable" and a heart rate
-   of 108).
-3. For aligned or contradicted it quotes the case passage verbatim; code checks the quote is in
-   the case, and a missing quote makes the label neutral.
-4. Reported: the share aligned and the share contradicted, of all set B questions; the panel's
-   majority decides.
-
-Expectation, to be tested: whether a case holds a clue about a variable depends on the
-question, not on the retrieval method, so the aligned share may be about the same for every
-method (see the comparison of set B answers above).
-
-## Planned evaluation of the three proposed metrics (2026-10-13)
-
-1. **Test:** run 2, the main judge only, all three metrics, the six repeated configurations
-   (five for faithfulness). Sensitivity of each new metric and of the two current ones on the
-   same run and judge: the SD of the method means over their mean bootstrap standard error, and
-   the number of method pairs whose paired 95% interval excludes zero.
-2. **One revision** of a metric that is not clearly more sensitive than its current
-   counterpart, tested the same way; the more sensitive version is kept.
-3. **Full run:** runs 1–10, three judges. Sensitivity from the run-to-run SD.
-4. A PDF report.
-
-Estimates (prices of 2026-10-13; token counts from run 2's stored judge calls and documents):
-
-| | Judge calls | Standard API | Batch API where offered | Time, standard | Time, batch |
-|---|---|---|---|---|---|
-| Test | about 4,600 | $2.8 | $1.4 | about 15 min | not measured (24 h window) |
-| Full run: zlog z-score | 25,800 | $4 | $3 | | |
-| Full run: faithfulness | 60,700 | $33 | $21 | | |
-| Full run: case alignment | 47,700 | $13 | $8 | | |
-| Full run, total | about 134,000 | $50 | $32 | 6–9 h | 6–9 h, at worst 24 h |
-
-`google/gemini-3.5-flash-lite` and `openai/gpt-6-luna` have `:batch` endpoints at half price;
-`qwen/qwen3.8-flash` has none, and its rate limits set the pace either way (the last judging,
-80,355 calls, took about 5 hours).
+Not done: the planned sanity check of faithfulness (another question's documents should give
+"not supported"), and human labels for the new metrics.
 
 ## Judge validation
 
@@ -413,7 +358,7 @@ Environment variables with the `MEDSIM_` prefix, as for medsim:
 
 | Variable | Default |
 |---|---|
-| `MEDSIM_JUDGE_MODELS` (JSON list; the first is the main judge) | `["google/gemini-3.5-flash-lite", "qwen/qwen3.8-flash", "openai/gpt-6-luna"]` |
+| `MEDSIM_JUDGE_MODELS` (JSON list; the first is the main judge) | `["anthropic/claude-haiku-5.5", "z-ai/glm-5.3-flash", "openai/gpt-6-luna"]` (until 2026-10-13: `["google/gemini-3.5-flash-lite", "qwen/qwen3.8-flash", "openai/gpt-6-luna"]`, whose verdicts stay in the judgment files) |
 | `MEDSIM_EXTRACTOR_MODEL`, `MEDSIM_REDACTOR_MODEL` | the main judge |
 | `MEDSIM_JUDGE_MAX_TOKENS`, `MEDSIM_EXTRACTOR_MAX_TOKENS`, `MEDSIM_REDACTOR_MAX_TOKENS` | 4000, 8000, 8000 |
 | `MEDSIM_JUDGE_MAX_ATTEMPTS`, `MEDSIM_JUDGE_RETRY_BACKOFF_S` | 3, 2.0 |

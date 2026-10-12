@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>New answer metrics for the simulated environment</title>
+<style>
+  @page { size: A4 landscape; margin: 12mm 12mm 13mm; }
+  body { font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; color: #1b1b1b;
+         font-size: 10.5px; line-height: 1.42; }
+  h1 { font-size: 21px; margin: 0 0 3px; }
+  h2 { font-size: 14.5px; margin: 16px 0 5px; border-bottom: 1.5px solid #8a94a6;
+       padding-bottom: 2px; break-after: avoid; }
+  h3 { font-size: 11.5px; margin: 10px 0 3px; break-after: avoid; }
+  p { margin: 4px 0; } p.sub { color: #555; margin: 0 0 8px; }
+  ul, ol { margin: 4px 0; padding-left: 17px; } li { margin: 2px 0; }
+  .cols { column-count: 2; column-gap: 22px; }
+  .cols > * { break-inside: avoid; }
+  ol.cols > li { break-inside: avoid; }
+  .box { background: #f4f6fa; border-left: 3px solid #8a94a6; padding: 6px 10px; margin: 6px 0; }
+  .eq { font-family: "SF Mono", Menlo, monospace; font-size: 10px; background: #f6f6f6;
+        padding: 3px 7px; margin: 3px 0; display: block; }
+  table { border-collapse: collapse; width: 100%; margin: 6px 0 4px; break-inside: avoid; }
+  th, td { border: 1px solid #cfcfcf; padding: 4px 5px; text-align: center; }
+  table.scores thead tr:first-child th { background: #e9eef6; font-size: 10.5px; }
+  table.scores thead tr:nth-child(2) th { background: #f4f6fa; font-weight: 600; }
+  th.group, th.first, td.first { border-left: 2px solid #8a94a6; }
+  th.new { background: #e3f0e6 !important; }
+  td.cfg, th.cfg { text-align: left; } td.cfg { font-weight: 600; }
+  table.scores td { white-space: nowrap; } table.scores td.cfg { white-space: normal; }
+  table.small { font-size: 9.5px; } table.plain td { text-align: left; vertical-align: top; }
+  table.plain th { background: #f4f6fa; text-align: left; }
+  span.sd { color: #666; } span.n { color: #a05a00; font-size: 8.5px; } td.na { color: #999; }
+  tbody tr:nth-child(even) td { background-color: #fafafa; }
+  tr.setc td { border-top: 2px solid #8a94a6; }
+  tr.strong td { background-color: #eaf5ec !important; }
+  .note { color: #444; font-size: 9.5px; } .break { break-before: page; }
+</style></head><body>
+<h1>New answer metrics for the simulated environment</h1>
+<p class="sub">Information Collection Strategies Experiment · environment benchmark ·
+13 October 2026</p>
+
+<div class="box"><b>What was asked.</b> The two existing answer metrics (masked correctness and factual
+consistency) barely separate the retrieval methods. The task was to add metrics that separate them
+more, test each on one run with one judge, revise once if needed, then score all ten stored runs with
+the whole judge panel, with the Jev decision model as an added judge.</div>
+<div class="cols">
+<ul>
+<li><b>Faithfulness separates every pair of retrieval methods.</b> Its spread between methods is 8.1
+times its run-to-run noise; for the two old metrics the ratio is 0.2 to 0.7. The documents support
+59% of Perplexity's answers, 35% with retrieval changes 1–4, and 21–25% for the other three
+methods.</li>
+<li><b>The zlog z-score does not separate the methods</b> (ratio 0.5–0.6, like masked correctness).
+The methods' answers are equally close to the true value; Gemini without any search is as close as
+the search methods.</li>
+<li><b>Case alignment separates them slightly</b> (ratio 1.0–1.4): answers from Gemini's own knowledge
+and from Perplexity are contradicted by the case a little more often (about 3% against 1.5%). The
+differences are one to two points.</li>
+</ul>
+<ul>
+<li><b>The old metrics hardly moved under the new panel</b> (Claude Haiku 5.5 and GLM 5.3 Flash in
+place of Gemini and Qwen): same category 83–86%, consistent about 97%, as before.</li>
+<li><b>Adding Jev as a fourth judge changes little:</b> most scores stay within one point. Exact
+masked correctness falls by one to two points, and native Google search's faithfulness by three
+(23.5% to 20.6%, one run).</li>
+<li><b>One part is incomplete.</b> Faithfulness and case alignment by the three chat judges cover
+nine runs, not ten: the API key reached its total spending limit of $250 during run 10. Everything
+else covers all ten runs.</li>
+</ul></div>
+<h2>Final scores: three judges</h2>
+<p class="note">Panel: Claude Haiku 5.5, GLM 5.3 Flash, GPT-6 Luna; the label is the majority vote, the zlog score the median of
+the judges. Mean <span class="sd">± SD</span> over runs. Green headers are the new metrics. ↓ lower
+is better. Ten runs, except faithfulness and case alignment (nine runs) and the two native search configurations (one run).</p>
+<table class='scores'><thead><tr><th rowspan="2" class="cfg">Configuration</th><th colspan="2" class="group old">Masked correctness</th><th colspan="1" class="group old">Factual consistency</th><th colspan="2" class="group new">Zlog z-score</th><th colspan="1" class="group new">Faithfulness</th><th colspan="2" class="group new">Case alignment</th></tr><tr><th class="first">same category (incl. exact)</th><th class="">exact</th><th class="first">consistent</th><th class="first">mean |z| ↓</th><th class="">satisfactory</th><th class="first">supported</th><th class="first">aligned</th><th class="">contradicted ↓</th></tr></thead><tbody><tr><td class="cfg">Gemini 3 Flash knowledge, no search</td><td class="first">84.4<span class="sd"> ± 1.5%</span></td><td class="">45.6<span class="sd"> ± 1.4%</span></td><td class="first">97.3<span class="sd"> ± 1.5%</span></td><td class="first">1.28<span class="sd"> ± 0.04</span></td><td class="">74.6<span class="sd"> ± 2.0%</span></td><td class="first na">–</td><td class="first">18.6<span class="sd"> ± 0.9%</span><span class="n"> (9)</span></td><td class="">3.3<span class="sd"> ± 0.5%</span><span class="n"> (9)</span></td></tr><tr><td class="cfg">Europe PMC + LitSense, without changes 1–4</td><td class="first">86.2<span class="sd"> ± 1.5%</span></td><td class="">45.4<span class="sd"> ± 2.5%</span></td><td class="first">96.8<span class="sd"> ± 1.2%</span></td><td class="first">1.26<span class="sd"> ± 0.05</span></td><td class="">73.0<span class="sd"> ± 1.8%</span></td><td class="first">22.7<span class="sd"> ± 1.3%</span><span class="n"> (9)</span></td><td class="first">20.0<span class="sd"> ± 1.1%</span><span class="n"> (9)</span></td><td class="">1.7<span class="sd"> ± 0.6%</span><span class="n"> (9)</span></td></tr><tr><td class="cfg">Europe PMC + LitSense, with changes 1–4</td><td class="first">84.9<span class="sd"> ± 1.3%</span></td><td class="">41.6<span class="sd"> ± 2.1%</span></td><td class="first">96.8<span class="sd"> ± 1.1%</span></td><td class="first">1.29<span class="sd"> ± 0.05</span></td><td class="">73.1<span class="sd"> ± 2.8%</span></td><td class="first">35.1<span class="sd"> ± 2.5%</span><span class="n"> (9)</span></td><td class="first">20.1<span class="sd"> ± 0.6%</span><span class="n"> (9)</span></td><td class="">1.5<span class="sd"> ± 0.5%</span><span class="n"> (9)</span></td></tr><tr><td class="cfg">OpenRouter search: Exa instant</td><td class="first">85.0<span class="sd"> ± 1.5%</span></td><td class="">45.9<span class="sd"> ± 3.0%</span></td><td class="first">97.2<span class="sd"> ± 0.9%</span></td><td class="first">1.25<span class="sd"> ± 0.06</span></td><td class="">75.4<span class="sd"> ± 2.7%</span></td><td class="first">21.0<span class="sd"> ± 1.3%</span><span class="n"> (9)</span></td><td class="first">20.2<span class="sd"> ± 0.8%</span><span class="n"> (9)</span></td><td class="">1.4<span class="sd"> ± 0.6%</span><span class="n"> (9)</span></td></tr><tr><td class="cfg">OpenRouter search: Parallel basic</td><td class="first">84.0<span class="sd"> ± 2.2%</span></td><td class="">43.4<span class="sd"> ± 2.6%</span></td><td class="first">96.7<span class="sd"> ± 1.0%</span></td><td class="first">1.29<span class="sd"> ± 0.06</span></td><td class="">71.9<span class="sd"> ± 2.8%</span></td><td class="first">25.4<span class="sd"> ± 1.8%</span><span class="n"> (9)</span></td><td class="first">20.3<span class="sd"> ± 1.0%</span><span class="n"> (9)</span></td><td class="">1.3<span class="sd"> ± 0.7%</span><span class="n"> (9)</span></td></tr><tr><td class="cfg">OpenRouter search: Perplexity</td><td class="first">83.2<span class="sd"> ± 2.3%</span></td><td class="">43.9<span class="sd"> ± 2.7%</span></td><td class="first">97.1<span class="sd"> ± 0.6%</span></td><td class="first">1.32<span class="sd"> ± 0.04</span></td><td class="">72.1<span class="sd"> ± 2.1%</span></td><td class="first">59.2<span class="sd"> ± 2.4%</span><span class="n"> (9)</span></td><td class="first">18.2<span class="sd"> ± 0.8%</span><span class="n"> (9)</span></td><td class="">2.7<span class="sd"> ± 0.7%</span><span class="n"> (9)</span></td></tr><tr><td class="cfg">Native Google search (one run)</td><td class="first">82.3%</td><td class="">44.7%</td><td class="first">96.7%</td><td class="first">1.25</td><td class="">71.4%</td><td class="first">23.5%</td><td class="first">19.1%</td><td class="">1.8%</td></tr><tr><td class="cfg">Native OpenAI search (one run)</td><td class="first">84.4%</td><td class="">44.0%</td><td class="first">95.6%</td><td class="first">1.28</td><td class="">72.9%</td><td class="first">38.3%</td><td class="first">19.5%</td><td class="">1.1%</td></tr><tr class="setc"><td class="cfg">Case study only, no retrieval (set C)</td><td class="first">99.2<span class="sd"> ± 0.4%</span></td><td class="">98.8<span class="sd"> ± 0.4%</span></td><td class="first">99.7<span class="sd"> ± 0.3%</span></td><td class="first">0.04<span class="sd"> ± 0.02</span></td><td class="">98.7<span class="sd"> ± 0.6%</span></td><td class="first na">–</td><td class="first">97.7<span class="sd"> ± 0.8%</span><span class="n"> (9)</span></td><td class="">0.3<span class="sd"> ± 0.3%</span><span class="n"> (9)</span></td></tr></tbody></table>
+<div class="break"></div>
+<h2>Final scores: the same table with the Jev decision model added as a fourth judge</h2>
+<p class="note">Panel: the three judges and Jev 1.13; with a 2–2 split the main judge (Claude Haiku 5.5) decides. Jev does not take part in the zlog z-score, so those two columns are the same as above. Runs as above.</p>
+<table class='scores'><thead><tr><th rowspan="2" class="cfg">Configuration</th><th colspan="2" class="group old">Masked correctness</th><th colspan="1" class="group old">Factual consistency</th><th colspan="2" class="group new">Zlog z-score</th><th colspan="1" class="group new">Faithfulness</th><th colspan="2" class="group new">Case alignment</th></tr><tr><th class="first">same category (incl. exact)</th><th class="">exact</th><th class="first">consistent</th><th class="first">mean |z| ↓</th><th class="">satisfactory</th><th class="first">supported</th><th class="first">aligned</th><th class="">contradicted ↓</th></tr></thead><tbody><tr><td class="cfg">Gemini 3 Flash knowledge, no search</td><td class="first">83.8<span class="sd"> ± 1.6%</span></td><td class="">43.7<span class="sd"> ± 2.1%</span></td><td class="first">97.2<span class="sd"> ± 1.5%</span></td><td class="first">1.28<span class="sd"> ± 0.04</span></td><td class="">74.6<span class="sd"> ± 2.0%</span></td><td class="first na">–</td><td class="first">19.1<span class="sd"> ± 1.1%</span><span class="n"> (9)</span></td><td class="">3.1<span class="sd"> ± 0.7%</span><span class="n"> (9)</span></td></tr><tr><td class="cfg">Europe PMC + LitSense, without changes 1–4</td><td class="first">86.0<span class="sd"> ± 1.4%</span></td><td class="">44.2<span class="sd"> ± 2.8%</span></td><td class="first">96.8<span class="sd"> ± 1.2%</span></td><td class="first">1.26<span class="sd"> ± 0.05</span></td><td class="">73.0<span class="sd"> ± 1.8%</span></td><td class="first">21.9<span class="sd"> ± 1.3%</span><span class="n"> (9)</span></td><td class="first">20.8<span class="sd"> ± 1.2%</span><span class="n"> (9)</span></td><td class="">1.4<span class="sd"> ± 0.7%</span><span class="n"> (9)</span></td></tr><tr><td class="cfg">Europe PMC + LitSense, with changes 1–4</td><td class="first">84.7<span class="sd"> ± 1.5%</span></td><td class="">40.3<span class="sd"> ± 2.5%</span></td><td class="first">96.8<span class="sd"> ± 1.1%</span></td><td class="first">1.29<span class="sd"> ± 0.05</span></td><td class="">73.1<span class="sd"> ± 2.8%</span></td><td class="first">35.0<span class="sd"> ± 1.9%</span><span class="n"> (9)</span></td><td class="first">21.0<span class="sd"> ± 0.6%</span><span class="n"> (9)</span></td><td class="">1.1<span class="sd"> ± 0.3%</span><span class="n"> (9)</span></td></tr><tr><td class="cfg">OpenRouter search: Exa instant</td><td class="first">84.1<span class="sd"> ± 1.8%</span></td><td class="">44.8<span class="sd"> ± 3.2%</span></td><td class="first">97.1<span class="sd"> ± 0.9%</span></td><td class="first">1.25<span class="sd"> ± 0.06</span></td><td class="">75.4<span class="sd"> ± 2.7%</span></td><td class="first">20.3<span class="sd"> ± 1.2%</span><span class="n"> (9)</span></td><td class="first">21.3<span class="sd"> ± 1.0%</span><span class="n"> (9)</span></td><td class="">1.1<span class="sd"> ± 0.7%</span><span class="n"> (9)</span></td></tr><tr><td class="cfg">OpenRouter search: Parallel basic</td><td class="first">84.5<span class="sd"> ± 2.3%</span></td><td class="">41.9<span class="sd"> ± 2.6%</span></td><td class="first">96.7<span class="sd"> ± 1.0%</span></td><td class="first">1.29<span class="sd"> ± 0.06</span></td><td class="">71.9<span class="sd"> ± 2.8%</span></td><td class="first">24.1<span class="sd"> ± 1.7%</span><span class="n"> (9)</span></td><td class="first">21.0<span class="sd"> ± 0.7%</span><span class="n"> (9)</span></td><td class="">1.2<span class="sd"> ± 0.7%</span><span class="n"> (9)</span></td></tr><tr><td class="cfg">OpenRouter search: Perplexity</td><td class="first">82.9<span class="sd"> ± 2.4%</span></td><td class="">42.8<span class="sd"> ± 2.9%</span></td><td class="first">97.1<span class="sd"> ± 0.7%</span></td><td class="first">1.32<span class="sd"> ± 0.04</span></td><td class="">72.1<span class="sd"> ± 2.1%</span></td><td class="first">59.5<span class="sd"> ± 2.3%</span><span class="n"> (9)</span></td><td class="first">19.2<span class="sd"> ± 0.7%</span><span class="n"> (9)</span></td><td class="">2.4<span class="sd"> ± 0.6%</span><span class="n"> (9)</span></td></tr><tr><td class="cfg">Native Google search (one run)</td><td class="first">82.3%</td><td class="">43.3%</td><td class="first">96.7%</td><td class="first">1.25</td><td class="">71.4%</td><td class="first">20.6%</td><td class="first">20.2%</td><td class="">1.8%</td></tr><tr><td class="cfg">Native OpenAI search (one run)</td><td class="first">83.7%</td><td class="">41.8%</td><td class="first">95.6%</td><td class="first">1.28</td><td class="">72.9%</td><td class="first">37.8%</td><td class="first">20.2%</td><td class="">1.1%</td></tr><tr class="setc"><td class="cfg">Case study only, no retrieval (set C)</td><td class="first">99.2<span class="sd"> ± 0.4%</span></td><td class="">98.8<span class="sd"> ± 0.5%</span></td><td class="first">99.4<span class="sd"> ± 0.4%</span></td><td class="first">0.04<span class="sd"> ± 0.02</span></td><td class="">98.7<span class="sd"> ± 0.6%</span></td><td class="first na">–</td><td class="first">97.1<span class="sd"> ± 0.9%</span><span class="n"> (9)</span></td><td class="">0.7<span class="sd"> ± 0.2%</span><span class="n"> (9)</span></td></tr></tbody></table>
+
+<h2>What the scores show</h2>
+<div class="cols">
+<ul>
+<li><b>Retrieval changes what an answer rests on, not how right it is.</b> Faithfulness ranges from
+21% to 59%, while every closeness measure is flat: same category 83–86%, mean |z| 1.25–1.32.</li>
+<li><b>Changes 1–4 do what they were built for.</b> They raise supported answers from 22.7% to 35.1%
+for the same sources, although masked correctness did not change.</li>
+<li><b>Perplexity is the most grounded and Exa instant the least</b> (59.2% against 21.0%). Native
+OpenAI search reaches 38.3% and native Google search 23.5%, each on one run.</li>
+<li><b>The judges confirm less support than the environment claims.</b> It labels 61% of Perplexity's
+answers, 47% with changes 1–4, and about 30% of the others as taken from the documents; the judges
+confirm 59%, 35%, and 21–25%.</li>
+</ul>
+<ul>
+<li><b>Case alignment:</b> about one answer in five is aligned with something the case says and
+1–3% are contradicted, for every retrieval method. The rest are neutral: the case gives no
+expectation for the variable.</li>
+<li><b>Set C behaves as it should.</b> When the case states the answer, mean |z| is 0.04 and 97.7% of
+answers are aligned.</li>
+<li><b>Empty cells:</b> faithfulness has no value for Gemini knowledge and for case study only,
+which retrieve no documents.</li>
+</ul></div>
+<div class="break"></div>
+
+<h2>Why the old metrics separate the methods poorly</h2>
+<ul>
+<li><b>Coarse labels.</b> Masked correctness has four labels and factual consistency two. Turning a
+continuous outcome into categories loses at least a third of its statistical information [1, 2].</li>
+<li><b>A ceiling.</b> About 97% of set B answers are consistent, for every method.</li>
+<li><b>They never look at the retrieved documents.</b> When the documents are weak, the synthesizer
+answers from its own knowledge and still lands in the right category.</li>
+</ul>
+
+<h2>The three new metrics</h2>
+<table class="plain small"><thead><tr><th style="width:11%"></th><th style="width:30%">Zlog z-score</th>
+<th style="width:29%">Faithfulness</th><th style="width:30%">Case alignment</th></tr></thead><tbody>
+<tr><td><b>Question</b></td><td>How far is the answer's value from the hidden true value?</td>
+<td>Do the retrieved documents support the answer's value?</td>
+<td>Does the rest of the case bear on the answer, and which way?</td></tr>
+<tr><td><b>Sets</b></td><td>A (140 of 141 questions have a numeric true value) and C</td><td>A and B</td><td>B and C</td></tr>
+<tr><td><b>Based on</b></td><td>The zlog transformation of laboratory results [3] and the proficiency-testing
+z-score of ISO 13528 [4]</td><td>Faithfulness in the evaluation of retrieval-augmented generation [5, 6]</td>
+<td>The three labels of natural language inference, the standard check of a text against its
+source [7, 8]</td></tr>
+<tr><td><b>Judge</b></td><td>Reads numbers only: once per question the reference limits and the true
+value, once per answer the answer's value in the true value's unit</td>
+<td>Yes or no, with the supporting passage quoted word for word</td>
+<td>Reads the level the case leads one to expect and the level the answer states, with the case
+passage that grounds the expectation</td></tr>
+<tr><td><b>Code</b></td><td>Computes z; the answer's score is the median of the judges' scores</td>
+<td>Looks for the quote in the documents; not found means not supported (1–4% of the "yes" verdicts)</td>
+<td>Looks for the quote in the case; compares the two levels</td></tr>
+<tr><td><b>Reported</b></td><td>Mean |z| capped at 3, and the share satisfactory (|z| ≤ 2). Unanswered
+questions score 3</td><td>Share of answers supported, of all questions</td>
+<td>Share aligned and share contradicted, of all questions</td></tr>
+</tbody></table>
+<h3>Zlog z-score: the equations</h3>
+<span class="eq">zlog(x) = (ln x − (ln LL + ln UL)/2) · 3.92 / (ln UL − ln LL) &nbsp;&nbsp;&nbsp; [3], LL and UL: lower and upper reference limits</span>
+<span class="eq">z = zlog(answer) − zlog(truth) = (ln answer − ln truth) / σ, &nbsp; σ = (ln UL − ln LL) / 3.92 &nbsp;&nbsp;&nbsp; [4], the true value as the assigned value</span>
+<span class="eq">revised (kept): σ is multiplied by max(1, |zlog(truth)| / 3.92)</span>
+<p>The answer's error is measured in units of the healthy population's spread. ISO 13528 rates |z| ≤ 2
+satisfactory and |z| ≥ 3 unsatisfactory. Rules beyond the two methods, all this project's choices:
+a one-sided reference range takes a lower limit of 15% of the upper; a variable without a reference
+interval takes σ = 0.15; values at or below zero use the same z without logarithms; for blood pressure
+the systolic value is scored; a true value given as a range or bound scores 0 for an answer inside it.</p>
+
+<div class="break"></div>
+<h2>Development: the test on one run with one judge</h2>
+
+<p>Run 2, Claude Haiku 5.5 as the only judge, the six configurations that were run ten times (five for
+faithfulness). <b>Spread</b> is the standard deviation of the configurations' means; <b>noise</b> is
+their mean standard error from a bootstrap that resamples diagnoses; <b>pairs separated</b> counts
+the pairs of configurations whose paired 95% interval excludes zero. A metric is more sensitive when
+signal ÷ noise is higher and more pairs are separated. Percent metrics are in points.</p>
+<table class='scores small'><thead><tr><th class='cfg'>Metric</th><th>Version</th><th>Gemini knowledge</th><th>EPMC + LitSense, without 1–4</th><th>EPMC + LitSense, with 1–4</th><th>Exa instant</th><th>Parallel basic</th><th>Perplexity</th><th class='first'>Spread</th><th>Noise</th><th>Signal ÷ noise</th><th>Pairs separated</th></tr></thead><tbody><tr><td class='cfg'>Masked correctness: same category (incl. exact), %</td><td>old</td><td>83.0</td><td>87.2</td><td>85.1</td><td>84.4</td><td>87.9</td><td>81.6</td><td class='first'>2.44</td><td>3.16</td><td><b>0.77</b></td><td>2 of 15</td></tr><tr><td class='cfg'>Masked correctness: exact, %</td><td>old</td><td>44.0</td><td>44.0</td><td>36.2</td><td>46.8</td><td>41.8</td><td>44.0</td><td class='first'>3.61</td><td>4.37</td><td><b>0.83</b></td><td>1 of 15</td></tr><tr><td class='cfg'>Factual consistency: consistent, %</td><td>old</td><td>96.7</td><td>97.1</td><td>95.6</td><td>97.1</td><td>97.4</td><td>96.3</td><td class='first'>0.66</td><td>1.09</td><td><b>0.61</b></td><td>0 of 15</td></tr><tr><td class='cfg'>Zlog z-score, first version: mean |z|</td><td>first</td><td>1.4</td><td>1.4</td><td>1.4</td><td>1.4</td><td>1.4</td><td>1.4</td><td class='first'>0.02</td><td>0.10</td><td><b>0.23</b></td><td>0 of 15</td></tr><tr><td class='cfg'>Zlog z-score: mean |z| (capped at 3)</td><td>revised, kept</td><td>1.2</td><td>1.2</td><td>1.2</td><td>1.2</td><td>1.2</td><td>1.2</td><td class='first'>0.02</td><td>0.09</td><td><b>0.25</b></td><td>0 of 15</td></tr><tr><td class='cfg'>Zlog z-score, first version: satisfactory, %</td><td>first</td><td>71.4</td><td>67.9</td><td>67.1</td><td>67.9</td><td>67.9</td><td>67.9</td><td class='first'>1.54</td><td>4.03</td><td><b>0.38</b></td><td>0 of 15</td></tr><tr><td class='cfg'>Zlog z-score: satisfactory (|z| ≤ 2), %</td><td>revised, kept</td><td>78.6</td><td>77.9</td><td>74.3</td><td>75.7</td><td>74.3</td><td>77.1</td><td class='first'>1.83</td><td>3.78</td><td><b>0.48</b></td><td>0 of 15</td></tr><tr class="strong"><td class='cfg'>Faithfulness: supported, %</td><td>kept as designed</td><td>–</td><td>16.9</td><td>29.5</td><td>15.5</td><td>22.8</td><td>56.7</td><td class='first'>16.80</td><td>2.09</td><td><b>8.03</b></td><td>9 of 10</td></tr><tr><td class='cfg'>Case alignment, first version: aligned, %</td><td>first</td><td>3.3</td><td>5.1</td><td>3.7</td><td>4.8</td><td>4.4</td><td>4.0</td><td class='first'>0.69</td><td>1.20</td><td><b>0.57</b></td><td>0 of 15</td></tr><tr><td class='cfg'>Case alignment: aligned, %</td><td>revised, kept</td><td>15.8</td><td>16.5</td><td>19.1</td><td>18.4</td><td>17.3</td><td>18.8</td><td class='first'>1.32</td><td>2.48</td><td><b>0.53</b></td><td>0 of 15</td></tr><tr><td class='cfg'>Case alignment, first version: contradicted, %</td><td>first</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td class='first'>0.00</td><td>0.00</td><td><b>0.00</b></td><td>0 of 15</td></tr><tr><td class='cfg'>Case alignment: contradicted, %</td><td>revised, kept</td><td>3.7</td><td>2.6</td><td>2.2</td><td>1.8</td><td>2.9</td><td>2.6</td><td class='first'>0.63</td><td>1.06</td><td><b>0.60</b></td><td>0 of 15</td></tr></tbody></table>
+
+<div class="cols">
+<ul>
+<li><b>Faithfulness</b> was kept as designed: about ten times the old metrics' ratio.</li>
+<li><b>Zlog z-score, one revision.</b> 22% of scores sat at the cap, many for very abnormal true
+values answered with similarly abnormal ones (haemoglobin 4 g/dL answered as 6.8). The revised scale
+widens the tolerance with the true value's own distance from normal. It was kept (0.25 against 0.23),
+a difference well inside the noise.</li>
+</ul>
+<ul>
+<li><b>Case alignment, one revision.</b> The first version asked for one verdict and counted only
+explicit statements: 96% of answers came back neutral and none contradicted. The revised version lets
+the clinical picture set an expectation and compares two levels. It was kept (0.60 against 0.57),
+again inside the noise, but it uses the scale: 16–19% aligned, 2–4% contradicted.</li>
+<li>Neither revision made its metric more sensitive than the old ones on this run. The nine-run
+figures below show the same for the zlog z-score and a modest gain for case alignment.</li>
+</ul></div>
+<div class="break"></div>
+<h2>Sensitivity over all judged runs</h2>
+
+<p><b>Spread</b> is the standard deviation of the configurations' means over runs, <b>run SD</b> the
+pooled run-to-run standard deviation, and <b>pairs separated</b> the pairs whose means differ by more
+than 2.3 standard errors (Welch's t). Percent metrics are in points.</p>
+<table class='scores small'><thead><tr><th rowspan='2' class='cfg'>Metric</th><th colspan='5' class='group'>Three judges</th><th colspan='5' class='group'>With Jev added</th></tr><tr><th class='first'>Runs</th><th>Spread</th><th>Run SD</th><th>Signal ÷ noise</th><th>Pairs separated</th><th class='first'>Runs</th><th>Spread</th><th>Run SD</th><th>Signal ÷ noise</th><th>Pairs separated</th></tr></thead><tbody><tr><td class='cfg'>Masked correctness: same category (incl. exact), %</td><td class='first'>10</td><td>1.02</td><td>1.77</td><td><b>0.58</b></td><td>3 of 15</td><td class='first'>10</td><td>1.01</td><td>1.86</td><td><b>0.54</b></td><td>3 of 15</td></tr><tr><td class='cfg'>Masked correctness: exact, %</td><td class='first'>10</td><td>1.67</td><td>2.44</td><td><b>0.68</b></td><td>4 of 15</td><td class='first'>10</td><td>1.66</td><td>2.74</td><td><b>0.61</b></td><td>3 of 15</td></tr><tr><td class='cfg'>Factual consistency: consistent, %</td><td class='first'>10</td><td>0.24</td><td>1.08</td><td><b>0.22</b></td><td>0 of 15</td><td class='first'>10</td><td>0.24</td><td>1.09</td><td><b>0.22</b></td><td>0 of 15</td></tr><tr><td class='cfg'>Zlog z-score: mean |z| (capped at 3)</td><td class='first'>10</td><td>0.03</td><td>0.05</td><td><b>0.52</b></td><td>2 of 15</td><td class='first'>10</td><td>0.03</td><td>0.05</td><td><b>0.52</b></td><td>2 of 15</td></tr><tr><td class='cfg'>Zlog z-score: satisfactory (|z| ≤ 2), %</td><td class='first'>10</td><td>1.39</td><td>2.42</td><td><b>0.58</b></td><td>5 of 15</td><td class='first'>10</td><td>1.39</td><td>2.42</td><td><b>0.58</b></td><td>5 of 15</td></tr><tr class="strong"><td class='cfg'>Faithfulness: supported, %</td><td class='first'>9</td><td>15.80</td><td>1.94</td><td><b>8.13</b></td><td>10 of 10</td><td class='first'>9</td><td>16.32</td><td>1.71</td><td><b>9.54</b></td><td>10 of 10</td></tr><tr><td class='cfg'>Case alignment: aligned, %</td><td class='first'>9</td><td>0.93</td><td>0.88</td><td><b>1.05</b></td><td>8 of 15</td><td class='first'>9</td><td>0.98</td><td>0.92</td><td><b>1.07</b></td><td>8 of 15</td></tr><tr><td class='cfg'>Case alignment: contradicted, %</td><td class='first'>9</td><td>0.83</td><td>0.59</td><td><b>1.39</b></td><td>9 of 15</td><td class='first'>9</td><td>0.84</td><td>0.65</td><td><b>1.29</b></td><td>8 of 15</td></tr></tbody></table>
+
+<h2>The judges</h2>
+<div class="cols">
+<ul>
+<li><b>Panel:</b> Claude Haiku 5.5 (main judge, breaks ties), GLM 5.3 Flash, and GPT-6 Luna. Haiku
+replaced Gemini 3.5 Flash Lite and GLM replaced Qwen 3.8 Flash, in the old scores as well: both
+re-judged every answer of the ten runs. GLM was chosen from four candidates on 40 stored answers.</li>
+<li><b>Jev 1.13</b> is a decision model: it returns a choice with probabilities and no text. It judged
+both old metrics, faithfulness, and case alignment for all ten runs. It cannot read out a number, so
+the zlog z-score has three judges in both tables, and its verdicts cannot be quote-checked.</li>
+<li><b>Agreement on faithfulness</b> (18,904 answers): the three judges are unanimous on 75.5%; any
+two agree on 81–85%, and Jev agrees with each of them as often (81–85%).</li>
+</ul>
+<ul>
+<li><b>Agreement on case alignment</b> (14,823 answers): the three judges are unanimous on 79.3% and
+agree pairwise on 84–88%. Jev agrees with them on only 60–67%: it calls 53% of answers aligned, the
+others 17–27%. With three other votes it rarely decides the label.</li>
+<li><b>Batch API:</b> not used. Gemini's batch endpoint is refused under the account's data-retention
+setting, and two GPT batches had completed nothing after 25 minutes.</li>
+<li><b>Volume and cost:</b> about 289,000 judgments; $56.60 spent on the day, including tests and
+calibration.</li>
+</ul></div>
+
+<h2>Limits</h2>
+<div class="cols">
+<ul>
+<li><b>Nine runs, not ten, for two metrics.</b> The API key's total limit of $250 was reached during
+run 10, so the three chat judges' faithfulness and case alignment for that run are unfinished and left
+out. Jev's verdicts for run 10 exist but are not shown alone.</li>
+<li><b>Faithfulness rewards grounding, not truth.</b> An answer can be faithful to a document that is
+wrong for this patient, and a method that returns more text has more chances of containing an
+agreeing number.</li>
+<li><b>The planned sanity check for faithfulness was not run</b> (another question's documents should
+give "not supported"); the key limit was reached first.</li>
+<li><b>The versions were chosen on one run and one judge</b>, on differences smaller than the noise.</li>
+</ul>
+<ul>
+<li><b>The reference limits come from the judges</b>, as the median of three; 103 of the 140 set A
+questions have a two-sided interval, 15 a one-sided one, 22 none.</li>
+<li><b>The revised zlog scale and the special-case rules are this project's own</b>, not from the cited
+methods.</li>
+<li><b>All judges are language models.</b> No human labels were collected for the new metrics.</li>
+<li><b>Native Google and OpenAI search</b> have one run each, so no standard deviation.</li>
+</ul></div>
+<h2>References</h2>
+<ol class="note cols">
+<li>Fedorov V, et al. Consequences of dichotomization. Pharmaceutical Statistics, 2008.</li>
+<li>van Zwet E, et al. An empirical assessment of the cost of dichotomization of the outcome of clinical trials. Statistics in Medicine, 2026.</li>
+<li>Hoffmann G, et al. The zlog value as a basis for the standardization of laboratory results. LaboratoriumsMedizin, 2017.</li>
+<li>ISO 13528, Statistical methods for use in proficiency testing by interlaboratory comparison; see: z-Scores and other scores in chemical proficiency testing. Analytical Methods, 2016.</li>
+<li>Es S, et al. RAGAs: automated evaluation of retrieval augmented generation. arXiv, 2023.</li>
+<li>Wallat J, et al. Correctness is not faithfulness in retrieval augmented generation attributions. ICTIR, 2025.</li>
+<li>Kryscinski W, et al. Evaluating the factual consistency of abstractive text summarization. 2019.</li>
+<li>Sciré A, et al. FENICE: factuality evaluation of summarization based on natural language inference and claim extraction. arXiv, 2024.</li>
+</ol>
+<p class="note">Data and code: environment/results/answer_metrics/ (scores, test, logs), environment/bench/answer_metrics.py,
+environment/bench/zlog.py, environment/results/scripts/make_answer_metrics.py. Method details: environment/bench/README.md.</p>
+</body></html>

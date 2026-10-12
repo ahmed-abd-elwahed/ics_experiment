@@ -1,0 +1,256 @@
+INFO bench.answer_metrics: answer_metrics --runs 1-10 --metrics zlog_value --workers 32
+INFO bench.answer_metrics: planned: {'anthropic/claude-haiku-5.5': 10093, 'z-ai/glm-5.3-flash': 11179, 'openai/gpt-6-luna': 11179}
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 200/10093 ($0.020)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 200/11179 ($0.011)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 200/11179 ($0.007)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 400/10093 ($0.040)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 400/11179 ($0.023)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions failed (ConnectError); retrying in 1.0s
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 400/11179 ($0.013)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 600/10093 ($0.060)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 600/11179 ($0.034)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 800/10093 ($0.080)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 800/11179 ($0.045)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 600/11179 ($0.020)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 1000/10093 ($0.100)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 1200/10093 ($0.120)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 1000/11179 ($0.056)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 800/11179 ($0.026)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 1400/10093 ($0.140)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 1200/11179 ($0.068)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions failed (ConnectError); retrying in 1.0s
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 1000/11179 ($0.033)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 1600/10093 ($0.160)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 1400/11179 ($0.079)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 1800/10093 ($0.181)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 1200/11179 ($0.039)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 1600/11179 ($0.090)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions failed (ConnectError); retrying in 1.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions failed (ConnectError); retrying in 1.0s
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 2000/10093 ($0.201)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 1800/11179 ($0.101)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 1400/11179 ($0.045)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 2200/10093 ($0.221)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 2000/11179 ($0.112)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 1600/11179 ($0.052)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 2200/11179 ($0.123)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 2400/10093 ($0.241)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 2400/11179 ($0.135)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 2600/10093 ($0.260)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 2800/10093 ($0.281)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 2600/11179 ($0.146)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 1800/11179 ($0.059)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 3000/10093 ($0.301)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 2800/11179 ($0.157)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 3200/10093 ($0.321)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 3400/10093 ($0.341)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 3000/11179 ($0.168)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 2000/11179 ($0.067)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 3600/10093 ($0.361)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 3200/11179 ($0.179)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 1.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 3800/10093 ($0.381)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 2200/11179 ($0.075)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 3400/11179 ($0.190)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 4000/10093 ($0.401)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 3600/11179 ($0.202)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 4200/10093 ($0.422)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 2400/11179 ($0.083)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 4400/10093 ($0.442)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 3800/11179 ($0.213)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 2600/11179 ($0.091)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 4600/10093 ($0.461)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 4000/11179 ($0.224)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 4800/10093 ($0.481)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 2800/11179 ($0.099)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 5000/10093 ($0.501)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 4200/11179 ($0.235)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 5200/10093 ($0.522)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 4400/11179 ($0.246)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 3000/11179 ($0.107)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 5400/10093 ($0.542)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 4600/11179 ($0.258)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 5600/10093 ($0.561)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 4800/11179 ($0.269)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 5800/10093 ($0.581)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 3200/11179 ($0.115)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 6000/10093 ($0.601)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 5000/11179 ($0.280)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 6200/10093 ($0.622)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 5200/11179 ($0.292)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions failed (ConnectError); retrying in 1.0s
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 3400/11179 ($0.123)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 6400/10093 ($0.642)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 5400/11179 ($0.303)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 6600/10093 ($0.662)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 5600/11179 ($0.314)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 6800/10093 ($0.681)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 3600/11179 ($0.131)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 5800/11179 ($0.325)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 7000/10093 ($0.701)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 7200/10093 ($0.722)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 6000/11179 ($0.336)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 3800/11179 ($0.139)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 7400/10093 ($0.742)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 6200/11179 ($0.347)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 7600/10093 ($0.762)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 6400/11179 ($0.359)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 4000/11179 ($0.147)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 7800/10093 ($0.783)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 6600/11179 ($0.370)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 8000/10093 ($0.802)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 4200/11179 ($0.155)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 6800/11179 ($0.381)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 8200/10093 ($0.823)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 7000/11179 ($0.393)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 8400/10093 ($0.843)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 4400/11179 ($0.162)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 7200/11179 ($0.404)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 8600/10093 ($0.863)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 8800/10093 ($0.883)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 7400/11179 ($0.415)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 4600/11179 ($0.170)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 9000/10093 ($0.903)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 7600/11179 ($0.427)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 9200/10093 ($0.923)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 7800/11179 ($0.438)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions failed (ConnectError); retrying in 1.0s
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 4800/11179 ($0.178)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 9400/10093 ($0.943)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 8000/11179 ($0.449)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 9600/10093 ($0.964)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 8200/11179 ($0.461)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 9800/10093 ($0.984)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 5000/11179 ($0.187)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 10000/10093 ($1.003)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 8400/11179 ($0.472)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions returned 429; retrying in 60.0s
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 5200/11179 ($0.196)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 8600/11179 ($0.483)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 8800/11179 ($0.494)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 5400/11179 ($0.205)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 9000/11179 ($0.505)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 5600/11179 ($0.213)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 9200/11179 ($0.516)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 10093/10093 ($1.012)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 9400/11179 ($0.528)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions failed (ConnectError); retrying in 1.0s
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 5800/11179 ($0.221)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 9600/11179 ($0.539)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 9800/11179 ($0.550)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 6000/11179 ($0.230)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 10000/11179 ($0.561)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 10200/11179 ($0.573)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 6200/11179 ($0.238)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 10400/11179 ($0.584)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 6400/11179 ($0.246)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 10600/11179 ($0.595)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 6600/11179 ($0.255)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 10800/11179 ($0.606)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 11000/11179 ($0.617)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 6800/11179 ($0.264)
+INFO bench.answer_metrics: zlog_value [openai/gpt-6-luna]: 11179/11179 ($0.627)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 7000/11179 ($0.274)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 7200/11179 ($0.283)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 7400/11179 ($0.291)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 7600/11179 ($0.301)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 7800/11179 ($0.310)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 8000/11179 ($0.318)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 8200/11179 ($0.328)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions failed (ConnectError); retrying in 1.0s
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 8400/11179 ($0.338)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 8600/11179 ($0.347)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 8800/11179 ($0.357)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 9000/11179 ($0.366)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 9200/11179 ($0.375)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 9400/11179 ($0.386)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 9600/11179 ($0.395)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions failed (ConnectError); retrying in 1.0s
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 9800/11179 ($0.404)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 10000/11179 ($0.414)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 10200/11179 ($0.424)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 10400/11179 ($0.433)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 10600/11179 ($0.443)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 10800/11179 ($0.453)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 11000/11179 ($0.462)
+INFO bench.answer_metrics: zlog_value [z-ai/glm-5.3-flash]: 11179/11179 ($0.471)
+INFO bench.answer_metrics: summary: {"counts": {"zlog_value [anthropic/claude-haiku-5.5]:ok": 10093, "zlog_value [openai/gpt-6-luna]:ok": 11179, "zlog_value [z-ai/glm-5.3-flash]:ok": 11179}, "cost_usd": {"zlog_value [anthropic/claude-haiku-5.5]": 1.0124, "zlog_value [openai/gpt-6-luna]": 0.6271, "zlog_value [z-ai/glm-5.3-flash]": 0.4712}, "total_cost_usd": 2.1107, "out_of_credit": false, "planned": {"anthropic/claude-haiku-5.5": 10093, "z-ai/glm-5.3-flash": 11179, "openai/gpt-6-luna": 11179}}
+{
+ "counts": {
+  "zlog_value [anthropic/claude-haiku-5.5]:ok": 10093,
+  "zlog_value [openai/gpt-6-luna]:ok": 11179,
+  "zlog_value [z-ai/glm-5.3-flash]:ok": 11179
+ },
+ "cost_usd": {
+  "zlog_value [anthropic/claude-haiku-5.5]": 1.0124,
+  "zlog_value [openai/gpt-6-luna]": 0.6271,
+  "zlog_value [z-ai/glm-5.3-flash]": 0.4712
+ },
+ "total_cost_usd": 2.1107,
+ "out_of_credit": false,
+ "planned": {
+  "anthropic/claude-haiku-5.5": 10093,
+  "z-ai/glm-5.3-flash": 11179,
+  "openai/gpt-6-luna": 11179
+ }
+}

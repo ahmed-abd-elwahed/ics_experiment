@@ -1,0 +1,210 @@
+INFO bench.answer_metrics: answer_metrics --metrics reference --workers 24
+INFO bench.answer_metrics: planned: {'anthropic/claude-haiku-5.5': 409, 'z-ai/glm-5.3-flash': 409, 'openai/gpt-6-luna': 409}
+INFO bench.answer_metrics: reference [anthropic/claude-haiku-5.5]: 200/409 ($0.039)
+INFO bench.answer_metrics: reference [openai/gpt-6-luna]: 200/409 ($0.025)
+INFO bench.answer_metrics: reference [anthropic/claude-haiku-5.5]: 400/409 ($0.079)
+INFO bench.answer_metrics: reference [anthropic/claude-haiku-5.5]: 409/409 ($0.081)
+INFO bench.answer_metrics: reference [z-ai/glm-5.3-flash]: 200/409 ($0.016)
+INFO bench.answer_metrics: reference [openai/gpt-6-luna]: 400/409 ($0.052)
+INFO bench.answer_metrics: reference [openai/gpt-6-luna]: 409/409 ($0.053)
+INFO bench.answer_metrics: reference [z-ai/glm-5.3-flash]: 400/409 ($0.033)
+INFO bench.answer_metrics: reference [z-ai/glm-5.3-flash]: 409/409 ($0.037)
+INFO bench.answer_metrics: summary: {"counts": {"reference [anthropic/claude-haiku-5.5]:ok": 409, "reference [openai/gpt-6-luna]:ok": 409, "reference [z-ai/glm-5.3-flash]:ok": 409}, "cost_usd": {"reference [anthropic/claude-haiku-5.5]": 0.0808, "reference [openai/gpt-6-luna]": 0.0533, "reference [z-ai/glm-5.3-flash]": 0.0374}, "total_cost_usd": 0.1715, "out_of_credit": false, "planned": {"anthropic/claude-haiku-5.5": 409, "z-ai/glm-5.3-flash": 409, "openai/gpt-6-luna": 409}}
+{
+ "counts": {
+  "reference [anthropic/claude-haiku-5.5]:ok": 409,
+  "reference [openai/gpt-6-luna]:ok": 409,
+  "reference [z-ai/glm-5.3-flash]:ok": 409
+ },
+ "cost_usd": {
+  "reference [anthropic/claude-haiku-5.5]": 0.0808,
+  "reference [openai/gpt-6-luna]": 0.0533,
+  "reference [z-ai/glm-5.3-flash]": 0.0374
+ },
+ "total_cost_usd": 0.1715,
+ "out_of_credit": false,
+ "planned": {
+  "anthropic/claude-haiku-5.5": 409,
+  "z-ai/glm-5.3-flash": 409,
+  "openai/gpt-6-luna": 409
+ }
+}
+INFO bench: bench --out environment/results/repeats/run_02/sets_ab --workers 32 judge
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 25/841
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 50/841
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 75/841
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 100/841
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 125/841
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 25/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 50/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 75/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 100/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 125/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 150/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 175/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 200/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 225/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 250/1591
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 150/841
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 175/841
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 200/841
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 225/841
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 250/841
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 275/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 300/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 325/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 350/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 375/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 400/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 425/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 450/1591
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 275/841
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 475/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 500/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 525/1591
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 300/841
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 325/841
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 350/841
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 375/841
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 400/841
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 550/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 575/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 600/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 625/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 650/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 675/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 700/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 725/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 750/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 775/1591
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 425/841
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 450/841
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 475/841
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 500/841
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 525/841
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 800/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 825/1591
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 550/841
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 850/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 875/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 900/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 925/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 950/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 975/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1000/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1025/1591
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions failed (ConnectError); retrying in 1.0s
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1050/1591
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 575/841
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 600/841
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 625/841
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 650/841
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 675/841
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1075/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1100/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1125/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1150/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1175/1591
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 700/841
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1200/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1225/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1250/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1275/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1300/1591
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 725/841
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 750/841
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 775/841
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 800/841
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1325/1591
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 825/841
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1350/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1375/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1400/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1425/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1450/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1475/1591
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 841/841
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1500/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1525/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1550/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1575/1591
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 1591/1591
+{"panel": ["anthropic/claude-haiku-5.5"], "todo": 2432, "masked_correctness [anthropic/claude-haiku-5.5]:ok": 841, "factual_consistency [anthropic/claude-haiku-5.5]:ok": 1591, "cost_usd": {"masked_correctness [anthropic/claude-haiku-5.5]": 0.2322, "factual_consistency [anthropic/claude-haiku-5.5]": 0.3185}}
+bench judge: done; key spend +$0.4282
+INFO bench: bench --out environment/results/repeats/run_02/set_c --workers 32 judge
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 25/272
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 25/272
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 50/272
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 50/272
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 75/272
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 75/272
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 100/272
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 100/272
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 125/272
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 125/272
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 150/272
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 150/272
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 175/272
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 175/272
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 200/272
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 200/272
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 225/272
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 225/272
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 250/272
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 250/272
+INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 272/272
+INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 272/272
+{"panel": ["anthropic/claude-haiku-5.5"], "todo": 544, "masked_correctness [anthropic/claude-haiku-5.5]:ok": 272, "factual_consistency [anthropic/claude-haiku-5.5]:ok": 272, "cost_usd": {"masked_correctness [anthropic/claude-haiku-5.5]": 0.056, "factual_consistency [anthropic/claude-haiku-5.5]": 0.0487}}
+bench judge: done; key spend +$0.1228
+INFO bench.answer_metrics: answer_metrics --runs 2 --metrics zlog_value,faithfulness,case_alignment --judges anthropic/claude-haiku-5.5 --workers 32
+INFO bench.answer_metrics: planned: {'anthropic/claude-haiku-5.5': 4965}
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions failed (ConnectError); retrying in 1.0s
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 200/1088 ($0.020)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions failed (ConnectError); retrying in 1.0s
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions failed (ConnectError); retrying in 1.0s
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 400/1088 ($0.040)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 600/1088 ($0.061)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 800/1088 ($0.081)
+INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 200/2020 ($0.110)
+INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 400/2020 ($0.230)
+INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 600/2020 ($0.341)
+INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 800/2020 ($0.450)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions failed (ConnectError); retrying in 1.0s
+INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 1000/2020 ($0.517)
+INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 1200/2020 ($0.580)
+INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 1400/2020 ($0.666)
+INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 1600/2020 ($0.758)
+INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 1800/2020 ($0.867)
+INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 2000/2020 ($0.983)
+INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 2020/2020 ($0.995)
+INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 200/1857 ($0.031)
+INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 400/1857 ($0.062)
+INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 600/1857 ($0.093)
+INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 800/1857 ($0.124)
+INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1000/1857 ($0.156)
+INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1200/1857 ($0.187)
+INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1400/1857 ($0.218)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 1000/1088 ($0.101)
+INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 1088/1088 ($0.109)
+INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1600/1857 ($0.249)
+INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1800/1857 ($0.282)
+INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1857/1857 ($0.291)
+INFO bench.answer_metrics: summary: {"counts": {"case_alignment [anthropic/claude-haiku-5.5]:ok": 1857, "faithfulness [anthropic/claude-haiku-5.5]:ok": 2020, "zlog_value [anthropic/claude-haiku-5.5]:ok": 1088}, "cost_usd": {"case_alignment [anthropic/claude-haiku-5.5]": 0.2914, "faithfulness [anthropic/claude-haiku-5.5]": 0.9946, "zlog_value [anthropic/claude-haiku-5.5]": 0.1094}, "total_cost_usd": 1.3954, "out_of_credit": false, "planned": {"anthropic/claude-haiku-5.5": 4965}}
+{
+ "counts": {
+  "case_alignment [anthropic/claude-haiku-5.5]:ok": 1857,
+  "faithfulness [anthropic/claude-haiku-5.5]:ok": 2020,
+  "zlog_value [anthropic/claude-haiku-5.5]:ok": 1088
+ },
+ "cost_usd": {
+  "case_alignment [anthropic/claude-haiku-5.5]": 0.2914,
+  "faithfulness [anthropic/claude-haiku-5.5]": 0.9946,
+  "zlog_value [anthropic/claude-haiku-5.5]": 0.1094
+ },
+ "total_cost_usd": 1.3954,
+ "out_of_credit": false,
+ "planned": {
+  "anthropic/claude-haiku-5.5": 4965
+ }
+}
+exit 0

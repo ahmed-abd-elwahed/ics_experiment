@@ -207,3 +207,23 @@ in [environment/NOTES.md](environment/NOTES.md).
 | `experiment/rerun.py` does this: it reruns a record's failed case runs with the record's own config and writes a merged record. It has no test of its own yet. | Written while the run was in progress; it was exercised on the real record. |
 | The report adds an exact McNemar test for every pair of strategies, with a Bonferroni threshold. | The strategies ran on the same cases, so a paired test is the right comparison; ten pairs need a correction. |
 | Both 84 MB records (first pass and merged) are committed. | "Record everything"; each is under GitHub's 100 MB file limit. |
+
+### Test stage, revisions, and the full run
+
+| Decision | Why |
+|---|---|
+| Faithfulness was kept as first designed. | On run 2 with one judge its spread between methods was 8.0 times its noise, against 0.6–0.8 for the existing metrics. |
+| The zlog z-score's one revision widens σ by `max(1, |zlog(truth)| / 3.92)`. | 22% of scores sat at the cap, many for very abnormal true values answered with similarly abnormal ones. A first draft divided by 1.96; it rated an answer in the middle of the reference interval as satisfactory whatever the true value, so the divisor was doubled before any result was looked at. |
+| Case alignment's one revision compares the level the case leads one to expect with the level the answer states. | The first version returned neutral for 96% of answers and contradicted for none, so it had no room to differ. |
+| Both revised versions were kept. | The rule was to keep the more sensitive of the two versions; the revised ones scored higher on run 2 (0.25 against 0.23; 0.60 against 0.57). Both differences are inside the noise, and the report says so. |
+| Only one revision was tried for each metric, chosen by reasoning before its result was seen. | One retry was the brief; trying formulas until one separates the methods would have produced a number that means nothing. |
+| The full run was ordered so that the parts every table needs came first, and faithfulness and case alignment by the chat judges ran run by run behind a balance check. | Measured prices put the whole plan at about $63 against a balance of $48 (GLM's reasoning tokens made its faithfulness calls about five times the estimate). |
+| Run 1 was judged first in that loop. | Only run 1 has the two native search configurations. |
+| The run continued past the first estimate when the account balance rose by $100 during it. | I did not add the credit; the approved plan was all ten runs, and the balance check was the only brake I had set. |
+| Run 10's faithfulness and case alignment by the chat judges were left unfinished. | The API key reached its total limit of $250, a limit set on the key. I did not look for a way around it. |
+| A run counts for a metric and configuration only when every panel judge has judged at least 98% of its answers. | Otherwise run 10's few judged answers, or Jev's verdicts alone, would have been averaged as if they were a panel's. |
+| The planned sanity check of faithfulness was not run. | The key limit was reached first; the report lists it as not done. |
+| `repeat_summary.*` and the workspaces' reports were rebuilt with the new panel; the earlier table is kept as `repeat_summary_previous_panel.*`. | The old scores were to use the new judges; nothing was to be lost. |
+| `make_repeat_summary.py` now counts failed judge calls in the two existing metrics' files only, and no longer names Qwen. | It had started counting run 10's unfinished new-metric calls as failures of the old metrics. |
+| The report is A4 landscape, built from HTML by headless Chrome like the other result PDFs. | The scores table has nine columns; the existing tables are made the same way. |
+| The presentation rules were not applied to the report. | They are for slide decks; a PDF report was asked for. |

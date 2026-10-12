@@ -5,6 +5,13 @@ The benchmark run ten times on the same questions, to measure run-to-run spread.
 and [.json](repeat_summary.json) with every run's values), built by
 [../scripts/make_repeat_summary.py](../scripts/make_repeat_summary.py) (no API calls).
 
+> **2026-10-13: new judge panel.** `repeat_summary.*` and every run's `report.*` were rebuilt
+> with the panel Claude Haiku 5.5, GLM 5.3 Flash, GPT-6 Luna (Haiku and GLM re-judged every
+> answer; cost in [../answer_metrics/](../answer_metrics/)). The table as it was with Gemini 3.5
+> Flash Lite, Qwen 3.8 Flash and GPT-6 Luna is kept as `repeat_summary_previous_panel.*`, and the
+> figures quoted below are that earlier panel's. Three more metrics were added the same day:
+> [../answer_metrics/answer_metrics_report.pdf](../answer_metrics/answer_metrics_report.pdf).
+
 ## What was repeated
 
 - **Configurations, sets A and B (141 + 272 questions):** `gemini_knowledge`, `current`,

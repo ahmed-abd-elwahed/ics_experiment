@@ -1,5 +1,29 @@
 # Environment benchmark results
 
+## 2026-10-13: three more answer metrics, a new judge panel, and the Jev decision model
+
+Report: [answer_metrics/answer_metrics_report.pdf](answer_metrics/answer_metrics_report.pdf)
+(scores: [answer_metrics/answer_metrics.md](answer_metrics/answer_metrics.md), `.json`; the
+one-run test: `answer_metrics/test_run2_haiku.json`). Method: [../bench/README.md](../bench/README.md).
+
+- **New metrics:** the zlog z-score (closeness to the true value), faithfulness (do the
+  retrieved documents support the answer), and case alignment (does the rest of the case bear
+  on the answer).
+- **Faithfulness separates every pair of retrieval methods** (spread 8.1 times the run-to-run
+  noise; 0.2–0.7 for the two existing metrics): 59% of Perplexity's answers are supported, 35%
+  with changes 1–4, 21–25% for the other three methods.
+- **The zlog z-score does not** (0.5): the methods' answers are equally close to the true value.
+- **Case alignment does slightly** (1.0–1.4), on differences of one to two points.
+- **Judge panel:** Claude Haiku 5.5, GLM 5.3 Flash, GPT-6 Luna (Gemini and Qwen replaced; the
+  existing metrics re-judged, and hardly changed). `typesafe/jev-1.13` judged everything but the
+  zlog z-score as a fourth judge; the scores are given with and without it.
+- **Coverage:** all ten runs, except faithfulness and case alignment by the chat judges (runs
+  1–9; the API key reached its total limit of $250 during run 10).
+- **Spend:** $56.60 on the OpenRouter key on the day (about 289,000 judgments, tests and
+  calibration included).
+
+The sections below describe earlier evaluations; their figures are the earlier panel's.
+
 ## 2026-09-29: seven retrieval configurations, and set C
 
 The table: [retriever_comparison.pdf](retriever_comparison.pdf) (also

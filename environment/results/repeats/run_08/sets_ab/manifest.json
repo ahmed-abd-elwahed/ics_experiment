@@ -186,6 +186,43 @@
       ],
       "key_usage_before": 193.371128582,
       "key_usage_after": 193.371128582
+    },
+    {
+      "step": "judge",
+      "at": "2026-10-12T18:02:04+00:00",
+      "panel": [
+        "anthropic/claude-haiku-5.5",
+        "z-ai/glm-5.3-flash",
+        "openai/gpt-6-luna"
+      ],
+      "todo": 4876,
+      "masked_correctness [z-ai/glm-5.3-flash]:ok": 841,
+      "masked_correctness [anthropic/claude-haiku-5.5]:ok": 841,
+      "factual_consistency [anthropic/claude-haiku-5.5]:ok": 1597,
+      "factual_consistency [z-ai/glm-5.3-flash]:ok": 1597,
+      "cost_usd": {
+        "masked_correctness [z-ai/glm-5.3-flash]": 0.1176,
+        "masked_correctness [anthropic/claude-haiku-5.5]": 0.2319,
+        "factual_consistency [anthropic/claude-haiku-5.5]": 0.3203,
+        "factual_consistency [z-ai/glm-5.3-flash]": 0.1564
+      },
+      "key_usage_before": 215.612863004,
+      "key_usage_after": 217.01626324
+    },
+    {
+      "step": "report",
+      "at": "2026-10-12T22:15:24+00:00",
+      "report": "environment/results/repeats/run_08/sets_ab/report.md",
+      "configs": [
+        "gemini_knowledge",
+        "current",
+        "improved_1to4",
+        "openrouter_exa_instant",
+        "openrouter_parallel_basic",
+        "openrouter_perplexity"
+      ],
+      "key_usage_before": 250.06641847,
+      "key_usage_after": 250.06641847
     }
   ],
   "latest": {
@@ -229,20 +266,29 @@
     },
     "judge": {
       "step": "judge",
-      "at": "2026-10-02T23:30:45+00:00",
+      "at": "2026-10-12T18:02:04+00:00",
       "panel": [
-        "google/gemini-3.5-flash-lite",
-        "qwen/qwen3.8-flash",
+        "anthropic/claude-haiku-5.5",
+        "z-ai/glm-5.3-flash",
         "openai/gpt-6-luna"
       ],
-      "todo": 0,
-      "cost_usd": {},
-      "key_usage_before": 193.2771185,
-      "key_usage_after": 193.2771185
+      "todo": 4876,
+      "masked_correctness [z-ai/glm-5.3-flash]:ok": 841,
+      "masked_correctness [anthropic/claude-haiku-5.5]:ok": 841,
+      "factual_consistency [anthropic/claude-haiku-5.5]:ok": 1597,
+      "factual_consistency [z-ai/glm-5.3-flash]:ok": 1597,
+      "cost_usd": {
+        "masked_correctness [z-ai/glm-5.3-flash]": 0.1176,
+        "masked_correctness [anthropic/claude-haiku-5.5]": 0.2319,
+        "factual_consistency [anthropic/claude-haiku-5.5]": 0.3203,
+        "factual_consistency [z-ai/glm-5.3-flash]": 0.1564
+      },
+      "key_usage_before": 215.612863004,
+      "key_usage_after": 217.01626324
     },
     "report": {
       "step": "report",
-      "at": "2026-10-02T23:35:45+00:00",
+      "at": "2026-10-12T22:15:24+00:00",
       "report": "environment/results/repeats/run_08/sets_ab/report.md",
       "configs": [
         "gemini_knowledge",
@@ -252,8 +298,8 @@
         "openrouter_parallel_basic",
         "openrouter_perplexity"
       ],
-      "key_usage_before": 193.371128582,
-      "key_usage_after": 193.371128582
+      "key_usage_before": 250.06641847,
+      "key_usage_after": 250.06641847
     }
   }
 }

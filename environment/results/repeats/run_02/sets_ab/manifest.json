@@ -184,6 +184,55 @@
       ],
       "key_usage_before": 193.152825118,
       "key_usage_after": 193.153725032
+    },
+    {
+      "step": "judge",
+      "at": "2026-10-12T16:28:16+00:00",
+      "panel": [
+        "anthropic/claude-haiku-5.5"
+      ],
+      "todo": 2432,
+      "masked_correctness [anthropic/claude-haiku-5.5]:ok": 841,
+      "factual_consistency [anthropic/claude-haiku-5.5]:ok": 1591,
+      "cost_usd": {
+        "masked_correctness [anthropic/claude-haiku-5.5]": 0.2322,
+        "factual_consistency [anthropic/claude-haiku-5.5]": 0.3185
+      },
+      "key_usage_before": 193.8769855,
+      "key_usage_after": 194.30518712
+    },
+    {
+      "step": "judge",
+      "at": "2026-10-12T16:59:45+00:00",
+      "panel": [
+        "anthropic/claude-haiku-5.5",
+        "z-ai/glm-5.3-flash",
+        "openai/gpt-6-luna"
+      ],
+      "todo": 2432,
+      "masked_correctness [z-ai/glm-5.3-flash]:ok": 841,
+      "factual_consistency [z-ai/glm-5.3-flash]:ok": 1591,
+      "cost_usd": {
+        "masked_correctness [z-ai/glm-5.3-flash]": 0.1345,
+        "factual_consistency [z-ai/glm-5.3-flash]": 0.1689
+      },
+      "key_usage_before": 199.24771326599998,
+      "key_usage_after": 200.853047785
+    },
+    {
+      "step": "report",
+      "at": "2026-10-12T22:12:54+00:00",
+      "report": "environment/results/repeats/run_02/sets_ab/report.md",
+      "configs": [
+        "gemini_knowledge",
+        "current",
+        "improved_1to4",
+        "openrouter_exa_instant",
+        "openrouter_parallel_basic",
+        "openrouter_perplexity"
+      ],
+      "key_usage_before": 250.06641847,
+      "key_usage_after": 250.06641847
     }
   ],
   "latest": {
@@ -224,20 +273,25 @@
     },
     "judge": {
       "step": "judge",
-      "at": "2026-10-02T22:31:01+00:00",
+      "at": "2026-10-12T16:59:45+00:00",
       "panel": [
-        "google/gemini-3.5-flash-lite",
-        "qwen/qwen3.8-flash",
+        "anthropic/claude-haiku-5.5",
+        "z-ai/glm-5.3-flash",
         "openai/gpt-6-luna"
       ],
-      "todo": 0,
-      "cost_usd": {},
-      "key_usage_before": 188.963509847,
-      "key_usage_after": 188.963509847
+      "todo": 2432,
+      "masked_correctness [z-ai/glm-5.3-flash]:ok": 841,
+      "factual_consistency [z-ai/glm-5.3-flash]:ok": 1591,
+      "cost_usd": {
+        "masked_correctness [z-ai/glm-5.3-flash]": 0.1345,
+        "factual_consistency [z-ai/glm-5.3-flash]": 0.1689
+      },
+      "key_usage_before": 199.24771326599998,
+      "key_usage_after": 200.853047785
     },
     "report": {
       "step": "report",
-      "at": "2026-10-02T23:18:38+00:00",
+      "at": "2026-10-12T22:12:54+00:00",
       "report": "environment/results/repeats/run_02/sets_ab/report.md",
       "configs": [
         "gemini_knowledge",
@@ -247,8 +301,8 @@
         "openrouter_parallel_basic",
         "openrouter_perplexity"
       ],
-      "key_usage_before": 193.152825118,
-      "key_usage_after": 193.153725032
+      "key_usage_before": 250.06641847,
+      "key_usage_after": 250.06641847
     }
   }
 }

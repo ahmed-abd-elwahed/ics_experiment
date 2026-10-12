@@ -1,0 +1,5 @@
+2026-10-13 03:36:29,068 INFO bench.answer_metrics: answer_metrics --runs 2 --metrics case_alignment --alignment-rubric m2 --judges anthropic/claude-haiku-5.5,typesafe/jev-1.13 --limit 4 --configs improved_1to4,case_information
+2026-10-13 03:36:29,585 INFO bench.answer_metrics: planned: {'anthropic/claude-haiku-5.5': 8, 'typesafe/jev-1.13': 8}
+2026-10-13 03:36:30,681 INFO bench.answer_metrics: case_alignment [typesafe/jev-1.13]: 8/8 ($0.000)
+2026-10-13 03:36:33,776 INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 8/8 ($0.002)
+2026-10-13 03:36:33,779 INFO bench.answer_metrics: summary: {"counts": {"case_alignment [anthropic/claude-haiku-5.5]:ok": 8, "case_alignment [typesafe/jev-1.13]:ok": 8}, "cost_usd": {"case_alignment [anthropic/claude-haiku-5.5]": 0.0016, "case_alignment [typesafe/jev-1.13]": 0.0003}, "total_cost_usd": 0.0019, "out_of_credit": false, "planned": {"anthropic/claude-haiku-5.5": 8, "typesafe/jev-1.13": 8}}

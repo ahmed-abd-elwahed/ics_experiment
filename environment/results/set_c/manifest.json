@@ -142,6 +142,38 @@
       ],
       "key_usage_before": 47.201322419,
       "key_usage_after": 47.201322419
+    },
+    {
+      "step": "judge",
+      "at": "2026-10-12T16:52:13+00:00",
+      "panel": [
+        "anthropic/claude-haiku-5.5",
+        "z-ai/glm-5.3-flash",
+        "openai/gpt-6-luna"
+      ],
+      "todo": 1088,
+      "factual_consistency [z-ai/glm-5.3-flash]:ok": 272,
+      "masked_correctness [z-ai/glm-5.3-flash]:ok": 272,
+      "masked_correctness [anthropic/claude-haiku-5.5]:ok": 272,
+      "factual_consistency [anthropic/claude-haiku-5.5]:ok": 272,
+      "cost_usd": {
+        "factual_consistency [z-ai/glm-5.3-flash]": 0.0241,
+        "masked_correctness [z-ai/glm-5.3-flash]": 0.0297,
+        "masked_correctness [anthropic/claude-haiku-5.5]": 0.0561,
+        "factual_consistency [anthropic/claude-haiku-5.5]": 0.0486
+      },
+      "key_usage_before": 198.661093534,
+      "key_usage_after": 199.021828269
+    },
+    {
+      "step": "report",
+      "at": "2026-10-12T22:16:47+00:00",
+      "report": "environment/results/set_c/report.md",
+      "configs": [
+        "case_information"
+      ],
+      "key_usage_before": 250.06641847,
+      "key_usage_after": 250.06641847
     }
   ],
   "latest": {
@@ -186,39 +218,35 @@
     },
     "judge": {
       "step": "judge",
-      "at": "2026-09-29T01:48:47+00:00",
+      "at": "2026-10-12T16:52:13+00:00",
       "panel": [
-        "google/gemini-3.5-flash-lite",
-        "qwen/qwen3.8-flash",
+        "anthropic/claude-haiku-5.5",
+        "z-ai/glm-5.3-flash",
         "openai/gpt-6-luna"
       ],
-      "todo": 24,
-      "masked_correctness [google/gemini-3.5-flash-lite]:ok": 4,
-      "factual_consistency [google/gemini-3.5-flash-lite]:ok": 4,
-      "masked_correctness [openai/gpt-6-luna]:ok": 4,
-      "factual_consistency [openai/gpt-6-luna]:ok": 4,
-      "factual_consistency [qwen/qwen3.8-flash]:ok": 4,
-      "masked_correctness [qwen/qwen3.8-flash]:ok": 4,
+      "todo": 1088,
+      "factual_consistency [z-ai/glm-5.3-flash]:ok": 272,
+      "masked_correctness [z-ai/glm-5.3-flash]:ok": 272,
+      "masked_correctness [anthropic/claude-haiku-5.5]:ok": 272,
+      "factual_consistency [anthropic/claude-haiku-5.5]:ok": 272,
       "cost_usd": {
-        "masked_correctness [google/gemini-3.5-flash-lite]": 0.002,
-        "factual_consistency [google/gemini-3.5-flash-lite]": 0.002,
-        "masked_correctness [openai/gpt-6-luna]": 0.0008,
-        "factual_consistency [openai/gpt-6-luna]": 0.0007,
-        "factual_consistency [qwen/qwen3.8-flash]": 0.0018,
-        "masked_correctness [qwen/qwen3.8-flash]": 0.0016
+        "factual_consistency [z-ai/glm-5.3-flash]": 0.0241,
+        "masked_correctness [z-ai/glm-5.3-flash]": 0.0297,
+        "masked_correctness [anthropic/claude-haiku-5.5]": 0.0561,
+        "factual_consistency [anthropic/claude-haiku-5.5]": 0.0486
       },
-      "key_usage_before": 47.191656611,
-      "key_usage_after": 47.191656611
+      "key_usage_before": 198.661093534,
+      "key_usage_after": 199.021828269
     },
     "report": {
       "step": "report",
-      "at": "2026-09-29T01:49:27+00:00",
+      "at": "2026-10-12T22:16:47+00:00",
       "report": "environment/results/set_c/report.md",
       "configs": [
         "case_information"
       ],
-      "key_usage_before": 47.201322419,
-      "key_usage_after": 47.201322419
+      "key_usage_before": 250.06641847,
+      "key_usage_after": 250.06641847
     },
     "replay": {
       "step": "replay",

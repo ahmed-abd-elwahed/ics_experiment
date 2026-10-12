@@ -1,0 +1,6 @@
+2026-10-13 03:20:24,117 INFO bench.answer_metrics: answer_metrics --metrics reference --limit 4
+2026-10-13 03:20:24,593 INFO bench.answer_metrics: planned: {'anthropic/claude-haiku-5.5': 4, 'z-ai/glm-5.3-flash': 4, 'openai/gpt-6-luna': 4}
+2026-10-13 03:20:29,481 INFO bench.answer_metrics: reference [anthropic/claude-haiku-5.5]: 4/4 ($0.001)
+2026-10-13 03:20:33,488 INFO bench.answer_metrics: reference [openai/gpt-6-luna]: 4/4 ($0.001)
+2026-10-13 03:21:05,120 INFO bench.answer_metrics: reference [z-ai/glm-5.3-flash]: 4/4 ($0.001)
+2026-10-13 03:21:05,121 INFO bench.answer_metrics: summary: {"counts": {"reference [anthropic/claude-haiku-5.5]:ok": 4, "reference [openai/gpt-6-luna]:ok": 4, "reference [z-ai/glm-5.3-flash]:ok": 4}, "cost_usd": {"reference [anthropic/claude-haiku-5.5]": 0.0011, "reference [openai/gpt-6-luna]": 0.0009, "reference [z-ai/glm-5.3-flash]": 0.0007}, "total_cost_usd": 0.0027, "out_of_credit": false, "planned": {"anthropic/claude-haiku-5.5": 4, "z-ai/glm-5.3-flash": 4, "openai/gpt-6-luna": 4}}

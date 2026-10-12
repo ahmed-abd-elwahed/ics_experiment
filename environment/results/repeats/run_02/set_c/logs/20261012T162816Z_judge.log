@@ -1,0 +1,23 @@
+2026-10-13 03:28:16,435 INFO bench: bench --out environment/results/repeats/run_02/set_c --workers 32 judge
+2026-10-13 03:28:20,865 INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 25/272
+2026-10-13 03:28:20,870 INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 25/272
+2026-10-13 03:28:24,064 INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 50/272
+2026-10-13 03:28:24,122 INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 50/272
+2026-10-13 03:28:26,343 INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 75/272
+2026-10-13 03:28:26,419 INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 75/272
+2026-10-13 03:28:29,260 INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 100/272
+2026-10-13 03:28:29,596 INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 100/272
+2026-10-13 03:28:31,790 INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 125/272
+2026-10-13 03:28:31,928 INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 125/272
+2026-10-13 03:28:35,071 INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 150/272
+2026-10-13 03:28:35,172 INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 150/272
+2026-10-13 03:28:37,443 INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 175/272
+2026-10-13 03:28:37,762 INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 175/272
+2026-10-13 03:28:40,268 INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 200/272
+2026-10-13 03:28:40,331 INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 200/272
+2026-10-13 03:28:43,043 INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 225/272
+2026-10-13 03:28:43,090 INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 225/272
+2026-10-13 03:28:45,764 INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 250/272
+2026-10-13 03:28:45,846 INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 250/272
+2026-10-13 03:28:48,206 INFO bench.judge: judge masked_correctness [anthropic/claude-haiku-5.5]: 272/272
+2026-10-13 03:28:48,216 INFO bench.judge: judge factual_consistency [anthropic/claude-haiku-5.5]: 272/272

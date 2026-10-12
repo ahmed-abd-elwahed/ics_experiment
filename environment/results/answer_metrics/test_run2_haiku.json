@@ -1,0 +1,371 @@
+{
+ "run": 2,
+ "panel": [
+  "anthropic/claude-haiku-5.5"
+ ],
+ "metrics": {
+  "mc_same": {
+   "questions": 141,
+   "means": {
+    "gemini_knowledge": 0.8297872340425532,
+    "current": 0.8723404255319149,
+    "improved_1to4": 0.851063829787234,
+    "openrouter_exa_instant": 0.8439716312056738,
+    "openrouter_parallel_basic": 0.8794326241134752,
+    "openrouter_perplexity": 0.8156028368794326
+   },
+   "se": {
+    "gemini_knowledge": 0.03259742226164714,
+    "current": 0.029277884795056015,
+    "improved_1to4": 0.032411813158865585,
+    "openrouter_exa_instant": 0.03156473114304315,
+    "openrouter_parallel_basic": 0.029114162255186087,
+    "openrouter_perplexity": 0.034862150072448764
+   },
+   "spread": 0.02443122587756753,
+   "noise": 0.03163802728104113,
+   "signal_to_noise": 0.7722107848427002,
+   "pairs": 15,
+   "pairs_separated": 2,
+   "separated": [
+    [
+     "current",
+     "openrouter_perplexity"
+    ],
+    [
+     "openrouter_parallel_basic",
+     "openrouter_perplexity"
+    ]
+   ]
+  },
+  "mc_exact": {
+   "questions": 141,
+   "means": {
+    "gemini_knowledge": 0.4397163120567376,
+    "current": 0.4397163120567376,
+    "improved_1to4": 0.3617021276595745,
+    "openrouter_exa_instant": 0.46808510638297873,
+    "openrouter_parallel_basic": 0.41843971631205673,
+    "openrouter_perplexity": 0.4397163120567376
+   },
+   "se": {
+    "gemini_knowledge": 0.04422205824027985,
+    "current": 0.044411978324248085,
+    "improved_1to4": 0.04192995915123209,
+    "openrouter_exa_instant": 0.045391821839066156,
+    "openrouter_parallel_basic": 0.04480260177174009,
+    "openrouter_perplexity": 0.04118053096661723
+   },
+   "spread": 0.03607041347094213,
+   "noise": 0.04365649171553058,
+   "signal_to_noise": 0.8262325270198076,
+   "pairs": 15,
+   "pairs_separated": 1,
+   "separated": [
+    [
+     "improved_1to4",
+     "openrouter_exa_instant"
+    ]
+   ]
+  },
+  "fc_consistent": {
+   "questions": 272,
+   "means": {
+    "gemini_knowledge": 0.9669117647058824,
+    "current": 0.9705882352941176,
+    "improved_1to4": 0.9558823529411765,
+    "openrouter_exa_instant": 0.9705882352941176,
+    "openrouter_parallel_basic": 0.9742647058823529,
+    "openrouter_perplexity": 0.9632352941176471
+   },
+   "se": {
+    "gemini_knowledge": 0.010950374425272512,
+    "current": 0.010416454072922953,
+    "improved_1to4": 0.012715127751829475,
+    "openrouter_exa_instant": 0.01025589605197893,
+    "openrouter_parallel_basic": 0.009534489532345503,
+    "openrouter_perplexity": 0.011336825316258618
+   },
+   "spread": 0.006576670522058182,
+   "noise": 0.010868194525101333,
+   "signal_to_noise": 0.6051299971553336,
+   "pairs": 15,
+   "pairs_separated": 0,
+   "separated": []
+  },
+  "zlog": {
+   "questions": 140,
+   "means": {
+    "gemini_knowledge": 1.202271405149855,
+    "current": 1.1669875253692783,
+    "improved_1to4": 1.2386264507269211,
+    "openrouter_exa_instant": 1.2034016490271142,
+    "openrouter_parallel_basic": 1.2197161715793141,
+    "openrouter_perplexity": 1.198101242681346
+   },
+   "se": {
+    "gemini_knowledge": 0.09288559357954797,
+    "current": 0.08972786244957118,
+    "improved_1to4": 0.09457394126618968,
+    "openrouter_exa_instant": 0.09894080291043422,
+    "openrouter_parallel_basic": 0.09482697010382478,
+    "openrouter_perplexity": 0.09097315585477352
+   },
+   "spread": 0.023873463344439187,
+   "noise": 0.09365472102739021,
+   "signal_to_noise": 0.25490934234332047,
+   "pairs": 15,
+   "pairs_separated": 0,
+   "separated": []
+  },
+  "zlog_sat": {
+   "questions": 140,
+   "means": {
+    "gemini_knowledge": 0.7857142857142857,
+    "current": 0.7785714285714286,
+    "improved_1to4": 0.7428571428571429,
+    "openrouter_exa_instant": 0.7571428571428571,
+    "openrouter_parallel_basic": 0.7428571428571429,
+    "openrouter_perplexity": 0.7714285714285715
+   },
+   "se": {
+    "gemini_knowledge": 0.03666411044885967,
+    "current": 0.03510956667540566,
+    "improved_1to4": 0.03763222519589856,
+    "openrouter_exa_instant": 0.041573036598782975,
+    "openrouter_parallel_basic": 0.03947370638313796,
+    "openrouter_perplexity": 0.0364693096508915
+   },
+   "spread": 0.01830393437503101,
+   "noise": 0.037820325825496055,
+   "signal_to_noise": 0.483970827207725,
+   "pairs": 15,
+   "pairs_separated": 0,
+   "separated": []
+  },
+  "faith": {
+   "questions": 413,
+   "means": {
+    "current": 0.1694915254237288,
+    "improved_1to4": 0.29539951573849876,
+    "openrouter_exa_instant": 0.1549636803874092,
+    "openrouter_parallel_basic": 0.22760290556900725,
+    "openrouter_perplexity": 0.5665859564164649
+   },
+   "se": {
+    "current": 0.017930645337211656,
+    "improved_1to4": 0.022595049915351058,
+    "openrouter_exa_instant": 0.01711557382850541,
+    "openrouter_parallel_basic": 0.021709567547584335,
+    "openrouter_perplexity": 0.025307638302462476
+   },
+   "spread": 0.168018503990383,
+   "noise": 0.020931694986222986,
+   "signal_to_noise": 8.026989887869615,
+   "pairs": 10,
+   "pairs_separated": 9,
+   "separated": [
+    [
+     "current",
+     "improved_1to4"
+    ],
+    [
+     "current",
+     "openrouter_parallel_basic"
+    ],
+    [
+     "current",
+     "openrouter_perplexity"
+    ],
+    [
+     "improved_1to4",
+     "openrouter_exa_instant"
+    ],
+    [
+     "improved_1to4",
+     "openrouter_parallel_basic"
+    ],
+    [
+     "improved_1to4",
+     "openrouter_perplexity"
+    ],
+    [
+     "openrouter_exa_instant",
+     "openrouter_parallel_basic"
+    ],
+    [
+     "openrouter_exa_instant",
+     "openrouter_perplexity"
+    ],
+    [
+     "openrouter_parallel_basic",
+     "openrouter_perplexity"
+    ]
+   ]
+  },
+  "align_aligned": {
+   "questions": 272,
+   "means": {
+    "gemini_knowledge": 0.15808823529411764,
+    "current": 0.16544117647058823,
+    "improved_1to4": 0.19117647058823528,
+    "openrouter_exa_instant": 0.18382352941176472,
+    "openrouter_parallel_basic": 0.17279411764705882,
+    "openrouter_perplexity": 0.1875
+   },
+   "se": {
+    "gemini_knowledge": 0.023067544284244217,
+    "current": 0.02514453745567982,
+    "improved_1to4": 0.026584048235907612,
+    "openrouter_exa_instant": 0.024612196251907578,
+    "openrouter_parallel_basic": 0.02244267949080843,
+    "openrouter_perplexity": 0.026897250514045724
+   },
+   "spread": 0.01315334104411641,
+   "noise": 0.024791376038765564,
+   "signal_to_noise": 0.5305611525374352,
+   "pairs": 15,
+   "pairs_separated": 0,
+   "separated": []
+  },
+  "align_contra": {
+   "questions": 272,
+   "means": {
+    "gemini_knowledge": 0.03676470588235294,
+    "current": 0.025735294117647058,
+    "improved_1to4": 0.022058823529411766,
+    "openrouter_exa_instant": 0.01838235294117647,
+    "openrouter_parallel_basic": 0.029411764705882353,
+    "openrouter_perplexity": 0.025735294117647058
+   },
+   "se": {
+    "gemini_knowledge": 0.013419955057178396,
+    "current": 0.010946084538827517,
+    "improved_1to4": 0.008928828868588541,
+    "openrouter_exa_instant": 0.009414956945390525,
+    "openrouter_parallel_basic": 0.010012632551446906,
+    "openrouter_perplexity": 0.010794978769647074
+   },
+   "spread": 0.006332358177825399,
+   "noise": 0.010586239455179827,
+   "signal_to_noise": 0.5981688024945429,
+   "pairs": 15,
+   "pairs_separated": 0,
+   "separated": []
+  },
+  "zlog_v1": {
+   "questions": 140,
+   "means": {
+    "gemini_knowledge": 1.3727919568798626,
+    "current": 1.353895601918624,
+    "improved_1to4": 1.4155885209209498,
+    "openrouter_exa_instant": 1.3710282433968075,
+    "openrouter_parallel_basic": 1.4039482877062426,
+    "openrouter_perplexity": 1.3769826610190283
+   },
+   "se": {
+    "gemini_knowledge": 0.09805930196091235,
+    "current": 0.09654246409924266,
+    "improved_1to4": 0.09975657108011024,
+    "openrouter_exa_instant": 0.10363658184710292,
+    "openrouter_parallel_basic": 0.0989317480124488,
+    "openrouter_perplexity": 0.09629225274280624
+   },
+   "spread": 0.022931557792209747,
+   "noise": 0.09886981995710387,
+   "signal_to_noise": 0.23193688227771572,
+   "pairs": 15,
+   "pairs_separated": 0,
+   "separated": []
+  },
+  "zlog_v1_sat": {
+   "questions": 140,
+   "means": {
+    "gemini_knowledge": 0.7142857142857143,
+    "current": 0.6785714285714286,
+    "improved_1to4": 0.6714285714285714,
+    "openrouter_exa_instant": 0.6785714285714286,
+    "openrouter_parallel_basic": 0.6785714285714286,
+    "openrouter_perplexity": 0.6785714285714286
+   },
+   "se": {
+    "gemini_knowledge": 0.04057700011791954,
+    "current": 0.03857848258984702,
+    "improved_1to4": 0.03892437358268165,
+    "openrouter_exa_instant": 0.04248363469602835,
+    "openrouter_parallel_basic": 0.04133652935611822,
+    "openrouter_perplexity": 0.03973992582638175
+   },
+   "spread": 0.015430334996209197,
+   "noise": 0.04027332436149609,
+   "signal_to_noise": 0.38314033521805807,
+   "pairs": 15,
+   "pairs_separated": 0,
+   "separated": []
+  },
+  "align_v1_aligned": {
+   "questions": 272,
+   "means": {
+    "gemini_knowledge": 0.03308823529411765,
+    "current": 0.051470588235294115,
+    "improved_1to4": 0.03676470588235294,
+    "openrouter_exa_instant": 0.04779411764705882,
+    "openrouter_parallel_basic": 0.04411764705882353,
+    "openrouter_perplexity": 0.04044117647058824
+   },
+   "se": {
+    "gemini_knowledge": 0.011106388765834108,
+    "current": 0.013018981676676328,
+    "improved_1to4": 0.010947672746848325,
+    "openrouter_exa_instant": 0.012735176768764274,
+    "openrouter_parallel_basic": 0.012508362566655745,
+    "openrouter_perplexity": 0.011613232720648762
+   },
+   "spread": 0.0068780466668638615,
+   "noise": 0.011988302540904591,
+   "signal_to_noise": 0.5737298206644083,
+   "pairs": 15,
+   "pairs_separated": 0,
+   "separated": []
+  },
+  "align_v1_contra": {
+   "questions": 272,
+   "means": {
+    "gemini_knowledge": 0.0,
+    "current": 0.0,
+    "improved_1to4": 0.0,
+    "openrouter_exa_instant": 0.0,
+    "openrouter_parallel_basic": 0.0,
+    "openrouter_perplexity": 0.0
+   },
+   "se": {
+    "gemini_knowledge": 0.0,
+    "current": 0.0,
+    "improved_1to4": 0.0,
+    "openrouter_exa_instant": 0.0,
+    "openrouter_parallel_basic": 0.0,
+    "openrouter_perplexity": 0.0
+   },
+   "spread": 0.0,
+   "noise": 0.0,
+   "signal_to_noise": null,
+   "pairs": 15,
+   "pairs_separated": 0,
+   "separated": []
+  }
+ },
+ "titles": {
+  "mc_same": "Masked correctness: same category (incl. exact), %",
+  "mc_exact": "Masked correctness: exact, %",
+  "fc_consistent": "Factual consistency: consistent, %",
+  "zlog": "Zlog z-score: mean |z| (capped at 3)",
+  "zlog_sat": "Zlog z-score: satisfactory (|z| \u2264 2), %",
+  "faith": "Faithfulness: supported, %",
+  "align_aligned": "Case alignment: aligned, %",
+  "align_contra": "Case alignment: contradicted, %",
+  "zlog_v1": "Zlog z-score, first version: mean |z|",
+  "zlog_v1_sat": "Zlog z-score, first version: satisfactory, %",
+  "align_v1_aligned": "Case alignment, first version: aligned, %",
+  "align_v1_contra": "Case alignment, first version: contradicted, %"
+ }
+}

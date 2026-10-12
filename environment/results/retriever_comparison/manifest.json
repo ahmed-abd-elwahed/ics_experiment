@@ -448,6 +448,45 @@
       ],
       "key_usage_before": 47.191656611,
       "key_usage_after": 47.199796337
+    },
+    {
+      "step": "judge",
+      "at": "2026-10-12T16:50:21+00:00",
+      "panel": [
+        "anthropic/claude-haiku-5.5",
+        "z-ai/glm-5.3-flash",
+        "openai/gpt-6-luna"
+      ],
+      "todo": 6452,
+      "masked_correctness [z-ai/glm-5.3-flash]:ok": 1127,
+      "masked_correctness [anthropic/claude-haiku-5.5]:ok": 1127,
+      "factual_consistency [anthropic/claude-haiku-5.5]:ok": 2099,
+      "factual_consistency [z-ai/glm-5.3-flash]:ok": 2099,
+      "cost_usd": {
+        "masked_correctness [z-ai/glm-5.3-flash]": 0.2015,
+        "masked_correctness [anthropic/claude-haiku-5.5]": 0.3099,
+        "factual_consistency [anthropic/claude-haiku-5.5]": 0.423,
+        "factual_consistency [z-ai/glm-5.3-flash]": 0.2304
+      },
+      "key_usage_before": 196.367952898,
+      "key_usage_after": 198.661093534
+    },
+    {
+      "step": "report",
+      "at": "2026-10-12T22:17:22+00:00",
+      "report": "environment/results/retriever_comparison/report.md",
+      "configs": [
+        "current",
+        "gemini_knowledge",
+        "improved_1to4",
+        "openrouter_exa_instant",
+        "openrouter_google",
+        "openrouter_openai",
+        "openrouter_parallel_basic",
+        "openrouter_perplexity"
+      ],
+      "key_usage_before": 250.06641847,
+      "key_usage_after": 250.06641847
     }
   ],
   "latest": {
@@ -497,46 +536,42 @@
     },
     "judge": {
       "step": "judge",
-      "at": "2026-09-29T01:48:09+00:00",
+      "at": "2026-10-12T16:50:21+00:00",
       "panel": [
-        "google/gemini-3.5-flash-lite",
-        "qwen/qwen3.8-flash",
+        "anthropic/claude-haiku-5.5",
+        "z-ai/glm-5.3-flash",
         "openai/gpt-6-luna"
       ],
-      "todo": 144,
-      "masked_correctness [google/gemini-3.5-flash-lite]:ok": 15,
-      "factual_consistency [openai/gpt-6-luna]:ok": 33,
-      "masked_correctness [openai/gpt-6-luna]:ok": 15,
-      "factual_consistency [google/gemini-3.5-flash-lite]:ok": 33,
-      "factual_consistency [qwen/qwen3.8-flash]:ok": 33,
-      "masked_correctness [qwen/qwen3.8-flash]:ok": 15,
+      "todo": 6452,
+      "masked_correctness [z-ai/glm-5.3-flash]:ok": 1127,
+      "masked_correctness [anthropic/claude-haiku-5.5]:ok": 1127,
+      "factual_consistency [anthropic/claude-haiku-5.5]:ok": 2099,
+      "factual_consistency [z-ai/glm-5.3-flash]:ok": 2099,
       "cost_usd": {
-        "masked_correctness [google/gemini-3.5-flash-lite]": 0.0083,
-        "factual_consistency [openai/gpt-6-luna]": 0.0041,
-        "masked_correctness [openai/gpt-6-luna]": 0.0027,
-        "factual_consistency [google/gemini-3.5-flash-lite]": 0.0143,
-        "factual_consistency [qwen/qwen3.8-flash]": 0.0067,
-        "masked_correctness [qwen/qwen3.8-flash]": 0.0078
+        "masked_correctness [z-ai/glm-5.3-flash]": 0.2015,
+        "masked_correctness [anthropic/claude-haiku-5.5]": 0.3099,
+        "factual_consistency [anthropic/claude-haiku-5.5]": 0.423,
+        "factual_consistency [z-ai/glm-5.3-flash]": 0.2304
       },
-      "key_usage_before": 47.148727405,
-      "key_usage_after": 47.188284399
+      "key_usage_before": 196.367952898,
+      "key_usage_after": 198.661093534
     },
     "report": {
       "step": "report",
-      "at": "2026-09-29T01:49:22+00:00",
+      "at": "2026-10-12T22:17:22+00:00",
       "report": "environment/results/retriever_comparison/report.md",
       "configs": [
         "current",
+        "gemini_knowledge",
         "improved_1to4",
         "openrouter_exa_instant",
-        "openrouter_parallel_basic",
-        "openrouter_perplexity",
         "openrouter_google",
         "openrouter_openai",
-        "gemini_knowledge"
+        "openrouter_parallel_basic",
+        "openrouter_perplexity"
       ],
-      "key_usage_before": 47.191656611,
-      "key_usage_after": 47.199796337
+      "key_usage_before": 250.06641847,
+      "key_usage_after": 250.06641847
     },
     "replay": {
       "step": "replay",

@@ -4,8 +4,8 @@
   ],
   "baseline": "case_information",
   "judge_panel": [
-    "google/gemini-3.5-flash-lite",
-    "qwen/qwen3.8-flash",
+    "anthropic/claude-haiku-5.5",
+    "z-ai/glm-5.3-flash",
     "openai/gpt-6-luna"
   ],
   "not_run": {
@@ -31,40 +31,40 @@
     "best_guess": {
       "case_information": {
         "mean": 0.025735294117647058,
-        "low": 0.007662835249042145,
-        "high": 0.045283018867924525,
+        "low": 0.00784313725490196,
+        "high": 0.045627376425855515,
         "n": 272
       }
     },
     "mc_c_exact": {
       "case_information": {
         "mean": 0.9816176470588235,
-        "low": 0.9646643109540636,
-        "high": 0.9962406015037594,
+        "low": 0.965034965034965,
+        "high": 0.9962825278810409,
         "n": 272
       }
     },
     "mc_c_same_category": {
       "case_information": {
         "mean": 0.9852941176470589,
-        "low": 0.969811320754717,
-        "high": 0.9964912280701754,
+        "low": 0.9701492537313433,
+        "high": 0.9964539007092199,
         "n": 272
       }
     },
     "mc_c_different_category": {
       "case_information": {
-        "mean": 0.007352941176470588,
+        "mean": 0.003676470588235294,
         "low": 0.0,
-        "high": 0.018796992481203006,
+        "high": 0.011538461538461539,
         "n": 272
       }
     },
     "mc_c_not_comparable": {
       "case_information": {
-        "mean": 0.007352941176470588,
+        "mean": 0.011029411764705883,
         "low": 0.0,
-        "high": 0.019083969465648856,
+        "high": 0.025454545454545455,
         "n": 272
       }
     },
@@ -78,17 +78,17 @@
     },
     "fc_c_consistent": {
       "case_information": {
-        "mean": 0.9926470588235294,
-        "low": 0.9813432835820896,
+        "mean": 0.9963235294117647,
+        "low": 0.9885496183206107,
         "high": 1.0,
         "n": 272
       }
     },
     "fc_c_inconsistent": {
       "case_information": {
-        "mean": 0.007352941176470588,
+        "mean": 0.003676470588235294,
         "low": 0.0,
-        "high": 0.018656716417910446,
+        "high": 0.011450381679389313,
         "n": 272
       }
     },
@@ -111,32 +111,32 @@
     "pipeline_cost": {
       "case_information": {
         "mean": 0.0002163360257352941,
-        "low": 0.0001769429084249084,
-        "high": 0.0002681443309859156,
+        "low": 0.00017642403773584906,
+        "high": 0.00026960511827956986,
         "n": 272
       }
     },
     "total_cost": {
       "case_information": {
         "mean": 0.0002163360257352941,
-        "low": 0.0001769429084249084,
-        "high": 0.0002681443309859156,
+        "low": 0.00017642403773584906,
+        "high": 0.00026960511827956986,
         "n": 272
       }
     },
     "wall_time": {
       "case_information": {
         "mean": 8.94878676470588,
-        "low": 7.1155147058823545,
-        "high": 11.162930402930398,
+        "low": 7.161187739463607,
+        "high": 11.08847908745247,
         "n": 272
       }
     },
     "retrieval_time": {
       "case_information": {
         "mean": 0.0031642084961469204,
-        "low": 0.002835914839524764,
-        "high": 0.003505467229011554,
+        "low": 0.002840276922269352,
+        "high": 0.0034970864431527675,
         "n": 272
       }
     }
@@ -161,40 +161,40 @@
     "best_guess": {
       "case_information": {
         "mean": 0.025735294117647058,
-        "low": 0.007662835249042145,
-        "high": 0.045283018867924525,
+        "low": 0.00784313725490196,
+        "high": 0.045627376425855515,
         "n": 272
       }
     },
     "mc_c_exact": {
       "case_information": {
         "mean": 0.9816176470588235,
-        "low": 0.9646643109540636,
-        "high": 0.9962406015037594,
+        "low": 0.965034965034965,
+        "high": 0.9962825278810409,
         "n": 272
       }
     },
     "mc_c_same_category": {
       "case_information": {
         "mean": 0.9852941176470589,
-        "low": 0.969811320754717,
-        "high": 0.9964912280701754,
+        "low": 0.9701492537313433,
+        "high": 0.9964539007092199,
         "n": 272
       }
     },
     "mc_c_different_category": {
       "case_information": {
-        "mean": 0.007352941176470588,
+        "mean": 0.003676470588235294,
         "low": 0.0,
-        "high": 0.018796992481203006,
+        "high": 0.011538461538461539,
         "n": 272
       }
     },
     "mc_c_not_comparable": {
       "case_information": {
-        "mean": 0.007352941176470588,
+        "mean": 0.011029411764705883,
         "low": 0.0,
-        "high": 0.019083969465648856,
+        "high": 0.025454545454545455,
         "n": 272
       }
     },
@@ -208,17 +208,17 @@
     },
     "fc_c_consistent": {
       "case_information": {
-        "mean": 0.9926470588235294,
-        "low": 0.9813432835820896,
+        "mean": 0.9963235294117647,
+        "low": 0.9885496183206107,
         "high": 1.0,
         "n": 272
       }
     },
     "fc_c_inconsistent": {
       "case_information": {
-        "mean": 0.007352941176470588,
+        "mean": 0.003676470588235294,
         "low": 0.0,
-        "high": 0.018656716417910446,
+        "high": 0.011450381679389313,
         "n": 272
       }
     },
@@ -243,57 +243,57 @@
   },
   "panel_agreement": {
     "panel": [
-      "google/gemini-3.5-flash-lite",
-      "qwen/qwen3.8-flash",
+      "anthropic/claude-haiku-5.5",
+      "z-ai/glm-5.3-flash",
       "openai/gpt-6-luna"
     ],
     "masked correctness": {
       "answers": 272,
       "resolution": {
-        "unanimous": 270,
-        "majority": 2
+        "unanimous": 269,
+        "majority": 3
       },
       "fewer_votes": 0,
       "pairs": {
-        "google/gemini-3.5-flash-lite | qwen/qwen3.8-flash": {
+        "anthropic/claude-haiku-5.5 | z-ai/glm-5.3-flash": {
+          "n": 272,
+          "agree": 269,
+          "kappa": 0.6964285714285705
+        },
+        "anthropic/claude-haiku-5.5 | openai/gpt-6-luna": {
           "n": 272,
           "agree": 271,
-          "kappa": 0.8876033057851236
+          "kappa": 0.9077966101694912
         },
-        "google/gemini-3.5-flash-lite | openai/gpt-6-luna": {
+        "z-ai/glm-5.3-flash | openai/gpt-6-luna": {
           "n": 272,
           "agree": 270,
           "kappa": 0.7752066115702473
-        },
-        "qwen/qwen3.8-flash | openai/gpt-6-luna": {
-          "n": 272,
-          "agree": 271,
-          "kappa": 0.8987341772151896
         }
       }
     },
     "factual consistency": {
       "answers": 272,
       "resolution": {
-        "unanimous": 268,
-        "majority": 4
+        "unanimous": 269,
+        "majority": 3
       },
       "fewer_votes": 0,
       "pairs": {
-        "google/gemini-3.5-flash-lite | qwen/qwen3.8-flash": {
+        "anthropic/claude-haiku-5.5 | z-ai/glm-5.3-flash": {
           "n": 272,
           "agree": 270,
-          "kappa": 0.6629491945477064
+          "kappa": 0.4962962962962948
         },
-        "google/gemini-3.5-flash-lite | openai/gpt-6-luna": {
+        "anthropic/claude-haiku-5.5 | openai/gpt-6-luna": {
           "n": 272,
-          "agree": 269,
-          "kappa": 0.394658753709197
+          "agree": 270,
+          "kappa": 0.4962962962962948
         },
-        "qwen/qwen3.8-flash | openai/gpt-6-luna": {
+        "z-ai/glm-5.3-flash | openai/gpt-6-luna": {
           "n": 272,
-          "agree": 269,
-          "kappa": 0.394658753709197
+          "agree": 270,
+          "kappa": 0.4962962962962948
         }
       }
     }
@@ -308,14 +308,20 @@
       "judge: masked correctness (google/gemini-3.5-flash-lite)": 0.13194370000000005,
       "judge: masked correctness (openai/gpt-6-luna)": 0.03942673000000001,
       "judge: masked correctness (qwen/qwen3.8-flash)": 0.05761496400000001,
+      "judge: masked correctness (typesafe/jev-1.13)": 0.010690764,
+      "judge: masked correctness (z-ai/glm-5.3-flash)": 0.02536526649999999,
+      "judge: masked correctness (anthropic/claude-haiku-5.5)": 0.05591830000000001,
       "judge: factual consistency (openai/gpt-6-luna)": 0.03044767000000001,
       "judge: factual consistency (google/gemini-3.5-flash-lite)": 0.10886140000000005,
       "judge: factual consistency (qwen/qwen3.8-flash)": 0.03423122399999999,
+      "judge: factual consistency (typesafe/jev-1.13)": 0.009422783999999998,
+      "judge: factual consistency (z-ai/glm-5.3-flash)": 0.020276385999999993,
+      "judge: factual consistency (anthropic/claude-haiku-5.5)": 0.04866460000000001,
       "validation: controls (panel)": 0,
       "validation: flipped truth (panel)": 0
     },
-    "total": 0.5996436870000001,
-    "key_usage_delta": 1.5540739870000095
+    "total": 0.7699817875000002,
+    "key_usage_delta": 1.870416137999996
   },
   "scores": [
     {
@@ -334,13 +340,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -374,13 +380,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -412,13 +418,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -450,13 +456,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -483,18 +489,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "normal",
+      "truth_category": "low",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -526,13 +532,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -564,13 +570,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -602,13 +608,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -640,13 +646,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -678,13 +684,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -716,13 +722,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -754,13 +760,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -787,18 +793,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "not_applicable",
+      "truth_category": "low",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -825,18 +831,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "not_applicable",
+      "truth_category": "low",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -863,18 +869,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "not_applicable",
+      "truth_category": "high",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -906,13 +912,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -944,13 +950,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -982,13 +988,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1020,13 +1026,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1058,13 +1064,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1096,13 +1102,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1134,13 +1140,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1172,13 +1178,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1210,13 +1216,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1248,13 +1254,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1286,13 +1292,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1324,13 +1330,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1362,13 +1368,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1400,13 +1406,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1438,13 +1444,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1476,13 +1482,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1514,13 +1520,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1552,13 +1558,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1590,13 +1596,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1628,13 +1634,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1661,18 +1667,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "normal",
+      "truth_category": "not_applicable",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1704,13 +1710,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1742,13 +1748,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1780,13 +1786,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1818,13 +1824,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1856,13 +1862,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1894,13 +1900,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1932,13 +1938,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -1970,13 +1976,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2008,13 +2014,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2046,13 +2052,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2084,13 +2090,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2122,13 +2128,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2160,13 +2166,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2198,13 +2204,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2231,18 +2237,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "normal",
+      "truth_category": "low",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2274,13 +2280,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2312,13 +2318,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2350,13 +2356,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2388,13 +2394,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2426,13 +2432,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2464,13 +2470,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2502,13 +2508,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2540,13 +2546,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2578,13 +2584,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2616,13 +2622,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2649,18 +2655,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "not_applicable",
+      "truth_category": "low",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2692,13 +2698,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2730,13 +2736,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2768,13 +2774,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2806,13 +2812,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2844,13 +2850,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2882,13 +2888,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2920,13 +2926,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2958,13 +2964,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -2992,17 +2998,17 @@
       "has_answer": true,
       "ran": true,
       "truth_category": "high",
-      "masked_verdict": "different_category",
+      "masked_verdict": "not_comparable",
       "consistency": "inconsistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "different_category",
-          "qwen/qwen3.8-flash": "different_category",
+          "anthropic/claude-haiku-5.5": "not_comparable",
+          "z-ai/glm-5.3-flash": "different_category",
           "openai/gpt-6-luna": "not_comparable"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "inconsistent",
-          "qwen/qwen3.8-flash": "inconsistent",
+          "anthropic/claude-haiku-5.5": "inconsistent",
+          "z-ai/glm-5.3-flash": "inconsistent",
           "openai/gpt-6-luna": "inconsistent"
         }
       },
@@ -3034,13 +3040,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3067,18 +3073,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "low",
+      "truth_category": "not_applicable",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3110,13 +3116,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3148,13 +3154,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3186,13 +3192,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3224,13 +3230,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3264,13 +3270,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3302,13 +3308,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3340,13 +3346,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3378,13 +3384,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3416,13 +3422,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3454,13 +3460,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3487,18 +3493,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "high",
+      "truth_category": "not_applicable",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3530,13 +3536,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3568,13 +3574,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3606,13 +3612,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3644,13 +3650,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3682,13 +3688,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3720,13 +3726,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3758,13 +3764,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3796,13 +3802,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3834,13 +3840,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3872,13 +3878,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3905,18 +3911,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "not_applicable",
+      "truth_category": "high",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3948,13 +3954,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -3986,13 +3992,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4024,13 +4030,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4062,13 +4068,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4100,13 +4106,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4138,13 +4144,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4176,13 +4182,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4214,13 +4220,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4252,13 +4258,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4290,13 +4296,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4328,13 +4334,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4366,13 +4372,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4404,13 +4410,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4442,13 +4448,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4480,13 +4486,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4518,18 +4524,18 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "same_category",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
       "resolution": {
-        "masked_correctness": "unanimous",
+        "masked_correctness": "majority",
         "factual_consistency": "unanimous"
       },
       "excluded_source_docs": 0,
@@ -4556,13 +4562,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "not_comparable",
-          "qwen/qwen3.8-flash": "not_comparable",
+          "anthropic/claude-haiku-5.5": "not_comparable",
+          "z-ai/glm-5.3-flash": "not_comparable",
           "openai/gpt-6-luna": "not_comparable"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "inconsistent"
         }
       },
@@ -4596,13 +4602,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4634,13 +4640,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4672,13 +4678,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4705,18 +4711,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "not_applicable",
+      "truth_category": "high",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4748,13 +4754,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4786,13 +4792,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4824,13 +4830,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4862,13 +4868,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4900,13 +4906,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4938,13 +4944,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -4971,18 +4977,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "high",
+      "truth_category": "not_applicable",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5014,13 +5020,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5052,13 +5058,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5090,13 +5096,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5128,13 +5134,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5161,18 +5167,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "not_applicable",
+      "truth_category": "low",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5204,13 +5210,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5242,13 +5248,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5280,13 +5286,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5318,13 +5324,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5356,13 +5362,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5394,13 +5400,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5432,13 +5438,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5470,13 +5476,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5508,13 +5514,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5546,13 +5552,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5579,18 +5585,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "low",
+      "truth_category": "not_applicable",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5622,13 +5628,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5660,13 +5666,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5693,18 +5699,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "normal",
+      "truth_category": "high",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5736,13 +5742,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5774,13 +5780,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5812,13 +5818,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5850,13 +5856,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5888,13 +5894,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5926,13 +5932,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -5966,13 +5972,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6001,16 +6007,16 @@
       "ran": true,
       "truth_category": "high",
       "masked_verdict": "not_comparable",
-      "consistency": "inconsistent",
+      "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "not_comparable",
-          "qwen/qwen3.8-flash": "not_comparable",
+          "anthropic/claude-haiku-5.5": "not_comparable",
+          "z-ai/glm-5.3-flash": "not_comparable",
           "openai/gpt-6-luna": "not_comparable"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "inconsistent",
-          "qwen/qwen3.8-flash": "inconsistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "inconsistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6042,13 +6048,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6080,13 +6086,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6118,13 +6124,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6156,13 +6162,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6194,19 +6200,19 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "inconsistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
       "resolution": {
         "masked_correctness": "unanimous",
-        "factual_consistency": "majority"
+        "factual_consistency": "unanimous"
       },
       "excluded_source_docs": 0,
       "retrieval_cost": 0.0,
@@ -6232,13 +6238,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6265,18 +6271,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "high",
+      "truth_category": "not_applicable",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6308,13 +6314,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6346,13 +6352,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6384,13 +6390,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6422,13 +6428,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6455,18 +6461,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "not_applicable",
+      "truth_category": "normal",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6498,13 +6504,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6536,13 +6542,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6574,13 +6580,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6612,13 +6618,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6650,13 +6656,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6688,13 +6694,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6721,18 +6727,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "normal",
+      "truth_category": "not_applicable",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6764,13 +6770,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6802,13 +6808,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6840,13 +6846,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6878,13 +6884,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "different_category",
-          "qwen/qwen3.8-flash": "different_category",
+          "anthropic/claude-haiku-5.5": "different_category",
+          "z-ai/glm-5.3-flash": "different_category",
           "openai/gpt-6-luna": "different_category"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "inconsistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "inconsistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6918,13 +6924,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6956,13 +6962,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -6994,13 +7000,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7027,18 +7033,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "low",
+      "truth_category": "not_applicable",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7070,13 +7076,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7108,13 +7114,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7141,18 +7147,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "low",
+      "truth_category": "not_applicable",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7184,13 +7190,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7222,13 +7228,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7260,13 +7266,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7298,13 +7304,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7336,13 +7342,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7374,13 +7380,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7412,13 +7418,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7450,13 +7456,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7488,13 +7494,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7526,13 +7532,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7564,13 +7570,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7602,13 +7608,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7640,13 +7646,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7678,13 +7684,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7716,13 +7722,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7754,13 +7760,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7792,13 +7798,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7830,13 +7836,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7868,13 +7874,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7906,13 +7912,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7944,13 +7950,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -7982,13 +7988,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8020,13 +8026,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8058,13 +8064,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8096,13 +8102,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8134,13 +8140,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8172,13 +8178,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8210,13 +8216,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8248,13 +8254,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8286,13 +8292,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8324,13 +8330,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8362,13 +8368,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8400,13 +8406,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8438,13 +8444,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8476,13 +8482,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8514,13 +8520,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8552,13 +8558,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8590,13 +8596,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8628,13 +8634,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8666,13 +8672,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8704,13 +8710,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8742,13 +8748,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8780,13 +8786,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8813,18 +8819,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "not_applicable",
+      "truth_category": "high",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8856,13 +8862,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8894,13 +8900,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8932,13 +8938,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -8970,13 +8976,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9008,13 +9014,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9046,13 +9052,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9084,13 +9090,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9122,13 +9128,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9160,13 +9166,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9198,13 +9204,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9236,13 +9242,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9274,13 +9280,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9312,13 +9318,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9350,13 +9356,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9388,13 +9394,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9426,13 +9432,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9464,13 +9470,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9497,18 +9503,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "normal",
+      "truth_category": "not_applicable",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9540,13 +9546,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9578,13 +9584,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9616,13 +9622,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "same_category",
+          "anthropic/claude-haiku-5.5": "same_category",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "same_category"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9656,13 +9662,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9694,13 +9700,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9732,13 +9738,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9770,13 +9776,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9808,13 +9814,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9846,13 +9852,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9884,13 +9890,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9922,13 +9928,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9955,18 +9961,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "not_applicable",
+      "truth_category": "low",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -9998,13 +10004,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -10031,18 +10037,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "normal",
+      "truth_category": "high",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -10069,18 +10075,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "not_applicable",
+      "truth_category": "low",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -10107,18 +10113,18 @@
       "n_docs": 0,
       "has_answer": true,
       "ran": true,
-      "truth_category": "low",
+      "truth_category": "not_applicable",
       "masked_verdict": "exact",
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -10150,13 +10156,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -10188,13 +10194,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -10226,13 +10232,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -10264,13 +10270,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -10302,13 +10308,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -10340,13 +10346,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -10378,13 +10384,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -10416,13 +10422,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -10454,13 +10460,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -10492,13 +10498,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -10530,13 +10536,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -10568,13 +10574,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -10606,13 +10612,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },
@@ -10646,13 +10652,13 @@
       "consistency": "consistent",
       "votes": {
         "masked_correctness": {
-          "google/gemini-3.5-flash-lite": "exact",
-          "qwen/qwen3.8-flash": "exact",
+          "anthropic/claude-haiku-5.5": "exact",
+          "z-ai/glm-5.3-flash": "exact",
           "openai/gpt-6-luna": "exact"
         },
         "factual_consistency": {
-          "google/gemini-3.5-flash-lite": "consistent",
-          "qwen/qwen3.8-flash": "consistent",
+          "anthropic/claude-haiku-5.5": "consistent",
+          "z-ai/glm-5.3-flash": "consistent",
           "openai/gpt-6-luna": "consistent"
         }
       },

@@ -115,7 +115,8 @@ def collect(
 def missing_verdicts(panel: list[str]) -> int:
     """Judge calls (answer, judge) of the repeat runs whose latest attempt still failed."""
     missing = 0
-    for path in REPEATS.glob("run_*/*/judge/*.jsonl"):
+    files = ("masked_correctness.jsonl", "factual_consistency.jsonl")
+    for path in (p for name in files for p in REPEATS.glob(f"run_*/*/judge/{name}")):
         latest: dict[tuple[str, str], str] = {}
         for line in path.read_text(encoding="utf-8").split("\n"):
             if line.strip():
@@ -277,9 +278,8 @@ def main() -> None:
     missing = missing_verdicts(panel)
     if missing:
         notes.append(
-            f"{missing} of the judge calls in runs 2 and later failed on every attempt "
-            "(qwen/qwen3.8-flash rate limits); those answers were voted on by the other two "
-            "judges."
+            f"{missing} of the judge calls in runs 2 and later failed on every attempt; those "
+            "answers were voted on by the remaining judges."
         )
     if skipped:
         notes.append(

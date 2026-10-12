@@ -11,7 +11,8 @@ decision model added, and each metric's sensitivity across runs.
 
 Per question, each metric is one number: 1 or 0 for a label's share, or the capped |z| for the
 zlog z-score. A question medsim did not answer counts as 0 (as 3 for the zlog z-score), so every
-share is over the full question set.
+share is over the full question set. A run counts for a metric and configuration only when
+every judge of the panel has judged it (at least 98% of its answers).
 """
 
 from __future__ import annotations
@@ -57,41 +58,49 @@ ORDER = [
     ("openrouter_openai", "Native OpenAI search (one run)", "ab"),
     ("case_information", "Case study only, no retrieval (set C)", "c"),
 ]
-REPEATED = [
-    c for c, _, k in ORDER if k == "ab" and not c.startswith(("openrouter_g", "openrouter_openai"))
-]
-# metric key -> (title, question sets on ab workspaces, higher is better, old or new)
+SINGLE_RUN = ("openrouter_google", "openrouter_openai")
+REPEATED = [c for c, _, k in ORDER if k == "ab" and c not in SINGLE_RUN]
+# metric key -> (title, the judged metric it comes from, higher is better, old or new)
 METRICS: dict[str, tuple[str, str, bool, str]] = {
-    "mc_same": ("Masked correctness: same category (incl. exact), %", "A", True, "old"),
-    "mc_exact": ("Masked correctness: exact, %", "A", True, "old"),
-    "fc_consistent": ("Factual consistency: consistent, %", "B", True, "old"),
-    "zlog": ("Zlog z-score: mean |z| (capped at 3)", "A", False, "new"),
-    "zlog_sat": ("Zlog z-score: satisfactory (|z| ≤ 2), %", "A", True, "new"),
-    "faith": ("Faithfulness: supported, %", "AB", True, "new"),
-    "align_aligned": ("Case alignment: aligned, %", "B", True, "new"),
-    "align_contra": ("Case alignment: contradicted, %", "B", False, "new"),
-}
+    "mc_same": (
+        "Masked correctness: same category (incl. exact), %", "masked_correctness", True, "old",
+    ),
+    "mc_exact": ("Masked correctness: exact, %", "masked_correctness", True, "old"),
+    "fc_consistent": ("Factual consistency: consistent, %", "factual_consistency", True, "old"),
+    "zlog": ("Zlog z-score: mean |z| (capped at 3)", "zlog_value", False, "new"),
+    "zlog_sat": ("Zlog z-score: satisfactory (|z| ≤ 2), %", "zlog_value", True, "new"),
+    "faith": ("Faithfulness: supported, %", "faithfulness", True, "new"),
+    "align_aligned": ("Case alignment: aligned, %", "case_alignment", True, "new"),
+    "align_contra": ("Case alignment: contradicted, %", "case_alignment", False, "new"),
+}  # fmt: skip
 # The other version of the two revised metrics, kept for the comparison in the test stage.
 VARIANTS: dict[str, tuple[str, str, bool, str]] = {
-    "zlog_v1": ("Zlog z-score, first version: mean |z|", "A", False, "new"),
-    "zlog_v1_sat": ("Zlog z-score, first version: satisfactory, %", "A", True, "new"),
-    "align_v1_aligned": ("Case alignment, first version: aligned, %", "B", True, "new"),
-    "align_v1_contra": ("Case alignment, first version: contradicted, %", "B", False, "new"),
-}
-PERCENT = {k for k in METRICS | VARIANTS if k not in ("zlog", "zlog_v1")}
-# The versions kept after the test stage (see the README): the revised zlog scale and the
+    "zlog_v1": ("Zlog z-score, first version: mean |z|", "zlog_value", False, "new"),
+    "zlog_v1_sat": ("Zlog z-score, first version: satisfactory, %", "zlog_value", True, "new"),
+    "align_v1_aligned": (
+        "Case alignment, first version: aligned, %", "case_alignment_v1", True, "new",
+    ),
+    "align_v1_contra": (
+        "Case alignment, first version: contradicted, %", "case_alignment_v1", False, "new",
+    ),
+}  # fmt: skip
+ALL = METRICS | VARIANTS
+PERCENT = {k for k in ALL if k not in ("zlog", "zlog_v1")}
+# The versions kept after the test stage (see bench/README.md): the revised zlog scale and the
 # revised case alignment rubric.
 ZLOG_SCALED = True
 ALIGNMENT_RUBRIC = "m2"
+COMPLETE = 0.98  # share of a configuration's answers each judge must have judged
 
 Values = dict[str, dict[str, dict[str, float]]]  # metric -> config -> item id -> value
+Coverage = dict[tuple[str, str], float]  # (judged metric, config) -> lowest judge's share
 
 
 def workspace_values(
     ws: Workspace, kind: str, panel: list[str], references: dict[str, Any]
-) -> tuple[Values, dict[str, str], dict[str, int]]:
+) -> tuple[Values, dict[str, str], Coverage]:
     """Per-question values of every metric in one workspace, the questions' diagnoses, and how
-    many answers lack a judgment (per metric)."""
+    much of each configuration's answers every panel judge has judged."""
     items = read_models(ws.items, Item)
     by_id = {i.item_id: i for i in items}
     configs = [c for c, _, k in ORDER if k == kind and ws.run_file(c).exists()]
@@ -109,93 +118,105 @@ def workspace_values(
         for metric, rubric in rubrics.items()
     }
     values: Values = defaultdict(lambda: defaultdict(dict))
-    missing: dict[str, int] = defaultdict(int)
+    eligible: dict[tuple[str, str], int] = defaultdict(int)
+    done: dict[tuple[str, str, str], int] = defaultdict(int)
+
+    def count(metric: str, cfg: str, labels: dict[str, Any], judges: list[str]) -> None:
+        eligible[(metric, cfg)] += 1
+        for m in judges:
+            done[(metric, cfg, m)] += labels.get(m) is not None
+
     for s in scores:
         item = by_id[s.item_id]
         qs, cfg, iid = s.question_set, s.config, s.item_id
         run = runs[cfg].get(iid)
         key = answer_key(iid, cfg, run.output_answer or "") if run and s.has_answer else None
 
-        def panel_label(metric: str, key: str = key or "") -> str | None:
-            return vote({m: (judged[metric][m].get(key) or {}).get("label") for m in panel}).label
+        def labels(metric: str, key: str = key or "") -> dict[str, str | None]:
+            return {m: (judged[metric][m].get(key) or {}).get("label") for m in panel}
 
         if qs in ("A", "C") and item.truth is not None:
-            if key and s.masked_verdict is None:
-                missing["masked_correctness"] += 1
+            if key:
+                count("masked_correctness", cfg, s.votes.get("masked_correctness", {}), panel)
             values["mc_same"][cfg][iid] = float(s.masked_verdict in ("exact", "same_category"))
             values["mc_exact"][cfg][iid] = float(s.masked_verdict == "exact")
             reference = references.get(iid)
             if reference is not None and scorable(reference):
-                if key is None:
-                    z: float | None = SCORE_CAP
-                else:
-                    outputs = [
-                        judged["zlog_value"][m][key] for m in chat if key in judged["zlog_value"][m]
-                    ]
-                    read = [value_score(reference, o, scaled=ZLOG_SCALED) for o in outputs]
-                    z = statistics.median(read) if read else None
-                    other = [value_score(reference, o, scaled=not ZLOG_SCALED) for o in outputs]
-                    if other:
-                        z1 = statistics.median(other)
-                        values["zlog_v1"][cfg][iid] = z1
-                        values["zlog_v1_sat"][cfg][iid] = float(z1 <= SATISFACTORY)
-                if z is None:
-                    missing["zlog_value"] += 1
-                else:
+                z: float | None = SCORE_CAP
+                z1: float | None = SCORE_CAP
+                if key:
+                    outputs = {m: judged["zlog_value"][m].get(key) for m in chat}
+                    count("zlog_value", cfg, outputs, chat)
+                    read = [o for o in outputs.values() if o is not None]
+                    z = z1 = None
+                    if read:
+                        z = statistics.median(
+                            value_score(reference, o, scaled=ZLOG_SCALED) for o in read
+                        )
+                        z1 = statistics.median(
+                            value_score(reference, o, scaled=not ZLOG_SCALED) for o in read
+                        )
+                if z is not None and z1 is not None:
                     values["zlog"][cfg][iid] = z
                     values["zlog_sat"][cfg][iid] = float(z <= SATISFACTORY)
-                    if key is None:
-                        values["zlog_v1"][cfg][iid] = SCORE_CAP
-                        values["zlog_v1_sat"][cfg][iid] = 0.0
+                    values["zlog_v1"][cfg][iid] = z1
+                    values["zlog_v1_sat"][cfg][iid] = float(z1 <= SATISFACTORY)
         if qs in ("B", "C"):
-            if key and s.consistency is None:
-                missing["factual_consistency"] += 1
+            if key:
+                count("factual_consistency", cfg, s.votes.get("factual_consistency", {}), panel)
             values["fc_consistent"][cfg][iid] = float(s.consistency == "consistent")
-            label = panel_label("case_alignment") if key else "unanswered"
-            if label is None:
-                missing["case_alignment"] += 1
-            else:
-                values["align_aligned"][cfg][iid] = float(label == "aligned")
-                values["align_contra"][cfg][iid] = float(label == "contradicted")
-            first = panel_label("case_alignment_v1") if key else "unanswered"
-            if first is not None:
-                values["align_v1_aligned"][cfg][iid] = float(first == "aligned")
-                values["align_v1_contra"][cfg][iid] = float(first == "contradicted")
+            for metric, prefix in (("case_alignment", "align"), ("case_alignment_v1", "align_v1")):
+                label: str | None = "unanswered"
+                if key:
+                    votes = labels(metric)
+                    count(metric, cfg, votes, panel)
+                    label = vote(votes).label
+                if label is not None:
+                    values[f"{prefix}_aligned"][cfg][iid] = float(label == "aligned")
+                    values[f"{prefix}_contra"][cfg][iid] = float(label == "contradicted")
         if qs in ("A", "B") and cfg not in NO_DOCUMENT_CONFIGS:
-            if key is None or run is None or not run.documents:
-                values["faith"][cfg][iid] = 0.0
-            else:
-                label = panel_label("faithfulness")
-                if label is None:
-                    missing["faithfulness"] += 1
-                else:
-                    values["faith"][cfg][iid] = float(label == "supported")
-    return values, {i.item_id: i.diagnosis for i in items}, dict(missing)
+            label = "not_supported"
+            if key and run is not None and run.documents:
+                votes = labels("faithfulness")
+                count("faithfulness", cfg, votes, panel)
+                label = vote(votes).label
+            if label is not None:
+                values["faith"][cfg][iid] = float(label == "supported")
+    coverage: Coverage = {}
+    for (metric, cfg), n in eligible.items():
+        judges = chat if metric == "zlog_value" else panel
+        coverage[(metric, cfg)] = min(done[(metric, cfg, m)] / n for m in judges) if n else 1.0
+    return values, {i.item_id: i.diagnosis for i in items}, coverage
 
 
-def run_values(run: int, panel: list[str]) -> tuple[Values, dict[str, str], dict[str, int]]:
+def run_values(run: int, panel: list[str]) -> tuple[Values, dict[str, str], Coverage]:
+    """As :func:`workspace_values` for both workspaces of one run. Values of a metric and
+    configuration that the panel has not finished judging are dropped."""
     index = json.loads((RESULTS / "repeats" / "index.json").read_text(encoding="utf-8"))
-    references = load_references(
-        [m for m in panel if m != JEV_MODEL] or BenchSettings().judge_models
-    )
+    chat = [m for m in panel if m != JEV_MODEL] or list(BenchSettings().judge_models)
+    references = load_references(chat)
     merged: Values = defaultdict(lambda: defaultdict(dict))
     diagnoses: dict[str, str] = {}
-    missing: dict[str, int] = defaultdict(int)
+    coverage: Coverage = {}
     for kind, key in (("ab", "sets_ab"), ("c", "set_c")):
-        values, diag, miss = workspace_values(
+        values, diag, cover = workspace_values(
             Workspace(REPO / index["runs"][str(run)][key]), kind, panel, references
         )
         diagnoses.update(diag)
+        coverage.update(cover)
         for metric, per_config in values.items():
             for config, per_item in per_config.items():
-                merged[metric][config].update(per_item)
-        for metric, n in miss.items():
-            missing[metric] += n
-    return merged, diagnoses, dict(missing)
+                if cover.get((ALL[metric][1], config), 1.0) >= COMPLETE:
+                    merged[metric][config].update(per_item)
+    return merged, diagnoses, coverage
 
 
 def scale(metric: str, value: float) -> float:
     return 100 * value if metric in PERCENT else value
+
+
+def metric_configs(metric: str) -> list[str]:
+    return [c for c in REPEATED if not (metric == "faith" and c in NO_DOCUMENT_CONFIGS)]
 
 
 # --- sensitivity on one run ----------------------------------------------------------------------
@@ -251,17 +272,13 @@ def single_run_sensitivity(
 
 
 def print_test(run: int, panel: list[str]) -> dict[str, Any]:
-    values, diagnoses, missing = run_values(run, panel)
-    report: dict[str, Any] = {
-        "run": run,
-        "panel": panel,
-        "missing_judgments": missing,
-        "metrics": {},
-    }
-    print(f"Run {run}, panel {panel}; answers without a judgment: {missing or 'none'}\n")
+    values, diagnoses, coverage = run_values(run, panel)
+    report: dict[str, Any] = {"run": run, "panel": panel, "metrics": {},
+                              "titles": {k: v[0] for k, v in ALL.items()}}  # fmt: skip
+    print(f"Run {run}, panel {panel}\n")
     print(f"{'metric':52s} {'n':>4s} {'spread':>7s} {'noise':>6s} {'S/N':>5s} {'pairs':>6s}  means")
-    for metric, (title, _, _, _) in (METRICS | VARIANTS).items():
-        configs = [c for c in REPEATED if not (metric == "faith" and c in NO_DOCUMENT_CONFIGS)]
+    for metric, (title, _, _, _) in ALL.items():
+        configs = metric_configs(metric)
         result = single_run_sensitivity(values.get(metric, {}), diagnoses, configs)
         if result is None:
             continue
@@ -273,26 +290,26 @@ def print_test(run: int, panel: list[str]) -> dict[str, Any]:
             f"{result['pairs_separated']:3d}/{result['pairs']:<2d}  {means}"
         )
     print("\nconfigurations:", ", ".join(REPEATED))
+    low = {f"{m}/{c}": round(v, 3) for (m, c), v in coverage.items() if v < COMPLETE}
+    if low:
+        print("not fully judged (left out):", low)
     return report
 
 
 # --- all runs ------------------------------------------------------------------------------------
 
 
-def all_runs(panel: list[str]) -> tuple[dict[str, dict[str, dict[int, float]]], dict[str, int]]:
-    """metric -> config -> run -> the run's mean, and missing judgments per metric."""
+def all_runs(panel: list[str]) -> dict[str, dict[str, dict[int, float]]]:
+    """metric -> config -> run -> the run's mean (complete runs only)."""
     index = json.loads((RESULTS / "repeats" / "index.json").read_text(encoding="utf-8"))
     table: dict[str, dict[str, dict[int, float]]] = defaultdict(lambda: defaultdict(dict))
-    missing: dict[str, int] = defaultdict(int)
     for run_text in sorted(index["runs"], key=int):
-        values, _, miss = run_values(int(run_text), panel)
-        for metric, n in miss.items():
-            missing[metric] += n
+        values, _, _ = run_values(int(run_text), panel)
         for metric, per_config in values.items():
             for config, per_item in per_config.items():
                 if per_item:
                     table[metric][config][int(run_text)] = statistics.fmean(per_item.values())
-    return table, dict(missing)
+    return table
 
 
 def across_run_sensitivity(
@@ -304,20 +321,19 @@ def across_run_sensitivity(
         return None
     means = {c: statistics.fmean(v) for c, v in groups.items()}
     sds = {c: statistics.stdev(v) for c, v in groups.items()}
-    within = statistics.fmean(sd**2 for sd in sds.values())  # pooled variance (equal n)
-    n = statistics.fmean(len(v) for v in groups.values())
+    within = statistics.fmean(sd**2 for sd in sds.values())
     between = statistics.variance(means.values())
     names = list(groups)
     pairs = [(a, b) for i, a in enumerate(names) for b in names[i + 1 :]]
     separated = []
     for a, b in pairs:
         se = (sds[a] ** 2 / len(groups[a]) + sds[b] ** 2 / len(groups[b])) ** 0.5
-        # Welch's t at about 18 degrees of freedom: |t| > 2.10 is p < 0.05.
-        if se and abs(means[a] - means[b]) / se > 2.10:
+        # Welch's t; |t| > 2.3 is p < 0.05 for the smallest number of runs used here (6 a side).
+        if se and abs(means[a] - means[b]) / se > 2.3:
             separated.append((a, b))
     return {"spread": between**0.5, "run_sd": within**0.5,
             "signal_to_noise": (between / within) ** 0.5 if within else None,
-            "f": n * between / within if within else None,
+            "runs": min(len(v) for v in groups.values()),
             "pairs": len(pairs), "pairs_separated": len(separated)}  # fmt: skip
 
 
@@ -325,7 +341,7 @@ def cell(metric: str, runs: dict[int, float]) -> str:
     if not runs:
         return "–"
     values = [scale(metric, v) for v in runs.values()]
-    digits = 2 if metric == "zlog" else 1
+    digits = 2 if metric in ("zlog", "zlog_v1") else 1
     suffix = "%" if metric in PERCENT else ""
     if len(values) == 1:
         return f"{values[0]:.{digits}f}{suffix}"
@@ -335,17 +351,15 @@ def cell(metric: str, runs: dict[int, float]) -> str:
 def build_full() -> dict[str, Any]:
     panel3 = list(BenchSettings().judge_models)
     data: dict[str, Any] = {"panels": {}, "order": [[c, name] for c, name, _ in ORDER],
-                            "metrics": {k: v[0] for k, v in METRICS.items()}}  # fmt: skip
+                            "metrics": {k: v[0] for k, v in ALL.items()},
+                            "kept": list(METRICS), "variants": list(VARIANTS)}  # fmt: skip
     for name, panel in (("three_judges", panel3), ("with_jev", [*panel3, JEV_MODEL])):
-        table, missing = all_runs(panel)
-        cells = {m: {c: cell(m, table[m].get(c, {})) for c, _, _ in ORDER} for m in METRICS}
-        sensitivity = {}
-        for m in METRICS:
-            configs = [c for c in REPEATED if not (m == "faith" and c in NO_DOCUMENT_CONFIGS)]
-            sensitivity[m] = across_run_sensitivity(table[m], configs)
+        table = all_runs(panel)
         data["panels"][name] = {
-            "panel": panel, "missing_judgments": missing, "cells": cells,
-            "sensitivity": sensitivity,
+            "panel": panel,
+            "cells": {m: {c: cell(m, table[m].get(c, {})) for c, _, _ in ORDER} for m in ALL},
+            "n_runs": {m: {c: len(table[m].get(c, {})) for c, _, _ in ORDER} for m in ALL},
+            "sensitivity": {m: across_run_sensitivity(table[m], metric_configs(m)) for m in ALL},
             "runs": {m: {c: {str(r): v for r, v in rv.items()} for c, rv in per.items()}
                      for m, per in table.items()},
         }  # fmt: skip
@@ -353,11 +367,15 @@ def build_full() -> dict[str, Any]:
 
 
 def markdown_table(data: dict[str, Any], panel_name: str) -> str:
-    cells = data["panels"][panel_name]["cells"]
+    panel = data["panels"][panel_name]
     head = ["Configuration", *(METRICS[m][0] for m in METRICS)]
     lines = ["| " + " | ".join(head) + " |", "|" + "---|" * len(head)]
     for config, name in data["order"]:
-        lines.append("| " + " | ".join([name, *(cells[m][config] for m in METRICS)]) + " |")
+        row = [name]
+        for m in METRICS:
+            n = panel["n_runs"][m][config]
+            row.append(panel["cells"][m][config] + (f" (n={n})" if n > 1 else ""))
+        lines.append("| " + " | ".join(row) + " |")
     return "\n".join(lines)
 
 
@@ -378,16 +396,13 @@ def main() -> None:
     data = build_full()
     SHARED.mkdir(parents=True, exist_ok=True)
     (SHARED / "answer_metrics.json").write_text(json.dumps(data, indent=1), encoding="utf-8")
-    parts = ["# Answer metrics: old and new, all configurations\n"]
-    for name, title in (
-        ("three_judges", "Three judges"),
-        ("with_jev", "With the Jev decision model added"),
-    ):
+    parts = ["# Answer metrics: old and new, all configurations\n",
+             "Mean ± SD over the runs the whole panel judged (n = number of runs).\n"]  # fmt: skip
+    titles = (("three_judges", "Three judges"), ("with_jev", "With the Jev decision model added"))
+    for name, title in titles:
         panel = data["panels"][name]
         parts += [f"## {title}\n", f"Panel: {', '.join(panel['panel'])}\n",
                   markdown_table(data, name) + "\n"]  # fmt: skip
-        if panel["missing_judgments"]:
-            parts.append(f"Answers without a judgment: {panel['missing_judgments']}\n")
     (SHARED / "answer_metrics.md").write_text("\n".join(parts), encoding="utf-8")
     print("\n".join(parts))
     print(f"Wrote {SHARED / 'answer_metrics.json'}", file=sys.stderr)

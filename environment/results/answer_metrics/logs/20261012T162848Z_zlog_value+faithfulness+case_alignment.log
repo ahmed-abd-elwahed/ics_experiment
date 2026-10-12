@@ -1,0 +1,34 @@
+2026-10-13 03:28:48,626 INFO bench.answer_metrics: answer_metrics --runs 2 --metrics zlog_value,faithfulness,case_alignment --judges anthropic/claude-haiku-5.5 --workers 32
+2026-10-13 03:28:49,133 INFO bench.answer_metrics: planned: {'anthropic/claude-haiku-5.5': 4965}
+2026-10-13 03:28:54,113 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions failed (ConnectError); retrying in 1.0s
+2026-10-13 03:28:59,608 INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 200/1088 ($0.020)
+2026-10-13 03:29:05,837 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions failed (ConnectError); retrying in 1.0s
+2026-10-13 03:29:07,278 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions failed (ConnectError); retrying in 1.0s
+2026-10-13 03:29:09,481 INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 400/1088 ($0.040)
+2026-10-13 03:29:18,890 INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 600/1088 ($0.061)
+2026-10-13 03:29:28,527 INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 800/1088 ($0.081)
+2026-10-13 03:29:43,791 INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 200/2020 ($0.110)
+2026-10-13 03:29:59,079 INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 400/2020 ($0.230)
+2026-10-13 03:30:15,188 INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 600/2020 ($0.341)
+2026-10-13 03:30:31,504 INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 800/2020 ($0.450)
+2026-10-13 03:30:40,913 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions failed (ConnectError); retrying in 1.0s
+2026-10-13 03:30:44,279 INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 1000/2020 ($0.517)
+2026-10-13 03:30:56,577 INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 1200/2020 ($0.580)
+2026-10-13 03:31:09,707 INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 1400/2020 ($0.666)
+2026-10-13 03:31:22,911 INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 1600/2020 ($0.758)
+2026-10-13 03:31:40,193 INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 1800/2020 ($0.867)
+2026-10-13 03:31:58,907 INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 2000/2020 ($0.983)
+2026-10-13 03:32:01,786 INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 2020/2020 ($0.995)
+2026-10-13 03:32:10,538 INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 200/1857 ($0.031)
+2026-10-13 03:32:21,113 INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 400/1857 ($0.062)
+2026-10-13 03:32:30,942 INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 600/1857 ($0.093)
+2026-10-13 03:32:41,570 INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 800/1857 ($0.124)
+2026-10-13 03:32:51,719 INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1000/1857 ($0.156)
+2026-10-13 03:33:01,636 INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1200/1857 ($0.187)
+2026-10-13 03:33:11,559 INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1400/1857 ($0.218)
+2026-10-13 03:33:28,723 INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 1000/1088 ($0.101)
+2026-10-13 03:33:33,036 INFO bench.answer_metrics: zlog_value [anthropic/claude-haiku-5.5]: 1088/1088 ($0.109)
+2026-10-13 03:33:33,675 INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1600/1857 ($0.249)
+2026-10-13 03:33:43,563 INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1800/1857 ($0.282)
+2026-10-13 03:33:47,013 INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1857/1857 ($0.291)
+2026-10-13 03:33:47,036 INFO bench.answer_metrics: summary: {"counts": {"case_alignment [anthropic/claude-haiku-5.5]:ok": 1857, "faithfulness [anthropic/claude-haiku-5.5]:ok": 2020, "zlog_value [anthropic/claude-haiku-5.5]:ok": 1088}, "cost_usd": {"case_alignment [anthropic/claude-haiku-5.5]": 0.2914, "faithfulness [anthropic/claude-haiku-5.5]": 0.9946, "zlog_value [anthropic/claude-haiku-5.5]": 0.1094}, "total_cost_usd": 1.3954, "out_of_credit": false, "planned": {"anthropic/claude-haiku-5.5": 4965}}

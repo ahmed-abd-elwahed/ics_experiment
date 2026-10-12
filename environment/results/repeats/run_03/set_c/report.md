@@ -1,8 +1,8 @@
 # Retrieval benchmark report
 
 - Workspace: `environment/results/repeats/run_03/set_c`
-- Judge panel: `google/gemini-3.5-flash-lite`, `qwen/qwen3.8-flash`, `openai/gpt-6-luna`. Each answer's label is the panel's majority vote; with no majority, the first (main) judge's label decides.
-- `case_information`: no retrieval: medsim (deepseek/deepseek-v4-flash-0731 for every stage) answers from the case information, or does not answer (set C)
+- Judge panel: `anthropic/claude-haiku-5.5`, `z-ai/glm-5.3-flash`, `openai/gpt-6-luna`. Each answer's label is the panel's majority vote; with no majority, the first (main) judge's label decides.
+- `case_information`: no retrieval: medsim (deepseek/deepseek-v4.1-flash:batch for every stage) answers from the case information, or does not answer (set C)
 
 ## Question sets
 
@@ -19,7 +19,7 @@
 | Documents returned per question | 0.00 [0.00, 0.00] |
 | Questions answered from literature | 0% [0, 0] |
 | Questions answered with a best guess (documents gave no usable basis) | 3% [1, 5] |
-| Masked correctness: exact (% of set C questions) | 99% [98, 100] |
+| Masked correctness: exact (% of set C questions) | 99% [97, 100] |
 | Masked correctness: same category (incl. exact) (% of set C questions) | 99% [98, 100] |
 | Masked correctness: different category (% of set C questions) | 0% [0, 1] |
 | Masked correctness: not comparable (% of set C questions) | 0% [0, 1] |
@@ -40,7 +40,7 @@
 | Documents returned per question | 0.00 [0.00, 0.00] |
 | Questions answered from literature | 0% [0, 0] |
 | Questions answered with a best guess (documents gave no usable basis) | 3% [1, 5] |
-| Masked correctness: exact (% of set C questions) | 99% [98, 100] |
+| Masked correctness: exact (% of set C questions) | 99% [97, 100] |
 | Masked correctness: same category (incl. exact) (% of set C questions) | 99% [98, 100] |
 | Masked correctness: different category (% of set C questions) | 0% [0, 1] |
 | Masked correctness: not comparable (% of set C questions) | 0% [0, 1] |
@@ -84,15 +84,15 @@ All questions that ran.
 
 | Metric | Answers | Unanimous | Majority | Tie broken by the main judge | Tie broken by the next judge | Fewer than all votes |
 |---|---|---|---|---|---|---|
-| masked correctness | 272 | 99% | 1% | 0% | 0% | 0 |
+| masked correctness | 272 | 100% | 0% | 0% | 0% | 0 |
 | factual consistency | 272 | 99% | 1% | 0% | 0% | 0 |
 
-- **masked correctness, `google/gemini-3.5-flash-lite` vs `qwen/qwen3.8-flash`:** 271/272 identical labels, Cohen's κ = 0.80.
-- **masked correctness, `google/gemini-3.5-flash-lite` vs `openai/gpt-6-luna`:** 270/272 identical labels, Cohen's κ = 0.66.
-- **masked correctness, `qwen/qwen3.8-flash` vs `openai/gpt-6-luna`:** 271/272 identical labels, Cohen's κ = 0.80.
-- **factual consistency, `google/gemini-3.5-flash-lite` vs `qwen/qwen3.8-flash`:** 270/272 identical labels, Cohen's κ = -0.00.
-- **factual consistency, `google/gemini-3.5-flash-lite` vs `openai/gpt-6-luna`:** 271/272 identical labels, Cohen's κ = -0.00.
-- **factual consistency, `qwen/qwen3.8-flash` vs `openai/gpt-6-luna`:** 271/272 identical labels, Cohen's κ = -0.00.
+- **masked correctness, `anthropic/claude-haiku-5.5` vs `z-ai/glm-5.3-flash`:** 271/272 identical labels, Cohen's κ = 0.80.
+- **masked correctness, `anthropic/claude-haiku-5.5` vs `openai/gpt-6-luna`:** 271/272 identical labels, Cohen's κ = 0.80.
+- **masked correctness, `z-ai/glm-5.3-flash` vs `openai/gpt-6-luna`:** 272/272 identical labels, Cohen's κ = 1.00.
+- **factual consistency, `anthropic/claude-haiku-5.5` vs `z-ai/glm-5.3-flash`:** 268/272 identical labels, Cohen's κ = -0.01.
+- **factual consistency, `anthropic/claude-haiku-5.5` vs `openai/gpt-6-luna`:** 269/272 identical labels, Cohen's κ = -0.00.
+- **factual consistency, `z-ai/glm-5.3-flash` vs `openai/gpt-6-luna`:** 271/272 identical labels, Cohen's κ = -0.00.
 
 ## Benchmark spend
 
@@ -105,12 +105,18 @@ All questions that ran.
 | judge: masked correctness (google/gemini-3.5-flash-lite) | $0.1321 |
 | judge: masked correctness (openai/gpt-6-luna) | $0.0402 |
 | judge: masked correctness (qwen/qwen3.8-flash) | $0.0703 |
+| judge: masked correctness (typesafe/jev-1.13) | $0.0107 |
+| judge: masked correctness (z-ai/glm-5.3-flash) | $0.0275 |
+| judge: masked correctness (anthropic/claude-haiku-5.5) | $0.0562 |
 | judge: factual consistency (google/gemini-3.5-flash-lite) | $0.1088 |
 | judge: factual consistency (openai/gpt-6-luna) | $0.0300 |
 | judge: factual consistency (qwen/qwen3.8-flash) | $0.0438 |
+| judge: factual consistency (typesafe/jev-1.13) | $0.0094 |
+| judge: factual consistency (z-ai/glm-5.3-flash) | $0.0209 |
+| judge: factual consistency (anthropic/claude-haiku-5.5) | $0.0486 |
 | validation: controls (panel) | $0.0000 |
 | validation: flipped truth (panel) | $0.0000 |
-| **total** | **$0.6122** |
+| **total** | **$0.7856** |
 
-Cross-check: the OpenRouter key's usage counter, read right after each of the 8 benchmark commands, rose by $1.2809. The counter lags behind requests, so this undercounts; per-call usage.cost above is the accounting source.
+Cross-check: the OpenRouter key's usage counter, read right after each of the 10 benchmark commands, rose by $1.8474. The counter lags behind requests, so this undercounts; per-call usage.cost above is the accounting source.
 

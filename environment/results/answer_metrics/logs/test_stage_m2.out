@@ -1,0 +1,27 @@
+INFO bench.answer_metrics: answer_metrics --runs 2 --metrics case_alignment --alignment-rubric m2 --judges anthropic/claude-haiku-5.5 --workers 32
+INFO bench.answer_metrics: planned: {'anthropic/claude-haiku-5.5': 1855}
+INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 200/1855 ($0.047)
+WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions failed (ConnectError); retrying in 1.0s
+INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 400/1855 ($0.095)
+INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 600/1855 ($0.142)
+INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 800/1855 ($0.190)
+INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1000/1855 ($0.238)
+INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1200/1855 ($0.284)
+INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1400/1855 ($0.332)
+INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1600/1855 ($0.378)
+INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1800/1855 ($0.424)
+INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1855/1855 ($0.438)
+INFO bench.answer_metrics: summary: {"counts": {"case_alignment [anthropic/claude-haiku-5.5]:ok": 1855}, "cost_usd": {"case_alignment [anthropic/claude-haiku-5.5]": 0.4379}, "total_cost_usd": 0.4379, "out_of_credit": false, "planned": {"anthropic/claude-haiku-5.5": 1855}}
+{
+ "counts": {
+  "case_alignment [anthropic/claude-haiku-5.5]:ok": 1855
+ },
+ "cost_usd": {
+  "case_alignment [anthropic/claude-haiku-5.5]": 0.4379
+ },
+ "total_cost_usd": 0.4379,
+ "out_of_credit": false,
+ "planned": {
+  "anthropic/claude-haiku-5.5": 1855
+ }
+}

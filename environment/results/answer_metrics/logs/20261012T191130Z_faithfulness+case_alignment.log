@@ -1,0 +1,84 @@
+2026-10-13 06:11:30,372 INFO bench.answer_metrics: answer_metrics --runs 3 --metrics faithfulness,case_alignment --workers 32
+2026-10-13 06:11:31,212 INFO bench.answer_metrics: planned: {'anthropic/claude-haiku-5.5': 3861, 'z-ai/glm-5.3-flash': 3861, 'openai/gpt-6-luna': 3861}
+2026-10-13 06:11:46,953 INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 200/1996 ($0.111)
+2026-10-13 06:11:57,886 INFO bench.answer_metrics: faithfulness [openai/gpt-6-luna]: 200/1996 ($0.086)
+2026-10-13 06:12:02,178 INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 400/1996 ($0.227)
+2026-10-13 06:12:18,521 INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 600/1996 ($0.340)
+2026-10-13 06:12:21,673 INFO bench.answer_metrics: faithfulness [openai/gpt-6-luna]: 400/1996 ($0.174)
+2026-10-13 06:12:33,695 INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 800/1996 ($0.447)
+2026-10-13 06:12:40,826 INFO bench.answer_metrics: faithfulness [z-ai/glm-5.3-flash]: 200/1996 ($0.092)
+2026-10-13 06:12:46,682 INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 1000/1996 ($0.514)
+2026-10-13 06:12:48,546 INFO bench.answer_metrics: faithfulness [openai/gpt-6-luna]: 600/1996 ($0.264)
+2026-10-13 06:12:59,781 INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 1200/1996 ($0.580)
+2026-10-13 06:13:12,741 INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 1400/1996 ($0.667)
+2026-10-13 06:13:15,531 INFO bench.answer_metrics: faithfulness [openai/gpt-6-luna]: 800/1996 ($0.343)
+2026-10-13 06:13:19,793 WARNING medsim.http: POST https://openrouter.ai/api/v1/chat/completions failed (ConnectError); retrying in 1.0s
+2026-10-13 06:13:26,222 INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 1600/1996 ($0.759)
+2026-10-13 06:13:36,827 INFO bench.answer_metrics: faithfulness [openai/gpt-6-luna]: 1000/1996 ($0.397)
+2026-10-13 06:13:43,536 INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 1800/1996 ($0.866)
+2026-10-13 06:13:52,951 WARNING bench.judge: judge z-ai/glm-5.3-flash: attempt 1/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 2s
+2026-10-13 06:13:57,296 INFO bench.answer_metrics: faithfulness [openai/gpt-6-luna]: 1200/1996 ($0.448)
+2026-10-13 06:14:03,603 INFO bench.answer_metrics: faithfulness [anthropic/claude-haiku-5.5]: 1996/1996 ($0.972)
+2026-10-13 06:14:13,642 INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 200/1865 ($0.046)
+2026-10-13 06:14:16,759 INFO bench.answer_metrics: faithfulness [openai/gpt-6-luna]: 1400/1996 ($0.515)
+2026-10-13 06:14:21,670 INFO bench.answer_metrics: faithfulness [z-ai/glm-5.3-flash]: 400/1996 ($0.202)
+2026-10-13 06:14:22,444 WARNING bench.judge: judge z-ai/glm-5.3-flash: attempt 1/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 2s
+2026-10-13 06:14:27,565 INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 400/1865 ($0.094)
+2026-10-13 06:14:28,316 WARNING bench.judge: judge z-ai/glm-5.3-flash: attempt 1/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 2s
+2026-10-13 06:14:37,672 INFO bench.answer_metrics: faithfulness [openai/gpt-6-luna]: 1600/1996 ($0.583)
+2026-10-13 06:14:41,344 INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 600/1865 ($0.140)
+2026-10-13 06:14:54,739 INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 800/1865 ($0.187)
+2026-10-13 06:14:56,737 WARNING bench.judge: judge z-ai/glm-5.3-flash: attempt 1/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 2s
+2026-10-13 06:15:08,197 INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1000/1865 ($0.235)
+2026-10-13 06:15:08,345 INFO bench.answer_metrics: faithfulness [openai/gpt-6-luna]: 1800/1996 ($0.669)
+2026-10-13 06:15:21,468 INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1200/1865 ($0.282)
+2026-10-13 06:15:34,965 INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1400/1865 ($0.328)
+2026-10-13 06:15:35,184 WARNING bench.judge: judge z-ai/glm-5.3-flash: attempt 1/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 2s
+2026-10-13 06:15:48,151 INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1600/1865 ($0.376)
+2026-10-13 06:15:48,796 INFO bench.answer_metrics: faithfulness [openai/gpt-6-luna]: 1996/1996 ($0.745)
+2026-10-13 06:16:00,815 INFO bench.answer_metrics: faithfulness [z-ai/glm-5.3-flash]: 600/1996 ($0.317)
+2026-10-13 06:16:01,179 INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1800/1865 ($0.423)
+2026-10-13 06:16:02,104 INFO bench.answer_metrics: case_alignment [openai/gpt-6-luna]: 200/1865 ($0.030)
+2026-10-13 06:16:08,124 INFO bench.answer_metrics: case_alignment [anthropic/claude-haiku-5.5]: 1865/1865 ($0.438)
+2026-10-13 06:16:14,599 WARNING bench.judge: judge z-ai/glm-5.3-flash: attempt 2/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 4s
+2026-10-13 06:16:22,090 INFO bench.answer_metrics: case_alignment [openai/gpt-6-luna]: 400/1865 ($0.059)
+2026-10-13 06:16:38,066 WARNING bench.judge: judge z-ai/glm-5.3-flash: attempt 1/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 2s
+2026-10-13 06:16:38,642 WARNING bench.judge: judge z-ai/glm-5.3-flash: attempt 1/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 2s
+2026-10-13 06:16:41,941 INFO bench.answer_metrics: case_alignment [openai/gpt-6-luna]: 600/1865 ($0.088)
+2026-10-13 06:17:03,015 INFO bench.answer_metrics: case_alignment [openai/gpt-6-luna]: 800/1865 ($0.118)
+2026-10-13 06:17:23,674 INFO bench.answer_metrics: case_alignment [openai/gpt-6-luna]: 1000/1865 ($0.148)
+2026-10-13 06:17:31,069 INFO bench.answer_metrics: faithfulness [z-ai/glm-5.3-flash]: 800/1996 ($0.425)
+2026-10-13 06:17:40,368 WARNING bench.judge: judge z-ai/glm-5.3-flash: attempt 2/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 4s
+2026-10-13 06:17:44,970 INFO bench.answer_metrics: case_alignment [openai/gpt-6-luna]: 1200/1865 ($0.177)
+2026-10-13 06:18:04,299 INFO bench.answer_metrics: case_alignment [openai/gpt-6-luna]: 1400/1865 ($0.206)
+2026-10-13 06:18:25,680 INFO bench.answer_metrics: case_alignment [openai/gpt-6-luna]: 1600/1865 ($0.236)
+2026-10-13 06:18:44,440 INFO bench.answer_metrics: faithfulness [z-ai/glm-5.3-flash]: 1000/1996 ($0.474)
+2026-10-13 06:18:45,379 INFO bench.answer_metrics: case_alignment [openai/gpt-6-luna]: 1800/1865 ($0.267)
+2026-10-13 06:18:47,115 WARNING bench.judge: judge z-ai/glm-5.3-flash: attempt 2/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 4s
+2026-10-13 06:18:55,166 INFO bench.answer_metrics: case_alignment [openai/gpt-6-luna]: 1865/1865 ($0.278)
+2026-10-13 06:19:01,545 WARNING bench.judge: judge z-ai/glm-5.3-flash: attempt 1/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 2s
+2026-10-13 06:19:08,217 WARNING bench.judge: judge z-ai/glm-5.3-flash: attempt 1/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 2s
+2026-10-13 06:19:11,317 WARNING bench.judge: judge z-ai/glm-5.3-flash: attempt 1/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 2s
+2026-10-13 06:19:36,031 INFO bench.answer_metrics: faithfulness [z-ai/glm-5.3-flash]: 1200/1996 ($0.530)
+2026-10-13 06:20:38,594 INFO bench.answer_metrics: faithfulness [z-ai/glm-5.3-flash]: 1400/1996 ($0.599)
+2026-10-13 06:21:49,186 INFO bench.answer_metrics: faithfulness [z-ai/glm-5.3-flash]: 1600/1996 ($0.676)
+2026-10-13 06:23:03,651 WARNING bench.judge: judge z-ai/glm-5.3-flash: attempt 1/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 2s
+2026-10-13 06:23:26,946 WARNING bench.judge: judge z-ai/glm-5.3-flash: attempt 1/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 2s
+2026-10-13 06:23:31,281 INFO bench.answer_metrics: faithfulness [z-ai/glm-5.3-flash]: 1800/1996 ($0.783)
+2026-10-13 06:25:48,803 WARNING bench.judge: judge z-ai/glm-5.3-flash: attempt 1/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 2s
+2026-10-13 06:25:56,429 WARNING bench.judge: judge z-ai/glm-5.3-flash: attempt 1/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 2s
+2026-10-13 06:26:03,240 INFO bench.answer_metrics: case_alignment [z-ai/glm-5.3-flash]: 200/1865 ($0.018)
+2026-10-13 06:26:03,424 WARNING bench.judge: judge z-ai/glm-5.3-flash: attempt 1/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 2s
+2026-10-13 06:26:44,810 INFO bench.answer_metrics: case_alignment [z-ai/glm-5.3-flash]: 400/1865 ($0.036)
+2026-10-13 06:27:22,292 INFO bench.answer_metrics: case_alignment [z-ai/glm-5.3-flash]: 600/1865 ($0.053)
+2026-10-13 06:27:51,109 WARNING bench.judge: judge z-ai/glm-5.3-flash: attempt 1/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 2s
+2026-10-13 06:28:01,113 INFO bench.answer_metrics: case_alignment [z-ai/glm-5.3-flash]: 800/1865 ($0.069)
+2026-10-13 06:28:33,291 INFO bench.answer_metrics: case_alignment [z-ai/glm-5.3-flash]: 1000/1865 ($0.084)
+2026-10-13 06:29:06,416 INFO bench.answer_metrics: case_alignment [z-ai/glm-5.3-flash]: 1200/1865 ($0.101)
+2026-10-13 06:29:37,928 INFO bench.answer_metrics: case_alignment [z-ai/glm-5.3-flash]: 1400/1865 ($0.117)
+2026-10-13 06:30:13,337 INFO bench.answer_metrics: case_alignment [z-ai/glm-5.3-flash]: 1600/1865 ($0.134)
+2026-10-13 06:30:49,268 INFO bench.answer_metrics: case_alignment [z-ai/glm-5.3-flash]: 1800/1865 ($0.152)
+2026-10-13 06:33:21,802 WARNING bench.judge: judge z-ai/glm-5.3-flash: attempt 1/3 failed (judge: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_JUDGE_MAX_TOKENS.); retrying in 2s
+2026-10-13 06:35:09,729 INFO bench.answer_metrics: case_alignment [z-ai/glm-5.3-flash]: 1865/1865 ($0.163)
+2026-10-13 06:42:27,302 INFO bench.answer_metrics: faithfulness [z-ai/glm-5.3-flash]: 1996/1996 ($0.914)
+2026-10-13 06:42:27,360 INFO bench.answer_metrics: summary: {"counts": {"case_alignment [anthropic/claude-haiku-5.5]:ok": 1865, "case_alignment [openai/gpt-6-luna]:ok": 1865, "case_alignment [z-ai/glm-5.3-flash]:ok": 1865, "faithfulness [anthropic/claude-haiku-5.5]:ok": 1996, "faithfulness [openai/gpt-6-luna]:ok": 1996, "faithfulness [z-ai/glm-5.3-flash]:ok": 1996}, "cost_usd": {"case_alignment [anthropic/claude-haiku-5.5]": 0.4384, "case_alignment [openai/gpt-6-luna]": 0.2778, "case_alignment [z-ai/glm-5.3-flash]": 0.1629, "faithfulness [anthropic/claude-haiku-5.5]": 0.9718, "faithfulness [openai/gpt-6-luna]": 0.745, "faithfulness [z-ai/glm-5.3-flash]": 0.9143}, "total_cost_usd": 3.5103, "out_of_credit": false, "planned": {"anthropic/claude-haiku-5.5": 3861, "z-ai/glm-5.3-flash": 3861, "openai/gpt-6-luna": 3861}}
