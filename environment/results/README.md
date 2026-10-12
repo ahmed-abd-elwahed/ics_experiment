@@ -19,8 +19,9 @@ one-run test: `answer_metrics/test_run2_haiku.json`). Method: [../bench/README.m
   zlog z-score as a fourth judge; the scores are given with and without it.
 - **Coverage:** all ten runs, except faithfulness and case alignment by the chat judges (runs
   1–9; the API key reached its total limit of $250 during run 10).
-- **Spend:** $56.60 on the OpenRouter key on the day (about 289,000 judgments, tests and
-  calibration included).
+- **Spend:** about $50 (the stored judgments' recorded cost is $49.46 for about 289,000
+  judgments; the rest is tests and calibration). The key's usage that day was $56.60, which also
+  covers another experiment run on the same key.
 
 The sections below describe earlier evaluations; their figures are the earlier panel's.
 

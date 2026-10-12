@@ -227,3 +227,4 @@ in [environment/NOTES.md](environment/NOTES.md).
 | `make_repeat_summary.py` now counts failed judge calls in the two existing metrics' files only, and no longer names Qwen. | It had started counting run 10's unfinished new-metric calls as failures of the old metrics. |
 | The report is A4 landscape, built from HTML by headless Chrome like the other result PDFs. | The scores table has nine columns; the existing tables are made the same way. |
 | The presentation rules were not applied to the report. | They are for slide decks; a PDF report was asked for. |
+| The cost of this work is reported from the stored judgments ($49.46, about $50 with tests), not from the key's usage that day ($56.60). | Another session ran an experiment on the same key during the run, so the key's usage and the balance both include its spend; the key limit was reached by the two together. |
