@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1728 776" role="img" aria-labelledby="t d" font-family="'DM Sans', system-ui, sans-serif" font-size="34" font-weight="500" fill="#141413">
   <title id="t">Framework overview</title>
-  <desc id="d">An information gathering strategy sends queries to an LLM inside a simulated environment. The LLM consults the case study and the literature, and returns answers.</desc>
+  <desc id="d">An information collection strategy sends queries to an LLM inside a simulated environment. The LLM consults the case study and the literature, and returns answers.</desc>
 
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
@@ -62,9 +62,9 @@
     <line x1="258" y1="566" x2="500" y2="456"/>
   </g>
 
-  <!-- Information gathering strategy -->
+  <!-- Information collection strategy -->
   <rect x="1110" y="192" width="600" height="54" rx="12" fill="#FCE5B4" stroke="#141413" stroke-width="2"/>
-  <text x="1410" y="230" text-anchor="middle">Information gathering strategy</text>
+  <text x="1410" y="230" text-anchor="middle">Information collection strategy</text>
   <use xlink:href="#robot" href="#robot" x="1410" y="410" color="#D97757"/>
 
   <!-- Query and answer -->

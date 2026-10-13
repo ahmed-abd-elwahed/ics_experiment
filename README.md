@@ -12,7 +12,7 @@ flowchart LR
         CS[Case study] <--> LLM[LLM]
         LIT[The literature] <--> LLM
     end
-    STRAT[Information gathering strategy] -- query --> LLM
+    STRAT[Information collection strategy] -- query --> LLM
     LLM -- answer --> STRAT
 ```
 
