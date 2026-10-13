@@ -87,6 +87,7 @@ VARIANTS: dict[str, tuple[str, str, bool, str]] = {
 # Further readings of a judged metric, scored but not in the main table.
 EXTRA: dict[str, tuple[str, str, bool, str]] = {
     "align_ok": ("Case alignment: aligned or neutral, %", "case_alignment", True, "new"),
+    "align_neutral": ("Case alignment: neutral, %", "case_alignment", True, "new"),
 }
 ALL = METRICS | VARIANTS | EXTRA
 PERCENT = {k for k in ALL if k not in ("zlog", "zlog_v1")}
@@ -180,6 +181,7 @@ def workspace_values(
                     values[f"{prefix}_contra"][cfg][iid] = float(label == "contradicted")
                     if f"{prefix}_ok" in ALL:
                         values[f"{prefix}_ok"][cfg][iid] = float(label in ("aligned", "neutral"))
+                        values[f"{prefix}_neutral"][cfg][iid] = float(label == "neutral")
         if qs in ("A", "B") and cfg not in NO_DOCUMENT_CONFIGS:
             label = "not_supported"
             if key and run is not None and run.documents:
