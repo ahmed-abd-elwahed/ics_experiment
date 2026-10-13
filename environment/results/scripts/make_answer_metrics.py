@@ -84,7 +84,11 @@ VARIANTS: dict[str, tuple[str, str, bool, str]] = {
         "Case alignment, first version: contradicted, %", "case_alignment_v1", False, "new",
     ),
 }  # fmt: skip
-ALL = METRICS | VARIANTS
+# Further readings of a judged metric, scored but not in the main table.
+EXTRA: dict[str, tuple[str, str, bool, str]] = {
+    "align_ok": ("Case alignment: aligned or neutral, %", "case_alignment", True, "new"),
+}
+ALL = METRICS | VARIANTS | EXTRA
 PERCENT = {k for k in ALL if k not in ("zlog", "zlog_v1")}
 # The versions kept after the test stage (see bench/README.md): the revised zlog scale and the
 # revised case alignment rubric.
@@ -174,6 +178,8 @@ def workspace_values(
                 if label is not None:
                     values[f"{prefix}_aligned"][cfg][iid] = float(label == "aligned")
                     values[f"{prefix}_contra"][cfg][iid] = float(label == "contradicted")
+                    if f"{prefix}_ok" in ALL:
+                        values[f"{prefix}_ok"][cfg][iid] = float(label in ("aligned", "neutral"))
         if qs in ("A", "B") and cfg not in NO_DOCUMENT_CONFIGS:
             label = "not_supported"
             if key and run is not None and run.documents:
