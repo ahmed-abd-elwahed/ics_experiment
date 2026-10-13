@@ -228,3 +228,17 @@ in [environment/NOTES.md](environment/NOTES.md).
 | The report is A4 landscape, built from HTML by headless Chrome like the other result PDFs. | The scores table has nine columns; the existing tables are made the same way. |
 | The presentation rules were not applied to the report. | They are for slide decks; a PDF report was asked for. |
 | The cost of this work is reported from the stored judgments ($49.46, about $50 with tests), not from the key's usage that day ($56.60). | Another session ran an experiment on the same key during the run, so the key's usage and the balance both include its spend; the key limit was reached by the two together. |
+
+### Metrics and strategies deck (2026-10-13)
+
+| Decision | Why |
+|---|---|
+| The deck has 21 slides in the order given in the request; the first three are the fixed opening slides, and the last is "Thank you", not a summary. | The presentation rules fix slides 1–3 and say the rules win over the design system's order; the requested order then wins over the design system's "close by reminding" slide. The takeaways slide still follows that rule's form (a takeaway title, a visual hint per point). |
+| The title slide's subtitle is "New answer metrics and five collection strategies". | The rules ask for a subtitle that summarises the deck; the design system caps it at eight words. |
+| The nine configurations are named Model knowledge, Original retrieval, Improved retrieval, Exa search, Parallel search, Perplexity search, Google search, OpenAI search, and Case only. | A two-word description of each was asked for; the full names are in the table slide's speaker notes. |
+| The environment table shows five of the eight metric columns (same category, consistent, mean \|z\|, supported, aligned) as means without standard deviations. | Nine rows already exceed the design system's "about six rows"; one slide was asked for, so columns were cut to keep the text at 28px. The report has the full table. |
+| Both tables are built the design system's way: header row in the label style, cells in body text, horizontal rule lines only, one accent-coloured row. | Asked for during the work ("make the tables have the same design system"). |
+| The strategy diagrams are the proposal page's own figures, rendered from that page at twice their size and placed as images. | The page draws them with script and styles them with its stylesheet; a slide's inline SVG cannot carry either, and an uploaded SVG loses its styles and fonts. |
+| The overview image was uploaded as the SVG file itself. | The rules say to use that file as it is. |
+| The Kaggle slide shows the public page of RSNA Knee Abnormality Detection, captured signed out on 2026-10-13 with the cookie banner cropped off. | It is the one live Kaggle competition about knees, and the account has entered it. |
+| The old-metrics slide shows the labels' average shares over the six repeated methods (44 / 40 / 14 / 2 and 97 / 3). | The point of the slide is the small number of categories; one bar per metric shows it. |
