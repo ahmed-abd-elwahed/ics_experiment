@@ -1,0 +1,14 @@
+2026-10-16 20:31:56,830 INFO bench.doc_metrics: doc_metrics retrieve --configs baseline@fresh1,baseline@fresh2 --workers 8
+2026-10-16 20:32:09,548 WARNING medsim.http: GET https://www.ebi.ac.uk/europepmc/webservices/rest/search returned 503; retrying in 1.0s
+2026-10-16 20:32:10,956 WARNING medsim.http: GET https://www.ebi.ac.uk/europepmc/webservices/rest/search returned 503; retrying in 1.0s
+2026-10-16 20:32:11,090 WARNING medsim.http: GET https://www.ebi.ac.uk/europepmc/webservices/rest/search returned 503; retrying in 1.0s
+2026-10-16 20:32:19,268 INFO bench.doc_metrics: retrieve baseline@fresh1: 25/129, $0.0000
+2026-10-16 20:32:29,213 INFO bench.doc_metrics: retrieve baseline@fresh1: 50/129, $0.0000
+2026-10-16 20:32:36,225 INFO bench.doc_metrics: retrieve baseline@fresh1: 75/129, $0.0000
+2026-10-16 20:32:43,909 INFO bench.doc_metrics: retrieve baseline@fresh1: 100/129, $0.0000
+2026-10-16 20:32:49,826 INFO bench.doc_metrics: retrieve baseline@fresh1: 125/129, $0.0000
+2026-10-16 20:32:54,711 INFO bench.doc_metrics: retrieve baseline@fresh1: 129/129, $0.0000
+2026-10-16 20:33:02,615 INFO bench.doc_metrics: retrieve baseline@fresh2: 25/64, $0.0000
+2026-10-16 20:33:09,713 INFO bench.doc_metrics: retrieve baseline@fresh2: 50/64, $0.0000
+2026-10-16 20:33:13,431 INFO bench.doc_metrics: retrieve baseline@fresh2: 64/64, $0.0000
+2026-10-16 20:33:13,432 INFO bench.doc_metrics: summary: {"baseline@fresh1": {"ok": 129, "cost_millicents": 0}, "baseline@fresh2": {"ok": 64, "cost_millicents": 0}}

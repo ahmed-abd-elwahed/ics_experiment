@@ -1,0 +1,3 @@
+2026-10-16 18:47:00,615 INFO bench.doc_metrics: doc_metrics retrieve --configs baseline --limit 2
+2026-10-16 18:47:07,174 INFO bench.doc_metrics: retrieve baseline: 2/2, $0.0000
+2026-10-16 18:47:07,175 INFO bench.doc_metrics: summary: {"baseline": {"ok": 2, "cost_millicents": 0}}

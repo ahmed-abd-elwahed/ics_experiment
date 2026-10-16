@@ -157,7 +157,10 @@ CHANGES: dict[str, Change] = {
         Change("litsense_only", "LitSense only", _top(enabled_sources=["litsense"])),
     )
 }  # fmt: skip
-QUERY_SETS: dict[str, str | None] = {DEFAULT_QUERY_SET: None, "gpt-6-luna": "openai/gpt-6-luna"}
+# "fresh1" and "fresh2" are the base query writer run again: new queries, for confirmation.
+QUERY_SETS: dict[str, str | None] = {
+    DEFAULT_QUERY_SET: None, "gpt-6-luna": "openai/gpt-6-luna", "fresh1": None, "fresh2": None
+}  # fmt: skip
 
 
 @dataclass(frozen=True)
@@ -166,13 +169,17 @@ class DocConfig:
 
     name: str
     changes: tuple[Change, ...]
+    queries: str | None = None  # ``name@set``: run on another set of frozen queries
 
     @property
     def description(self) -> str:
-        return "; ".join(c.description for c in self.changes) or "baseline: changes 1-4"
+        text = "; ".join(c.description for c in self.changes) or "baseline: changes 1-4"
+        return text + (f" (queries: {self.queries})" if self.queries else "")
 
     @property
     def query_set(self) -> str:
+        if self.queries:
+            return self.queries
         sets = {c.query_set for c in self.changes if c.query_set}
         if len(sets) > 1:
             raise ConfigError(f"{self.name}: changes use different query writers")
@@ -186,13 +193,18 @@ class DocConfig:
 
 
 def doc_config(name: str) -> DocConfig:
-    if name == "baseline":
-        return DocConfig(name, ())
-    parts = name.split("+")
+    """``name#2`` is the same configuration under another label: with the search cache its
+    documents are the same, so judging it again measures the judge's own noise."""
+    spec, _, queries = name.partition("#")[0].partition("@")
+    if queries and queries not in QUERY_SETS:
+        raise ConfigError(f"Unknown query set {queries!r}; known: {', '.join(QUERY_SETS)}")
+    if spec == "baseline":
+        return DocConfig(name, (), queries or None)
+    parts = spec.split("+")
     unknown = [p for p in parts if p not in CHANGES]
     if unknown:
         raise ConfigError(f"Unknown change(s) {', '.join(unknown)}; known: {', '.join(CHANGES)}")
-    return DocConfig(name, tuple(CHANGES[p] for p in parts))
+    return DocConfig(name, tuple(CHANGES[p] for p in parts), queries or None)
 
 
 def environment_settings(**overrides: Any) -> Settings:
@@ -654,7 +666,8 @@ def step_retrieve(
             f"{config.name}: {len(missing)} questions have no frozen query in set "
             f"{config.query_set!r}; run `queries --query-set {config.query_set}` first."
         )
-    done = config_runs(ws, config.name)
+    # A question where a source failed (an outage, a rate limit) is retrieved again.
+    done = {k for k, r in config_runs(ws, config.name).items() if not r.failed_sources}
     todo = [i for i in items if i.item_id not in done][:limit]
     jobs = [
         lambda i=i: retrieve_one(
@@ -718,8 +731,15 @@ def step_score(ws: DocWorkspace, items: Sequence[Item], judge_model: str) -> dic
             entry["documents_per_question"] = (
                 statistics.fmean(len(r.documents) for r in runs.values()) if runs else 0.0
             )
-            if baseline and control is None and label != "baseline":
-                entry["vs_baseline"] = {m: paired_difference(baseline, judged, m) for m in METRICS}
+            # A configuration on another query set is compared with the baseline on that set.
+            ref_label = "baseline@" + label.partition("@")[2] if "@" in label else "baseline"
+            ref = (
+                baseline
+                if ref_label == "baseline"
+                else (ok_judgments(ws, ref_label, judge_model) if ref_label in labels else {})
+            )
+            if ref and control is None and label != ref_label:
+                entry["vs_baseline"] = {m: paired_difference(ref, judged, m) for m in METRICS}
             results["configs"][key] = entry
     ws.scores.parent.mkdir(parents=True, exist_ok=True)
     ws.scores.write_text(json.dumps(results, indent=2), encoding="utf-8")

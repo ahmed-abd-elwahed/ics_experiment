@@ -1,0 +1,20 @@
+2026-10-16 20:08:59,559 INFO bench.doc_metrics: doc_metrics judge --configs llm_select20+epmc25,llm_select20+q_synonym,llm_select20+epmc25+q_synonym --workers 24
+2026-10-16 20:09:13,881 INFO bench.doc_metrics: judge llm_select20+epmc25: 25/141, $0.0333
+2026-10-16 20:09:22,928 INFO bench.doc_metrics: judge llm_select20+epmc25: 50/141, $0.0674
+2026-10-16 20:09:31,903 INFO bench.doc_metrics: judge llm_select20+epmc25: 75/141, $0.1023
+2026-10-16 20:09:40,348 INFO bench.doc_metrics: judge llm_select20+epmc25: 100/141, $0.1360
+2026-10-16 20:09:49,022 INFO bench.doc_metrics: judge llm_select20+epmc25: 125/141, $0.1701
+2026-10-16 20:09:55,334 INFO bench.doc_metrics: judge llm_select20+epmc25: 141/141, $0.1921
+2026-10-16 20:10:08,113 INFO bench.doc_metrics: judge llm_select20+q_synonym: 25/141, $0.0324
+2026-10-16 20:10:16,984 INFO bench.doc_metrics: judge llm_select20+q_synonym: 50/141, $0.0648
+2026-10-16 20:10:25,404 INFO bench.doc_metrics: judge llm_select20+q_synonym: 75/141, $0.0998
+2026-10-16 20:10:34,137 INFO bench.doc_metrics: judge llm_select20+q_synonym: 100/141, $0.1332
+2026-10-16 20:10:43,433 INFO bench.doc_metrics: judge llm_select20+q_synonym: 125/141, $0.1691
+2026-10-16 20:10:52,058 INFO bench.doc_metrics: judge llm_select20+q_synonym: 141/141, $0.1919
+2026-10-16 20:11:05,379 INFO bench.doc_metrics: judge llm_select20+epmc25+q_synonym: 25/141, $0.0324
+2026-10-16 20:11:15,167 INFO bench.doc_metrics: judge llm_select20+epmc25+q_synonym: 50/141, $0.0682
+2026-10-16 20:11:23,322 INFO bench.doc_metrics: judge llm_select20+epmc25+q_synonym: 75/141, $0.1014
+2026-10-16 20:11:32,892 INFO bench.doc_metrics: judge llm_select20+epmc25+q_synonym: 100/141, $0.1339
+2026-10-16 20:11:40,883 INFO bench.doc_metrics: judge llm_select20+epmc25+q_synonym: 125/141, $0.1701
+2026-10-16 20:11:49,338 INFO bench.doc_metrics: judge llm_select20+epmc25+q_synonym: 141/141, $0.1927
+2026-10-16 20:11:49,344 INFO bench.doc_metrics: summary: {"llm_select20+epmc25": {"ok": 141, "cost_millicents": 19212}, "llm_select20+q_synonym": {"ok": 141, "cost_millicents": 19190}, "llm_select20+epmc25+q_synonym": {"ok": 141, "cost_millicents": 19275}}

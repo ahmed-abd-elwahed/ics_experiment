@@ -1,0 +1,112 @@
+<!doctype html><html><head><meta charset="utf-8">
+<title>Retrieved-document metrics</title><style>
+  @page { size: A4; margin: 13mm 12mm 14mm; }
+  body { font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; color: #1b1b1b;
+         font-size: 10.5px; line-height: 1.45; }
+  h1 { font-size: 21px; margin: 0 0 3px; }
+  h2 { font-size: 14.5px; margin: 16px 0 5px; border-bottom: 1.5px solid #8a94a6;
+       padding-bottom: 2px; break-after: avoid; }
+  p { margin: 4px 0; } p.sub { color: #555; margin: 0 0 8px; }
+  ul { margin: 4px 0; padding-left: 17px; } li { margin: 2px 0; }
+  .box { background: #f4f6fa; border-left: 3px solid #8a94a6; padding: 6px 10px; margin: 6px 0; }
+  table { border-collapse: collapse; width: 100%; margin: 6px 0 4px; break-inside: avoid; }
+  th, td { border: 1px solid #cfcfcf; padding: 3px 5px; text-align: center; }
+  th { background: #e9eef6; } td.cfg, th.cfg { text-align: left; }
+  td { white-space: nowrap; } td.cfg { white-space: normal; }
+  tbody tr:nth-child(even) td { background-color: #fafafa; }
+  tr.win td { background-color: #eaf5ec !important; font-weight: 600; }
+  tr.base td { background-color: #f1f3f7 !important; }
+  span.ci { color: #666; font-size: 9px; } .pos { color: #1d6b32; } .neg { color: #a12a1a; }
+  .note { color: #444; font-size: 9.5px; }
+</style></head><body>
+<h1>Which retrieval settings find the true value?</h1>
+<p class="sub">Truth coverage and graded relevance of the documents medsim retrieves (Europe PMC +
+LitSense), on the 141 set A questions of the retrieval benchmark · judge anthropic/claude-haiku-5.5
+· 37 scored configurations and controls</p>
+
+<div class="box"><b>Result.</b> The best configuration is <b>llm_select20+epmc25+q_synonym</b>
+(an LLM picks the 8 documents from the best 20; 25 Europe PMC candidates (baseline 50); Europe PMC MeSH synonym expansion): strict truth coverage 70.2% against the
+baseline's 60.3% (<span class="pos">+9.9</span> <span class="ci">(+3.5 to +17.0)</span> points,
+paired over the same questions), nDCG@8 0.750 against 0.691, and precision@8
+49.6% against 41.3%.
+On fresh queries: query set fresh1: strict +7.1 points, nDCG +0.054; query set fresh2: strict +12.1 points, nDCG +0.058.</div>
+
+<h2>What was measured</h2>
+<ul>
+<li><b>Strict truth coverage</b> (decides): a document gives a value or range for this variable
+in patients with this or a closely related condition, and the hidden true value lies inside it or
+within about 15%. <b>Category coverage</b> (shown): a document's value, range, or level, a
+reference range for comparable patients included, puts the true value in the same low / normal /
+high category.</li>
+<li><b>Graded relevance</b>: each document 0 (not about the variable or the condition), 1 (about
+them, no usable value), or 2 (a value for the variable in comparable patients).
+<b>nDCG@8</b> is against a perfect list of eight grade-2 documents, so it rewards better documents
+and a better order (it breaks ties); <b>precision@8</b> is the share of grade-2 documents.</li>
+<li>One judge call per question grades all eight documents and gives both coverage verdicts. Every
+positive verdict needs a verbatim quote that code finds in the named document; an unverified grade 2
+counts as 1, and unverified coverage as not covered.</li>
+<li>Each configuration retrieves for the same <b>frozen search query</b> per question (medsim's
+Stages A and B once, with the stored runs' model deepseek/deepseek-v4-flash-0731), and no
+answer is written. Differences between configurations therefore come from the retrieval settings.
+Eight documents per question throughout. Search results are cached, so a configuration that issues
+the same requests gets the same results.</li>
+</ul>
+
+<h2>Can the metrics be trusted?</h2>
+<table><thead><tr><th class="cfg">Check</th><th>Strict coverage</th><th>Category</th><th>nDCG@8</th>
+<th class="cfg">Reading</th></tr></thead><tbody>
+<tr><td class="cfg">Shuffled control: each question judged on another question's documents</td>
+<td>0.0%</td><td>0.7%</td>
+<td>0.034</td>
+<td class="cfg">Near zero: the judge reads the documents rather than answering from the question.</td></tr>
+<tr><td class="cfg">The baseline's documents judged twice</td><td>60.3% / 61.7%</td>
+<td>83.7% / 85.8%</td>
+<td>0.691 / 0.680</td>
+<td class="cfg">The judge's own noise: 1.4 points of strict coverage.</td></tr>
+<tr><td class="cfg">Stored benchmark runs 2–6 of the baseline method (fresh queries, full pipeline)</td>
+<td>61.7% ± 3.4</td><td>–</td>
+<td>0.675 ± 0.019</td>
+<td class="cfg">Run-to-run spread (mean ± SD) when the query is written anew; the frozen-query
+baseline (60.3%) lies inside it.</td></tr>
+<tr><td class="cfg">Stored run 2 of the original retrieval (<code>current</code>)</td>
+<td>40.4%</td><td>70.2%</td>
+<td>0.593</td>
+<td class="cfg">About 20 points below changes 1–4: the metrics separate a known difference.</td></tr>
+</tbody></table>
+
+<h2>Single changes from the baseline</h2>
+<p>The baseline is medsim's default retrieval (changes 1–4: value-first ranking in one list,
+50 Europe PMC candidates, animal and age filter, article-body search with excerpts, value-based
+broadening). Each row changes one setting. Differences are paired over the same 141 questions,
+with 95% bootstrap intervals; green intervals exclude zero.</p>
+<table><thead><tr><th class='cfg'>Configuration</th><th>Strict coverage</th><th>Δ strict vs baseline (95% CI)</th><th>Category coverage</th><th>nDCG@8</th><th>Δ nDCG vs baseline</th><th>Precision@8</th><th>n</th></tr></thead><tbody><tr class="base"><td class="cfg"><b>baseline</b><br><span class="note">baseline: changes 1-4</span></td><td>60.3%</td><td></td><td>83.7%</td><td>0.691</td><td></td><td>41.3%</td><td>141</td></tr><tr class=""><td class="cfg"><b>llm_select40</b><br><span class="note">an LLM picks the 8 documents from the best 40</span></td><td>68.8%</td><td><span class="pos">+8.5</span> <span class="ci">(+2.1 to +15.6)</span></td><td>89.4%</td><td>0.746</td><td><span class="pos">+0.055</span> <span class="ci">(+0.030 to +0.078)</span></td><td>50.8%</td><td>141</td></tr><tr class=""><td class="cfg"><b>llm_select20</b><br><span class="note">an LLM picks the 8 documents from the best 20</span></td><td>67.4%</td><td><span class="pos">+7.1</span> <span class="ci">(+0.7 to +14.2)</span></td><td>89.4%</td><td>0.749</td><td><span class="pos">+0.058</span> <span class="ci">(+0.041 to +0.076)</span></td><td>49.6%</td><td>141</td></tr><tr class=""><td class="cfg"><b>epmc25</b><br><span class="note">25 Europe PMC candidates (baseline 50)</span></td><td>66.0%</td><td><span class="">+5.7</span> <span class="ci">(-1.4 to +12.8)</span></td><td>85.1%</td><td>0.690</td><td><span class="">-0.001</span> <span class="ci">(-0.020 to +0.017)</span></td><td>42.6%</td><td>141</td></tr><tr class=""><td class="cfg"><b>q_synonym</b><br><span class="note">Europe PMC MeSH synonym expansion</span></td><td>63.8%</td><td><span class="">+3.5</span> <span class="ci">(-1.4 to +8.5)</span></td><td>84.4%</td><td>0.690</td><td><span class="">-0.001</span> <span class="ci">(-0.015 to +0.013)</span></td><td>42.3%</td><td>141</td></tr><tr class=""><td class="cfg"><b>epmc_only</b><br><span class="note">Europe PMC only</span></td><td>63.1%</td><td><span class="">+2.8</span> <span class="ci">(-2.8 to +8.5)</span></td><td>85.8%</td><td>0.665</td><td><span class="neg">-0.026</span> <span class="ci">(-0.048 to -0.005)</span></td><td>40.5%</td><td>141</td></tr><tr class=""><td class="cfg"><b>ls_sentences</b><br><span class="note">LitSense sentences instead of passages</span></td><td>63.1%</td><td><span class="">+2.8</span> <span class="ci">(-4.3 to +9.9)</span></td><td>86.5%</td><td>0.659</td><td><span class="neg">-0.032</span> <span class="ci">(-0.053 to -0.013)</span></td><td>39.3%</td><td>141</td></tr><tr class=""><td class="cfg"><b>q_natural</b><br><span class="note">LitSense natural-language queries</span></td><td>62.4%</td><td><span class="">+2.1</span> <span class="ci">(-4.3 to +8.5)</span></td><td>83.7%</td><td>0.684</td><td><span class="">-0.007</span> <span class="ci">(-0.029 to +0.014)</span></td><td>41.3%</td><td>141</td></tr><tr class=""><td class="cfg"><b>round_robin</b><br><span class="note">round-robin merge across sources instead of one list</span></td><td>62.4%</td><td><span class="">+2.1</span> <span class="ci">(-4.3 to +8.5)</span></td><td>83.7%</td><td>0.667</td><td><span class="neg">-0.024</span> <span class="ci">(-0.044 to -0.006)</span></td><td>39.6%</td><td>141</td></tr><tr class=""><td class="cfg"><b>ls100</b><br><span class="note">100 LitSense results</span></td><td>61.7%</td><td><span class="">+1.4</span> <span class="ci">(-5.0 to +7.8)</span></td><td>86.5%</td><td>0.681</td><td><span class="">-0.010</span> <span class="ci">(-0.028 to +0.007)</span></td><td>40.9%</td><td>141</td></tr><tr class=""><td class="cfg"><b>epmc100</b><br><span class="note">100 Europe PMC candidates</span></td><td>61.7%</td><td><span class="">+1.4</span> <span class="ci">(-5.0 to +7.8)</span></td><td>85.8%</td><td>0.679</td><td><span class="">-0.012</span> <span class="ci">(-0.028 to +0.004)</span></td><td>40.5%</td><td>141</td></tr><tr class=""><td class="cfg"><b>fulltext20</b><br><span class="note">20 open-access full texts fetched for excerpts (baseline 10)</span></td><td>61.0%</td><td><span class="">+0.7</span> <span class="ci">(-5.7 to +7.1)</span></td><td>87.9%</td><td>0.700</td><td><span class="">+0.009</span> <span class="ci">(-0.008 to +0.026)</span></td><td>44.7%</td><td>141</td></tr><tr class=""><td class="cfg"><b>ls60</b><br><span class="note">60 LitSense results (baseline 30)</span></td><td>61.0%</td><td><span class="">+0.7</span> <span class="ci">(-5.7 to +7.1)</span></td><td>86.5%</td><td>0.681</td><td><span class="">-0.010</span> <span class="ci">(-0.025 to +0.005)</span></td><td>41.2%</td><td>141</td></tr><tr class=""><td class="cfg"><b>ls_no_rerank</b><br><span class="note">no LitSense-side rerank</span></td><td>61.0%</td><td><span class="">+0.7</span> <span class="ci">(-5.7 to +7.1)</span></td><td>87.2%</td><td>0.677</td><td><span class="">-0.014</span> <span class="ci">(-0.033 to +0.004)</span></td><td>40.5%</td><td>141</td></tr><tr class=""><td class="cfg"><b>chars3000</b><br><span class="note">3,000 characters per document (baseline 1,500)</span></td><td>60.3%</td><td><span class="">+0.0</span> <span class="ci">(-6.4 to +6.4)</span></td><td>86.5%</td><td>0.677</td><td><span class="">-0.013</span> <span class="ci">(-0.035 to +0.006)</span></td><td>41.7%</td><td>141</td></tr><tr class=""><td class="cfg"><b>no_value_first</b><br><span class="note">no value-first ranking</span></td><td>59.6%</td><td><span class="">-0.7</span> <span class="ci">(-7.1 to +5.7)</span></td><td>84.4%</td><td>0.683</td><td><span class="">-0.008</span> <span class="ci">(-0.026 to +0.009)</span></td><td>41.5%</td><td>141</td></tr><tr class=""><td class="cfg"><b>ladder_v1</b><br><span class="note">the original broadening ladder (v1)</span></td><td>59.6%</td><td><span class="">-0.7</span> <span class="ci">(-7.8 to +6.4)</span></td><td>85.8%</td><td>0.661</td><td><span class="neg">-0.029</span> <span class="ci">(-0.050 to -0.010)</span></td><td>37.8%</td><td>141</td></tr><tr class=""><td class="cfg"><b>q_gpt6luna</b><br><span class="note">openai/gpt-6-luna writes the search query</span></td><td>58.9%</td><td><span class="">-1.4</span> <span class="ci">(-10.6 to +7.1)</span></td><td>87.9%</td><td>0.704</td><td><span class="">+0.014</span> <span class="ci">(-0.016 to +0.040)</span></td><td>44.0%</td><td>141</td></tr><tr class=""><td class="cfg"><b>no_population_filter</b><br><span class="note">no animal and age-group filter</span></td><td>56.7%</td><td><span class="">-3.5</span> <span class="ci">(-9.2 to +2.1)</span></td><td>85.8%</td><td>0.682</td><td><span class="">-0.008</span> <span class="ci">(-0.026 to +0.008)</span></td><td>40.7%</td><td>141</td></tr><tr class=""><td class="cfg"><b>no_excerpts</b><br><span class="note">no full-text excerpts (abstracts and passages only)</span></td><td>39.0%</td><td><span class="neg">-21.3</span> <span class="ci">(-29.8 to -12.8)</span></td><td>70.9%</td><td>0.597</td><td><span class="neg">-0.094</span> <span class="ci">(-0.122 to -0.068)</span></td><td>29.7%</td><td>141</td></tr><tr class=""><td class="cfg"><b>no_lexical_rerank</b><br><span class="note">no lexical rerank within each source</span></td><td>34.8%</td><td><span class="neg">-25.5</span> <span class="ci">(-34.0 to -17.0)</span></td><td>66.0%</td><td>0.554</td><td><span class="neg">-0.136</span> <span class="ci">(-0.164 to -0.110)</span></td><td>20.3%</td><td>141</td></tr><tr class=""><td class="cfg"><b>litsense_only</b><br><span class="note">LitSense only</span></td><td>29.8%</td><td><span class="neg">-30.5</span> <span class="ci">(-40.4 to -21.3)</span></td><td>61.7%</td><td>0.576</td><td><span class="neg">-0.115</span> <span class="ci">(-0.144 to -0.087)</span></td><td>23.8%</td><td>141</td></tr></tbody></table>
+<p class="note">With 21 changes tested at 95%, about one could look better or worse by chance alone;
+treat single changes whose interval only just excludes zero with care.</p>
+
+<h2>Combinations</h2>
+<p>The changes with the largest positive estimates, added to the best single change.</p>
+<table><thead><tr><th class='cfg'>Configuration</th><th>Strict coverage</th><th>Δ strict vs baseline (95% CI)</th><th>Category coverage</th><th>nDCG@8</th><th>Δ nDCG vs baseline</th><th>Precision@8</th><th>n</th></tr></thead><tbody><tr class="base"><td class="cfg"><b>baseline</b><br><span class="note">baseline: changes 1-4</span></td><td>60.3%</td><td></td><td>83.7%</td><td>0.691</td><td></td><td>41.3%</td><td>141</td></tr><tr class="win"><td class="cfg"><b>llm_select20+epmc25+q_synonym</b><br><span class="note">an LLM picks the 8 documents from the best 20; 25 Europe PMC candidates (baseline 50); Europe PMC MeSH synonym expansion</span></td><td>70.2%</td><td><span class="pos">+9.9</span> <span class="ci">(+3.5 to +17.0)</span></td><td>87.9%</td><td>0.750</td><td><span class="pos">+0.059</span> <span class="ci">(+0.042 to +0.076)</span></td><td>49.6%</td><td>141</td></tr><tr class=""><td class="cfg"><b>llm_select20+q_synonym</b><br><span class="note">an LLM picks the 8 documents from the best 20; Europe PMC MeSH synonym expansion</span></td><td>68.8%</td><td><span class="pos">+8.5</span> <span class="ci">(+2.8 to +14.9)</span></td><td>90.8%</td><td>0.743</td><td><span class="pos">+0.052</span> <span class="ci">(+0.035 to +0.070)</span></td><td>48.8%</td><td>141</td></tr><tr class=""><td class="cfg"><b>llm_select20+epmc25</b><br><span class="note">an LLM picks the 8 documents from the best 20; 25 Europe PMC candidates (baseline 50)</span></td><td>68.8%</td><td><span class="pos">+8.5</span> <span class="ci">(+1.4 to +14.9)</span></td><td>87.9%</td><td>0.737</td><td><span class="pos">+0.046</span> <span class="ci">(+0.027 to +0.065)</span></td><td>48.3%</td><td>141</td></tr></tbody></table>
+
+<h2>Confirmation on fresh queries</h2>
+<p>The baseline and the best configuration again, each on two new sets of queries written by the
+same query builder: the gain should hold when the queries change. Here each Δ compares with the
+baseline on the same query set.</p>
+<table><thead><tr><th class='cfg'>Configuration</th><th>Strict coverage</th><th>Δ strict vs baseline (95% CI)</th><th>Category coverage</th><th>nDCG@8</th><th>Δ nDCG vs baseline</th><th>Precision@8</th><th>n</th></tr></thead><tbody><tr class="base"><td class="cfg"><b>baseline@fresh1</b><br><span class="note">baseline: changes 1-4 (queries: fresh1)</span></td><td>62.4%</td><td></td><td>87.9%</td><td>0.681</td><td></td><td>40.7%</td><td>141</td></tr><tr class="win"><td class="cfg"><b>llm_select20+epmc25+q_synonym@fresh1</b><br><span class="note">an LLM picks the 8 documents from the best 20; 25 Europe PMC candidates (baseline 50); Europe PMC MeSH synonym expansion (queries: fresh1)</span></td><td>69.5%</td><td><span class="">+7.1</span> <span class="ci">(-0.7 to +14.9)</span></td><td>89.4%</td><td>0.735</td><td><span class="pos">+0.054</span> <span class="ci">(+0.036 to +0.074)</span></td><td>47.1%</td><td>141</td></tr><tr class="base"><td class="cfg"><b>baseline@fresh2</b><br><span class="note">baseline: changes 1-4 (queries: fresh2)</span></td><td>57.4%</td><td></td><td>85.1%</td><td>0.682</td><td></td><td>41.7%</td><td>141</td></tr><tr class="win"><td class="cfg"><b>llm_select20+epmc25+q_synonym@fresh2</b><br><span class="note">an LLM picks the 8 documents from the best 20; 25 Europe PMC candidates (baseline 50); Europe PMC MeSH synonym expansion (queries: fresh2)</span></td><td>69.5%</td><td><span class="pos">+12.1</span> <span class="ci">(+4.3 to +19.9)</span></td><td>92.9%</td><td>0.740</td><td><span class="pos">+0.058</span> <span class="ci">(+0.039 to +0.078)</span></td><td>47.5%</td><td>141</td></tr></tbody></table>
+
+<h2>Cost and limits</h2>
+<ul>
+<li>Cost of this work from the stored usage records: $9.11 (judge $7.00,
+LLM selection during retrieval $1.79, query writing $0.32).
+Europe PMC and LitSense are free.</li>
+<li>One judge, an LLM, without human labels: absolute levels may be off; the comparisons between
+configurations, made by the same judge on the same questions, are the point.</li>
+<li>141 questions: differences of a few points are inside the noise.</li>
+<li>Europe PMC answered HTTP 503 during the first retrieval of the two fresh-query baseline runs (129 and 64 of
+141 questions lost it). Those questions were retrieved again once it recovered and judged again; the tables use
+the second attempt. Every other run had no failed source.</li>
+<li>LLM selection adds one call per question to medsim's retrieval (about $0.0016 with
+deepseek/deepseek-v4-flash-0731, and its latency). It is not medsim's default yet.</li>
+<li>The best configuration was chosen on these questions; the fresh-query runs re-test it, but on
+the same 141 questions, not on new ones.</li>
+</ul>
+</body></html>

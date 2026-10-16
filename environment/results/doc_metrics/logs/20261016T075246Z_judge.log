@@ -1,0 +1,8 @@
+2026-10-16 18:52:46,478 INFO bench.doc_metrics: doc_metrics judge --configs  --stored 2 --stored-config current --workers 24
+2026-10-16 18:52:57,481 INFO bench.doc_metrics: judge stored_run02_current: 25/141, $0.0314
+2026-10-16 18:53:05,550 INFO bench.doc_metrics: judge stored_run02_current: 50/141, $0.0605
+2026-10-16 18:53:13,256 INFO bench.doc_metrics: judge stored_run02_current: 75/141, $0.0930
+2026-10-16 18:53:21,254 INFO bench.doc_metrics: judge stored_run02_current: 100/141, $0.1249
+2026-10-16 18:53:29,108 INFO bench.doc_metrics: judge stored_run02_current: 125/141, $0.1579
+2026-10-16 18:53:37,970 INFO bench.doc_metrics: judge stored_run02_current: 141/141, $0.1801
+2026-10-16 18:53:37,972 INFO bench.doc_metrics: summary: {"stored_run02_current": {"ok": 141, "cost_millicents": 18010}}

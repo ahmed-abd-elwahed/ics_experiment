@@ -1,0 +1,8 @@
+2026-10-16 19:48:20,341 INFO bench.doc_metrics: doc_metrics queries --query-set fresh1 --workers 24
+2026-10-16 19:48:37,601 INFO bench.doc_metrics: queries fresh1: 25/141, $0.0136
+2026-10-16 19:48:50,375 INFO bench.doc_metrics: queries fresh1: 50/141, $0.0283
+2026-10-16 19:49:01,798 INFO bench.doc_metrics: queries fresh1: 75/141, $0.0430
+2026-10-16 19:49:16,181 INFO bench.doc_metrics: queries fresh1: 100/141, $0.0567
+2026-10-16 19:49:28,007 INFO bench.doc_metrics: queries fresh1: 125/141, $0.0700
+2026-10-16 19:50:30,494 INFO bench.doc_metrics: queries fresh1: 141/141, $0.0841
+2026-10-16 19:50:30,498 INFO bench.doc_metrics: summary: {"fresh1": {"ok": 141, "cost_millicents": 8415}}

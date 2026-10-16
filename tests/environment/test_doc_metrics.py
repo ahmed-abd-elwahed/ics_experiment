@@ -129,6 +129,10 @@ def test_configurations_compose_on_the_baseline() -> None:
         "natural", True, 40
     )  # fmt: skip
     assert doc_config("q_gpt6luna").query_set == "gpt-6-luna"
+    assert doc_config("baseline#2").settings(base) == baseline
+    assert doc_config("llm_select20@fresh1").query_set == "fresh1"
+    with pytest.raises(ConfigError, match="Unknown query set"):
+        doc_config("baseline@nope")
     assert doc_config("epmc100").query_set == "base"
     with pytest.raises(ConfigError, match="Unknown change"):
         doc_config("q_natural+nonsense")

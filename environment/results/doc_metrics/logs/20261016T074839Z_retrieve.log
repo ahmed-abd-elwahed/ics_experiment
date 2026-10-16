@@ -1,0 +1,183 @@
+2026-10-16 18:48:39,736 INFO bench.doc_metrics: doc_metrics retrieve --configs baseline,baseline#2,q_natural,q_synonym,q_gpt6luna,epmc25,epmc100,ls60,ls100,ls_sentences,no_value_first,round_robin,no_lexical_rerank,ls_no_rerank,llm_select20,llm_select40,no_population_filter,no_excerpts,fulltext20,chars3000,ladder_v1,epmc_only,litsense_only --workers 16
+2026-10-16 18:48:54,974 INFO bench.doc_metrics: retrieve baseline: 25/139, $0.0000
+2026-10-16 18:49:04,449 INFO bench.doc_metrics: retrieve baseline: 50/139, $0.0000
+2026-10-16 18:49:12,841 INFO bench.doc_metrics: retrieve baseline: 75/139, $0.0000
+2026-10-16 18:49:20,751 INFO bench.doc_metrics: retrieve baseline: 100/139, $0.0000
+2026-10-16 18:49:22,611 WARNING medsim.http: GET https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/passages/ failed (ReadTimeout); retrying in 1.0s
+2026-10-16 18:49:25,650 WARNING medsim.http: GET https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/passages/ failed (ReadTimeout); retrying in 1.0s
+2026-10-16 18:49:31,548 INFO bench.doc_metrics: retrieve baseline: 125/139, $0.0000
+2026-10-16 18:49:40,325 WARNING medsim.http: GET https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/passages/ failed (ReadTimeout); retrying in 1.0s
+2026-10-16 18:49:41,330 WARNING medsim.http: GET https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/passages/ failed (ReadTimeout); retrying in 1.0s
+2026-10-16 18:50:01,035 WARNING medsim.http: GET https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/passages/ failed (ReadTimeout); retrying in 1.0s
+2026-10-16 18:50:33,943 WARNING medsim.http: GET https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/passages/ failed (ReadTimeout); retrying in 1.0s
+2026-10-16 18:50:37,944 INFO bench.doc_metrics: retrieve baseline: 139/139, $0.0000
+2026-10-16 18:50:39,442 INFO bench.doc_metrics: retrieve baseline#2: 25/141, $0.0000
+2026-10-16 18:50:40,601 INFO bench.doc_metrics: retrieve baseline#2: 50/141, $0.0000
+2026-10-16 18:50:41,852 INFO bench.doc_metrics: retrieve baseline#2: 75/141, $0.0000
+2026-10-16 18:50:42,981 INFO bench.doc_metrics: retrieve baseline#2: 100/141, $0.0000
+2026-10-16 18:50:44,190 INFO bench.doc_metrics: retrieve baseline#2: 125/141, $0.0000
+2026-10-16 18:50:44,745 INFO bench.doc_metrics: retrieve baseline#2: 141/141, $0.0000
+2026-10-16 18:51:25,409 INFO bench.doc_metrics: retrieve q_natural: 25/141, $0.0000
+2026-10-16 18:51:28,885 WARNING medsim.http: GET https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/passages/ failed (ReadTimeout); retrying in 1.0s
+2026-10-16 18:51:46,010 WARNING medsim.http: GET https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/passages/ failed (ReadTimeout); retrying in 1.0s
+2026-10-16 18:51:49,040 WARNING medsim.http: GET https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/passages/ failed (ReadTimeout); retrying in 1.0s
+2026-10-16 18:51:59,891 INFO bench.doc_metrics: retrieve q_natural: 50/141, $0.0000
+2026-10-16 18:52:36,720 INFO bench.doc_metrics: retrieve q_natural: 75/141, $0.0000
+2026-10-16 18:52:37,413 WARNING medsim.http: GET https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/passages/ failed (ReadTimeout); retrying in 1.0s
+2026-10-16 18:53:12,881 INFO bench.doc_metrics: retrieve q_natural: 100/141, $0.0000
+2026-10-16 18:53:41,903 WARNING medsim.http: GET https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/passages/ failed (ReadTimeout); retrying in 1.0s
+2026-10-16 18:53:44,229 INFO bench.doc_metrics: retrieve q_natural: 125/141, $0.0000
+2026-10-16 18:54:02,069 WARNING medsim.http: GET https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/passages/ failed (ReadTimeout); retrying in 1.0s
+2026-10-16 18:54:07,903 INFO bench.doc_metrics: retrieve q_natural: 141/141, $0.0000
+2026-10-16 18:54:12,839 INFO bench.doc_metrics: retrieve q_synonym: 25/141, $0.0000
+2026-10-16 18:54:15,670 INFO bench.doc_metrics: retrieve q_synonym: 50/141, $0.0000
+2026-10-16 18:54:18,770 INFO bench.doc_metrics: retrieve q_synonym: 75/141, $0.0000
+2026-10-16 18:54:21,634 INFO bench.doc_metrics: retrieve q_synonym: 100/141, $0.0000
+2026-10-16 18:54:24,748 INFO bench.doc_metrics: retrieve q_synonym: 125/141, $0.0000
+2026-10-16 18:54:27,853 INFO bench.doc_metrics: retrieve q_synonym: 141/141, $0.0000
+2026-10-16 18:54:37,820 INFO bench.doc_metrics: retrieve q_gpt6luna: 25/141, $0.0000
+2026-10-16 18:54:44,237 INFO bench.doc_metrics: retrieve q_gpt6luna: 50/141, $0.0000
+2026-10-16 18:54:57,679 INFO bench.doc_metrics: retrieve q_gpt6luna: 75/141, $0.0000
+2026-10-16 18:55:06,343 INFO bench.doc_metrics: retrieve q_gpt6luna: 100/141, $0.0000
+2026-10-16 18:55:16,293 INFO bench.doc_metrics: retrieve q_gpt6luna: 125/141, $0.0000
+2026-10-16 18:55:19,062 WARNING medsim.http: GET https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/passages/ failed (ReadTimeout); retrying in 1.0s
+2026-10-16 18:55:32,046 INFO bench.doc_metrics: retrieve q_gpt6luna: 141/141, $0.0000
+2026-10-16 18:55:38,650 INFO bench.doc_metrics: retrieve epmc25: 25/141, $0.0000
+2026-10-16 18:55:44,323 INFO bench.doc_metrics: retrieve epmc25: 50/141, $0.0000
+2026-10-16 18:55:51,546 INFO bench.doc_metrics: retrieve epmc25: 75/141, $0.0000
+2026-10-16 18:55:56,005 INFO bench.doc_metrics: retrieve epmc25: 100/141, $0.0000
+2026-10-16 18:56:00,511 INFO bench.doc_metrics: retrieve epmc25: 125/141, $0.0000
+2026-10-16 18:56:05,115 INFO bench.doc_metrics: retrieve epmc25: 141/141, $0.0000
+2026-10-16 18:56:10,880 INFO bench.doc_metrics: retrieve epmc100: 25/141, $0.0000
+2026-10-16 18:56:16,391 INFO bench.doc_metrics: retrieve epmc100: 50/141, $0.0000
+2026-10-16 18:56:21,991 INFO bench.doc_metrics: retrieve epmc100: 75/141, $0.0000
+2026-10-16 18:56:34,391 INFO bench.doc_metrics: retrieve epmc100: 100/141, $0.0000
+2026-10-16 18:56:38,208 INFO bench.doc_metrics: retrieve epmc100: 125/141, $0.0000
+2026-10-16 18:56:42,372 INFO bench.doc_metrics: retrieve epmc100: 141/141, $0.0000
+2026-10-16 18:56:44,101 INFO bench.doc_metrics: retrieve ls60: 25/141, $0.0000
+2026-10-16 18:56:45,571 INFO bench.doc_metrics: retrieve ls60: 50/141, $0.0000
+2026-10-16 18:56:47,066 INFO bench.doc_metrics: retrieve ls60: 75/141, $0.0000
+2026-10-16 18:56:48,443 INFO bench.doc_metrics: retrieve ls60: 100/141, $0.0000
+2026-10-16 18:56:49,723 INFO bench.doc_metrics: retrieve ls60: 125/141, $0.0000
+2026-10-16 18:56:50,392 INFO bench.doc_metrics: retrieve ls60: 141/141, $0.0000
+2026-10-16 18:56:52,618 INFO bench.doc_metrics: retrieve ls100: 25/141, $0.0000
+2026-10-16 18:56:54,267 INFO bench.doc_metrics: retrieve ls100: 50/141, $0.0000
+2026-10-16 18:56:56,192 INFO bench.doc_metrics: retrieve ls100: 75/141, $0.0000
+2026-10-16 18:56:57,868 INFO bench.doc_metrics: retrieve ls100: 100/141, $0.0000
+2026-10-16 18:56:59,640 INFO bench.doc_metrics: retrieve ls100: 125/141, $0.0000
+2026-10-16 18:57:00,332 INFO bench.doc_metrics: retrieve ls100: 141/141, $0.0000
+2026-10-16 18:57:32,940 WARNING medsim.http: GET https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/sentences/ returned 502; retrying in 1.0s
+2026-10-16 18:57:34,053 WARNING medsim.http: GET https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/sentences/ returned 502; retrying in 1.0s
+2026-10-16 18:57:44,454 WARNING medsim.http: GET https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/sentences/ failed (ReadTimeout); retrying in 1.0s
+2026-10-16 18:57:58,431 INFO bench.doc_metrics: retrieve ls_sentences: 25/141, $0.0000
+2026-10-16 18:58:26,029 INFO bench.doc_metrics: retrieve ls_sentences: 50/141, $0.0000
+2026-10-16 18:58:58,360 INFO bench.doc_metrics: retrieve ls_sentences: 75/141, $0.0000
+2026-10-16 18:59:34,855 INFO bench.doc_metrics: retrieve ls_sentences: 100/141, $0.0000
+2026-10-16 18:59:36,827 WARNING medsim.http: GET https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/sentences/ failed (ReadTimeout); retrying in 1.0s
+2026-10-16 19:00:08,120 INFO bench.doc_metrics: retrieve ls_sentences: 125/141, $0.0000
+2026-10-16 19:00:31,594 INFO bench.doc_metrics: retrieve ls_sentences: 141/141, $0.0000
+2026-10-16 19:00:33,467 INFO bench.doc_metrics: retrieve no_value_first: 25/141, $0.0000
+2026-10-16 19:00:34,106 INFO bench.doc_metrics: retrieve no_value_first: 50/141, $0.0000
+2026-10-16 19:00:35,423 INFO bench.doc_metrics: retrieve no_value_first: 75/141, $0.0000
+2026-10-16 19:00:36,471 INFO bench.doc_metrics: retrieve no_value_first: 100/141, $0.0000
+2026-10-16 19:00:37,529 INFO bench.doc_metrics: retrieve no_value_first: 125/141, $0.0000
+2026-10-16 19:00:38,042 INFO bench.doc_metrics: retrieve no_value_first: 141/141, $0.0000
+2026-10-16 19:00:42,532 INFO bench.doc_metrics: retrieve round_robin: 25/141, $0.0000
+2026-10-16 19:00:43,006 INFO bench.doc_metrics: retrieve round_robin: 50/141, $0.0000
+2026-10-16 19:00:43,480 INFO bench.doc_metrics: retrieve round_robin: 75/141, $0.0000
+2026-10-16 19:00:43,515 INFO bench.doc_metrics: retrieve round_robin: 100/141, $0.0000
+2026-10-16 19:00:43,518 INFO bench.doc_metrics: retrieve round_robin: 125/141, $0.0000
+2026-10-16 19:00:43,520 INFO bench.doc_metrics: retrieve round_robin: 141/141, $0.0000
+2026-10-16 19:00:44,848 INFO bench.doc_metrics: retrieve no_lexical_rerank: 25/141, $0.0000
+2026-10-16 19:00:45,365 INFO bench.doc_metrics: retrieve no_lexical_rerank: 50/141, $0.0000
+2026-10-16 19:00:46,226 INFO bench.doc_metrics: retrieve no_lexical_rerank: 75/141, $0.0000
+2026-10-16 19:00:46,963 INFO bench.doc_metrics: retrieve no_lexical_rerank: 100/141, $0.0000
+2026-10-16 19:00:47,762 INFO bench.doc_metrics: retrieve no_lexical_rerank: 125/141, $0.0000
+2026-10-16 19:00:48,075 INFO bench.doc_metrics: retrieve no_lexical_rerank: 141/141, $0.0000
+2026-10-16 19:01:28,602 INFO bench.doc_metrics: retrieve ls_no_rerank: 25/141, $0.0000
+2026-10-16 19:02:03,465 INFO bench.doc_metrics: retrieve ls_no_rerank: 50/141, $0.0000
+2026-10-16 19:02:40,379 INFO bench.doc_metrics: retrieve ls_no_rerank: 75/141, $0.0000
+2026-10-16 19:03:18,060 INFO bench.doc_metrics: retrieve ls_no_rerank: 100/141, $0.0000
+2026-10-16 19:03:48,819 INFO bench.doc_metrics: retrieve ls_no_rerank: 125/141, $0.0000
+2026-10-16 19:04:06,122 INFO bench.doc_metrics: retrieve ls_no_rerank: 141/141, $0.0000
+2026-10-16 19:05:43,188 INFO bench.doc_metrics: retrieve llm_select20: 25/141, $0.0349
+2026-10-16 19:07:00,023 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:07:00,025 INFO bench.doc_metrics: retrieve llm_select20: 50/141, $0.0755
+2026-10-16 19:08:17,569 INFO bench.doc_metrics: retrieve llm_select20: 75/141, $0.1141
+2026-10-16 19:09:31,414 INFO bench.doc_metrics: retrieve llm_select20: 100/141, $0.1555
+2026-10-16 19:10:45,015 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:10:46,463 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:10:46,468 INFO bench.doc_metrics: retrieve llm_select20: 125/141, $0.2004
+2026-10-16 19:11:36,399 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:13:27,476 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:13:27,478 INFO bench.doc_metrics: retrieve llm_select20: 141/141, $0.2540
+2026-10-16 19:14:51,057 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:14:58,559 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:15:01,219 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:15:08,371 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:15:08,608 INFO bench.doc_metrics: retrieve llm_select40: 25/141, $0.0683
+2026-10-16 19:16:04,330 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:16:07,672 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:16:21,370 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:16:42,175 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:16:48,678 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:16:48,680 INFO bench.doc_metrics: retrieve llm_select40: 50/141, $0.1383
+2026-10-16 19:17:07,355 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:18:01,171 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:18:25,096 INFO bench.doc_metrics: retrieve llm_select40: 75/141, $0.2203
+2026-10-16 19:18:41,491 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:18:42,866 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:19:34,480 INFO bench.doc_metrics: retrieve llm_select40: 100/141, $0.2872
+2026-10-16 19:19:48,778 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:19:55,713 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:21:04,831 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:21:10,207 INFO bench.doc_metrics: retrieve llm_select40: 125/141, $0.3659
+2026-10-16 19:21:38,111 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:22:12,351 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:22:29,068 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:23:58,020 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:23:58,023 INFO bench.doc_metrics: retrieve llm_select40: 141/141, $0.4225
+2026-10-16 19:23:59,399 INFO bench.doc_metrics: retrieve no_population_filter: 25/141, $0.0000
+2026-10-16 19:24:02,602 INFO bench.doc_metrics: retrieve no_population_filter: 50/141, $0.0000
+2026-10-16 19:24:04,391 INFO bench.doc_metrics: retrieve no_population_filter: 75/141, $0.0000
+2026-10-16 19:24:05,380 INFO bench.doc_metrics: retrieve no_population_filter: 100/141, $0.0000
+2026-10-16 19:24:06,413 INFO bench.doc_metrics: retrieve no_population_filter: 125/141, $0.0000
+2026-10-16 19:24:09,736 INFO bench.doc_metrics: retrieve no_population_filter: 141/141, $0.0000
+2026-10-16 19:24:11,081 INFO bench.doc_metrics: retrieve no_excerpts: 25/141, $0.0000
+2026-10-16 19:24:12,200 INFO bench.doc_metrics: retrieve no_excerpts: 50/141, $0.0000
+2026-10-16 19:24:13,544 INFO bench.doc_metrics: retrieve no_excerpts: 75/141, $0.0000
+2026-10-16 19:24:14,316 INFO bench.doc_metrics: retrieve no_excerpts: 100/141, $0.0000
+2026-10-16 19:24:14,321 INFO bench.doc_metrics: retrieve no_excerpts: 125/141, $0.0000
+2026-10-16 19:24:14,324 INFO bench.doc_metrics: retrieve no_excerpts: 141/141, $0.0000
+2026-10-16 19:24:22,826 INFO bench.doc_metrics: retrieve fulltext20: 25/141, $0.0000
+2026-10-16 19:24:28,194 INFO bench.doc_metrics: retrieve fulltext20: 50/141, $0.0000
+2026-10-16 19:24:31,864 INFO bench.doc_metrics: retrieve fulltext20: 75/141, $0.0000
+2026-10-16 19:24:38,080 INFO bench.doc_metrics: retrieve fulltext20: 100/141, $0.0000
+2026-10-16 19:24:41,977 INFO bench.doc_metrics: retrieve fulltext20: 125/141, $0.0000
+2026-10-16 19:24:52,241 INFO bench.doc_metrics: retrieve fulltext20: 141/141, $0.0000
+2026-10-16 19:24:55,148 INFO bench.doc_metrics: retrieve chars3000: 25/141, $0.0000
+2026-10-16 19:24:55,801 INFO bench.doc_metrics: retrieve chars3000: 50/141, $0.0000
+2026-10-16 19:24:56,812 INFO bench.doc_metrics: retrieve chars3000: 75/141, $0.0000
+2026-10-16 19:24:58,056 INFO bench.doc_metrics: retrieve chars3000: 100/141, $0.0000
+2026-10-16 19:24:59,310 INFO bench.doc_metrics: retrieve chars3000: 125/141, $0.0000
+2026-10-16 19:24:59,932 INFO bench.doc_metrics: retrieve chars3000: 141/141, $0.0000
+2026-10-16 19:25:01,388 INFO bench.doc_metrics: retrieve ladder_v1: 25/141, $0.0000
+2026-10-16 19:25:02,432 INFO bench.doc_metrics: retrieve ladder_v1: 50/141, $0.0000
+2026-10-16 19:25:06,013 INFO bench.doc_metrics: retrieve ladder_v1: 75/141, $0.0000
+2026-10-16 19:25:17,558 INFO bench.doc_metrics: retrieve ladder_v1: 100/141, $0.0000
+2026-10-16 19:25:21,590 INFO bench.doc_metrics: retrieve ladder_v1: 125/141, $0.0000
+2026-10-16 19:25:34,227 WARNING medsim.http: GET https://www.ncbi.nlm.nih.gov/research/litsense2-api/api/passages/ failed (ReadTimeout); retrying in 1.0s
+2026-10-16 19:25:37,496 INFO bench.doc_metrics: retrieve ladder_v1: 141/141, $0.0000
+2026-10-16 19:25:39,560 INFO bench.doc_metrics: retrieve epmc_only: 25/141, $0.0000
+2026-10-16 19:25:40,040 INFO bench.doc_metrics: retrieve epmc_only: 50/141, $0.0000
+2026-10-16 19:25:40,555 INFO bench.doc_metrics: retrieve epmc_only: 75/141, $0.0000
+2026-10-16 19:25:41,323 INFO bench.doc_metrics: retrieve epmc_only: 100/141, $0.0000
+2026-10-16 19:25:42,187 INFO bench.doc_metrics: retrieve epmc_only: 125/141, $0.0000
+2026-10-16 19:25:42,578 INFO bench.doc_metrics: retrieve epmc_only: 141/141, $0.0000
+2026-10-16 19:25:44,671 INFO bench.doc_metrics: retrieve litsense_only: 25/141, $0.0000
+2026-10-16 19:25:44,839 INFO bench.doc_metrics: retrieve litsense_only: 50/141, $0.0000
+2026-10-16 19:25:44,842 INFO bench.doc_metrics: retrieve litsense_only: 75/141, $0.0000
+2026-10-16 19:25:44,845 INFO bench.doc_metrics: retrieve litsense_only: 100/141, $0.0000
+2026-10-16 19:25:44,848 INFO bench.doc_metrics: retrieve litsense_only: 125/141, $0.0000
+2026-10-16 19:25:44,849 INFO bench.doc_metrics: retrieve litsense_only: 141/141, $0.0000
+2026-10-16 19:25:44,851 INFO bench.doc_metrics: summary: {"baseline": {"ok": 139, "cost_millicents": 0}, "baseline#2": {"ok": 141, "cost_millicents": 0}, "q_natural": {"ok": 141, "cost_millicents": 0}, "q_synonym": {"ok": 141, "cost_millicents": 0}, "q_gpt6luna": {"ok": 141, "cost_millicents": 0}, "epmc25": {"ok": 141, "cost_millicents": 0}, "epmc100": {"ok": 141, "cost_millicents": 0}, "ls60": {"ok": 141, "cost_millicents": 0}, "ls100": {"ok": 141, "cost_millicents": 0}, "ls_sentences": {"ok": 141, "cost_millicents": 0}, "no_value_first": {"ok": 141, "cost_millicents": 0}, "round_robin": {"ok": 141, "cost_millicents": 0}, "no_lexical_rerank": {"ok": 141, "cost_millicents": 0}, "ls_no_rerank": {"ok": 141, "cost_millicents": 0}, "llm_select20": {"ok": 141, "cost_millicents": 25404}, "llm_select40": {"ok": 141, "cost_millicents": 42249}, "no_population_filter": {"ok": 141, "cost_millicents": 0}, "no_excerpts": {"ok": 141, "cost_millicents": 0}, "fulltext20": {"ok": 141, "cost_millicents": 0}, "chars3000": {"ok": 141, "cost_millicents": 0}, "ladder_v1": {"ok": 141, "cost_millicents": 0}, "epmc_only": {"ok": 141, "cost_millicents": 0}, "litsense_only": {"ok": 141, "cost_millicents": 0}}

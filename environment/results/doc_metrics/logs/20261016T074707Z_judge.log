@@ -1,0 +1,3 @@
+2026-10-16 18:47:07,357 INFO bench.doc_metrics: doc_metrics judge --configs baseline --limit 2
+2026-10-16 18:47:17,080 INFO bench.doc_metrics: judge baseline: 2/2, $0.0022
+2026-10-16 18:47:17,081 INFO bench.doc_metrics: summary: {"baseline": {"ok": 2, "cost_millicents": 216}}

@@ -1,0 +1,8 @@
+2026-10-16 18:47:49,512 INFO bench.doc_metrics: doc_metrics queries --query-set gpt-6-luna --workers 24
+2026-10-16 18:48:02,077 INFO bench.doc_metrics: queries gpt-6-luna: 25/141, $0.0112
+2026-10-16 18:48:10,472 INFO bench.doc_metrics: queries gpt-6-luna: 50/141, $0.0220
+2026-10-16 18:48:17,878 INFO bench.doc_metrics: queries gpt-6-luna: 75/141, $0.0327
+2026-10-16 18:48:25,365 INFO bench.doc_metrics: queries gpt-6-luna: 100/141, $0.0432
+2026-10-16 18:48:32,956 INFO bench.doc_metrics: queries gpt-6-luna: 125/141, $0.0545
+2026-10-16 18:48:39,529 INFO bench.doc_metrics: queries gpt-6-luna: 141/141, $0.0618
+2026-10-16 18:48:39,534 INFO bench.doc_metrics: summary: {"gpt-6-luna": {"ok": 141, "cost_millicents": 6184}}

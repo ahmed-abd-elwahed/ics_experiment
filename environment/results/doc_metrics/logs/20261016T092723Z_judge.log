@@ -1,0 +1,26 @@
+2026-10-16 20:27:23,193 INFO bench.doc_metrics: doc_metrics judge --configs baseline@fresh1,baseline@fresh2,llm_select20+epmc25+q_synonym@fresh1,llm_select20+epmc25+q_synonym@fresh2 --workers 24
+2026-10-16 20:27:34,511 INFO bench.doc_metrics: judge baseline@fresh1: 25/141, $0.0237
+2026-10-16 20:27:41,877 INFO bench.doc_metrics: judge baseline@fresh1: 50/141, $0.0492
+2026-10-16 20:27:47,874 INFO bench.doc_metrics: judge baseline@fresh1: 75/141, $0.0764
+2026-10-16 20:27:54,765 INFO bench.doc_metrics: judge baseline@fresh1: 100/141, $0.1010
+2026-10-16 20:28:02,093 INFO bench.doc_metrics: judge baseline@fresh1: 125/141, $0.1291
+2026-10-16 20:28:09,955 INFO bench.doc_metrics: judge baseline@fresh1: 141/141, $0.1495
+2026-10-16 20:28:20,389 INFO bench.doc_metrics: judge baseline@fresh2: 25/141, $0.0254
+2026-10-16 20:28:26,586 INFO bench.doc_metrics: judge baseline@fresh2: 50/141, $0.0503
+2026-10-16 20:28:32,914 INFO bench.doc_metrics: judge baseline@fresh2: 75/141, $0.0773
+2026-10-16 20:28:41,799 INFO bench.doc_metrics: judge baseline@fresh2: 100/141, $0.1091
+2026-10-16 20:28:50,576 INFO bench.doc_metrics: judge baseline@fresh2: 125/141, $0.1447
+2026-10-16 20:28:59,114 INFO bench.doc_metrics: judge baseline@fresh2: 141/141, $0.1677
+2026-10-16 20:29:11,434 INFO bench.doc_metrics: judge llm_select20+epmc25+q_synonym@fresh1: 25/141, $0.0339
+2026-10-16 20:29:21,270 INFO bench.doc_metrics: judge llm_select20+epmc25+q_synonym@fresh1: 50/141, $0.0679
+2026-10-16 20:29:30,822 INFO bench.doc_metrics: judge llm_select20+epmc25+q_synonym@fresh1: 75/141, $0.1017
+2026-10-16 20:29:39,909 INFO bench.doc_metrics: judge llm_select20+epmc25+q_synonym@fresh1: 100/141, $0.1368
+2026-10-16 20:29:49,689 INFO bench.doc_metrics: judge llm_select20+epmc25+q_synonym@fresh1: 125/141, $0.1724
+2026-10-16 20:29:57,377 INFO bench.doc_metrics: judge llm_select20+epmc25+q_synonym@fresh1: 141/141, $0.1951
+2026-10-16 20:30:10,719 INFO bench.doc_metrics: judge llm_select20+epmc25+q_synonym@fresh2: 25/141, $0.0330
+2026-10-16 20:30:19,940 INFO bench.doc_metrics: judge llm_select20+epmc25+q_synonym@fresh2: 50/141, $0.0677
+2026-10-16 20:30:27,871 INFO bench.doc_metrics: judge llm_select20+epmc25+q_synonym@fresh2: 75/141, $0.0992
+2026-10-16 20:30:37,183 INFO bench.doc_metrics: judge llm_select20+epmc25+q_synonym@fresh2: 100/141, $0.1337
+2026-10-16 20:30:44,710 INFO bench.doc_metrics: judge llm_select20+epmc25+q_synonym@fresh2: 125/141, $0.1693
+2026-10-16 20:30:54,036 INFO bench.doc_metrics: judge llm_select20+epmc25+q_synonym@fresh2: 141/141, $0.1925
+2026-10-16 20:30:54,042 INFO bench.doc_metrics: summary: {"baseline@fresh1": {"ok": 141, "cost_millicents": 14947}, "baseline@fresh2": {"ok": 141, "cost_millicents": 16773}, "llm_select20+epmc25+q_synonym@fresh1": {"ok": 141, "cost_millicents": 19507}, "llm_select20+epmc25+q_synonym@fresh2": {"ok": 141, "cost_millicents": 19247}}

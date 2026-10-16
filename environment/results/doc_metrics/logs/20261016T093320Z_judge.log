@@ -1,0 +1,11 @@
+2026-10-16 20:33:20,264 INFO bench.doc_metrics: doc_metrics judge --configs baseline@fresh1,baseline@fresh2 --workers 24
+2026-10-16 20:33:34,616 INFO bench.doc_metrics: judge baseline@fresh1: 25/128, $0.0319
+2026-10-16 20:33:43,145 INFO bench.doc_metrics: judge baseline@fresh1: 50/128, $0.0655
+2026-10-16 20:33:51,340 INFO bench.doc_metrics: judge baseline@fresh1: 75/128, $0.0983
+2026-10-16 20:33:59,747 INFO bench.doc_metrics: judge baseline@fresh1: 100/128, $0.1330
+2026-10-16 20:34:09,284 INFO bench.doc_metrics: judge baseline@fresh1: 125/128, $0.1679
+2026-10-16 20:34:10,926 INFO bench.doc_metrics: judge baseline@fresh1: 128/128, $0.1727
+2026-10-16 20:34:23,905 INFO bench.doc_metrics: judge baseline@fresh2: 25/64, $0.0314
+2026-10-16 20:34:32,226 INFO bench.doc_metrics: judge baseline@fresh2: 50/64, $0.0645
+2026-10-16 20:34:40,568 INFO bench.doc_metrics: judge baseline@fresh2: 64/64, $0.0839
+2026-10-16 20:34:40,574 INFO bench.doc_metrics: summary: {"baseline@fresh1": {"ok": 128, "cost_millicents": 17266}, "baseline@fresh2": {"ok": 64, "cost_millicents": 8390}}

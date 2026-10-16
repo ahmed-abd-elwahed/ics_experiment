@@ -1,0 +1,8 @@
+2026-10-16 19:46:51,990 INFO bench.doc_metrics: doc_metrics judge --configs baseline --shuffled --workers 24
+2026-10-16 19:46:57,185 INFO bench.doc_metrics: judge baseline (shuffled): 25/141, $0.0159
+2026-10-16 19:46:59,527 INFO bench.doc_metrics: judge baseline (shuffled): 50/141, $0.0325
+2026-10-16 19:47:01,744 INFO bench.doc_metrics: judge baseline (shuffled): 75/141, $0.0481
+2026-10-16 19:47:04,136 INFO bench.doc_metrics: judge baseline (shuffled): 100/141, $0.0640
+2026-10-16 19:47:06,683 INFO bench.doc_metrics: judge baseline (shuffled): 125/141, $0.0813
+2026-10-16 19:47:16,217 INFO bench.doc_metrics: judge baseline (shuffled): 141/141, $0.0940
+2026-10-16 19:47:16,219 INFO bench.doc_metrics: summary: {"baseline": {"ok": 141, "cost_millicents": 9400}}

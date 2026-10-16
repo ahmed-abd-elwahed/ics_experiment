@@ -262,3 +262,12 @@ in [environment/NOTES.md](environment/NOTES.md).
 | The search space is the Europe PMC + LitSense settings only (21 single changes), with a $10 cap. | Chosen by the project owner. |
 | The stored `improved_1to4` runs 2–10 give the run-to-run noise, `current` checks that the metrics separate a known difference, and a shuffled control checks that the judge reads the documents. | No retrieval is needed for these; the stored runs used fresh queries and the full pipeline. |
 | Nothing paid has run. | The OpenRouter key's own limit ($250) is used up; raising it is the owner's setting. |
+| The judging cost was $0.0011 per question, about $0.18 per configuration, twice the estimate. | The judge reads about 4,500 tokens per question (eight documents) and writes about 1,200. The job still fitted the $10 cap ($9.11). |
+| Stored runs 2–6 were judged for the noise estimate instead of 2–10. | Five runs give the spread; the saving paid for the higher judging cost. |
+| The baseline was also judged twice on the same cached documents (`baseline#2`). | It measures the judge's own noise (1.4 points), which the frozen-query design leaves as the main noise between configurations. |
+| LLM selection from 20, not from 40, was taken into the combinations. | The two were within the judge's noise on coverage (67.4% and 68.8%); nDCG breaks the tie in favour of 20, and it is the cheaper of the two. |
+| The combinations added the next two largest single gains (25 Europe PMC candidates, MeSH synonyms) to it, alone and together. | They were the changes with the largest positive estimates; the budget allowed three combinations. |
+| The winner is `llm_select20+epmc25+q_synonym`. | Highest strict coverage (70.2%); the other LLM-selection variants were within about 3 points and it also has the highest nDCG@8. |
+| Confirmation reran only the baseline and the winner, on two fresh query sets. | The runner-up was a near-identical configuration; the cap allowed two configurations. |
+| The fresh-query baseline runs were retrieved again for the questions where Europe PMC failed (HTTP 503), and retrieval now retries any question with a failed source. | An outage had turned them into LitSense-only runs (36% and 46%), which would have exaggerated the winner's gain. |
+| The winner was not made medsim's default. | It changes the environment every experiment uses and adds an LLM call per literature question; that is the owner's choice. |

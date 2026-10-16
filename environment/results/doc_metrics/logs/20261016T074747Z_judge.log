@@ -1,0 +1,32 @@
+2026-10-16 18:47:47,588 INFO bench.doc_metrics: doc_metrics judge --configs  --stored 2-6 --workers 24
+2026-10-16 18:48:01,608 INFO bench.doc_metrics: judge stored_run02_improved_1to4: 25/141, $0.0324
+2026-10-16 18:48:10,769 INFO bench.doc_metrics: judge stored_run02_improved_1to4: 50/141, $0.0658
+2026-10-16 18:48:20,090 INFO bench.doc_metrics: judge stored_run02_improved_1to4: 75/141, $0.0983
+2026-10-16 18:48:29,544 INFO bench.doc_metrics: judge stored_run02_improved_1to4: 100/141, $0.1321
+2026-10-16 18:48:37,981 INFO bench.doc_metrics: judge stored_run02_improved_1to4: 125/141, $0.1678
+2026-10-16 18:48:57,706 INFO bench.doc_metrics: judge stored_run02_improved_1to4: 141/141, $0.1901
+2026-10-16 18:49:09,341 INFO bench.doc_metrics: judge stored_run03_improved_1to4: 25/141, $0.0301
+2026-10-16 18:49:17,162 INFO bench.doc_metrics: judge stored_run03_improved_1to4: 50/141, $0.0593
+2026-10-16 18:49:25,124 INFO bench.doc_metrics: judge stored_run03_improved_1to4: 75/141, $0.0899
+2026-10-16 18:49:34,579 INFO bench.doc_metrics: judge stored_run03_improved_1to4: 100/141, $0.1238
+2026-10-16 18:49:43,613 INFO bench.doc_metrics: judge stored_run03_improved_1to4: 125/141, $0.1592
+2026-10-16 18:49:48,704 INFO bench.doc_metrics: judge stored_run03_improved_1to4: 141/141, $0.1823
+2026-10-16 18:50:01,014 INFO bench.doc_metrics: judge stored_run04_improved_1to4: 25/141, $0.0289
+2026-10-16 18:50:09,898 INFO bench.doc_metrics: judge stored_run04_improved_1to4: 50/141, $0.0616
+2026-10-16 18:50:17,796 INFO bench.doc_metrics: judge stored_run04_improved_1to4: 75/141, $0.0956
+2026-10-16 18:50:25,721 INFO bench.doc_metrics: judge stored_run04_improved_1to4: 100/141, $0.1263
+2026-10-16 18:50:34,188 INFO bench.doc_metrics: judge stored_run04_improved_1to4: 125/141, $0.1602
+2026-10-16 18:50:40,843 INFO bench.doc_metrics: judge stored_run04_improved_1to4: 141/141, $0.1825
+2026-10-16 18:50:52,531 INFO bench.doc_metrics: judge stored_run05_improved_1to4: 25/141, $0.0309
+2026-10-16 18:51:01,709 INFO bench.doc_metrics: judge stored_run05_improved_1to4: 50/141, $0.0635
+2026-10-16 18:51:09,963 INFO bench.doc_metrics: judge stored_run05_improved_1to4: 75/141, $0.0966
+2026-10-16 18:51:18,324 INFO bench.doc_metrics: judge stored_run05_improved_1to4: 100/141, $0.1289
+2026-10-16 18:51:27,269 INFO bench.doc_metrics: judge stored_run05_improved_1to4: 125/141, $0.1621
+2026-10-16 18:51:35,001 INFO bench.doc_metrics: judge stored_run05_improved_1to4: 141/141, $0.1851
+2026-10-16 18:51:47,080 INFO bench.doc_metrics: judge stored_run06_improved_1to4: 25/141, $0.0287
+2026-10-16 18:51:55,919 INFO bench.doc_metrics: judge stored_run06_improved_1to4: 50/141, $0.0626
+2026-10-16 18:52:04,548 INFO bench.doc_metrics: judge stored_run06_improved_1to4: 75/141, $0.0974
+2026-10-16 18:52:13,982 INFO bench.doc_metrics: judge stored_run06_improved_1to4: 100/141, $0.1314
+2026-10-16 18:52:21,151 INFO bench.doc_metrics: judge stored_run06_improved_1to4: 125/141, $0.1649
+2026-10-16 18:52:46,235 INFO bench.doc_metrics: judge stored_run06_improved_1to4: 141/141, $0.1915
+2026-10-16 18:52:46,240 INFO bench.doc_metrics: summary: {"stored_run02_improved_1to4": {"ok": 141, "cost_millicents": 19007}, "stored_run03_improved_1to4": {"ok": 141, "cost_millicents": 18226}, "stored_run04_improved_1to4": {"ok": 141, "cost_millicents": 18248}, "stored_run05_improved_1to4": {"ok": 141, "cost_millicents": 18512}, "stored_run06_improved_1to4": {"ok": 141, "cost_millicents": 19147}}

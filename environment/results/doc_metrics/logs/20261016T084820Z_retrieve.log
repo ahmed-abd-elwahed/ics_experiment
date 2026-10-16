@@ -1,0 +1,35 @@
+2026-10-16 19:48:20,342 INFO bench.doc_metrics: doc_metrics retrieve --configs llm_select20+epmc25,llm_select20+q_synonym,llm_select20+epmc25+q_synonym --workers 16
+2026-10-16 19:49:12,291 INFO bench.doc_metrics: retrieve llm_select20+epmc25: 25/141, $0.0280
+2026-10-16 19:49:36,297 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:50:04,600 INFO bench.doc_metrics: retrieve llm_select20+epmc25: 50/141, $0.0689
+2026-10-16 19:50:56,034 INFO bench.doc_metrics: retrieve llm_select20+epmc25: 75/141, $0.1074
+2026-10-16 19:51:22,029 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:51:37,138 INFO bench.doc_metrics: retrieve llm_select20+epmc25: 100/141, $0.1488
+2026-10-16 19:52:37,573 INFO bench.doc_metrics: retrieve llm_select20+epmc25: 125/141, $0.1860
+2026-10-16 19:53:27,919 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:55:02,927 INFO bench.doc_metrics: retrieve llm_select20+epmc25: 141/141, $0.2297
+2026-10-16 19:56:04,257 INFO bench.doc_metrics: retrieve llm_select20+q_synonym: 25/141, $0.0366
+2026-10-16 19:56:17,935 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:56:57,185 INFO bench.doc_metrics: retrieve llm_select20+q_synonym: 50/141, $0.0754
+2026-10-16 19:57:38,988 WARNING medsim.llm: OpenRouter returned an empty reply; retrying in 1.0s
+2026-10-16 19:58:08,894 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:58:14,355 INFO bench.doc_metrics: retrieve llm_select20+q_synonym: 75/141, $0.1219
+2026-10-16 19:58:19,066 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:58:57,366 INFO bench.doc_metrics: retrieve llm_select20+q_synonym: 100/141, $0.1671
+2026-10-16 19:59:35,551 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:59:42,874 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 19:59:56,783 INFO bench.doc_metrics: retrieve llm_select20+q_synonym: 125/141, $0.2075
+2026-10-16 20:00:00,514 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 20:01:35,942 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 20:01:35,946 INFO bench.doc_metrics: retrieve llm_select20+q_synonym: 141/141, $0.2405
+2026-10-16 20:02:40,484 INFO bench.doc_metrics: retrieve llm_select20+epmc25+q_synonym: 25/141, $0.0343
+2026-10-16 20:03:32,774 INFO bench.doc_metrics: retrieve llm_select20+epmc25+q_synonym: 50/141, $0.0672
+2026-10-16 20:04:21,893 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 20:04:21,901 INFO bench.doc_metrics: retrieve llm_select20+epmc25+q_synonym: 75/141, $0.1014
+2026-10-16 20:05:51,611 INFO bench.doc_metrics: retrieve llm_select20+epmc25+q_synonym: 100/141, $0.1459
+2026-10-16 20:06:09,397 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 20:07:30,625 INFO bench.doc_metrics: retrieve llm_select20+epmc25+q_synonym: 125/141, $0.1868
+2026-10-16 20:07:47,971 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 20:08:59,297 WARNING medsim.retrieval: LLM rerank failed, keeping lexical order: reranker: reply cut off at max_tokens=8000 before a complete answer, even after retrying with a doubled budget. Raise MEDSIM_RERANKER_MAX_TOKENS.
+2026-10-16 20:08:59,300 INFO bench.doc_metrics: retrieve llm_select20+epmc25+q_synonym: 141/141, $0.2245
+2026-10-16 20:08:59,305 INFO bench.doc_metrics: summary: {"llm_select20+epmc25": {"ok": 141, "cost_millicents": 22970}, "llm_select20+q_synonym": {"ok": 141, "cost_millicents": 24054}, "llm_select20+epmc25+q_synonym": {"ok": 141, "cost_millicents": 22454}}

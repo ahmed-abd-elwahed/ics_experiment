@@ -1,0 +1,8 @@
+2026-10-16 18:45:04,690 INFO bench.doc_metrics: doc_metrics queries --workers 24
+2026-10-16 18:45:25,524 INFO bench.doc_metrics: queries base: 25/139, $0.0119
+2026-10-16 18:45:42,128 INFO bench.doc_metrics: queries base: 50/139, $0.0252
+2026-10-16 18:46:01,599 INFO bench.doc_metrics: queries base: 75/139, $0.0418
+2026-10-16 18:46:17,022 INFO bench.doc_metrics: queries base: 100/139, $0.0565
+2026-10-16 18:46:32,856 INFO bench.doc_metrics: queries base: 125/139, $0.0724
+2026-10-16 18:47:00,415 INFO bench.doc_metrics: queries base: 139/139, $0.0848
+2026-10-16 18:47:00,418 INFO bench.doc_metrics: summary: {"base": {"ok": 139, "cost_millicents": 8485}}

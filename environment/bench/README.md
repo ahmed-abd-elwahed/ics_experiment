@@ -337,6 +337,40 @@ The scores are in `results/answer_metrics/answer_metrics.md`; the full account i
 Not done: the planned sanity check of faithfulness (another question's documents should give
 "not supported"), and human labels for the new metrics.
 
+## Document metrics: truth coverage and graded relevance (2026-10-16)
+
+Metrics on the retrieved documents themselves, for set A, and the search for the Europe PMC +
+LitSense settings that score highest on them. Code: `bench/doc_metrics.py`; report:
+`results/scripts/make_doc_metrics_report.py`; results:
+[../results/doc_metrics/](../results/doc_metrics/) (`doc_metrics_report.pdf`, `scores.json`).
+
+- **Strict truth coverage** (decides): a document gives a value or range for the variable in
+  patients with this or a closely related condition, and the hidden true value lies inside it or
+  within about 15%. **Category coverage**: a document puts the true value in the same low /
+  normal / high category (a reference range for comparable patients counts).
+- **Graded relevance**: each document 0 / 1 / 2; **nDCG@8** against eight grade-2 documents
+  (breaks ties) and **precision@8**.
+- One judge call (`anthropic/claude-haiku-5.5`) per question grades all eight documents; every
+  positive verdict needs a verbatim quote that code finds in the named document.
+- Configurations run retrieval only, on one frozen query per question (`queries`; Stages A and B
+  with `deepseek/deepseek-v4-flash-0731`). `name+other` combines changes, `name@fresh1` uses
+  another set of frozen queries, `name#2` repeats a configuration under another label (same
+  cached documents, so it measures the judge's noise). A question where a source failed is
+  retrieved again on rerun.
+
+```bash
+PYTHONPATH=.:environment python -m bench.doc_metrics queries [--query-set fresh1]
+PYTHONPATH=.:environment python -m bench.doc_metrics retrieve --configs baseline,llm_select20
+PYTHONPATH=.:environment python -m bench.doc_metrics judge --configs baseline [--shuffled] [--stored 2-6]
+PYTHONPATH=.:environment python -m bench.doc_metrics score
+```
+
+Result: LLM selection of the final 8 documents from the best 20, with 25 Europe PMC candidates
+and MeSH synonyms (`llm_select20+epmc25+q_synonym`), raised strict coverage from 60.3% to 70.2%
+(+9.9 points, 95% CI +3.5 to +17.0) and nDCG@8 from 0.691 to 0.750; on two fresh query sets the
+gain was +7.1 and +12.1 points. LLM selection alone accounts for most of it. Full-text excerpts,
+the lexical rerank and Europe PMC are each worth 20–30 points. The shuffled control scores 0%.
+
 ## Judge validation
 
 Controls and flips are judged by the whole panel and pass or fail on the voted label; each
