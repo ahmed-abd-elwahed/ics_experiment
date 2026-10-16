@@ -245,3 +245,20 @@ in [environment/NOTES.md](environment/NOTES.md).
 | "Information gathering strategy" became "Information collection strategy" in `framework-overview.svg` (label, description and comment), in the README's copy of the diagram, and on the overview slides of both decks. | Asked for "everywhere" the overview diagram is used. The web app's scene heading and the code's class names (`InformationGatheringStrategy`) were left as they are: they are not the diagram, and renaming the class would change the code's interface. |
 | `make_answer_metrics.py` also scores "case alignment: aligned or neutral" (`align_ok`), kept out of the main table. | The deck's environment table was asked to show aligned plus neutral; summing per question gives a proper mean ± SD over runs, which adding two columns' means would not. |
 | After the first publish, changes to the deck are made on the version last saved in the page, slide by slide. | The deck is being edited by hand in the page at the same time; starting from an older copy would undo those edits. |
+
+### Document metrics: truth coverage and graded relevance (2026-10-16)
+
+| Decision | Why |
+|---|---|
+| Truth coverage is scored on set A only (141 questions). | Only set A has a hidden true value for the documents to contain. |
+| Truth coverage has two levels: strict (a value or range for patients with this or a related condition that contains the true value, or is within about 15% of it) decides; category (same low / normal / high, a reference range for comparable patients counts) is reported alongside. | Chosen by the project owner. A general reference range would otherwise "cover" every normal true value. |
+| Graded relevance grades each document 0 / 1 / 2 and is summarised as nDCG@8 against a perfect list of eight grade-2 documents, plus precision@8. | Against the list's own ideal order, nDCG would only measure order and give a list of eight useless documents a perfect score. |
+| One judge call per question grades all documents and gives both coverage levels; every positive verdict needs a verbatim quote that code finds in the document it names. | One call keeps the cost per configuration at about $0.07; the quote check is the one used for faithfulness. |
+| The judge is `anthropic/claude-haiku-5.5`, the panel's main judge. | One judge was asked for; it is not of the pipeline's family (DeepSeek). |
+| The best configuration is chosen on strict coverage; nDCG@8 breaks ties within the noise. | Chosen by the project owner. |
+| Configurations run retrieval only, on one frozen query per question made by medsim's Stages A and B with the stored runs' model (`deepseek/deepseek-v4-flash-0731`). | Differences then come from the retrieval settings, not from the query writer's sampling; Stage C is not needed for these metrics and is about half the LLM cost. |
+| The query writer is tested as its own change with its own frozen queries (`q_gpt6luna`). | It acts before the search, so it cannot share the baseline's queries. |
+| The number of documents stays at 8. | It is what Stage C reads; with more documents, coverage rises trivially. |
+| The search space is the Europe PMC + LitSense settings only (21 single changes), with a $10 cap. | Chosen by the project owner. |
+| The stored `improved_1to4` runs 2–10 give the run-to-run noise, `current` checks that the metrics separate a known difference, and a shuffled control checks that the judge reads the documents. | No retrieval is needed for these; the stored runs used fresh queries and the full pipeline. |
+| Nothing paid has run. | The OpenRouter key's own limit ($250) is used up; raising it is the owner's setting. |
