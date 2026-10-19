@@ -344,3 +344,45 @@ mark { background: var(--mark); color: inherit; border-radius: 3px; padding: 0 1
   .channel { flex-direction: column; }
   .env { padding: 16px 12px; }
 }
+
+/* Strategy flow diagrams (flows.js): the strategy column widens to hold one. */
+.scene.with-flow { grid-template-columns: minmax(0, 1.3fr) minmax(140px, 0.5fr) minmax(0, 1.75fr); }
+.hidden-robot { display: none; }
+.flow { width: 100%; }
+.flow-canvas { position: relative; width: 100%; }
+.flow-svg { display: block; width: 100%; height: auto; }
+.flow-svg text { font-family: inherit; fill: var(--text); }
+.flow-band { fill: var(--surface-2); }
+.flow-band-label { font-size: 11px; font-weight: 600; fill: var(--muted) !important; }
+.flow-edge polyline { fill: none; stroke: var(--muted); stroke-width: 1.4; transition: stroke 0.2s, stroke-width 0.2s; }
+.flow-edge.qa polyline { stroke: var(--text); stroke-width: 1.8; }
+.flow-edge text { font-size: 11px; fill: var(--muted) !important; }
+.flow-edge.qa text { font-size: 12px; font-weight: 600; fill: var(--text) !important; }
+.flow-edge.active polyline { stroke: var(--accent-strong); stroke-width: 3; }
+.flow-edge.active text { fill: var(--accent-strong) !important; }
+.fah { fill: var(--muted); }
+.flow-node .shape { fill: var(--surface); stroke: var(--faint); stroke-width: 1.4; transition: stroke-width 0.2s, fill 0.2s; }
+.flow-node.llm .shape { fill: var(--accent-soft); stroke: var(--accent-strong); }
+.flow-node.end .shape { fill: var(--text); stroke: var(--text); }
+.flow-node.end text { fill: var(--surface); }
+.flow-node .tag { font-size: 9px; letter-spacing: 0.08em; fill: var(--muted); }
+.flow-node.llm .tag { fill: var(--accent-strong); }
+.flow-node .ttl { font-size: 12.5px; font-weight: 600; }
+.flow-node .sub { font-size: 10.5px; fill: var(--muted); }
+.flow-node .dtx { font-size: 11.5px; font-weight: 600; }
+.flow-node.active .shape { stroke: var(--accent-strong); stroke-width: 3.5; filter: drop-shadow(0 0 4px var(--accent-soft)); }
+.flow-node.end.active .shape { stroke: var(--accent-strong); }
+.flow-leader { stroke: var(--accent-strong); stroke-width: 1.5; stroke-dasharray: 4 4; }
+.flow-card {
+  position: absolute; left: 1%; width: 98%; overflow: auto; z-index: 2;
+  background: var(--surface); border: 1.5px solid var(--accent-strong); border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(16, 24, 40, 0.16); padding: 8px 10px; font-size: 12px; line-height: 1.4;
+  animation: flow-card-in 0.18s ease-out;
+}
+.flow-card-title { font-weight: 600; margin-bottom: 4px; }
+.flow-io + .flow-io { margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--border); }
+.flow-io-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-strong); }
+.flow-io div + div { margin-top: 2px; }
+@keyframes flow-card-in { from { transform: translateY(6px); } to { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .flow-card { animation: none; } }
+@media (max-width: 1100px) { .scene.with-flow { grid-template-columns: 1fr; } }

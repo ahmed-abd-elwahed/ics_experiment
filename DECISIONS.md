@@ -293,3 +293,15 @@ in [environment/NOTES.md](environment/NOTES.md).
 | The answers were written by `replay_one` on the stored documents (Stages A–C, nothing searched again). | The answer is then written on exactly the documents whose coverage was judged, so the two metrics can be cross-tabulated. |
 | The faithfulness rubric is the benchmark's (`bench.answer_metrics`), with the single judge `anthropic/claude-haiku-5.5`. | Same metric as in the answer-metrics report; one judge, as for coverage. |
 | A question without an answer or without documents counts as not supported. | As in `make_answer_metrics.py`, so the denominator is every question. |
+
+### Strategy flow diagrams in the web app (2026-10-20)
+
+| Decision | Why |
+|---|---|
+| The View record tab draws the proposal page's flow diagram of the record's strategy (`webapp/static/flows.js`) in place of the strategy robot, chosen by each case run's `strategy_name`; `basic` and unknown strategies keep the old box. | "Dynamically use a diagram based on the displayed record." |
+| A case run is walked through the strategy's own steps (update, stop rule, ask, channel check, phase change, final differential), with the environment's query and answer steps between them. | Each Next press then shows one step of the strategy, in the order it ran. |
+| Each step's In and Out are built from the record: the iteration's question and rationale, the strategy's saved state (`strategy_trace`), the answer, the diagnosis, and the strategy's params. | The records do not store the LLM calls' prompt or reply text, only their tokens and cost; the saved state is what each call returned. |
+| A few outputs are not in the records and are said to be missing rather than invented: the sequence strategy's intermediate "settle" verdicts (only the last is saved). | Showing a guessed verdict would misstate what ran. |
+| The In/Out card sits in a lane under the diagram, joined to the active node by a dashed leader line. | Cards placed next to nodes covered other nodes and the title in the narrow column. |
+| The diagram widens the strategy column (the scene's grid changes only when a diagram is shown). | At the old width the node text was too small to read. |
+| The strategy box title now reads "Information Collection Strategy". | The rename to "collection" was asked for everywhere on 2026-10-13. |

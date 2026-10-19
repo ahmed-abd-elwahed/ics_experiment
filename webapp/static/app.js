@@ -141,7 +141,7 @@ function showTab(tab) {
     $("#record-source").hidden = tab !== "view";
     $("#envrun-source").hidden = tab !== "envruns";
     $("#caserun-label").textContent = tab === "envruns" ? "Case" : "Case run";
-    $("#strategy-title").textContent = tab === "envruns" ? "Evaluation Questions" : "Information Gathering Strategy";
+    $("#strategy-title").textContent = tab === "envruns" ? "Evaluation Questions" : "Information Collection Strategy";
     renderViewer();
   }
   writeHash();
@@ -762,7 +762,11 @@ function currentRun() {
   return view.record?.case_runs?.[view.runIndex] || null;
 }
 
+// A strategy with a flow diagram (flows.js) walks through its own steps between the questions.
+const hasFlow = (caseRun) => !isEnvRuns() && typeof FLOWS !== "undefined" && FLOWS.has(caseRun?.strategy_name);
+
 function buildSteps(caseRun) {
+  if (hasFlow(caseRun)) return FLOWS.steps(caseRun, view.record);
   const steps = [{ kind: "start" }];
   caseRun.iterations.forEach((iteration, i) => {
     steps.push({ kind: "query", i, iteration });
@@ -835,6 +839,9 @@ function stepText(caseRun, step) {
     if (env) return ["Case loaded", `Case ${caseRun.case_id} is loaded into the environment; ${plural(total, "evaluation question")} follow.${caseRun.note ? ` ${caseRun.note}` : ""}`];
     return ["Case loaded", `Case ${caseRun.case_id} is loaded into the environment. The strategy starts with no information about the patient.`];
   }
+  if (step.kind === "flow") {
+    return [step.title, "Inside the strategy: see the diagram for what this step read (In) and returned (Out)."];
+  }
   if (step.kind === "query") {
     return [`${unit} ${step.i + 1} of ${total} · Query`, `${env ? "The evaluation asks" : "The strategy asks"}: “${step.iteration.question}”`];
   }
@@ -847,10 +854,20 @@ function stepText(caseRun, step) {
   return ["Case run finished", `Stopped because ${STOP_LABELS[caseRun.stop_reason] || caseRun.stop_reason}, after ${plural(total, "iteration")} in ${duration(caseRun.elapsed_s)}.`];
 }
 
+// The environment's boxes keep showing the last query or answer while the strategy works.
+function environmentStep(index) {
+  for (let i = index; i >= 0; i--) {
+    const s = view.steps[i];
+    if (s.kind !== "flow") return s;
+  }
+  return view.steps[0];
+}
+
 function renderStep() {
   const caseRun = currentRun();
   if (!caseRun) return;
-  const step = view.steps[view.step];
+  const shown = view.steps[view.step];
+  const step = environmentStep(view.step);
   const response = step.iteration?.environment_response || null;
 
   $("#step-range").max = String(view.steps.length - 1);
@@ -862,7 +879,7 @@ function renderStep() {
   $("#next-case").disabled = view.runIndex === view.record.case_runs.length - 1;
   $("#strategy-select").value = caseRun.strategy ?? "";
 
-  const [title, caption] = stepText(caseRun, step);
+  const [title, caption] = stepText(caseRun, shown);
   $("#step-title").textContent = title;
   $("#step-caption").textContent = caption;
 
@@ -871,17 +888,29 @@ function renderStep() {
   renderLiteratureBox(caseRun, step, response);
   renderLlmBox(caseRun, step, response);
   renderMessages(step);
+  const flow = hasFlow(caseRun);
+  $("#scene").classList.toggle("with-flow", flow);
+  $("#strategy-flow").hidden = !flow;
+  $("#node-strategy .robot").classList.toggle("hidden-robot", flow);
+  $("#box-strategy").hidden = flow;
   if (isEnvRuns()) renderQuestionsBox(caseRun, step);
-  else renderStrategyBox(caseRun, step);
+  else if (flow) {
+    $("#strategy-title").textContent = FLOWS.title(caseRun.strategy_name);
+    FLOWS.render($("#strategy-flow"), caseRun.strategy_name, shown);
+  } else {
+    $("#strategy-title").textContent = "Information Collection Strategy";
+    renderStrategyBox(caseRun, step);
+  }
 
-  const usedCase = step.kind === "start" || (step.kind === "answer" && step.iteration.answer_source === "case_study");
-  const usedLiterature = step.kind === "answer" && Boolean(response?.literature_search);
+  const live = shown.kind !== "flow";  // a step inside the strategy leaves the environment idle
+  const usedCase = live && (step.kind === "start" || (step.kind === "answer" && step.iteration.answer_source === "case_study"));
+  const usedLiterature = live && step.kind === "answer" && Boolean(response?.literature_search);
   $("#node-case").classList.toggle("active", usedCase);
   $("#node-lit").classList.toggle("active", usedLiterature);
-  $("#node-llm").classList.toggle("active", step.kind === "query" || step.kind === "answer");
-  $("#msg-query").classList.toggle("active", step.kind === "query");
-  $("#msg-answer").classList.toggle("active", step.kind === "answer");
-  $("#node-strategy").classList.toggle("active", step.kind !== "answer" && step.kind !== "start");
+  $("#node-llm").classList.toggle("active", live && (step.kind === "query" || step.kind === "answer"));
+  $("#msg-query").classList.toggle("active", live && step.kind === "query");
+  $("#msg-answer").classList.toggle("active", live && step.kind === "answer");
+  $("#node-strategy").classList.toggle("active", shown.kind !== "answer" && shown.kind !== "start");
   view.arrows = { case: usedCase && step.kind === "answer", lit: usedLiterature };
   requestAnimationFrame(drawEnvArrows);
   writeHash();
