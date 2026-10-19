@@ -284,3 +284,12 @@ in [environment/NOTES.md](environment/NOTES.md).
 | The raw run records (`records/*.json` without `.eval`/`.report`) still contain the gut feeling case runs. | They are the record of what ran and what it cost; removing case runs would make their totals wrong. |
 | `Meeting 63.pptx` was not changed; its slide 10 still shows gut feeling. | It is the owner's original meeting deck. |
 | Earlier entries of this log that mention gut feeling were kept. | The log records what was decided at the time. |
+
+### Faithfulness of the answers on the searched configurations (2026-10-20)
+
+| Decision | Why |
+|---|---|
+| Faithfulness was measured for the baseline and the winner only, on the frozen-query documents. | Asked for after the search; these two are the comparison that matters, and it cost $0.59. |
+| The answers were written by `replay_one` on the stored documents (Stages A–C, nothing searched again). | The answer is then written on exactly the documents whose coverage was judged, so the two metrics can be cross-tabulated. |
+| The faithfulness rubric is the benchmark's (`bench.answer_metrics`), with the single judge `anthropic/claude-haiku-5.5`. | Same metric as in the answer-metrics report; one judge, as for coverage. |
+| A question without an answer or without documents counts as not supported. | As in `make_answer_metrics.py`, so the denominator is every question. |

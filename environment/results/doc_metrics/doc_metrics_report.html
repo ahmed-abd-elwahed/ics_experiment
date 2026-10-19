@@ -93,9 +93,23 @@ same query builder: the gain should hold when the queries change. Here each Δ c
 baseline on the same query set.</p>
 <table><thead><tr><th class='cfg'>Configuration</th><th>Strict coverage</th><th>Δ strict vs baseline (95% CI)</th><th>Category coverage</th><th>nDCG@8</th><th>Δ nDCG vs baseline</th><th>Precision@8</th><th>n</th></tr></thead><tbody><tr class="base"><td class="cfg"><b>baseline@fresh1</b><br><span class="note">baseline: changes 1-4 (queries: fresh1)</span></td><td>62.4%</td><td></td><td>87.9%</td><td>0.681</td><td></td><td>40.7%</td><td>141</td></tr><tr class="win"><td class="cfg"><b>llm_select20+epmc25+q_synonym@fresh1</b><br><span class="note">an LLM picks the 8 documents from the best 20; 25 Europe PMC candidates (baseline 50); Europe PMC MeSH synonym expansion (queries: fresh1)</span></td><td>69.5%</td><td><span class="">+7.1</span> <span class="ci">(-0.7 to +14.9)</span></td><td>89.4%</td><td>0.735</td><td><span class="pos">+0.054</span> <span class="ci">(+0.036 to +0.074)</span></td><td>47.1%</td><td>141</td></tr><tr class="base"><td class="cfg"><b>baseline@fresh2</b><br><span class="note">baseline: changes 1-4 (queries: fresh2)</span></td><td>57.4%</td><td></td><td>85.1%</td><td>0.682</td><td></td><td>41.7%</td><td>141</td></tr><tr class="win"><td class="cfg"><b>llm_select20+epmc25+q_synonym@fresh2</b><br><span class="note">an LLM picks the 8 documents from the best 20; 25 Europe PMC candidates (baseline 50); Europe PMC MeSH synonym expansion (queries: fresh2)</span></td><td>69.5%</td><td><span class="pos">+12.1</span> <span class="ci">(+4.3 to +19.9)</span></td><td>92.9%</td><td>0.740</td><td><span class="pos">+0.058</span> <span class="ci">(+0.039 to +0.078)</span></td><td>47.5%</td><td>141</td></tr></tbody></table>
 
+<h2>Faithfulness of the answers written on these documents</h2>
+<p>medsim's answer-writing stage (Stage C) was run on each configuration's documents, with the
+frozen queries, and every answer with documents was judged for faithfulness with the benchmark's
+rubric (<code>bench.answer_metrics</code>): does at least one document give a value for this variable
+in a comparable patient that agrees with the answer? Same judge; a question with no answer counts as
+not supported.</p>
+<table><thead><tr><th class="cfg">Configuration</th><th>Supported (95% CI)</th>
+<th>Δ vs baseline (paired)</th><th>Covered and supported</th><th>Covered, not supported</th>
+<th>Not covered, supported</th><th>Neither</th></tr></thead><tbody><tr class="base"><td class="cfg"><b>baseline</b></td><td>22.0% <span class="ci">(15.6 to 29.1)</span></td><td></td><td>23</td><td>62</td><td>8</td><td>48</td></tr><tr class="win"><td class="cfg"><b>llm_select20+epmc25+q_synonym</b></td><td>32.6% <span class="ci">(25.5 to 40.4)</span></td><td><span class="pos">+10.6</span> <span class="ci">(+2.8 to +19.1)</span></td><td>35</td><td>64</td><td>11</td><td>31</td></tr></tbody></table>
+<p class="note">"Covered" is strict truth coverage of the same documents. Covered but not supported
+means the documents held a value matching the truth but the answer was not backed by them: the
+answer-writing stage, not retrieval, is where those questions are lost. This judge reads "agrees"
+strictly (in one example, 9.8 cm in the document against 9.6 cm in the answer was not supported).</p>
+
 <h2>Cost and limits</h2>
 <ul>
-<li>Cost of this work from the stored usage records: $9.11 (judge $7.00,
+<li>Cost of this work from the stored usage records: $9.69 (judge $7.15,
 LLM selection during retrieval $1.79, query writing $0.32).
 Europe PMC and LitSense are free.</li>
 <li>One judge, an LLM, without human labels: absolute levels may be off; the comparisons between

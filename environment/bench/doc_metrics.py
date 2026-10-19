@@ -27,6 +27,8 @@ Steps (workspace ``environment/results/doc_metrics``)::
     python -m bench.doc_metrics queries [--query-set NAME]
     python -m bench.doc_metrics retrieve --configs baseline,q_natural,...
     python -m bench.doc_metrics judge --configs baseline,... [--stored 2-10] [--shuffled]
+    python -m bench.doc_metrics answer --configs baseline,...        # Stage C on those documents
+    python -m bench.doc_metrics faithfulness --configs baseline,...  # bench.answer_metrics' rubric
     python -m bench.doc_metrics score
 """
 
@@ -52,16 +54,19 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
+from bench.answer_metrics import judge_faithfulness, ok_metric_judgments
 from bench.config import BenchSettings
-from bench.judge import Judge, _target, _truth
+from bench.judge import Judge, _target, _truth, answer_key
 from bench.run import (
     RETRIEVAL_NOTES,
     RETRIEVAL_STAGES,
     LiveRetrievers,
     RetrieverFactory,
+    RunConfig,
     SourceArticleFilter,
     _doc_record,
     _improved,
+    replay_one,
 )
 from bench.schemas import DocRecord, Item, RunRecord, Status, _LLMOutput, calls_cost
 from bench.text import quote_found
@@ -709,6 +714,88 @@ def step_judge(
     return _pool(jobs, JsonlWriter(ws.judgments), workers, name)
 
 
+# --- faithfulness of the answers written on these documents -------------------------------------
+
+
+def answer_file(ws: DocWorkspace, label: str) -> Path:
+    return ws.root / "answers" / f"{label}.jsonl"
+
+
+def faithfulness_file(ws: DocWorkspace) -> Path:
+    return ws.root / "judge" / "faithfulness.jsonl"
+
+
+def latest_answers(ws: DocWorkspace, label: str) -> dict[str, RunRecord]:
+    latest = latest_by(read_models(answer_file(ws, label), RunRecord), lambda r: r.item_id)
+    return {k: r for k, r in latest.items() if r.status == "ok"}
+
+
+def step_answer(
+    ws: DocWorkspace, items: Sequence[Item], label: str, *, llm: LLMClient,
+    settings: Settings, workers: int, limit: int | None = None,
+) -> Counter[str]:  # fmt: skip
+    """medsim's Stages A-C on the documents a configuration retrieved (``replay_one``):
+    nothing is searched again, so the answer is written on exactly the documents judged."""
+    config = doc_config(label)
+    run_config = RunConfig(label, config.description, config.settings)
+    runs = config_runs(ws, label)
+    done = latest_answers(ws, label)
+    todo = [i for i in items if i.item_id in runs and i.item_id not in done][:limit]
+    jobs = [
+        lambda i=i: replay_one(i, run_config, runs[i.item_id], llm=llm, base_settings=settings)
+        for i in todo
+    ]
+    return _pool(jobs, JsonlWriter(answer_file(ws, label)), workers, f"answer {label}")
+
+
+def step_faithfulness(
+    ws: DocWorkspace, items: Sequence[Item], label: str, judge: Judge, *, workers: int,
+    limit: int | None = None,
+) -> Counter[str]:  # fmt: skip
+    """Faithfulness (``bench.answer_metrics``) of every answer that has documents."""
+    by_id = {i.item_id: i for i in items}
+    answers = latest_answers(ws, label)
+    done = ok_metric_judgments(faithfulness_file(ws), judge.model)
+    todo = [
+        r for i, r in answers.items()
+        if i in by_id and r.documents and r.output_answer
+        and answer_key(i, label, r.output_answer) not in done
+    ][:limit]  # fmt: skip
+    jobs = [lambda r=r: judge_faithfulness(judge, by_id[r.item_id], r) for r in todo]
+    return _pool(jobs, JsonlWriter(faithfulness_file(ws)), workers, f"faithfulness {label}")
+
+
+def faithfulness_scores(
+    ws: DocWorkspace, items: Sequence[Item], label: str, judge_model: str
+) -> dict[str, Any]:
+    """Supported share over every question (no answer or no documents: not supported), and its
+    cross-tabulation with strict truth coverage of the same documents."""
+    answers = latest_answers(ws, label)
+    judged = ok_metric_judgments(faithfulness_file(ws), judge_model)
+    coverage = ok_judgments(ws, label, judge_model)
+    supported: dict[str, float] = {}
+    cells: Counter[str] = Counter()
+    for item in items:
+        run = answers.get(item.item_id)
+        out = judged.get(answer_key(item.item_id, label, run.output_answer or "")) if run else None
+        ok = bool(out and out.get("label") == "supported")
+        supported[item.item_id] = float(ok)
+        covered = item.item_id in coverage and coverage[item.item_id].strict
+        cells[
+            f"{'covered' if covered else 'not_covered'}_{'supported' if ok else 'not_supported'}"
+        ] += 1
+    values = list(supported.values())
+    return {
+        "questions": len(values), "answered": len(answers),
+        "judged": sum(1 for i in items if (r := answers.get(i.item_id)) is not None
+                      and answer_key(i.item_id, label, r.output_answer or "") in judged),
+        "supported": statistics.fmean(values) if values else 0.0,
+        "supported_ci": bootstrap_ci(values), "by_coverage": dict(cells),
+        "per_question": supported,
+        "answer_cost_usd": round(sum(sum(r.llm_cost_usd.values()) for r in answers.values()), 4),
+    }  # fmt: skip
+
+
 def step_score(ws: DocWorkspace, items: Sequence[Item], judge_model: str) -> dict[str, Any]:
     labels = sorted({j.config for j in read_models(ws.judgments, DocJudgment)})
     expected = [i.item_id for i in items]
@@ -741,6 +828,18 @@ def step_score(ws: DocWorkspace, items: Sequence[Item], judge_model: str) -> dic
             if ref and control is None and label != ref_label:
                 entry["vs_baseline"] = {m: paired_difference(ref, judged, m) for m in METRICS}
             results["configs"][key] = entry
+    faith = {}
+    for label in labels:
+        if answer_file(ws, label).exists():
+            faith[label] = faithfulness_scores(ws, items, label, judge_model)
+    if "baseline" in faith:
+        base_values = faith["baseline"]["per_question"]
+        for label, entry in faith.items():
+            if label != "baseline":
+                diffs = [entry["per_question"][i] - base_values[i] for i in base_values]
+                entry["vs_baseline"] = {"mean": statistics.fmean(diffs) if diffs else 0.0,
+                                        "ci": bootstrap_ci(diffs)}  # fmt: skip
+    results["faithfulness"] = faith
     ws.scores.parent.mkdir(parents=True, exist_ok=True)
     ws.scores.write_text(json.dumps(results, indent=2), encoding="utf-8")
     return results
@@ -766,7 +865,9 @@ def table(results: Mapping[str, Any]) -> str:
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="python -m bench.doc_metrics", description=__doc__)
-    parser.add_argument("step", choices=["queries", "retrieve", "judge", "score"])
+    parser.add_argument(
+        "step", choices=["queries", "retrieve", "judge", "answer", "faithfulness", "score"]
+    )
     parser.add_argument("--configs", default="baseline",
                         help="Comma-separated: baseline, a change, or changes joined "
                         "by +.")  # fmt: skip
@@ -810,6 +911,12 @@ def main(argv: Sequence[str] | None = None) -> int:
                 ws, items, args.query_set, llm=llm, settings=settings, workers=args.workers,
                 limit=args.limit,
             )  # fmt: skip
+        elif args.step == "answer":
+            for name in args.configs.split(","):
+                summary[name] = step_answer(
+                    ws, items, name, llm=llm, settings=settings, workers=args.workers,
+                    limit=args.limit,
+                )  # fmt: skip
         elif args.step == "retrieve":
             live = LiveRetrievers(settings, cache=True)
             try:
@@ -820,6 +927,15 @@ def main(argv: Sequence[str] | None = None) -> int:
                     )  # fmt: skip
             finally:
                 live.close()
+        elif args.step == "faithfulness":
+            llm.verify_models([judge_model])
+            faith_judge = Judge(llm, judge_model, bench.judge_max_tokens,
+                                max_attempts=bench.judge_max_attempts,
+                                backoff_s=bench.judge_retry_backoff_s)  # fmt: skip
+            for name in args.configs.split(","):
+                summary[name] = step_faithfulness(
+                    ws, items, name, faith_judge, workers=args.workers, limit=args.limit
+                )
         else:
             llm.verify_models([judge_model])
             judge = Judge(llm, judge_model, bench.judge_max_tokens,

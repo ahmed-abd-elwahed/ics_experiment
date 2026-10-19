@@ -1,0 +1,14 @@
+2026-10-20 04:32:37,150 INFO bench.doc_metrics: doc_metrics faithfulness --configs baseline,llm_select20+epmc25+q_synonym --workers 24
+2026-10-20 04:32:42,465 INFO bench.doc_metrics: faithfulness baseline: 25/137, $0.0127
+2026-10-20 04:32:44,836 INFO bench.doc_metrics: faithfulness baseline: 50/137, $0.0260
+2026-10-20 04:32:47,764 INFO bench.doc_metrics: faithfulness baseline: 75/137, $0.0409
+2026-10-20 04:32:50,018 INFO bench.doc_metrics: faithfulness baseline: 100/137, $0.0551
+2026-10-20 04:32:52,747 INFO bench.doc_metrics: faithfulness baseline: 125/137, $0.0690
+2026-10-20 04:32:55,699 INFO bench.doc_metrics: faithfulness baseline: 137/137, $0.0763
+2026-10-20 04:32:59,250 INFO bench.doc_metrics: faithfulness llm_select20+epmc25+q_synonym: 25/140, $0.0119
+2026-10-20 04:33:01,729 INFO bench.doc_metrics: faithfulness llm_select20+epmc25+q_synonym: 50/140, $0.0271
+2026-10-20 04:33:04,458 INFO bench.doc_metrics: faithfulness llm_select20+epmc25+q_synonym: 75/140, $0.0409
+2026-10-20 04:33:06,820 INFO bench.doc_metrics: faithfulness llm_select20+epmc25+q_synonym: 100/140, $0.0564
+2026-10-20 04:33:08,901 INFO bench.doc_metrics: faithfulness llm_select20+epmc25+q_synonym: 125/140, $0.0695
+2026-10-20 04:33:11,777 INFO bench.doc_metrics: faithfulness llm_select20+epmc25+q_synonym: 140/140, $0.0790
+2026-10-20 04:33:11,785 INFO bench.doc_metrics: summary: {"baseline": {"ok": 137, "cost_millicents": 7628}, "llm_select20+epmc25+q_synonym": {"ok": 140, "cost_millicents": 7898}}

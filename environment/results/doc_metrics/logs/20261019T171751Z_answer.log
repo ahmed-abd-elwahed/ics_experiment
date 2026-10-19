@@ -1,0 +1,14 @@
+2026-10-20 04:17:51,000 INFO bench.doc_metrics: doc_metrics answer --configs baseline,llm_select20+epmc25+q_synonym --workers 16
+2026-10-20 04:19:00,877 INFO bench.doc_metrics: answer baseline: 25/139, $0.0373
+2026-10-20 04:19:58,190 INFO bench.doc_metrics: answer baseline: 50/139, $0.0773
+2026-10-20 04:20:54,047 INFO bench.doc_metrics: answer baseline: 75/139, $0.1138
+2026-10-20 04:21:50,268 INFO bench.doc_metrics: answer baseline: 100/139, $0.1457
+2026-10-20 04:22:48,003 INFO bench.doc_metrics: answer baseline: 125/139, $0.1836
+2026-10-20 04:26:14,249 INFO bench.doc_metrics: answer baseline: 139/139, $0.2183
+2026-10-20 04:27:16,112 INFO bench.doc_metrics: answer llm_select20+epmc25+q_synonym: 25/141, $0.0358
+2026-10-20 04:27:54,049 INFO bench.doc_metrics: answer llm_select20+epmc25+q_synonym: 50/141, $0.0708
+2026-10-20 04:28:51,875 INFO bench.doc_metrics: answer llm_select20+epmc25+q_synonym: 75/141, $0.1052
+2026-10-20 04:29:43,897 INFO bench.doc_metrics: answer llm_select20+epmc25+q_synonym: 100/141, $0.1425
+2026-10-20 04:31:28,017 INFO bench.doc_metrics: answer llm_select20+epmc25+q_synonym: 125/141, $0.1846
+2026-10-20 04:32:36,890 INFO bench.doc_metrics: answer llm_select20+epmc25+q_synonym: 141/141, $0.2101
+2026-10-20 04:32:36,894 INFO bench.doc_metrics: summary: {"baseline": {"ok": 139, "cost_millicents": 21829}, "llm_select20+epmc25+q_synonym": {"ok": 141, "cost_millicents": 21005}}

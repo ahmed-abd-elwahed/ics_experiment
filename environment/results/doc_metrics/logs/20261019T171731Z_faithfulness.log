@@ -1,0 +1,3 @@
+2026-10-20 04:17:31,237 INFO bench.doc_metrics: doc_metrics faithfulness --configs baseline --limit 2
+2026-10-20 04:17:37,916 INFO bench.doc_metrics: faithfulness baseline: 2/2, $0.0011
+2026-10-20 04:17:37,917 INFO bench.doc_metrics: summary: {"baseline": {"ok": 2, "cost_millicents": 110}}

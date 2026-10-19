@@ -371,6 +371,12 @@ and MeSH synonyms (`llm_select20+epmc25+q_synonym`), raised strict coverage from
 gain was +7.1 and +12.1 points. LLM selection alone accounts for most of it. Full-text excerpts,
 the lexical rerank and Europe PMC are each worth 20–30 points. The shuffled control scores 0%.
 
+Faithfulness of the answers medsim writes on those documents (`answer`, then `faithfulness`, with
+the rubric of `bench.answer_metrics` and the same judge): 22.0% supported for the baseline and
+32.6% for the winner (+10.6 points, 95% CI +2.8 to +19.1). For about 44% of questions the
+documents cover the truth but the answer is not supported by them, in both configurations: there
+the answer-writing stage, not retrieval, loses the value.
+
 ## Judge validation
 
 Controls and flips are judged by the whole panel and pass or fail on the voted label; each

@@ -17,7 +17,15 @@ import subprocess
 import sys
 from typing import Any
 
-from bench.doc_metrics import CHANGES, WORKSPACE, DocJudgment, DocWorkspace, FrozenQuery
+from bench.answer_metrics import MetricJudgment
+from bench.doc_metrics import (
+    CHANGES,
+    WORKSPACE,
+    DocJudgment,
+    DocWorkspace,
+    FrozenQuery,
+    faithfulness_file,
+)
 from bench.schemas import RunRecord, calls_cost
 from bench.workspace import read_models
 
@@ -87,8 +95,16 @@ def costs() -> dict[str, float]:
         for r in read_models(ws.root / "runs" / f, RunRecord)
     )
     judge = sum(calls_cost(j.llm_calls) for j in read_models(ws.judgments, DocJudgment))
-    return {"queries": queries, "retrieval": retrieval, "judge": judge,
-            "total": queries + retrieval + judge}  # fmt: skip
+    judge += sum(
+        calls_cost(r.llm_calls) for r in read_models(faithfulness_file(ws), MetricJudgment)
+    )
+    answers = sum(
+        sum(r.llm_cost_usd.values())
+        for f in os.listdir(ws.root / "answers")
+        for r in read_models(ws.root / "answers" / f, RunRecord)
+    )
+    return {"queries": queries, "retrieval": retrieval, "judge": judge, "answers": answers,
+            "total": queries + retrieval + judge + answers}  # fmt: skip
 
 
 def row(name: str, e: dict[str, Any], cls: str = "") -> str:
@@ -108,6 +124,38 @@ HEAD = (
     "(95% CI)</th><th>Category coverage</th><th>nDCG@8</th><th>Δ nDCG vs baseline</th>"
     "<th>Precision@8</th><th>n</th></tr>"
 )
+
+
+def faithfulness_section(scores: dict[str, Any], winner: str) -> str:
+    """Faithfulness of the answers medsim writes on each configuration's documents."""
+    f = scores.get("faithfulness") or {}
+    if "baseline" not in f or winner not in f:
+        return ""
+    cells = ("covered_supported", "covered_not_supported", "not_covered_supported",
+             "not_covered_not_supported")  # fmt: skip
+    rows = ""
+    for name in ("baseline", winner):
+        e = f[name]
+        d = e.get("vs_baseline")
+        rows += (
+            f'<tr class="{"win" if name == winner else "base"}"><td class="cfg"><b>{esc(name)}</b></td>'
+            f"<td>{pct(e['supported'])} {ci(e['supported_ci'])}</td><td>{delta(d)}</td>"
+            + "".join(f"<td>{e['by_coverage'].get(c, 0)}</td>" for c in cells)
+            + "</tr>"
+        )
+    return f"""<h2>Faithfulness of the answers written on these documents</h2>
+<p>medsim's answer-writing stage (Stage C) was run on each configuration's documents, with the
+frozen queries, and every answer with documents was judged for faithfulness with the benchmark's
+rubric (<code>bench.answer_metrics</code>): does at least one document give a value for this variable
+in a comparable patient that agrees with the answer? Same judge; a question with no answer counts as
+not supported.</p>
+<table><thead><tr><th class="cfg">Configuration</th><th>Supported (95% CI)</th>
+<th>Δ vs baseline (paired)</th><th>Covered and supported</th><th>Covered, not supported</th>
+<th>Not covered, supported</th><th>Neither</th></tr></thead><tbody>{rows}</tbody></table>
+<p class="note">"Covered" is strict truth coverage of the same documents. Covered but not supported
+means the documents held a value matching the truth but the answer was not backed by them: the
+answer-writing stage, not retrieval, is where those questions are lost. This judge reads "agrees"
+strictly (in one example, 9.8 cm in the document against 9.6 cm in the answer was not supported).</p>"""
 
 
 def build(scores: dict[str, Any], winner: str, spend: dict[str, float]) -> str:
@@ -228,6 +276,8 @@ treat single changes whose interval only just excludes zero with care.</p>
 same query builder: the gain should hold when the queries change. Here each Δ compares with the
 baseline on the same query set.</p>
 {fresh_table}
+
+{faithfulness_section(scores, winner)}
 
 <h2>Cost and limits</h2>
 <ul>
