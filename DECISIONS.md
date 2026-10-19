@@ -305,3 +305,12 @@ in [environment/NOTES.md](environment/NOTES.md).
 | The In/Out card sits in a lane under the diagram, joined to the active node by a dashed leader line. | Cards placed next to nodes covered other nodes and the title in the narrow column. |
 | The diagram widens the strategy column (the scene's grid changes only when a diagram is shown). | At the old width the node text was too small to read. |
 | The strategy box title now reads "Information Collection Strategy". | The rename to "collection" was asked for everywhere on 2026-10-13. |
+
+### Four strategies at 8 and 16 iterations (2026-10-20)
+
+| Decision | Why |
+|---|---|
+| The 8- and 16-iteration runs use exactly the 4-iteration run's configuration (`configs/strategies_272.json`: Haiku 5.5, GPT-6 Luna, the default Europe PMC + LitSense retrieval, stop rules kept), changing only `max_iterations`. | "Run this same configuration"; the 4-iteration run is reused as the third budget. |
+| The two runs ran one after the other, with 64 workers. | LitSense allows one request per second across everything that uses it. |
+| The plot has one panel per strategy and one line per budget, coloured light to dark blue by the number of iterations (a validated ordinal ramp). | The budgets are ordered; twelve lines on one axis would not be readable. |
+| The 8- and 16-iteration records are committed gzipped and their raw `.json` files are ignored by git. | They are 143 MB and 280 MB, over GitHub's 100 MB file limit; the web app reads the uncompressed copies on this machine. |

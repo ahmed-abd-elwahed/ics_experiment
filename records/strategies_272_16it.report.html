@@ -1,0 +1,76 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<title>Information collection strategies: results</title><style>
+@page { size: A4; margin: 16mm 14mm; }
+body { font: 10.5pt/1.45 -apple-system, "Helvetica Neue", Arial, sans-serif; color: #141413; }
+h1 { font-size: 19pt; margin: 0 0 2pt; } h2 { font-size: 13pt; margin: 18pt 0 6pt; }
+p { margin: 4pt 0; } .lead { color: #444; } small, .note { color: #555; font-size: 9pt; }
+table { border-collapse: collapse; width: 100%; margin: 6pt 0; font-size: 9.5pt; }
+th, td { padding: 4pt 6pt; border-bottom: 0.5pt solid #cfd3d9; text-align: right; }
+th:first-child, td:first-child { text-align: left; } th { font-weight: 600; background: #f1f2f4; }
+td.best { font-weight: 700; } ul { margin: 4pt 0; padding-left: 16pt; } li { margin: 2pt 0; }
+svg text { font: 9pt -apple-system, "Helvetica Neue", Arial, sans-serif; fill: #141413; }
+h2 { break-after: avoid; } table, figure, ul { break-inside: avoid; } figure { margin: 6pt 0; }
+td:first-child, th:first-child { white-space: nowrap; }
+</style></head><body>
+<h1>Information Collection Strategies Experiment</h1>
+<p class="lead">Diagnostic accuracy of four information collection strategies on
+272 simulated cases</p>
+<p class="note">Run 2026-10-19T19:40:58+00:00 to 2026-10-19T22:49:10+00:00 · record
+<code>strategies_272_16it.json</code> · status completed · commit
+7e10b23</p>
+
+<h2>Result</h2>
+<table><tr><th>Strategy</th><th>Hit rate@1</th><th>Hit rate@3</th><th>Hit rate@5</th><th>Hit rate@10</th><th>nDCG@10</th><th>MRR</th><th>Cases</th></tr><tr><td>1. Hypothesis-driven</td><td class="">27.6%</td><td class="">36.4%</td><td class="">39.7%</td><td class="">43.4%</td><td class="">0.356</td><td class="">0.331</td><td>272</td></tr><tr><td>2. Knowledge-driven</td><td class="best">34.9%</td><td class="best">45.6%</td><td class="best">51.1%</td><td class="best">53.7%</td><td class="best">0.443</td><td class="best">0.412</td><td>272</td></tr><tr><td>3. Channel-based</td><td class="">29.4%</td><td class="">44.5%</td><td class="">48.2%</td><td class="">51.8%</td><td class="">0.411</td><td class="">0.377</td><td>272</td></tr><tr><td>4. Sequence-based</td><td class="">34.2%</td><td class="">43.4%</td><td class="">47.1%</td><td class="">49.6%</td><td class="">0.419</td><td class="">0.395</td><td>272</td></tr></table>
+<p class="note">Bold marks the best value in a column. Hit rate@k: share of cases whose true
+diagnosis code is among the first k codes of the strategy's differential. nDCG@10 and MRR reward
+a true diagnosis placed higher. Every case counts in the denominator.</p>
+<figure><svg viewBox="0 0 640 262" width="100%" role="img" aria-label="Hit rate at k by strategy"><line x1="44" x2="474" y1="222.0" y2="222.0" stroke="#d8dce2" stroke-width="0.6"/><text x="38" y="225.0" text-anchor="end">0%</text><line x1="44" x2="474" y1="187.0" y2="187.0" stroke="#d8dce2" stroke-width="0.6"/><text x="38" y="190.0" text-anchor="end">10%</text><line x1="44" x2="474" y1="152.0" y2="152.0" stroke="#d8dce2" stroke-width="0.6"/><text x="38" y="155.0" text-anchor="end">20%</text><line x1="44" x2="474" y1="117.0" y2="117.0" stroke="#d8dce2" stroke-width="0.6"/><text x="38" y="120.0" text-anchor="end">30%</text><line x1="44" x2="474" y1="82.0" y2="82.0" stroke="#d8dce2" stroke-width="0.6"/><text x="38" y="85.0" text-anchor="end">40%</text><line x1="44" x2="474" y1="47.0" y2="47.0" stroke="#d8dce2" stroke-width="0.6"/><text x="38" y="50.0" text-anchor="end">50%</text><line x1="44" x2="474" y1="12.0" y2="12.0" stroke="#d8dce2" stroke-width="0.6"/><text x="38" y="15.0" text-anchor="end">60%</text><text x="44.0" y="237" text-anchor="middle">1</text><text x="91.8" y="237" text-anchor="middle">2</text><text x="139.6" y="237" text-anchor="middle">3</text><text x="187.3" y="237" text-anchor="middle">4</text><text x="235.1" y="237" text-anchor="middle">5</text><text x="282.9" y="237" text-anchor="middle">6</text><text x="330.7" y="237" text-anchor="middle">7</text><text x="378.4" y="237" text-anchor="middle">8</text><text x="426.2" y="237" text-anchor="middle">9</text><text x="474.0" y="237" text-anchor="middle">10</text><text x="259.0" y="254" text-anchor="middle">k: the true diagnosis is among the first k diagnoses</text><polyline points="44.0,125.5 91.8,98.5 139.6,94.6 187.3,86.9 235.1,83.0 282.9,75.3 330.7,72.7 378.4,71.4 426.2,71.4 474.0,70.2" fill="none" stroke="#1f2a5a" stroke-width="1.8"/><circle cx="44.0" cy="125.5" r="2.2" fill="#1f2a5a"/><circle cx="91.8" cy="98.5" r="2.2" fill="#1f2a5a"/><circle cx="139.6" cy="94.6" r="2.2" fill="#1f2a5a"/><circle cx="187.3" cy="86.9" r="2.2" fill="#1f2a5a"/><circle cx="235.1" cy="83.0" r="2.2" fill="#1f2a5a"/><circle cx="282.9" cy="75.3" r="2.2" fill="#1f2a5a"/><circle cx="330.7" cy="72.7" r="2.2" fill="#1f2a5a"/><circle cx="378.4" cy="71.4" r="2.2" fill="#1f2a5a"/><circle cx="426.2" cy="71.4" r="2.2" fill="#1f2a5a"/><circle cx="474.0" cy="70.2" r="2.2" fill="#1f2a5a"/><polyline points="44.0,99.8 91.8,76.6 139.6,62.4 187.3,50.9 235.1,43.1 282.9,40.6 330.7,39.3 378.4,34.1 426.2,34.1 474.0,34.1" fill="none" stroke="#c2410c" stroke-width="1.8"/><circle cx="44.0" cy="99.8" r="2.2" fill="#c2410c"/><circle cx="91.8" cy="76.6" r="2.2" fill="#c2410c"/><circle cx="139.6" cy="62.4" r="2.2" fill="#c2410c"/><circle cx="187.3" cy="50.9" r="2.2" fill="#c2410c"/><circle cx="235.1" cy="43.1" r="2.2" fill="#c2410c"/><circle cx="282.9" cy="40.6" r="2.2" fill="#c2410c"/><circle cx="330.7" cy="39.3" r="2.2" fill="#c2410c"/><circle cx="378.4" cy="34.1" r="2.2" fill="#c2410c"/><circle cx="426.2" cy="34.1" r="2.2" fill="#c2410c"/><circle cx="474.0" cy="34.1" r="2.2" fill="#c2410c"/><polyline points="44.0,119.1 91.8,79.2 139.6,66.3 187.3,59.9 235.1,53.4 282.9,50.9 330.7,45.7 378.4,44.4 426.2,44.4 474.0,40.6" fill="none" stroke="#0f766e" stroke-width="1.8"/><circle cx="44.0" cy="119.1" r="2.2" fill="#0f766e"/><circle cx="91.8" cy="79.2" r="2.2" fill="#0f766e"/><circle cx="139.6" cy="66.3" r="2.2" fill="#0f766e"/><circle cx="187.3" cy="59.9" r="2.2" fill="#0f766e"/><circle cx="235.1" cy="53.4" r="2.2" fill="#0f766e"/><circle cx="282.9" cy="50.9" r="2.2" fill="#0f766e"/><circle cx="330.7" cy="45.7" r="2.2" fill="#0f766e"/><circle cx="378.4" cy="44.4" r="2.2" fill="#0f766e"/><circle cx="426.2" cy="44.4" r="2.2" fill="#0f766e"/><circle cx="474.0" cy="40.6" r="2.2" fill="#0f766e"/><polyline points="44.0,102.3 91.8,80.5 139.6,70.2 187.3,63.7 235.1,57.3 282.9,54.7 330.7,52.1 378.4,52.1 426.2,48.3 474.0,48.3" fill="none" stroke="#7c3aed" stroke-width="1.8"/><circle cx="44.0" cy="102.3" r="2.2" fill="#7c3aed"/><circle cx="91.8" cy="80.5" r="2.2" fill="#7c3aed"/><circle cx="139.6" cy="70.2" r="2.2" fill="#7c3aed"/><circle cx="187.3" cy="63.7" r="2.2" fill="#7c3aed"/><circle cx="235.1" cy="57.3" r="2.2" fill="#7c3aed"/><circle cx="282.9" cy="54.7" r="2.2" fill="#7c3aed"/><circle cx="330.7" cy="52.1" r="2.2" fill="#7c3aed"/><circle cx="378.4" cy="52.1" r="2.2" fill="#7c3aed"/><circle cx="426.2" cy="48.3" r="2.2" fill="#7c3aed"/><circle cx="474.0" cy="48.3" r="2.2" fill="#7c3aed"/><text x="482" y="37.1" fill="#c2410c" style="fill:#c2410c">2. Knowledge-driven  53.7%</text><text x="482" y="49.1" fill="#0f766e" style="fill:#0f766e">3. Channel-based  51.8%</text><text x="482" y="61.1" fill="#7c3aed" style="fill:#7c3aed">4. Sequence-based  49.6%</text><text x="482" y="73.2" fill="#1f2a5a" style="fill:#1f2a5a">1. Hypothesis-driven  43.4%</text></svg></figure>
+
+<h2>How sure the differences are</h2>
+<table><tr><th>Strategy</th><th>Hit rate@1 (95% interval)</th><th>Hit rate@10 (95% interval)</th>
+</tr><tr><td>1. Hypothesis-driven</td><td>27.6% (22.6% to 33.2%)</td><td>43.4% (37.6% to 49.3%)</td></tr><tr><td>2. Knowledge-driven</td><td>34.9% (29.5% to 40.8%)</td><td>53.7% (47.7% to 59.5%)</td></tr><tr><td>3. Channel-based</td><td>29.4% (24.3% to 35.1%)</td><td>51.8% (45.9% to 57.7%)</td></tr><tr><td>4. Sequence-based</td><td>34.2% (28.8% to 40.0%)</td><td>49.6% (43.7% to 55.5%)</td></tr></table>
+<p class="note">Wilson intervals over the cases of this single run. The strategies ran on the
+same cases, so the paired comparison below is the sharper test.</p>
+<table><tr><th>Pair (first vs second)</th><th>@1: cases only the first / only the second hit</th><th>p</th><th>@10: only the first / only the second</th><th>p</th></tr><tr><td>1. Hypothesis-driven vs 2. Knowledge-driven</td><td>17 / 37</td><td>0.009</td><td>20 / 48</td><td class="best">0.001</td></tr><tr><td>1. Hypothesis-driven vs 3. Channel-based</td><td>34 / 39</td><td>0.640</td><td>30 / 53</td><td>0.015</td></tr><tr><td>1. Hypothesis-driven vs 4. Sequence-based</td><td>27 / 45</td><td>0.044</td><td>29 / 46</td><td>0.064</td></tr><tr><td>2. Knowledge-driven vs 3. Channel-based</td><td>40 / 25</td><td>0.082</td><td>41 / 36</td><td>0.649</td></tr><tr><td>2. Knowledge-driven vs 4. Sequence-based</td><td>40 / 38</td><td>0.910</td><td>39 / 28</td><td>0.222</td></tr><tr><td>3. Channel-based vs 4. Sequence-based</td><td>29 / 42</td><td>0.154</td><td>41 / 35</td><td>0.567</td></tr></table><p class="note">Exact McNemar test on the same 272 cases. With 6 comparisons, a p-value below 0.008 (bold) holds after a Bonferroni correction; values between that and 0.05 are suggestive only.</p>
+
+<h2>What was run</h2>
+<ul>
+<li>272 cases from <code>cases/combined_272_whole_chunking.json</code>, each run with
+every strategy: 1088 case runs.</li>
+<li>Each strategy could ask at most 16 questions and could stop earlier by its own rule.
+When it stopped, it gave a differential of up to 10 diagnoses with probabilities.</li>
+<li>Strategy model: anthropic/claude-haiku-5.5. Simulated environment model:
+openai/gpt-6-luna; literature sources
+europe_pmc, litsense.</li>
+<li>Coding: ICD-11 MMS 2024-01, first result of the flexible search for the diagnosis name. A prediction counts as a hit only when
+its code equals the true diagnosis code exactly.</li>
+<li>Total time 3.1 h; total cost $25.70
+(strategies $12.48, environment $13.22).</li>
+</ul>
+
+<h2>How the strategies behaved</h2>
+<table><tr><th>Strategy</th><th>Questions per case</th><th>Why runs stopped</th>
+<th>Strategy LLM calls per case</th><th>Seconds per case</th><th>Strategy cost</th>
+<th>Environment cost</th><th>Failed runs</th><th>No differential</th></tr><tr><td>1. Hypothesis-driven</td><td>13.18</td><td>max iterations 170, strategy done 102</td><td>27.0</td><td>624</td><td>$4.56</td><td>$3.08</td><td>0</td><td>0</td></tr><tr><td>2. Knowledge-driven</td><td>15.94</td><td>max iterations 267, strategy done 5</td><td>32.0</td><td>686</td><td>$4.39</td><td>$3.61</td><td>0</td><td>0</td></tr><tr><td>3. Channel-based</td><td>14.79</td><td>max iterations 229, strategy done 43</td><td>32.1</td><td>680</td><td>$1.39</td><td>$3.43</td><td>0</td><td>0</td></tr><tr><td>4. Sequence-based</td><td>13.26</td><td>strategy done 199, max iterations 73</td><td>24.3</td><td>599</td><td>$2.15</td><td>$3.11</td><td>0</td><td>0</td></tr></table>
+<table><tr><th>Where the answers came from (questions)</th><th>Case study</th><th>Literature</th>
+<th>Unanswerable</th><th>No answer (error)</th></tr><tr><td>1. Hypothesis-driven</td><td>676</td><td>2750</td><td>159</td><td>0</td></tr><tr><td>2. Knowledge-driven</td><td>927</td><td>3228</td><td>181</td><td>0</td></tr><tr><td>3. Channel-based</td><td>676</td><td>3092</td><td>254</td><td>0</td></tr><tr><td>4. Sequence-based</td><td>686</td><td>2741</td><td>180</td><td>0</td></tr></table>
+
+<h2>Coding</h2>
+<table><tr><th>Strategy</th><th>Predicted diagnoses</th><th>Without an ICD code</th>
+<th>Cases with no coded prediction</th><th>Cases whose true diagnosis has no code</th></tr>
+<tr><td>1. Hypothesis-driven</td><td>2720</td><td>4</td><td>0</td><td>2</td></tr><tr><td>2. Knowledge-driven</td><td>2720</td><td>3</td><td>0</td><td>2</td></tr><tr><td>3. Channel-based</td><td>2720</td><td>1</td><td>0</td><td>2</td></tr><tr><td>4. Sequence-based</td><td>2720</td><td>2</td><td>0</td><td>2</td></tr></table>
+<p class="note">4684 distinct diagnosis names were coded; 7
+have no ICD-11 match. A case whose true diagnosis has no code cannot be hit by any strategy.</p>
+
+<h2>Reading these numbers</h2>
+<ul>
+<li>Exact code match is strict: a correct diagnosis worded so that the search returns a
+neighbouring code (a parent, a sibling, or a code with a different extension) counts as a miss.
+</li>
+<li>One run per case and strategy. LLM sampling differs between runs, so small differences
+between strategies may not repeat.</li>
+<li>The stopping thresholds are starting values and were not tuned.</li>
+<li>Answers marked "literature" are synthesized by the simulated environment when the case text
+is silent; they are plausible, not facts about the patient.</li>
+</ul>
+</body></html>

@@ -19,3 +19,7 @@ bench_runs/
 
 # ICD-11 codes looked up by the evaluation (every code used is saved in <record>.eval.json)
 .icd_cache/
+
+# Records over GitHub's 100 MB limit are committed gzipped (<record>.json.gz)
+records/strategies_272_8it.json
+records/strategies_272_16it.json
