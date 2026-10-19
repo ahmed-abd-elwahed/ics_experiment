@@ -95,8 +95,9 @@ def wait_for(app: App, state: str) -> dict[str, Any]:
 def test_page_and_options(project: Path) -> None:
     app = App(project)
     status, page = call(app, "GET", "/")
-    assert status == 200 and "Information Gathering Strategy" in page
+    assert status == 200 and "Information Collection Strategy" in page
     assert call(app, "GET", "/static/app.js")[0] == 200
+    assert call(app, "GET", "/static/flows.js")[0] == 200
     assert call(app, "GET", "/static/../server.py")[0] == 404
     status, options = call(app, "GET", "/api/options")
     assert status == 200
