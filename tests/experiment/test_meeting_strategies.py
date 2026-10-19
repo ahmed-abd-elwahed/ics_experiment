@@ -1,12 +1,9 @@
-"""The five strategies of Meeting 63: what each asks, when it stops, and what it records."""
+"""The four strategies of Meeting 63: what each asks, when it stops, and what it records."""
 
 from __future__ import annotations
 
 from typing import Any
 
-import pytest
-
-from medsim.errors import ConfigError
 from strategies import CaseContext, build_strategy, describe_strategies
 from strategies.base import StrategySession
 from strategies.common import DIAGNOSE, RankedEntry, ranked
@@ -29,9 +26,9 @@ def system_prompts(llm: ScriptedLLM) -> list[str]:
     return [call["messages"][0].content.split("\n\n")[1][:32] for call in llm.calls]
 
 
-def test_all_five_are_registered_with_default_params() -> None:
+def test_all_four_are_registered_with_default_params() -> None:
     names = {entry["name"] for entry in describe_strategies()}
-    assert {"hypothesis", "knowledge", "gut", "channel", "sequence"} <= names
+    assert {"hypothesis", "knowledge", "channel", "sequence"} <= names
 
 
 def test_hypothesis_asks_updates_and_stops_on_a_clear_leader(llm: ScriptedLLM) -> None:
@@ -85,33 +82,6 @@ def test_knowledge_stops_when_a_pattern_is_complete(llm: ScriptedLLM) -> None:
     s.remember("What are the vital signs?", "Normal.")
     llm.push({"findings": [], "patterns": [done], "basics_covered": True})
     assert s.next_question() is None
-
-
-def test_gut_reads_the_sense_several_times_and_stops_on_reassurance(llm: ScriptedLLM) -> None:
-    s = session(llm, "gut")
-    s.remember("What is the complaint?", "A cold.")
-    llm.push(*[{"sense": "alarm"}] * 2, *[{"sense": "reassurance"}] * 3, {"question": "Fever?"})
-    question = s.next_question()
-    assert question is not None and question.rationale is None
-    assert len(question.llm_calls) == 6
-    assert sorted(question.trace["senses"][0]) == ["alarm"] * 2 + ["reassurance"] * 3
-    votes = llm.calls[:5]
-    assert {(c["temperature"], c["max_tokens"]) for c in votes} == {(1.0, 300)}
-    s.remember(question.text, "No.")
-
-    llm.push(*[{"sense": "reassurance"}] * 4, {"sense": "alarm"})
-    assert s.next_question() is None  # 4 of 5
-    llm.push(DDX)
-    diagnosis = s.final_diagnosis()
-    assert diagnosis is not None and len(diagnosis.llm_calls) == 6
-    assert "first impression" in llm.calls[-1]["messages"][1].content
-
-
-def test_gut_needed_cannot_exceed_votes() -> None:
-    with pytest.raises(ConfigError, match="needed cannot be more than votes"):
-        build_strategy(
-            "gut", {"votes": 3, "needed": 4}, llm=ScriptedLLM(), settings=make_settings()
-        )
 
 
 def test_channel_confines_questions_and_opens_the_exam_when_unsure(llm: ScriptedLLM) -> None:

@@ -20,18 +20,19 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
+from evaluation.evaluate import without
 from experiment.record import ExperimentRecord, load_record
 
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 SHOWN = ("hit_rate@1", "hit_rate@3", "hit_rate@5", "hit_rate@10", "ndcg@10", "mrr")
 COLOURS = ("#1f2a5a", "#c2410c", "#0f766e", "#7c3aed", "#b45309", "#475569")
 LABELS = {"ndcg@10": "nDCG@10", "mrr": "MRR"}
+NUMBERS = {2: "two", 3: "three", 4: "four", 5: "five", 6: "six"}
 TITLES = {
     "hypothesis": "1. Hypothesis-driven",
     "knowledge": "2. Knowledge-driven",
-    "gut": "3. Gut feeling",
-    "channel": "4. Channel-based",
-    "sequence": "5. Sequence-based",
+    "channel": "3. Channel-based",
+    "sequence": "4. Sequence-based",
 }
 
 CSS = """
@@ -231,6 +232,7 @@ def build(record: ExperimentRecord, evaluation: dict[str, Any]) -> str:
     took = f"{minutes / 60:.1f} h" if minutes >= 90 else f"{minutes:.0f} min"
     limit = record.config.stopping.max_iterations
     coded = evaluation["coding"]
+    count = NUMBERS.get(len(by_strategy), str(len(by_strategy)))
     reruns = ""
     if record.reruns:
         again = Counter(str(r["strategy"]) for r in record.reruns)
@@ -242,7 +244,7 @@ def build(record: ExperimentRecord, evaluation: dict[str, Any]) -> str:
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <title>Information collection strategies: results</title><style>{CSS}</style></head><body>
 <h1>Information Collection Strategies Experiment</h1>
-<p class="lead">Diagnostic accuracy of five information collection strategies on
+<p class="lead">Diagnostic accuracy of {count} information collection strategies on
 {len(record.case_ids)} simulated cases</p>
 <p class="note">Run {e(record.started_at)} to {e(record.finished_at or "")} · record
 <code>{e(Path(record.output).name)}</code> · status {e(record.status)} · commit
@@ -309,11 +311,18 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="evaluation.report", description=__doc__.splitlines()[0])
     parser.add_argument("record", type=Path)
     parser.add_argument("--no-pdf", action="store_true")
+    parser.add_argument("--exclude", default="", help="strategies to leave out, comma-separated")
     args = parser.parse_args(argv)
     stem = args.record.name.removesuffix(".partial.jsonl").removesuffix(".json")
     evaluation = json.loads(args.record.with_name(f"{stem}.eval.json").read_text("utf-8"))
     page = args.record.with_name(f"{stem}.report.html")
-    page.write_text(build(load_record(args.record), evaluation), encoding="utf-8")
+    excluded = [s for s in args.exclude.split(",") if s]
+    record = without(load_record(args.record), excluded)
+    evaluation["by_strategy"] = {
+        k: v for k, v in evaluation["by_strategy"].items() if k not in excluded
+    }
+    evaluation["case_runs"] = [r for r in evaluation["case_runs"] if r["strategy"] not in excluded]
+    page.write_text(build(record, evaluation), encoding="utf-8")
     print(f"Wrote {page}", file=sys.stderr)
     if not args.no_pdf:
         pdf = page.with_suffix(".pdf")

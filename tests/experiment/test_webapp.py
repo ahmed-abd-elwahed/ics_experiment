@@ -103,7 +103,7 @@ def test_page_and_options(project: Path) -> None:
     assert options["configs"] == ["basic.json"]
     assert options["case_files"] == ["cases/cases.json"]
     assert [s["name"] for s in options["strategies"]] == [
-        "basic", "hypothesis", "knowledge", "gut", "channel", "sequence"
+        "basic", "hypothesis", "knowledge", "channel", "sequence"
     ]  # fmt: skip
     assert "openrouter_api_key" not in options["environment_settings"]
     assert options["environment_settings"]["max_documents"] == 8

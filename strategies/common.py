@@ -1,5 +1,5 @@
-"""What the five strategies of Meeting 63 (slides 8 to 12) share: params, the LLM call helper,
-and the final differential.
+"""What the four strategies of Meeting 63 (slides 8, 9, 11 and 12) share: params, the LLM call
+helper, and the final differential.
 
 In each strategy the LLM estimates (a probability, a label, a list) and code decides when to
 stop, by comparing those values with thresholds in the strategy's params.

@@ -20,7 +20,7 @@ from dotenv import load_dotenv
 
 from evaluation.icd import SEARCH_URL, ICDCoder, credentials
 from evaluation.metrics import METRICS, case_scores, mean_scores, rank_of, ranked_codes
-from experiment.record import CaseRun, ExperimentRecord, load_record
+from experiment.record import CaseRun, ExperimentRecord, load_record, summarize
 from medsim.errors import MedSimError
 
 Coder = Callable[[Sequence[str]], list[str]]
@@ -111,6 +111,21 @@ def evaluate_record(record: ExperimentRecord, coder: Coder) -> dict[str, Any]:
     }
 
 
+def without(record: ExperimentRecord, excluded: Sequence[str]) -> ExperimentRecord:
+    """The record without the case runs of the excluded strategies (its summary recomputed)."""
+    if not excluded:
+        return record
+    runs = [run for run in record.case_runs if run.strategy not in excluded]
+    keys = [key for key in record.config.strategy_keys if key not in excluded]
+    return record.model_copy(
+        update={
+            "case_runs": runs,
+            "strategies": {k: v for k, v in record.strategies.items() if k not in excluded},
+            "summary": summarize(runs, keys),
+        }
+    )
+
+
 def table(evaluation: dict[str, Any]) -> str:
     shown = ("hit_rate@1", "hit_rate@3", "hit_rate@5", "hit_rate@10", "ndcg@10", "mrr")
     width = max([len("strategy"), *(len(key) for key in evaluation["by_strategy"])])
@@ -126,10 +141,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("record", type=Path, help="an experiment record (.json or .partial.jsonl)")
     parser.add_argument("--output", type=Path, help="default: <record>.eval.json")
     parser.add_argument("--workers", type=int, default=10, help="parallel ICD lookups")
+    parser.add_argument("--exclude", default="", help="strategies to leave out, comma-separated")
     args = parser.parse_args(argv)
     load_dotenv(".env")  # the project root, where this is run from
     try:
-        record = load_record(args.record)
+        record = without(load_record(args.record), [s for s in args.exclude.split(",") if s])
         coder = ICDCoder(*credentials(), workers=args.workers)
         try:
             evaluation = evaluate_record(record, coder.codes)

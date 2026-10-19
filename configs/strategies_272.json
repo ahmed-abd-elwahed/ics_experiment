@@ -7,7 +7,6 @@
   "strategies": [
     { "name": "hypothesis", "params": { "model": "anthropic/claude-haiku-5.5" } },
     { "name": "knowledge", "params": { "model": "anthropic/claude-haiku-5.5" } },
-    { "name": "gut", "params": { "model": "anthropic/claude-haiku-5.5" } },
     { "name": "channel", "params": { "model": "anthropic/claude-haiku-5.5" } },
     { "name": "sequence", "params": { "model": "anthropic/claude-haiku-5.5" } }
   ],

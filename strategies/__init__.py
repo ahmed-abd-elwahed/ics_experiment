@@ -25,7 +25,6 @@ from strategies.base import (
 )
 from strategies.basic import BasicStrategy
 from strategies.channel import ChannelStrategy
-from strategies.gut import GutStrategy
 from strategies.hypothesis import HypothesisStrategy
 from strategies.knowledge import KnowledgeStrategy
 from strategies.sequence import SequenceStrategy
@@ -34,7 +33,6 @@ STRATEGIES: dict[str, type[InformationGatheringStrategy[Any]]] = {
     BasicStrategy.name: BasicStrategy,
     HypothesisStrategy.name: HypothesisStrategy,
     KnowledgeStrategy.name: KnowledgeStrategy,
-    GutStrategy.name: GutStrategy,
     ChannelStrategy.name: ChannelStrategy,
     SequenceStrategy.name: SequenceStrategy,
 }

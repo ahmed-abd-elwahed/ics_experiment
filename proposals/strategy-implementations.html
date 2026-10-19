@@ -93,8 +93,8 @@ ol.open { margin: 0; padding-left: 20px; display: flex; flex-direction: column; 
 <div class="wrap">
 <header class="top">
   <div class="eyebrow">Information Collection Strategies Experiment · proposal</div>
-  <h1>How I would implement the five strategies from Meeting 63</h1>
-  <p>Slides 8 to 12 of <code>Meeting 63.pptx</code> each draw one strategy as a flowchart. Below, every box on those slides becomes either an LLM call or a rule in code, on top of the existing <code>StrategySession</code> interface. Each figure is the project's overview diagram with the strategy robot replaced by that strategy's proposed flow. Nothing here is built yet. Select any step in a diagram to see what it reads and returns.</p>
+  <h1>How I would implement the four strategies from Meeting 63</h1>
+  <p>Slides 8, 9, 11 and 12 of <code>Meeting 63.pptx</code> each draw one strategy as a flowchart. Below, every box on those slides becomes either an LLM call or a rule in code, on top of the existing <code>StrategySession</code> interface. Each figure is the project's overview diagram with the strategy robot replaced by that strategy's proposed flow. Nothing here is built yet. Select any step in a diagram to see what it reads and returns.</p>
   <div class="legend" aria-label="Legend">
     <span><i class="sw llm"></i>LLM call (structured JSON out)</span>
     <span><i class="sw"></i>Code</span>
@@ -107,15 +107,14 @@ ol.open { margin: 0; padding-left: 20px; display: flex; flex-direction: column; 
   <a href="#shared">Shared design</a>
   <a href="#s1">1 Hypothesis-driven</a>
   <a href="#s2">2 Knowledge-driven</a>
-  <a href="#s3">3 Gut feeling</a>
-  <a href="#s4">4 Channel-based</a>
-  <a href="#s5">5 Sequence-based</a>
+  <a href="#s3">3 Channel-based</a>
+  <a href="#s4">4 Sequence-based</a>
   <a href="#compare">Side by side</a>
   <a href="#open">Open questions</a>
 </nav>
 
 <section id="shared">
-  <h2>What all five share</h2>
+  <h2>What all four share</h2>
   <div class="two">
     <div>
       <h3>Kept from the current code</h3>
@@ -126,7 +125,7 @@ ol.open { margin: 0; padding-left: 20px; display: flex; flex-direction: column; 
       </ul>
     </div>
     <div>
-      <h3>New for all five</h3>
+      <h3>New for all four</h3>
       <ul>
         <li><b>A diagnosis step.</b> Every slide ends in "Return diagnosis", but the runner never asks a strategy for one. I would add <code>final_diagnosis()</code> to the session, called after any stop, including a forced stop at <code>max_iterations</code>.</li>
         <li><b>Grading.</b> A judge compares that diagnosis with the case's hidden one. The research question asks for the most accurate strategy, so this is the outcome measure.</li>
@@ -201,42 +200,9 @@ ol.open { margin: 0; padding-left: 20px; display: flex; flex-direction: column; 
 </section>
 
 <section id="s3">
-  <h2>3. Gut feeling</h2>
-  <p class="slide"><b>Slide 10:</b> Collect new information → Current sense? → Alarm: collect again · Reassurance: return diagnosis</p>
-  <div data-diagram="s3"></div>
-  <div class="two">
-    <div>
-      <h3>Proposal</h3>
-      <ul>
-        <li>Everything is a fast, unreasoned call: reasoning switched off, a few output tokens, no rationale requested. No differential or summary is kept; the only state is the memory.</li>
-        <li>After each answer the model is asked for one word, <code>alarm</code> or <code>reassurance</code>, <code>votes</code> times in parallel at temperature 1. Repeating it measures how steady the sense is, since a single word carries no confidence.</li>
-        <li>The run stops when at least <code>needed</code> of the votes say reassurance. Otherwise the model asks whatever it wants to know next.</li>
-        <li>The diagnosis is a one-line first impression, again without reasoning.</li>
-      </ul>
-    </div>
-    <div>
-      <h3>Sketch</h3>
-<pre>class GutSession(StrategySession):
-    def next_question(self) -> Question | None:
-        if self.memory:
-            senses = self.call_many(SENSE, Sense, n=self.p.votes,
-                                    temperature=1.0, reasoning=None)
-            calm = sum(s.sense == "reassurance" for s in senses)
-            if calm >= self.p.needed:
-                return None          # sense of reassurance
-        turn = self.call(ASK_FAST, BareQuestion, reasoning=None)
-        return Question(turn.question)   # no rationale by design
-
-    def final_diagnosis(self) -> Diagnosis:
-        return self.call(IMPRESSION, Diagnosis, reasoning=None)</pre>
-    </div>
-  </div>
-</section>
-
-<section id="s4">
-  <h2>4. Channel-based</h2>
+  <h2>3. Channel-based</h2>
   <p class="slide"><b>Slide 11:</b> Conduct patient interview → Confident in diagnosis? → Yes: return diagnosis · No: physical exam</p>
-  <div data-diagram="s4"></div>
+  <div data-diagram="s3"></div>
   <div class="two">
     <div>
       <h3>Proposal</h3>
@@ -270,15 +236,15 @@ ol.open { margin: 0; padding-left: 20px; display: flex; flex-direction: column; 
   </div>
 </section>
 
-<section id="s5">
-  <h2>5. Sequence-based</h2>
+<section id="s4">
+  <h2>4. Sequence-based</h2>
   <p class="slide"><b>Slide 12:</b> Initialization of diagnosis → Refinement of diagnosis → Defining the final diagnosis</p>
-  <div data-diagram="s5"></div>
+  <div data-diagram="s4"></div>
   <div class="two">
     <div>
       <h3>Proposal</h3>
       <ul>
-        <li>Three phases in a fixed order, each with its own prompt and goal. Unlike strategies 1 to 3 there is no early exit: every run passes through all three.</li>
+        <li>Three phases in a fixed order, each with its own prompt and goal. Unlike the other three, there is no early exit: every run passes through all three.</li>
         <li><b>Initialization:</b> a few open questions, then one call drafts a differential of at most five diagnoses.</li>
         <li><b>Refinement:</b> each question aims to remove a candidate; after each answer the list is pruned or reordered.</li>
         <li><b>Final diagnosis:</b> ask for the finding that would confirm or exclude the leader, then commit.</li>
@@ -316,9 +282,8 @@ ol.open { margin: 0; padding-left: 20px; display: flex; flex-direction: column; 
     <tbody>
       <tr><td>1 Hypothesis-driven</td><td>The two leading diagnoses it would separate</td><td>Ranked differential with probabilities</td><td>Leader ≥ 0.80 and ahead by ≥ 0.30</td><td class="num">2</td></tr>
       <tr><td>2 Knowledge-driven</td><td>The findings a pattern still lacks</td><td>Findings, patterns, missing findings</td><td>A pattern has nothing missing</td><td class="num">2</td></tr>
-      <tr><td>3 Gut feeling</td><td>Whatever the model wants to know, unreasoned</td><td>None beyond the memory</td><td>4 of 5 votes say reassurance</td><td class="num">1 + 5 one-word</td></tr>
-      <tr><td>4 Channel-based</td><td>The current channel's prompt</td><td>Current channel, last confidence</td><td>Confident at the end of a channel, or no channel left</td><td class="num">2, + 1 per channel</td></tr>
-      <tr><td>5 Sequence-based</td><td>The current phase's goal</td><td>Phase, candidate list</td><td>Final phase settles the leader</td><td class="num">1 to 2</td></tr>
+      <tr><td>3 Channel-based</td><td>The current channel's prompt</td><td>Current channel, last confidence</td><td>Confident at the end of a channel, or no channel left</td><td class="num">2, + 1 per channel</td></tr>
+      <tr><td>4 Sequence-based</td><td>The current phase's goal</td><td>Phase, candidate list</td><td>Final phase settles the leader</td><td class="num">1 to 2</td></tr>
     </tbody>
   </table>
   </div>
@@ -332,7 +297,7 @@ ol.open { margin: 0; padding-left: 20px; display: flex; flex-direction: column; 
     <li><b>Channel-based: what follows the physical exam?</b> The slide draws no arrow out of it. I assumed a second confidence check, then the diagnosis.</li>
     <li><b>Sequence-based: when does a phase end?</b> The slide gives the order but no conditions. I assumed 3 opening questions, refinement until 2 candidates remain or 75% of the budget is used, then the final phase.</li>
     <li><b>Thresholds need a pilot.</b> A probability or confidence that an LLM states is not calibrated. I would run a few cases, look at where each strategy stops, and set the thresholds before the real run.</li>
-    <li><b>Reporting.</b> The strategies stop after different numbers of questions, so accuracy should be reported next to questions asked and cost. All five should use the same model and the same <code>max_iterations</code>.</li>
+    <li><b>Reporting.</b> The strategies stop after different numbers of questions, so accuracy should be reported next to questions asked and cost. All four should use the same model and the same <code>max_iterations</code>.</li>
   </ol>
 </section>
 </div>
@@ -440,23 +405,7 @@ ol.open { margin: 0; padding-left: 20px; display: flex; flex-direction: column; 
       dx: { kind: "llm", tag: "LLM", t: "Match to a diagnosis", s: "first time one is named",
         d: { does: "Names the diagnosis that the completed pattern fits.", reads: "Memory and the final picture.", returns: "<code>{diagnosis}</code>", rule: "Slide box: “Return diagnosis”." } } }),
 
-    s3: loop({
-      title: "3. Gut feeling",
-      yes: "reassurance", no: "alarm",
-      state: "memory only (no differential, no summary)",
-      ask: { kind: "llm", tag: "LLM · FAST", t: "Ask what comes to mind", s: "no reasoning, no rationale",
-        d: { does: "Asks the next question on impulse.", reads: "Memory only.", returns: "<code>{question}</code>",
-             rule: "Reasoning off and a small token limit, so the model cannot deliberate. Slide box: “Collect new information”." } },
-      upd: { kind: "llm", tag: "LLM · FAST ×5", t: "Read the sense", s: "alarm or reassurance",
-        d: { does: "Asks for the gut feeling about this patient, as one word.", reads: "Memory only.", returns: "<code>{sense: \"alarm\" | \"reassurance\"}</code>, five times in parallel at temperature 1.",
-             rule: "Five samples because one word has no confidence attached; agreement between samples stands in for it." } },
-      stop: { t: "≥ 4 of 5 say", s: "reassurance?",
-        d: { does: "Turns the five votes into the current sense.", reads: "The five votes.", returns: "Stop or continue. No LLM call.",
-             rule: "<code>count(reassurance) ≥ needed</code>; <code>votes</code> = 5 and <code>needed</code> = 4 are my starting values. Slide diamond: “Current sense?”." } },
-      dx: { kind: "llm", tag: "LLM · FAST", t: "First impression", s: "one line, no reasoning",
-        d: { does: "States the diagnosis the model would bet on.", reads: "Memory only.", returns: "<code>{diagnosis}</code>", rule: "Slide box: “Return diagnosis”." } } }),
-
-    s4: { W: 1294, px: 1280, sel: "sure", title: "4. Channel-based", state: "memory + channel (interview | exam) + last {diagnosis, confidence}",
+    s3: { W: 1294, px: 1280, sel: "sure", title: "3. Channel-based", state: "memory + channel (interview | exam) + last {diagnosis, confidence}",
       nodes: {
         ask: { x: 720, y: 160, kind: "llm", tag: "LLM ×2", t: "Ask within the channel", s: "then check its channel",
           d: { does: "Asks the next question allowed in the current channel. A second, short call labels the question as history, examination or test.", reads: "Memory and the current channel's prompt.",
@@ -476,7 +425,7 @@ ol.open { margin: 0; padding-left: 20px; display: flex; flex-direction: column; 
       edges: [[[720, 261], [720, 191]], [[812, 307], [858, 307]], [[1030, 307], [1076, 307]], [[1168, 353], [1168, 408]], [[1168, 261], [1168, 191]], [[1082, 160], [806, 160]]],
       labels: [[728, 231, "no"], [835, 299, "yes", "middle"], [1176, 385, "yes"], [1176, 231, "no"], [944, 152, "ask in the new channel", "middle"]] },
 
-    s5: { W: 1094, px: 1080, sel: "refine", title: "5. Sequence-based", state: "memory + phase (init | refine | final) + candidates [diagnosis]",
+    s4: { W: 1094, px: 1080, sel: "refine", title: "4. Sequence-based", state: "memory + phase (init | refine | final) + candidates [diagnosis]",
       bands: [[105, "Phase 1 · Initialization of diagnosis"], [225, "Phase 2 · Refinement of diagnosis"], [345, "Phase 3 · Defining the final diagnosis"]],
       rail: true,
       nodes: {
@@ -499,9 +448,8 @@ ol.open { margin: 0; padding-left: 20px; display: flex; flex-direction: column; 
   var CAPTION = {
     s1: "After every answer the differential is rewritten; code stops the loop once one hypothesis clearly leads.",
     s2: "The loop asks only for missing findings; a diagnosis is named once, after a pattern is complete.",
-    s3: "Unreasoned calls throughout; five one-word votes decide between alarm (keep asking) and reassurance (stop).",
-    s4: "Questions are confined to one channel at a time; confidence is checked when a channel is used up, and low confidence opens the next channel.",
-    s5: "Three phases in a fixed order, each with its own prompt; code moves on when the candidate list is short enough or the phase's budget is used."
+    s3: "Questions are confined to one channel at a time; confidence is checked when a channel is used up, and low confidence opens the next channel.",
+    s4: "Three phases in a fixed order, each with its own prompt; code moves on when the candidate list is short enough or the phase's budget is used."
   };
   var KIND = { llm: "LLM call", code: "Code", dec: "Stop rule in code", end: "Output" };
 

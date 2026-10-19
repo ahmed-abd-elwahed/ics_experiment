@@ -271,3 +271,16 @@ in [environment/NOTES.md](environment/NOTES.md).
 | Confirmation reran only the baseline and the winner, on two fresh query sets. | The runner-up was a near-identical configuration; the cap allowed two configurations. |
 | The fresh-query baseline runs were retrieved again for the questions where Europe PMC failed (HTTP 503), and retrieval now retries any question with a failed source. | An outage had turned them into LitSense-only runs (36% and 46%), which would have exaggerated the winner's gain. |
 | The winner was not made medsim's default. | It changes the environment every experiment uses and adds an LLM call per literature question; that is the owner's choice. |
+
+### Removing the gut feeling strategy (2026-10-20)
+
+| Decision | Why |
+|---|---|
+| The gut feeling strategy was removed from the code (`strategies/gut.py`, its registration and tests), the README, the 272-case config, the report's labels, the proposal page, and the "New Metrics and Strategies" deck. | Asked for ("remove the Gut Feeling strategy from everywhere"). |
+| The remaining strategies were renumbered: channel-based is 3 and sequence-based is 4. | The numbers are a sequence on every page and slide; a gap at 3 would read as a missing strategy. |
+| The 272-case and pilot evaluations and reports were rebuilt without gut feeling (`--exclude gut`, a new option of `evaluation` and `evaluation.report`); the other strategies' numbers are unchanged. | Those files present the results; rebuilding needs no API calls, as the ICD codes are cached. |
+| The paired comparisons are now six; after the Bonferroni correction (p < 0.0083) sequence-based against hypothesis-driven at top 10 (p = 0.004) still differs. | Fewer comparisons change the threshold, so the slide's footnote was updated. |
+| The deck's cost sentence now gives the four strategies' cost ($5.83) instead of the whole run's time and cost. | The run's $6.91 included gut feeling. |
+| The raw run records (`records/*.json` without `.eval`/`.report`) still contain the gut feeling case runs. | They are the record of what ran and what it cost; removing case runs would make their totals wrong. |
+| `Meeting 63.pptx` was not changed; its slide 10 still shows gut feeling. | It is the owner's original meeting deck. |
+| Earlier entries of this log that mention gut feeling were kept. | The log records what was decided at the time. |

@@ -2,12 +2,12 @@
   "format": "ics-experiment-evaluation",
   "record": "/Users/ahmed/ics_experiment/records/pilot_strategies_272_20261012T165100Z.json",
   "record_status": "completed",
-  "evaluated_at": "2026-10-12T16:53:46+00:00",
+  "evaluated_at": "2026-10-19T17:20:33+00:00",
   "coding": {
     "system": "ICD-11 MMS 2024-01",
     "endpoint": "https://id.who.int/icd/release/11/2024-01/mms/search",
     "method": "first result of the flexible search for the diagnosis name",
-    "names": 183,
+    "names": 161,
     "names_uncoded": 0
   },
   "metrics": [
@@ -80,36 +80,6 @@
       },
       "cost_usd": 0.030774,
       "mean_case_run_seconds": 110.5
-    },
-    "gut": {
-      "case_runs": 5,
-      "metrics": {
-        "hit_rate@1": 0.4,
-        "hit_rate@2": 0.4,
-        "hit_rate@3": 0.4,
-        "hit_rate@4": 0.4,
-        "hit_rate@5": 0.4,
-        "hit_rate@6": 0.4,
-        "hit_rate@7": 0.4,
-        "hit_rate@8": 0.4,
-        "hit_rate@9": 0.4,
-        "hit_rate@10": 0.4,
-        "ndcg@10": 0.4,
-        "mrr": 0.4
-      },
-      "without_differential": 1,
-      "without_coded_prediction": 1,
-      "true_diagnosis_uncoded": 0,
-      "predictions_uncoded": 0,
-      "predictions": 40,
-      "mean_questions": 3.6,
-      "stop_reasons": {
-        "error": 1,
-        "max_iterations": 3,
-        "strategy_done": 1
-      },
-      "cost_usd": 0.018549,
-      "mean_case_run_seconds": 74.35
     },
     "channel": {
       "case_runs": 5,
@@ -328,94 +298,6 @@
         "3A94",
         "BD51.Z",
         "ND56.5"
-      ],
-      "rank": null,
-      "scores": {
-        "hit_rate@1": 0.0,
-        "hit_rate@2": 0.0,
-        "hit_rate@3": 0.0,
-        "hit_rate@4": 0.0,
-        "hit_rate@5": 0.0,
-        "hit_rate@6": 0.0,
-        "hit_rate@7": 0.0,
-        "hit_rate@8": 0.0,
-        "hit_rate@9": 0.0,
-        "hit_rate@10": 0.0,
-        "ndcg@10": 0.0,
-        "mrr": 0.0
-      }
-    },
-    {
-      "index": 2,
-      "case_id": "PMC6796688_01",
-      "strategy": "gut",
-      "status": "completed",
-      "stop_reason": "strategy_done",
-      "questions": 3,
-      "true_diagnosis": "Traumatic injury of left subclavian artery",
-      "true_icd_code": "NB30.1Z&XK8G",
-      "predictions": [
-        {
-          "name": "Injury of blood vessels of lower limb",
-          "probability": 0.3,
-          "icd_code": "ND56.5"
-        },
-        {
-          "name": "Fracture of femur",
-          "probability": 0.2,
-          "icd_code": "NC72.Z"
-        },
-        {
-          "name": "Open wound of lower limb",
-          "probability": 0.15,
-          "icd_code": "ND56.1"
-        },
-        {
-          "name": "Injury of blood vessels of upper limb",
-          "probability": 0.1,
-          "icd_code": "ND56.5"
-        },
-        {
-          "name": "Fracture of tibia",
-          "probability": 0.08,
-          "icd_code": "NC92.2"
-        },
-        {
-          "name": "Gunshot wound of lower limb",
-          "probability": 0.06,
-          "icd_code": "PA80.2"
-        },
-        {
-          "name": "Fracture of humerus",
-          "probability": 0.04,
-          "icd_code": "NC12.3"
-        },
-        {
-          "name": "Injury of nerves of lower limb",
-          "probability": 0.03,
-          "icd_code": "ND5Z"
-        },
-        {
-          "name": "Compartment syndrome of lower limb",
-          "probability": 0.025,
-          "icd_code": "NF0A.6"
-        },
-        {
-          "name": "Hypovolaemic shock",
-          "probability": 0.02,
-          "icd_code": "MG40.1"
-        }
-      ],
-      "ranked_codes": [
-        "ND56.5",
-        "NC72.Z",
-        "ND56.1",
-        "NC92.2",
-        "PA80.2",
-        "NC12.3",
-        "ND5Z",
-        "NF0A.6",
-        "MG40.1"
       ],
       "rank": null,
       "scores": {
@@ -785,33 +667,6 @@
       }
     },
     {
-      "index": 7,
-      "case_id": "PMC3056427_01",
-      "strategy": "gut",
-      "status": "error",
-      "stop_reason": "error",
-      "questions": 3,
-      "true_diagnosis": "Tricuspid Valve Regurgitation",
-      "true_icd_code": "BB81.Z",
-      "predictions": [],
-      "ranked_codes": [],
-      "rank": null,
-      "scores": {
-        "hit_rate@1": 0.0,
-        "hit_rate@2": 0.0,
-        "hit_rate@3": 0.0,
-        "hit_rate@4": 0.0,
-        "hit_rate@5": 0.0,
-        "hit_rate@6": 0.0,
-        "hit_rate@7": 0.0,
-        "hit_rate@8": 0.0,
-        "hit_rate@9": 0.0,
-        "hit_rate@10": 0.0,
-        "ndcg@10": 0.0,
-        "mrr": 0.0
-      }
-    },
-    {
       "index": 8,
       "case_id": "PMC3056427_01",
       "strategy": "channel",
@@ -1167,93 +1022,6 @@
       }
     },
     {
-      "index": 12,
-      "case_id": "PMC6056777_01",
-      "strategy": "gut",
-      "status": "completed",
-      "stop_reason": "max_iterations",
-      "questions": 4,
-      "true_diagnosis": "Left subclavian artery aneurysm",
-      "true_icd_code": "BD51.3&XA5D68",
-      "predictions": [
-        {
-          "name": "Aneurysm of left subclavian artery",
-          "probability": 0.3,
-          "icd_code": "BD51.3&XA5D68"
-        },
-        {
-          "name": "Pseudoaneurysm of aorta following surgical repair",
-          "probability": 0.2,
-          "icd_code": "BD51.Z"
-        },
-        {
-          "name": "Left recurrent laryngeal nerve palsy caused by mediastinal compression",
-          "probability": 0.13,
-          "icd_code": "CA0H.0"
-        },
-        {
-          "name": "Dissection of left subclavian artery",
-          "probability": 0.09,
-          "icd_code": "LA8B.24"
-        },
-        {
-          "name": "Aortic dissection",
-          "probability": 0.07,
-          "icd_code": "BD50.Z"
-        },
-        {
-          "name": "Thoracic outlet syndrome",
-          "probability": 0.05,
-          "icd_code": "8B91.Z"
-        },
-        {
-          "name": "Carotid-subclavian bypass graft pseudoaneurysm",
-          "probability": 0.04,
-          "icd_code": "BD51.Z"
-        },
-        {
-          "name": "Malignant neoplasm of thyroid gland",
-          "probability": 0.03,
-          "icd_code": "2D10.Z"
-        },
-        {
-          "name": "Laryngeal paralysis",
-          "probability": 0.02,
-          "icd_code": "CA0H.0"
-        },
-        {
-          "name": "Mediastinal fibrosis",
-          "probability": 0.01,
-          "icd_code": "CB22.0"
-        }
-      ],
-      "ranked_codes": [
-        "BD51.3&XA5D68",
-        "BD51.Z",
-        "CA0H.0",
-        "LA8B.24",
-        "BD50.Z",
-        "8B91.Z",
-        "2D10.Z",
-        "CB22.0"
-      ],
-      "rank": 1,
-      "scores": {
-        "hit_rate@1": 1.0,
-        "hit_rate@2": 1.0,
-        "hit_rate@3": 1.0,
-        "hit_rate@4": 1.0,
-        "hit_rate@5": 1.0,
-        "hit_rate@6": 1.0,
-        "hit_rate@7": 1.0,
-        "hit_rate@8": 1.0,
-        "hit_rate@9": 1.0,
-        "hit_rate@10": 1.0,
-        "ndcg@10": 1.0,
-        "mrr": 1.0
-      }
-    },
-    {
       "index": 13,
       "case_id": "PMC6056777_01",
       "strategy": "channel",
@@ -1590,95 +1358,6 @@
         "CA40.07",
         "1C41&XN5PZ/1G40",
         "CA40.05"
-      ],
-      "rank": null,
-      "scores": {
-        "hit_rate@1": 0.0,
-        "hit_rate@2": 0.0,
-        "hit_rate@3": 0.0,
-        "hit_rate@4": 0.0,
-        "hit_rate@5": 0.0,
-        "hit_rate@6": 0.0,
-        "hit_rate@7": 0.0,
-        "hit_rate@8": 0.0,
-        "hit_rate@9": 0.0,
-        "hit_rate@10": 0.0,
-        "ndcg@10": 0.0,
-        "mrr": 0.0
-      }
-    },
-    {
-      "index": 17,
-      "case_id": "PMC11249570_01",
-      "strategy": "gut",
-      "status": "completed",
-      "stop_reason": "max_iterations",
-      "questions": 4,
-      "true_diagnosis": "Salbutamol poisoning",
-      "true_icd_code": "NE60",
-      "predictions": [
-        {
-          "name": "Pneumonia due to Streptococcus pneumoniae",
-          "probability": 0.3,
-          "icd_code": "CA40.07"
-        },
-        {
-          "name": "Sepsis due to pneumonia",
-          "probability": 0.2,
-          "icd_code": "1C41&XN3PW/1G40"
-        },
-        {
-          "name": "Acute respiratory distress syndrome",
-          "probability": 0.15,
-          "icd_code": "CB00"
-        },
-        {
-          "name": "Pneumonia due to Staphylococcus aureus",
-          "probability": 0.08,
-          "icd_code": "CA40.06"
-        },
-        {
-          "name": "Pneumonia due to Legionella pneumophila",
-          "probability": 0.06,
-          "icd_code": "1C19.1"
-        },
-        {
-          "name": "Pneumonia due to Klebsiella pneumoniae",
-          "probability": 0.05,
-          "icd_code": "CA40.03"
-        },
-        {
-          "name": "Pneumonia due to Pseudomonas aeruginosa",
-          "probability": 0.04,
-          "icd_code": "CA40.05"
-        },
-        {
-          "name": "Septic shock",
-          "probability": 0.03,
-          "icd_code": "1G41"
-        },
-        {
-          "name": "Acute kidney injury",
-          "probability": 0.025,
-          "icd_code": "NB92.0Z"
-        },
-        {
-          "name": "Pneumonia due to influenza virus",
-          "probability": 0.02,
-          "icd_code": "1E32"
-        }
-      ],
-      "ranked_codes": [
-        "CA40.07",
-        "1C41&XN3PW/1G40",
-        "CB00",
-        "CA40.06",
-        "1C19.1",
-        "CA40.03",
-        "CA40.05",
-        "1G41",
-        "NB92.0Z",
-        "1E32"
       ],
       "rank": null,
       "scores": {
@@ -2049,95 +1728,6 @@
         "hit_rate@10": 0.0,
         "ndcg@10": 0.0,
         "mrr": 0.0
-      }
-    },
-    {
-      "index": 22,
-      "case_id": "PMC5468569_01",
-      "strategy": "gut",
-      "status": "completed",
-      "stop_reason": "max_iterations",
-      "questions": 4,
-      "true_diagnosis": "Trisomy 18",
-      "true_icd_code": "LD40.2",
-      "predictions": [
-        {
-          "name": "Trisomy 18",
-          "probability": 0.4,
-          "icd_code": "LD40.2"
-        },
-        {
-          "name": "Congenital complete atrioventricular block",
-          "probability": 0.2,
-          "icd_code": "BC63.20"
-        },
-        {
-          "name": "Congenital long QT syndrome",
-          "probability": 0.08,
-          "icd_code": "BC65.0"
-        },
-        {
-          "name": "Congenital hypothyroidism",
-          "probability": 0.06,
-          "icd_code": "5A00.0Z"
-        },
-        {
-          "name": "Sick sinus syndrome",
-          "probability": 0.05,
-          "icd_code": "BC80.20"
-        },
-        {
-          "name": "Intraventricular haemorrhage of newborn",
-          "probability": 0.04,
-          "icd_code": "KA82.Z"
-        },
-        {
-          "name": "Hypoxic-ischaemic encephalopathy of newborn",
-          "probability": 0.03,
-          "icd_code": "KB04"
-        },
-        {
-          "name": "Congenital malformation of heart",
-          "probability": 0.025,
-          "icd_code": "LA8Z"
-        },
-        {
-          "name": "Hypothermia of newborn",
-          "probability": 0.02,
-          "icd_code": "KD12.Z"
-        },
-        {
-          "name": "Hyperkalaemia of newborn",
-          "probability": 0.015,
-          "icd_code": "KB63.31"
-        }
-      ],
-      "ranked_codes": [
-        "LD40.2",
-        "BC63.20",
-        "BC65.0",
-        "5A00.0Z",
-        "BC80.20",
-        "KA82.Z",
-        "KB04",
-        "LA8Z",
-        "KD12.Z",
-        "KB63.31"
-      ],
-      "rank": 1,
-      "scores": {
-        "hit_rate@1": 1.0,
-        "hit_rate@2": 1.0,
-        "hit_rate@3": 1.0,
-        "hit_rate@4": 1.0,
-        "hit_rate@5": 1.0,
-        "hit_rate@6": 1.0,
-        "hit_rate@7": 1.0,
-        "hit_rate@8": 1.0,
-        "hit_rate@9": 1.0,
-        "hit_rate@10": 1.0,
-        "ndcg@10": 1.0,
-        "mrr": 1.0
       }
     },
     {

@@ -31,7 +31,7 @@ flowchart LR
 ├── cases/                  case datasets (shared by the experiment and the environment)
 ├── configs/                experiment configs; basic.json uses the "basic" strategy
 ├── experiment/             the experiment: config, runner (threads), progress, records, CLI
-├── strategies/             information gathering strategies: base interface, basic, and the five of Meeting 63
+├── strategies/             information gathering strategies: base interface, basic, and the four of Meeting 63
 ├── evaluation/             ICD-11 coding of the diagnoses and the ranking metrics
 ├── webapp/                 web app: server, stored-run loader, static page
 ├── scripts/                run_experiment.py
@@ -200,14 +200,13 @@ experiment at a time.
 the single most useful next question, with a one-sentence rationale. It uses the environment's
 default model unless `params.model` names another.
 
-Five more strategies implement the flowcharts of Meeting 63 (slides 8 to 12). In each, the LLM
+Four more strategies implement the flowcharts of Meeting 63 (slides 8, 9, 11 and 12). In each, the LLM
 estimates and code decides when to stop, against thresholds in the strategy's `params`:
 
 | Name | Asks | Stops when |
 |---|---|---|
 | `hypothesis` | the question that best separates the leading hypotheses of a ranked differential | the leader's probability ≥ `accept` and its lead ≥ `margin` |
 | `knowledge` | for a finding a clinical pattern still lacks; no diagnosis is named until the end | a pattern has nothing missing and the basics are covered |
-| `gut` | whatever comes to mind, without reasoning | `needed` of `votes` one-word readings say "reassurance" |
 | `channel` | within one channel at a time (interview, then physical exam); other questions are rejected | confident after a channel, or no channel left |
 | `sequence` | by phase: opening questions, then questions that prune the candidates, then one that tests the leader | the final phase settles the diagnosis |
 
