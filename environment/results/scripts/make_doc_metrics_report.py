@@ -282,7 +282,8 @@ baseline on the same query set.</p>
 <h2>Cost and limits</h2>
 <ul>
 <li>Cost of this work from the stored usage records: ${spend["total"]:.2f} (judge ${spend["judge"]:.2f},
-LLM selection during retrieval ${spend["retrieval"]:.2f}, query writing ${spend["queries"]:.2f}).
+LLM selection during retrieval ${spend["retrieval"]:.2f}, query writing ${spend["queries"]:.2f},
+answer writing for faithfulness ${spend["answers"]:.2f}).
 Europe PMC and LitSense are free.</li>
 <li>One judge, an LLM, without human labels: absolute levels may be off; the comparisons between
 configurations, made by the same judge on the same questions, are the point.</li>
