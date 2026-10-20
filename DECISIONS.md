@@ -382,3 +382,9 @@ in [environment/NOTES.md](environment/NOTES.md).
 | Clinician's View drops the "Information Collection Strategy" title and puts "Diagnosis Information Retrieval" over the centre column, above the Query and Answer. The title is placed outside the column's flow, so the Query and Answer stay on the scene's vertical centre; on narrow windows it sits on its own line above them. | Asked for (2026-10-20). |
 | The "Diagnosis Information Retrieval" title has its own row at the top of the scene, centred across its full width, above every box and the "Simulated Environment" heading. | Asked for (2026-10-20): the title higher than all boxes. Over the centre column alone it wrapped to two lines. |
 | View record and Clinician's View keep their own position; opening one with no record of its own starts on the other's record. | Matches how each viewer tab keeps its place, without loading the record twice. |
+
+### Space bar steps forward in the viewer (2026-10-20)
+
+| Decision | Why |
+|---|---|
+| In View record, Environment runs and Clinician's View, Space moves to the next step, like →, wherever the focus is: it is caught before a focused button, list or the step slider can use it, so it never clicks "Next case", opens a list or scrolls the page. It is left alone only while typing in a text field. The key hint under the scene lists it. | Asked for: "make the space bar always move to the next iteration". "Iteration" read as the viewer's next step, as in the earlier request about moving through the iterations. |
