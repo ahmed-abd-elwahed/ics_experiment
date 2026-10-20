@@ -340,3 +340,18 @@ in [environment/NOTES.md](environment/NOTES.md).
 |---|---|
 | The best free configuration is `epmc25` (25 Europe PMC candidates): the highest strict coverage without an LLM in retrieval (66.0%). Its faithfulness was measured the same way as the baseline's and the winner's: answers written on its frozen-query documents, the benchmark's rubric, the single judge. | Asked for; the same method keeps the three values comparable. It cost $0.30. |
 | The other configurations of the document-metric search have no faithfulness value. | Each would cost about $0.30 (about $7 for all 22); only the free winner was asked for. |
+
+### One case through the four strategies, question by question (2026-10-20)
+
+| Decision | Why |
+|---|---|
+| The deck walks one case run through each strategy with one slide per question, plus a section slide and a stop-and-diagnose slide per strategy (54 slides, "One Case Through the Strategies"). | Chosen by the project owner: "one case, step by step", from the 16-iteration run, in a new deck. |
+| The case is `PMC10625821_01` (plunging ranula). | Every strategy stopped by its own rule (6, 14, 8 and 13 questions), and the outcomes differ: three name it first, sequence-based ranks it 9th. One of the shortest cases where all four finish on their own, so the deck stays near 50 slides. |
+| One slide per question, not per step: each slide lights the whole path of that iteration (update, stop rule, ask, query, answer). | The record viewer's per-step walk is about five steps per question, over 200 slides for this case. |
+| The diagrams are the record viewer's (`webapp/static/flows.js`), redrawn natively on the slide: boxes and labels as slide text, lines and diamonds in one inline SVG. | Fonts do not load inside a slide's SVG, and the viewer's 470px-wide layout holds no 24px text. Lit nodes and edges use the one terracotta accent; LLM steps are teal-soft, code steps white. |
+| Boxes were widened and labels shortened (for example "Update differential"); the loop-back of channel-based runs right of the environment box. | Node text at 28px must fit one line; the earlier layout crossed the "Answer" label. |
+| The In/Out card shortens long questions and answers, then drops the optional line (fills, separates, changed), until it fits; the full text and rationale are in each slide's speaker notes. | Some answers are 300 characters; the card has room for about 20 lines at 24px. |
+| Diagnosis names drop their parentheses on the slides. | "Lymphoma (non-Hodgkin or Hodgkin) of cervical lymph nodes" does not fit a card line. |
+| The true diagnosis's rank is the evaluation's (ICD-11 match), shown with the name the strategy used ("Ranula"). | It is the rank the results tables use. |
+| The slides are written by `scripts/make_case_walkthrough_deck.py` (record, evaluation and case id as arguments). | The same walk can be made for another case or run. |
+| The slides were checked by rendering them with headless Chrome before publishing (nothing runs past the bottom margin). | The Slides type does not build-check layout; the cards' text lengths vary. |
