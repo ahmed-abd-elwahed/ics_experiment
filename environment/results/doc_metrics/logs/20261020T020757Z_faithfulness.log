@@ -1,0 +1,8 @@
+2026-10-20 13:07:57,597 INFO bench.doc_metrics: doc_metrics faithfulness --configs epmc25 --workers 24
+2026-10-20 13:08:02,963 INFO bench.doc_metrics: faithfulness epmc25: 25/139, $0.0127
+2026-10-20 13:08:05,610 INFO bench.doc_metrics: faithfulness epmc25: 50/139, $0.0272
+2026-10-20 13:08:07,788 INFO bench.doc_metrics: faithfulness epmc25: 75/139, $0.0416
+2026-10-20 13:08:10,016 INFO bench.doc_metrics: faithfulness epmc25: 100/139, $0.0552
+2026-10-20 13:08:12,657 INFO bench.doc_metrics: faithfulness epmc25: 125/139, $0.0689
+2026-10-20 13:08:16,784 INFO bench.doc_metrics: faithfulness epmc25: 139/139, $0.0785
+2026-10-20 13:08:16,792 INFO bench.doc_metrics: summary: {"epmc25": {"ok": 139, "cost_millicents": 7855}}

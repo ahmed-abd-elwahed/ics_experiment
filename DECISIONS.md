@@ -333,3 +333,10 @@ in [environment/NOTES.md](environment/NOTES.md).
 | Retrieval cost per question comes from stored run 2 (run 1 for the native searches); total cost per question is the run cost over 413 questions (272 for case only). | The summary stores only the total per run. |
 | Section 2's figures are copied from `results/README.md`, not recomputed. | That study's metrics (relevance and correctness grades) are not produced by the current code. |
 | Truth coverage and nDCG@8 appear in section 1 only for Europe PMC + LitSense. | They were measured only for those configurations' stored documents. |
+
+### Faithfulness of the best free configuration (2026-10-20)
+
+| Decision | Why |
+|---|---|
+| The best free configuration is `epmc25` (25 Europe PMC candidates): the highest strict coverage without an LLM in retrieval (66.0%). Its faithfulness was measured the same way as the baseline's and the winner's: answers written on its frozen-query documents, the benchmark's rubric, the single judge. | Asked for; the same method keeps the three values comparable. It cost $0.30. |
+| The other configurations of the document-metric search have no faithfulness value. | Each would cost about $0.30 (about $7 for all 22); only the free winner was asked for. |

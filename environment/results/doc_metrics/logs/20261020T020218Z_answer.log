@@ -1,0 +1,8 @@
+2026-10-20 13:02:18,138 INFO bench.doc_metrics: doc_metrics answer --configs epmc25 --workers 16
+2026-10-20 13:03:30,785 INFO bench.doc_metrics: answer epmc25: 25/141, $0.0372
+2026-10-20 13:04:23,136 INFO bench.doc_metrics: answer epmc25: 50/141, $0.0836
+2026-10-20 13:05:33,577 INFO bench.doc_metrics: answer epmc25: 75/141, $0.1200
+2026-10-20 13:06:18,465 INFO bench.doc_metrics: answer epmc25: 100/141, $0.1590
+2026-10-20 13:07:04,522 INFO bench.doc_metrics: answer epmc25: 125/141, $0.1933
+2026-10-20 13:07:57,347 INFO bench.doc_metrics: answer epmc25: 141/141, $0.2229
+2026-10-20 13:07:57,354 INFO bench.doc_metrics: summary: {"epmc25": {"ok": 141, "cost_millicents": 22285}}
