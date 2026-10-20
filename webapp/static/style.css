@@ -357,6 +357,15 @@ mark { background: var(--mark); color: inherit; border-radius: 3px; padding: 0 1
   .scene.with-flow > .channel .msg-box { max-height: 112px; }
 }
 .hidden-robot { display: none; }
+
+/* Clinician's View: the strategy's memory and output, in place of its diagram. */
+.clinician-boxes { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+.clinician-label { margin: 0 0 4px; font-size: 15px; font-weight: 600; text-align: center; }
+.clinician-box.active > .clinician-label { color: var(--accent-strong); }
+.clinician-box.active > .box { border-color: var(--accent-strong); box-shadow: 0 0 0 3px var(--accent-soft); }
+#box-memory, #box-output { max-height: 300px; }
+.output-list { margin: 4px 0 6px; padding-left: 20px; display: flex; flex-direction: column; gap: 3px; }
+.output-list li.truth-hit { background: var(--ok-soft); border-radius: 6px; padding: 1px 6px; margin-left: -6px; }
 .flow { width: 100%; }
 .flow-canvas { position: relative; width: 100%; }
 .flow-svg { display: block; width: 100%; height: auto; }

@@ -17,6 +17,7 @@
       <button type="button" role="tab" id="tab-run" data-tab="run" aria-controls="panel-run">Run experiment</button>
       <button type="button" role="tab" id="tab-view" data-tab="view" aria-controls="panel-view">View record</button>
       <button type="button" role="tab" id="tab-envruns" data-tab="envruns" aria-controls="panel-view">Environment runs</button>
+      <button type="button" role="tab" id="tab-clinician" data-tab="clinician" aria-controls="panel-view">Clinician's View</button>
     </nav>
   </header>
 
@@ -212,6 +213,16 @@
             <svg class="robot" aria-hidden="true"><use href="#robot"/></svg>
             <div class="box" id="box-strategy"></div>
             <div class="flow" id="strategy-flow" hidden></div>
+            <div class="clinician-boxes" id="clinician-boxes" hidden>
+              <div class="clinician-box" id="clin-memory">
+                <h4 class="clinician-label">Memory</h4>
+                <div class="box" id="box-memory"></div>
+              </div>
+              <div class="clinician-box" id="clin-output">
+                <h4 class="clinician-label">Output</h4>
+                <div class="box" id="box-output"></div>
+              </div>
+            </div>
           </div>
         </div>
         <p class="hint">Keys: ← → step · N next case · P previous case · Home / End first and last step.</p>

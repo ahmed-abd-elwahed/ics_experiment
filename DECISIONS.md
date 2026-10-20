@@ -368,3 +368,12 @@ in [environment/NOTES.md](environment/NOTES.md).
 | The figure is `records/plots/topk_by_iterations.svg` rendered to a 2000px PNG. | The SVG's text uses system fonts that an uploaded SVG cannot load reliably; a PNG at twice its size stays sharp. |
 | The takeaways slide has two points. | The request said three but named two and ended "that's it". |
 | The "Presentation" and "Thank you" slides are title slides with no subtitle. | The content after the takeaways is to come; these two were asked to be last. |
+
+### Clinician's View tab in the web app (2026-10-20)
+
+| Decision | Why |
+|---|---|
+| A fourth tab, "Clinician's View", shows a record like View record but without the strategy flow diagrams; the environment (case study, literature, LLM) and the Query and Answer messages stay. | Asked for: remove the strategies' diagrams, keep the asked query and answers. |
+| The strategy column holds two boxes, Memory and Output, that change as the run is stepped through. Memory lists the questions and answers so far (the newest highlighted). Output shows the strategy's saved state when it asked the current question (differential for hypothesis-driven, findings and patterns for knowledge-driven, channel and current diagnosis for channel-based, phase and candidates for sequence-based), and at the end the final ranked diagnosis with the true diagnosis highlighted when named. | "Two boxes, one for the memory and one for the output (these boxes update during the runs)". The saved state is what the record has per question; the diagrams' internal steps are left out. |
+| The tab steps through queries and answers only (no steps inside the strategy). | Without the diagram those steps have nothing to show. |
+| View record and Clinician's View keep their own position; opening one with no record of its own starts on the other's record. | Matches how each viewer tab keeps its place, without loading the record twice. |

@@ -1,6 +1,7 @@
 "use strict";
 
-// ICS experiment web app: run an experiment (Run tab) and step through a record (View tab).
+// ICS experiment web app: run an experiment (Run tab) and step through a record (View tab, or
+// Clinician's View: the same record without the strategy diagrams, showing its memory and output).
 // Record content comes from LLMs and literature, so it is only ever inserted as text.
 
 const $ = (selector, root = document) => root.querySelector(selector);
@@ -112,7 +113,8 @@ const SOURCE_LABELS = { case_study: "case study", literature: "literature (synth
 // --- tabs and the address bar ----------------------------------------------------------------
 
 const app = { tab: "run" };
-const VIEW_TABS = new Set(["view", "envruns"]);
+const VIEW_TABS = new Set(["view", "envruns", "clinician"]);
+const RECORD_TABS = new Set(["view", "clinician"]);
 
 function readHash() {
   const [tab, query] = location.hash.replace(/^#/, "").split("?");
@@ -138,7 +140,9 @@ function showTab(tab) {
   if (VIEW_TABS.has(tab)) {
     view = viewers[tab];
     $("#panel-view").setAttribute("aria-labelledby", `tab-${tab}`);
-    $("#record-source").hidden = tab !== "view";
+    $("#record-source").hidden = !RECORD_TABS.has(tab);
+    shareRecord(view);
+    if (RECORD_TABS.has(tab) && view.path) $("#record-select").value = view.path;
     $("#envrun-source").hidden = tab !== "envruns";
     $("#caserun-label").textContent = tab === "envruns" ? "Case" : "Case run";
     $("#strategy-title").textContent = tab === "envruns" ? "Evaluation Questions" : "Information Collection Strategy";
@@ -496,10 +500,22 @@ async function initRun() {
 const viewers = {
   view: { mode: "record", list: [], record: null, path: null, runIndex: 0, step: 0, steps: [], message: null },
   envruns: { mode: "envruns", list: [], record: null, path: null, runIndex: 0, step: 0, steps: [], message: null },
+  clinician: { mode: "clinician", list: [], record: null, path: null, runIndex: 0, step: 0, steps: [], message: null },
 };
 let view = viewers.view;
 
 const isEnvRuns = () => view.mode === "envruns";
+const isClinician = () => view.mode === "clinician";
+
+// The record tab that the record picker loads into: the one showing, else View record.
+const recordViewer = () => (RECORD_TABS.has(app.tab) ? viewers[app.tab] : viewers.view);
+
+// A record tab opened before it has a record of its own starts on the other record tab's record.
+function shareRecord(target) {
+  if (target.mode === "envruns" || target.record) return;
+  const other = target === viewers.view ? viewers.clinician : viewers.view;
+  if (other.record) loadInto(target, other.record, other.path, { run: other.runIndex });
+}
 
 function viewMessage(target, text, kind = "info") {
   target.message = text ? { text, kind } : null;
@@ -516,7 +532,7 @@ function loadInto(target, record, path, position = {}) {
   target.path = path;
   const runs = record.case_runs || [];
   target.runIndex = clamp(position.run ?? 0, 0, Math.max(0, runs.length - 1));
-  target.steps = runs.length ? buildSteps(runs[target.runIndex]) : [];
+  target.steps = runs.length ? buildSteps(runs[target.runIndex], target) : [];
   target.step = clamp(position.step ?? 0, 0, Math.max(0, target.steps.length - 1));
   if (!runs.length) {
     const text = record.status === "running" ? "No case run has finished yet. Refresh (↻) in a moment." : "Nothing to show: there are no case runs.";
@@ -550,10 +566,10 @@ function renderViewer() {
 // --- experiment records ----------------------------------------------------------------------
 
 async function refreshRecords(selectPath) {
-  const target = viewers.view;
+  const target = recordViewer();
   try {
     const { records } = await api("/api/records");
-    target.list = records;
+    viewers.view.list = viewers.clinician.list = records;
   } catch (error) {
     viewMessage(target, error.message, "error");
     return;
@@ -570,10 +586,10 @@ async function refreshRecords(selectPath) {
 
 async function openRecord(path, position) {
   if (!path) return;
-  const target = viewers.view;
+  const target = recordViewer();
   viewMessage(target, "Loading…");
   try {
-    setRecord(await api(`/api/record?path=${encodeURIComponent(path)}`), path, position);
+    setRecord(await api(`/api/record?path=${encodeURIComponent(path)}`), path, position, target);
   } catch (error) {
     viewMessage(target, `Could not open ${path}: ${error.message}`, "error");
   }
@@ -602,19 +618,19 @@ function parseRecordText(text, name) {
 async function openRecordFile(file) {
   try {
     const record = parseRecordText(await file.text(), file.name);
-    if (setRecord(record, null)) viewMessage(viewers.view, `Showing ${file.name} (opened from your computer).`, "info");
+    if (setRecord(record, null)) viewMessage(recordViewer(), `Showing ${file.name} (opened from your computer).`, "info");
   } catch (error) {
-    viewMessage(viewers.view, `${file.name} is not an experiment record: ${error.message}`, "error");
+    viewMessage(recordViewer(), `${file.name} is not an experiment record: ${error.message}`, "error");
   }
 }
 
-function setRecord(record, path, position = {}) {
+function setRecord(record, path, position = {}, target = recordViewer()) {
   if (!record || record.format !== "ics-experiment-record") {
-    viewMessage(viewers.view, "This file is not an experiment record.", "error");
+    viewMessage(target, "This file is not an experiment record.", "error");
     return false;
   }
-  viewMessage(viewers.view, "");
-  loadInto(viewers.view, record, path, position);
+  viewMessage(target, "");
+  loadInto(target, record, path, position);
   return true;
 }
 
@@ -763,10 +779,11 @@ function currentRun() {
 }
 
 // A strategy with a flow diagram (flows.js) walks through its own steps between the questions.
-const hasFlow = (caseRun) => !isEnvRuns() && typeof FLOWS !== "undefined" && FLOWS.has(caseRun?.strategy_name);
+// Clinician's View leaves the diagrams out, so it steps only through the questions and answers.
+const hasFlow = (caseRun, target = view) => target.mode === "record" && typeof FLOWS !== "undefined" && FLOWS.has(caseRun?.strategy_name);
 
-function buildSteps(caseRun) {
-  if (hasFlow(caseRun)) return FLOWS.steps(caseRun, view.record);
+function buildSteps(caseRun, target = view) {
+  if (hasFlow(caseRun, target)) return FLOWS.steps(caseRun, target.record);
   const steps = [{ kind: "start" }];
   caseRun.iterations.forEach((iteration, i) => {
     steps.push({ kind: "query", i, iteration });
@@ -892,9 +909,13 @@ function renderStep() {
   $("#scene").classList.toggle("with-flow", flow);
   $("#strategy-flow").hidden = !flow;
   $("#node-strategy .robot").classList.toggle("hidden-robot", flow);
-  $("#box-strategy").hidden = flow;
+  $("#box-strategy").hidden = flow || isClinician();
+  $("#clinician-boxes").hidden = !isClinician();
   if (isEnvRuns()) renderQuestionsBox(caseRun, step);
-  else if (flow) {
+  else if (isClinician()) {
+    $("#strategy-title").textContent = "Information Collection Strategy";
+    renderClinicianBoxes(caseRun, step);
+  } else if (flow) {
     $("#strategy-title").textContent = FLOWS.title(caseRun.strategy_name);
     FLOWS.render($("#strategy-flow"), caseRun.strategy_name, shown);
   } else {
@@ -1180,6 +1201,98 @@ function renderStrategyBox(caseRun, step) {
   box.scrollTop = fresh ? Math.max(0, fresh.offsetTop - 40) : 0;
 }
 
+// --- Clinician's View: the strategy's memory and output ---------------------------------------
+
+const percent = (p) => `${Math.round(100 * (p ?? 0))}%`;
+
+function renderMemoryBox(caseRun, step) {
+  const box = $("#box-memory");
+  const memory = caseRun.iterations.slice(0, answeredCount(caseRun, step)).filter((it) => it.answer != null);
+  fill(box, 
+    h("div", { class: "muted", text: plural(memory.length, "answer") }),
+    memory.length
+      ? h(
+          "ol",
+          { class: "memory" },
+          memory.map((it, i) =>
+            h("li", { class: step.kind === "answer" && i === memory.length - 1 ? "new" : null }, h("div", { class: "q", text: it.question }), h("div", { text: it.answer })),
+          ),
+        )
+      : h("p", { class: "placeholder", text: "Empty: the strategy starts with no information about the patient." }),
+  );
+  const fresh = $(".memory li.new", box);
+  box.scrollTop = fresh ? Math.max(0, fresh.offsetTop - 40) : box.scrollHeight;
+}
+
+// What the strategy has worked out so far, from the state it saved when it asked the question.
+function workingOutput(name, trace) {
+  if (!trace) return null;
+  if (name === "hypothesis" && trace.differential?.length) {
+    return [h("h4", { text: "Differential" }), h("ol", { class: "output-list" }, trace.differential.map((d) => h("li", null, h("strong", { text: percent(d.probability) }), ` ${d.diagnosis}`)))];
+  }
+  if (name === "knowledge" && trace.picture) {
+    const picture = trace.picture;
+    return [
+      picture.findings?.length ? [h("h4", { text: "Findings" }), h("ul", { class: "output-list" }, picture.findings.map((f) => h("li", { text: f })))] : null,
+      picture.patterns?.length
+        ? [
+            h("h4", { text: "Patterns" }),
+            h("ul", { class: "output-list" }, picture.patterns.map((p) => h("li", null, h("strong", { text: p.name }), h("div", { class: "muted", text: `Missing: ${(p.missing || []).join("; ") || "nothing"}` })))),
+          ]
+        : null,
+      h("p", { class: "muted", text: picture.basics_covered ? "Basics covered." : "Basics not yet covered." }),
+    ];
+  }
+  if (name === "channel" && trace.channel) {
+    const last = (trace.assessments || []).at(-1);
+    return [
+      h("div", { class: "kv" }, h("span", { class: "k", text: "Channel" }), h("strong", { text: trace.channel })),
+      last ? h("div", { class: "kv" }, h("span", { class: "k", text: "Current diagnosis" }), h("span", { text: `${last.diagnosis} (confidence ${percent(last.confidence)})` })) : h("p", { class: "muted", text: "No diagnosis rated yet." }),
+    ];
+  }
+  if (name === "sequence" && trace.phase) {
+    return [
+      h("div", { class: "kv" }, h("span", { class: "k", text: "Phase" }), h("strong", { text: trace.phase })),
+      trace.candidates?.length ? [h("h4", { text: "Candidates" }), h("ol", { class: "output-list" }, trace.candidates.map((c) => h("li", { text: c })))] : h("p", { class: "muted", text: "No candidates yet." }),
+    ];
+  }
+  return null;
+}
+
+function renderOutputBox(caseRun, step) {
+  const box = $("#box-output");
+  box.scrollTop = 0;
+  if (step.kind === "start") return fill(box, h("p", { class: "placeholder", text: "Nothing yet." }));
+  if (step.kind === "end") {
+    const kind = caseRun.status === "error" ? "error" : caseRun.status === "cancelled" ? "cancelled" : "";
+    const diagnosis = caseRun.diagnosis;
+    const truth = caseRun.case?.diagnosis?.toLowerCase();
+    const list = diagnosis?.differential || [];
+    return fill(box, 
+      h("div", { class: `stop-banner ${kind}` }, `Stopped: ${STOP_LABELS[caseRun.stop_reason] || caseRun.stop_reason}.`, caseRun.error ? h("div", { class: "text", text: caseRun.error }) : null),
+      diagnosis?.error ? h("p", { class: "badge error", text: `The diagnosis failed: ${diagnosis.error}` }) : null,
+      list.length
+        ? [
+            h("h4", { text: "Final diagnosis" }),
+            h("ol", { class: "output-list" }, list.map((d) => h("li", { class: d.name.toLowerCase() === truth ? "truth-hit" : null }, h("strong", { text: percent(d.probability) }), ` ${d.name}`))),
+          ]
+        : diagnosis?.error ? null : h("p", { class: "placeholder", text: "No diagnosis recorded." }),
+    );
+  }
+  const output = workingOutput(caseRun.strategy_name, step.iteration.strategy_trace);
+  fill(box, 
+    h("div", { class: "muted", text: `When asking question ${step.i + 1}` }),
+    output || h("p", { class: "placeholder", text: "This strategy keeps no working output; it gives its diagnosis when it stops." }),
+  );
+}
+
+function renderClinicianBoxes(caseRun, step) {
+  renderMemoryBox(caseRun, step);
+  renderOutputBox(caseRun, step);
+  $("#clin-memory").classList.toggle("active", step.kind === "answer");
+  $("#clin-output").classList.toggle("active", step.kind === "query" || step.kind === "end");
+}
+
 const VERDICT_LABELS = {
   exact: "masked correctness: exact (the answer matches the hidden value)",
   same_category: "masked correctness: same category (low / normal / high) as the hidden value",
@@ -1352,7 +1465,7 @@ function wire() {
 
   $("#record-select").addEventListener("change", (event) => openRecord(event.target.value));
   $("#records-refresh").addEventListener("click", async () => {
-    const target = viewers.view;
+    const target = recordViewer();
     await refreshRecords();
     if (target.path) openRecord(target.path, { run: target.runIndex, step: target.step });
   });
@@ -1413,11 +1526,11 @@ async function init() {
   const { tab, params } = readHash();
   showTab(tab);
 
-  const recordPath = tab === "view" ? params.get("record") : null;
+  const recordPath = RECORD_TABS.has(tab) ? params.get("record") : null;
   await refreshRecords(recordPath);
   if (recordPath) openRecord(recordPath, positionFrom(params));
   else if (viewers.view.list.length) openRecord(viewers.view.list[0].path);
-  else viewMessage(viewers.view, "No records yet. Run an experiment in the Run tab, or open a record file.", "info");
+  else for (const target of [viewers.view, viewers.clinician]) viewMessage(target, "No records yet. Run an experiment in the Run tab, or open a record file.", "info");
 
   const sourcePath = tab === "envruns" ? params.get("source") : null;
   await refreshEnvRuns(sourcePath);
