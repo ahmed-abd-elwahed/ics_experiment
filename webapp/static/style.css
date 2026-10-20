@@ -381,6 +381,7 @@ option[class^="strat-"] { background: var(--strat-soft); }
    answer stay centred on the scene's height. */
 .scene.clinician { grid-template-columns: minmax(0, 1.25fr) minmax(170px, 0.6fr) minmax(0, 1.35fr); }
 .scene.clinician > .channel { align-self: center; }
+.scene.clinician .env-title { margin-left: 0; text-align: center; }
 /* The title has a row of its own above every box, centred across the scene; the boxes share the
    row below, so the query and answer stay centred on them. */
 .scene.clinician { grid-template-rows: auto auto; row-gap: 12px; }
