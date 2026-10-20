@@ -364,6 +364,13 @@ mark { background: var(--mark); color: inherit; border-radius: 3px; padding: 0 1
 .clinician-box.active > .clinician-label { color: var(--accent-strong); }
 .clinician-box.active > .box { border-color: var(--accent-strong); box-shadow: 0 0 0 3px var(--accent-soft); }
 #box-memory, #box-output { max-height: 300px; }
+/* A narrower environment leaves room for wider, taller memory and output boxes; the query and
+   answer stay centred on the scene's height. */
+.scene.clinician { grid-template-columns: minmax(0, 1.25fr) minmax(170px, 0.6fr) minmax(0, 1.35fr); }
+.scene.clinician > .channel { align-self: center; }
+.scene.clinician #box-memory, .scene.clinician #box-output { max-height: 420px; font-size: 14px; }
+.scene.clinician .diagnosis .badge { white-space: normal; }
+@media (max-width: 1180px) { .scene.clinician { grid-template-columns: 1fr; } }
 .output-list { margin: 4px 0 6px; padding-left: 20px; display: flex; flex-direction: column; gap: 3px; }
 .output-list li.truth-hit { background: var(--ok-soft); border-radius: 6px; padding: 1px 6px; margin-left: -6px; }
 .flow { width: 100%; }

@@ -907,6 +907,7 @@ function renderStep() {
   renderMessages(step);
   const flow = hasFlow(caseRun);
   $("#scene").classList.toggle("with-flow", flow);
+  $("#scene").classList.toggle("clinician", isClinician());
   $("#strategy-flow").hidden = !flow;
   $("#node-strategy .robot").classList.toggle("hidden-robot", flow || isClinician());
   $("#box-strategy").hidden = flow || isClinician();
