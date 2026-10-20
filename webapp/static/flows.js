@@ -13,22 +13,31 @@ const FLOWS = (() => {
 
   // --- diagrams ----------------------------------------------------------------------------------
 
+  // One grid for every strategy: columns at x 140 and 360, rows at y 90, 230, 360 and 470. The
+  // query always leaves on row 1 and the answer arrives on row 2, so switching strategies keeps
+  // both in place next to the scene's Query and Answer messages.
+  const W = 470;
+  const COL = [140, 360];
+  const ROW = [90, 230, 360, 470];
+  const QUERY = { pts: [[COL[0] - 86, ROW[0]], [6, ROW[0]]], qa: true };
+  const ANSWER = { pts: [[6, ROW[1]], [COL[0] - 86, ROW[1]]], qa: true };
+  const DX = (x, y) => ({ x, y, kind: "llm", tag: "LLM", t: "Final differential", s: "up to 10, ranked" });
+
   const loop = (o) => ({
-    W: 470, H: 420,
     nodes: {
-      ask: { x: 140, y: 90, kind: "llm", tag: "LLM", ...o.ask },
-      upd: { x: 140, y: 230, kind: "llm", tag: "LLM", ...o.upd },
-      stop: { x: 360, y: 230, kind: "dec", ...o.stop },
-      dx: { x: 360, y: 360, kind: "llm", tag: "LLM", t: "Final differential", s: "up to 10, ranked" },
-      end: { x: 140, y: 360, kind: "end", t: "Diagnosis" },
+      ask: { x: COL[0], y: ROW[0], kind: "llm", tag: "LLM", ...o.ask },
+      upd: { x: COL[0], y: ROW[1], kind: "llm", tag: "LLM", ...o.upd },
+      stop: { x: COL[1], y: ROW[1], kind: "dec", ...o.stop },
+      dx: DX(COL[1], ROW[2]),
+      end: { x: COL[0], y: ROW[2], kind: "end", t: "Diagnosis" },
     },
     edges: {
-      query: { pts: [[54, 90], [6, 90]], qa: true },
-      answer: { pts: [[6, 230], [54, 230]], qa: true },
-      toStop: { pts: [[226, 230], [268, 230]] },
-      no: { pts: [[360, 184], [360, 90], [226, 90]], label: [368, 140, o.no || "no"] },
-      yes: { pts: [[360, 276], [360, 329]], label: [368, 306, o.yes || "yes"] },
-      toEnd: { pts: [[274, 360], [190, 360]] },
+      query: QUERY,
+      answer: ANSWER,
+      toStop: { pts: [[COL[0] + 86, ROW[1]], [COL[1] - 92, ROW[1]]] },
+      no: { pts: [[COL[1], ROW[1] - 46], [COL[1], ROW[0]], [COL[0] + 86, ROW[0]]], label: [COL[1] + 8, 140, o.no || "no"] },
+      yes: { pts: [[COL[1], ROW[1] + 46], [COL[1], ROW[2] - 31]], label: [COL[1] + 8, 306, o.yes || "yes"] },
+      toEnd: { pts: [[COL[1] - 86, ROW[2]], [COL[0] + 50, ROW[2]]] },
     },
   });
 
@@ -44,50 +53,57 @@ const FLOWS = (() => {
       stop: { t: "a pattern with", s: "nothing missing?" },
     }),
     channel: {
-      W: 470, H: 500,
       nodes: {
-        ask: { x: 140, y: 100, kind: "llm", tag: "LLM ×2", t: "Ask within the channel", s: "then check its channel" },
-        more: { x: 140, y: 230, kind: "dec", t: "channel", s: "used up?" },
-        conf: { x: 360, y: 230, kind: "llm", tag: "LLM", t: "Diagnose and rate", s: "diagnosis + confidence" },
-        sure: { x: 360, y: 360, kind: "dec", t: "confident, or", s: "no channel left?" },
-        sw: { x: 140, y: 360, kind: "code", tag: "CODE", t: "Switch channel", s: "interview → exam" },
-        dx: { x: 360, y: 470, kind: "llm", tag: "LLM", t: "Final differential", s: "up to 10, ranked" },
-        end: { x: 140, y: 470, kind: "end", t: "Diagnosis" },
+        ask: { x: COL[0], y: ROW[0], kind: "llm", tag: "LLM ×2", t: "Ask within the channel", s: "then check its channel" },
+        more: { x: COL[0], y: ROW[1], kind: "dec", t: "channel", s: "used up?" },
+        conf: { x: COL[1], y: ROW[1], kind: "llm", tag: "LLM", t: "Diagnose and rate", s: "diagnosis + confidence" },
+        sure: { x: COL[1], y: ROW[2], kind: "dec", t: "confident, or", s: "no channel left?" },
+        sw: { x: COL[0], y: ROW[2], kind: "code", tag: "CODE", t: "Switch channel", s: "interview → exam" },
+        dx: DX(COL[1], ROW[3]),
+        end: { x: COL[0], y: ROW[3], kind: "end", t: "Diagnosis" },
       },
       edges: {
-        query: { pts: [[54, 92], [6, 92]], qa: true },
-        answer: { pts: [[6, 230], [48, 230]], qa: true },
-        no: { pts: [[140, 184], [140, 131]], label: [148, 162, "no"] },
-        yes: { pts: [[232, 230], [274, 230]], label: [253, 222, "yes", "middle"] },
-        toSure: { pts: [[360, 261], [360, 314]] },
-        sureNo: { pts: [[268, 360], [226, 360]], label: [247, 352, "no", "middle"] },
-        back: { pts: [[54, 360], [24, 360], [24, 116], [54, 116]], label: [30, 300, "ask"] },
-        sureYes: { pts: [[452, 360], [462, 360], [462, 470], [446, 470]], label: [452, 420, "yes", "end"] },
-        toEnd: { pts: [[274, 470], [190, 470]] },
+        query: QUERY,
+        answer: { pts: [[6, ROW[1]], [COL[0] - 92, ROW[1]]], qa: true },
+        no: { pts: [[COL[0], ROW[1] - 46], [COL[0], ROW[0] + 31]], label: [COL[0] + 8, 162, "no"] },
+        yes: { pts: [[COL[0] + 92, ROW[1]], [COL[1] - 86, ROW[1]]], label: [250, ROW[1] - 8, "yes", "middle"] },
+        toSure: { pts: [[COL[1], ROW[1] + 31], [COL[1], ROW[2] - 46]] },
+        sureNo: { pts: [[COL[1] - 92, ROW[2]], [COL[0] + 86, ROW[2]]], label: [247, ROW[2] - 8, "no", "middle"] },
+        back: { pts: [[COL[0] - 86, ROW[2]], [24, ROW[2]], [24, ROW[0] + 20], [COL[0] - 86, ROW[0] + 20]], label: [30, 300, "ask"] },
+        sureYes: { pts: [[COL[1] + 92, ROW[2]], [462, ROW[2]], [462, ROW[3]], [COL[1] + 86, ROW[3]]], label: [456, 420, "yes", "end"] },
+        toEnd: { pts: [[COL[1] - 86, ROW[3]], [COL[0] + 50, ROW[3]]] },
       },
     },
     sequence: {
-      W: 470, H: 420,
-      bands: [[40, "Phase 1 · Initialization"], [160, "Phase 2 · Refinement"], [290, "Phase 3 · Final diagnosis"]],
+      bands: [[ROW[0] - 55, "Phase 1 · Initialization"], [ROW[1] - 55, "Phase 2 · Refinement"], [ROW[2] - 55, "Phase 3 · Final diagnosis"]],
       nodes: {
-        open: { x: 150, y: 90, kind: "llm", tag: "LLM", t: "Ask opening questions", s: "complaint, history" },
-        draft: { x: 370, y: 90, kind: "llm", tag: "LLM", t: "Draft the differential", s: "at most 5 candidates" },
-        refine: { x: 150, y: 215, kind: "llm", tag: "LLM ×2", t: "Ask, then prune", s: "one candidate at a time" },
-        confirm: { x: 150, y: 345, kind: "llm", tag: "LLM ×2", t: "Test the leader", s: "confirm or exclude" },
-        dx: { x: 370, y: 345, kind: "llm", tag: "LLM", t: "Final differential", s: "up to 10, ranked" },
+        open: { x: COL[0], y: ROW[0], kind: "llm", tag: "LLM", t: "Ask opening questions", s: "complaint, history" },
+        draft: { x: COL[1], y: ROW[0], kind: "llm", tag: "LLM", t: "Draft the differential", s: "at most 5 candidates" },
+        refine: { x: COL[0], y: ROW[1], kind: "llm", tag: "LLM ×2", t: "Ask, then prune", s: "one candidate at a time" },
+        confirm: { x: COL[0], y: ROW[2], kind: "llm", tag: "LLM ×2", t: "Test the leader", s: "confirm or exclude" },
+        dx: DX(COL[1], ROW[2]),
+        end: { x: COL[1], y: ROW[3], kind: "end", t: "Diagnosis" },
       },
       edges: {
-        rail: { pts: [[40, 90], [40, 345]], plain: true },
-        r1: { pts: [[40, 90], [62, 90]] }, r2: { pts: [[40, 215], [62, 215]] }, r3: { pts: [[40, 345], [62, 345]] },
-        query: { pts: [[40, 262], [4, 262]], qa: true },
-        answer: { pts: [[4, 290], [40, 290]], qa: true },
-        toDraft: { pts: [[236, 90], [284, 90]], label: [260, 82, "after k", "middle"] },
-        toRefine: { pts: [[370, 121], [370, 215], [236, 215]], label: [378, 170, "list ready"] },
-        toFinal: { pts: [[150, 246], [150, 314]], label: [158, 282, "≤ 2 left or budget"] },
-        toDx: { pts: [[236, 345], [284, 345]], label: [260, 337, "settled", "middle"] },
+        // Every phase asks: the rail joins its three asking steps to the query and answer rows.
+        rail: { pts: [[30, ROW[0]], [30, ROW[2]]], plain: true },
+        r1: { pts: [[30, ROW[0] + 14], [COL[0] - 86, ROW[0] + 14]] },
+        r2: { pts: [[30, ROW[1] + 14], [COL[0] - 86, ROW[1] + 14]] },
+        r3: { pts: [[30, ROW[2]], [COL[0] - 86, ROW[2]]] },
+        query: QUERY,
+        answer: ANSWER,
+        toDraft: { pts: [[COL[0] + 86, ROW[0]], [COL[1] - 86, ROW[0]]], label: [250, ROW[0] - 8, "after k", "middle"] },
+        toRefine: { pts: [[COL[1], ROW[0] + 31], [COL[1], ROW[1]], [COL[0] + 86, ROW[1]]], label: [COL[1] + 8, 170, "list ready"] },
+        toFinal: { pts: [[COL[0], ROW[1] + 31], [COL[0], ROW[2] - 31]], label: [COL[0] + 8, 296, "≤ 2 left or budget"] },
+        toDx: { pts: [[COL[0] + 86, ROW[2]], [COL[1] - 86, ROW[2]]], label: [250, ROW[2] - 8, "settled", "middle"] },
+        toEnd: { pts: [[COL[1], ROW[2] + 31], [COL[1], ROW[3] - 22]] },
       },
     },
   };
+
+  // Each diagram is as tall as its lowest node; the shared top rows stay where they are.
+  const height = (d) =>
+    Math.max(...Object.values(d.nodes).map((n) => n.y + (n.kind === "dec" ? DEC.hh : n.kind === "end" ? 22 : RECT.hh))) + 24;
 
   function el(tag, attrs = {}, text) {
     const node = document.createElementNS(NS, tag);
@@ -98,17 +114,17 @@ const FLOWS = (() => {
 
   function draw(name) {
     const d = DIAGRAMS[name];
-    const svg = el("svg", { viewBox: `0 0 ${d.W} ${d.H + LANE}`, class: "flow-svg", role: "img", "aria-label": `Flow of the ${name} strategy` });
+    const H = height(d);
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H + LANE}`, class: "flow-svg", role: "img", "aria-label": `Flow of the ${name} strategy` });
     const defs = el("defs");
     const marker = el("marker", { id: `fah-${name}`, viewBox: "0 0 10 10", refX: 9, refY: 5, markerWidth: 9, markerHeight: 9, markerUnits: "userSpaceOnUse", orient: "auto-start-reverse" });
     marker.append(el("path", { d: "M0,1 L10,5 L0,9 Z", class: "fah" }));
     defs.append(marker);
     svg.append(defs);
     for (const [y, label] of d.bands || []) {
-      svg.append(el("rect", { x: 56, y, width: d.W - 64, height: 110, rx: 8, class: "flow-band" }));
-      svg.append(el("text", { x: d.W - 16, y: y + 102, "text-anchor": "end", class: "flow-band-label" }, label));
+      svg.append(el("rect", { x: 46, y, width: W - 54, height: 110, rx: 8, class: "flow-band" }));
+      svg.append(el("text", { x: W - 16, y: y + 102, "text-anchor": "end", class: "flow-band-label" }, label));
     }
-    svg.append(el("line", { class: "flow-leader", x1: 0, y1: 0, x2: 0, y2: 0, visibility: "hidden" }));
     for (const [id, e] of Object.entries(d.edges)) {
       const g = el("g", { class: `flow-edge${e.qa ? " qa" : ""}`, "data-edge": id });
       g.append(el("polyline", { points: e.pts.map((p) => p.join(",")).join(" "), "marker-end": e.plain ? null : `url(#fah-${name})` }));
@@ -174,8 +190,17 @@ const FLOWS = (() => {
   // --- steps --------------------------------------------------------------------------------------
 
   function envSteps(steps, it, i, from, to) {
-    steps.push({ kind: "query", i, iteration: it, node: from, edges: ["query"] });
-    steps.push({ kind: "answer", i, iteration: it, node: to, edges: ["answer"] });
+    steps.push({ kind: "query", i, iteration: it, node: from, edges: ["query"], title: `Question ${i + 1} to the environment`,
+      input: [`Asked by this step after ${i} answer${i === 1 ? "" : "s"}.`], output: [`“${it.question}”`] });
+    const source = { case_study: "the case study", literature: "the literature (synthesized)", unanswerable: "nobody: unanswerable" }[it.answer_source] || "the environment";
+    steps.push({ kind: "answer", i, iteration: it, node: to, edges: ["answer"], title: `Answer ${i + 1} from the environment`,
+      input: [`“${shorten(it.question, 120)}”`], output: [...answerLines(it), `Answered from ${source}; added to the strategy's memory.`] });
+  }
+
+  function startStep(caseRun) {
+    const first = { hypothesis: "ask", knowledge: "ask", channel: "ask", sequence: "open" }[caseRun.strategy_name];
+    return { kind: "start", node: first, title: "Case loaded", input: [`Case ${caseRun.case_id}; the diagnosis is hidden from the strategy.`],
+      output: ["Memory: empty. The first step asks for the presenting complaint."] };
   }
 
   function limitStep(caseRun, maxIter, node) {
@@ -204,7 +229,7 @@ const FLOWS = (() => {
     const state = (it) => (kind === "hypothesis" ? it?.strategy_trace?.differential : it?.strategy_trace?.picture);
     const lines = kind === "hypothesis" ? differentialLines : pictureLines;
     const updTitle = kind === "hypothesis" ? "Update the differential (LLM)" : "Recognise patterns (LLM)";
-    const steps = [{ kind: "start", node: null }];
+    const steps = [startStep(caseRun)];
     const check = (st, stop) => {
       if (kind === "hypothesis") {
         const top = st?.[0]?.probability ?? 0;
@@ -246,7 +271,7 @@ const FLOWS = (() => {
     const maxIter = record.config?.stopping?.max_iterations;
     const cap = params.questions_per_channel || Math.max(1, Math.floor((maxIter || 2 * channels.length) / channels.length));
     const confident = params.confident ?? 0.8;
-    const steps = [{ kind: "start", node: null }];
+    const steps = [startStep(caseRun)];
     let rejectedSeen = 0;
     let asked = 0;
     const assess = (a) => [`${a.diagnosis} — confidence ${pct(a.confidence)}`];
@@ -290,7 +315,7 @@ const FLOWS = (() => {
   function sequenceSteps(caseRun, record) {
     const its = caseRun.iterations;
     const maxIter = record.config?.stopping?.max_iterations;
-    const steps = [{ kind: "start", node: null }];
+    const steps = [startStep(caseRun)];
     const askNode = { init: "open", refine: "refine", final: "confirm" };
     const cand = (list) => (list?.length ? list.map((c, i) => `${i + 1}. ${c}`) : ["(none yet)"]);
     its.forEach((it, i) => {
@@ -358,12 +383,9 @@ const FLOWS = (() => {
     svg.querySelectorAll(".flow-edge").forEach((g) => g.classList.toggle("active", (step.edges || []).includes(g.dataset.edge)));
     const card = canvas.querySelector(".flow-card");
     const node = DIAGRAMS[name].nodes[step.node];
-    const text = step.kind === "flow" || step.kind === "end";
+    const text = Boolean(step.title);
     card.hidden = !(text && node);
-    if (card.hidden) {
-      svg.querySelector(".flow-leader").setAttribute("visibility", "hidden");
-      return;
-    }
+    if (card.hidden) return;
     const section = (label, lines) => {
       const div = document.createElement("div");
       div.className = "flow-io";
@@ -382,16 +404,11 @@ const FLOWS = (() => {
     title.className = "flow-card-title";
     title.textContent = step.title || "";
     card.replaceChildren(title, section("In", step.input), section("Out", step.output));
-    // The card fills the lane under the diagram; a dashed leader joins it to the node (drawn
-    // under the nodes, so it never hides one).
-    const d = DIAGRAMS[name];
-    const total = d.H + LANE;
-    card.style.top = `${((d.H + 8) / total) * 100}%`;
-    card.style.height = `${((LANE - 12) / total) * 100}%`;
-    const half = node.kind === "dec" ? DEC.hh : node.kind === "end" ? 22 : RECT.hh;
-    const leader = svg.querySelector(".flow-leader");
-    for (const [k, v] of Object.entries({ x1: node.x, y1: node.y + half, x2: node.x, y2: d.H + 8 })) leader.setAttribute(k, String(v));
-    leader.setAttribute("visibility", "visible");
+    // The card fills the lane under the diagram; the active node is the one outlined.
+    const H = height(DIAGRAMS[name]);
+    const total = H + LANE;
+    card.style.top = `${((H + 4) / total) * 100}%`;
+    card.style.height = `${((LANE - 8) / total) * 100}%`;
     card.scrollTop = 0;
   }
 

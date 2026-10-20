@@ -912,7 +912,10 @@ function renderStep() {
   $("#msg-answer").classList.toggle("active", live && step.kind === "answer");
   $("#node-strategy").classList.toggle("active", shown.kind !== "answer" && shown.kind !== "start");
   view.arrows = { case: usedCase && step.kind === "answer", lit: usedLiterature };
-  requestAnimationFrame(drawEnvArrows);
+  requestAnimationFrame(() => {
+    drawEnvArrows();
+    alignChannel();
+  });
   writeHash();
 }
 
@@ -1267,6 +1270,28 @@ function renderQuestionsBox(caseRun, step) {
 
 // --- arrows inside the environment -----------------------------------------------------------
 
+// With a flow diagram, the Query and Answer messages sit on the rows of the diagram's query and
+// answer edges, so each arrow continues straight into its node.
+function alignChannel() {
+  const scene = $("#scene");
+  const channel = $(".channel", scene);
+  const messages = { query: $("#msg-query"), answer: $("#msg-answer") };
+  const flow = scene.classList.contains("with-flow") && window.matchMedia("(min-width: 1181px)").matches;
+  for (const [edge, message] of Object.entries(messages)) {
+    if (!flow) {
+      message.style.top = "";
+      continue;
+    }
+    const line = $(`#strategy-flow [data-edge="${edge}"] polyline`);
+    if (!line) continue;
+    const arrow = $(".arrow", message);
+    const target = line.getBoundingClientRect();
+    const own = channel.getBoundingClientRect();
+    const offset = arrow.getBoundingClientRect().top + arrow.offsetHeight / 2 - message.getBoundingClientRect().top;
+    message.style.top = `${target.top + target.height / 2 - own.top - offset}px`;
+  }
+}
+
 function drawEnvArrows() {
   const svg = $("#env-arrows");
   if (!svg || $("#viewer").hidden || !VIEW_TABS.has(app.tab) || getComputedStyle(svg).display === "none") return;
@@ -1372,7 +1397,10 @@ function wire() {
   let resizeTimer;
   window.addEventListener("resize", () => {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(drawEnvArrows, 80);
+    resizeTimer = setTimeout(() => {
+      drawEnvArrows();
+      alignChannel();
+    }, 80);
   });
 }
 

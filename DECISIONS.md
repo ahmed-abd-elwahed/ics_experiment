@@ -314,3 +314,12 @@ in [environment/NOTES.md](environment/NOTES.md).
 | The two runs ran one after the other, with 64 workers. | LitSense allows one request per second across everything that uses it. |
 | The plot has one panel per strategy and one line per budget, coloured light to dark blue by the number of iterations (a validated ordinal ramp). | The budgets are ordered; twelve lines on one axis would not be readable. |
 | The 8- and 16-iteration records are committed gzipped and their raw `.json` files are ignored by git. | They are 143 MB and 280 MB, over GitHub's 100 MB file limit; the web app reads the uncompressed copies on this machine. |
+
+### Aligning the record viewer (2026-10-20)
+
+| Decision | Why |
+|---|---|
+| With a flow diagram, the scene's columns are top-aligned, and the Query and Answer messages are placed (in script, on every step and resize) on the rows of the diagram's query and answer edges, each arrow first. | The columns were centred on the tall diagram, so the titles and the environment box sat at different heights, and the messages did not meet the edges they continue. |
+| All four diagrams share one grid: columns at x 140 and 360, rows at y 90, 230, 360 and 470, the query on row 1 and the answer on row 2. Each diagram is as tall as its lowest node. | Each diagram had its own layout, so switching strategies moved the query and answer rows and the In/Out lane. |
+| The dashed leader line from the node to the In/Out card was removed. | It ran behind other nodes and read as an extra edge; the outlined node and the card's title already name the step. |
+| The query and answer steps and the start step now have In/Out text too (the question asked, the answer and its source, the case loaded). | The lane was empty on those steps. |
