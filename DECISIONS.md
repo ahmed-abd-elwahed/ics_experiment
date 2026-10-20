@@ -323,3 +323,13 @@ in [environment/NOTES.md](environment/NOTES.md).
 | All four diagrams share one grid: columns at x 140 and 360, rows at y 90, 230, 360 and 470, the query on row 1 and the answer on row 2. Each diagram is as tall as its lowest node. | Each diagram had its own layout, so switching strategies moved the query and answer rows and the In/Out lane. |
 | The dashed leader line from the node to the In/Out card was removed. | It ran behind other nodes and read as an extra edge; the outlined node and the card's title already name the step. |
 | The query and answer steps and the start step now have In/Out text too (the question asked, the answer and its source, the case loaded). | The lane was empty on those steps. |
+
+### The search methods table (2026-10-20)
+
+| Decision | Why |
+|---|---|
+| The table has three sections: the repeated benchmark (every search method), the 50-question study of changes 1–6 (2026-09-21), and the document-metric search (2026-10-16). | They used different questions, judges and metrics; one merged table would put incomparable numbers side by side. |
+| Section 1's cost per run is the mean of runs 2 and later; the native searches' is run 1's. | OpenRouter raised the DeepSeek output price after run 1, as in `repeat_summary.md`. |
+| Retrieval cost per question comes from stored run 2 (run 1 for the native searches); total cost per question is the run cost over 413 questions (272 for case only). | The summary stores only the total per run. |
+| Section 2's figures are copied from `results/README.md`, not recomputed. | That study's metrics (relevance and correctness grades) are not produced by the current code. |
+| Truth coverage and nDCG@8 appear in section 1 only for Europe PMC + LitSense. | They were measured only for those configurations' stored documents. |
