@@ -360,6 +360,17 @@ mark { background: var(--mark); color: inherit; border-radius: 3px; padding: 0 1
 
 /* Clinician's View: the strategy's memory and output, in place of its diagram. */
 .clinician-boxes { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+/* A subtle colour per strategy: the strategy picker and the Memory and Output boxes take it. */
+.strat-basic { --strat: #6b7280; --strat-soft: #f1f2f4; }
+.strat-hypothesis { --strat: #3b6fd4; --strat-soft: #edf2fc; }
+.strat-knowledge { --strat: #2f8f4e; --strat-soft: #ebf6ee; }
+.strat-channel { --strat: #c7741a; --strat-soft: #fdf3e7; }
+.strat-sequence { --strat: #7b4fc4; --strat-soft: #f3eefb; }
+.strat-other { --strat: var(--border); --strat-soft: var(--surface); }
+option[class^="strat-"] { background: var(--strat-soft); }
+.strategy-pick { display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600; }
+.strategy-pick select { background: var(--strat-soft); border: 1px solid var(--strat); border-left-width: 5px; font-weight: 600; }
+.clinician-boxes[class*="strat-"] .box { background: var(--strat-soft); border-color: color-mix(in srgb, var(--strat) 45%, var(--border)); }
 .clinician-label { margin: 0 0 4px; font-size: 15px; font-weight: 600; text-align: center; }
 .clinician-box.active > .clinician-label { color: var(--accent-strong); }
 .clinician-box.active > .box { border-color: var(--accent-strong); box-shadow: 0 0 0 3px var(--accent-soft); }

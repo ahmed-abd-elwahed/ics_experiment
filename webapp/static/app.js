@@ -141,6 +141,9 @@ function showTab(tab) {
     view = viewers[tab];
     $("#panel-view").setAttribute("aria-labelledby", `tab-${tab}`);
     $("#record-source").hidden = !RECORD_TABS.has(tab);
+    // Clinician's View picks the strategy above its Memory box; the other tabs in the toolbar.
+    if (tab === "clinician") $("#strategy-pick").append($("#strategy-select"));
+    else $("#caserun-select").after($("#strategy-select"));
     shareRecord(view);
     if (RECORD_TABS.has(tab) && view.path) $("#record-select").value = view.path;
     $("#envrun-source").hidden = tab !== "envruns";
@@ -770,8 +773,15 @@ function fillCaseRunSelect() {
   fill($("#caserun-select"), ...runs.map((r, i) => h("option", { value: String(i), text: caseRunLabel(r, i) })));
   const strategies = [...new Set(runs.map((r) => r.strategy))];
   const strategySelect = $("#strategy-select");
-  strategySelect.hidden = isEnvRuns() || strategies.length < 2;
-  fill(strategySelect, ...strategies.map((s) => h("option", { value: s ?? "", text: s ?? "" })));
+  strategySelect.hidden = isEnvRuns() || (strategies.length < 2 && !isClinician());
+  fill(strategySelect, ...strategies.map((s) => h("option", { value: s ?? "", text: s ?? "", class: `strat-${strategyKind(s)}` })));
+}
+
+// Each kind of strategy has its own subtle colour (style.css, .strat-*).
+const STRATEGY_KINDS = new Set(["basic", "hypothesis", "knowledge", "channel", "sequence"]);
+function strategyKind(strategy) {
+  const name = view.record?.case_runs?.find((r) => r.strategy === strategy)?.strategy_name;
+  return STRATEGY_KINDS.has(name) ? name : "other";
 }
 
 function currentRun() {
@@ -895,6 +905,8 @@ function renderStep() {
   $("#prev-case").disabled = view.runIndex === 0;
   $("#next-case").disabled = view.runIndex === view.record.case_runs.length - 1;
   $("#strategy-select").value = caseRun.strategy ?? "";
+  $("#strategy-select").className = isClinician() ? `strat-${strategyKind(caseRun.strategy)}` : "";
+  $("#clinician-boxes").className = `clinician-boxes strat-${strategyKind(caseRun.strategy)}`;
 
   const [title, caption] = stepText(caseRun, shown);
   $("#step-title").textContent = title;
