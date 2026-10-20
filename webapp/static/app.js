@@ -1491,29 +1491,29 @@ function wire() {
   $("#next-step").addEventListener("click", () => goStep(view.step + 1));
   $("#step-range").addEventListener("input", (event) => goStep(Number(event.target.value)));
 
-  // Space always moves to the next step, wherever the focus is (a focused button, list or the
-  // step slider would otherwise take it), except while typing in a text field. Captured before
-  // the focused element sees it; the keyup is swallowed too, since a button clicks on keyup.
+  // Space and → always move to the next step and ← to the previous one, wherever the focus is (a
+  // focused button, list or the step slider would otherwise take them), except while typing in a
+  // text field. Captured before the focused element sees them; the keyup is swallowed too, since
+  // a button clicks on keyup.
+  const STEP_KEYS = { " ": 1, ArrowRight: 1, ArrowLeft: -1 };
   const typing = (target) =>
     target instanceof Element &&
     (Boolean(target.closest("textarea, [contenteditable]")) || (target.matches("input") && !["range", "checkbox", "radio", "button", "submit", "file"].includes(target.type)));
-  const spaceStep = (event) => event.key === " " && VIEW_TABS.has(app.tab) && view.steps.length && !event.metaKey && !event.ctrlKey && !event.altKey && !typing(event.target);
+  const stepKey = (event) => event.key in STEP_KEYS && VIEW_TABS.has(app.tab) && view.steps.length && !event.metaKey && !event.ctrlKey && !event.altKey && !typing(event.target);
   document.addEventListener("keydown", (event) => {
-    if (!spaceStep(event)) return;
+    if (!stepKey(event)) return;
     event.preventDefault();
     event.stopPropagation();
-    goStep(view.step + 1);
+    goStep(view.step + STEP_KEYS[event.key]);
   }, true);
   document.addEventListener("keyup", (event) => {
-    if (spaceStep(event)) event.preventDefault();
+    if (stepKey(event)) event.preventDefault();
   }, true);
 
   document.addEventListener("keydown", (event) => {
     if (!VIEW_TABS.has(app.tab) || !view.steps.length || event.metaKey || event.ctrlKey || event.altKey) return;
     if (event.target instanceof Element && event.target.closest("input, textarea, select, [contenteditable]")) return;
     const actions = {
-      ArrowRight: () => goStep(view.step + 1),
-      ArrowLeft: () => goStep(view.step - 1),
       Home: () => goStep(0),
       End: () => goStep(view.steps.length - 1),
       n: () => jumpCase(1),

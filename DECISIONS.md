@@ -388,3 +388,4 @@ in [environment/NOTES.md](environment/NOTES.md).
 | Decision | Why |
 |---|---|
 | In View record, Environment runs and Clinician's View, Space moves to the next step, like →, wherever the focus is: it is caught before a focused button, list or the step slider can use it, so it never clicks "Next case", opens a list or scrolls the page. It is left alone only while typing in a text field. The key hint under the scene lists it. | Asked for: "make the space bar always move to the next iteration". "Iteration" read as the viewer's next step, as in the earlier request about moving through the iterations. |
+| ← and → work the same way: always the previous and next step, even with a list or the step slider focused (a focused list no longer changes its selection on an arrow key). | Asked for (2026-10-20): "and the left and right arrow keys also". |
