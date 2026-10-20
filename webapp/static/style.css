@@ -368,8 +368,15 @@ mark { background: var(--mark); color: inherit; border-radius: 3px; padding: 0 1
    answer stay centred on the scene's height. */
 .scene.clinician { grid-template-columns: minmax(0, 1.25fr) minmax(170px, 0.6fr) minmax(0, 1.35fr); }
 .scene.clinician > .channel { align-self: center; }
-.scene.clinician #box-memory, .scene.clinician #box-output { max-height: 420px; font-size: 14px; }
+.scene.clinician #box-memory, .scene.clinician #box-output { max-height: none; font-size: 14px; }
 .scene.clinician .diagnosis .badge { white-space: normal; }
+/* Fixed heights, so stepping through a run never resizes a box; longer content scrolls. */
+.scene.clinician .box { flex: none; }
+.scene.clinician #box-case { height: 270px; }
+.scene.clinician #box-lit { height: 200px; }
+.scene.clinician #box-llm { height: 300px; }
+.scene.clinician .msg-box { height: 150px; max-height: none; }
+.scene.clinician #box-memory, .scene.clinician #box-output { height: 420px; }
 @media (max-width: 1180px) { .scene.clinician { grid-template-columns: 1fr; } }
 .output-list { margin: 4px 0 6px; padding-left: 20px; display: flex; flex-direction: column; gap: 3px; }
 .output-list li.truth-hit { background: var(--ok-soft); border-radius: 6px; padding: 1px 6px; margin-left: -6px; }
