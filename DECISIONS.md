@@ -355,3 +355,16 @@ in [environment/NOTES.md](environment/NOTES.md).
 | The true diagnosis's rank is the evaluation's (ICD-11 match), shown with the name the strategy used ("Ranula"). | It is the rank the results tables use. |
 | The slides are written by `scripts/make_case_walkthrough_deck.py` (record, evaluation and case id as arguments). | The same walk can be made for another case or run. |
 | The slides were checked by rendering them with headless Chrome before publishing (nothing runs past the bottom margin). | The Slides type does not build-check layout; the cards' text lengths vary. |
+
+### Retrieval optimization and strategy scaling deck (2026-10-20)
+
+| Decision | Why |
+|---|---|
+| The deck "Retrieval Optimization and Strategy Scaling" uses Presentation Design's layouts and type, with its colours moved to sky blue: title slides `#CFE8F7`, body slides `#F2F7FB`, the one accent `#5DB8EA` (ink text on it), rules `#D5E2EC`. | A sky blue theme of that design system was asked for; ink, muted text, white and the fonts are kept. |
+| The retrieval table's three rows come from the document-metric search (2026-10-16): `baseline`, `llm_select20+epmc25+q_synonym` and `epmc25`. "Original Europe PMC + LitSense" is that run's baseline (medsim's default at the time, changes 1–4), labelled "the run's starting point". | The request was the original, the paid winner and the best free system of the optimization run. |
+| Its columns are strict and category truth coverage, nDCG@8 and precision@8, plus retrieval cost per question ($0.2245 over 141 questions for the winner, $0.0016). | "The different benchmarks, excluding the faithfulness"; only retrieval differs between the three, so the answer-writing cost is left out. |
+| The approval slide states the free system's gain with its interval (−1.4 to +12.8 points) in the notes. | The interval includes zero; the slide should not overstate it. |
+| The scaling gains are top-10 accuracy from 4 to 16 questions: knowledge-driven +19.5 points (highest), sequence-based +11.4 (lowest). | At top 10 these two are the highest and lowest, as the takeaways state; at top 1 hypothesis-driven, not sequence-based, gains least (+11.8 against +15.1). |
+| The figure is `records/plots/topk_by_iterations.svg` rendered to a 2000px PNG. | The SVG's text uses system fonts that an uploaded SVG cannot load reliably; a PNG at twice its size stays sharp. |
+| The takeaways slide has two points. | The request said three but named two and ended "that's it". |
+| The "Presentation" and "Thank you" slides are title slides with no subtitle. | The content after the takeaways is to come; these two were asked to be last. |
