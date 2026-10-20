@@ -908,7 +908,7 @@ function renderStep() {
   const flow = hasFlow(caseRun);
   $("#scene").classList.toggle("with-flow", flow);
   $("#strategy-flow").hidden = !flow;
-  $("#node-strategy .robot").classList.toggle("hidden-robot", flow);
+  $("#node-strategy .robot").classList.toggle("hidden-robot", flow || isClinician());
   $("#box-strategy").hidden = flow || isClinician();
   $("#clinician-boxes").hidden = !isClinician();
   if (isEnvRuns()) renderQuestionsBox(caseRun, step);
