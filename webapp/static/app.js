@@ -912,6 +912,8 @@ function renderStep() {
   $("#node-strategy .robot").classList.toggle("hidden-robot", flow || isClinician());
   $("#box-strategy").hidden = flow || isClinician();
   $("#clinician-boxes").hidden = !isClinician();
+  $("#strategy-title").hidden = isClinician();
+  $("#channel-title").hidden = !isClinician();
   if (isEnvRuns()) renderQuestionsBox(caseRun, step);
   else if (isClinician()) {
     $("#strategy-title").textContent = "Information Collection Strategy";

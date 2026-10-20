@@ -367,7 +367,13 @@ mark { background: var(--mark); color: inherit; border-radius: 3px; padding: 0 1
 /* A narrower environment leaves room for wider, taller memory and output boxes; the query and
    answer stay centred on the scene's height. */
 .scene.clinician { grid-template-columns: minmax(0, 1.25fr) minmax(170px, 0.6fr) minmax(0, 1.35fr); }
-.scene.clinician > .channel { align-self: center; }
+.scene.clinician > .channel { align-self: center; position: relative; }
+/* The title sits above the messages without moving them off the vertical centre. */
+.channel-title { position: absolute; bottom: calc(100% + 24px); left: 10px; right: 10px; margin: 0; text-align: center; font-size: 20px; font-weight: 600; line-height: 1.25; }
+@media (max-width: 1180px) {
+  .scene.clinician > .channel { flex-wrap: wrap; }
+  .channel-title { position: static; flex-basis: 100%; }
+}
 .scene.clinician #box-memory, .scene.clinician #box-output { max-height: none; font-size: 14px; }
 .scene.clinician .diagnosis .badge { white-space: normal; }
 /* Fixed heights, so stepping through a run never resizes a box; longer content scrolls. */
