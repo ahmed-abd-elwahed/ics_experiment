@@ -371,6 +371,8 @@ option[class^="strat-"] { background: var(--strat-soft); }
 .strategy-pick { display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600; }
 .strategy-pick select { background: var(--strat-soft); border: 1px solid var(--strat); border-left-width: 5px; font-weight: 600; }
 .clinician-boxes[class*="strat-"] .box { background: var(--strat-soft); border-color: color-mix(in srgb, var(--strat) 45%, var(--border)); }
+.memory-group { margin: 10px 0 2px; padding: 2px 8px; border-left: 3px solid var(--strat, var(--border)); font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.memory-group.current { color: var(--strat, var(--accent-strong)); }
 .clinician-label { margin: 0 0 4px; font-size: 15px; font-weight: 600; text-align: center; }
 .clinician-box.active > .clinician-label { color: var(--accent-strong); }
 .clinician-box.active > .box { border-color: var(--accent-strong); box-shadow: 0 0 0 3px var(--accent-soft); }

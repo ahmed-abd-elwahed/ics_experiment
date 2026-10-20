@@ -1220,19 +1220,40 @@ function renderStrategyBox(caseRun, step) {
 
 const percent = (p) => `${Math.round(100 * (p ?? 0))}%`;
 
+const PHASE_LABELS = { init: "Phase 1 · Initialization", refine: "Phase 2 · Refinement", final: "Phase 3 · Final diagnosis" };
+
+// Channel-based memory is grouped by the channel each question was asked in, sequence-based by
+// the phase; other strategies keep one list.
+function memoryGroup(caseRun, it) {
+  const trace = it.strategy_trace || {};
+  if (caseRun.strategy_name === "channel" && trace.channel) return `Channel · ${trace.channel[0].toUpperCase()}${trace.channel.slice(1)}`;
+  if (caseRun.strategy_name === "sequence" && trace.phase) return PHASE_LABELS[trace.phase] || trace.phase;
+  return null;
+}
+
 function renderMemoryBox(caseRun, step) {
   const box = $("#box-memory");
   const memory = caseRun.iterations.slice(0, answeredCount(caseRun, step)).filter((it) => it.answer != null);
+  const groups = [];
+  memory.forEach((it, i) => {
+    const label = memoryGroup(caseRun, it);
+    if (!groups.length || groups.at(-1).label !== label) groups.push({ label, start: i, items: [] });
+    groups.at(-1).items.push(it);
+  });
+  const current = step.iteration ? memoryGroup(caseRun, step.iteration) : null;
   fill(box, 
     h("div", { class: "muted", text: plural(memory.length, "answer") }),
     memory.length
-      ? h(
-          "ol",
-          { class: "memory" },
-          memory.map((it, i) =>
-            h("li", { class: step.kind === "answer" && i === memory.length - 1 ? "new" : null }, h("div", { class: "q", text: it.question }), h("div", { text: it.answer })),
+      ? groups.map((group) => [
+          group.label ? h("div", { class: `memory-group${group === groups.at(-1) && group.label === current ? " current" : ""}`, text: `${group.label} · ${plural(group.items.length, "question")}` }) : null,
+          h(
+            "ol",
+            { class: "memory", start: String(group.start + 1) },
+            group.items.map((it, j) =>
+              h("li", { class: step.kind === "answer" && group.start + j === memory.length - 1 ? "new" : null }, h("div", { class: "q", text: it.question }), h("div", { text: it.answer })),
+            ),
           ),
-        )
+        ])
       : h("p", { class: "placeholder", text: "Empty: the strategy starts with no information about the patient." }),
   );
   const fresh = $(".memory li.new", box);
