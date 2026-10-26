@@ -418,3 +418,9 @@ in [environment/NOTES.md](environment/NOTES.md).
 | The second landing tile's heading reads "Information Collection Strategies" (was "Clinician's View"); the ICS tab itself keeps its "Clinician's View" label. | Asked for (2026-10-26). |
 | The landing tiles no longer have the small red line ("DDx experiment", "ICS experiment"); the bold tile heading is red instead (`punch-ink`, the design system's pink as text). | Asked for (2026-10-26). |
 | The landing tile headings are black again (ink), not red. | Asked for (2026-10-26), replacing the previous row. |
+
+### Green accent on the ICS page (2026-10-26)
+
+| Decision | Why |
+|---|---|
+| The ICS experiment page has a green accent (`#1b7f5b`, the design system's slot-c green): its small top line, the highlighted path through the diagram (active boxes, arrows, Query and Answer, Memory and Output) and a light green fill on its tab in the top bar. The DDx page keeps blue and the pink tab. | Asked for (2026-10-26). The ICS page's dashed environment was already green, so the same green ties the accent to it. |

@@ -30,6 +30,9 @@
   --slot-b-tint: #ebe3f5;
   --slot-c: #1b7f5b;
   --ok-tint: #dcefe5;
+  --ics: #1b7f5b;
+  --ics-tint: #dcefe5;
+  --ics-fill: #9bd6b8;
   --active: var(--slot-a);
   --active-tint: var(--slot-a-tint);
 
@@ -97,6 +100,10 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 }
 .nav a[aria-current="page"] { background: var(--punch); }
 .nav a:hover:not([aria-current="page"]) { background: var(--tan); }
+/* The ICS experiment page takes a green accent: its eyebrow, the active tab and the highlighted path. */
+html[data-page="ics"] .nav a[aria-current="page"] { background: var(--ics-fill); }
+#ics { --active: var(--ics); --active-tint: var(--ics-tint); }
+#ics .eyebrow { color: var(--ics); }
 
 /* --- an experiment view -------------------------------------------------------------------- */
 
@@ -1050,6 +1057,7 @@ let page = null;
 function show() {
   const name = location.hash.slice(1);
   page = name in PAGES ? name : null;
+  document.documentElement.dataset.page = page || "home";
   $("#home").hidden = page !== null;
   $("#top").hidden = page === null;
   $("#ddx").hidden = page !== "ddx";
