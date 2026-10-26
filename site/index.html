@@ -73,7 +73,7 @@ button, select { font: inherit; color: inherit; }
 }
 .tile:hover { background: var(--punch-tint); transform: translateY(-2px); }
 .tile svg { width: 64px; height: 64px; color: var(--ink); }
-.tile h2 { font: 800 26px/1.15 var(--sans); letter-spacing: -0.02em; }
+.tile h2 { font: 800 26px/1.15 var(--sans); letter-spacing: -0.02em; color: var(--punch-ink); }
 .tile p { margin: 0; color: var(--ink-muted); }
 .tile .go { margin-top: auto; font: 500 13px/18px var(--mono); letter-spacing: 0.14em; text-transform: uppercase; }
 @media (max-width: 640px) { .tiles { grid-template-columns: 1fr; } }
@@ -327,14 +327,12 @@ mark { background: var(--gold-tint); color: inherit; border-radius: 3px; padding
     <div class="tiles">
       <a class="tile" href="#ddx">
         <svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><path d="M32 6 L44 18 L32 30 L20 18 Z"/><rect x="4" y="34" width="20" height="13" rx="4"/><rect x="40" y="34" width="20" height="13" rx="4"/><rect x="22" y="50" width="20" height="11" rx="4"/><path d="M44 18 H50 V34 M50 47 V55 H42 M22 55 H14 V47 M14 34 V18 H20"/></g></svg>
-        <div class="eyebrow">DDx experiment</div>
         <h2>Differential diagnosis framework</h2>
         <p>One case through the framework's loop: rank diseases, check whether one stands out, ask for more, update, repeat.</p>
         <span class="go">Open ›</span>
       </a>
       <a class="tile" href="#ics">
         <svg viewBox="0 0 150 184" aria-hidden="true"><use href="#robot"/></svg>
-        <div class="eyebrow">ICS experiment</div>
         <h2>Information Collection Strategies</h2>
         <p>Four information collection strategies question a simulated patient environment about the same case.</p>
         <span class="go">Open ›</span>
