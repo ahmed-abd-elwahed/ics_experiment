@@ -4,8 +4,25 @@
     {
       "name": "webapp",
       "runtimeExecutable": ".venv/bin/python",
-      "runtimeArgs": ["-m", "webapp", "--no-browser"],
+      "runtimeArgs": [
+        "-m",
+        "webapp",
+        "--no-browser"
+      ],
       "port": 8765,
+      "autoPort": true
+    },
+    {
+      "name": "site",
+      "runtimeExecutable": ".venv/bin/python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8790",
+        "--directory",
+        "site"
+      ],
+      "port": 8790,
       "autoPort": true
     }
   ]

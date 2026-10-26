@@ -1,0 +1,211 @@
+{
+ "case_id": "PMC7520668_01",
+ "diagnosis": "Fabry Disease",
+ "background": "A 69-year-old male with a history of hypertension, diet-controlled diabetes, morbid obesity status post gastric bypass, and metastatic prostate cancer presents for the evaluation of progressive chronic kidney disease and proteinuria. His current medications include atorvastatin, amlodipine, aspirin, calcium carbonate, and leuprolide, and he has no known drug allergies. The patient's family history is notable for a brother who developed renal failure of an unclear etiology in his forties. On review of systems, he reports experiencing peripheral neuropathy associated with unstable balance, but he denies any hypohidrosis, extremity pain, gastrointestinal complaints, rashes, cardiac symptoms, or other skin issues.",
+ "case_text": "A 69-year-old male with hypertension, diabetes (diet controlled), history of morbid obesity status post gastric bypass, and metastatic prostate cancer presented with progressive chronic kidney disease and subnephrotic-range proteinuria. Glomerular filtration rate declined by >5 ml/min/1.73 m2 per year. Medications: atorvastatin, amlodipine, aspirin, calcium carbonate, leuprolide. No known drug allergies. Family history notable for a brother with renal failure of unclear etiology in his forties. Review of systems notable for peripheral neuropathy with unstable balance; denied hypohidrosis, extremity pain, gastrointestinal complaints, rashes, or cardiac symptoms; denied skin issues. Exam: BP 160/78, pulse 72, BMI 24.5; no abnormal lung, heart, abdominal, extremity, or skin findings. Labs: creatinine 4.3 mg/dL, BUN 47 mg/dL, CO2 19 mg/dL; electrolytes otherwise normal. CBC: hemoglobin 10.9 g/dL with normal platelets and WBC. Urinalysis with mild proteinuria; urine protein/creatinine ratio 2.2. SPEP, UPEP, and serum free light chains without abnormalities. Kidney ultrasound showed slightly atrophic kidneys with echogenic parenchyma. Kidney biopsy: light microscopy with normocellular glomeruli, uniform capillary walls, prominent podocytes with foamy cytoplasm; ultrastructural exam with osmophilic lamellated inclusions in podocytes with concentric/striped appearance (myelin-like lamellated inclusions). Alpha-galactosidase enzyme activity low (21 nm/hr/mg protein; reference 50–150). GLA gene testing showed missense variant c.682A>C (p.Ala228Cys); daughter and grandson tested positive for same variant. In vitro mutation testing suggested suitability for migalastat therapy.",
+ "model": "openai/gpt-5.4-mini",
+ "environment_model": "google/gemini-3-flash-preview",
+ "threshold": 0.5,
+ "rounds_in_experiment": 8,
+ "final_in_experiment": [
+  "Fabry disease",
+  0.97
+ ],
+ "source": "data/runs/final/table/gpt_5.4_mini/framework/runs_record_0.json · run 130",
+ "rounds": [
+  {
+   "ddx": [
+    [
+     "Monoclonal gammopathy-related kidney disease (e.g., AL amyloidosis or light chain deposition disease)",
+     0.22
+    ],
+    [
+     "Hereditary nephropathy (e.g., Fabry disease)",
+     0.18
+    ],
+    [
+     "Diabetic kidney disease",
+     0.14
+    ],
+    [
+     "Hypertensive nephrosclerosis",
+     0.1
+    ],
+    [
+     "FSGS/obesity-related glomerulopathy",
+     0.1
+    ],
+    [
+     "Membranous nephropathy",
+     0.08
+    ],
+    [
+     "Multiple myeloma / cast nephropathy",
+     0.06
+    ],
+    [
+     "Medication-related kidney injury",
+     0.04
+    ],
+    [
+     "IgA nephropathy",
+     0.04
+    ],
+    [
+     "Prostate cancer–related obstructive uropathy or paraneoplastic renal disease",
+     0.04
+    ]
+   ],
+   "question": "What are the serum creatinine trend, estimated GFR, and the degree/type of proteinuria on quantification (urine protein-to-creatinine ratio or 24-hour protein, and is it albumin-predominant or non-albumin)?",
+   "answer": "Creatinine 4.3 mg/dL (progressive chronic kidney disease with GFR decline by >5 ml/min/1.73 m2 per year); urine protein/creatinine ratio 2.2 (subnephrotic-range proteinuria).\n\nDo not ask questions about the estimated GFR value or if the proteinuria is albumin-predominant or non-albumin.",
+   "spans": [
+    "Glomerular filtration rate declined by >5 ml/min/1.73 m2 per year",
+    "creatinine 4.3 mg/dL",
+    "urine protein/creatinine ratio 2.2",
+    "subnephrotic-range proteinuria"
+   ]
+  },
+  {
+   "ddx": [
+    [
+     "Monoclonal gammopathy-related kidney disease (e.g., AL amyloidosis or light chain deposition disease)",
+     0.28
+    ],
+    [
+     "Hereditary nephropathy (e.g., Fabry disease)",
+     0.2
+    ],
+    [
+     "FSGS/obesity-related glomerulopathy",
+     0.11
+    ],
+    [
+     "Diabetic kidney disease",
+     0.1
+    ],
+    [
+     "Hypertensive nephrosclerosis",
+     0.09
+    ],
+    [
+     "Multiple myeloma / cast nephropathy",
+     0.07
+    ],
+    [
+     "Membranous nephropathy",
+     0.05
+    ],
+    [
+     "Medication-related kidney injury",
+     0.04
+    ],
+    [
+     "Prostate cancer–related obstructive uropathy or paraneoplastic renal disease",
+     0.03
+    ],
+    [
+     "IgA nephropathy",
+     0.03
+    ]
+   ],
+   "question": "Has a serum and urine monoclonal protein workup been done yet — specifically SPEP/UPEP with immunofixation and serum free light chains?",
+   "answer": "SPEP, UPEP, and serum free light chains without abnormalities.",
+   "spans": [
+    "SPEP, UPEP, and serum free light chains without abnormalities"
+   ]
+  },
+  {
+   "ddx": [
+    [
+     "Hereditary nephropathy (e.g., Fabry disease)",
+     0.28
+    ],
+    [
+     "FSGS/obesity-related glomerulopathy",
+     0.18
+    ],
+    [
+     "Monoclonal gammopathy-related kidney disease (e.g., AL amyloidosis or light chain deposition disease)",
+     0.16
+    ],
+    [
+     "Diabetic kidney disease",
+     0.1
+    ],
+    [
+     "Hypertensive nephrosclerosis",
+     0.08
+    ],
+    [
+     "Membranous nephropathy",
+     0.06
+    ],
+    [
+     "Medication-related kidney injury",
+     0.04
+    ],
+    [
+     "Prostate cancer–related obstructive uropathy or paraneoplastic renal disease",
+     0.04
+    ],
+    [
+     "IgA nephropathy",
+     0.03
+    ],
+    [
+     "Multiple myeloma / cast nephropathy",
+     0.03
+    ]
+   ],
+   "question": "Has a kidney biopsy been performed, and if so what does the light microscopy, immunofluorescence, and electron microscopy show?",
+   "answer": "Kidney biopsy: light microscopy with normocellular glomeruli, uniform capillary walls, prominent podocytes with foamy cytoplasm; ultrastructural exam with osmophilic lamellated inclusions in podocytes with concentric/striped appearance (myelin-like lamellated inclusions). Do not ask questions about immunofluorescence.",
+   "spans": [
+    "Kidney biopsy: light microscopy with normocellular glomeruli, uniform capillary walls, prominent podocytes with foamy cytoplasm; ultrastructural exam with osmophilic lamellated inclusions in podocytes with concentric/striped appearance (myelin-like lamellated inclusions)"
+   ]
+  },
+  {
+   "ddx": [
+    [
+     "Hereditary nephropathy (e.g., Fabry disease)",
+     0.55
+    ],
+    [
+     "FSGS/obesity-related glomerulopathy",
+     0.12
+    ],
+    [
+     "Hypertensive nephrosclerosis",
+     0.08
+    ],
+    [
+     "Diabetic kidney disease",
+     0.07
+    ],
+    [
+     "Monoclonal gammopathy-related kidney disease (e.g., AL amyloidosis or light chain deposition disease)",
+     0.05
+    ],
+    [
+     "Prostate cancer–related obstructive uropathy or paraneoplastic renal disease",
+     0.04
+    ],
+    [
+     "Membranous nephropathy",
+     0.03
+    ],
+    [
+     "Medication-related kidney injury",
+     0.03
+    ],
+    [
+     "IgA nephropathy",
+     0.02
+    ],
+    [
+     "Multiple myeloma / cast nephropathy",
+     0.01
+    ]
+   ]
+  }
+ ]
+}

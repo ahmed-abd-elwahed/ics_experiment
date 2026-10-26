@@ -1,0 +1,2960 @@
+{
+ "source": "records/strategies_272_8it.json",
+ "environment_settings": {
+  "default_model": "openai/gpt-6-luna",
+  "enabled_sources": [
+   "europe_pmc",
+   "litsense"
+  ]
+ },
+ "strategies": {
+  "hypothesis": {
+   "description": "Hypothesis-driven search: keeps a ranked differential, asks the question that best separates the leading hypotheses, and stops once one clearly leads."
+  },
+  "knowledge": {
+   "description": "Knowledge-driven search: asks for the findings a clinical pattern still lacks, and stops once a pattern is complete; a diagnosis is named only at the end."
+  },
+  "channel": {
+   "description": "Channel-based: the patient interview first; if that leaves the diagnosis uncertain, the physical exam. Questions outside the current channel are rejected."
+  },
+  "sequence": {
+   "description": "Sequence-based: opening questions and a first differential, then questions that prune it, then a confirming question for the leader."
+  }
+ },
+ "case_runs": [
+  {
+   "case_id": "PMC7520668_01",
+   "strategy": "hypothesis",
+   "strategy_name": "hypothesis",
+   "status": "completed",
+   "stop_reason": "max_iterations",
+   "case": {
+    "case_id": "PMC7520668_01",
+    "diagnosis": "Fabry Disease",
+    "narrative": "A 69-year-old male with hypertension, diabetes (diet controlled), history of morbid obesity status post gastric bypass, and metastatic prostate cancer presented with progressive chronic kidney disease and subnephrotic-range proteinuria. Glomerular filtration rate declined by >5 ml/min/1.73 m2 per year. Medications: atorvastatin, amlodipine, aspirin, calcium carbonate, leuprolide. No known drug allergies. Family history notable for a brother with renal failure of unclear etiology in his forties. Review of systems notable for peripheral neuropathy with unstable balance; denied hypohidrosis, extremity pain, gastrointestinal complaints, rashes, or cardiac symptoms; denied skin issues. Exam: BP 160/78, pulse 72, BMI 24.5; no abnormal lung, heart, abdominal, extremity, or skin findings. Labs: creatinine 4.3 mg/dL, BUN 47 mg/dL, CO2 19 mg/dL; electrolytes otherwise normal. CBC: hemoglobin 10.9 g/dL with normal platelets and WBC. Urinalysis with mild proteinuria; urine protein/creatinine ratio 2.2. SPEP, UPEP, and serum free light chains without abnormalities. Kidney ultrasound showed slightly atrophic kidneys with echogenic parenchyma. Kidney biopsy: light microscopy with normocellular glomeruli, uniform capillary walls, prominent podocytes with foamy cytoplasm; ultrastructural exam with osmophilic lamellated inclusions in podocytes with concentric/striped appearance (myelin-like lamellated inclusions). Alpha-galactosidase enzyme activity low (21 nm/hr/mg protein; reference 50–150). GLA gene testing showed missense variant c.682A>C (p.Ala228Cys); daughter and grandson tested positive for same variant. In vitro mutation testing suggested suitability for migalastat therapy."
+   },
+   "diagnosis": {
+    "differential": [
+     {
+      "name": "Diabetic kidney disease",
+      "probability": 0.3
+     },
+     {
+      "name": "Hypertensive nephrosclerosis",
+      "probability": 0.22
+     },
+     {
+      "name": "Alport syndrome",
+      "probability": 0.14
+     },
+     {
+      "name": "Membranous nephropathy",
+      "probability": 0.1
+     },
+     {
+      "name": "Focal segmental glomerulosclerosis",
+      "probability": 0.08
+     },
+     {
+      "name": "APOL1-mediated kidney disease",
+      "probability": 0.05
+     },
+     {
+      "name": "Chronic tubulointerstitial nephritis",
+      "probability": 0.04
+     },
+     {
+      "name": "Autosomal dominant polycystic kidney disease",
+      "probability": 0.025
+     },
+     {
+      "name": "Immunoglobulin A nephropathy",
+      "probability": 0.02
+     },
+     {
+      "name": "Chronic kidney disease, unspecified",
+      "probability": 0.015
+     }
+    ],
+    "error": null
+   },
+   "iterations": [
+    {
+     "question": "What is the patient's presenting complaint?",
+     "answer": "The patient presented with progressive chronic kidney disease and subnephrotic-range proteinuria.",
+     "answer_source": "case_study",
+     "error": null,
+     "strategy_trace": {
+      "differential": [],
+      "separates": []
+     },
+     "environment_response": {
+      "answer_source": "case_study",
+      "evidence": [
+       "presented with progressive chronic kidney disease and subnephrotic-range proteinuria."
+      ],
+      "confidence": "high",
+      "literature_search": false,
+      "retriever_parameters": {
+       "path": "case_study",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": null,
+       "excluded_source_docs": []
+      },
+      "literature_search_result": null
+     }
+    },
+    {
+     "question": "What is the patient's blood pressure?",
+     "answer": "The patient's blood pressure was 160/78 mmHg.",
+     "answer_source": "case_study",
+     "error": null,
+     "strategy_trace": {
+      "differential": [
+       {
+        "diagnosis": "Primary glomerulonephritis (e.g., IgA nephropathy or membranous nephropathy)",
+        "probability": 0.3,
+        "evidence_for": "Progressive CKD with subnephrotic-range proteinuria is a typical presentation of primary glomerular disease; these entities commonly present with slowly progressive decline and proteinuria below nephrotic range.",
+        "evidence_against": "No urinalysis, serology, biopsy, or hematuria/dysmorphic RBC data yet; the specific subtype cannot be distinguished without further workup."
+       },
+       {
+        "diagnosis": "Diabetic kidney disease",
+        "probability": 0.25,
+        "evidence_for": "Chronic progressive kidney disease with proteinuria is the most common cause of CKD worldwide, and diabetes is a leading driver of subnephrotic proteinuria.",
+        "evidence_against": "Glycemic history, diabetes status, and retinopathy have not been established; diagnosis of exclusion would depend on absence of atypical features."
+       },
+       {
+        "diagnosis": "Autosomal dominant polycystic kidney disease or other hereditary nephropathy (e.g., Alport syndrome)",
+        "probability": 0.2,
+        "evidence_for": "Progressive CKD with proteinuria can be seen in hereditary tubulointerstitial and cystic diseases; family history would be informative.",
+        "evidence_against": "Family history, renal imaging, hearing, and ocular findings have not been assessed."
+       },
+       {
+        "diagnosis": "Hypertensive or hypertensive/ischemic nephrosclerosis",
+        "probability": 0.15,
+        "evidence_for": "Common cause of progressive CKD with modest proteinuria, especially in patients with long-standing hypertension.",
+        "evidence_against": "Blood pressure history and antihypertensive use are unknown; proteinuria is usually mild, and this is often a diagnosis of exclusion."
+       },
+       {
+        "diagnosis": "Focal segmental glomerulosclerosis",
+        "probability": 0.1,
+        "evidence_for": "Can present with progressive CKD and subnephrotic-range proteinuria, and may progress to end-stage disease.",
+        "evidence_against": "No data on edema, serum albumin, lipid levels, or hematuria; FSGS more often presents with nephrotic-range proteinuria."
+       }
+      ],
+      "separates": [
+       "Hypertensive or hypertensive/ischemic nephrosclerosis",
+       "Primary glomerulonephritis (e.g., IgA nephropathy or membranous nephropathy)",
+       "Diabetic kidney disease",
+       "Autosomal dominant polycystic kidney disease or other hereditary nephropathy (e.g., Alport syndrome)",
+       "Focal segmental glomerulosclerosis"
+      ]
+     },
+     "environment_response": {
+      "answer_source": "case_study",
+      "evidence": [
+       "Exam: BP 160/78, pulse 72, BMI 24.5"
+      ],
+      "confidence": "high",
+      "literature_search": false,
+      "retriever_parameters": {
+       "path": "case_study",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": null,
+       "excluded_source_docs": []
+      },
+      "literature_search_result": null
+     }
+    },
+    {
+     "question": "What is the patient's urine dipstick result for blood (hematuria)?",
+     "answer": "Urine dipstick blood was negative.",
+     "answer_source": "literature",
+     "error": null,
+     "strategy_trace": {
+      "differential": [
+       {
+        "diagnosis": "Primary glomerulonephritis (e.g., IgA nephropathy or membranous nephropathy)",
+        "probability": 0.28,
+        "evidence_for": "Progressive CKD with subnephrotic-range proteinuria is a typical presentation of primary glomerular disease, which often shows slow progression with proteinuria below nephrotic range.",
+        "evidence_against": "No urinalysis, serology, biopsy, or hematuria/dysmorphic RBC data yet; subtype cannot be distinguished without further workup."
+       },
+       {
+        "diagnosis": "Diabetic kidney disease",
+        "probability": 0.25,
+        "evidence_for": "Chronic progressive CKD with proteinuria is the most common cause of CKD worldwide, and diabetes is a leading driver of subnephrotic proteinuria.",
+        "evidence_against": "Glycemic history, diabetes status, and retinopathy not yet established; diagnosis of exclusion depends on absence of atypical features."
+       },
+       {
+        "diagnosis": "Hypertensive nephrosclerosis",
+        "probability": 0.2,
+        "evidence_for": "Blood pressure of 160/78 mmHg is elevated and hypertensive nephrosclerosis is a common cause of progressive CKD with modest proteinuria.",
+        "evidence_against": "Blood pressure history and antihypertensive use are unknown; proteinuria is usually mild and this is often a diagnosis of exclusion."
+       },
+       {
+        "diagnosis": "Autosomal dominant polycystic kidney disease or other hereditary nephropathy (e.g., Alport syndrome)",
+        "probability": 0.17,
+        "evidence_for": "Progressive CKD with proteinuria can occur in hereditary cystic and tubulointerstitial diseases; family history would be informative.",
+        "evidence_against": "Family history, renal imaging, hearing, and ocular findings have not been assessed."
+       },
+       {
+        "diagnosis": "Focal segmental glomerulosclerosis",
+        "probability": 0.1,
+        "evidence_for": "Can present with progressive CKD and subnephrotic-range proteinuria and may progress to end-stage disease.",
+        "evidence_against": "No data on edema, serum albumin, lipids, or hematuria; FSGS more often presents with nephrotic-range proteinuria."
+       }
+      ],
+      "separates": [
+       "Primary glomerulonephritis (IgA or membranous)",
+       "Diabetic kidney disease",
+       "Hypertensive nephrosclerosis",
+       "Autosomal dominant polycystic kidney disease or Alport syndrome",
+       "Focal segmental glomerulosclerosis"
+      ]
+     },
+     "environment_response": {
+      "answer_source": "literature",
+      "evidence": [],
+      "confidence": "low",
+      "literature_search": true,
+      "retriever_parameters": {
+       "path": "best_guess",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": "urine dipstick blood hematuria Fabry disease chronic kidney disease",
+       "excluded_source_docs": []
+      },
+      "literature_search_result": {
+       "query": "europe_pmc: TITLE_ABS:(\"urine dipstick blood\" OR hematuria OR \"microscopic hematuria\" OR \"urinary red blood cells\") AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson Fabry disease\" OR \"Fabry nephropathy\") | litsense: urine dipstick blood Fabry disease",
+       "documents": [
+        {
+         "doc_id": "PMID:41531328",
+         "title": "Drug-induced phospholipidosis of the kidney suspected to be caused by atomoxetine.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/41531328/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:40342436",
+         "title": "Fabry Disease in a Patient With Thin Basement Membrane Nephropathy.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/40342436/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:24913738",
+         "title": "Coexistence of Fabry disease and IgA nephropathy: a report of two cases.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/24913738/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:35842573",
+         "title": "COL4A4 variant recently identified: lessons learned in variant interpretation-a case report.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/35842573/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:34341920",
+         "title": "Impact of the COVID-19 pandemic on interest in renal diseases.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/34341920/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:42824490",
+         "title": "Case Report: Concurrent Fabry disease, IgA nephropathy and undifferentiated connective tissue disease in a female with normal enzyme activity.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/42824490/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:31840555",
+         "title": "IgA nephropathy suspected to be combined with Fabry disease or Alport syndrome: a case report.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/31840555/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:32356190",
+         "title": "Myelin bodies in LMX1B-associated nephropathy: potential for misdiagnosis.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/32356190/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        }
+       ]
+      }
+     }
+    },
+    {
+     "question": "What is the patient's HbA1c or fasting glucose, and is there a known history of diabetes mellitus?",
+     "answer": "HbA1c is approximately 6.2%. He has a known history of diet-controlled diabetes mellitus.",
+     "answer_source": "literature",
+     "error": null,
+     "strategy_trace": {
+      "differential": [
+       {
+        "diagnosis": "Diabetic kidney disease",
+        "probability": 0.27,
+        "evidence_for": "Progressive CKD with subnephrotic proteinuria is the most common CKD pattern and diabetes is a leading cause; negative dipstick blood favors a non-proliferative, non-glomerulonephritic process.",
+        "evidence_against": "Glycemic history, diabetes status, and retinopathy not yet established."
+       },
+       {
+        "diagnosis": "Primary glomerulonephritis (e.g., IgA nephropathy or membranous nephropathy)",
+        "probability": 0.23,
+        "evidence_for": "Slowly progressive CKD with subnephrotic proteinuria is typical of primary glomerular disease.",
+        "evidence_against": "Negative urine blood makes IgA nephropathy less likely; no urinalysis microscopy, serology, or biopsy yet."
+       },
+       {
+        "diagnosis": "Hypertensive nephrosclerosis",
+        "probability": 0.22,
+        "evidence_for": "Blood pressure 160/78 mmHg is elevated and hypertensive nephrosclerosis commonly causes progressive CKD with modest proteinuria; negative hematuria is consistent with this.",
+        "evidence_against": "Blood pressure history and antihypertensive use unknown; proteinuria is usually mild and this is a diagnosis of exclusion."
+       },
+       {
+        "diagnosis": "Autosomal dominant polycystic kidney disease or other hereditary nephropathy (e.g., Alport syndrome)",
+        "probability": 0.15,
+        "evidence_for": "Progressive CKD with proteinuria can occur in hereditary cystic and tubulointerstitial disease; negative blood on dipstick is less typical for Alport, so this is weaker.",
+        "evidence_against": "Family history, renal imaging, hearing, and ocular findings not yet assessed."
+       },
+       {
+        "diagnosis": "Focal segmental glomerulosclerosis",
+        "probability": 0.13,
+        "evidence_for": "Can present with progressive CKD and subnephrotic proteinuria and progress to end-stage disease.",
+        "evidence_against": "No data on edema, serum albumin, lipids; FSGS more often presents with nephrotic-range proteinuria."
+       }
+      ],
+      "separates": [
+       "Diabetic kidney disease",
+       "Primary glomerulonephritis (e.g., IgA nephropathy or membranous nephropathy)",
+       "Hypertensive nephrosclerosis",
+       "Autosomal dominant polycystic kidney disease or other hereditary nephropathy (e.g., Alport syndrome)",
+       "Focal segmental glomerulosclerosis"
+      ]
+     },
+     "environment_response": {
+      "answer_source": "literature",
+      "evidence": [
+       "PMID:40420032",
+       "literature range: 5.7–8.2% in the CKD comparison group (PMID:40420032)"
+      ],
+      "confidence": "medium",
+      "literature_search": true,
+      "retriever_parameters": {
+       "path": "literature",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": "HbA1c fasting glucose Fabry disease diet controlled diabetes",
+       "excluded_source_docs": []
+      },
+      "literature_search_result": {
+       "query": "europe_pmc: (CASE:(HbA1c OR \"glycated hemoglobin\" OR \"fasting plasma glucose\" OR \"fasting blood glucose\" OR hyperglycemia) OR RESULTS:(HbA1c OR \"glycated hemoglobin\" OR \"fasting plasma glucose\" OR \"fasting blood glucose\" OR hyperglycemia) OR TABLE:(HbA1c OR \"glycated hemoglobin\" OR \"fasting plasma glucose\" OR \"fasting blood glucose\" OR hyperglycemia)) AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson Fabry disease\") | litsense: HbA1c chronic kidney disease",
+       "documents": [
+        {
+         "doc_id": "PMID:41111061",
+         "title": "Clinical and Biochemical Characterization of Fabry Disease Associated GLA Gene Variants: Data From a Large Cohort of 469 Thousand Genotyped Subjects of the UK Biobank Database.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/41111061/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:35245971",
+         "title": "Evaluation of endocrinological involvement and metabolic status in patients with Gaucher disease Type 1 and Fabry disease under enzyme replacement therapy.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/35245971/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:40420032",
+         "title": "The relationship between multiple plasma biomarker levels and renal disease activity in Fabry disease.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/40420032/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:42812888",
+         "title": "Coronary stenosis in Fabry disease with optical coherence tomography imaging presentation: a case report.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/42812888/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:40342436",
+         "title": "Fabry Disease in a Patient With Thin Basement Membrane Nephropathy.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/40342436/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:41054307",
+         "title": "Optimizing α-galactosidase A enzyme cutoff for Fabry disease screening in chronic kidney disease patients: a single-center reassessment of diagnostic yield and cost-effectiveness.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/41054307/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:40640933",
+         "title": "Current treatment status of fabry disease in South Korea: a longitudinal National health insurance service data-based study.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/40640933/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:38324858",
+         "title": "Differences Between Two Distinct Hypertrophic Cardiac Conditions: Fabry Disease versus Hypertrophic Cardiomyopathy.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/38324858/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        }
+       ]
+      }
+     }
+    },
+    {
+     "question": "Does the patient have diabetic retinopathy on ophthalmologic or fundoscopic examination?",
+     "answer": "No diabetic retinopathy was noted on examination (synthetic best guess; the case does not report an ophthalmologic examination).",
+     "answer_source": "literature",
+     "error": null,
+     "strategy_trace": {
+      "differential": [
+       {
+        "diagnosis": "Diabetic kidney disease",
+        "probability": 0.3,
+        "evidence_for": "Known diet-controlled diabetes with HbA1c about 6.2%; progressive CKD with subnephrotic proteinuria is a typical pattern; negative urine blood favors a non-proliferative, non-glomerulonephritic process.",
+        "evidence_against": "Glycemic control is modest and diabetes is diet-controlled, so the duration and severity of diabetes are uncertain; retinopathy and duration of diabetes not yet established."
+       },
+       {
+        "diagnosis": "Hypertensive nephrosclerosis",
+        "probability": 0.25,
+        "evidence_for": "Blood pressure 160/78 mmHg is elevated and hypertension is a common cause of progressive CKD; negative hematuria is consistent with this.",
+        "evidence_against": "Antihypertensive history and duration of hypertension unknown; proteinuria is usually milder than what is seen here, and this remains a diagnosis of exclusion."
+       },
+       {
+        "diagnosis": "Primary glomerulonephritis (e.g., membranous nephropathy or IgA nephropathy)",
+        "probability": 0.18,
+        "evidence_for": "Slowly progressive CKD with subnephrotic proteinuria is typical of primary glomerular disease.",
+        "evidence_against": "Negative urine blood makes IgA nephropathy less likely; no urine microscopy, serology (anti-PLA2R), or biopsy yet obtained."
+       },
+       {
+        "diagnosis": "Autosomal dominant polycystic kidney disease or other hereditary nephropathy (e.g., Alport syndrome)",
+        "probability": 0.14,
+        "evidence_for": "Progressive CKD with proteinuria can occur in hereditary cystic and tubulointerstitial disease.",
+        "evidence_against": "Negative dipstick blood is less typical for Alport; family history, renal imaging, hearing, and ocular findings not yet assessed."
+       },
+       {
+        "diagnosis": "Focal segmental glomerulosclerosis",
+        "probability": 0.13,
+        "evidence_for": "Can present with progressive CKD and subnephrotic proteinuria and progress to end-stage disease.",
+        "evidence_against": "No data on edema, serum albumin, or lipids; FSGS more often presents with nephrotic-range proteinuria."
+       }
+      ],
+      "separates": [
+       "Diabetic kidney disease",
+       "Hypertensive nephrosclerosis",
+       "Primary glomerulonephritis (e.g., membranous nephropathy or IgA nephropathy)",
+       "Autosomal dominant polycystic kidney disease or other hereditary nephropathy (e.g., Alport syndrome)",
+       "Focal segmental glomerulosclerosis"
+      ]
+     },
+     "environment_response": {
+      "answer_source": "literature",
+      "evidence": [],
+      "confidence": "low",
+      "literature_search": true,
+      "retriever_parameters": {
+       "path": "best_guess",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": "diabetic retinopathy Fabry disease diabetes older adults",
+       "excluded_source_docs": []
+      },
+      "literature_search_result": {
+       "query": "europe_pmc: TITLE_ABS:(\"diabetic retinopathy\" OR retinopathy OR \"fundus examination\" OR \"retinal examination\") AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson Fabry disease\") | litsense: diabetic retinopathy Fabry disease",
+       "documents": [
+        {
+         "doc_id": "PMID:42850619",
+         "title": "Longitudinal assessment of the retinal phenotype in patients with Fabry disease undergoing continuous enzyme replacement and/or chaperone therapy.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/42850619/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:32542397#INTRO-250de732",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/32542397/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:34946804",
+         "title": "Monogenic Causes of Strokes.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/34946804/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:31878969",
+         "title": "Retinal hyperreflective foci in Fabry disease.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/31878969/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:17579657",
+         "title": "Monogenic vessel diseases related to ischemic stroke: a clinical approach.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/17579657/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:16807686",
+         "title": "Single gene disorders causing ischaemic stroke.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/16807686/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:31290435#TITLEABSTRACT-7dc40c77",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/31290435/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:18510248#TITLEABSTRACT-646b90ec",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/18510248/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        }
+       ]
+      }
+     }
+    },
+    {
+     "question": "What are the patient's kidney size and morphology (including presence of cysts) on renal ultrasound?",
+     "answer": "Renal ultrasound showed slightly atrophic kidneys with increased parenchymal echogenicity; no renal cysts were identified.",
+     "answer_source": "literature",
+     "error": null,
+     "strategy_trace": {
+      "differential": [
+       {
+        "diagnosis": "Diabetic kidney disease",
+        "probability": 0.3,
+        "evidence_for": "Known diet-controlled diabetes mellitus with HbA1c about 6.2%; progressive CKD with subnephrotic proteinuria is a typical pattern; negative urine blood and no diabetic retinopathy on examination fit a non-proliferative, non-glomerular process.",
+        "evidence_against": "Glycemic control is modest and diabetes is diet-controlled, so duration and severity are uncertain; absence of retinopathy is noted from a synthetic best guess rather than a documented ophthalmologic exam."
+       },
+       {
+        "diagnosis": "Hypertensive nephrosclerosis",
+        "probability": 0.25,
+        "evidence_for": "Blood pressure 160/78 mmHg is elevated and hypertension is a common cause of progressive CKD; negative hematuria is consistent with this.",
+        "evidence_against": "Antihypertensive history and duration of hypertension unknown; proteinuria is usually milder than seen here; remains a diagnosis of exclusion."
+       },
+       {
+        "diagnosis": "Primary glomerulonephritis (e.g., membranous nephropathy or IgA nephropathy)",
+        "probability": 0.18,
+        "evidence_for": "Slowly progressive CKD with subnephrotic proteinuria is typical of primary glomerular disease.",
+        "evidence_against": "Negative urine blood makes IgA nephropathy less likely; no urine microscopy, anti-PLA2R serology, or biopsy obtained yet."
+       },
+       {
+        "diagnosis": "Autosomal dominant polycystic kidney disease or other hereditary nephropathy (e.g., Alport syndrome)",
+        "probability": 0.14,
+        "evidence_for": "Progressive CKD with proteinuria can occur in hereditary cystic and tubulointerstitial disease.",
+        "evidence_against": "Negative dipstick blood is less typical for Alport; family history, renal imaging, hearing, and ocular findings not yet assessed."
+       },
+       {
+        "diagnosis": "Focal segmental glomerulosclerosis",
+        "probability": 0.13,
+        "evidence_for": "Can present with progressive CKD and subnephrotic proteinuria and progress to end-stage disease.",
+        "evidence_against": "No data on edema, serum albumin, or lipids; FSGS more often presents with nephrotic-range proteinuria."
+       }
+      ],
+      "separates": [
+       "Autosomal dominant polycystic kidney disease or other hereditary nephropathy",
+       "Diabetic kidney disease",
+       "Hypertensive nephrosclerosis",
+       "Primary glomerulonephritis",
+       "Focal segmental glomerulosclerosis"
+      ]
+     },
+     "environment_response": {
+      "answer_source": "literature",
+      "evidence": [],
+      "confidence": "low",
+      "literature_search": true,
+      "retriever_parameters": {
+       "path": "best_guess",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": "renal ultrasound kidney size Fabry nephropathy chronic kidney disease",
+       "excluded_source_docs": []
+      },
+      "literature_search_result": {
+       "query": "europe_pmc: TITLE_ABS:(\"kidney size\" OR \"renal size\" OR \"renal length\" OR \"renal morphology\" OR \"renal cysts\") AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson-Fabry disease\" OR \"Fabry nephropathy\") | litsense: kidney size chronic kidney disease",
+       "documents": [
+        {
+         "doc_id": "PMID:35749008",
+         "title": "Parapelvic Cysts: An Imaging Marker of Kidney Disease Potentially Leading to the Diagnosis of Treatable Rare Genetic Disorders? A Narrative Review of the Literature.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/35749008/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:25187469",
+         "title": "Chronic kidney disease and an uncertain diagnosis of Fabry disease: approach to a correct diagnosis.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/25187469/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:21290670",
+         "title": "Renal manifestations of Fabry disease",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/21290670/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:20497759",
+         "title": "An aid to the diagnosis of genetic disorders underlying adult-onset renal failure: a literature review.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/20497759/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:36073247#TITLEABSTRACT-8fd4d785",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/36073247/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:40673439#INTRO-e7f272fc",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/40673439/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:19707461#TITLEABSTRACT-e1e8155f",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/19707461/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:35722479#TITLEABSTRACT-d6d7f1e2",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/35722479/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        }
+       ]
+      }
+     }
+    },
+    {
+     "question": "What is the patient's serum albumin level?",
+     "answer": "The patient's serum albumin is estimated to be 3.5 g/dL; this is a synthetic estimate, not a value stated in the case.",
+     "answer_source": "literature",
+     "error": null,
+     "strategy_trace": {
+      "differential": [
+       {
+        "diagnosis": "Diabetic kidney disease",
+        "probability": 0.37,
+        "evidence_for": "Known diet-controlled diabetes with HbA1c about 6.2%; progressive CKD with subnephrotic proteinuria is typical; negative urine blood and no retinopathy fit a non-proliferative process; slightly atrophic kidneys with increased echogenicity are consistent with chronic diabetic parenchymal damage.",
+        "evidence_against": "Glycemic control is modest and diabetes duration and severity are uncertain; absence of retinopathy comes from a synthetic best guess rather than a documented ophthalmologic exam; echogenicity alone is nonspecific."
+       },
+       {
+        "diagnosis": "Hypertensive nephrosclerosis",
+        "probability": 0.31,
+        "evidence_for": "Blood pressure 160/78 mmHg is elevated; hypertension is a common cause of progressive CKD; atrophic kidneys with increased echogenicity and no cysts fit chronic hypertensive injury; negative hematuria is consistent.",
+        "evidence_against": "Antihypertensive history and duration of hypertension are unknown; proteinuria is usually milder than seen here; remains a diagnosis of exclusion and overlaps with diabetic disease."
+       },
+       {
+        "diagnosis": "Primary glomerulonephritis (e.g., membranous nephropathy)",
+        "probability": 0.15,
+        "evidence_for": "Slowly progressive CKD with subnephrotic proteinuria is typical of primary glomerular disease; negative urine blood makes IgA nephropathy less likely.",
+        "evidence_against": "No urine microscopy, anti-PLA2R serology, or biopsy yet; atrophic kidneys suggest a long-standing chronic process that may be less typical of an active primary GN."
+       },
+       {
+        "diagnosis": "Focal segmental glomerulosclerosis",
+        "probability": 0.1,
+        "evidence_for": "Can present with progressive CKD and subnephrotic proteinuria and progress to end-stage disease.",
+        "evidence_against": "No data on edema, serum albumin, or lipids; FSGS more often presents with nephrotic-range proteinuria; no biopsy."
+       },
+       {
+        "diagnosis": "Hereditary nephropathy (e.g., Alport syndrome)",
+        "probability": 0.07,
+        "evidence_for": "Progressive CKD with proteinuria can occur in hereditary tubulointerstitial and glomerular disease; ADPKD is less likely given no renal cysts on ultrasound.",
+        "evidence_against": "Negative dipstick blood is less typical for Alport; family history, hearing, and ocular findings not yet assessed; atrophic echogenic kidneys are nonspecific."
+       }
+      ],
+      "separates": [
+       "Diabetic kidney disease",
+       "Hypertensive nephrosclerosis",
+       "Primary glomerulonephritis (e.g., membranous nephropathy)",
+       "Focal segmental glomerulosclerosis"
+      ]
+     },
+     "environment_response": {
+      "answer_source": "literature",
+      "evidence": [
+       "PMID:39423097"
+      ],
+      "confidence": "medium",
+      "literature_search": true,
+      "retriever_parameters": {
+       "path": "literature",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": "serum albumin Fabry disease chronic kidney disease proteinuria",
+       "excluded_source_docs": []
+      },
+      "literature_search_result": {
+       "query": "europe_pmc: TITLE_ABS:(\"serum albumin\" OR albumin OR hypoalbuminemia) AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson-Fabry disease\" OR \"alpha-galactosidase A deficiency\") | litsense: serum albumin Fabry disease",
+       "documents": [
+        {
+         "doc_id": "PMID:39423097",
+         "title": "Coexistence of Fabry Disease and Membranous Nephropathy: A Case Report.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/39423097/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:34609404#INTRO-4227b2ad",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/34609404/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:39529120",
+         "title": "Effectiveness and safety of enzyme replacement therapy in the treatment of Fabry disease: a Chinese monocentric real-world study.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/39529120/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:33809516#INTRO-d9c69772",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/33809516/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:41158984",
+         "title": "Renoprotective effects of SGLT2 inhibitors in patients with Fabry disease.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/41158984/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:30943985#INTRO-54971f94",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/30943985/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:40433208",
+         "title": "Utilization of Transthoracic Echocardiography and Biochemical Markers in Detecting Cardiomyopathy in Fabry Disease.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/40433208/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:21949853#DISCUSS-873b9d2f",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/21949853/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        }
+       ]
+      }
+     }
+    },
+    {
+     "question": "Does the patient have a family history of kidney disease, hearing loss, or eye abnormalities?",
+     "answer": "Yes. His brother had renal failure; family history of hearing loss or eye abnormalities is not reported.",
+     "answer_source": "literature",
+     "error": null,
+     "strategy_trace": {
+      "differential": [
+       {
+        "diagnosis": "Diabetic kidney disease",
+        "probability": 0.37,
+        "evidence_for": "Known diet-controlled diabetes with HbA1c about 6.2%; progressive CKD with subnephrotic proteinuria is typical; negative urine blood and no retinopathy fit a non-proliferative process; slightly atrophic kidneys with increased echogenicity are consistent with chronic diabetic parenchymal damage.",
+        "evidence_against": "Glycemic control is modest and diabetes duration and severity are uncertain; absence of retinopathy comes from a synthetic best guess rather than a documented ophthalmologic exam; echogenicity alone is nonspecific."
+       },
+       {
+        "diagnosis": "Hypertensive nephrosclerosis",
+        "probability": 0.31,
+        "evidence_for": "Blood pressure 160/78 mmHg is elevated; hypertension is a common cause of progressive CKD; atrophic kidneys with increased echogenicity and no cysts fit chronic hypertensive injury; negative hematuria is consistent.",
+        "evidence_against": "Antihypertensive history and duration of hypertension are unknown; proteinuria is usually milder than seen here; remains a diagnosis of exclusion and overlaps with diabetic disease."
+       },
+       {
+        "diagnosis": "Primary glomerulonephritis (e.g., membranous nephropathy)",
+        "probability": 0.15,
+        "evidence_for": "Slowly progressive CKD with subnephrotic proteinuria is typical of primary glomerular disease; negative urine blood makes IgA nephropathy less likely.",
+        "evidence_against": "No urine microscopy, anti-PLA2R serology, or biopsy yet; atrophic kidneys suggest a long-standing chronic process that may be less typical of an active primary GN."
+       },
+       {
+        "diagnosis": "Focal segmental glomerulosclerosis",
+        "probability": 0.1,
+        "evidence_for": "Can present with progressive CKD and subnephrotic proteinuria and progress to end-stage disease.",
+        "evidence_against": "No data on edema or lipids; serum albumin estimate of 3.5 g/dL is a synthetic value; FSGS more often presents with nephrotic-range proteinuria; no biopsy."
+       },
+       {
+        "diagnosis": "Hereditary nephropathy (e.g., Alport syndrome)",
+        "probability": 0.07,
+        "evidence_for": "Progressive CKD with proteinuria can occur in hereditary tubulointerstitial and glomerular disease; ADPKD is less likely given no renal cysts on ultrasound.",
+        "evidence_against": "Negative dipstick blood is less typical for Alport; family history, hearing, and ocular findings not yet assessed; atrophic echogenic kidneys are nonspecific."
+       }
+      ],
+      "separates": [
+       "Hereditary nephropathy (e.g., Alport syndrome)",
+       "Diabetic kidney disease",
+       "Hypertensive nephrosclerosis",
+       "Primary glomerulonephritis (e.g., membranous nephropathy)",
+       "Focal segmental glomerulosclerosis"
+      ]
+     },
+     "environment_response": {
+      "answer_source": "literature",
+      "evidence": [],
+      "confidence": "low",
+      "literature_search": true,
+      "retriever_parameters": {
+       "path": "best_guess",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": "Fabry disease family history renal hearing ocular manifestations",
+       "excluded_source_docs": []
+      },
+      "literature_search_result": {
+       "query": "europe_pmc: TITLE_ABS:(\"family history\" OR \"family history of renal disease\" OR \"familial hearing loss\" OR \"familial ocular abnormalities\" OR \"family history of kidney disease\") AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson-Fabry disease\" OR \"alpha-galactosidase A deficiency\") | litsense: family history Fabry disease",
+       "documents": [
+        {
+         "doc_id": "PMID:40475330",
+         "title": "Clinical characteristics and interdepartmental collaboration for patients with Anderson-Fabry disease in Shiga Prefecture, Japan.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/40475330/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:18172746#TITLEABSTRACT-be05bb0e",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/18172746/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:42453247",
+         "title": "A multigenerational fabry disease case caused by a <i>de novo</i> GLA mutation: Diagnostic delay, phenotypic variability, and the impact of early detection.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/42453247/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:21776363#INTRO-92bbb5f0",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/21776363/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:40342436",
+         "title": "Fabry Disease in a Patient With Thin Basement Membrane Nephropathy.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/40342436/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:21549080#TITLEABSTRACT-4a43bee2",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/21549080/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:32301697",
+         "title": "Fabry disease in two brothers with proteinuria: A case report and Fabry disease review .",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/32301697/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:40342436#TITLEABSTRACT-d98f1e6b",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/40342436/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "case_id": "PMC7520668_01",
+   "strategy": "knowledge",
+   "strategy_name": "knowledge",
+   "status": "completed",
+   "stop_reason": "max_iterations",
+   "case": {
+    "case_id": "PMC7520668_01",
+    "diagnosis": "Fabry Disease",
+    "narrative": "A 69-year-old male with hypertension, diabetes (diet controlled), history of morbid obesity status post gastric bypass, and metastatic prostate cancer presented with progressive chronic kidney disease and subnephrotic-range proteinuria. Glomerular filtration rate declined by >5 ml/min/1.73 m2 per year. Medications: atorvastatin, amlodipine, aspirin, calcium carbonate, leuprolide. No known drug allergies. Family history notable for a brother with renal failure of unclear etiology in his forties. Review of systems notable for peripheral neuropathy with unstable balance; denied hypohidrosis, extremity pain, gastrointestinal complaints, rashes, or cardiac symptoms; denied skin issues. Exam: BP 160/78, pulse 72, BMI 24.5; no abnormal lung, heart, abdominal, extremity, or skin findings. Labs: creatinine 4.3 mg/dL, BUN 47 mg/dL, CO2 19 mg/dL; electrolytes otherwise normal. CBC: hemoglobin 10.9 g/dL with normal platelets and WBC. Urinalysis with mild proteinuria; urine protein/creatinine ratio 2.2. SPEP, UPEP, and serum free light chains without abnormalities. Kidney ultrasound showed slightly atrophic kidneys with echogenic parenchyma. Kidney biopsy: light microscopy with normocellular glomeruli, uniform capillary walls, prominent podocytes with foamy cytoplasm; ultrastructural exam with osmophilic lamellated inclusions in podocytes with concentric/striped appearance (myelin-like lamellated inclusions). Alpha-galactosidase enzyme activity low (21 nm/hr/mg protein; reference 50–150). GLA gene testing showed missense variant c.682A>C (p.Ala228Cys); daughter and grandson tested positive for same variant. In vitro mutation testing suggested suitability for migalastat therapy."
+   },
+   "diagnosis": {
+    "differential": [
+     {
+      "name": "Hereditary transthyretin amyloidosis",
+      "probability": 0.2
+     },
+     {
+      "name": "Fabry disease",
+      "probability": 0.16
+     },
+     {
+      "name": "Alport syndrome",
+      "probability": 0.14
+     },
+     {
+      "name": "Hypertensive chronic kidney disease",
+      "probability": 0.12
+     },
+     {
+      "name": "Focal segmental glomerulosclerosis",
+      "probability": 0.09
+     },
+     {
+      "name": "Light chain amyloidosis",
+      "probability": 0.07
+     },
+     {
+      "name": "Primary membranous nephropathy",
+      "probability": 0.05
+     },
+     {
+      "name": "Chronic tubulointerstitial nephritis",
+      "probability": 0.04
+     },
+     {
+      "name": "Diabetic kidney disease",
+      "probability": 0.03
+     },
+     {
+      "name": "Charcot-Marie-Tooth disease",
+      "probability": 0.02
+     }
+    ],
+    "error": null
+   },
+   "iterations": [
+    {
+     "question": "What is the patient's presenting complaint?",
+     "answer": "The patient presented with progressive chronic kidney disease and subnephrotic-range proteinuria.",
+     "answer_source": "case_study",
+     "error": null,
+     "strategy_trace": {
+      "picture": {
+       "findings": [],
+       "patterns": [],
+       "basics_covered": false
+      },
+      "fills": "The primary reason the patient sought care, including the main symptom and its onset."
+     },
+     "environment_response": {
+      "answer_source": "case_study",
+      "evidence": [
+       "presented with progressive chronic kidney disease and subnephrotic-range proteinuria"
+      ],
+      "confidence": "high",
+      "literature_search": false,
+      "retriever_parameters": {
+       "path": "case_study",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": null,
+       "excluded_source_docs": []
+      },
+      "literature_search_result": null
+     }
+    },
+    {
+     "question": "What is the patient's urine protein-to-creatinine ratio?",
+     "answer": "The patient's urine protein-to-creatinine ratio was 2.2.",
+     "answer_source": "case_study",
+     "error": null,
+     "strategy_trace": {
+      "picture": {
+       "findings": [
+        "Presenting complaint is progressive chronic kidney disease",
+        "Subnephrotic-range proteinuria is present",
+        "No history, vital signs or examination findings are known yet"
+       ],
+       "patterns": [
+        {
+         "name": "Progressive chronic kidney disease with subnephrotic-range proteinuria",
+         "present": [
+          "Progressive chronic kidney disease",
+          "Subnephrotic-range proteinuria"
+         ],
+         "missing": [
+          "Quantified proteinuria (urine protein-to-creatinine ratio or 24-hour protein)",
+          "Creatinine and eGFR trend over time",
+          "Urinalysis for haematuria, casts and sediment",
+          "Blood pressure",
+          "Oedema or other signs of fluid retention",
+          "Serum albumin and lipids",
+          "Duration and age of onset of kidney disease",
+          "Medication and exposure history",
+          "Family history of kidney disease",
+          "Kidney size and structure on imaging"
+         ]
+        }
+       ],
+       "basics_covered": false
+      },
+      "fills": "Quantified proteinuria (urine protein-to-creatinine ratio)"
+     },
+     "environment_response": {
+      "answer_source": "case_study",
+      "evidence": [
+       "urine protein/creatinine ratio 2.2"
+      ],
+      "confidence": "high",
+      "literature_search": false,
+      "retriever_parameters": {
+       "path": "case_study",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": null,
+       "excluded_source_docs": []
+      },
+      "literature_search_result": null
+     }
+    },
+    {
+     "question": "What is the patient's urinalysis result for blood, red cell casts and other sediment findings?",
+     "answer": "Urinalysis showed no blood, no red cell casts, and an otherwise bland sediment.",
+     "answer_source": "literature",
+     "error": null,
+     "strategy_trace": {
+      "picture": {
+       "findings": [
+        "Presented with progressive chronic kidney disease",
+        "Subnephrotic-range proteinuria",
+        "Urine protein-to-creatinine ratio 2.2"
+       ],
+       "patterns": [
+        {
+         "name": "Progressive chronic kidney disease with subnephrotic-range proteinuria",
+         "present": [
+          "Progressive chronic kidney disease",
+          "Subnephrotic-range proteinuria",
+          "Urine protein-to-creatinine ratio 2.2"
+         ],
+         "missing": [
+          "Creatinine and eGFR trend over time",
+          "Urinalysis for haematuria, casts and sediment",
+          "Blood pressure",
+          "Oedema or other signs of fluid retention",
+          "Serum albumin and lipids",
+          "Duration and age of onset of kidney disease",
+          "Medication and exposure history",
+          "Family history of kidney disease",
+          "Kidney size and structure on imaging"
+         ]
+        }
+       ],
+       "basics_covered": false
+      },
+      "fills": "Urinalysis for haematuria, casts and sediment"
+     },
+     "environment_response": {
+      "answer_source": "literature",
+      "evidence": [],
+      "confidence": "low",
+      "literature_search": true,
+      "retriever_parameters": {
+       "path": "best_guess",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": "urine sediment hematuria Fabry disease older adults",
+       "excluded_source_docs": []
+      },
+      "literature_search_result": {
+       "query": "europe_pmc: TITLE_ABS:(urinalysis OR \"urine sediment\" OR hematuria OR \"red blood cell casts\" OR proteinuria) AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson-Fabry disease\" OR \"Fabry nephropathy\") | litsense: urinalysis Fabry disease",
+       "documents": [
+        {
+         "doc_id": "PMID:41845307",
+         "title": "Clinical awareness and targeted manual urine microscopy enable diagnosis of a fabry disease family missed by routine urinalysis.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/41845307/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:27904112#CASE-d5861bb8",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/27904112/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:42395686",
+         "title": "Renal involvement in Fabry disease from Tunisian families: Six case reports.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/42395686/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:21071972#TITLEABSTRACT-3538f4b4",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/21071972/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:42290669",
+         "title": "A Rare Case of Fabry Disease Combined With Idiopathic Multicentric Castleman Disease and Membranous Nephropathy.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/42290669/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:42824490",
+         "title": "Case Report: Concurrent Fabry disease, IgA nephropathy and undifferentiated connective tissue disease in a female with normal enzyme activity.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/42824490/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:42355394",
+         "title": "Phenotypic Variability of Kidney Involvement in Fabry Disease-Lessons from a Family Study.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/42355394/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:37629768",
+         "title": "Treatment of Fabry Nephropathy: A Literature Review.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/37629768/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        }
+       ]
+      }
+     }
+    },
+    {
+     "question": "What is the patient's blood pressure?",
+     "answer": "The patient's blood pressure was 160/78.",
+     "answer_source": "case_study",
+     "error": null,
+     "strategy_trace": {
+      "picture": {
+       "findings": [
+        "Presenting complaint is progressive chronic kidney disease with subnephrotic-range proteinuria",
+        "Urine protein-to-creatinine ratio is 2.2",
+        "Urinalysis shows no blood, no red cell casts and an otherwise bland sediment"
+       ],
+       "patterns": [
+        {
+         "name": "Progressive chronic kidney disease with subnephrotic-range proteinuria and bland urinalysis",
+         "present": [
+          "Progressive chronic kidney disease",
+          "Subnephrotic-range proteinuria",
+          "Urine protein-to-creatinine ratio 2.2",
+          "No haematuria",
+          "No red cell casts",
+          "Bland urine sediment"
+         ],
+         "missing": [
+          "Creatinine and eGFR trend over time",
+          "Blood pressure",
+          "Oedema or other signs of fluid retention",
+          "Serum albumin and lipids",
+          "Duration and age of onset of kidney disease",
+          "Medication and exposure history",
+          "Family history of kidney disease",
+          "Kidney size and structure on imaging"
+         ]
+        }
+       ],
+       "basics_covered": false
+      },
+      "fills": "Blood pressure"
+     },
+     "environment_response": {
+      "answer_source": "case_study",
+      "evidence": [
+       "Exam: BP 160/78, pulse 72, BMI 24.5"
+      ],
+      "confidence": "high",
+      "literature_search": false,
+      "retriever_parameters": {
+       "path": "case_study",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": null,
+       "excluded_source_docs": []
+      },
+      "literature_search_result": null
+     }
+    },
+    {
+     "question": "What is the patient's serum creatinine and estimated glomerular filtration rate (eGFR)?",
+     "answer": "Serum creatinine is 4.3 mg/dL, with an estimated eGFR of approximately 13 mL/min/1.73 m².",
+     "answer_source": "literature",
+     "error": null,
+     "strategy_trace": {
+      "picture": {
+       "findings": [
+        "Presenting complaint is progressive chronic kidney disease with subnephrotic-range proteinuria",
+        "Urine protein-to-creatinine ratio is 2.2",
+        "Urinalysis shows no blood, no red cell casts and a bland sediment",
+        "Blood pressure is 160/78"
+       ],
+       "patterns": [
+        {
+         "name": "Progressive chronic kidney disease with subnephrotic-range proteinuria and bland urine sediment",
+         "present": [
+          "Progressive chronic kidney disease",
+          "Subnephrotic-range proteinuria",
+          "Urine protein-to-creatinine ratio 2.2",
+          "No haematuria",
+          "No red cell casts",
+          "Bland urine sediment"
+         ],
+         "missing": [
+          "Creatinine and eGFR trend over time",
+          "Serum albumin and lipids",
+          "Oedema or other signs of fluid retention",
+          "Duration and age of onset of kidney disease",
+          "Medication and exposure history",
+          "Family history of kidney disease",
+          "Kidney size and structure on imaging"
+         ]
+        },
+        {
+         "name": "Hypertension in the setting of chronic kidney disease",
+         "present": [
+          "Blood pressure 160/78"
+         ],
+         "missing": [
+          "Repeat blood pressure readings",
+          "Current antihypertensive therapy and adherence",
+          "Fundoscopy or other evidence of target-organ damage",
+          "Heart rate and other vital signs"
+         ]
+        }
+       ],
+       "basics_covered": false
+      },
+      "fills": "Serum creatinine and eGFR, establishing the current level of kidney function and CKD stage."
+     },
+     "environment_response": {
+      "answer_source": "literature",
+      "evidence": [],
+      "confidence": "low",
+      "literature_search": true,
+      "retriever_parameters": {
+       "path": "literature",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": "serum creatinine eGFR Fabry disease elderly male",
+       "excluded_source_docs": []
+      },
+      "literature_search_result": {
+       "query": "europe_pmc: TITLE_ABS:(\"serum creatinine\" OR creatinine OR \"estimated glomerular filtration rate\" OR eGFR OR \"renal insufficiency\") AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson Fabry disease\" OR \"Fabry nephropathy\") | litsense: serum creatinine Fabry disease",
+       "documents": [
+        {
+         "doc_id": "PMID:40898253",
+         "title": "Functional and histopathologic correlation in the fabry nephropathy with N215S genotype.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/40898253/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:19810002#TITLEABSTRACT-c3f16e6b",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/19810002/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:42226196",
+         "title": "Real world outcomes of Fabry disease in Italian excellence centers: the ground study.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/42226196/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:19833663#TITLEABSTRACT-08e2ac5c",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/19833663/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:41196191",
+         "title": "Long-term effectiveness and safety outcomes in adults with Fabry disease treated with agalsidase alfa: 20 years of data from the Fabry Outcome Survey.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/41196191/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:18437007#TITLEABSTRACT-74fa8930",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/18437007/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:41463002",
+         "title": "Long-Term Enzyme Replacement Therapy and Renal Outcomes in Fabry Disease: A Systematic Review and Meta-Analysis.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/41463002/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:37442614",
+         "title": "Interpretation of GFR slope in untreated and treated adult Fabry patients.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/37442614/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        }
+       ]
+      }
+     }
+    },
+    {
+     "question": "What is the patient's serum albumin level?",
+     "answer": "Serum albumin is 3.8 g/dL.",
+     "answer_source": "literature",
+     "error": null,
+     "strategy_trace": {
+      "picture": {
+       "findings": [
+        "Presenting complaint of progressive chronic kidney disease with subnephrotic-range proteinuria",
+        "Urine protein-to-creatinine ratio 2.2",
+        "Urinalysis with no blood, no red cell casts, and otherwise bland sediment",
+        "Blood pressure 160/78",
+        "Serum creatinine 4.3 mg/dL with eGFR approximately 13 mL/min/1.73 m2"
+       ],
+       "patterns": [
+        {
+         "name": "Progressive chronic kidney disease with subnephrotic-range proteinuria and bland urine sediment",
+         "present": [
+          "Progressive chronic kidney disease",
+          "Subnephrotic-range proteinuria",
+          "Urine protein-to-creatinine ratio 2.2",
+          "No haematuria",
+          "No red cell casts",
+          "Bland urine sediment",
+          "Serum creatinine 4.3 mg/dL",
+          "eGFR approximately 13 mL/min/1.73 m2"
+         ],
+         "missing": [
+          "Creatinine and eGFR trend over time",
+          "Serum albumin and lipids",
+          "Oedema or other signs of fluid retention",
+          "Duration and age of onset of kidney disease",
+          "Medication and exposure history",
+          "Family history of kidney disease",
+          "Kidney size and structure on imaging"
+         ]
+        },
+        {
+         "name": "Hypertension in the setting of chronic kidney disease",
+         "present": [
+          "Blood pressure 160/78"
+         ],
+         "missing": [
+          "Repeat blood pressure readings",
+          "Current antihypertensive therapy and adherence",
+          "Fundoscopy or other evidence of target-organ damage",
+          "Heart rate and other vital signs"
+         ]
+        }
+       ],
+       "basics_covered": false
+      },
+      "fills": "Serum albumin level, which is missing from the clinical picture and is needed to assess the degree of hypoalbuminaemia alongside the subnephrotic-range proteinuria."
+     },
+     "environment_response": {
+      "answer_source": "literature",
+      "evidence": [],
+      "confidence": "low",
+      "literature_search": true,
+      "retriever_parameters": {
+       "path": "best_guess",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": "serum albumin Fabry disease chronic kidney disease",
+       "excluded_source_docs": []
+      },
+      "literature_search_result": {
+       "query": "europe_pmc: TITLE_ABS:(\"serum albumin\" OR \"serum albumin level\" OR albumin OR hypoalbuminemia) AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson Fabry disease\" OR \"Anderson Fabry syndrome\") | litsense: serum albumin Fabry disease",
+       "documents": [
+        {
+         "doc_id": "PMID:39529120",
+         "title": "Effectiveness and safety of enzyme replacement therapy in the treatment of Fabry disease: a Chinese monocentric real-world study.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/39529120/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:34609404#INTRO-4227b2ad",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/34609404/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:30733880",
+         "title": "High Lyso-Gb3 Plasma Levels Associated with Decreased miR-29 and miR-200 Urinary Excretion in Young Non-Albuminuric Male Patient with Classic Fabry Disease.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/30733880/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:33809516#INTRO-d9c69772",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/33809516/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:41158984",
+         "title": "Renoprotective effects of SGLT2 inhibitors in patients with Fabry disease.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/41158984/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:30943985#INTRO-54971f94",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/30943985/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:39423097",
+         "title": "Coexistence of Fabry Disease and Membranous Nephropathy: A Case Report.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/39423097/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:21949853#DISCUSS-873b9d2f",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/21949853/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        }
+       ]
+      }
+     }
+    },
+    {
+     "question": "Is there a family history of kidney disease in the patient's relatives?",
+     "answer": "Yes. The patient had a brother with renal failure of unclear etiology in his forties.",
+     "answer_source": "case_study",
+     "error": null,
+     "strategy_trace": {
+      "picture": {
+       "findings": [
+        "Presented with progressive chronic kidney disease and subnephrotic-range proteinuria",
+        "Urine protein-to-creatinine ratio 2.2",
+        "Urinalysis: no blood, no red cell casts, otherwise bland sediment",
+        "Blood pressure 160/78 mmHg",
+        "Serum creatinine 4.3 mg/dL with eGFR approximately 13 mL/min/1.73 m2",
+        "Serum albumin 3.8 g/dL"
+       ],
+       "patterns": [
+        {
+         "name": "Progressive chronic kidney disease with subnephrotic-range proteinuria and bland urine sediment",
+         "present": [
+          "Progressive chronic kidney disease",
+          "Subnephrotic-range proteinuria, urine protein-to-creatinine ratio 2.2",
+          "No haematuria",
+          "No red cell casts",
+          "Bland urine sediment",
+          "Serum creatinine 4.3 mg/dL",
+          "eGFR approximately 13 mL/min/1.73 m2",
+          "Serum albumin 3.8 g/dL"
+         ],
+         "missing": [
+          "Creatinine and eGFR trend over time",
+          "Serum lipids",
+          "Oedema or other signs of fluid retention",
+          "Duration and age of onset of kidney disease",
+          "Medication and exposure history",
+          "Family history of kidney disease",
+          "Kidney size and structure on imaging"
+         ]
+        },
+        {
+         "name": "Hypertension in the setting of chronic kidney disease",
+         "present": [
+          "Blood pressure 160/78 mmHg"
+         ],
+         "missing": [
+          "Repeat blood pressure readings",
+          "Current antihypertensive therapy and adherence",
+          "Fundoscopy or other evidence of target-organ damage",
+          "Heart rate and other vital signs"
+         ]
+        }
+       ],
+       "basics_covered": false
+      },
+      "fills": "Family history of kidney disease"
+     },
+     "environment_response": {
+      "answer_source": "case_study",
+      "evidence": [
+       "Family history notable for a brother with renal failure of unclear etiology in his forties."
+      ],
+      "confidence": "high",
+      "literature_search": false,
+      "retriever_parameters": {
+       "path": "case_study",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": null,
+       "excluded_source_docs": []
+      },
+      "literature_search_result": null
+     }
+    },
+    {
+     "question": "Does the patient have any extrarenal features, such as hearing loss, eye abnormalities, or rash?",
+     "answer": "The patient had peripheral neuropathy with unstable balance. Rash or other skin issues were denied; hearing loss and eye abnormalities are not mentioned in the case.",
+     "answer_source": "case_study",
+     "error": null,
+     "strategy_trace": {
+      "picture": {
+       "findings": [
+        "Presenting complaint is progressive chronic kidney disease with subnephrotic-range proteinuria",
+        "Urine protein-to-creatinine ratio is 2.2",
+        "Urinalysis shows no blood, no red cell casts and an otherwise bland sediment",
+        "Blood pressure is 160/78",
+        "Serum creatinine is 4.3 mg/dL with eGFR approximately 13 mL/min/1.73 m2",
+        "Serum albumin is 3.8 g/dL",
+        "Family history: a brother had renal failure of unclear etiology in his forties"
+       ],
+       "patterns": [
+        {
+         "name": "Progressive chronic kidney disease with subnephrotic-range proteinuria and bland urine sediment",
+         "present": [
+          "Progressive chronic kidney disease",
+          "Subnephrotic-range proteinuria, urine protein-to-creatinine ratio 2.2",
+          "No haematuria or red cell casts, bland sediment",
+          "Serum creatinine 4.3 mg/dL, eGFR approximately 13 mL/min/1.73 m2",
+          "Serum albumin 3.8 g/dL"
+         ],
+         "missing": [
+          "Creatinine and eGFR trend over time",
+          "Serum lipids",
+          "Oedema or other signs of fluid retention",
+          "Duration and age of onset of kidney disease",
+          "Medication and exposure history",
+          "Kidney size and structure on imaging"
+         ]
+        },
+        {
+         "name": "Hypertension in the setting of chronic kidney disease",
+         "present": [
+          "Blood pressure 160/78 mmHg",
+          "Reduced eGFR of approximately 13 mL/min/1.73 m2"
+         ],
+         "missing": [
+          "Repeat blood pressure readings",
+          "Current antihypertensive therapy and adherence",
+          "Fundoscopy or other evidence of target-organ damage",
+          "Heart rate and other vital signs"
+         ]
+        },
+        {
+         "name": "Familial kidney disease with renal failure in a first-degree relative",
+         "present": [
+          "Brother with renal failure of unclear etiology in his forties"
+         ],
+         "missing": [
+          "Etiology of brother's renal failure",
+          "Age of patient and other affected relatives",
+          "Extrarenal features in patient or relatives"
+         ]
+        }
+       ],
+       "basics_covered": false
+      },
+      "fills": "Extrarenal features in the patient (hearing loss, eye abnormalities, rash)"
+     },
+     "environment_response": {
+      "answer_source": "case_study",
+      "evidence": [
+       "Review of systems notable for peripheral neuropathy with unstable balance; denied hypohidrosis, extremity pain, gastrointestinal complaints, rashes, or cardiac symptoms; denied skin issues."
+      ],
+      "confidence": "high",
+      "literature_search": false,
+      "retriever_parameters": {
+       "path": "case_study",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": null,
+       "excluded_source_docs": []
+      },
+      "literature_search_result": null
+     }
+    }
+   ]
+  },
+  {
+   "case_id": "PMC7520668_01",
+   "strategy": "channel",
+   "strategy_name": "channel",
+   "status": "completed",
+   "stop_reason": "max_iterations",
+   "case": {
+    "case_id": "PMC7520668_01",
+    "diagnosis": "Fabry Disease",
+    "narrative": "A 69-year-old male with hypertension, diabetes (diet controlled), history of morbid obesity status post gastric bypass, and metastatic prostate cancer presented with progressive chronic kidney disease and subnephrotic-range proteinuria. Glomerular filtration rate declined by >5 ml/min/1.73 m2 per year. Medications: atorvastatin, amlodipine, aspirin, calcium carbonate, leuprolide. No known drug allergies. Family history notable for a brother with renal failure of unclear etiology in his forties. Review of systems notable for peripheral neuropathy with unstable balance; denied hypohidrosis, extremity pain, gastrointestinal complaints, rashes, or cardiac symptoms; denied skin issues. Exam: BP 160/78, pulse 72, BMI 24.5; no abnormal lung, heart, abdominal, extremity, or skin findings. Labs: creatinine 4.3 mg/dL, BUN 47 mg/dL, CO2 19 mg/dL; electrolytes otherwise normal. CBC: hemoglobin 10.9 g/dL with normal platelets and WBC. Urinalysis with mild proteinuria; urine protein/creatinine ratio 2.2. SPEP, UPEP, and serum free light chains without abnormalities. Kidney ultrasound showed slightly atrophic kidneys with echogenic parenchyma. Kidney biopsy: light microscopy with normocellular glomeruli, uniform capillary walls, prominent podocytes with foamy cytoplasm; ultrastructural exam with osmophilic lamellated inclusions in podocytes with concentric/striped appearance (myelin-like lamellated inclusions). Alpha-galactosidase enzyme activity low (21 nm/hr/mg protein; reference 50–150). GLA gene testing showed missense variant c.682A>C (p.Ala228Cys); daughter and grandson tested positive for same variant. In vitro mutation testing suggested suitability for migalastat therapy."
+   },
+   "diagnosis": {
+    "differential": [
+     {
+      "name": "Diabetic nephropathy",
+      "probability": 0.3
+     },
+     {
+      "name": "Hypertensive chronic kidney disease",
+      "probability": 0.2
+     },
+     {
+      "name": "Membranous nephropathy",
+      "probability": 0.12
+     },
+     {
+      "name": "Focal segmental glomerulosclerosis",
+      "probability": 0.08
+     },
+     {
+      "name": "Immunoglobulin A nephropathy",
+      "probability": 0.06
+     },
+     {
+      "name": "Renal amyloidosis",
+      "probability": 0.05
+     },
+     {
+      "name": "Ischaemic nephropathy",
+      "probability": 0.04
+     },
+     {
+      "name": "Minimal change disease",
+      "probability": 0.03
+     },
+     {
+      "name": "Renal involvement in metastatic prostate cancer",
+      "probability": 0.025
+     },
+     {
+      "name": "Obesity-related glomerulopathy",
+      "probability": 0.02
+     }
+    ],
+    "error": null
+   },
+   "iterations": [
+    {
+     "question": "What is the presenting complaint that brought the patient in today?",
+     "answer": "He presented with progressive chronic kidney disease and subnephrotic-range proteinuria.",
+     "answer_source": "case_study",
+     "error": null,
+     "strategy_trace": {
+      "channel": "interview",
+      "assessments": [],
+      "rejected": []
+     },
+     "environment_response": {
+      "answer_source": "case_study",
+      "evidence": [
+       "presented with progressive chronic kidney disease and subnephrotic-range proteinuria."
+      ],
+      "confidence": "high",
+      "literature_search": false,
+      "retriever_parameters": {
+       "path": "case_study",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": null,
+       "excluded_source_docs": []
+      },
+      "literature_search_result": null
+     }
+    },
+    {
+     "question": "What is the patient's age and sex?",
+     "answer": "The patient is a 69-year-old male.",
+     "answer_source": "case_study",
+     "error": null,
+     "strategy_trace": {
+      "channel": "interview",
+      "assessments": [],
+      "rejected": []
+     },
+     "environment_response": {
+      "answer_source": "case_study",
+      "evidence": [
+       "A 69-year-old male with hypertension, diabetes (diet controlled), history of morbid obesity status post gastric bypass, and metastatic prostate cancer presented with progressive chronic kidney disease and subnephrotic-range proteinuria."
+      ],
+      "confidence": "high",
+      "literature_search": false,
+      "retriever_parameters": {
+       "path": "case_study",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": null,
+       "excluded_source_docs": []
+      },
+      "literature_search_result": null
+     }
+    },
+    {
+     "question": "What is the patient's past medical history, including any known diabetes, hypertension, or prior kidney disease?",
+     "answer": "The patient had hypertension, diet-controlled diabetes, prior morbid obesity treated with gastric bypass, and metastatic prostate cancer. He also had progressive chronic kidney disease, with glomerular filtration rate declining by more than 5 ml/min/1.73 m² per year.",
+     "answer_source": "case_study",
+     "error": null,
+     "strategy_trace": {
+      "channel": "interview",
+      "assessments": [],
+      "rejected": []
+     },
+     "environment_response": {
+      "answer_source": "case_study",
+      "evidence": [
+       "A 69-year-old male with hypertension, diabetes (diet controlled), history of morbid obesity status post gastric bypass, and metastatic prostate cancer presented with progressive chronic kidney disease and subnephrotic-range proteinuria.",
+       "Glomerular filtration rate declined by >5 ml/min/1.73 m2 per year."
+      ],
+      "confidence": "high",
+      "literature_search": false,
+      "retriever_parameters": {
+       "path": "case_study",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": null,
+       "excluded_source_docs": []
+      },
+      "literature_search_result": null
+     }
+    },
+    {
+     "question": "What medications is the patient currently taking, including any antihypertensives, diabetes medications, and prior prostate cancer treatments?",
+     "answer": "The listed medications are atorvastatin, amlodipine, aspirin, calcium carbonate, and leuprolide. Diabetes is described as diet controlled, and no diabetes medication or other prior prostate cancer treatment is specified.",
+     "answer_source": "case_study",
+     "error": null,
+     "strategy_trace": {
+      "channel": "interview",
+      "assessments": [],
+      "rejected": []
+     },
+     "environment_response": {
+      "answer_source": "case_study",
+      "evidence": [
+       "Medications: atorvastatin, amlodipine, aspirin, calcium carbonate, leuprolide.",
+       "diabetes (diet controlled)"
+      ],
+      "confidence": "high",
+      "literature_search": false,
+      "retriever_parameters": {
+       "path": "case_study",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": null,
+       "excluded_source_docs": []
+      },
+      "literature_search_result": null
+     }
+    },
+    {
+     "question": "What are the patient's vital signs, including blood pressure, heart rate, respiratory rate, temperature, and oxygen saturation?",
+     "answer": "Blood pressure is 160/78 mmHg and heart rate is 72 beats/min. For this synthetic record, respiratory rate is 16 breaths/min, temperature is 36.8 °C, and oxygen saturation is 98%.",
+     "answer_source": "literature",
+     "error": null,
+     "strategy_trace": {
+      "channel": "exam",
+      "assessments": [
+       {
+        "after": "interview",
+        "diagnosis": "Diabetic kidney disease (diabetic nephropathy) with hypertensive nephrosclerosis as a contributor",
+        "confidence": 0.4
+       }
+      ],
+      "rejected": []
+     },
+     "environment_response": {
+      "answer_source": "literature",
+      "evidence": [],
+      "confidence": "low",
+      "literature_search": true,
+      "retriever_parameters": {
+       "path": "best_guess",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": "vital signs Fabry disease older adults chronic kidney disease",
+       "excluded_source_docs": []
+      },
+      "literature_search_result": {
+       "query": "europe_pmc: TITLE_ABS:(\"vital signs\" OR \"blood pressure\" OR \"heart rate\" OR \"respiratory rate\" OR \"oxygen saturation\") AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson Fabry disease\" OR \"Anderson-Fabry disease\" OR \"Fabry s disease\") | litsense: vital signs chronic kidney disease",
+       "documents": [
+        {
+         "doc_id": "PMID:33844184",
+         "title": "Elevated Ambulatory Blood Pressure Measurements are Associated with a Progressive Form of Fabry Disease.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/33844184/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "DOI:10.21203/rs.3.rs-59388/v1",
+         "title": "Elevated Ambulatory Blood Pressure Measurements Are Associated With a Progressive Form of Fabry Disease",
+         "url": "https://doi.org/10.21203/rs.3.rs-59388/v1",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:42181773",
+         "title": "Effectiveness and tolerability of migalastat in adult Fabry disease: A single regional centre experience.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/42181773/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:37434805",
+         "title": "Management of Hypertension in Fabry Disease.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/37434805/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:39225306",
+         "title": "Screening for Fabry disease in patients with left ventricular hypertrophy in China: A multicentre and prospective study.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/39225306/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:36069908",
+         "title": "Arrhythmia Burden and Heart Rate Response During Exercise in Anderson-Fabry Disease.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/36069908/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:41268272",
+         "title": "Spinal anesthesia in a patient with Fabry disease and multiorgan involvement: a rare case with long-term success.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/41268272/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:41704902",
+         "title": "Dapagliflozin in Patients With CKD With Fabry Disease.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/41704902/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        }
+       ]
+      }
+     }
+    },
+    {
+     "question": "What is the patient's body mass index on examination, and is there any peripheral edema?",
+     "answer": "The patient's BMI was 24.5 kg/m², and no peripheral edema was noted on examination.",
+     "answer_source": "literature",
+     "error": null,
+     "strategy_trace": {
+      "channel": "exam",
+      "assessments": [
+       {
+        "after": "interview",
+        "diagnosis": "Diabetic kidney disease (diabetic nephropathy) with hypertensive nephrosclerosis as a contributor",
+        "confidence": 0.4
+       }
+      ],
+      "rejected": []
+     },
+     "environment_response": {
+      "answer_source": "literature",
+      "evidence": [],
+      "confidence": "low",
+      "literature_search": true,
+      "retriever_parameters": {
+       "path": "literature",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": "body mass index peripheral edema Fabry disease adults",
+       "excluded_source_docs": []
+      },
+      "literature_search_result": {
+       "query": "europe_pmc: TITLE_ABS:(\"body mass index\" OR BMI OR \"peripheral edema\" OR edema) AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson-Fabry disease\" OR \"Fabry s disease\") | litsense: body mass index Fabry disease",
+       "documents": [
+        {
+         "doc_id": "PMID:42584677",
+         "title": "Vascular endothelial dysfunction and echocardiographic changes in male and female patients with Fabry disease: a single-center observational study.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/42584677/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:35782602#FIG-fe72c62f",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/35782602/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:41762726",
+         "title": "Use of nonsteroidal mineralocorticoid receptor antagonist in chronic kidney disease: A case report of a patient with Fabry disease in his mid-20s.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/41762726/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:38706878#RESULTS-b75f56ef",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/38706878/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:39473688",
+         "title": "Fabry Disease in a Female: A Unique Case Highlighting the Variability in Clinical Presentation.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/39473688/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:35575807#INTRO-656fc6dc",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/35575807/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:36406818",
+         "title": "Polycystic kidney disease complicates renal pathology in a family with Fabry disease.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/36406818/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:38637893#TABLE-796652da",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/38637893/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        }
+       ]
+      }
+     }
+    },
+    {
+     "question": "What did the general examination of the patient's abdomen, cardiovascular system, and lungs reveal, including any murmurs, rubs, or crackles?",
+     "answer": "The general examination found no abnormal findings in the abdomen, heart, or lungs. The case does not specifically enumerate murmurs, rubs, or crackles.",
+     "answer_source": "case_study",
+     "error": null,
+     "strategy_trace": {
+      "channel": "exam",
+      "assessments": [
+       {
+        "after": "interview",
+        "diagnosis": "Diabetic kidney disease (diabetic nephropathy) with hypertensive nephrosclerosis as a contributor",
+        "confidence": 0.4
+       }
+      ],
+      "rejected": []
+     },
+     "environment_response": {
+      "answer_source": "case_study",
+      "evidence": [
+       "Exam: BP 160/78, pulse 72, BMI 24.5; no abnormal lung, heart, abdominal, extremity, or skin findings."
+      ],
+      "confidence": "high",
+      "literature_search": false,
+      "retriever_parameters": {
+       "path": "case_study",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": null,
+       "excluded_source_docs": []
+      },
+      "literature_search_result": null
+     }
+    },
+    {
+     "question": "What did the examination of the patient's lymph nodes reveal, including any peripheral lymphadenopathy?",
+     "answer": "Lymph node examination was unremarkable, with no palpable peripheral lymphadenopathy.",
+     "answer_source": "literature",
+     "error": null,
+     "strategy_trace": {
+      "channel": "exam",
+      "assessments": [
+       {
+        "after": "interview",
+        "diagnosis": "Diabetic kidney disease (diabetic nephropathy) with hypertensive nephrosclerosis as a contributor",
+        "confidence": 0.4
+       }
+      ],
+      "rejected": []
+     },
+     "environment_response": {
+      "answer_source": "literature",
+      "evidence": [],
+      "confidence": "low",
+      "literature_search": true,
+      "retriever_parameters": {
+       "path": "best_guess",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": "lymphadenopathy lymph node findings Fabry disease older adults",
+       "excluded_source_docs": []
+      },
+      "literature_search_result": {
+       "query": "europe_pmc: TITLE_ABS:(\"lymph node examination\" OR lymphadenopathy OR \"peripheral lymphadenopathy\" OR \"lymph node enlargement\") AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson-Fabry disease\") | litsense: lymph node examination Fabry disease",
+       "documents": [
+        {
+         "doc_id": "PMID:40559385",
+         "title": "The Hidden Burden: Gastrointestinal Involvement in Lysosomal Storage Disorders.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/40559385/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:2507783",
+         "title": "Anderson-Fabry disease: an unusual presentation with lymphadenopathy.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/2507783/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:6767013",
+         "title": "Granulomatous gingivitis in Anderson-Fabry disease.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/6767013/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:25763722",
+         "title": "Histiocytic disorders of the chest: imaging findings.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/25763722/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:6713973#TITLEABSTRACT-b4fc699c",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/6713973/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:3143258#TITLEABSTRACT-05a7ce8e",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/3143258/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:27262908#INTRO-1f84ddeb",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/27262908/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:10462028#TITLEABSTRACT-80e5c6ec",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/10462028/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "case_id": "PMC7520668_01",
+   "strategy": "sequence",
+   "strategy_name": "sequence",
+   "status": "completed",
+   "stop_reason": "max_iterations",
+   "case": {
+    "case_id": "PMC7520668_01",
+    "diagnosis": "Fabry Disease",
+    "narrative": "A 69-year-old male with hypertension, diabetes (diet controlled), history of morbid obesity status post gastric bypass, and metastatic prostate cancer presented with progressive chronic kidney disease and subnephrotic-range proteinuria. Glomerular filtration rate declined by >5 ml/min/1.73 m2 per year. Medications: atorvastatin, amlodipine, aspirin, calcium carbonate, leuprolide. No known drug allergies. Family history notable for a brother with renal failure of unclear etiology in his forties. Review of systems notable for peripheral neuropathy with unstable balance; denied hypohidrosis, extremity pain, gastrointestinal complaints, rashes, or cardiac symptoms; denied skin issues. Exam: BP 160/78, pulse 72, BMI 24.5; no abnormal lung, heart, abdominal, extremity, or skin findings. Labs: creatinine 4.3 mg/dL, BUN 47 mg/dL, CO2 19 mg/dL; electrolytes otherwise normal. CBC: hemoglobin 10.9 g/dL with normal platelets and WBC. Urinalysis with mild proteinuria; urine protein/creatinine ratio 2.2. SPEP, UPEP, and serum free light chains without abnormalities. Kidney ultrasound showed slightly atrophic kidneys with echogenic parenchyma. Kidney biopsy: light microscopy with normocellular glomeruli, uniform capillary walls, prominent podocytes with foamy cytoplasm; ultrastructural exam with osmophilic lamellated inclusions in podocytes with concentric/striped appearance (myelin-like lamellated inclusions). Alpha-galactosidase enzyme activity low (21 nm/hr/mg protein; reference 50–150). GLA gene testing showed missense variant c.682A>C (p.Ala228Cys); daughter and grandson tested positive for same variant. In vitro mutation testing suggested suitability for migalastat therapy."
+   },
+   "diagnosis": {
+    "differential": [
+     {
+      "name": "Diabetic nephropathy",
+      "probability": 0.24
+     },
+     {
+      "name": "Hypertensive nephrosclerosis",
+      "probability": 0.12
+     },
+     {
+      "name": "Membranous nephropathy",
+      "probability": 0.11
+     },
+     {
+      "name": "IgA nephropathy",
+      "probability": 0.1
+     },
+     {
+      "name": "Minimal change disease",
+      "probability": 0.07
+     },
+     {
+      "name": "Focal segmental glomerulosclerosis",
+      "probability": 0.06
+     },
+     {
+      "name": "C3 glomerulopathy",
+      "probability": 0.05
+     },
+     {
+      "name": "Membranoproliferative glomerulonephritis",
+      "probability": 0.04
+     },
+     {
+      "name": "Lupus nephritis",
+      "probability": 0.03
+     },
+     {
+      "name": "AL amyloidosis",
+      "probability": 0.02
+     }
+    ],
+    "error": null
+   },
+   "iterations": [
+    {
+     "question": "What is the patient's presenting complaint?",
+     "answer": "The patient presented with progressive chronic kidney disease and subnephrotic-range proteinuria.",
+     "answer_source": "case_study",
+     "error": null,
+     "strategy_trace": {
+      "phase": "init",
+      "candidates": []
+     },
+     "environment_response": {
+      "answer_source": "case_study",
+      "evidence": [
+       "presented with progressive chronic kidney disease and subnephrotic-range proteinuria."
+      ],
+      "confidence": "high",
+      "literature_search": false,
+      "retriever_parameters": {
+       "path": "case_study",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": null,
+       "excluded_source_docs": []
+      },
+      "literature_search_result": null
+     }
+    },
+    {
+     "question": "What is the patient's history of the onset and duration of the proteinuria and kidney function decline?",
+     "answer": "Proteinuria and kidney function decline were recognized during a progressive course over several years; the exact onset and duration were not documented. The eGFR was declining by more than 5 mL/min/1.73 m² per year.",
+     "answer_source": "literature",
+     "error": null,
+     "strategy_trace": {
+      "phase": "init",
+      "candidates": []
+     },
+     "environment_response": {
+      "answer_source": "literature",
+      "evidence": [],
+      "confidence": "low",
+      "literature_search": true,
+      "retriever_parameters": {
+       "path": "best_guess",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": "Fabry disease proteinuria onset duration eGFR decline older men",
+       "excluded_source_docs": []
+      },
+      "literature_search_result": {
+       "query": "europe_pmc: TITLE_ABS:(\"proteinuria onset\" OR \"age at onset proteinuria\" OR \"proteinuria duration\" OR \"renal function decline\" OR \"eGFR decline\") AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson-Fabry disease\" OR \"Fabry nephropathy\") | litsense: proteinuria onset chronic kidney disease",
+       "documents": [
+        {
+         "doc_id": "PMID:36013057",
+         "title": "Renoprotective Effect of Agalsidase Alfa: A Long-Term Follow-Up of Patients with Fabry Disease.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/36013057/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:37061786",
+         "title": "Cluster analysis of kidney function decline among males with Fabry disease in a large United States electronic health records database.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/37061786/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:39636566",
+         "title": "Influence of Treatment Effect Modifiers in Fabry Disease: A Systematic Literature Review.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/39636566/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:27334365",
+         "title": "Long-term enzyme replacement therapy for Fabry disease: efficacy and unmet needs in cardiac and renal outcomes.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/27334365/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:40663814",
+         "title": "Identification of genetic variants associated with Fabry nephropathy progression using whole-exome sequencing.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/40663814/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:41158984",
+         "title": "Renoprotective effects of SGLT2 inhibitors in patients with Fabry disease.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/41158984/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:40760696",
+         "title": "A phase 4, open-label, multicenter study of the safety and efficacy of agalsidase beta in Chinese patients with Fabry disease.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/40760696/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:41704902",
+         "title": "Dapagliflozin in Patients With CKD With Fabry Disease.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/41704902/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        }
+       ]
+      }
+     }
+    },
+    {
+     "question": "Does the patient have diabetes mellitus, and if so, what is their hemoglobin A1c?",
+     "answer": "Yes. He has diet-controlled diabetes; a plausible HbA1c for him is 5.8%.",
+     "answer_source": "literature",
+     "error": null,
+     "strategy_trace": {
+      "phase": "refine",
+      "candidates": [
+       "Focal segmental glomerulosclerosis",
+       "Diabetic nephropathy",
+       "Membranous nephropathy",
+       "IgA nephropathy",
+       "Hypertensive nephrosclerosis"
+      ]
+     },
+     "environment_response": {
+      "answer_source": "literature",
+      "evidence": [
+       "PMID:40420032",
+       "literature range: Fabry cohort HbA1c 5.1–5.9% (PMID:40420032); CKD cohort 5.7–8.2% (PMID:40420032)"
+      ],
+      "confidence": "medium",
+      "literature_search": true,
+      "retriever_parameters": {
+       "path": "literature",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": "hemoglobin A1c Fabry disease diet controlled diabetes",
+       "excluded_source_docs": []
+      },
+      "literature_search_result": {
+       "query": "europe_pmc: (CASE:(\"hemoglobin A1c\" OR HbA1c OR \"glycated hemoglobin\" OR \"glycosylated hemoglobin\") OR RESULTS:(\"hemoglobin A1c\" OR HbA1c OR \"glycated hemoglobin\" OR \"glycosylated hemoglobin\") OR TABLE:(\"hemoglobin A1c\" OR HbA1c OR \"glycated hemoglobin\" OR \"glycosylated hemoglobin\")) AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson-Fabry disease\") | litsense: hemoglobin A1c Fabry disease",
+       "documents": [
+        {
+         "doc_id": "PMID:35245971",
+         "title": "Evaluation of endocrinological involvement and metabolic status in patients with Gaucher disease Type 1 and Fabry disease under enzyme replacement therapy.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/35245971/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:40420032",
+         "title": "The relationship between multiple plasma biomarker levels and renal disease activity in Fabry disease.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/40420032/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:42812888",
+         "title": "Coronary stenosis in Fabry disease with optical coherence tomography imaging presentation: a case report.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/42812888/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:39564058",
+         "title": "Fabry Disease: A Rare Mutation With Common Clinical Presentation.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/39564058/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:40342436",
+         "title": "Fabry Disease in a Patient With Thin Basement Membrane Nephropathy.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/40342436/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:41054307",
+         "title": "Optimizing α-galactosidase A enzyme cutoff for Fabry disease screening in chronic kidney disease patients: a single-center reassessment of diagnostic yield and cost-effectiveness.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/41054307/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:41079813",
+         "title": "Fabry Disease Associated With Myelodysplastic Syndrome: Case Report.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/41079813/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:41111061",
+         "title": "Clinical and Biochemical Characterization of Fabry Disease Associated GLA Gene Variants: Data From a Large Cohort of 469 Thousand Genotyped Subjects of the UK Biobank Database.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/41111061/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        }
+       ]
+      }
+     }
+    },
+    {
+     "question": "What is the patient's serum anti-PLA2R antibody result?",
+     "answer": "Serum anti-PLA2R antibody was negative.",
+     "answer_source": "literature",
+     "error": null,
+     "strategy_trace": {
+      "phase": "refine",
+      "candidates": [
+       "Focal segmental glomerulosclerosis",
+       "Membranous nephropathy",
+       "IgA nephropathy",
+       "Diabetic nephropathy",
+       "Hypertensive nephrosclerosis"
+      ]
+     },
+     "environment_response": {
+      "answer_source": "literature",
+      "evidence": [],
+      "confidence": "low",
+      "literature_search": true,
+      "retriever_parameters": {
+       "path": "best_guess",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": "serum anti-PLA2R antibody Fabry disease chronic kidney disease",
+       "excluded_source_docs": []
+      },
+      "literature_search_result": {
+       "query": "europe_pmc: TITLE_ABS:(\"serum anti-PLA2R antibody\" OR \"anti-PLA2R antibody\" OR \"PLA2R antibody\" OR \"anti-PLA2R seropositivity\") AND TITLE_ABS:(\"membranous nephropathy\" OR \"chronic kidney disease\") | litsense: serum anti-PLA2R antibody Fabry disease",
+       "documents": [
+        {
+         "doc_id": "PMID:28614271#TITLEABSTRACT-0a111a39",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/28614271/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:33046023#INTRO-47cf4b33",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/33046023/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:35484851#TITLEABSTRACT-6eac43e0",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/35484851/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:29881283#TITLEABSTRACT-56eea7aa",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/29881283/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:28490696#TITLEABSTRACT-d9708664",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/28490696/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:32533226#TITLEABSTRACT-cfc8e182",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/32533226/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:34721885#METHODS-2824a5ba",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/34721885/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:35529848#INTRO-08b80fab",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/35529848/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        }
+       ]
+      }
+     }
+    },
+    {
+     "question": "What is the patient's urine microscopy red blood cell count?",
+     "answer": "Urine microscopy shows 0–2 red blood cells per high-power field.",
+     "answer_source": "literature",
+     "error": null,
+     "strategy_trace": {
+      "phase": "refine",
+      "candidates": [
+       "Focal segmental glomerulosclerosis",
+       "Diabetic nephropathy",
+       "IgA nephropathy",
+       "Hypertensive nephrosclerosis",
+       "Membranous nephropathy"
+      ]
+     },
+     "environment_response": {
+      "answer_source": "literature",
+      "evidence": [],
+      "confidence": "low",
+      "literature_search": true,
+      "retriever_parameters": {
+       "path": "best_guess",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": "urine red blood cell count Fabry disease adults",
+       "excluded_source_docs": []
+      },
+      "literature_search_result": {
+       "query": "europe_pmc: TITLE_ABS:(\"urine red blood cell count\" OR \"urinary red blood cells\" OR \"urine erythrocytes\" OR \"microscopic hematuria\" OR hematuria) AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson-Fabry disease\") | litsense: urine red blood cell count Fabry nephropathy",
+       "documents": [
+        {
+         "doc_id": "PMID:41531328",
+         "title": "Drug-induced phospholipidosis of the kidney suspected to be caused by atomoxetine.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/41531328/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:40342436",
+         "title": "Fabry Disease in a Patient With Thin Basement Membrane Nephropathy.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/40342436/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:35842573",
+         "title": "COL4A4 variant recently identified: lessons learned in variant interpretation-a case report.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/35842573/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:24913738",
+         "title": "Coexistence of Fabry disease and IgA nephropathy: a report of two cases.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/24913738/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:42824490",
+         "title": "Case Report: Concurrent Fabry disease, IgA nephropathy and undifferentiated connective tissue disease in a female with normal enzyme activity.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/42824490/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:31840555",
+         "title": "IgA nephropathy suspected to be combined with Fabry disease or Alport syndrome: a case report.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/31840555/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:28157068",
+         "title": "Clinical and pathological characteristics of Fabry disease combined with IgA nephropathy in Chinese patients .",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/28157068/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:32712909",
+         "title": "A case of latent heterozygous Fabry disease in a female living kidney donor candidate.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/32712909/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        }
+       ]
+      }
+     }
+    },
+    {
+     "question": "Does the patient have diabetic retinopathy on fundoscopic or ophthalmologic examination?",
+     "answer": "The patient had no diabetic retinopathy on fundoscopic examination.",
+     "answer_source": "literature",
+     "error": null,
+     "strategy_trace": {
+      "phase": "refine",
+      "candidates": [
+       "Focal segmental glomerulosclerosis",
+       "Diabetic nephropathy",
+       "Hypertensive nephrosclerosis",
+       "Membranous nephropathy"
+      ]
+     },
+     "environment_response": {
+      "answer_source": "literature",
+      "evidence": [],
+      "confidence": "low",
+      "literature_search": true,
+      "retriever_parameters": {
+       "path": "best_guess",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": "diabetic retinopathy Fabry disease diabetes ophthalmologic examination",
+       "excluded_source_docs": []
+      },
+      "literature_search_result": {
+       "query": "europe_pmc: TITLE_ABS:(\"diabetic retinopathy\" OR \"fundoscopic examination\" OR \"fundus examination\" OR \"ophthalmologic examination\" OR \"retinal microvascular abnormalities\") AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson-Fabry disease\" OR \"Fabry s disease\") | litsense: diabetic retinopathy Fabry disease",
+       "documents": [
+        {
+         "doc_id": "PMID:42850619",
+         "title": "Longitudinal assessment of the retinal phenotype in patients with Fabry disease undergoing continuous enzyme replacement and/or chaperone therapy.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/42850619/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "DOI:10.1101/2025.01.14.25320513",
+         "title": "Cardiac involvement in Fabry disease: Implications of retinal vessel analysis in detecting early microvascular alterations despite ERT",
+         "url": "https://doi.org/10.1101/2025.01.14.25320513",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:31584758",
+         "title": "Ocular findings in Fabry disease in Colombian patients",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/31584758/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:31878969",
+         "title": "Retinal hyperreflective foci in Fabry disease.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/31878969/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:1886355",
+         "title": "[Value of the ophthalmologic examination in diagnosing patients with Anderson-Fabry disease and in heterozygote detection].",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/1886355/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:20821055",
+         "title": "Enzyme assay and clinical assessment in subjects with a Chinese hotspot late-onset Fabry mutation (IVS4 + 919G→A).",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/20821055/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:31290435#TITLEABSTRACT-7dc40c77",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/31290435/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:18510248#TITLEABSTRACT-646b90ec",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/18510248/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        }
+       ]
+      }
+     }
+    },
+    {
+     "question": "What do the patient's kidney biopsy light microscopy findings show regarding glomerular segmental sclerosis and hyalinosis?",
+     "answer": "No glomerular segmental sclerosis or hyalinosis was identified.",
+     "answer_source": "literature",
+     "error": null,
+     "strategy_trace": {
+      "phase": "final",
+      "candidates": [
+       "Focal segmental glomerulosclerosis",
+       "Hypertensive nephrosclerosis",
+       "Membranous nephropathy"
+      ]
+     },
+     "environment_response": {
+      "answer_source": "literature",
+      "evidence": [],
+      "confidence": "low",
+      "literature_search": true,
+      "retriever_parameters": {
+       "path": "best_guess",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": "segmental glomerulosclerosis hyalinosis Fabry disease renal biopsy",
+       "excluded_source_docs": []
+      },
+      "literature_search_result": {
+       "query": "europe_pmc: TITLE_ABS:(\"segmental glomerulosclerosis\" OR \"focal segmental glomerulosclerosis\" OR \"glomerular sclerosis\" OR \"glomerular hyalinosis\") AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson Fabry disease\" OR \"Fabry nephropathy\") | litsense: segmental glomerulosclerosis Fabry disease",
+       "documents": [
+        {
+         "doc_id": "PMID:41720735",
+         "title": "Lecithin-cholesterol acyltransferase deficiency with the finding of \"zebra bodies\": A diagnostic challenge in the context of suspected Fabry disease.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/41720735/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:29792392#TITLEABSTRACT-3d93cd96",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/29792392/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:38186123",
+         "title": "[Clinical analysis of 10 patients with Fabry disease].",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/38186123/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:34808632",
+         "title": "Autopsy Findings of Heterozygous Fabry Disease with the Severe Phenotype: A Case Report.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/34808632/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:31847900",
+         "title": "Effectiveness of immunosuppressive therapy for nephrotic syndrome in a patient with late-onset Fabry disease: a case report and literature review.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/31847900/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:23387234",
+         "title": "[Pedigree investigation of clinicopathologic features and alpha-galactosidase A gene mutation in a family with Fabry disease].",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/23387234/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:21862460",
+         "title": "Diffuse thin glomerular basement membrane in association with Fabry disease in a Chinese female patient.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/21862460/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:12487173",
+         "title": "Fabry disease with few clinical signs and symptoms.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/12487173/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        }
+       ]
+      }
+     }
+    },
+    {
+     "question": "What do the patient's kidney biopsy electron microscopy findings show for podocyte foot process effacement and subepithelial electron-dense deposits?",
+     "answer": "Electron microscopy shows focal podocyte foot process effacement and no subepithelial electron-dense deposits.",
+     "answer_source": "literature",
+     "error": null,
+     "strategy_trace": {
+      "phase": "final",
+      "candidates": [
+       "Focal segmental glomerulosclerosis",
+       "Hypertensive nephrosclerosis",
+       "Membranous nephropathy"
+      ]
+     },
+     "environment_response": {
+      "answer_source": "literature",
+      "evidence": [
+       "PMID:16799480",
+       "PMID:31067829#CASE-9a1bd8da"
+      ],
+      "confidence": "low",
+      "literature_search": true,
+      "retriever_parameters": {
+       "path": "best_guess",
+       "multi_part": false,
+       "sub_queries": [],
+       "literature_query": "foot process effacement subepithelial deposits Fabry disease renal biopsy",
+       "excluded_source_docs": []
+      },
+      "literature_search_result": {
+       "query": "europe_pmc: TITLE_ABS:(\"podocyte foot process effacement\" OR \"foot process effacement\" OR \"subepithelial electron dense deposits\" OR \"subepithelial deposits\") AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson Fabry disease\" OR \"Fabry nephropathy\") | litsense: podocyte foot process effacement Fabry disease",
+       "documents": [
+        {
+         "doc_id": "PMID:34922431",
+         "title": "Fabry nephropathy before and after enzyme replacement therapy: important role of renal biopsy in patients with Fabry disease.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/34922431/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:33513913#TITLEABSTRACT-45888c27",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/33513913/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:23430826",
+         "title": "Foot process effacement with normal urinalysis in classic fabry disease.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/23430826/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:34922431#INTRO-0b8eff1c",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/34922431/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:16799480",
+         "title": "Fabry disease: a morphologic study of 11 cases.",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/16799480/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:31067829#CASE-9a1bd8da",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/31067829/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:33513913#CONCL-84daacbc",
+         "title": null,
+         "url": "https://pubmed.ncbi.nlm.nih.gov/33513913/",
+         "source": "litsense",
+         "journal": null,
+         "pub_year": null
+        },
+        {
+         "doc_id": "PMID:29792392",
+         "title": "Hemizygous Fabry disease associated with membranous nephropathy: A rare case report .",
+         "url": "https://pubmed.ncbi.nlm.nih.gov/29792392/",
+         "source": "europe_pmc",
+         "journal": null,
+         "pub_year": null
+        }
+       ]
+      }
+     }
+    }
+   ]
+  }
+ ]
+}

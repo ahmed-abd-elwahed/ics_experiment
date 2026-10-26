@@ -1,0 +1,1090 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diagnosis Experiments</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@800&display=swap">
+<style>
+/* Blog Design system, Paper theme: printed paper, 2px ink boxes, one pink. The diagrams keep the
+   Clinician's View conventions: line icons, boxes joined by arrows, the active path in blue. */
+:root {
+  --paper: #efe9e2;
+  --grain: #ddd5ca;
+  --surface: #f8f5f0;
+  --tan: #ece2d4;
+  --ink: #141210;
+  --ink-muted: #6b655e;
+  --ink-faint: #9a938b;
+  --line: #d6cec4;
+  --punch: #f25c7f;
+  --punch-ink: #bd2a53;
+  --punch-tint: #fbdde4;
+  --clay: #8a5a2b;
+  --clay-tint: #f3e6d6;
+  --gold: #e8b522;
+  --gold-tint: #f7e8c2;
+  --slot-a: #2f6fcc;
+  --slot-a-tint: #dfe8f6;
+  --slot-b: #7b4dbb;
+  --slot-b-tint: #ebe3f5;
+  --slot-c: #1b7f5b;
+  --ok-tint: #dcefe5;
+  --active: var(--slot-a);
+  --active-tint: var(--slot-a-tint);
+
+  --display: "Playfair Display", "Iowan Old Style", Georgia, serif;
+  --sans: Inter, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", "SF Mono", Menlo, monospace;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image: radial-gradient(var(--grain) 0.7px, transparent 0.9px);
+  background-size: 3px 3px;
+  font: 400 15px/1.5 var(--sans);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3, h4 { margin: 0; text-wrap: balance; }
+a { color: inherit; }
+.mono { font-family: var(--mono); font-size: 0.92em; }
+.muted { color: var(--ink-muted); }
+.eyebrow { font: 700 13px/16px var(--sans); letter-spacing: 0.18em; text-transform: uppercase; color: var(--punch-ink); }
+button, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--active); outline-offset: 2px; }
+
+/* --- landing ------------------------------------------------------------------------------- */
+
+.home { min-height: 100vh; display: grid; place-items: center; padding-block: 48px; }
+.home-inner { width: min(860px, 100%); display: flex; flex-direction: column; align-items: center; gap: 32px; text-align: center; }
+.home h1 { font: 800 clamp(34px, 5vw, 52px)/1.08 var(--display); letter-spacing: -0.02em; }
+.home .lede { color: var(--ink-muted); max-width: 52ch; margin: 12px auto 0; }
+.tiles { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.tile {
+  display: flex; flex-direction: column; gap: 14px; text-align: left; text-decoration: none;
+  background: var(--surface); border: 2px solid var(--ink); border-radius: 16px; padding: 22px 22px 18px;
+  transition: background 0.15s, transform 0.15s;
+}
+.tile:hover { background: var(--punch-tint); transform: translateY(-2px); }
+.tile svg { width: 64px; height: 64px; color: var(--ink); }
+.tile h2 { font: 800 26px/1.15 var(--sans); letter-spacing: -0.02em; }
+.tile p { margin: 0; color: var(--ink-muted); }
+.tile .go { margin-top: auto; font: 500 13px/18px var(--mono); letter-spacing: 0.14em; text-transform: uppercase; }
+@media (max-width: 640px) { .tiles { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .tile { transition: none; } .tile:hover { transform: none; } }
+
+/* --- top navigation ------------------------------------------------------------------------ */
+
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+  display: flex; align-items: stretch; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  margin: 0 calc(-1 * max(16px, env(safe-area-inset-left, 0px))) 0 calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+  padding: 10px max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px));
+  background: var(--paper); border-bottom: 2px solid var(--ink);
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+.brand { display: flex; align-items: center; font: 500 14px/18px var(--mono); letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; }
+.nav { display: flex; }
+.nav a {
+  display: flex; align-items: center; padding: 8px 16px; border: 2px solid var(--ink); margin-left: -2px;
+  font: 500 14px/18px var(--mono); letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; background: var(--surface);
+}
+.nav a[aria-current="page"] { background: var(--punch); }
+.nav a:hover:not([aria-current="page"]) { background: var(--tan); }
+
+/* --- an experiment view -------------------------------------------------------------------- */
+
+main.view { max-width: 1640px; margin: 0 auto; padding-block: 28px 40px; }
+.view-head { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+.view-head h1 { font: 800 clamp(28px, 3.4vw, 40px)/1.1 var(--display); letter-spacing: -0.015em; }
+.view-head .meta { color: var(--ink-muted); font-size: 14px; }
+
+.stepper {
+  display: flex; align-items: center; gap: 14px; padding: 10px 14px;
+  background: var(--surface); border: 2px solid var(--ink); border-radius: 16px;
+}
+.step-btn {
+  flex: none; width: 46px; height: 46px; border-radius: 10px; border: 2px solid var(--ink);
+  background: var(--surface); font-size: 16px; cursor: pointer;
+}
+.step-btn.next { background: var(--ink); color: var(--surface); }
+.step-btn:disabled { opacity: 0.35; cursor: default; }
+.step-btn:hover:not(:disabled) { background: var(--tan); }
+.step-btn.next:hover:not(:disabled) { background: #2b2723; }
+.step-info { flex: 1; min-width: 0; }
+.step-title { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-weight: 700; }
+.step-count { font: 500 12px/18px var(--mono); letter-spacing: 0.12em; color: var(--ink-muted); text-transform: uppercase; }
+.step-info input[type="range"] { width: 100%; margin: 6px 0 2px; accent-color: var(--ink); }
+.step-caption { color: var(--ink-muted); font-size: 14px; overflow-wrap: anywhere; min-height: 2.9em; }
+
+.hint { margin: 18px 0 0; text-align: center; color: var(--ink-faint); font: 400 12px/16px var(--mono); letter-spacing: 0.06em; }
+
+/* --- the scene: environment, query and answer, then the diagnoser --------------------------- */
+
+.scene { display: grid; align-items: center; margin-top: 22px; }
+.ddx .scene { grid-template-columns: minmax(0, 0.9fr) minmax(150px, 0.5fr) minmax(0, 1.35fr) minmax(0, 1fr); column-gap: 14px; }
+.ics .scene { grid-template-columns: minmax(0, 1.25fr) minmax(160px, 0.55fr) minmax(0, 1.35fr); }
+
+.col-title { font: 700 20px/1.25 var(--sans); letter-spacing: -0.01em; text-align: center; margin-bottom: 10px; }
+.env {
+  position: relative; border: 2.5px dashed var(--slot-c);
+  border-radius: 48px 30px 44px 36px / 36px 44px 30px 48px;
+  background: rgba(27, 127, 91, 0.05); padding: 20px 20px 24px;
+}
+.env-grid { position: relative; z-index: 1; display: grid; gap: 20px 0; }
+.ics .env-grid { grid-template-columns: minmax(0, 1fr) 64px minmax(0, 1fr); }
+.ics #i-node-case { grid-column: 1; grid-row: 1; }
+.ics #i-node-lit { grid-column: 1; grid-row: 2; }
+.ics #i-node-llm { grid-column: 3; grid-row: 1 / span 2; align-self: center; }
+.env-arrows { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: visible; }
+.env-arrows line { stroke: var(--ink); stroke-width: 2; opacity: 0.5; }
+.env-arrows line.on { stroke: var(--active); stroke-width: 3; opacity: 1; }
+.env-arrows .head { fill: var(--ink); opacity: 0.5; }
+.env-arrows .head-on { fill: var(--active); }
+
+.node { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 0; }
+.node h3 { font: 700 16px/1.25 var(--sans); text-align: center; }
+.icon { color: var(--ink); transition: color 0.2s; }
+.icon.doc { width: 52px; height: 68px; }
+.icon.magnifier { width: 60px; height: 62px; }
+.robot { width: 74px; height: 92px; color: var(--ink); transition: color 0.2s, transform 0.2s; }
+.node.on .robot { color: var(--active); transform: translateY(-2px); }
+.node.case.on .icon { color: var(--clay); }
+.node.lit.on .icon { color: var(--slot-b); }
+.v-arrow { position: relative; width: 2px; height: 34px; margin: 2px auto; background: var(--ink); opacity: 0.5; }
+.v-arrow::before, .v-arrow::after { content: ""; position: absolute; left: 50%; transform: translateX(-50%); border: 6px solid transparent; }
+.v-arrow::before { top: -4px; border-top: 0; border-bottom: 10px solid var(--ink); }
+.v-arrow::after { bottom: -4px; border-bottom: 0; border-top: 10px solid var(--ink); }
+.v-arrow.on { background: var(--active); opacity: 1; width: 3px; }
+.v-arrow.on::before { border-bottom-color: var(--active); }
+.v-arrow.on::after { border-top-color: var(--active); }
+
+.box {
+  position: relative; width: 100%; flex: none;
+  background: var(--surface); border: 2px solid var(--ink); border-radius: 10px;
+  padding: 10px 12px; font-size: 13.5px; line-height: 1.45;
+  overflow: auto; overflow-wrap: anywhere; transition: border-color 0.2s, box-shadow 0.2s;
+}
+.node.on > .box, .msg.on > .box, .panel.on > .box { border-color: var(--active); box-shadow: 0 0 0 3px var(--active-tint); }
+.node.case.on > .box { border-color: var(--clay); box-shadow: 0 0 0 3px var(--clay-tint); }
+.node.lit.on > .box { border-color: var(--slot-b); box-shadow: 0 0 0 3px var(--slot-b-tint); }
+.box p { margin: 0 0 6px; }
+.box p:last-child { margin-bottom: 0; }
+.box h4 { font: 500 11.5px/16px var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-muted); margin: 10px 0 4px; }
+.box h4:first-child { margin-top: 0; }
+.placeholder { color: var(--ink-faint); font-style: italic; }
+.text { white-space: pre-wrap; }
+mark { background: var(--gold-tint); color: inherit; border-radius: 3px; padding: 0 1px; box-shadow: inset 0 -2px 0 var(--gold); }
+.kv { display: flex; gap: 6px; flex-wrap: wrap; font-size: 12.5px; }
+.kv .k { color: var(--ink-muted); }
+.badges { display: flex; gap: 5px; flex-wrap: wrap; margin: 0 0 6px; }
+.badge {
+  display: inline-block; font: 600 11px/18px var(--sans); padding: 0 8px; border-radius: 6px;
+  background: var(--tan); color: var(--ink); border: 1px solid var(--line); white-space: nowrap;
+}
+.badge.case { background: var(--clay-tint); color: var(--clay); border-color: transparent; }
+.badge.lit { background: var(--slot-b-tint); color: var(--slot-b); border-color: transparent; }
+.badge.ok { background: var(--ok-tint); color: var(--slot-c); border-color: transparent; }
+.badge.warn { background: var(--gold-tint); color: #8a5a00; border-color: transparent; }
+.truth { margin: 4px 0 8px; padding: 6px 8px; border-radius: 6px; background: var(--tan); }
+.truth .badge { margin-right: 6px; white-space: normal; background: var(--surface); }
+.query-text { font: 400 11.5px/1.45 var(--mono); background: var(--tan); padding: 5px 7px; border-radius: 6px; white-space: pre-wrap; }
+.docs { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+.docs li { border-top: 1px solid var(--line); padding-top: 6px; }
+.docs .doc-title { font-weight: 600; }
+.docs .doc-meta { font-size: 11.5px; color: var(--ink-muted); }
+
+/* query and answer between the environment and the diagnoser */
+.channel { display: flex; flex-direction: column; justify-content: center; gap: 28px; padding: 0 8px; }
+.msg { display: flex; flex-direction: column; gap: 8px; }
+.msg-label { text-align: center; font: 600 17px/1.2 var(--sans); }
+.msg .box { height: 150px; }
+.msg .arrow { position: relative; height: 2px; background: var(--ink); opacity: 0.55; margin: 0 -12px 0 -20px; }
+.msg .arrow::before, .msg .arrow::after { content: ""; position: absolute; top: 50%; transform: translateY(-50%); border: 7px solid transparent; }
+.arrow-left::before { left: -3px; border-left: 0; border-right: 12px solid var(--ink); }
+.arrow-right::after { right: -3px; border-right: 0; border-left: 12px solid var(--ink); }
+.msg.on .arrow { background: var(--active); opacity: 1; height: 3px; }
+.msg.on .arrow-left::before { border-right-color: var(--active); }
+.msg.on .arrow-right::after { border-left-color: var(--active); }
+.msg.on .msg-label { color: var(--active); }
+
+.panels { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.panel-label { font: 700 16px/1.25 var(--sans); text-align: center; margin-bottom: 6px; }
+.panel.on .panel-label { color: var(--active); }
+
+/* --- DDx: the framework loop ------------------------------------------------------------- */
+
+.flowchart { min-width: 0; }
+.flow-svg { display: block; width: 100%; height: auto; max-width: 520px; margin: 0 auto; overflow: visible; }
+.flow-svg text { font-family: var(--sans); fill: var(--ink); }
+.fnode .shape { fill: var(--surface); stroke: var(--ink); stroke-width: 2; transition: fill 0.2s, stroke 0.2s, stroke-width 0.2s; }
+.fnode text { font-size: 14px; font-weight: 600; text-anchor: middle; }
+.fnode.on .shape { stroke: var(--active); stroke-width: 3.5; fill: var(--active-tint); }
+.fnode.on text { fill: var(--active); }
+.fnode.done .shape { fill: var(--gold); stroke: var(--ink); stroke-width: 3; }
+.fnode.done text { fill: var(--ink); }
+.fedge polyline { fill: none; stroke: var(--ink); stroke-width: 2; opacity: 0.75; transition: stroke 0.2s, stroke-width 0.2s; }
+.fedge text { font-size: 14px; font-weight: 700; }
+.fedge.start text { font: 400 12px var(--mono); fill: var(--ink-muted); }
+.fedge.on polyline { stroke: var(--active); stroke-width: 3.5; opacity: 1; }
+.fedge.on text { fill: var(--active); }
+.fhead { fill: var(--ink); }
+.fhead-on { fill: var(--active); }
+
+.ddx #d-box-case { height: 250px; }
+.ddx #d-box-llm { height: 130px; }
+.ddx #d-box-rep, .ddx #d-box-ddx { height: 300px; }
+.rep-bg { margin: 0 0 8px; }
+.memory { margin: 4px 0 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+.memory .q { font-weight: 600; }
+.memory li.new { background: var(--active-tint); border-radius: 6px; padding: 3px 6px; margin-left: -6px; }
+.missing { color: var(--ink-muted); font-style: italic; }
+
+.ddx-list { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.ddx-row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.ddx-name { min-width: 0; }
+.ddx-p { flex: none; font: 500 12.5px/1 var(--mono); font-variant-numeric: tabular-nums; }
+.ddx-p .delta { color: var(--ink-muted); margin-left: 4px; }
+.bar { position: relative; height: 7px; margin-top: 3px; background: var(--tan); border-radius: 4px; }
+.bar i { position: absolute; inset: 0 auto 0 0; background: var(--ink); opacity: 0.65; border-radius: 4px; transition: width 0.35s; }
+.bar b { position: absolute; top: -3px; bottom: -3px; width: 0; border-left: 2px dashed var(--punch-ink); }
+.ddx-list li.lead .ddx-name { font-weight: 700; }
+.ddx-list li.lead .bar i { background: var(--active); opacity: 1; }
+.ddx-list li.pass .bar i { background: var(--gold); opacity: 1; }
+.ddx-list li.pass { background: var(--gold-tint); border-radius: 6px; padding: 4px 6px; margin: 0 -6px; }
+.thr-note { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-muted); }
+.thr-note::before { content: ""; height: 12px; border-left: 2px dashed var(--punch-ink); }
+.verdict { padding: 7px 9px; border-radius: 6px; background: var(--ok-tint); color: var(--slot-c); font-weight: 600; margin-bottom: 8px; }
+.verdict.no { background: var(--tan); color: var(--ink); }
+
+/* --- ICS: the Clinician's View ---------------------------------------------------------- */
+
+.ics #i-box-case { height: 270px; }
+.ics #i-box-lit { height: 200px; }
+.ics #i-box-llm { height: 290px; }
+.ics #i-box-memory, .ics #i-box-output { height: 360px; font-size: 14px; }
+.strategy-pick { display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; }
+.strategy-pick select {
+  padding: 6px 10px; border-radius: 10px; border: 2px solid var(--ink); border-left-width: 8px;
+  border-left-color: var(--strat); background: var(--strat-soft); font-weight: 600; cursor: pointer;
+}
+.strat-hypothesis { --strat: var(--slot-a); --strat-soft: #e9eff9; }
+.strat-knowledge { --strat: var(--slot-c); --strat-soft: #e5f2ec; }
+.strat-channel { --strat: var(--clay); --strat-soft: #f5ece2; }
+.strat-sequence { --strat: var(--slot-b); --strat-soft: #f0eaf7; }
+.strat-other { --strat: var(--ink); --strat-soft: var(--surface); }
+.clin[class*="strat-"] .box { background: var(--strat-soft); }
+.memory-group { margin: 10px 0 2px; padding: 2px 8px; border-left: 3px solid var(--strat, var(--ink)); font: 500 11.5px/16px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); }
+.memory-group.current { color: var(--strat); }
+.output-list { margin: 4px 0 6px; padding-left: 20px; display: flex; flex-direction: column; gap: 3px; }
+.output-list li.truth-hit { background: var(--ok-tint); border-radius: 6px; padding: 1px 6px; margin-left: -6px; }
+.stop-banner { padding: 7px 9px; border-radius: 6px; background: var(--tan); font-weight: 600; margin-bottom: 6px; }
+
+/* --- narrow screens ------------------------------------------------------------------------ */
+
+@media (max-width: 1240px) {
+  .ddx .scene { grid-template-columns: minmax(0, 1fr) minmax(150px, 0.55fr) minmax(0, 1.2fr); row-gap: 24px; }
+  .ddx .panels { grid-column: 1 / -1; flex-direction: row; }
+  .ddx .panels .panel { flex: 1; min-width: 0; }
+}
+@media (max-width: 1100px) {
+  .scene, .ddx .scene, .ics .scene { grid-template-columns: minmax(0, 1fr); row-gap: 22px; }
+  .ddx .panels { flex-direction: column; }
+  .channel { flex-direction: row; gap: 12px; padding: 0; }
+  .msg { flex: 1; min-width: 0; }
+  .msg .arrow { margin: 0; }
+  .ics .env-grid { grid-template-columns: minmax(0, 1fr); }
+  .ics #i-node-case, .ics #i-node-lit, .ics #i-node-llm { grid-column: 1; grid-row: auto; }
+  .env-arrows { display: none; }
+}
+@media (max-width: 640px) {
+  .channel { flex-direction: column; }
+  .stepper { gap: 8px; padding: 8px 10px; }
+  .step-btn { width: 40px; height: 40px; }
+  .env { padding: 14px 10px; }
+  .nav a { padding: 6px 10px; font-size: 12px; letter-spacing: 0.08em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .robot, .box, .bar i, .fnode .shape, .fedge polyline { transition: none; }
+  .node.on .robot { transform: none; }
+}
+</style>
+
+<!-- Landing -------------------------------------------------------------------------------- -->
+<section class="home" id="home" hidden>
+  <div class="home-inner">
+    <div>
+      <div class="eyebrow">Computer-based diagnosis</div>
+      <h1>Information Collection Strategies</h1>
+      <p class="lede">Two experiments on how a diagnostic system gathers what it needs to know about a patient. Each one walks through a real run, step by step.</p>
+    </div>
+    <div class="tiles">
+      <a class="tile" href="#ddx">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><path d="M32 6 L44 18 L32 30 L20 18 Z"/><rect x="4" y="34" width="20" height="13" rx="4"/><rect x="40" y="34" width="20" height="13" rx="4"/><rect x="22" y="50" width="20" height="11" rx="4"/><path d="M44 18 H50 V34 M50 47 V55 H42 M22 55 H14 V47 M14 34 V18 H20"/></g></svg>
+        <div class="eyebrow">DDx experiment</div>
+        <h2>Differential diagnosis framework</h2>
+        <p>One case through the framework's loop: rank diseases, check whether one stands out, ask for more, update, repeat.</p>
+        <span class="go">Open ›</span>
+      </a>
+      <a class="tile" href="#ics">
+        <svg viewBox="0 0 150 184" aria-hidden="true"><use href="#robot"/></svg>
+        <div class="eyebrow">ICS experiment</div>
+        <h2>Clinician's View</h2>
+        <p>Four information collection strategies question a simulated patient environment about the same case.</p>
+        <span class="go">Open ›</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Navigation for the two views ------------------------------------------------------------- -->
+<header class="top" id="top" hidden>
+  <a class="brand" href="#">■ Diagnosis experiments</a>
+  <nav class="nav" aria-label="Experiments">
+    <a href="#ddx" id="nav-ddx">DDx experiment</a>
+    <a href="#ics" id="nav-ics">ICS experiment</a>
+  </nav>
+</header>
+
+<!-- DDx experiment ------------------------------------------------------------------------ -->
+<main class="view ddx" id="ddx" hidden>
+  <div class="view-head">
+    <div class="eyebrow">DDx experiment · illustrative case run</div>
+    <h1>Differential Diagnosis Framework</h1>
+    <div class="meta" id="d-meta"></div>
+  </div>
+
+  <div class="stepper">
+    <button type="button" class="step-btn" data-step="-1" aria-label="Previous step">◀</button>
+    <div class="step-info">
+      <div class="step-title"><span class="s-title"></span><span class="step-count"></span></div>
+      <input type="range" min="0" max="0" value="0" aria-label="Step">
+      <div class="step-caption" aria-live="polite"></div>
+    </div>
+    <button type="button" class="step-btn next" data-step="1" aria-label="Next step">▶</button>
+  </div>
+
+  <div class="scene">
+    <div class="env-wrap">
+      <div class="col-title">Simulated Environment</div>
+      <div class="env">
+        <div class="env-grid">
+          <div class="node case" id="d-node-case">
+            <h3>Case Study</h3>
+            <svg class="icon doc" aria-hidden="true"><use href="#doc"/></svg>
+            <div class="box" id="d-box-case"></div>
+          </div>
+          <div class="v-arrow" id="d-env-arrow" aria-hidden="true"></div>
+          <div class="node" id="d-node-llm">
+            <h3>LLM</h3>
+            <svg class="robot" aria-hidden="true"><use href="#robot"/></svg>
+            <div class="box" id="d-box-llm"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="channel">
+      <div class="msg" id="d-msg-query">
+        <div class="msg-label">Query</div>
+        <div class="box" id="d-box-query"></div>
+        <div class="arrow arrow-left" aria-hidden="true"></div>
+      </div>
+      <div class="msg" id="d-msg-answer">
+        <div class="msg-label">Answer</div>
+        <div class="arrow arrow-right" aria-hidden="true"></div>
+        <div class="box" id="d-box-answer"></div>
+      </div>
+    </div>
+
+    <div class="flowchart">
+      <div class="col-title">DDx Framework</div>
+      <svg class="flow-svg" id="d-flow" viewBox="0 0 520 486" role="img" aria-label="The framework's loop: calculate disease probabilities, check for sufficient differentiation, return the disease if yes, otherwise retrieve new information and update the case representation.">
+        <defs>
+          <marker id="fh" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto"><path class="fhead" d="M0,0 L10,5 L0,10 z"/></marker>
+          <marker id="fh-on" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto"><path class="fhead-on" d="M0,0 L10,5 L0,10 z"/></marker>
+        </defs>
+        <g class="fedge" data-edge="yes"><polyline points="260,103 260,64"/><text x="272" y="90">Yes</text></g>
+        <g class="fedge" data-edge="no"><polyline points="352,165 431,165 431,260"/><text x="384" y="154">No</text></g>
+        <g class="fedge" data-edge="ru"><polyline points="431,336 431,407 337,407"/></g>
+        <g class="fedge" data-edge="uc"><polyline points="185,407 89,407 89,338"/></g>
+        <g class="fedge" data-edge="cd"><polyline points="89,262 89,165 166,165"/></g>
+        <g class="fedge start" data-edge="start"><polyline points="260,482 260,446"/><text x="272" y="474">start: background &amp; presentation</text></g>
+
+        <g class="fnode" data-node="return"><rect class="shape" x="180" y="12" width="160" height="52" rx="26"/><text x="260" y="43">Return Disease</text></g>
+        <g class="fnode" data-node="decide"><polygon class="shape" points="260,103 352,165 260,227 168,165"/><text x="260" y="161">Sufficient</text><text x="260" y="179">Differentiation?</text></g>
+        <g class="fnode" data-node="calc"><rect class="shape" x="14" y="262" width="150" height="74" rx="14"/><text x="89" y="294">Calculate Disease</text><text x="89" y="313">Probabilities</text></g>
+        <g class="fnode" data-node="retrieve"><rect class="shape" x="356" y="262" width="150" height="74" rx="14"/><text x="431" y="294">Retrieve New</text><text x="431" y="313">Information</text></g>
+        <g class="fnode" data-node="update"><rect class="shape" x="185" y="370" width="150" height="74" rx="14"/><text x="260" y="402">Update Case</text><text x="260" y="421">Representation</text></g>
+      </svg>
+    </div>
+
+    <div class="panels">
+      <div class="panel" id="d-panel-rep">
+        <div class="panel-label">Case Representation</div>
+        <div class="box" id="d-box-rep"></div>
+      </div>
+      <div class="panel" id="d-panel-ddx">
+        <div class="panel-label">Disease Probabilities</div>
+        <div class="box" id="d-box-ddx"></div>
+      </div>
+    </div>
+  </div>
+  <p class="hint">Space or → next step · ← previous step · Home / End first and last step</p>
+</main>
+
+<!-- ICS experiment: Clinician's View -------------------------------------------------------- -->
+<main class="view ics" id="ics" hidden>
+  <div class="view-head">
+    <div class="eyebrow">ICS experiment · Clinician's View</div>
+    <h1>Diagnosis Information Retrieval</h1>
+    <div class="meta" id="i-meta"></div>
+  </div>
+
+  <div class="stepper">
+    <button type="button" class="step-btn" data-step="-1" aria-label="Previous step">◀</button>
+    <div class="step-info">
+      <div class="step-title"><span class="s-title"></span><span class="step-count"></span></div>
+      <input type="range" min="0" max="0" value="0" aria-label="Step">
+      <div class="step-caption" aria-live="polite"></div>
+    </div>
+    <button type="button" class="step-btn next" data-step="1" aria-label="Next step">▶</button>
+  </div>
+
+  <div class="scene">
+    <div class="env-wrap">
+      <div class="col-title">Simulated Environment</div>
+      <div class="env" id="i-env">
+        <svg class="env-arrows" id="i-env-arrows" aria-hidden="true"></svg>
+        <div class="env-grid">
+          <div class="node case" id="i-node-case">
+            <h3>Case Study</h3>
+            <svg class="icon doc" aria-hidden="true"><use href="#doc"/></svg>
+            <div class="box" id="i-box-case"></div>
+          </div>
+          <div class="node lit" id="i-node-lit">
+            <h3>The Literature</h3>
+            <svg class="icon magnifier" aria-hidden="true"><use href="#magnifier"/></svg>
+            <div class="box" id="i-box-lit"></div>
+          </div>
+          <div class="node" id="i-node-llm">
+            <h3>LLM</h3>
+            <svg class="robot" aria-hidden="true"><use href="#robot"/></svg>
+            <div class="box" id="i-box-llm"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="channel">
+      <div class="msg" id="i-msg-query">
+        <div class="msg-label">Query</div>
+        <div class="box" id="i-box-query"></div>
+        <div class="arrow arrow-left" aria-hidden="true"></div>
+      </div>
+      <div class="msg" id="i-msg-answer">
+        <div class="msg-label">Answer</div>
+        <div class="arrow arrow-right" aria-hidden="true"></div>
+        <div class="box" id="i-box-answer"></div>
+      </div>
+    </div>
+
+    <div class="panels clin" id="i-clin">
+      <div class="strategy-pick"><label for="i-strategy">Strategy</label><select id="i-strategy"></select></div>
+      <div class="panel" id="i-panel-memory">
+        <div class="panel-label">Memory</div>
+        <div class="box" id="i-box-memory"></div>
+      </div>
+      <div class="panel" id="i-panel-output">
+        <div class="panel-label">Output</div>
+        <div class="box" id="i-box-output"></div>
+      </div>
+    </div>
+  </div>
+  <p class="hint">Space or → next step · ← previous step · Home / End first and last step</p>
+</main>
+
+<!-- Icons, as in the Clinician's View -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="robot" viewBox="0 0 150 184">
+    <g fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+      <circle cx="75" cy="10" r="6.5"/>
+      <line x1="75" y1="17" x2="75" y2="28"/>
+      <rect x="50" y="28" width="50" height="42" rx="9"/>
+      <circle cx="65" cy="49" r="8"/><circle cx="65" cy="49" r="3"/>
+      <circle cx="85" cy="49" r="8"/><circle cx="85" cy="49" r="3"/>
+      <rect x="66" y="70" width="18" height="8"/>
+      <rect x="42" y="78" width="66" height="56" rx="2"/>
+      <polyline points="42,108 55,108 61,94 69,122 77,88 83,108 108,108"/>
+      <path d="M42 94 H28 V72"/>
+      <path d="M20 58 V64 A8 8 0 0 0 36 64 V58"/>
+      <path d="M108 98 H122 V112"/>
+      <path d="M114 126 V120 A8 8 0 0 1 130 120 V126"/>
+      <rect x="63" y="134" width="24" height="10"/>
+      <rect x="34" y="144" width="82" height="34" rx="17"/>
+    </g>
+    <g fill="currentColor">
+      <circle cx="56" cy="161" r="4.5"/><circle cx="75" cy="161" r="4.5"/><circle cx="94" cy="161" r="4.5"/>
+    </g>
+  </symbol>
+  <symbol id="doc" viewBox="0 0 100 130">
+    <g fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round">
+      <path d="M12 6 H66 L90 30 V124 H12 Z"/>
+      <path d="M66 6 V30 H90"/>
+      <path d="M28 48 H52 M28 60 H74 M28 72 H74 M28 84 H74 M28 96 H74 M28 108 H74"/>
+    </g>
+  </symbol>
+  <symbol id="magnifier" viewBox="0 0 112 116">
+    <g fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round">
+      <circle cx="46" cy="46" r="34"/>
+      <rect x="69" y="79.5" width="38" height="15" rx="7.5" transform="rotate(45 88 87)"/>
+    </g>
+  </symbol>
+</svg>
+
+<script>
+"use strict";
+// Case data from the experiment records (scripts/build_showcase_site.py fills it in). It is model
+// output and case text, so it is only ever inserted as text.
+const DATA = {"ddx":{"case_id":"PMC7520668_01","diagnosis":"Fabry Disease","background":"A 69-year-old male with a history of hypertension, diet-controlled diabetes, morbid obesity status post gastric bypass, and metastatic prostate cancer presents for the evaluation of progressive chronic kidney disease and proteinuria. His current medications include atorvastatin, amlodipine, aspirin, calcium carbonate, and leuprolide, and he has no known drug allergies. The patient's family history is notable for a brother who developed renal failure of an unclear etiology in his forties. On review of systems, he reports experiencing peripheral neuropathy associated with unstable balance, but he denies any hypohidrosis, extremity pain, gastrointestinal complaints, rashes, cardiac symptoms, or other skin issues.","case_text":"A 69-year-old male with hypertension, diabetes (diet controlled), history of morbid obesity status post gastric bypass, and metastatic prostate cancer presented with progressive chronic kidney disease and subnephrotic-range proteinuria. Glomerular filtration rate declined by >5 ml/min/1.73 m2 per year. Medications: atorvastatin, amlodipine, aspirin, calcium carbonate, leuprolide. No known drug allergies. Family history notable for a brother with renal failure of unclear etiology in his forties. Review of systems notable for peripheral neuropathy with unstable balance; denied hypohidrosis, extremity pain, gastrointestinal complaints, rashes, or cardiac symptoms; denied skin issues. Exam: BP 160/78, pulse 72, BMI 24.5; no abnormal lung, heart, abdominal, extremity, or skin findings. Labs: creatinine 4.3 mg/dL, BUN 47 mg/dL, CO2 19 mg/dL; electrolytes otherwise normal. CBC: hemoglobin 10.9 g/dL with normal platelets and WBC. Urinalysis with mild proteinuria; urine protein/creatinine ratio 2.2. SPEP, UPEP, and serum free light chains without abnormalities. Kidney ultrasound showed slightly atrophic kidneys with echogenic parenchyma. Kidney biopsy: light microscopy with normocellular glomeruli, uniform capillary walls, prominent podocytes with foamy cytoplasm; ultrastructural exam with osmophilic lamellated inclusions in podocytes with concentric/striped appearance (myelin-like lamellated inclusions). Alpha-galactosidase enzyme activity low (21 nm/hr/mg protein; reference 50–150). GLA gene testing showed missense variant c.682A>C (p.Ala228Cys); daughter and grandson tested positive for same variant. In vitro mutation testing suggested suitability for migalastat therapy.","model":"openai/gpt-5.4-mini","environment_model":"google/gemini-3-flash-preview","threshold":0.5,"rounds_in_experiment":8,"final_in_experiment":["Fabry disease",0.97],"source":"data/runs/final/table/gpt_5.4_mini/framework/runs_record_0.json · run 130","rounds":[{"ddx":[["Monoclonal gammopathy-related kidney disease (e.g., AL amyloidosis or light chain deposition disease)",0.22],["Hereditary nephropathy (e.g., Fabry disease)",0.18],["Diabetic kidney disease",0.14],["Hypertensive nephrosclerosis",0.1],["FSGS/obesity-related glomerulopathy",0.1],["Membranous nephropathy",0.08],["Multiple myeloma / cast nephropathy",0.06],["Medication-related kidney injury",0.04],["IgA nephropathy",0.04],["Prostate cancer–related obstructive uropathy or paraneoplastic renal disease",0.04]],"question":"What are the serum creatinine trend, estimated GFR, and the degree/type of proteinuria on quantification (urine protein-to-creatinine ratio or 24-hour protein, and is it albumin-predominant or non-albumin)?","answer":"Creatinine 4.3 mg/dL (progressive chronic kidney disease with GFR decline by >5 ml/min/1.73 m2 per year); urine protein/creatinine ratio 2.2 (subnephrotic-range proteinuria).\n\nDo not ask questions about the estimated GFR value or if the proteinuria is albumin-predominant or non-albumin.","spans":["Glomerular filtration rate declined by >5 ml/min/1.73 m2 per year","creatinine 4.3 mg/dL","urine protein/creatinine ratio 2.2","subnephrotic-range proteinuria"]},{"ddx":[["Monoclonal gammopathy-related kidney disease (e.g., AL amyloidosis or light chain deposition disease)",0.28],["Hereditary nephropathy (e.g., Fabry disease)",0.2],["FSGS/obesity-related glomerulopathy",0.11],["Diabetic kidney disease",0.1],["Hypertensive nephrosclerosis",0.09],["Multiple myeloma / cast nephropathy",0.07],["Membranous nephropathy",0.05],["Medication-related kidney injury",0.04],["Prostate cancer–related obstructive uropathy or paraneoplastic renal disease",0.03],["IgA nephropathy",0.03]],"question":"Has a serum and urine monoclonal protein workup been done yet — specifically SPEP/UPEP with immunofixation and serum free light chains?","answer":"SPEP, UPEP, and serum free light chains without abnormalities.","spans":["SPEP, UPEP, and serum free light chains without abnormalities"]},{"ddx":[["Hereditary nephropathy (e.g., Fabry disease)",0.28],["FSGS/obesity-related glomerulopathy",0.18],["Monoclonal gammopathy-related kidney disease (e.g., AL amyloidosis or light chain deposition disease)",0.16],["Diabetic kidney disease",0.1],["Hypertensive nephrosclerosis",0.08],["Membranous nephropathy",0.06],["Medication-related kidney injury",0.04],["Prostate cancer–related obstructive uropathy or paraneoplastic renal disease",0.04],["IgA nephropathy",0.03],["Multiple myeloma / cast nephropathy",0.03]],"question":"Has a kidney biopsy been performed, and if so what does the light microscopy, immunofluorescence, and electron microscopy show?","answer":"Kidney biopsy: light microscopy with normocellular glomeruli, uniform capillary walls, prominent podocytes with foamy cytoplasm; ultrastructural exam with osmophilic lamellated inclusions in podocytes with concentric/striped appearance (myelin-like lamellated inclusions). Do not ask questions about immunofluorescence.","spans":["Kidney biopsy: light microscopy with normocellular glomeruli, uniform capillary walls, prominent podocytes with foamy cytoplasm; ultrastructural exam with osmophilic lamellated inclusions in podocytes with concentric/striped appearance (myelin-like lamellated inclusions)"]},{"ddx":[["Hereditary nephropathy (e.g., Fabry disease)",0.55],["FSGS/obesity-related glomerulopathy",0.12],["Hypertensive nephrosclerosis",0.08],["Diabetic kidney disease",0.07],["Monoclonal gammopathy-related kidney disease (e.g., AL amyloidosis or light chain deposition disease)",0.05],["Prostate cancer–related obstructive uropathy or paraneoplastic renal disease",0.04],["Membranous nephropathy",0.03],["Medication-related kidney injury",0.03],["IgA nephropathy",0.02],["Multiple myeloma / cast nephropathy",0.01]]}]},"ics":{"source":"records/strategies_272_8it.json","environment_settings":{"default_model":"openai/gpt-6-luna","enabled_sources":["europe_pmc","litsense"]},"strategies":{"hypothesis":{"description":"Hypothesis-driven search: keeps a ranked differential, asks the question that best separates the leading hypotheses, and stops once one clearly leads."},"knowledge":{"description":"Knowledge-driven search: asks for the findings a clinical pattern still lacks, and stops once a pattern is complete; a diagnosis is named only at the end."},"channel":{"description":"Channel-based: the patient interview first; if that leaves the diagnosis uncertain, the physical exam. Questions outside the current channel are rejected."},"sequence":{"description":"Sequence-based: opening questions and a first differential, then questions that prune it, then a confirming question for the leader."}},"case_runs":[{"case_id":"PMC7520668_01","strategy":"hypothesis","strategy_name":"hypothesis","status":"completed","stop_reason":"max_iterations","case":{"case_id":"PMC7520668_01","diagnosis":"Fabry Disease","narrative":"A 69-year-old male with hypertension, diabetes (diet controlled), history of morbid obesity status post gastric bypass, and metastatic prostate cancer presented with progressive chronic kidney disease and subnephrotic-range proteinuria. Glomerular filtration rate declined by >5 ml/min/1.73 m2 per year. Medications: atorvastatin, amlodipine, aspirin, calcium carbonate, leuprolide. No known drug allergies. Family history notable for a brother with renal failure of unclear etiology in his forties. Review of systems notable for peripheral neuropathy with unstable balance; denied hypohidrosis, extremity pain, gastrointestinal complaints, rashes, or cardiac symptoms; denied skin issues. Exam: BP 160/78, pulse 72, BMI 24.5; no abnormal lung, heart, abdominal, extremity, or skin findings. Labs: creatinine 4.3 mg/dL, BUN 47 mg/dL, CO2 19 mg/dL; electrolytes otherwise normal. CBC: hemoglobin 10.9 g/dL with normal platelets and WBC. Urinalysis with mild proteinuria; urine protein/creatinine ratio 2.2. SPEP, UPEP, and serum free light chains without abnormalities. Kidney ultrasound showed slightly atrophic kidneys with echogenic parenchyma. Kidney biopsy: light microscopy with normocellular glomeruli, uniform capillary walls, prominent podocytes with foamy cytoplasm; ultrastructural exam with osmophilic lamellated inclusions in podocytes with concentric/striped appearance (myelin-like lamellated inclusions). Alpha-galactosidase enzyme activity low (21 nm/hr/mg protein; reference 50–150). GLA gene testing showed missense variant c.682A>C (p.Ala228Cys); daughter and grandson tested positive for same variant. In vitro mutation testing suggested suitability for migalastat therapy."},"diagnosis":{"differential":[{"name":"Diabetic kidney disease","probability":0.3},{"name":"Hypertensive nephrosclerosis","probability":0.22},{"name":"Alport syndrome","probability":0.14},{"name":"Membranous nephropathy","probability":0.1},{"name":"Focal segmental glomerulosclerosis","probability":0.08},{"name":"APOL1-mediated kidney disease","probability":0.05},{"name":"Chronic tubulointerstitial nephritis","probability":0.04},{"name":"Autosomal dominant polycystic kidney disease","probability":0.025},{"name":"Immunoglobulin A nephropathy","probability":0.02},{"name":"Chronic kidney disease, unspecified","probability":0.015}],"error":null},"iterations":[{"question":"What is the patient's presenting complaint?","answer":"The patient presented with progressive chronic kidney disease and subnephrotic-range proteinuria.","answer_source":"case_study","error":null,"strategy_trace":{"differential":[],"separates":[]},"environment_response":{"answer_source":"case_study","evidence":["presented with progressive chronic kidney disease and subnephrotic-range proteinuria."],"confidence":"high","literature_search":false,"retriever_parameters":{"path":"case_study","multi_part":false,"sub_queries":[],"literature_query":null,"excluded_source_docs":[]},"literature_search_result":null}},{"question":"What is the patient's blood pressure?","answer":"The patient's blood pressure was 160/78 mmHg.","answer_source":"case_study","error":null,"strategy_trace":{"differential":[{"diagnosis":"Primary glomerulonephritis (e.g., IgA nephropathy or membranous nephropathy)","probability":0.3,"evidence_for":"Progressive CKD with subnephrotic-range proteinuria is a typical presentation of primary glomerular disease; these entities commonly present with slowly progressive decline and proteinuria below nephrotic range.","evidence_against":"No urinalysis, serology, biopsy, or hematuria/dysmorphic RBC data yet; the specific subtype cannot be distinguished without further workup."},{"diagnosis":"Diabetic kidney disease","probability":0.25,"evidence_for":"Chronic progressive kidney disease with proteinuria is the most common cause of CKD worldwide, and diabetes is a leading driver of subnephrotic proteinuria.","evidence_against":"Glycemic history, diabetes status, and retinopathy have not been established; diagnosis of exclusion would depend on absence of atypical features."},{"diagnosis":"Autosomal dominant polycystic kidney disease or other hereditary nephropathy (e.g., Alport syndrome)","probability":0.2,"evidence_for":"Progressive CKD with proteinuria can be seen in hereditary tubulointerstitial and cystic diseases; family history would be informative.","evidence_against":"Family history, renal imaging, hearing, and ocular findings have not been assessed."},{"diagnosis":"Hypertensive or hypertensive/ischemic nephrosclerosis","probability":0.15,"evidence_for":"Common cause of progressive CKD with modest proteinuria, especially in patients with long-standing hypertension.","evidence_against":"Blood pressure history and antihypertensive use are unknown; proteinuria is usually mild, and this is often a diagnosis of exclusion."},{"diagnosis":"Focal segmental glomerulosclerosis","probability":0.1,"evidence_for":"Can present with progressive CKD and subnephrotic-range proteinuria, and may progress to end-stage disease.","evidence_against":"No data on edema, serum albumin, lipid levels, or hematuria; FSGS more often presents with nephrotic-range proteinuria."}],"separates":["Hypertensive or hypertensive/ischemic nephrosclerosis","Primary glomerulonephritis (e.g., IgA nephropathy or membranous nephropathy)","Diabetic kidney disease","Autosomal dominant polycystic kidney disease or other hereditary nephropathy (e.g., Alport syndrome)","Focal segmental glomerulosclerosis"]},"environment_response":{"answer_source":"case_study","evidence":["Exam: BP 160/78, pulse 72, BMI 24.5"],"confidence":"high","literature_search":false,"retriever_parameters":{"path":"case_study","multi_part":false,"sub_queries":[],"literature_query":null,"excluded_source_docs":[]},"literature_search_result":null}},{"question":"What is the patient's urine dipstick result for blood (hematuria)?","answer":"Urine dipstick blood was negative.","answer_source":"literature","error":null,"strategy_trace":{"differential":[{"diagnosis":"Primary glomerulonephritis (e.g., IgA nephropathy or membranous nephropathy)","probability":0.28,"evidence_for":"Progressive CKD with subnephrotic-range proteinuria is a typical presentation of primary glomerular disease, which often shows slow progression with proteinuria below nephrotic range.","evidence_against":"No urinalysis, serology, biopsy, or hematuria/dysmorphic RBC data yet; subtype cannot be distinguished without further workup."},{"diagnosis":"Diabetic kidney disease","probability":0.25,"evidence_for":"Chronic progressive CKD with proteinuria is the most common cause of CKD worldwide, and diabetes is a leading driver of subnephrotic proteinuria.","evidence_against":"Glycemic history, diabetes status, and retinopathy not yet established; diagnosis of exclusion depends on absence of atypical features."},{"diagnosis":"Hypertensive nephrosclerosis","probability":0.2,"evidence_for":"Blood pressure of 160/78 mmHg is elevated and hypertensive nephrosclerosis is a common cause of progressive CKD with modest proteinuria.","evidence_against":"Blood pressure history and antihypertensive use are unknown; proteinuria is usually mild and this is often a diagnosis of exclusion."},{"diagnosis":"Autosomal dominant polycystic kidney disease or other hereditary nephropathy (e.g., Alport syndrome)","probability":0.17,"evidence_for":"Progressive CKD with proteinuria can occur in hereditary cystic and tubulointerstitial diseases; family history would be informative.","evidence_against":"Family history, renal imaging, hearing, and ocular findings have not been assessed."},{"diagnosis":"Focal segmental glomerulosclerosis","probability":0.1,"evidence_for":"Can present with progressive CKD and subnephrotic-range proteinuria and may progress to end-stage disease.","evidence_against":"No data on edema, serum albumin, lipids, or hematuria; FSGS more often presents with nephrotic-range proteinuria."}],"separates":["Primary glomerulonephritis (IgA or membranous)","Diabetic kidney disease","Hypertensive nephrosclerosis","Autosomal dominant polycystic kidney disease or Alport syndrome","Focal segmental glomerulosclerosis"]},"environment_response":{"answer_source":"literature","evidence":[],"confidence":"low","literature_search":true,"retriever_parameters":{"path":"best_guess","multi_part":false,"sub_queries":[],"literature_query":"urine dipstick blood hematuria Fabry disease chronic kidney disease","excluded_source_docs":[]},"literature_search_result":{"query":"europe_pmc: TITLE_ABS:(\"urine dipstick blood\" OR hematuria OR \"microscopic hematuria\" OR \"urinary red blood cells\") AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson Fabry disease\" OR \"Fabry nephropathy\") | litsense: urine dipstick blood Fabry disease","documents":[{"doc_id":"PMID:41531328","title":"Drug-induced phospholipidosis of the kidney suspected to be caused by atomoxetine.","url":"https://pubmed.ncbi.nlm.nih.gov/41531328/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:40342436","title":"Fabry Disease in a Patient With Thin Basement Membrane Nephropathy.","url":"https://pubmed.ncbi.nlm.nih.gov/40342436/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:24913738","title":"Coexistence of Fabry disease and IgA nephropathy: a report of two cases.","url":"https://pubmed.ncbi.nlm.nih.gov/24913738/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:35842573","title":"COL4A4 variant recently identified: lessons learned in variant interpretation-a case report.","url":"https://pubmed.ncbi.nlm.nih.gov/35842573/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:34341920","title":"Impact of the COVID-19 pandemic on interest in renal diseases.","url":"https://pubmed.ncbi.nlm.nih.gov/34341920/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:42824490","title":"Case Report: Concurrent Fabry disease, IgA nephropathy and undifferentiated connective tissue disease in a female with normal enzyme activity.","url":"https://pubmed.ncbi.nlm.nih.gov/42824490/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:31840555","title":"IgA nephropathy suspected to be combined with Fabry disease or Alport syndrome: a case report.","url":"https://pubmed.ncbi.nlm.nih.gov/31840555/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:32356190","title":"Myelin bodies in LMX1B-associated nephropathy: potential for misdiagnosis.","url":"https://pubmed.ncbi.nlm.nih.gov/32356190/","source":"europe_pmc","journal":null,"pub_year":null}]}}},{"question":"What is the patient's HbA1c or fasting glucose, and is there a known history of diabetes mellitus?","answer":"HbA1c is approximately 6.2%. He has a known history of diet-controlled diabetes mellitus.","answer_source":"literature","error":null,"strategy_trace":{"differential":[{"diagnosis":"Diabetic kidney disease","probability":0.27,"evidence_for":"Progressive CKD with subnephrotic proteinuria is the most common CKD pattern and diabetes is a leading cause; negative dipstick blood favors a non-proliferative, non-glomerulonephritic process.","evidence_against":"Glycemic history, diabetes status, and retinopathy not yet established."},{"diagnosis":"Primary glomerulonephritis (e.g., IgA nephropathy or membranous nephropathy)","probability":0.23,"evidence_for":"Slowly progressive CKD with subnephrotic proteinuria is typical of primary glomerular disease.","evidence_against":"Negative urine blood makes IgA nephropathy less likely; no urinalysis microscopy, serology, or biopsy yet."},{"diagnosis":"Hypertensive nephrosclerosis","probability":0.22,"evidence_for":"Blood pressure 160/78 mmHg is elevated and hypertensive nephrosclerosis commonly causes progressive CKD with modest proteinuria; negative hematuria is consistent with this.","evidence_against":"Blood pressure history and antihypertensive use unknown; proteinuria is usually mild and this is a diagnosis of exclusion."},{"diagnosis":"Autosomal dominant polycystic kidney disease or other hereditary nephropathy (e.g., Alport syndrome)","probability":0.15,"evidence_for":"Progressive CKD with proteinuria can occur in hereditary cystic and tubulointerstitial disease; negative blood on dipstick is less typical for Alport, so this is weaker.","evidence_against":"Family history, renal imaging, hearing, and ocular findings not yet assessed."},{"diagnosis":"Focal segmental glomerulosclerosis","probability":0.13,"evidence_for":"Can present with progressive CKD and subnephrotic proteinuria and progress to end-stage disease.","evidence_against":"No data on edema, serum albumin, lipids; FSGS more often presents with nephrotic-range proteinuria."}],"separates":["Diabetic kidney disease","Primary glomerulonephritis (e.g., IgA nephropathy or membranous nephropathy)","Hypertensive nephrosclerosis","Autosomal dominant polycystic kidney disease or other hereditary nephropathy (e.g., Alport syndrome)","Focal segmental glomerulosclerosis"]},"environment_response":{"answer_source":"literature","evidence":["PMID:40420032","literature range: 5.7–8.2% in the CKD comparison group (PMID:40420032)"],"confidence":"medium","literature_search":true,"retriever_parameters":{"path":"literature","multi_part":false,"sub_queries":[],"literature_query":"HbA1c fasting glucose Fabry disease diet controlled diabetes","excluded_source_docs":[]},"literature_search_result":{"query":"europe_pmc: (CASE:(HbA1c OR \"glycated hemoglobin\" OR \"fasting plasma glucose\" OR \"fasting blood glucose\" OR hyperglycemia) OR RESULTS:(HbA1c OR \"glycated hemoglobin\" OR \"fasting plasma glucose\" OR \"fasting blood glucose\" OR hyperglycemia) OR TABLE:(HbA1c OR \"glycated hemoglobin\" OR \"fasting plasma glucose\" OR \"fasting blood glucose\" OR hyperglycemia)) AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson Fabry disease\") | litsense: HbA1c chronic kidney disease","documents":[{"doc_id":"PMID:41111061","title":"Clinical and Biochemical Characterization of Fabry Disease Associated GLA Gene Variants: Data From a Large Cohort of 469 Thousand Genotyped Subjects of the UK Biobank Database.","url":"https://pubmed.ncbi.nlm.nih.gov/41111061/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:35245971","title":"Evaluation of endocrinological involvement and metabolic status in patients with Gaucher disease Type 1 and Fabry disease under enzyme replacement therapy.","url":"https://pubmed.ncbi.nlm.nih.gov/35245971/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:40420032","title":"The relationship between multiple plasma biomarker levels and renal disease activity in Fabry disease.","url":"https://pubmed.ncbi.nlm.nih.gov/40420032/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:42812888","title":"Coronary stenosis in Fabry disease with optical coherence tomography imaging presentation: a case report.","url":"https://pubmed.ncbi.nlm.nih.gov/42812888/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:40342436","title":"Fabry Disease in a Patient With Thin Basement Membrane Nephropathy.","url":"https://pubmed.ncbi.nlm.nih.gov/40342436/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:41054307","title":"Optimizing α-galactosidase A enzyme cutoff for Fabry disease screening in chronic kidney disease patients: a single-center reassessment of diagnostic yield and cost-effectiveness.","url":"https://pubmed.ncbi.nlm.nih.gov/41054307/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:40640933","title":"Current treatment status of fabry disease in South Korea: a longitudinal National health insurance service data-based study.","url":"https://pubmed.ncbi.nlm.nih.gov/40640933/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:38324858","title":"Differences Between Two Distinct Hypertrophic Cardiac Conditions: Fabry Disease versus Hypertrophic Cardiomyopathy.","url":"https://pubmed.ncbi.nlm.nih.gov/38324858/","source":"europe_pmc","journal":null,"pub_year":null}]}}},{"question":"Does the patient have diabetic retinopathy on ophthalmologic or fundoscopic examination?","answer":"No diabetic retinopathy was noted on examination (synthetic best guess; the case does not report an ophthalmologic examination).","answer_source":"literature","error":null,"strategy_trace":{"differential":[{"diagnosis":"Diabetic kidney disease","probability":0.3,"evidence_for":"Known diet-controlled diabetes with HbA1c about 6.2%; progressive CKD with subnephrotic proteinuria is a typical pattern; negative urine blood favors a non-proliferative, non-glomerulonephritic process.","evidence_against":"Glycemic control is modest and diabetes is diet-controlled, so the duration and severity of diabetes are uncertain; retinopathy and duration of diabetes not yet established."},{"diagnosis":"Hypertensive nephrosclerosis","probability":0.25,"evidence_for":"Blood pressure 160/78 mmHg is elevated and hypertension is a common cause of progressive CKD; negative hematuria is consistent with this.","evidence_against":"Antihypertensive history and duration of hypertension unknown; proteinuria is usually milder than what is seen here, and this remains a diagnosis of exclusion."},{"diagnosis":"Primary glomerulonephritis (e.g., membranous nephropathy or IgA nephropathy)","probability":0.18,"evidence_for":"Slowly progressive CKD with subnephrotic proteinuria is typical of primary glomerular disease.","evidence_against":"Negative urine blood makes IgA nephropathy less likely; no urine microscopy, serology (anti-PLA2R), or biopsy yet obtained."},{"diagnosis":"Autosomal dominant polycystic kidney disease or other hereditary nephropathy (e.g., Alport syndrome)","probability":0.14,"evidence_for":"Progressive CKD with proteinuria can occur in hereditary cystic and tubulointerstitial disease.","evidence_against":"Negative dipstick blood is less typical for Alport; family history, renal imaging, hearing, and ocular findings not yet assessed."},{"diagnosis":"Focal segmental glomerulosclerosis","probability":0.13,"evidence_for":"Can present with progressive CKD and subnephrotic proteinuria and progress to end-stage disease.","evidence_against":"No data on edema, serum albumin, or lipids; FSGS more often presents with nephrotic-range proteinuria."}],"separates":["Diabetic kidney disease","Hypertensive nephrosclerosis","Primary glomerulonephritis (e.g., membranous nephropathy or IgA nephropathy)","Autosomal dominant polycystic kidney disease or other hereditary nephropathy (e.g., Alport syndrome)","Focal segmental glomerulosclerosis"]},"environment_response":{"answer_source":"literature","evidence":[],"confidence":"low","literature_search":true,"retriever_parameters":{"path":"best_guess","multi_part":false,"sub_queries":[],"literature_query":"diabetic retinopathy Fabry disease diabetes older adults","excluded_source_docs":[]},"literature_search_result":{"query":"europe_pmc: TITLE_ABS:(\"diabetic retinopathy\" OR retinopathy OR \"fundus examination\" OR \"retinal examination\") AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson Fabry disease\") | litsense: diabetic retinopathy Fabry disease","documents":[{"doc_id":"PMID:42850619","title":"Longitudinal assessment of the retinal phenotype in patients with Fabry disease undergoing continuous enzyme replacement and/or chaperone therapy.","url":"https://pubmed.ncbi.nlm.nih.gov/42850619/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:32542397#INTRO-250de732","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/32542397/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:34946804","title":"Monogenic Causes of Strokes.","url":"https://pubmed.ncbi.nlm.nih.gov/34946804/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:31878969","title":"Retinal hyperreflective foci in Fabry disease.","url":"https://pubmed.ncbi.nlm.nih.gov/31878969/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:17579657","title":"Monogenic vessel diseases related to ischemic stroke: a clinical approach.","url":"https://pubmed.ncbi.nlm.nih.gov/17579657/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:16807686","title":"Single gene disorders causing ischaemic stroke.","url":"https://pubmed.ncbi.nlm.nih.gov/16807686/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:31290435#TITLEABSTRACT-7dc40c77","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/31290435/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:18510248#TITLEABSTRACT-646b90ec","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/18510248/","source":"litsense","journal":null,"pub_year":null}]}}},{"question":"What are the patient's kidney size and morphology (including presence of cysts) on renal ultrasound?","answer":"Renal ultrasound showed slightly atrophic kidneys with increased parenchymal echogenicity; no renal cysts were identified.","answer_source":"literature","error":null,"strategy_trace":{"differential":[{"diagnosis":"Diabetic kidney disease","probability":0.3,"evidence_for":"Known diet-controlled diabetes mellitus with HbA1c about 6.2%; progressive CKD with subnephrotic proteinuria is a typical pattern; negative urine blood and no diabetic retinopathy on examination fit a non-proliferative, non-glomerular process.","evidence_against":"Glycemic control is modest and diabetes is diet-controlled, so duration and severity are uncertain; absence of retinopathy is noted from a synthetic best guess rather than a documented ophthalmologic exam."},{"diagnosis":"Hypertensive nephrosclerosis","probability":0.25,"evidence_for":"Blood pressure 160/78 mmHg is elevated and hypertension is a common cause of progressive CKD; negative hematuria is consistent with this.","evidence_against":"Antihypertensive history and duration of hypertension unknown; proteinuria is usually milder than seen here; remains a diagnosis of exclusion."},{"diagnosis":"Primary glomerulonephritis (e.g., membranous nephropathy or IgA nephropathy)","probability":0.18,"evidence_for":"Slowly progressive CKD with subnephrotic proteinuria is typical of primary glomerular disease.","evidence_against":"Negative urine blood makes IgA nephropathy less likely; no urine microscopy, anti-PLA2R serology, or biopsy obtained yet."},{"diagnosis":"Autosomal dominant polycystic kidney disease or other hereditary nephropathy (e.g., Alport syndrome)","probability":0.14,"evidence_for":"Progressive CKD with proteinuria can occur in hereditary cystic and tubulointerstitial disease.","evidence_against":"Negative dipstick blood is less typical for Alport; family history, renal imaging, hearing, and ocular findings not yet assessed."},{"diagnosis":"Focal segmental glomerulosclerosis","probability":0.13,"evidence_for":"Can present with progressive CKD and subnephrotic proteinuria and progress to end-stage disease.","evidence_against":"No data on edema, serum albumin, or lipids; FSGS more often presents with nephrotic-range proteinuria."}],"separates":["Autosomal dominant polycystic kidney disease or other hereditary nephropathy","Diabetic kidney disease","Hypertensive nephrosclerosis","Primary glomerulonephritis","Focal segmental glomerulosclerosis"]},"environment_response":{"answer_source":"literature","evidence":[],"confidence":"low","literature_search":true,"retriever_parameters":{"path":"best_guess","multi_part":false,"sub_queries":[],"literature_query":"renal ultrasound kidney size Fabry nephropathy chronic kidney disease","excluded_source_docs":[]},"literature_search_result":{"query":"europe_pmc: TITLE_ABS:(\"kidney size\" OR \"renal size\" OR \"renal length\" OR \"renal morphology\" OR \"renal cysts\") AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson-Fabry disease\" OR \"Fabry nephropathy\") | litsense: kidney size chronic kidney disease","documents":[{"doc_id":"PMID:35749008","title":"Parapelvic Cysts: An Imaging Marker of Kidney Disease Potentially Leading to the Diagnosis of Treatable Rare Genetic Disorders? A Narrative Review of the Literature.","url":"https://pubmed.ncbi.nlm.nih.gov/35749008/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:25187469","title":"Chronic kidney disease and an uncertain diagnosis of Fabry disease: approach to a correct diagnosis.","url":"https://pubmed.ncbi.nlm.nih.gov/25187469/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:21290670","title":"Renal manifestations of Fabry disease","url":"https://pubmed.ncbi.nlm.nih.gov/21290670/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:20497759","title":"An aid to the diagnosis of genetic disorders underlying adult-onset renal failure: a literature review.","url":"https://pubmed.ncbi.nlm.nih.gov/20497759/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:36073247#TITLEABSTRACT-8fd4d785","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/36073247/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:40673439#INTRO-e7f272fc","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/40673439/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:19707461#TITLEABSTRACT-e1e8155f","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/19707461/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:35722479#TITLEABSTRACT-d6d7f1e2","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/35722479/","source":"litsense","journal":null,"pub_year":null}]}}},{"question":"What is the patient's serum albumin level?","answer":"The patient's serum albumin is estimated to be 3.5 g/dL; this is a synthetic estimate, not a value stated in the case.","answer_source":"literature","error":null,"strategy_trace":{"differential":[{"diagnosis":"Diabetic kidney disease","probability":0.37,"evidence_for":"Known diet-controlled diabetes with HbA1c about 6.2%; progressive CKD with subnephrotic proteinuria is typical; negative urine blood and no retinopathy fit a non-proliferative process; slightly atrophic kidneys with increased echogenicity are consistent with chronic diabetic parenchymal damage.","evidence_against":"Glycemic control is modest and diabetes duration and severity are uncertain; absence of retinopathy comes from a synthetic best guess rather than a documented ophthalmologic exam; echogenicity alone is nonspecific."},{"diagnosis":"Hypertensive nephrosclerosis","probability":0.31,"evidence_for":"Blood pressure 160/78 mmHg is elevated; hypertension is a common cause of progressive CKD; atrophic kidneys with increased echogenicity and no cysts fit chronic hypertensive injury; negative hematuria is consistent.","evidence_against":"Antihypertensive history and duration of hypertension are unknown; proteinuria is usually milder than seen here; remains a diagnosis of exclusion and overlaps with diabetic disease."},{"diagnosis":"Primary glomerulonephritis (e.g., membranous nephropathy)","probability":0.15,"evidence_for":"Slowly progressive CKD with subnephrotic proteinuria is typical of primary glomerular disease; negative urine blood makes IgA nephropathy less likely.","evidence_against":"No urine microscopy, anti-PLA2R serology, or biopsy yet; atrophic kidneys suggest a long-standing chronic process that may be less typical of an active primary GN."},{"diagnosis":"Focal segmental glomerulosclerosis","probability":0.1,"evidence_for":"Can present with progressive CKD and subnephrotic proteinuria and progress to end-stage disease.","evidence_against":"No data on edema, serum albumin, or lipids; FSGS more often presents with nephrotic-range proteinuria; no biopsy."},{"diagnosis":"Hereditary nephropathy (e.g., Alport syndrome)","probability":0.07,"evidence_for":"Progressive CKD with proteinuria can occur in hereditary tubulointerstitial and glomerular disease; ADPKD is less likely given no renal cysts on ultrasound.","evidence_against":"Negative dipstick blood is less typical for Alport; family history, hearing, and ocular findings not yet assessed; atrophic echogenic kidneys are nonspecific."}],"separates":["Diabetic kidney disease","Hypertensive nephrosclerosis","Primary glomerulonephritis (e.g., membranous nephropathy)","Focal segmental glomerulosclerosis"]},"environment_response":{"answer_source":"literature","evidence":["PMID:39423097"],"confidence":"medium","literature_search":true,"retriever_parameters":{"path":"literature","multi_part":false,"sub_queries":[],"literature_query":"serum albumin Fabry disease chronic kidney disease proteinuria","excluded_source_docs":[]},"literature_search_result":{"query":"europe_pmc: TITLE_ABS:(\"serum albumin\" OR albumin OR hypoalbuminemia) AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson-Fabry disease\" OR \"alpha-galactosidase A deficiency\") | litsense: serum albumin Fabry disease","documents":[{"doc_id":"PMID:39423097","title":"Coexistence of Fabry Disease and Membranous Nephropathy: A Case Report.","url":"https://pubmed.ncbi.nlm.nih.gov/39423097/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:34609404#INTRO-4227b2ad","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/34609404/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:39529120","title":"Effectiveness and safety of enzyme replacement therapy in the treatment of Fabry disease: a Chinese monocentric real-world study.","url":"https://pubmed.ncbi.nlm.nih.gov/39529120/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:33809516#INTRO-d9c69772","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/33809516/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:41158984","title":"Renoprotective effects of SGLT2 inhibitors in patients with Fabry disease.","url":"https://pubmed.ncbi.nlm.nih.gov/41158984/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:30943985#INTRO-54971f94","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/30943985/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:40433208","title":"Utilization of Transthoracic Echocardiography and Biochemical Markers in Detecting Cardiomyopathy in Fabry Disease.","url":"https://pubmed.ncbi.nlm.nih.gov/40433208/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:21949853#DISCUSS-873b9d2f","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/21949853/","source":"litsense","journal":null,"pub_year":null}]}}},{"question":"Does the patient have a family history of kidney disease, hearing loss, or eye abnormalities?","answer":"Yes. His brother had renal failure; family history of hearing loss or eye abnormalities is not reported.","answer_source":"literature","error":null,"strategy_trace":{"differential":[{"diagnosis":"Diabetic kidney disease","probability":0.37,"evidence_for":"Known diet-controlled diabetes with HbA1c about 6.2%; progressive CKD with subnephrotic proteinuria is typical; negative urine blood and no retinopathy fit a non-proliferative process; slightly atrophic kidneys with increased echogenicity are consistent with chronic diabetic parenchymal damage.","evidence_against":"Glycemic control is modest and diabetes duration and severity are uncertain; absence of retinopathy comes from a synthetic best guess rather than a documented ophthalmologic exam; echogenicity alone is nonspecific."},{"diagnosis":"Hypertensive nephrosclerosis","probability":0.31,"evidence_for":"Blood pressure 160/78 mmHg is elevated; hypertension is a common cause of progressive CKD; atrophic kidneys with increased echogenicity and no cysts fit chronic hypertensive injury; negative hematuria is consistent.","evidence_against":"Antihypertensive history and duration of hypertension are unknown; proteinuria is usually milder than seen here; remains a diagnosis of exclusion and overlaps with diabetic disease."},{"diagnosis":"Primary glomerulonephritis (e.g., membranous nephropathy)","probability":0.15,"evidence_for":"Slowly progressive CKD with subnephrotic proteinuria is typical of primary glomerular disease; negative urine blood makes IgA nephropathy less likely.","evidence_against":"No urine microscopy, anti-PLA2R serology, or biopsy yet; atrophic kidneys suggest a long-standing chronic process that may be less typical of an active primary GN."},{"diagnosis":"Focal segmental glomerulosclerosis","probability":0.1,"evidence_for":"Can present with progressive CKD and subnephrotic proteinuria and progress to end-stage disease.","evidence_against":"No data on edema or lipids; serum albumin estimate of 3.5 g/dL is a synthetic value; FSGS more often presents with nephrotic-range proteinuria; no biopsy."},{"diagnosis":"Hereditary nephropathy (e.g., Alport syndrome)","probability":0.07,"evidence_for":"Progressive CKD with proteinuria can occur in hereditary tubulointerstitial and glomerular disease; ADPKD is less likely given no renal cysts on ultrasound.","evidence_against":"Negative dipstick blood is less typical for Alport; family history, hearing, and ocular findings not yet assessed; atrophic echogenic kidneys are nonspecific."}],"separates":["Hereditary nephropathy (e.g., Alport syndrome)","Diabetic kidney disease","Hypertensive nephrosclerosis","Primary glomerulonephritis (e.g., membranous nephropathy)","Focal segmental glomerulosclerosis"]},"environment_response":{"answer_source":"literature","evidence":[],"confidence":"low","literature_search":true,"retriever_parameters":{"path":"best_guess","multi_part":false,"sub_queries":[],"literature_query":"Fabry disease family history renal hearing ocular manifestations","excluded_source_docs":[]},"literature_search_result":{"query":"europe_pmc: TITLE_ABS:(\"family history\" OR \"family history of renal disease\" OR \"familial hearing loss\" OR \"familial ocular abnormalities\" OR \"family history of kidney disease\") AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson-Fabry disease\" OR \"alpha-galactosidase A deficiency\") | litsense: family history Fabry disease","documents":[{"doc_id":"PMID:40475330","title":"Clinical characteristics and interdepartmental collaboration for patients with Anderson-Fabry disease in Shiga Prefecture, Japan.","url":"https://pubmed.ncbi.nlm.nih.gov/40475330/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:18172746#TITLEABSTRACT-be05bb0e","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/18172746/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:42453247","title":"A multigenerational fabry disease case caused by a <i>de novo<\/i> GLA mutation: Diagnostic delay, phenotypic variability, and the impact of early detection.","url":"https://pubmed.ncbi.nlm.nih.gov/42453247/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:21776363#INTRO-92bbb5f0","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/21776363/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:40342436","title":"Fabry Disease in a Patient With Thin Basement Membrane Nephropathy.","url":"https://pubmed.ncbi.nlm.nih.gov/40342436/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:21549080#TITLEABSTRACT-4a43bee2","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/21549080/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:32301697","title":"Fabry disease in two brothers with proteinuria: A case report and Fabry disease review .","url":"https://pubmed.ncbi.nlm.nih.gov/32301697/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:40342436#TITLEABSTRACT-d98f1e6b","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/40342436/","source":"litsense","journal":null,"pub_year":null}]}}}]},{"case_id":"PMC7520668_01","strategy":"knowledge","strategy_name":"knowledge","status":"completed","stop_reason":"max_iterations","case":{"case_id":"PMC7520668_01","diagnosis":"Fabry Disease","narrative":"A 69-year-old male with hypertension, diabetes (diet controlled), history of morbid obesity status post gastric bypass, and metastatic prostate cancer presented with progressive chronic kidney disease and subnephrotic-range proteinuria. Glomerular filtration rate declined by >5 ml/min/1.73 m2 per year. Medications: atorvastatin, amlodipine, aspirin, calcium carbonate, leuprolide. No known drug allergies. Family history notable for a brother with renal failure of unclear etiology in his forties. Review of systems notable for peripheral neuropathy with unstable balance; denied hypohidrosis, extremity pain, gastrointestinal complaints, rashes, or cardiac symptoms; denied skin issues. Exam: BP 160/78, pulse 72, BMI 24.5; no abnormal lung, heart, abdominal, extremity, or skin findings. Labs: creatinine 4.3 mg/dL, BUN 47 mg/dL, CO2 19 mg/dL; electrolytes otherwise normal. CBC: hemoglobin 10.9 g/dL with normal platelets and WBC. Urinalysis with mild proteinuria; urine protein/creatinine ratio 2.2. SPEP, UPEP, and serum free light chains without abnormalities. Kidney ultrasound showed slightly atrophic kidneys with echogenic parenchyma. Kidney biopsy: light microscopy with normocellular glomeruli, uniform capillary walls, prominent podocytes with foamy cytoplasm; ultrastructural exam with osmophilic lamellated inclusions in podocytes with concentric/striped appearance (myelin-like lamellated inclusions). Alpha-galactosidase enzyme activity low (21 nm/hr/mg protein; reference 50–150). GLA gene testing showed missense variant c.682A>C (p.Ala228Cys); daughter and grandson tested positive for same variant. In vitro mutation testing suggested suitability for migalastat therapy."},"diagnosis":{"differential":[{"name":"Hereditary transthyretin amyloidosis","probability":0.2},{"name":"Fabry disease","probability":0.16},{"name":"Alport syndrome","probability":0.14},{"name":"Hypertensive chronic kidney disease","probability":0.12},{"name":"Focal segmental glomerulosclerosis","probability":0.09},{"name":"Light chain amyloidosis","probability":0.07},{"name":"Primary membranous nephropathy","probability":0.05},{"name":"Chronic tubulointerstitial nephritis","probability":0.04},{"name":"Diabetic kidney disease","probability":0.03},{"name":"Charcot-Marie-Tooth disease","probability":0.02}],"error":null},"iterations":[{"question":"What is the patient's presenting complaint?","answer":"The patient presented with progressive chronic kidney disease and subnephrotic-range proteinuria.","answer_source":"case_study","error":null,"strategy_trace":{"picture":{"findings":[],"patterns":[],"basics_covered":false},"fills":"The primary reason the patient sought care, including the main symptom and its onset."},"environment_response":{"answer_source":"case_study","evidence":["presented with progressive chronic kidney disease and subnephrotic-range proteinuria"],"confidence":"high","literature_search":false,"retriever_parameters":{"path":"case_study","multi_part":false,"sub_queries":[],"literature_query":null,"excluded_source_docs":[]},"literature_search_result":null}},{"question":"What is the patient's urine protein-to-creatinine ratio?","answer":"The patient's urine protein-to-creatinine ratio was 2.2.","answer_source":"case_study","error":null,"strategy_trace":{"picture":{"findings":["Presenting complaint is progressive chronic kidney disease","Subnephrotic-range proteinuria is present","No history, vital signs or examination findings are known yet"],"patterns":[{"name":"Progressive chronic kidney disease with subnephrotic-range proteinuria","present":["Progressive chronic kidney disease","Subnephrotic-range proteinuria"],"missing":["Quantified proteinuria (urine protein-to-creatinine ratio or 24-hour protein)","Creatinine and eGFR trend over time","Urinalysis for haematuria, casts and sediment","Blood pressure","Oedema or other signs of fluid retention","Serum albumin and lipids","Duration and age of onset of kidney disease","Medication and exposure history","Family history of kidney disease","Kidney size and structure on imaging"]}],"basics_covered":false},"fills":"Quantified proteinuria (urine protein-to-creatinine ratio)"},"environment_response":{"answer_source":"case_study","evidence":["urine protein/creatinine ratio 2.2"],"confidence":"high","literature_search":false,"retriever_parameters":{"path":"case_study","multi_part":false,"sub_queries":[],"literature_query":null,"excluded_source_docs":[]},"literature_search_result":null}},{"question":"What is the patient's urinalysis result for blood, red cell casts and other sediment findings?","answer":"Urinalysis showed no blood, no red cell casts, and an otherwise bland sediment.","answer_source":"literature","error":null,"strategy_trace":{"picture":{"findings":["Presented with progressive chronic kidney disease","Subnephrotic-range proteinuria","Urine protein-to-creatinine ratio 2.2"],"patterns":[{"name":"Progressive chronic kidney disease with subnephrotic-range proteinuria","present":["Progressive chronic kidney disease","Subnephrotic-range proteinuria","Urine protein-to-creatinine ratio 2.2"],"missing":["Creatinine and eGFR trend over time","Urinalysis for haematuria, casts and sediment","Blood pressure","Oedema or other signs of fluid retention","Serum albumin and lipids","Duration and age of onset of kidney disease","Medication and exposure history","Family history of kidney disease","Kidney size and structure on imaging"]}],"basics_covered":false},"fills":"Urinalysis for haematuria, casts and sediment"},"environment_response":{"answer_source":"literature","evidence":[],"confidence":"low","literature_search":true,"retriever_parameters":{"path":"best_guess","multi_part":false,"sub_queries":[],"literature_query":"urine sediment hematuria Fabry disease older adults","excluded_source_docs":[]},"literature_search_result":{"query":"europe_pmc: TITLE_ABS:(urinalysis OR \"urine sediment\" OR hematuria OR \"red blood cell casts\" OR proteinuria) AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson-Fabry disease\" OR \"Fabry nephropathy\") | litsense: urinalysis Fabry disease","documents":[{"doc_id":"PMID:41845307","title":"Clinical awareness and targeted manual urine microscopy enable diagnosis of a fabry disease family missed by routine urinalysis.","url":"https://pubmed.ncbi.nlm.nih.gov/41845307/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:27904112#CASE-d5861bb8","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/27904112/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:42395686","title":"Renal involvement in Fabry disease from Tunisian families: Six case reports.","url":"https://pubmed.ncbi.nlm.nih.gov/42395686/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:21071972#TITLEABSTRACT-3538f4b4","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/21071972/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:42290669","title":"A Rare Case of Fabry Disease Combined With Idiopathic Multicentric Castleman Disease and Membranous Nephropathy.","url":"https://pubmed.ncbi.nlm.nih.gov/42290669/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:42824490","title":"Case Report: Concurrent Fabry disease, IgA nephropathy and undifferentiated connective tissue disease in a female with normal enzyme activity.","url":"https://pubmed.ncbi.nlm.nih.gov/42824490/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:42355394","title":"Phenotypic Variability of Kidney Involvement in Fabry Disease-Lessons from a Family Study.","url":"https://pubmed.ncbi.nlm.nih.gov/42355394/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:37629768","title":"Treatment of Fabry Nephropathy: A Literature Review.","url":"https://pubmed.ncbi.nlm.nih.gov/37629768/","source":"europe_pmc","journal":null,"pub_year":null}]}}},{"question":"What is the patient's blood pressure?","answer":"The patient's blood pressure was 160/78.","answer_source":"case_study","error":null,"strategy_trace":{"picture":{"findings":["Presenting complaint is progressive chronic kidney disease with subnephrotic-range proteinuria","Urine protein-to-creatinine ratio is 2.2","Urinalysis shows no blood, no red cell casts and an otherwise bland sediment"],"patterns":[{"name":"Progressive chronic kidney disease with subnephrotic-range proteinuria and bland urinalysis","present":["Progressive chronic kidney disease","Subnephrotic-range proteinuria","Urine protein-to-creatinine ratio 2.2","No haematuria","No red cell casts","Bland urine sediment"],"missing":["Creatinine and eGFR trend over time","Blood pressure","Oedema or other signs of fluid retention","Serum albumin and lipids","Duration and age of onset of kidney disease","Medication and exposure history","Family history of kidney disease","Kidney size and structure on imaging"]}],"basics_covered":false},"fills":"Blood pressure"},"environment_response":{"answer_source":"case_study","evidence":["Exam: BP 160/78, pulse 72, BMI 24.5"],"confidence":"high","literature_search":false,"retriever_parameters":{"path":"case_study","multi_part":false,"sub_queries":[],"literature_query":null,"excluded_source_docs":[]},"literature_search_result":null}},{"question":"What is the patient's serum creatinine and estimated glomerular filtration rate (eGFR)?","answer":"Serum creatinine is 4.3 mg/dL, with an estimated eGFR of approximately 13 mL/min/1.73 m².","answer_source":"literature","error":null,"strategy_trace":{"picture":{"findings":["Presenting complaint is progressive chronic kidney disease with subnephrotic-range proteinuria","Urine protein-to-creatinine ratio is 2.2","Urinalysis shows no blood, no red cell casts and a bland sediment","Blood pressure is 160/78"],"patterns":[{"name":"Progressive chronic kidney disease with subnephrotic-range proteinuria and bland urine sediment","present":["Progressive chronic kidney disease","Subnephrotic-range proteinuria","Urine protein-to-creatinine ratio 2.2","No haematuria","No red cell casts","Bland urine sediment"],"missing":["Creatinine and eGFR trend over time","Serum albumin and lipids","Oedema or other signs of fluid retention","Duration and age of onset of kidney disease","Medication and exposure history","Family history of kidney disease","Kidney size and structure on imaging"]},{"name":"Hypertension in the setting of chronic kidney disease","present":["Blood pressure 160/78"],"missing":["Repeat blood pressure readings","Current antihypertensive therapy and adherence","Fundoscopy or other evidence of target-organ damage","Heart rate and other vital signs"]}],"basics_covered":false},"fills":"Serum creatinine and eGFR, establishing the current level of kidney function and CKD stage."},"environment_response":{"answer_source":"literature","evidence":[],"confidence":"low","literature_search":true,"retriever_parameters":{"path":"literature","multi_part":false,"sub_queries":[],"literature_query":"serum creatinine eGFR Fabry disease elderly male","excluded_source_docs":[]},"literature_search_result":{"query":"europe_pmc: TITLE_ABS:(\"serum creatinine\" OR creatinine OR \"estimated glomerular filtration rate\" OR eGFR OR \"renal insufficiency\") AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson Fabry disease\" OR \"Fabry nephropathy\") | litsense: serum creatinine Fabry disease","documents":[{"doc_id":"PMID:40898253","title":"Functional and histopathologic correlation in the fabry nephropathy with N215S genotype.","url":"https://pubmed.ncbi.nlm.nih.gov/40898253/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:19810002#TITLEABSTRACT-c3f16e6b","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/19810002/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:42226196","title":"Real world outcomes of Fabry disease in Italian excellence centers: the ground study.","url":"https://pubmed.ncbi.nlm.nih.gov/42226196/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:19833663#TITLEABSTRACT-08e2ac5c","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/19833663/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:41196191","title":"Long-term effectiveness and safety outcomes in adults with Fabry disease treated with agalsidase alfa: 20 years of data from the Fabry Outcome Survey.","url":"https://pubmed.ncbi.nlm.nih.gov/41196191/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:18437007#TITLEABSTRACT-74fa8930","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/18437007/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:41463002","title":"Long-Term Enzyme Replacement Therapy and Renal Outcomes in Fabry Disease: A Systematic Review and Meta-Analysis.","url":"https://pubmed.ncbi.nlm.nih.gov/41463002/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:37442614","title":"Interpretation of GFR slope in untreated and treated adult Fabry patients.","url":"https://pubmed.ncbi.nlm.nih.gov/37442614/","source":"europe_pmc","journal":null,"pub_year":null}]}}},{"question":"What is the patient's serum albumin level?","answer":"Serum albumin is 3.8 g/dL.","answer_source":"literature","error":null,"strategy_trace":{"picture":{"findings":["Presenting complaint of progressive chronic kidney disease with subnephrotic-range proteinuria","Urine protein-to-creatinine ratio 2.2","Urinalysis with no blood, no red cell casts, and otherwise bland sediment","Blood pressure 160/78","Serum creatinine 4.3 mg/dL with eGFR approximately 13 mL/min/1.73 m2"],"patterns":[{"name":"Progressive chronic kidney disease with subnephrotic-range proteinuria and bland urine sediment","present":["Progressive chronic kidney disease","Subnephrotic-range proteinuria","Urine protein-to-creatinine ratio 2.2","No haematuria","No red cell casts","Bland urine sediment","Serum creatinine 4.3 mg/dL","eGFR approximately 13 mL/min/1.73 m2"],"missing":["Creatinine and eGFR trend over time","Serum albumin and lipids","Oedema or other signs of fluid retention","Duration and age of onset of kidney disease","Medication and exposure history","Family history of kidney disease","Kidney size and structure on imaging"]},{"name":"Hypertension in the setting of chronic kidney disease","present":["Blood pressure 160/78"],"missing":["Repeat blood pressure readings","Current antihypertensive therapy and adherence","Fundoscopy or other evidence of target-organ damage","Heart rate and other vital signs"]}],"basics_covered":false},"fills":"Serum albumin level, which is missing from the clinical picture and is needed to assess the degree of hypoalbuminaemia alongside the subnephrotic-range proteinuria."},"environment_response":{"answer_source":"literature","evidence":[],"confidence":"low","literature_search":true,"retriever_parameters":{"path":"best_guess","multi_part":false,"sub_queries":[],"literature_query":"serum albumin Fabry disease chronic kidney disease","excluded_source_docs":[]},"literature_search_result":{"query":"europe_pmc: TITLE_ABS:(\"serum albumin\" OR \"serum albumin level\" OR albumin OR hypoalbuminemia) AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson Fabry disease\" OR \"Anderson Fabry syndrome\") | litsense: serum albumin Fabry disease","documents":[{"doc_id":"PMID:39529120","title":"Effectiveness and safety of enzyme replacement therapy in the treatment of Fabry disease: a Chinese monocentric real-world study.","url":"https://pubmed.ncbi.nlm.nih.gov/39529120/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:34609404#INTRO-4227b2ad","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/34609404/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:30733880","title":"High Lyso-Gb3 Plasma Levels Associated with Decreased miR-29 and miR-200 Urinary Excretion in Young Non-Albuminuric Male Patient with Classic Fabry Disease.","url":"https://pubmed.ncbi.nlm.nih.gov/30733880/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:33809516#INTRO-d9c69772","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/33809516/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:41158984","title":"Renoprotective effects of SGLT2 inhibitors in patients with Fabry disease.","url":"https://pubmed.ncbi.nlm.nih.gov/41158984/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:30943985#INTRO-54971f94","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/30943985/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:39423097","title":"Coexistence of Fabry Disease and Membranous Nephropathy: A Case Report.","url":"https://pubmed.ncbi.nlm.nih.gov/39423097/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:21949853#DISCUSS-873b9d2f","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/21949853/","source":"litsense","journal":null,"pub_year":null}]}}},{"question":"Is there a family history of kidney disease in the patient's relatives?","answer":"Yes. The patient had a brother with renal failure of unclear etiology in his forties.","answer_source":"case_study","error":null,"strategy_trace":{"picture":{"findings":["Presented with progressive chronic kidney disease and subnephrotic-range proteinuria","Urine protein-to-creatinine ratio 2.2","Urinalysis: no blood, no red cell casts, otherwise bland sediment","Blood pressure 160/78 mmHg","Serum creatinine 4.3 mg/dL with eGFR approximately 13 mL/min/1.73 m2","Serum albumin 3.8 g/dL"],"patterns":[{"name":"Progressive chronic kidney disease with subnephrotic-range proteinuria and bland urine sediment","present":["Progressive chronic kidney disease","Subnephrotic-range proteinuria, urine protein-to-creatinine ratio 2.2","No haematuria","No red cell casts","Bland urine sediment","Serum creatinine 4.3 mg/dL","eGFR approximately 13 mL/min/1.73 m2","Serum albumin 3.8 g/dL"],"missing":["Creatinine and eGFR trend over time","Serum lipids","Oedema or other signs of fluid retention","Duration and age of onset of kidney disease","Medication and exposure history","Family history of kidney disease","Kidney size and structure on imaging"]},{"name":"Hypertension in the setting of chronic kidney disease","present":["Blood pressure 160/78 mmHg"],"missing":["Repeat blood pressure readings","Current antihypertensive therapy and adherence","Fundoscopy or other evidence of target-organ damage","Heart rate and other vital signs"]}],"basics_covered":false},"fills":"Family history of kidney disease"},"environment_response":{"answer_source":"case_study","evidence":["Family history notable for a brother with renal failure of unclear etiology in his forties."],"confidence":"high","literature_search":false,"retriever_parameters":{"path":"case_study","multi_part":false,"sub_queries":[],"literature_query":null,"excluded_source_docs":[]},"literature_search_result":null}},{"question":"Does the patient have any extrarenal features, such as hearing loss, eye abnormalities, or rash?","answer":"The patient had peripheral neuropathy with unstable balance. Rash or other skin issues were denied; hearing loss and eye abnormalities are not mentioned in the case.","answer_source":"case_study","error":null,"strategy_trace":{"picture":{"findings":["Presenting complaint is progressive chronic kidney disease with subnephrotic-range proteinuria","Urine protein-to-creatinine ratio is 2.2","Urinalysis shows no blood, no red cell casts and an otherwise bland sediment","Blood pressure is 160/78","Serum creatinine is 4.3 mg/dL with eGFR approximately 13 mL/min/1.73 m2","Serum albumin is 3.8 g/dL","Family history: a brother had renal failure of unclear etiology in his forties"],"patterns":[{"name":"Progressive chronic kidney disease with subnephrotic-range proteinuria and bland urine sediment","present":["Progressive chronic kidney disease","Subnephrotic-range proteinuria, urine protein-to-creatinine ratio 2.2","No haematuria or red cell casts, bland sediment","Serum creatinine 4.3 mg/dL, eGFR approximately 13 mL/min/1.73 m2","Serum albumin 3.8 g/dL"],"missing":["Creatinine and eGFR trend over time","Serum lipids","Oedema or other signs of fluid retention","Duration and age of onset of kidney disease","Medication and exposure history","Kidney size and structure on imaging"]},{"name":"Hypertension in the setting of chronic kidney disease","present":["Blood pressure 160/78 mmHg","Reduced eGFR of approximately 13 mL/min/1.73 m2"],"missing":["Repeat blood pressure readings","Current antihypertensive therapy and adherence","Fundoscopy or other evidence of target-organ damage","Heart rate and other vital signs"]},{"name":"Familial kidney disease with renal failure in a first-degree relative","present":["Brother with renal failure of unclear etiology in his forties"],"missing":["Etiology of brother's renal failure","Age of patient and other affected relatives","Extrarenal features in patient or relatives"]}],"basics_covered":false},"fills":"Extrarenal features in the patient (hearing loss, eye abnormalities, rash)"},"environment_response":{"answer_source":"case_study","evidence":["Review of systems notable for peripheral neuropathy with unstable balance; denied hypohidrosis, extremity pain, gastrointestinal complaints, rashes, or cardiac symptoms; denied skin issues."],"confidence":"high","literature_search":false,"retriever_parameters":{"path":"case_study","multi_part":false,"sub_queries":[],"literature_query":null,"excluded_source_docs":[]},"literature_search_result":null}}]},{"case_id":"PMC7520668_01","strategy":"channel","strategy_name":"channel","status":"completed","stop_reason":"max_iterations","case":{"case_id":"PMC7520668_01","diagnosis":"Fabry Disease","narrative":"A 69-year-old male with hypertension, diabetes (diet controlled), history of morbid obesity status post gastric bypass, and metastatic prostate cancer presented with progressive chronic kidney disease and subnephrotic-range proteinuria. Glomerular filtration rate declined by >5 ml/min/1.73 m2 per year. Medications: atorvastatin, amlodipine, aspirin, calcium carbonate, leuprolide. No known drug allergies. Family history notable for a brother with renal failure of unclear etiology in his forties. Review of systems notable for peripheral neuropathy with unstable balance; denied hypohidrosis, extremity pain, gastrointestinal complaints, rashes, or cardiac symptoms; denied skin issues. Exam: BP 160/78, pulse 72, BMI 24.5; no abnormal lung, heart, abdominal, extremity, or skin findings. Labs: creatinine 4.3 mg/dL, BUN 47 mg/dL, CO2 19 mg/dL; electrolytes otherwise normal. CBC: hemoglobin 10.9 g/dL with normal platelets and WBC. Urinalysis with mild proteinuria; urine protein/creatinine ratio 2.2. SPEP, UPEP, and serum free light chains without abnormalities. Kidney ultrasound showed slightly atrophic kidneys with echogenic parenchyma. Kidney biopsy: light microscopy with normocellular glomeruli, uniform capillary walls, prominent podocytes with foamy cytoplasm; ultrastructural exam with osmophilic lamellated inclusions in podocytes with concentric/striped appearance (myelin-like lamellated inclusions). Alpha-galactosidase enzyme activity low (21 nm/hr/mg protein; reference 50–150). GLA gene testing showed missense variant c.682A>C (p.Ala228Cys); daughter and grandson tested positive for same variant. In vitro mutation testing suggested suitability for migalastat therapy."},"diagnosis":{"differential":[{"name":"Diabetic nephropathy","probability":0.3},{"name":"Hypertensive chronic kidney disease","probability":0.2},{"name":"Membranous nephropathy","probability":0.12},{"name":"Focal segmental glomerulosclerosis","probability":0.08},{"name":"Immunoglobulin A nephropathy","probability":0.06},{"name":"Renal amyloidosis","probability":0.05},{"name":"Ischaemic nephropathy","probability":0.04},{"name":"Minimal change disease","probability":0.03},{"name":"Renal involvement in metastatic prostate cancer","probability":0.025},{"name":"Obesity-related glomerulopathy","probability":0.02}],"error":null},"iterations":[{"question":"What is the presenting complaint that brought the patient in today?","answer":"He presented with progressive chronic kidney disease and subnephrotic-range proteinuria.","answer_source":"case_study","error":null,"strategy_trace":{"channel":"interview","assessments":[],"rejected":[]},"environment_response":{"answer_source":"case_study","evidence":["presented with progressive chronic kidney disease and subnephrotic-range proteinuria."],"confidence":"high","literature_search":false,"retriever_parameters":{"path":"case_study","multi_part":false,"sub_queries":[],"literature_query":null,"excluded_source_docs":[]},"literature_search_result":null}},{"question":"What is the patient's age and sex?","answer":"The patient is a 69-year-old male.","answer_source":"case_study","error":null,"strategy_trace":{"channel":"interview","assessments":[],"rejected":[]},"environment_response":{"answer_source":"case_study","evidence":["A 69-year-old male with hypertension, diabetes (diet controlled), history of morbid obesity status post gastric bypass, and metastatic prostate cancer presented with progressive chronic kidney disease and subnephrotic-range proteinuria."],"confidence":"high","literature_search":false,"retriever_parameters":{"path":"case_study","multi_part":false,"sub_queries":[],"literature_query":null,"excluded_source_docs":[]},"literature_search_result":null}},{"question":"What is the patient's past medical history, including any known diabetes, hypertension, or prior kidney disease?","answer":"The patient had hypertension, diet-controlled diabetes, prior morbid obesity treated with gastric bypass, and metastatic prostate cancer. He also had progressive chronic kidney disease, with glomerular filtration rate declining by more than 5 ml/min/1.73 m² per year.","answer_source":"case_study","error":null,"strategy_trace":{"channel":"interview","assessments":[],"rejected":[]},"environment_response":{"answer_source":"case_study","evidence":["A 69-year-old male with hypertension, diabetes (diet controlled), history of morbid obesity status post gastric bypass, and metastatic prostate cancer presented with progressive chronic kidney disease and subnephrotic-range proteinuria.","Glomerular filtration rate declined by >5 ml/min/1.73 m2 per year."],"confidence":"high","literature_search":false,"retriever_parameters":{"path":"case_study","multi_part":false,"sub_queries":[],"literature_query":null,"excluded_source_docs":[]},"literature_search_result":null}},{"question":"What medications is the patient currently taking, including any antihypertensives, diabetes medications, and prior prostate cancer treatments?","answer":"The listed medications are atorvastatin, amlodipine, aspirin, calcium carbonate, and leuprolide. Diabetes is described as diet controlled, and no diabetes medication or other prior prostate cancer treatment is specified.","answer_source":"case_study","error":null,"strategy_trace":{"channel":"interview","assessments":[],"rejected":[]},"environment_response":{"answer_source":"case_study","evidence":["Medications: atorvastatin, amlodipine, aspirin, calcium carbonate, leuprolide.","diabetes (diet controlled)"],"confidence":"high","literature_search":false,"retriever_parameters":{"path":"case_study","multi_part":false,"sub_queries":[],"literature_query":null,"excluded_source_docs":[]},"literature_search_result":null}},{"question":"What are the patient's vital signs, including blood pressure, heart rate, respiratory rate, temperature, and oxygen saturation?","answer":"Blood pressure is 160/78 mmHg and heart rate is 72 beats/min. For this synthetic record, respiratory rate is 16 breaths/min, temperature is 36.8 °C, and oxygen saturation is 98%.","answer_source":"literature","error":null,"strategy_trace":{"channel":"exam","assessments":[{"after":"interview","diagnosis":"Diabetic kidney disease (diabetic nephropathy) with hypertensive nephrosclerosis as a contributor","confidence":0.4}],"rejected":[]},"environment_response":{"answer_source":"literature","evidence":[],"confidence":"low","literature_search":true,"retriever_parameters":{"path":"best_guess","multi_part":false,"sub_queries":[],"literature_query":"vital signs Fabry disease older adults chronic kidney disease","excluded_source_docs":[]},"literature_search_result":{"query":"europe_pmc: TITLE_ABS:(\"vital signs\" OR \"blood pressure\" OR \"heart rate\" OR \"respiratory rate\" OR \"oxygen saturation\") AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson Fabry disease\" OR \"Anderson-Fabry disease\" OR \"Fabry s disease\") | litsense: vital signs chronic kidney disease","documents":[{"doc_id":"PMID:33844184","title":"Elevated Ambulatory Blood Pressure Measurements are Associated with a Progressive Form of Fabry Disease.","url":"https://pubmed.ncbi.nlm.nih.gov/33844184/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"DOI:10.21203/rs.3.rs-59388/v1","title":"Elevated Ambulatory Blood Pressure Measurements Are Associated With a Progressive Form of Fabry Disease","url":"https://doi.org/10.21203/rs.3.rs-59388/v1","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:42181773","title":"Effectiveness and tolerability of migalastat in adult Fabry disease: A single regional centre experience.","url":"https://pubmed.ncbi.nlm.nih.gov/42181773/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:37434805","title":"Management of Hypertension in Fabry Disease.","url":"https://pubmed.ncbi.nlm.nih.gov/37434805/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:39225306","title":"Screening for Fabry disease in patients with left ventricular hypertrophy in China: A multicentre and prospective study.","url":"https://pubmed.ncbi.nlm.nih.gov/39225306/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:36069908","title":"Arrhythmia Burden and Heart Rate Response During Exercise in Anderson-Fabry Disease.","url":"https://pubmed.ncbi.nlm.nih.gov/36069908/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:41268272","title":"Spinal anesthesia in a patient with Fabry disease and multiorgan involvement: a rare case with long-term success.","url":"https://pubmed.ncbi.nlm.nih.gov/41268272/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:41704902","title":"Dapagliflozin in Patients With CKD With Fabry Disease.","url":"https://pubmed.ncbi.nlm.nih.gov/41704902/","source":"europe_pmc","journal":null,"pub_year":null}]}}},{"question":"What is the patient's body mass index on examination, and is there any peripheral edema?","answer":"The patient's BMI was 24.5 kg/m², and no peripheral edema was noted on examination.","answer_source":"literature","error":null,"strategy_trace":{"channel":"exam","assessments":[{"after":"interview","diagnosis":"Diabetic kidney disease (diabetic nephropathy) with hypertensive nephrosclerosis as a contributor","confidence":0.4}],"rejected":[]},"environment_response":{"answer_source":"literature","evidence":[],"confidence":"low","literature_search":true,"retriever_parameters":{"path":"literature","multi_part":false,"sub_queries":[],"literature_query":"body mass index peripheral edema Fabry disease adults","excluded_source_docs":[]},"literature_search_result":{"query":"europe_pmc: TITLE_ABS:(\"body mass index\" OR BMI OR \"peripheral edema\" OR edema) AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson-Fabry disease\" OR \"Fabry s disease\") | litsense: body mass index Fabry disease","documents":[{"doc_id":"PMID:42584677","title":"Vascular endothelial dysfunction and echocardiographic changes in male and female patients with Fabry disease: a single-center observational study.","url":"https://pubmed.ncbi.nlm.nih.gov/42584677/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:35782602#FIG-fe72c62f","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/35782602/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:41762726","title":"Use of nonsteroidal mineralocorticoid receptor antagonist in chronic kidney disease: A case report of a patient with Fabry disease in his mid-20s.","url":"https://pubmed.ncbi.nlm.nih.gov/41762726/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:38706878#RESULTS-b75f56ef","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/38706878/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:39473688","title":"Fabry Disease in a Female: A Unique Case Highlighting the Variability in Clinical Presentation.","url":"https://pubmed.ncbi.nlm.nih.gov/39473688/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:35575807#INTRO-656fc6dc","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/35575807/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:36406818","title":"Polycystic kidney disease complicates renal pathology in a family with Fabry disease.","url":"https://pubmed.ncbi.nlm.nih.gov/36406818/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:38637893#TABLE-796652da","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/38637893/","source":"litsense","journal":null,"pub_year":null}]}}},{"question":"What did the general examination of the patient's abdomen, cardiovascular system, and lungs reveal, including any murmurs, rubs, or crackles?","answer":"The general examination found no abnormal findings in the abdomen, heart, or lungs. The case does not specifically enumerate murmurs, rubs, or crackles.","answer_source":"case_study","error":null,"strategy_trace":{"channel":"exam","assessments":[{"after":"interview","diagnosis":"Diabetic kidney disease (diabetic nephropathy) with hypertensive nephrosclerosis as a contributor","confidence":0.4}],"rejected":[]},"environment_response":{"answer_source":"case_study","evidence":["Exam: BP 160/78, pulse 72, BMI 24.5; no abnormal lung, heart, abdominal, extremity, or skin findings."],"confidence":"high","literature_search":false,"retriever_parameters":{"path":"case_study","multi_part":false,"sub_queries":[],"literature_query":null,"excluded_source_docs":[]},"literature_search_result":null}},{"question":"What did the examination of the patient's lymph nodes reveal, including any peripheral lymphadenopathy?","answer":"Lymph node examination was unremarkable, with no palpable peripheral lymphadenopathy.","answer_source":"literature","error":null,"strategy_trace":{"channel":"exam","assessments":[{"after":"interview","diagnosis":"Diabetic kidney disease (diabetic nephropathy) with hypertensive nephrosclerosis as a contributor","confidence":0.4}],"rejected":[]},"environment_response":{"answer_source":"literature","evidence":[],"confidence":"low","literature_search":true,"retriever_parameters":{"path":"best_guess","multi_part":false,"sub_queries":[],"literature_query":"lymphadenopathy lymph node findings Fabry disease older adults","excluded_source_docs":[]},"literature_search_result":{"query":"europe_pmc: TITLE_ABS:(\"lymph node examination\" OR lymphadenopathy OR \"peripheral lymphadenopathy\" OR \"lymph node enlargement\") AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson-Fabry disease\") | litsense: lymph node examination Fabry disease","documents":[{"doc_id":"PMID:40559385","title":"The Hidden Burden: Gastrointestinal Involvement in Lysosomal Storage Disorders.","url":"https://pubmed.ncbi.nlm.nih.gov/40559385/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:2507783","title":"Anderson-Fabry disease: an unusual presentation with lymphadenopathy.","url":"https://pubmed.ncbi.nlm.nih.gov/2507783/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:6767013","title":"Granulomatous gingivitis in Anderson-Fabry disease.","url":"https://pubmed.ncbi.nlm.nih.gov/6767013/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:25763722","title":"Histiocytic disorders of the chest: imaging findings.","url":"https://pubmed.ncbi.nlm.nih.gov/25763722/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:6713973#TITLEABSTRACT-b4fc699c","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/6713973/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:3143258#TITLEABSTRACT-05a7ce8e","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/3143258/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:27262908#INTRO-1f84ddeb","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/27262908/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:10462028#TITLEABSTRACT-80e5c6ec","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/10462028/","source":"litsense","journal":null,"pub_year":null}]}}}]},{"case_id":"PMC7520668_01","strategy":"sequence","strategy_name":"sequence","status":"completed","stop_reason":"max_iterations","case":{"case_id":"PMC7520668_01","diagnosis":"Fabry Disease","narrative":"A 69-year-old male with hypertension, diabetes (diet controlled), history of morbid obesity status post gastric bypass, and metastatic prostate cancer presented with progressive chronic kidney disease and subnephrotic-range proteinuria. Glomerular filtration rate declined by >5 ml/min/1.73 m2 per year. Medications: atorvastatin, amlodipine, aspirin, calcium carbonate, leuprolide. No known drug allergies. Family history notable for a brother with renal failure of unclear etiology in his forties. Review of systems notable for peripheral neuropathy with unstable balance; denied hypohidrosis, extremity pain, gastrointestinal complaints, rashes, or cardiac symptoms; denied skin issues. Exam: BP 160/78, pulse 72, BMI 24.5; no abnormal lung, heart, abdominal, extremity, or skin findings. Labs: creatinine 4.3 mg/dL, BUN 47 mg/dL, CO2 19 mg/dL; electrolytes otherwise normal. CBC: hemoglobin 10.9 g/dL with normal platelets and WBC. Urinalysis with mild proteinuria; urine protein/creatinine ratio 2.2. SPEP, UPEP, and serum free light chains without abnormalities. Kidney ultrasound showed slightly atrophic kidneys with echogenic parenchyma. Kidney biopsy: light microscopy with normocellular glomeruli, uniform capillary walls, prominent podocytes with foamy cytoplasm; ultrastructural exam with osmophilic lamellated inclusions in podocytes with concentric/striped appearance (myelin-like lamellated inclusions). Alpha-galactosidase enzyme activity low (21 nm/hr/mg protein; reference 50–150). GLA gene testing showed missense variant c.682A>C (p.Ala228Cys); daughter and grandson tested positive for same variant. In vitro mutation testing suggested suitability for migalastat therapy."},"diagnosis":{"differential":[{"name":"Diabetic nephropathy","probability":0.24},{"name":"Hypertensive nephrosclerosis","probability":0.12},{"name":"Membranous nephropathy","probability":0.11},{"name":"IgA nephropathy","probability":0.1},{"name":"Minimal change disease","probability":0.07},{"name":"Focal segmental glomerulosclerosis","probability":0.06},{"name":"C3 glomerulopathy","probability":0.05},{"name":"Membranoproliferative glomerulonephritis","probability":0.04},{"name":"Lupus nephritis","probability":0.03},{"name":"AL amyloidosis","probability":0.02}],"error":null},"iterations":[{"question":"What is the patient's presenting complaint?","answer":"The patient presented with progressive chronic kidney disease and subnephrotic-range proteinuria.","answer_source":"case_study","error":null,"strategy_trace":{"phase":"init","candidates":[]},"environment_response":{"answer_source":"case_study","evidence":["presented with progressive chronic kidney disease and subnephrotic-range proteinuria."],"confidence":"high","literature_search":false,"retriever_parameters":{"path":"case_study","multi_part":false,"sub_queries":[],"literature_query":null,"excluded_source_docs":[]},"literature_search_result":null}},{"question":"What is the patient's history of the onset and duration of the proteinuria and kidney function decline?","answer":"Proteinuria and kidney function decline were recognized during a progressive course over several years; the exact onset and duration were not documented. The eGFR was declining by more than 5 mL/min/1.73 m² per year.","answer_source":"literature","error":null,"strategy_trace":{"phase":"init","candidates":[]},"environment_response":{"answer_source":"literature","evidence":[],"confidence":"low","literature_search":true,"retriever_parameters":{"path":"best_guess","multi_part":false,"sub_queries":[],"literature_query":"Fabry disease proteinuria onset duration eGFR decline older men","excluded_source_docs":[]},"literature_search_result":{"query":"europe_pmc: TITLE_ABS:(\"proteinuria onset\" OR \"age at onset proteinuria\" OR \"proteinuria duration\" OR \"renal function decline\" OR \"eGFR decline\") AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson-Fabry disease\" OR \"Fabry nephropathy\") | litsense: proteinuria onset chronic kidney disease","documents":[{"doc_id":"PMID:36013057","title":"Renoprotective Effect of Agalsidase Alfa: A Long-Term Follow-Up of Patients with Fabry Disease.","url":"https://pubmed.ncbi.nlm.nih.gov/36013057/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:37061786","title":"Cluster analysis of kidney function decline among males with Fabry disease in a large United States electronic health records database.","url":"https://pubmed.ncbi.nlm.nih.gov/37061786/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:39636566","title":"Influence of Treatment Effect Modifiers in Fabry Disease: A Systematic Literature Review.","url":"https://pubmed.ncbi.nlm.nih.gov/39636566/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:27334365","title":"Long-term enzyme replacement therapy for Fabry disease: efficacy and unmet needs in cardiac and renal outcomes.","url":"https://pubmed.ncbi.nlm.nih.gov/27334365/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:40663814","title":"Identification of genetic variants associated with Fabry nephropathy progression using whole-exome sequencing.","url":"https://pubmed.ncbi.nlm.nih.gov/40663814/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:41158984","title":"Renoprotective effects of SGLT2 inhibitors in patients with Fabry disease.","url":"https://pubmed.ncbi.nlm.nih.gov/41158984/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:40760696","title":"A phase 4, open-label, multicenter study of the safety and efficacy of agalsidase beta in Chinese patients with Fabry disease.","url":"https://pubmed.ncbi.nlm.nih.gov/40760696/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:41704902","title":"Dapagliflozin in Patients With CKD With Fabry Disease.","url":"https://pubmed.ncbi.nlm.nih.gov/41704902/","source":"europe_pmc","journal":null,"pub_year":null}]}}},{"question":"Does the patient have diabetes mellitus, and if so, what is their hemoglobin A1c?","answer":"Yes. He has diet-controlled diabetes; a plausible HbA1c for him is 5.8%.","answer_source":"literature","error":null,"strategy_trace":{"phase":"refine","candidates":["Focal segmental glomerulosclerosis","Diabetic nephropathy","Membranous nephropathy","IgA nephropathy","Hypertensive nephrosclerosis"]},"environment_response":{"answer_source":"literature","evidence":["PMID:40420032","literature range: Fabry cohort HbA1c 5.1–5.9% (PMID:40420032); CKD cohort 5.7–8.2% (PMID:40420032)"],"confidence":"medium","literature_search":true,"retriever_parameters":{"path":"literature","multi_part":false,"sub_queries":[],"literature_query":"hemoglobin A1c Fabry disease diet controlled diabetes","excluded_source_docs":[]},"literature_search_result":{"query":"europe_pmc: (CASE:(\"hemoglobin A1c\" OR HbA1c OR \"glycated hemoglobin\" OR \"glycosylated hemoglobin\") OR RESULTS:(\"hemoglobin A1c\" OR HbA1c OR \"glycated hemoglobin\" OR \"glycosylated hemoglobin\") OR TABLE:(\"hemoglobin A1c\" OR HbA1c OR \"glycated hemoglobin\" OR \"glycosylated hemoglobin\")) AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson-Fabry disease\") | litsense: hemoglobin A1c Fabry disease","documents":[{"doc_id":"PMID:35245971","title":"Evaluation of endocrinological involvement and metabolic status in patients with Gaucher disease Type 1 and Fabry disease under enzyme replacement therapy.","url":"https://pubmed.ncbi.nlm.nih.gov/35245971/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:40420032","title":"The relationship between multiple plasma biomarker levels and renal disease activity in Fabry disease.","url":"https://pubmed.ncbi.nlm.nih.gov/40420032/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:42812888","title":"Coronary stenosis in Fabry disease with optical coherence tomography imaging presentation: a case report.","url":"https://pubmed.ncbi.nlm.nih.gov/42812888/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:39564058","title":"Fabry Disease: A Rare Mutation With Common Clinical Presentation.","url":"https://pubmed.ncbi.nlm.nih.gov/39564058/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:40342436","title":"Fabry Disease in a Patient With Thin Basement Membrane Nephropathy.","url":"https://pubmed.ncbi.nlm.nih.gov/40342436/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:41054307","title":"Optimizing α-galactosidase A enzyme cutoff for Fabry disease screening in chronic kidney disease patients: a single-center reassessment of diagnostic yield and cost-effectiveness.","url":"https://pubmed.ncbi.nlm.nih.gov/41054307/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:41079813","title":"Fabry Disease Associated With Myelodysplastic Syndrome: Case Report.","url":"https://pubmed.ncbi.nlm.nih.gov/41079813/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:41111061","title":"Clinical and Biochemical Characterization of Fabry Disease Associated GLA Gene Variants: Data From a Large Cohort of 469 Thousand Genotyped Subjects of the UK Biobank Database.","url":"https://pubmed.ncbi.nlm.nih.gov/41111061/","source":"europe_pmc","journal":null,"pub_year":null}]}}},{"question":"What is the patient's serum anti-PLA2R antibody result?","answer":"Serum anti-PLA2R antibody was negative.","answer_source":"literature","error":null,"strategy_trace":{"phase":"refine","candidates":["Focal segmental glomerulosclerosis","Membranous nephropathy","IgA nephropathy","Diabetic nephropathy","Hypertensive nephrosclerosis"]},"environment_response":{"answer_source":"literature","evidence":[],"confidence":"low","literature_search":true,"retriever_parameters":{"path":"best_guess","multi_part":false,"sub_queries":[],"literature_query":"serum anti-PLA2R antibody Fabry disease chronic kidney disease","excluded_source_docs":[]},"literature_search_result":{"query":"europe_pmc: TITLE_ABS:(\"serum anti-PLA2R antibody\" OR \"anti-PLA2R antibody\" OR \"PLA2R antibody\" OR \"anti-PLA2R seropositivity\") AND TITLE_ABS:(\"membranous nephropathy\" OR \"chronic kidney disease\") | litsense: serum anti-PLA2R antibody Fabry disease","documents":[{"doc_id":"PMID:28614271#TITLEABSTRACT-0a111a39","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/28614271/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:33046023#INTRO-47cf4b33","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/33046023/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:35484851#TITLEABSTRACT-6eac43e0","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/35484851/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:29881283#TITLEABSTRACT-56eea7aa","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/29881283/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:28490696#TITLEABSTRACT-d9708664","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/28490696/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:32533226#TITLEABSTRACT-cfc8e182","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/32533226/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:34721885#METHODS-2824a5ba","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/34721885/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:35529848#INTRO-08b80fab","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/35529848/","source":"litsense","journal":null,"pub_year":null}]}}},{"question":"What is the patient's urine microscopy red blood cell count?","answer":"Urine microscopy shows 0–2 red blood cells per high-power field.","answer_source":"literature","error":null,"strategy_trace":{"phase":"refine","candidates":["Focal segmental glomerulosclerosis","Diabetic nephropathy","IgA nephropathy","Hypertensive nephrosclerosis","Membranous nephropathy"]},"environment_response":{"answer_source":"literature","evidence":[],"confidence":"low","literature_search":true,"retriever_parameters":{"path":"best_guess","multi_part":false,"sub_queries":[],"literature_query":"urine red blood cell count Fabry disease adults","excluded_source_docs":[]},"literature_search_result":{"query":"europe_pmc: TITLE_ABS:(\"urine red blood cell count\" OR \"urinary red blood cells\" OR \"urine erythrocytes\" OR \"microscopic hematuria\" OR hematuria) AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson-Fabry disease\") | litsense: urine red blood cell count Fabry nephropathy","documents":[{"doc_id":"PMID:41531328","title":"Drug-induced phospholipidosis of the kidney suspected to be caused by atomoxetine.","url":"https://pubmed.ncbi.nlm.nih.gov/41531328/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:40342436","title":"Fabry Disease in a Patient With Thin Basement Membrane Nephropathy.","url":"https://pubmed.ncbi.nlm.nih.gov/40342436/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:35842573","title":"COL4A4 variant recently identified: lessons learned in variant interpretation-a case report.","url":"https://pubmed.ncbi.nlm.nih.gov/35842573/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:24913738","title":"Coexistence of Fabry disease and IgA nephropathy: a report of two cases.","url":"https://pubmed.ncbi.nlm.nih.gov/24913738/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:42824490","title":"Case Report: Concurrent Fabry disease, IgA nephropathy and undifferentiated connective tissue disease in a female with normal enzyme activity.","url":"https://pubmed.ncbi.nlm.nih.gov/42824490/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:31840555","title":"IgA nephropathy suspected to be combined with Fabry disease or Alport syndrome: a case report.","url":"https://pubmed.ncbi.nlm.nih.gov/31840555/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:28157068","title":"Clinical and pathological characteristics of Fabry disease combined with IgA nephropathy in Chinese patients .","url":"https://pubmed.ncbi.nlm.nih.gov/28157068/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:32712909","title":"A case of latent heterozygous Fabry disease in a female living kidney donor candidate.","url":"https://pubmed.ncbi.nlm.nih.gov/32712909/","source":"europe_pmc","journal":null,"pub_year":null}]}}},{"question":"Does the patient have diabetic retinopathy on fundoscopic or ophthalmologic examination?","answer":"The patient had no diabetic retinopathy on fundoscopic examination.","answer_source":"literature","error":null,"strategy_trace":{"phase":"refine","candidates":["Focal segmental glomerulosclerosis","Diabetic nephropathy","Hypertensive nephrosclerosis","Membranous nephropathy"]},"environment_response":{"answer_source":"literature","evidence":[],"confidence":"low","literature_search":true,"retriever_parameters":{"path":"best_guess","multi_part":false,"sub_queries":[],"literature_query":"diabetic retinopathy Fabry disease diabetes ophthalmologic examination","excluded_source_docs":[]},"literature_search_result":{"query":"europe_pmc: TITLE_ABS:(\"diabetic retinopathy\" OR \"fundoscopic examination\" OR \"fundus examination\" OR \"ophthalmologic examination\" OR \"retinal microvascular abnormalities\") AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson-Fabry disease\" OR \"Fabry s disease\") | litsense: diabetic retinopathy Fabry disease","documents":[{"doc_id":"PMID:42850619","title":"Longitudinal assessment of the retinal phenotype in patients with Fabry disease undergoing continuous enzyme replacement and/or chaperone therapy.","url":"https://pubmed.ncbi.nlm.nih.gov/42850619/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"DOI:10.1101/2025.01.14.25320513","title":"Cardiac involvement in Fabry disease: Implications of retinal vessel analysis in detecting early microvascular alterations despite ERT","url":"https://doi.org/10.1101/2025.01.14.25320513","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:31584758","title":"Ocular findings in Fabry disease in Colombian patients","url":"https://pubmed.ncbi.nlm.nih.gov/31584758/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:31878969","title":"Retinal hyperreflective foci in Fabry disease.","url":"https://pubmed.ncbi.nlm.nih.gov/31878969/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:1886355","title":"[Value of the ophthalmologic examination in diagnosing patients with Anderson-Fabry disease and in heterozygote detection].","url":"https://pubmed.ncbi.nlm.nih.gov/1886355/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:20821055","title":"Enzyme assay and clinical assessment in subjects with a Chinese hotspot late-onset Fabry mutation (IVS4 + 919G→A).","url":"https://pubmed.ncbi.nlm.nih.gov/20821055/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:31290435#TITLEABSTRACT-7dc40c77","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/31290435/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:18510248#TITLEABSTRACT-646b90ec","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/18510248/","source":"litsense","journal":null,"pub_year":null}]}}},{"question":"What do the patient's kidney biopsy light microscopy findings show regarding glomerular segmental sclerosis and hyalinosis?","answer":"No glomerular segmental sclerosis or hyalinosis was identified.","answer_source":"literature","error":null,"strategy_trace":{"phase":"final","candidates":["Focal segmental glomerulosclerosis","Hypertensive nephrosclerosis","Membranous nephropathy"]},"environment_response":{"answer_source":"literature","evidence":[],"confidence":"low","literature_search":true,"retriever_parameters":{"path":"best_guess","multi_part":false,"sub_queries":[],"literature_query":"segmental glomerulosclerosis hyalinosis Fabry disease renal biopsy","excluded_source_docs":[]},"literature_search_result":{"query":"europe_pmc: TITLE_ABS:(\"segmental glomerulosclerosis\" OR \"focal segmental glomerulosclerosis\" OR \"glomerular sclerosis\" OR \"glomerular hyalinosis\") AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson Fabry disease\" OR \"Fabry nephropathy\") | litsense: segmental glomerulosclerosis Fabry disease","documents":[{"doc_id":"PMID:41720735","title":"Lecithin-cholesterol acyltransferase deficiency with the finding of \"zebra bodies\": A diagnostic challenge in the context of suspected Fabry disease.","url":"https://pubmed.ncbi.nlm.nih.gov/41720735/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:29792392#TITLEABSTRACT-3d93cd96","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/29792392/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:38186123","title":"[Clinical analysis of 10 patients with Fabry disease].","url":"https://pubmed.ncbi.nlm.nih.gov/38186123/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:34808632","title":"Autopsy Findings of Heterozygous Fabry Disease with the Severe Phenotype: A Case Report.","url":"https://pubmed.ncbi.nlm.nih.gov/34808632/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:31847900","title":"Effectiveness of immunosuppressive therapy for nephrotic syndrome in a patient with late-onset Fabry disease: a case report and literature review.","url":"https://pubmed.ncbi.nlm.nih.gov/31847900/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:23387234","title":"[Pedigree investigation of clinicopathologic features and alpha-galactosidase A gene mutation in a family with Fabry disease].","url":"https://pubmed.ncbi.nlm.nih.gov/23387234/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:21862460","title":"Diffuse thin glomerular basement membrane in association with Fabry disease in a Chinese female patient.","url":"https://pubmed.ncbi.nlm.nih.gov/21862460/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:12487173","title":"Fabry disease with few clinical signs and symptoms.","url":"https://pubmed.ncbi.nlm.nih.gov/12487173/","source":"europe_pmc","journal":null,"pub_year":null}]}}},{"question":"What do the patient's kidney biopsy electron microscopy findings show for podocyte foot process effacement and subepithelial electron-dense deposits?","answer":"Electron microscopy shows focal podocyte foot process effacement and no subepithelial electron-dense deposits.","answer_source":"literature","error":null,"strategy_trace":{"phase":"final","candidates":["Focal segmental glomerulosclerosis","Hypertensive nephrosclerosis","Membranous nephropathy"]},"environment_response":{"answer_source":"literature","evidence":["PMID:16799480","PMID:31067829#CASE-9a1bd8da"],"confidence":"low","literature_search":true,"retriever_parameters":{"path":"best_guess","multi_part":false,"sub_queries":[],"literature_query":"foot process effacement subepithelial deposits Fabry disease renal biopsy","excluded_source_docs":[]},"literature_search_result":{"query":"europe_pmc: TITLE_ABS:(\"podocyte foot process effacement\" OR \"foot process effacement\" OR \"subepithelial electron dense deposits\" OR \"subepithelial deposits\") AND TITLE_ABS:(\"Fabry disease\" OR \"Anderson Fabry disease\" OR \"Fabry nephropathy\") | litsense: podocyte foot process effacement Fabry disease","documents":[{"doc_id":"PMID:34922431","title":"Fabry nephropathy before and after enzyme replacement therapy: important role of renal biopsy in patients with Fabry disease.","url":"https://pubmed.ncbi.nlm.nih.gov/34922431/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:33513913#TITLEABSTRACT-45888c27","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/33513913/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:23430826","title":"Foot process effacement with normal urinalysis in classic fabry disease.","url":"https://pubmed.ncbi.nlm.nih.gov/23430826/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:34922431#INTRO-0b8eff1c","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/34922431/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:16799480","title":"Fabry disease: a morphologic study of 11 cases.","url":"https://pubmed.ncbi.nlm.nih.gov/16799480/","source":"europe_pmc","journal":null,"pub_year":null},{"doc_id":"PMID:31067829#CASE-9a1bd8da","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/31067829/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:33513913#CONCL-84daacbc","title":null,"url":"https://pubmed.ncbi.nlm.nih.gov/33513913/","source":"litsense","journal":null,"pub_year":null},{"doc_id":"PMID:29792392","title":"Hemizygous Fabry disease associated with membranous nephropathy: A rare case report .","url":"https://pubmed.ncbi.nlm.nih.gov/29792392/","source":"europe_pmc","journal":null,"pub_year":null}]}}}]}]}};
+
+const $ = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+function nodes(children) {
+  return children.flat(Infinity).filter((c) => c != null && c !== false).map((c) => (c instanceof Node ? c : document.createTextNode(String(c))));
+}
+function h(tag, props, ...children) {
+  const node = document.createElement(tag);
+  for (const [key, value] of Object.entries(props || {})) {
+    if (value == null || value === false) continue;
+    if (key === "class") node.className = value;
+    else if (key === "text") node.textContent = value;
+    else if (key === "style") node.setAttribute("style", value);
+    else node.setAttribute(key, value === true ? "" : String(value));
+  }
+  node.append(...nodes(children));
+  return node;
+}
+const fill = (node, ...children) => node.replaceChildren(...nodes(children));
+const clamp = (v, lo, hi) => Math.max(lo, Math.min(v, hi));
+const pct = (p) => `${Math.round(100 * (p ?? 0))}%`;
+const plural = (n, word, many = `${word}s`) => `${n} ${n === 1 ? word : many}`;
+const placeholder = (text) => h("p", { class: "placeholder", text });
+
+// Case text with the given spans highlighted.
+function highlighted(text, spans) {
+  const lower = text.toLowerCase();
+  const ranges = [];
+  for (const raw of spans) {
+    const span = raw.trim().replace(/^["“]|["”]$/g, "");
+    if (span.length < 4) continue;
+    let from = 0, at;
+    while ((at = lower.indexOf(span.toLowerCase(), from)) !== -1) { ranges.push([at, at + span.length]); from = at + span.length; }
+  }
+  ranges.sort((a, b) => a[0] - b[0]);
+  const merged = [];
+  for (const r of ranges) {
+    const last = merged.at(-1);
+    if (last && r[0] <= last[1]) last[1] = Math.max(last[1], r[1]); else merged.push([...r]);
+  }
+  const node = h("div", { class: "text" });
+  let pos = 0;
+  for (const [s, e] of merged) { node.append(text.slice(pos, s), h("mark", { text: text.slice(s, e) })); pos = e; }
+  node.append(text.slice(pos));
+  return node;
+}
+function scrollToMark(box) {
+  const mark = $("mark", box);
+  box.scrollTop = mark ? Math.max(0, mark.offsetTop - 60) : 0;
+}
+
+// --- a stepper: one per view ------------------------------------------------------------------
+
+function makeStepper(root, render) {
+  const s = { steps: [], i: 0 };
+  const range = $("input[type=range]", root);
+  s.go = (i) => {
+    if (!s.steps.length) return;
+    s.i = clamp(i, 0, s.steps.length - 1);
+    range.max = String(s.steps.length - 1);
+    range.value = String(s.i);
+    $(".step-count", root).textContent = `Step ${s.i + 1} of ${s.steps.length}`;
+    $$(".step-btn", root)[0].disabled = s.i === 0;
+    $$(".step-btn", root)[1].disabled = s.i === s.steps.length - 1;
+    const [title, caption] = render(s.steps[s.i], s.i);
+    $(".s-title", root).textContent = title;
+    $(".step-caption", root).textContent = caption;
+  };
+  for (const b of $$(".step-btn", root)) b.addEventListener("click", () => s.go(s.i + Number(b.dataset.step)));
+  range.addEventListener("input", () => s.go(Number(range.value)));
+  return s;
+}
+
+// =============================================================================================
+// DDx experiment: the framework's loop
+// =============================================================================================
+
+const D = DATA.ddx;
+const ddxRoot = $("#ddx");
+const LAST = D.rounds.length - 1;  // the round whose differential passes the threshold
+
+function ddxSteps() {
+  const steps = [{ k: "start" }];
+  D.rounds.forEach((_, r) => {
+    steps.push({ k: "calc", r }, { k: "decide", r });
+    if (r < LAST) steps.push({ k: "query", r }, { k: "answer", r }, { k: "update", r });
+  });
+  steps.push({ k: "return", r: LAST });
+  return steps;
+}
+
+// "Do not ask questions about X." is the environment's way of saying X is not in the case.
+function splitAnswer(answer) {
+  const at = answer.indexOf("Do not ask questions about");
+  if (at === -1) return { found: answer.trim(), missing: null };
+  const missing = answer.slice(at + "Do not ask questions about".length).trim().replace(/\.$/, "");
+  return { found: answer.slice(0, at).trim(), missing };
+}
+function answerNodes(answer) {
+  const { found, missing } = splitAnswer(answer);
+  return [found ? h("div", { class: "text", text: found }) : null, missing ? h("div", { class: "missing", text: `Not in the case: ${missing}.` }) : null];
+}
+
+const top1 = (ddx) => ddx.reduce((a, b) => (b[1] > a[1] ? b : a));
+const shortModel = (m) => m.split("/").pop();
+
+function renderDdx(step, index) {
+  const steps = ddx.steps;
+  const answered = steps.slice(0, index + 1).filter((s) => s.k === "update").length;
+  const shownRound = step.k === "start" ? -1 : step.r;
+  const asking = ["query", "answer", "update"].includes(step.k);
+
+  // flowchart
+  const NODE = { start: "update", calc: "calc", decide: "decide", query: "retrieve", answer: "retrieve", update: "update", return: "return" };
+  // the edge each step arrives by
+  const EDGE = { start: "start", calc: "uc", decide: "cd", query: "no", answer: "no", update: "ru", return: "yes" };
+  for (const g of $$(".fnode", ddxRoot)) {
+    g.classList.toggle("on", g.dataset.node === NODE[step.k] && step.k !== "return");
+    g.classList.toggle("done", g.dataset.node === "return" && step.k === "return");
+  }
+  for (const g of $$(".fedge", ddxRoot)) {
+    const on = g.dataset.edge === EDGE[step.k];
+    g.classList.toggle("on", on);
+    $("polyline", g).setAttribute("marker-end", on ? "url(#fh-on)" : "url(#fh)");
+  }
+
+  // environment
+  const round = shownRound >= 0 ? D.rounds[step.r] : null;
+  const caseBox = $("#d-box-case");
+  fill(caseBox,
+    h("div", { class: "kv" }, h("span", { class: "k", text: "Case" }), h("span", { class: "mono", text: D.case_id })),
+    h("div", { class: "truth" }, h("span", { class: "badge", text: "ground truth · never shown to the framework" }), h("strong", { text: D.diagnosis })),
+    h("h4", { text: "Case information" }),
+    highlighted(D.case_text, step.k === "answer" ? round.spans : []),
+  );
+  scrollToMark(caseBox);
+  $("#d-node-case").classList.toggle("on", step.k === "answer");
+  $("#d-node-llm").classList.toggle("on", step.k === "query" || step.k === "answer");
+  $("#d-env-arrow").classList.toggle("on", step.k === "answer");
+  const llm = $("#d-box-llm");
+  if (step.k === "query") fill(llm, placeholder("Received the question. Looking for the answer in the case…"));
+  else if (step.k === "answer") {
+    const { missing } = splitAnswer(round.answer);
+    fill(llm,
+      h("div", { class: "badges" }, h("span", { class: "badge case", text: "case study" }), missing ? h("span", { class: "badge warn", text: "partly not in the case" }) : null),
+      h("h4", { text: "Evidence" }),
+      h("ul", { style: "margin:0;padding-left:18px" }, round.spans.map((s) => h("li", { text: s }))),
+    );
+  } else {
+    fill(llm,
+      h("p", { text: "Returns the part of the case that answers each question. When the case is silent, it says what is missing." }),
+      h("div", { class: "kv" }, h("span", { class: "k", text: "Model" }), h("span", { class: "mono", text: D.environment_model })),
+    );
+  }
+
+  // query and answer
+  fill($("#d-box-query"), asking ? h("div", { class: "text", text: round.question }) : placeholder(step.k === "start" ? "No question yet." : step.k === "return" ? "No more questions." : "—"));
+  fill($("#d-box-answer"), step.k === "answer" || step.k === "update" ? answerNodes(round.answer) : placeholder(step.k === "query" ? "Waiting for the environment…" : "—"));
+  $("#d-msg-query").classList.toggle("on", step.k === "query");
+  $("#d-msg-answer").classList.toggle("on", step.k === "answer");
+
+  // case representation
+  const rep = $("#d-box-rep");
+  fill(rep,
+    h("h4", { text: "Background and presentation" }),
+    h("p", { class: "rep-bg", text: D.background }),
+    h("h4", { text: `Retrieved · ${plural(answered, "answer")}` }),
+    answered
+      ? h("ol", { class: "memory" }, D.rounds.slice(0, answered).map((r, i) =>
+          h("li", { class: step.k === "update" && i === answered - 1 ? "new" : null }, h("div", { class: "q", text: r.question }), answerNodes(r.answer))))
+      : placeholder("Nothing yet."),
+  );
+  const fresh = $(".memory li.new", rep);
+  rep.scrollTop = fresh ? fresh.offsetTop - 40 : step.k === "start" ? 0 : rep.scrollTop;
+  $("#d-panel-rep").classList.toggle("on", step.k === "start" || step.k === "update");
+
+  // disease probabilities
+  const box = $("#d-box-ddx");
+  if (shownRound < 0) fill(box, placeholder("No probabilities yet: the framework calculates them from the case representation."));
+  else {
+    const ddx = D.rounds[shownRound].ddx;
+    const prev = shownRound > 0 ? new Map(D.rounds[shownRound - 1].ddx) : null;
+    const [leadName, leadP] = top1(ddx);
+    const judged = step.k !== "calc";
+    const passes = judged && leadP >= D.threshold;
+    fill(box,
+      step.k === "return"
+        ? h("div", { class: "verdict" }, `Returned: ${leadName} (${pct(leadP)}). Ground truth: ${D.diagnosis}.`)
+        : judged
+          ? h("div", { class: `verdict ${passes ? "" : "no"}` }, passes ? `Yes: ${pct(leadP)} reaches the ${pct(D.threshold)} threshold.` : `No: ${pct(leadP)} is below the ${pct(D.threshold)} threshold.`)
+          : null,
+      h("div", { class: "thr-note", text: `Round ${shownRound + 1} · stopping threshold ${pct(D.threshold)}` }),
+      h("ol", { class: "ddx-list" }, ddx.map(([name, p]) => {
+        const before = prev?.get(name);
+        const delta = before == null ? (prev ? "new" : "") : Math.round(100 * (p - before));
+        const lead = name === leadName;
+        return h("li", { class: `${lead ? "lead" : ""} ${lead && passes ? "pass" : ""}` },
+          h("div", { class: "ddx-row" }, h("span", { class: "ddx-name", text: name }),
+            h("span", { class: "ddx-p" }, pct(p), delta === "" || delta === 0 ? null : h("span", { class: "delta", text: delta === "new" ? "new" : `${delta > 0 ? "▲" : "▼"}${Math.abs(delta)}` }))),
+          h("div", { class: "bar" }, h("i", { style: `width:${(100 * p).toFixed(1)}%` }), h("b", { style: `left:${100 * D.threshold}%` })));
+      })),
+    );
+    if (step.k === "calc") box.scrollTop = 0;
+  }
+  $("#d-panel-ddx").classList.toggle("on", ["calc", "decide", "return"].includes(step.k));
+
+  return ddxText(step);
+}
+
+function ddxText(step) {
+  const n = step.r + 1;
+  const round = D.rounds[step.r];
+  if (step.k === "start") return ["Case loaded", `The framework starts from the patient's background and presentation, which becomes the first case representation. The full case stays in the environment.`];
+  if (step.k === "calc") return [`Round ${n} · Calculate disease probabilities`, `${shortModel(D.model)} reads the case representation${step.r ? " and its previous probabilities" : ""} and ranks ten diseases, each with a probability.`];
+  if (step.k === "decide") {
+    const [name, p] = top1(round.ddx);
+    return [`Round ${n} · Sufficient differentiation?`, p >= D.threshold
+      ? `${name} leads with ${pct(p)}, which reaches the ${pct(D.threshold)} threshold: yes.`
+      : `${name} leads with ${pct(p)}, below the ${pct(D.threshold)} threshold: no, so the framework collects more information.`];
+  }
+  if (step.k === "query") return [`Round ${n} · Retrieve new information · Query`, `The framework asks the question it chose with these probabilities: “${round.question}”`];
+  if (step.k === "answer") {
+    const { missing } = splitAnswer(round.answer);
+    return [`Round ${n} · Retrieve new information · Answer`, `The environment returns the part of the case that answers it.${missing ? " Part of the question is not in the case, and it says so." : ""}`];
+  }
+  if (step.k === "update") return [`Round ${n} · Update case representation`, "The answer is added to the case representation, and the loop goes back to calculating the probabilities."];
+  const [name, p] = top1(round.ddx);
+  const [finalName, finalP] = D.final_in_experiment;
+  return ["Return disease", `The framework returns ${name} (${pct(p)}). This walkthrough stops at the framework's default ${pct(D.threshold)} threshold; in the experiment the run went on for all ${D.rounds_in_experiment} rounds and ended on ${finalName} (${pct(finalP)}).`];
+}
+
+const ddx = makeStepper(ddxRoot, renderDdx);
+ddx.steps = ddxSteps();
+fill($("#d-meta"), `Case ${D.case_id} · framework LLM ${shortModel(D.model)} · stops when one disease reaches ${pct(D.threshold)}`);
+
+// =============================================================================================
+// ICS experiment: the Clinician's View
+// =============================================================================================
+
+const I = DATA.ics;
+const icsRoot = $("#ics");
+const STOP_LABELS = { max_iterations: "reached the iteration limit", max_seconds: "reached the time limit", strategy_done: "the strategy had nothing more to ask", error: "an error ended the case run" };
+const PATH_LABELS = {
+  case_study: "Answered from the case study",
+  literature: "Synthesized from the literature (a simulation artifact, not a clinical claim)",
+  best_guess: "Best guess from the case and diagnosis: the documents gave no usable basis (a simulation artifact)",
+  ledger_hit: "Asked before: the stored answer was reused",
+  ledger_hit_after_query_builder: "Asked before (same variable): the stored answer was reused",
+  off_topic: "Not a question about the patient",
+  withheld: "Withheld: the question asks for the diagnosis",
+  query_builder_declined: "No literature answer is possible for this question",
+  all_sources_failed: "The literature sources were unavailable",
+  no_documents: "No relevant literature was found",
+  inconsistent_with_case: "No answer consistent with the case could be synthesized",
+  synthesizer_unanswerable: "The literature does not support an answer",
+};
+const SOURCE_LABELS = { case_study: "case study", literature: "literature (synthesized)", unanswerable: "unanswerable" };
+const PHASE_LABELS = { init: "Phase 1 · Initialization", refine: "Phase 2 · Refinement", final: "Phase 3 · Final diagnosis" };
+const STRATEGY_KINDS = new Set(["hypothesis", "knowledge", "channel", "sequence"]);
+const kind = (run) => (STRATEGY_KINDS.has(run.strategy_name) ? run.strategy_name : "other");
+
+let icsRun = I.case_runs[0];
+const icsArrows = { case: false, lit: false };
+
+function icsSteps(run) {
+  const steps = [{ k: "start" }];
+  run.iterations.forEach((it, i) => steps.push({ k: "query", i, it }, { k: "answer", i, it }));
+  steps.push({ k: "end" });
+  return steps;
+}
+function pathLabel(response) {
+  const p = response?.retriever_parameters || {};
+  const paths = p.multi_part ? (p.sub_queries || []).map((s) => s.path) : p.path ? [p.path] : [];
+  return [...new Set(paths.map((x) => PATH_LABELS[x] || x))].join("; ") || "Answered";
+}
+const answeredCount = (run, step) => (step.k === "start" ? 0 : step.k === "query" ? step.i : step.k === "answer" ? step.i + 1 : run.iterations.length);
+
+function renderIcs(step) {
+  const run = icsRun;
+  const response = step.it?.environment_response || null;
+  $("#i-strategy").value = run.strategy;
+  $("#i-strategy").className = `strat-${kind(run)}`;
+  $("#i-clin").className = `panels clin strat-${kind(run)}`;
+
+  // case study
+  const caseBox = $("#i-box-case");
+  const spans = step.k === "answer" && step.it.answer_source === "case_study" ? response?.evidence || [] : [];
+  fill(caseBox,
+    h("div", { class: "kv" }, h("span", { class: "k", text: "Case" }), h("span", { class: "mono", text: run.case.case_id })),
+    h("div", { class: "truth" }, h("span", { class: "badge", text: "ground truth · never shown to the strategy" }), h("strong", { text: run.case.diagnosis })),
+    h("h4", { text: "Case information" }),
+    highlighted(run.case.narrative, spans),
+  );
+  scrollToMark(caseBox);
+
+  // literature
+  const lit = $("#i-box-lit");
+  lit.scrollTop = 0;
+  if (step.k === "start") fill(lit, placeholder("Searched only when the case study cannot answer a question."));
+  else if (step.k === "query") fill(lit, placeholder("Waiting: the case study is checked first."));
+  else if (step.k === "end") fill(lit, placeholder(`Searched for ${run.iterations.filter((it) => it.environment_response?.literature_search).length} of ${plural(run.iterations.length, "question")}.`));
+  else if (!response?.literature_search) fill(lit, placeholder(`Not searched. ${pathLabel(response)}.`));
+  else {
+    const result = response.literature_search_result || {};
+    const cited = new Set(response.evidence || []);
+    const docs = result.documents || [];
+    fill(lit,
+      h("h4", { text: "Query sent" }),
+      h("div", { class: "query-text", text: result.query || response.retriever_parameters?.literature_query || "–" }),
+      h("p", { class: "muted", style: "margin-top:6px", text: plural(docs.length, "document") }),
+      h("ol", { class: "docs" }, docs.map((d) => h("li", null,
+        h("div", { class: "badges" }, h("span", { class: "badge", text: d.source }), cited.has(d.doc_id) ? h("span", { class: "badge lit", text: "cited" }) : null),
+        h("div", { class: "doc-title" }, /^https?:\/\//i.test(d.url || "") ? h("a", { href: d.url, target: "_blank", rel: "noopener noreferrer", text: d.title || d.doc_id }) : d.title || d.doc_id),
+        h("div", { class: "doc-meta mono", text: [d.doc_id, d.journal, d.pub_year].filter(Boolean).join(" · ") })))),
+    );
+  }
+
+  // LLM
+  const llm = $("#i-box-llm");
+  llm.scrollTop = 0;
+  if (step.k === "start") {
+    const s = I.environment_settings || {};
+    fill(llm,
+      h("p", { text: "Answers each question from the case study. When the case is silent, it searches the literature and synthesizes a plausible answer." }),
+      s.default_model ? h("div", { class: "kv" }, h("span", { class: "k", text: "Model" }), h("span", { class: "mono", text: s.default_model })) : null,
+      s.enabled_sources?.length ? h("div", { class: "kv" }, h("span", { class: "k", text: "Sources" }), h("span", { text: s.enabled_sources.join(", ") })) : null,
+    );
+  } else if (step.k === "query") fill(llm, placeholder("Received the question. Checking whether the case study answers it…"));
+  else if (step.k === "end") {
+    const counts = {};
+    for (const it of run.iterations) if (it.answer_source) counts[it.answer_source] = (counts[it.answer_source] || 0) + 1;
+    fill(llm, h("h4", { text: "Answers" }), h("div", { class: "badges" }, Object.entries(counts).map(([src, n]) => h("span", { class: `badge ${src === "case_study" ? "case" : "lit"}`, text: `${SOURCE_LABELS[src] || src}: ${n}` }))));
+  } else if (!response) fill(llm, h("p", { class: "text", text: step.it.error || "No response recorded." }));
+  else {
+    const evidence = (response.evidence || []).filter(Boolean);
+    fill(llm,
+      h("div", { class: "badges" }, h("span", { class: `badge ${response.answer_source === "case_study" ? "case" : "lit"}`, text: SOURCE_LABELS[response.answer_source] || response.answer_source }), h("span", { class: "badge", text: `confidence ${response.confidence}` })),
+      h("p", { text: pathLabel(response) }),
+      evidence.length ? [h("h4", { text: "Evidence" }), h("ul", { style: "margin:0;padding-left:18px" }, evidence.map((e) => h("li", { text: e })))] : null,
+    );
+  }
+
+  // query and answer
+  fill($("#i-box-query"), step.k === "query" || step.k === "answer" ? h("div", { class: "text", text: step.it.question }) : placeholder(step.k === "start" ? "No question yet." : "No more questions."));
+  fill($("#i-box-answer"), step.k === "answer" ? h("div", { class: "text", text: step.it.answer ?? step.it.error ?? "" }) : placeholder(step.k === "query" ? "Waiting for the environment…" : "—"));
+
+  renderMemory(run, step);
+  renderOutput(run, step);
+
+  const usedCase = step.k === "start" || (step.k === "answer" && step.it.answer_source === "case_study");
+  const usedLit = step.k === "answer" && Boolean(response?.literature_search);
+  $("#i-node-case").classList.toggle("on", usedCase);
+  $("#i-node-lit").classList.toggle("on", usedLit);
+  $("#i-node-llm").classList.toggle("on", step.k === "query" || step.k === "answer");
+  $("#i-msg-query").classList.toggle("on", step.k === "query");
+  $("#i-msg-answer").classList.toggle("on", step.k === "answer");
+  $("#i-panel-memory").classList.toggle("on", step.k === "answer");
+  $("#i-panel-output").classList.toggle("on", step.k === "query" || step.k === "end");
+  icsArrows.case = usedCase && step.k === "answer";
+  icsArrows.lit = usedLit;
+  requestAnimationFrame(drawEnvArrows);
+  return icsText(run, step);
+}
+
+function memoryGroup(run, it) {
+  const t = it.strategy_trace || {};
+  if (run.strategy_name === "channel" && t.channel) return `Channel · ${t.channel[0].toUpperCase()}${t.channel.slice(1)}`;
+  if (run.strategy_name === "sequence" && t.phase) return PHASE_LABELS[t.phase] || t.phase;
+  return null;
+}
+function renderMemory(run, step) {
+  const box = $("#i-box-memory");
+  const memory = run.iterations.slice(0, answeredCount(run, step)).filter((it) => it.answer != null);
+  const groups = [];
+  memory.forEach((it, i) => {
+    const label = memoryGroup(run, it);
+    if (!groups.length || groups.at(-1).label !== label) groups.push({ label, start: i, items: [] });
+    groups.at(-1).items.push(it);
+  });
+  const current = step.it ? memoryGroup(run, step.it) : null;
+  fill(box,
+    h("div", { class: "muted", text: plural(memory.length, "answer") }),
+    memory.length
+      ? groups.map((g) => [
+          g.label ? h("div", { class: `memory-group${g === groups.at(-1) && g.label === current ? " current" : ""}`, text: `${g.label} · ${plural(g.items.length, "question")}` }) : null,
+          h("ol", { class: "memory", start: String(g.start + 1) }, g.items.map((it, j) =>
+            h("li", { class: step.k === "answer" && g.start + j === memory.length - 1 ? "new" : null }, h("div", { class: "q", text: it.question }), h("div", { text: it.answer })))),
+        ])
+      : placeholder("Empty: the strategy starts with no information about the patient."),
+  );
+  const fresh = $(".memory li.new", box);
+  box.scrollTop = fresh ? Math.max(0, fresh.offsetTop - 40) : box.scrollHeight;
+}
+function workingOutput(name, t) {
+  if (!t) return null;
+  if (name === "hypothesis" && t.differential?.length) return [h("h4", { text: "Differential" }), h("ol", { class: "output-list" }, t.differential.map((d) => h("li", null, h("strong", { text: pct(d.probability) }), ` ${d.diagnosis}`)))];
+  if (name === "knowledge" && t.picture) {
+    const p = t.picture;
+    return [
+      p.findings?.length ? [h("h4", { text: "Findings" }), h("ul", { class: "output-list" }, p.findings.map((f) => h("li", { text: f })))] : null,
+      p.patterns?.length ? [h("h4", { text: "Patterns" }), h("ul", { class: "output-list" }, p.patterns.map((x) => h("li", null, h("strong", { text: x.name }), h("div", { class: "muted", text: `Missing: ${(x.missing || []).join("; ") || "nothing"}` }))))] : null,
+      h("p", { class: "muted", text: p.basics_covered ? "Basics covered." : "Basics not yet covered." }),
+    ];
+  }
+  if (name === "channel" && t.channel) {
+    const last = (t.assessments || []).at(-1);
+    return [
+      h("div", { class: "kv" }, h("span", { class: "k", text: "Channel" }), h("strong", { text: t.channel })),
+      last ? h("div", { class: "kv" }, h("span", { class: "k", text: "Current diagnosis" }), h("span", { text: `${last.diagnosis} (confidence ${pct(last.confidence)})` })) : h("p", { class: "muted", text: "No diagnosis rated yet." }),
+    ];
+  }
+  if (name === "sequence" && t.phase) {
+    return [
+      h("div", { class: "kv" }, h("span", { class: "k", text: "Phase" }), h("strong", { text: t.phase })),
+      t.candidates?.length ? [h("h4", { text: "Candidates" }), h("ol", { class: "output-list" }, t.candidates.map((c) => h("li", { text: c })))] : h("p", { class: "muted", text: "No candidates yet." }),
+    ];
+  }
+  return null;
+}
+function renderOutput(run, step) {
+  const box = $("#i-box-output");
+  box.scrollTop = 0;
+  if (step.k === "start") return fill(box, placeholder("Nothing yet."));
+  if (step.k === "end") {
+    const truth = run.case.diagnosis.toLowerCase();
+    const list = run.diagnosis?.differential || [];
+    return fill(box,
+      h("div", { class: "stop-banner" }, `Stopped: ${STOP_LABELS[run.stop_reason] || run.stop_reason}.`),
+      list.length
+        ? [h("h4", { text: "Final diagnosis" }), h("ol", { class: "output-list" }, list.map((d) => h("li", { class: d.name.toLowerCase() === truth ? "truth-hit" : null }, h("strong", { text: pct(d.probability) }), ` ${d.name}`)))]
+        : placeholder("No diagnosis recorded."),
+    );
+  }
+  fill(box,
+    h("div", { class: "muted", text: `When asking question ${step.i + 1}` }),
+    workingOutput(run.strategy_name, step.it.strategy_trace) || placeholder("This strategy keeps no working output; it gives its diagnosis when it stops."),
+  );
+}
+function icsText(run, step) {
+  const total = run.iterations.length;
+  if (step.k === "start") return ["Case loaded", `Case ${run.case_id} is loaded into the environment. The strategy starts with no information about the patient.`];
+  if (step.k === "query") return [`Iteration ${step.i + 1} of ${total} · Query`, `The strategy asks: “${step.it.question}”`];
+  if (step.k === "answer") return [`Iteration ${step.i + 1} of ${total} · Answer`, `${pathLabel(step.it.environment_response)}. The answer is added to the strategy's memory.`];
+  return ["Case run finished", `Stopped after ${plural(total, "iteration")}: ${STOP_LABELS[run.stop_reason] || run.stop_reason}.`];
+}
+
+// Lines between the case study, the literature and the LLM.
+function drawEnvArrows() {
+  const svg = $("#i-env-arrows");
+  if (icsRoot.hidden || getComputedStyle(svg).display === "none") return;
+  const env = $("#i-env").getBoundingClientRect();
+  const robot = $("#i-node-llm .robot").getBoundingClientRect();
+  const llmBox = $("#i-box-llm").getBoundingClientRect();
+  const lines = [];
+  for (const [key, id, offset] of [["case", "#i-node-case", -10], ["lit", "#i-node-lit", 10]]) {
+    const node = $(id).getBoundingClientRect();
+    const icon = $(`${id} .icon`).getBoundingClientRect();
+    const x1 = node.right - env.left + 8;
+    const y1 = icon.top + icon.height / 2 - env.top;
+    let x2 = robot.left - env.left - 4;
+    let y2 = robot.top + robot.height * 0.55 + offset - env.top;
+    const [bx, by, bw, bh] = [llmBox.left - env.left - 8, llmBox.top - env.top - 8, llmBox.width + 16, llmBox.height + 16];
+    for (let t = 0; t <= 1; t += 0.01) {
+      const x = x1 + (x2 - x1) * t, y = y1 + (y2 - y1) * t;
+      if (x >= bx && x <= bx + bw && y >= by && y <= by + bh) { [x2, y2] = [x, y]; break; }
+    }
+    const on = icsArrows[key];
+    const m = on ? "url(#ih-on)" : "url(#ih)";
+    lines.push(`<line class="${on ? "on" : ""}" x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" marker-start="${m}" marker-end="${m}"/>`);
+  }
+  svg.setAttribute("viewBox", `0 0 ${env.width.toFixed(1)} ${env.height.toFixed(1)}`);
+  svg.innerHTML =
+    '<defs><marker id="ih" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path class="head" d="M0,0 L10,5 L0,10 z"/></marker>' +
+    '<marker id="ih-on" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path class="head-on" d="M0,0 L10,5 L0,10 z"/></marker></defs>' +
+    lines.join("");
+}
+
+const ics = makeStepper(icsRoot, renderIcs);
+ics.steps = icsSteps(icsRun);
+const picker = $("#i-strategy");
+fill(picker, I.case_runs.map((r) => h("option", { value: r.strategy, class: `strat-${kind(r)}`, text: r.strategy })));
+picker.addEventListener("change", () => {
+  icsRun = I.case_runs.find((r) => r.strategy === picker.value) || icsRun;
+  ics.steps = icsSteps(icsRun);
+  ics.go(0);
+});
+const icsRun0 = I.case_runs[0];
+fill($("#i-meta"), `Case ${icsRun0.case_id} · ${plural(icsRun0.iterations.length, "question")} per strategy · each strategy starts with no information about the patient`);
+
+// =============================================================================================
+// pages and keys
+// =============================================================================================
+
+const PAGES = { ddx: ddx, ics: ics };
+let page = null;
+
+function show() {
+  const name = location.hash.slice(1);
+  page = name in PAGES ? name : null;
+  $("#home").hidden = page !== null;
+  $("#top").hidden = page === null;
+  $("#ddx").hidden = page !== "ddx";
+  $("#ics").hidden = page !== "ics";
+  $("#nav-ddx").toggleAttribute("aria-current", page === "ddx");
+  $("#nav-ics").toggleAttribute("aria-current", page === "ics");
+  if (page === "ddx") $("#nav-ddx").setAttribute("aria-current", "page");
+  if (page === "ics") $("#nav-ics").setAttribute("aria-current", "page");
+  document.title = page === "ddx" ? "DDx Experiment" : page === "ics" ? "ICS Experiment" : "Diagnosis Experiments";
+  if (page) PAGES[page].go(PAGES[page].i);
+  window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", show);
+
+// Space and → always step forward and ← back, wherever the focus is (the strategy picker or the
+// slider would otherwise take them). The keyup is swallowed too, since a button clicks on keyup.
+const STEP_KEYS = { " ": 1, ArrowRight: 1, ArrowLeft: -1 };
+const stepKey = (e) => page && e.key in STEP_KEYS && !e.metaKey && !e.ctrlKey && !e.altKey;
+document.addEventListener("keydown", (e) => {
+  if (page && (e.key === "Home" || e.key === "End") && !(e.target instanceof Element && e.target.closest("select"))) {
+    e.preventDefault();
+    PAGES[page].go(e.key === "Home" ? 0 : Infinity);
+    return;
+  }
+  if (!stepKey(e)) return;
+  e.preventDefault();
+  e.stopPropagation();
+  PAGES[page].go(PAGES[page].i + STEP_KEYS[e.key]);
+}, true);
+document.addEventListener("keyup", (e) => { if (stepKey(e)) e.preventDefault(); }, true);
+
+let resizeTimer;
+window.addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(drawEnvArrows, 80); });
+
+show();
+</script>
