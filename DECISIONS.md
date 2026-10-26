@@ -417,3 +417,4 @@ in [environment/NOTES.md](environment/NOTES.md).
 | The small red line above the landing title reads "Human Inspired" (shown in capitals by the eyebrow style). | Asked for (2026-10-26). |
 | The second landing tile's heading reads "Information Collection Strategies" (was "Clinician's View"); the ICS tab itself keeps its "Clinician's View" label. | Asked for (2026-10-26). |
 | The landing tiles no longer have the small red line ("DDx experiment", "ICS experiment"); the bold tile heading is red instead (`punch-ink`, the design system's pink as text). | Asked for (2026-10-26). |
+| The landing tile headings are black again (ink), not red. | Asked for (2026-10-26), replacing the previous row. |
