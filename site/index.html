@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Diagnosis Experiments</title>
+<title>Computer-based Diagnosis</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -320,8 +320,8 @@ mark { background: var(--gold-tint); color: inherit; border-radius: 3px; padding
 <section class="home" id="home" hidden>
   <div class="home-inner">
     <div>
-      <div class="eyebrow">Computer-based diagnosis</div>
-      <h1>Information Collection Strategies</h1>
+      <div class="eyebrow">Information collection strategies</div>
+      <h1>Computer-based Diagnosis</h1>
       <p class="lede">Two experiments on how a diagnostic system gathers what it needs to know about a patient. Each one walks through a real run, step by step.</p>
     </div>
     <div class="tiles">
@@ -1060,7 +1060,7 @@ function show() {
   $("#nav-ics").toggleAttribute("aria-current", page === "ics");
   if (page === "ddx") $("#nav-ddx").setAttribute("aria-current", "page");
   if (page === "ics") $("#nav-ics").setAttribute("aria-current", "page");
-  document.title = page === "ddx" ? "DDx Experiment" : page === "ics" ? "ICS Experiment" : "Diagnosis Experiments";
+  document.title = page === "ddx" ? "DDx Experiment" : page === "ics" ? "ICS Experiment" : "Computer-based Diagnosis";
   if (page) PAGES[page].go(PAGES[page].i);
   window.scrollTo(0, 0);
 }

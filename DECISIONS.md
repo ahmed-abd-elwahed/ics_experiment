@@ -407,3 +407,9 @@ in [environment/NOTES.md](environment/NOTES.md).
 | The DDx environment's "Do not ask questions about X." replies are shown as "Not in the case: X." | That reply is how DDx-Experiment's retriever says the case does not contain X (`utils.retrieve_case_info`). |
 | ICS tab: the Clinician's View for the four strategies' runs of the same case in `records/strategies_272_8it.json` (8 questions each), with the strategy picker above Memory. Removed: the record and case-run pickers, previous/next case, record summary, costs, LLM-call tables and literature excerpts. | Asked for: simplify the site and remove unnecessary elements. 8 iterations matches the DDx run's 8 rounds. |
 | Both tabs keep the stepper (◀ ▶, slider, step caption); Space and → step forward and ← back wherever the focus is, Home and End jump to the first and last step. | Asked for: the space and left/right arrow controls. |
+
+### Landing page title (2026-10-26)
+
+| Decision | Why |
+|---|---|
+| The landing page title is "Computer-based Diagnosis" (also the browser tab title); the small line above it now reads "Information collection strategies", the title it replaced. | Asked for. The old small line would have repeated the new title. |
