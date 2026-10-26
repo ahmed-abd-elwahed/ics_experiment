@@ -415,3 +415,4 @@ in [environment/NOTES.md](environment/NOTES.md).
 | The landing page title is "Computer-based Diagnosis" (also the browser tab title); the small line above it now reads "Information collection strategies", the title it replaced. | Asked for. The old small line would have repeated the new title. |
 
 | The small red line above the landing title reads "Human Inspired" (shown in capitals by the eyebrow style). | Asked for (2026-10-26). |
+| The second landing tile's heading reads "Information Collection Strategies" (was "Clinician's View"); the ICS tab itself keeps its "Clinician's View" label. | Asked for (2026-10-26). |
