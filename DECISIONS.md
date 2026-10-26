@@ -457,3 +457,13 @@ in [environment/NOTES.md](environment/NOTES.md).
 | A reply without a readable score (an integer 0–60) is retried at most three times, then recorded as failed; the notebook retried without limit. | No endless loop on a model that never answers in format. None was needed: 272 of 272 scored on the first try. |
 | All 272 cases were scored again, including the 180 shared with version 1. | Scores must come from one model. On those 180, Gemini 4 correlates 0.92 with DDx's Gemini 3.1 Pro scores but is higher (mean 19.9 vs 16.4; mean absolute difference 4.4). |
 | Run on 16 parallel workers; cost $2.96 (estimate $5–9, approved). Mean score 19.32 (range 0–51); 102 cases are high complexity (21 or more). | Gemini 4 used no reasoning tokens, so replies were cheaper than estimated. |
+
+### Accuracy by INTERMED complexity bucket (2026-10-26)
+
+| Decision | Why |
+|---|---|
+| `records/strategies_272_v2_rep1_4it.json` (dataset v2, 4 questions, repetition 1) was evaluated into its `.eval.json` with the usual `python -m evaluation`. | It had no evaluation; the figures need each case run's rank. ICD lookups only, no LLM calls. |
+| `evaluation/plot_complexity.py` draws one bar group per complexity bucket and one bar per strategy, y = top-1 accuracy, with 95% Wilson intervals as whiskers. Written next to it: `.svg`, `.html` (with a table of every value), `.pdf`, `.png` and `.json`, like `plot_topk`. | Asked for: "a bar plot of the groups in the x-axis. Each group has four bars for each ICS." Top-1 because it is the system's diagnosis; `--k` gives any other top k. The buckets hold 48–74 cases, so the intervals show which gaps the run can support. |
+| Hits come from each case run's stored `rank` (the evaluation's own rule), and the per-bucket counts add up to the evaluation's overall top-1 for every strategy. | One definition of a hit across the report and the figures. |
+| Five buckets: 0–11, 12–15, 16–20, 21–26, 27–60 (54, 54, 62, 48, 54 cases). Four buckets: 0–11, 12–17, 18–23, 24–60 (54, 74, 73, 71). | The two configurations suggested earlier: the five keep INTERMED's 21 cut-off with near-equal sizes; the four are the most even. Scores are `cases/combined_272_whole_chunking_v2_intermed.json` (Gemini 4). |
+| Colours are the dataviz reference palette's first four categorical slots (blue, orange, aqua, yellow) in strategy order, not the site's strategy colours. | The site's channel-based clay failed the palette check (chroma 0.089, reads as gray; CVD ΔE 6.1 next to the green). The four slots pass; aqua and yellow are under 3:1 on the surface, so the HTML and PDF carry the value table. |
