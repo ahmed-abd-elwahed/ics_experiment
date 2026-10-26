@@ -1,0 +1,43 @@
+{
+  "name": "strategies_272_v2_rep1",
+  "cases_file": "cases/combined_272_whole_chunking_v2.json",
+  "case_ids": null,
+  "max_cases": null,
+  "environment": {
+    "default_model": "openai/gpt-6-luna",
+    "cache_enabled": true,
+    "seed": 7
+  },
+  "strategies": [
+    {
+      "name": "hypothesis",
+      "params": {
+        "model": "anthropic/claude-haiku-5.5"
+      }
+    },
+    {
+      "name": "knowledge",
+      "params": {
+        "model": "anthropic/claude-haiku-5.5"
+      }
+    },
+    {
+      "name": "channel",
+      "params": {
+        "model": "anthropic/claude-haiku-5.5"
+      }
+    },
+    {
+      "name": "sequence",
+      "params": {
+        "model": "anthropic/claude-haiku-5.5"
+      }
+    }
+  ],
+  "stopping": {
+    "max_iterations": 4,
+    "max_seconds": null
+  },
+  "workers": 64,
+  "output": "records/{name}_{timestamp}.json"
+}
