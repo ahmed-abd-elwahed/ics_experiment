@@ -100,8 +100,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 }
 .nav a[aria-current="page"] { background: var(--punch); }
 .nav a:hover:not([aria-current="page"]) { background: var(--tan); }
-/* The ICS experiment page takes a green accent: its eyebrow, the active tab and the highlighted path. */
+/* The ICS experiment page takes a green accent and a greenish paper: its eyebrow, the active tab, the highlighted path and the ground. */
 html[data-page="ics"] .nav a[aria-current="page"] { background: var(--ics-fill); }
+html[data-page="ics"] { --paper: #e3ece2; --grain: #cddacc; --tan: #d9e6d7; }
 #ics { --active: var(--ics); --active-tint: var(--ics-tint); }
 #ics .eyebrow { color: var(--ics); }
 
