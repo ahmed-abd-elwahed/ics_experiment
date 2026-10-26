@@ -426,3 +426,14 @@ in [environment/NOTES.md](environment/NOTES.md).
 | The ICS experiment page has a green accent (`#1b7f5b`, the design system's slot-c green): its small top line, the highlighted path through the diagram (active boxes, arrows, Query and Answer, Memory and Output) and a light green fill on its tab in the top bar. The DDx page keeps blue and the pink tab. | Asked for (2026-10-26). The ICS page's dashed environment was already green, so the same green ties the accent to it. |
 | The ICS page's paper is greenish too (`#e3ece2`, grain `#cddacc`, tan fills `#d9e6d7`); the boxes stay the warm off-white. The DDx page and the landing page keep the warm paper. | Asked for (2026-10-26). |
 | The ICS page's boxes are light green too (`surface` `#f0f7ee` there; the Memory and Output boxes keep their strategy tints). | Asked for (2026-10-26). |
+
+### Case dataset version 2 (2026-10-26)
+
+| Decision | Why |
+|---|---|
+| `cases/combined_272_whole_chunking_v2.json` is version 2 of the 272-case dataset, next to version 1, which is unchanged. Its 272 cases come from 272 different case reports. 180 rows are identical to version 1; the other 92 replace rows that repeated a case already in the set (version 1 has 180 distinct cases; its repeats carry `-2`, `-3`… ids). | Version 1 was balanced with `sample(n=16, replace=True)` in `DDx-Experiment/data/process_datasets.ipynb`, so some cases were drawn up to six times. The name says only "v2", as asked. |
+| Each replacement is an unused case of the same medical field that had already been through DDx-Experiment's case-information and diagnosis extraction, so every field still has 16 MultiCaRe cases; the 16 B/S cases are unchanged. Made by `DDx-Experiment/dedupe_272_dataset.py` (untracked there), then converted to this project's format the way version 1 was (chunks joined, diagnosis trimmed). | Keeps the per-field balance and the same extraction prompt and model as the rest of the set. |
+| Version 2 is only in this project; its DDx-Experiment copies were moved to the Trash. | Asked for: "only make v2 available in the ICS experiment". |
+| The script also generated the replacements' background-and-presentation summaries on `google/gemini-4-argon`, synchronously (balance fell $0.08). They are not part of version 2 here, which uses the full case text. | Asked for Gemini 4 Batch; a one-request test batch was refused (HTTP 422, the account's Zero Data Retention setting), and the approved fallback was the synchronous endpoint. DDx-Experiment's own OpenRouter key returned 401 "User not found", so this project's key was passed in from the shell. |
+| Existing runs, bench items and reports stay on version 1. | Rerunning them on version 2 is a paid run and was not asked for. |
+| `test_bundled_dataset_loads` now checks both versions. | Version 2 must load under the same rules (unique ids, three fields). |

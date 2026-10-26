@@ -87,8 +87,11 @@ def test_duplicate_case_ids_are_rejected(tmp_path: Path) -> None:
         select_cases(make_config(cases_file))
 
 
-def test_bundled_dataset_loads() -> None:
-    path = Path(__file__).resolve().parents[2] / "cases" / "combined_272_whole_chunking.json"
+@pytest.mark.parametrize(
+    "name", ["combined_272_whole_chunking.json", "combined_272_whole_chunking_v2.json"]
+)
+def test_bundled_dataset_loads(name: str) -> None:
+    path = Path(__file__).resolve().parents[2] / "cases" / name
     records = json.loads(path.read_text(encoding="utf-8"))
     assert all(set(r) == {"case_id", "case_information", "diagnosis"} for r in records)
     assert len(select_cases(make_config(path))) == len(records) == 272
