@@ -425,3 +425,4 @@ in [environment/NOTES.md](environment/NOTES.md).
 |---|---|
 | The ICS experiment page has a green accent (`#1b7f5b`, the design system's slot-c green): its small top line, the highlighted path through the diagram (active boxes, arrows, Query and Answer, Memory and Output) and a light green fill on its tab in the top bar. The DDx page keeps blue and the pink tab. | Asked for (2026-10-26). The ICS page's dashed environment was already green, so the same green ties the accent to it. |
 | The ICS page's paper is greenish too (`#e3ece2`, grain `#cddacc`, tan fills `#d9e6d7`); the boxes stay the warm off-white. The DDx page and the landing page keep the warm paper. | Asked for (2026-10-26). |
+| The ICS page's boxes are light green too (`surface` `#f0f7ee` there; the Memory and Output boxes keep their strategy tints). | Asked for (2026-10-26). |
