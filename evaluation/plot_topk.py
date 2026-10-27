@@ -8,6 +8,11 @@ x = k, y = top@k in %. With several comma-separated evaluations (repeated runs) 
 the line is their mean and a band of the same colour shows ±1 sample standard deviation.
 Writes OUT_STEM.svg, OUT_STEM.html (with the values as a table) and OUT_STEM.pdf and
 OUT_STEM.png (printed from the HTML by headless Google Chrome). No API calls.
+
+    .venv/bin/python -m evaluation.plot_topk --split OUT_STEM "4 iterations=..." ...
+
+writes one vector plot per strategy instead: OUT_STEM_<strategy>.svg and a .pdf of the same
+size, all on the same y axis.
 """
 
 from __future__ import annotations
@@ -15,6 +20,7 @@ from __future__ import annotations
 import html
 import json
 import math
+import re
 import statistics
 import subprocess
 import sys
@@ -114,14 +120,24 @@ def panel(x0: float, y0: float, w: float, h: float, title: str,
     return "".join(out)
 
 
-def figure(runs: list[Run]) -> str:
-    strategies = [s for s in TITLES if all(s in e["by_strategy"] for _, es in runs for e in es)]
+def available(runs: list[Run]) -> list[str]:
+    return [s for s in TITLES if all(s in e["by_strategy"] for _, es in runs for e in es)]
+
+
+def figure(runs: list[Run], only: str | None = None) -> str:
+    """All strategies in a 2-column grid, or with ``only`` that strategy's panel alone (legend
+    stacked above it). The y axis is the same either way, so split panels stay comparable."""
+    strategies = available(runs)
     top = max(v + d for _, es in runs for s in strategies
               for v, d in zip(values(es, s), spread(es, s), strict=True))  # fmt: skip
     y_max = max(10.0, math.ceil(top / 10) * 10)
-    w, h, cols = 500, 300, 2
+    if only is not None:
+        strategies = [only]
+    w, h = 500, 300
+    cols = min(2, len(strategies))
     rows = math.ceil(len(strategies) / cols)
-    legend_h = 36
+    stacked = only is not None
+    legend_h = 12 + 18 * len(runs) if stacked else 36
     width, height = cols * w, rows * h + legend_h
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" '
              f'width="{width}" height="{height}" font-family="-apple-system, Helvetica Neue, '
@@ -130,13 +146,15 @@ def figure(runs: list[Run]) -> str:
              f'<rect width="{width}" height="{height}" fill="{SURFACE}"/>']  # fmt: skip
     lx = 46.0
     repeated = any(len(es) > 1 for _, es in runs)
-    for (name, es), colour in zip(runs, RAMP, strict=False):  # legend, in budget order
+    for row, ((name, es), colour) in enumerate(zip(runs, RAMP, strict=False)):  # legend
         label = f"{name} (mean of {len(es)} runs ± SD)" if repeated else name
-        parts.append(f'<line x1="{lx}" x2="{lx + 22}" y1="18" y2="18" stroke="{colour}" '
-                     f'stroke-width="2"/><circle cx="{lx + 11}" cy="18" r="4" fill="{colour}" '
-                     f'stroke="{SURFACE}" stroke-width="2"/><text x="{lx + 30}" y="22" '
+        ly = 18 + 18 * row if stacked else 18
+        parts.append(f'<line x1="{lx}" x2="{lx + 22}" y1="{ly}" y2="{ly}" stroke="{colour}" '
+                     f'stroke-width="2"/><circle cx="{lx + 11}" cy="{ly}" r="4" fill="{colour}" '
+                     f'stroke="{SURFACE}" stroke-width="2"/><text x="{lx + 30}" y="{ly + 4}" '
                      f'font-size="12" fill="{INK}">{html.escape(label)}</text>')  # fmt: skip
-        lx += 30 + 8 * len(label) + 28
+        if not stacked:
+            lx += 30 + 8 * len(label) + 28
     for i, strategy in enumerate(strategies):
         series = [(label, values(es, strategy), spread(es, strategy), colour)
                   for (label, es), colour in zip(runs, RAMP, strict=False)]  # fmt: skip
@@ -174,12 +192,43 @@ def repeats_note(runs: list[Run]) -> str:
     )
 
 
+def write_vector(svg: str, stem: Path) -> None:
+    """``stem.svg`` and a ``stem.pdf`` of exactly the figure's size (vector, printed by
+    headless Chrome from a one-page HTML wrapper that is deleted afterwards)."""
+    stem.with_suffix(".svg").write_text(svg, encoding="utf-8")
+    width, height = re.search(r'width="(\d+)" height="(\d+)"', svg).groups()  # type: ignore[union-attr]
+    page = stem.with_name(stem.name + ".print.html")
+    page.write_text(
+        f'<!doctype html><html><head><meta charset="utf-8"><style>@page {{ size: {width}px '
+        f"{height}px; margin: 0; }} html, body {{ margin: 0; }} svg {{ display: block; }}"
+        f"</style></head><body>{svg}</body></html>",
+        encoding="utf-8",
+    )
+    try:
+        subprocess.run(
+            [CHROME, "--headless=new", "--disable-gpu", "--no-pdf-header-footer",
+             f"--print-to-pdf={stem.with_suffix('.pdf')}", page.resolve().as_uri()],
+            check=True, capture_output=True, timeout=120,
+        )  # fmt: skip
+    finally:
+        page.unlink(missing_ok=True)
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     args = list(sys.argv[1:] if argv is None else argv)
+    split = bool(args) and args[0] == "--split"
+    if split:
+        args = args[1:]
     if len(args) < 2:
         print(__doc__, file=sys.stderr)
         return 2
     stem, runs = Path(args[0]), [load(spec) for spec in args[1:]]
+    if split:
+        for strategy in available(runs):
+            write_vector(figure(runs, only=strategy), stem.with_name(f"{stem.name}_{strategy}"))
+        print(f"Wrote {stem}_<strategy>.svg/.pdf for {', '.join(available(runs))}",
+              file=sys.stderr)  # fmt: skip
+        return 0
     svg = figure(runs)
     stem.with_suffix(".svg").write_text(svg, encoding="utf-8")
     page = stem.with_suffix(".html")
