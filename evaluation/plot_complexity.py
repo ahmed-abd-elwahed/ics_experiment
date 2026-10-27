@@ -94,13 +94,14 @@ def bar_path(x0: float, w: float, top_y: float, base: float) -> str:
 
 
 def figure(labels: list[str], runs: list[tuple[str, dict[str, list[dict[str, float]]]]],
-           sizes: list[int], k: int) -> str:  # fmt: skip
+           sizes: list[int], k: int, intervals: bool = True) -> str:  # fmt: skip
     strategies = list(runs[0][1])
     single = len(runs) == 1
+    whiskers = single and intervals
     width, height = 1000, 520
     left, right, top, bottom = 56, 20, 64, 64
     pw, ph = width - left - right, height - top - bottom
-    peak = max(c["hi" if single else "pct"] for _, t in runs for v in t.values() for c in v)
+    peak = max(c["hi" if whiskers else "pct"] for _, t in runs for v in t.values() for c in v)
     y_max = max(10.0, math.ceil(peak / 10) * 10)
     group_w = pw / len(labels)
     bar_w = min(36.0, (group_w * 0.72 - 2 * (len(strategies) - 1)) / len(strategies))
@@ -178,7 +179,7 @@ def figure(labels: list[str], runs: list[tuple[str, dict[str, list[dict[str, flo
                              f'<line x1="{x0 - 3:.1f}" x2="{x0 + bar_w + 3:.1f}" y1="{ty:.1f}" '
                              f'y2="{ty:.1f}" stroke="{LATER_COLOURS[j - 1]}" stroke-width="3" '
                              f'stroke-linecap="round"/>')  # fmt: skip
-            if single:
+            if whiskers:
                 c, cx = cells[0][2], x0 + bar_w / 2
                 parts.append(f'<line x1="{cx:.1f}" x2="{cx:.1f}" y1="{y(c["lo"]):.1f}" '
                              f'y2="{y(c["hi"]):.1f}" stroke="{INK}" stroke-width="1.2" '
@@ -229,6 +230,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     parser.add_argument("--k", type=int, default=1, help="top-k accuracy (default 1)")
     parser.add_argument("--title", default="")
+    parser.add_argument(
+        "--no-intervals",
+        action="store_true",
+        help="leave the 95%% interval whiskers off (they stay in the table)",
+    )
     args = parser.parse_args(argv)
 
     if len(args.run) > 3:
@@ -242,7 +248,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         evaluation = json.loads(path.read_text(encoding="utf-8"))
         labels, table, sizes = tabulate(evaluation, scores, cuts, args.k)
         runs.append((label, table))
-    svg = figure(labels, runs, sizes, args.k)
+    svg = figure(labels, runs, sizes, args.k, intervals=not args.no_intervals)
     stem = args.stem
     stem.parent.mkdir(parents=True, exist_ok=True)
     stem.with_suffix(".svg").write_text(svg, encoding="utf-8")
@@ -267,7 +273,8 @@ td {{ font-variant-numeric: tabular-nums; }}</style></head><body>
 <h1>{html.escape(title)}</h1>
 <p>{html.escape(", ".join(f"{label}: {path.name}" for label, path in specs))}. Top {args.k}: the
 true diagnosis's ICD-11 code is among the strategy's first {args.k} diagnoses (exact code
-match). Brackets{" and whiskers" if len(runs) == 1 else ""}: 95% Wilson interval.</p>
+match). Brackets{" and whiskers" if len(runs) == 1 and not args.no_intervals else ""}: 95% Wilson
+interval.</p>
 {svg}{table_html(labels, runs, sizes)}</body></html>""",
         encoding="utf-8",
     )
