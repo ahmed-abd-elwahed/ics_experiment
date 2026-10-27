@@ -89,33 +89,37 @@
   @media (prefers-reduced-motion: reduce) { .show-btn, .toast { transition: none; } }
 
 
-  /* Cover: a doctor walking along the top of the title box */
+  /* Cover: a doctor walking along the top of the title box; the script below moves it */
   .doc-walker {
     position: absolute; left: 0; bottom: 100%; width: 100px; height: 152px;
-    margin-bottom: -1px; pointer-events: none;
-    animation: doc-walk 16s linear infinite;
+    margin-bottom: -1px; pointer-events: none; transform: translateX(40px);
   }
   .doc-face { display: block; overflow: visible; transform-origin: 50% 50%; }
+  .doc-walker.facing-left .doc-face { scale: -1 1; }
   .doc-walker .doc-leg, .doc-walker .doc-arm { transform-box: view-box; }
   .doc-walker .doc-leg { transform-origin: 50px 100px; }
   .doc-walker .doc-arm { transform-origin: 50px 46px; }
+  .doc-walker .doc-face { animation: doc-bob 0.4s ease-in-out infinite alternate; }
   .doc-leg-front, .doc-arm-back { animation: doc-swing 0.8s ease-in-out infinite alternate; }
   .doc-leg-back, .doc-arm-front { animation: doc-swing 0.8s ease-in-out infinite alternate-reverse; }
-  .doc-walker svg { animation-name: doc-turn, doc-bob; animation-duration: 16s, 0.4s; animation-timing-function: step-end, ease-in-out;
-    animation-iteration-count: infinite, infinite; animation-direction: normal, alternate; }
-  @keyframes doc-walk {
-    0%   { transform: translateX(40px); }
-    48%  { transform: translateX(1356px); }
-    50%  { transform: translateX(1356px); }
-    98%  { transform: translateX(40px); }
-    100% { transform: translateX(40px); }
-  }
-  @keyframes doc-turn { 0% { scale: 1 1; } 49% { scale: -1 1; } 99% { scale: 1 1; } }
+  .doc-scope-exam { opacity: 0; transition: opacity 0.25s; }
+  .doc-scope-rest { transition: opacity 0.25s; }
+  /* Listening: stand still, earpieces in, chest piece on the box, a heart beating */
+  .doc-walker.examining .doc-face,
+  .doc-walker.examining .doc-leg,
+  .doc-walker.examining .doc-arm { animation: none; }
+  .doc-walker.examining .doc-arm-front { opacity: 0; }
+  .doc-walker.examining .doc-leg-front { rotate: 9deg; }
+  .doc-walker.examining .doc-leg-back { rotate: -9deg; }
+  .doc-walker.examining .doc-scope-rest { opacity: 0; }
+  .doc-walker.examining .doc-scope-exam { opacity: 1; }
+  .doc-heart { transform-box: fill-box; transform-origin: 50% 60%; }
+  .doc-walker.examining .doc-heart { animation: doc-beat 0.75s ease-in-out infinite; }
   @keyframes doc-bob { from { translate: 0 0; } to { translate: 0 -3px; } }
   @keyframes doc-swing { from { rotate: -22deg; } to { rotate: 22deg; } }
+  @keyframes doc-beat { 0%, 60%, 100% { scale: 0.85; } 15% { scale: 1.2; } 35% { scale: 1.05; } }
   @media (prefers-reduced-motion: reduce) {
-    .doc-walker, .doc-walker * { animation: none !important; }
-    .doc-walker { transform: translateX(1356px); }
+    .doc-walker, .doc-walker * { animation: none !important; transition: none !important; }
   }
   .thumb-slide .doc-walker, .thumb-slide .doc-walker * { animation-play-state: paused; }
 
@@ -182,14 +186,25 @@
         <path d="M37 42 Q50 36 63 42 L68 104 L32 104 Z" fill="#FCFCFB" stroke="#141413" stroke-width="4" stroke-linejoin="round"/>
         <line x1="50" y1="42" x2="50" y2="104" stroke="#141413" stroke-width="2.5"/>
         <rect x="55" y="72" width="9" height="7" rx="1.5" fill="none" stroke="#141413" stroke-width="2"/>
-        <path d="M44 41 Q43 60 50 64 Q57 60 56 41" fill="none" stroke="#0E7C8C" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="50" cy="66" r="4" fill="#0E7C8C" stroke="#141413" stroke-width="1.5"/>
+        <g class="doc-scope-rest">
+          <path d="M44 41 Q43 60 50 64 Q57 60 56 41" fill="none" stroke="#0E7C8C" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="50" cy="66" r="4" fill="#0E7C8C" stroke="#141413" stroke-width="1.5"/>
+        </g>
         <g class="doc-leg doc-leg-front" stroke="#141413" stroke-width="4" stroke-linecap="round"><line x1="50" y1="100" x2="50" y2="148"/><line x1="50" y1="148" x2="58" y2="148"/></g>
         <g class="doc-arm doc-arm-front" stroke="#141413" stroke-width="4" stroke-linecap="round"><line x1="50" y1="46" x2="50" y2="84"/></g>
         <circle cx="50" cy="22" r="14" fill="#FCFCFB" stroke="#141413" stroke-width="4"/>
         <path d="M37 17 Q50 8 63 17" fill="none" stroke="#141413" stroke-width="3"/>
         <circle cx="61" cy="13" r="5" fill="#DDDCD6" stroke="#141413" stroke-width="2"/>
         <circle cx="57" cy="23" r="1.8" fill="#141413"/>
+        <g class="doc-scope-exam">
+          <path d="M37 27 Q40 46 50 52 M63 27 Q60 46 50 52" fill="none" stroke="#0E7C8C" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="37" cy="26" r="2.5" fill="#141413"/>
+          <circle cx="63" cy="26" r="2.5" fill="#141413"/>
+          <path d="M50 52 Q60 62 70 80 Q81 108 86 141" fill="none" stroke="#0E7C8C" stroke-width="3" stroke-linecap="round"/>
+          <line x1="50" y1="46" x2="70" y2="80" stroke="#141413" stroke-width="4" stroke-linecap="round"/>
+          <ellipse cx="86" cy="145" rx="6" ry="3.5" fill="#0E7C8C" stroke="#141413" stroke-width="1.5"/>
+          <path class="doc-heart" d="M105 112 C105 108 100 106 98 110 C96 106 91 108 91 112 C91 116 98 120 98 122 C98 120 105 116 105 112 Z" fill="#D97757" stroke="#141413" stroke-width="1.5" stroke-linejoin="round"/>
+        </g>
       </svg>
     </div>
     <h1 style="width:1400px; font-family:Newsreader, Georgia, serif; font-size:96px; font-weight:500; line-height:1.08; text-align:center; color:#141413">Information Collection Strategies Experiment</h1>
@@ -559,6 +574,46 @@
   strip.addEventListener('wheel', (e) => {
     if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) { strip.scrollLeft += e.deltaY; e.preventDefault(); }
   }, { passive: false });
+
+  // Cover doctor: walks the box, stops once per crossing at a random spot,
+  // listens with the stethoscope for 3 s, then walks on.
+  (function doctor() {
+    const w = document.querySelector('.reveal .doc-walker');
+    if (!w) return;
+    const MIN = 40, MAX = 1356;          // slide px along the box top
+    const SPEED = 170;                    // px per second
+    const LISTEN = 3000, TURN = 400;      // ms
+    let x = MIN, dir = 1, stopAt, pauseUntil = 0, last = 0;
+    const place = () => { w.style.transform = 'translateX(' + x.toFixed(1) + 'px)'; };
+    const pickStop = () => {
+      const a = MIN + 0.15 * (MAX - MIN), b = MIN + 0.85 * (MAX - MIN);
+      stopAt = a + Math.random() * (b - a);
+    };
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      x = MIN + 0.5 * (MAX - MIN); place(); w.classList.add('examining'); return;
+    }
+    pickStop();
+    function frame(t) {
+      const dt = Math.min(t - (last || t), 100) / 1000;
+      last = t;
+      if (t < pauseUntil) { requestAnimationFrame(frame); return; }
+      if (w.classList.contains('examining')) { w.classList.remove('examining'); stopAt = null; }
+      const nx = x + dir * SPEED * dt;
+      if (stopAt != null && (dir > 0 ? nx >= stopAt : nx <= stopAt)) {
+        x = stopAt; place();
+        w.classList.add('examining');
+        pauseUntil = t + LISTEN;
+      } else if (nx >= MAX || nx <= MIN) {
+        x = nx >= MAX ? MAX : MIN; place();
+        dir = -dir;
+        w.classList.toggle('facing-left', dir < 0);
+        pickStop();
+        pauseUntil = t + TURN;
+      } else { x = nx; place(); }
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  })();
 
   // Click anywhere on a slide = next, as in PowerPoint (links and controls still work).
   document.querySelector('.reveal').addEventListener('click', (e) => {
