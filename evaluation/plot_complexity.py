@@ -64,8 +64,14 @@ def hit(run: dict[str, Any], k: int) -> bool:
     return rank is not None and rank <= k
 
 
-def tabulate(evaluation: dict[str, Any], scores: dict[str, int], cuts: list[int],
-             k: int) -> tuple[list[str], dict[str, list[dict[str, float]]], list[int]]:  # fmt: skip
+SCORE_METRICS = {"mrr": "MRR", "ndcg@10": "nDCG@10"}
+
+
+def tabulate(evaluation: dict[str, Any], scores: dict[str, int], cuts: list[int], k: int,
+             metric: str | None = None,
+             ) -> tuple[list[str], dict[str, list[dict[str, float]]], list[int]]:  # fmt: skip
+    """Per strategy and bucket: top-k accuracy, or with `metric` ("mrr", "ndcg@10") the mean of
+    the evaluation's per-case score. `pct` is always on a 0-100 scale (a score times 100)."""
     labels = bucket_labels(cuts)
     strategies = [s for s in TITLES if s in evaluation["by_strategy"]]
     counts = {s: [[0, 0] for _ in labels] for s in strategies}
@@ -73,10 +79,14 @@ def tabulate(evaluation: dict[str, Any], scores: dict[str, int], cuts: list[int]
         if run["strategy"] not in counts:
             continue
         b = sum(scores[run["case_id"]] >= c for c in cuts)
-        counts[run["strategy"]][b][0] += hit(run, k)
+        counts[run["strategy"]][b][0] += run["scores"][metric] if metric else hit(run, k)
         counts[run["strategy"]][b][1] += 1
     cases = [sum(scores[c] >= lo for lo in cuts) for c in scores]
     sizes = [cases.count(i) for i in range(len(labels))]
+    if metric:
+        table = {s: [{"sum": h, "n": n, "pct": 100 * h / n if n else 0.0, "value": h / n if n
+                      else 0.0} for h, n in counts[s]] for s in strategies}  # fmt: skip
+        return labels, table, sizes
     table = {
         s: [{"hits": h, "n": n, "pct": 100 * h / n if n else 0.0,
              "lo": 100 * wilson(h, n)[0], "hi": 100 * wilson(h, n)[1]} for h, n in counts[s]]
@@ -94,10 +104,21 @@ def bar_path(x0: float, w: float, top_y: float, base: float) -> str:
 
 
 def figure(labels: list[str], runs: list[tuple[str, dict[str, list[dict[str, float]]]]],
-           sizes: list[int], k: int, intervals: bool = True) -> str:  # fmt: skip
+           sizes: list[int], k: int, intervals: bool = True,
+           metric: str | None = None) -> str:  # fmt: skip
     strategies = list(runs[0][1])
     single = len(runs) == 1
-    whiskers = single and intervals
+    whiskers = single and intervals and not metric
+    y_name = SCORE_METRICS[metric] if metric else f"Top-{k} accuracy"
+
+    def y_tick(t: int) -> str:
+        return f"{t / 100:.1f}" if metric else f"{t}%"
+
+    def shown(c: dict[str, float]) -> str:
+        if metric:
+            return f"{c['value']:.3f}"
+        return f"{c['pct']:.1f}% ({c['hits']}/{c['n']})"
+
     width, height = 1000, 520
     left, right, top, bottom = 56, 20, 64, 64
     pw, ph = width - left - right, height - top - bottom
@@ -115,7 +136,7 @@ def figure(labels: list[str], runs: list[tuple[str, dict[str, list[dict[str, flo
 
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" '
            f'width="{width}" height="{height}" font-family="-apple-system, Helvetica Neue, '
-           f'Arial, sans-serif" role="img" aria-label="Top-{k} accuracy of each strategy by '
+           f'Arial, sans-serif" role="img" aria-label="{y_name} of each strategy by '
            f'INTERMED complexity bucket">',
            f'<rect width="{width}" height="{height}" fill="{SURFACE}"/>']  # fmt: skip
     legend = [(COLOURS[s], TITLES[s]) for s in strategies]
@@ -140,9 +161,9 @@ def figure(labels: list[str], runs: list[tuple[str, dict[str, list[dict[str, flo
         out.append(f'<line x1="{left}" x2="{left + pw}" y1="{y(tick):.1f}" y2="{y(tick):.1f}" '
                    f'stroke="{GRID}" stroke-width="1"/><text x="{left - 6}" '
                    f'y="{y(tick) + 4:.1f}" font-size="11" text-anchor="end" '
-                   f'fill="{MUTED}">{tick}%</text>')  # fmt: skip
+                   f'fill="{MUTED}">{y_tick(tick)}</text>')  # fmt: skip
     out.append(f'<text transform="translate(14 {top + ph / 2}) rotate(-90)" font-size="11" '
-               f'text-anchor="middle" fill="{MUTED}">Top-{k} accuracy</text>')  # fmt: skip
+               f'text-anchor="middle" fill="{MUTED}">{y_name}</text>')  # fmt: skip
     base = y(0)
     for g, label in enumerate(labels):
         gx = left + g * group_w + (group_w - span) / 2
@@ -155,7 +176,7 @@ def figure(labels: list[str], runs: list[tuple[str, dict[str, list[dict[str, flo
             x0 = gx + i * (bar_w + 2)
             cells = [(j, rl, t[s][g]) for j, (rl, t) in enumerate(runs)]
             tip = f"{TITLES[s]}, score {label}: " + "; ".join(
-                f"{rl} {c['pct']:.1f}% ({c['hits']}/{c['n']})" for _, rl, c in cells
+                f"{rl} {shown(c)}" for _, rl, c in cells
             )
             parts = [f"<g><title>{html.escape(tip)}</title>"]
             # Later runs behind, tallest at the back; the first run always in front.
@@ -198,14 +219,17 @@ def figure(labels: list[str], runs: list[tuple[str, dict[str, list[dict[str, flo
 
 
 def table_html(labels: list[str], runs: list[tuple[str, dict[str, list[dict[str, float]]]]],
-               sizes: list[int]) -> str:  # fmt: skip
+               sizes: list[int], metric: str | None = None) -> str:  # fmt: skip
+    def cell(c: dict[str, float]) -> str:
+        if metric:
+            return f"<td>{c['value']:.3f}</td>"
+        return f"<td>{c['pct']:.1f}% <span>({c['lo']:.0f}–{c['hi']:.0f})</span></td>"
+
     head = "".join(f"<th>{lbl}<br><span>{n} cases</span></th>"
                    for lbl, n in zip(labels, sizes, strict=True))  # fmt: skip
     body = "".join(
         f"<tr><td>{html.escape(TITLES[s])}</td><td>{html.escape(rl)}</td>"
-        + "".join(
-            f"<td>{c['pct']:.1f}% <span>({c['lo']:.0f}–{c['hi']:.0f})</span></td>" for c in table[s]
-        )
+        + "".join(cell(c) for c in table[s])
         + "</tr>"
         for s in runs[0][1]
         for rl, table in runs
@@ -229,6 +253,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         help="an evaluation, repeated in budget order (at most three)",
     )
     parser.add_argument("--k", type=int, default=1, help="top-k accuracy (default 1)")
+    parser.add_argument(
+        "--metric",
+        choices=list(SCORE_METRICS),
+        help="plot this per-case score (mean per bucket) instead of top-k",
+    )
     parser.add_argument("--title", default="")
     parser.add_argument(
         "--no-intervals",
@@ -246,19 +275,36 @@ def main(argv: Sequence[str] | None = None) -> int:
     runs, labels, sizes = [], [], []
     for label, path in specs:
         evaluation = json.loads(path.read_text(encoding="utf-8"))
-        labels, table, sizes = tabulate(evaluation, scores, cuts, args.k)
+        labels, table, sizes = tabulate(evaluation, scores, cuts, args.k, args.metric)
         runs.append((label, table))
-    svg = figure(labels, runs, sizes, args.k, intervals=not args.no_intervals)
+    svg = figure(labels, runs, sizes, args.k, intervals=not args.no_intervals, metric=args.metric)
     stem = args.stem
     stem.parent.mkdir(parents=True, exist_ok=True)
     stem.with_suffix(".svg").write_text(svg, encoding="utf-8")
     stem.with_suffix(".json").write_text(json.dumps(
-        {"scores": str(args.scores), "cuts": cuts, "k": args.k, "buckets": labels,
+        {"scores": str(args.scores), "cuts": cuts, "k": args.k, "metric": args.metric,
+         "buckets": labels,
          "cases_per_bucket": sizes,
          "runs": [{"label": label, "evaluation": str(path), "by_strategy": table}
                   for (label, path), (_, table) in zip(specs, runs, strict=True)]},
         indent=2) + "\n", encoding="utf-8")  # fmt: skip
-    title = args.title or f"Top-{args.k} accuracy by INTERMED complexity, {len(labels)} buckets"
+    y_name = SCORE_METRICS[args.metric] if args.metric else f"Top-{args.k} accuracy"
+    title = args.title or f"{y_name} by INTERMED complexity, {len(labels)} buckets"
+    if args.metric:
+        note = {
+            "mrr": "MRR: the mean over the bucket's case runs of 1/rank of the true ICD-11 code "
+            "in the strategy's differential (0 when absent).",
+            "ndcg@10": "nDCG@10: the mean over the bucket's case runs of 1/log2(rank + 1) of the "
+            "true ICD-11 code within the first ten (0 otherwise). With one correct code per "
+            "case the ideal DCG is 1, so this is also DCG@10.",
+        }[args.metric]
+    else:
+        note = (
+            f"Top {args.k}: the true diagnosis's ICD-11 code is among the strategy's first "
+            f"{args.k} diagnoses (exact code match). Brackets"
+            + (" and whiskers" if len(runs) == 1 and not args.no_intervals else "")
+            + ": 95% Wilson interval."
+        )
     page = stem.with_suffix(".html")
     page.write_text(
         f"""<!doctype html><html><head><meta charset="utf-8"><title>Accuracy by complexity</title>
@@ -271,11 +317,9 @@ th, td {{ border-bottom: 1px solid {GRID}; padding: 4px 8px; text-align: right; 
 th:first-child, td:first-child {{ text-align: left; }} span {{ color: {MUTED}; font-weight: 400; }}
 td {{ font-variant-numeric: tabular-nums; }}</style></head><body>
 <h1>{html.escape(title)}</h1>
-<p>{html.escape(", ".join(f"{label}: {path.name}" for label, path in specs))}. Top {args.k}: the
-true diagnosis's ICD-11 code is among the strategy's first {args.k} diagnoses (exact code
-match). Brackets{" and whiskers" if len(runs) == 1 and not args.no_intervals else ""}: 95% Wilson
-interval.</p>
-{svg}{table_html(labels, runs, sizes)}</body></html>""",
+<p>{html.escape(", ".join(f"{label}: {path.name}" for label, path in specs))}.
+{html.escape(note)}</p>
+{svg}{table_html(labels, runs, sizes, args.metric)}</body></html>""",
         encoding="utf-8",
     )
     for flag, out in (("--print-to-pdf", stem.with_suffix(".pdf")),
