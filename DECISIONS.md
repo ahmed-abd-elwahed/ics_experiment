@@ -507,3 +507,4 @@ in [environment/NOTES.md](environment/NOTES.md).
 | It is queued to start when `run_v2_repetitions.sh` exits (it waits on that process), not in parallel. | LitSense allows one request per second in total. |
 | Its raw record is git-ignored and is to be committed gzipped. | Over GitHub's 100 MB limit, like the 16-question records. |
 | In the plots it is a single run, a line without a band. | One run has no spread to show. |
+| Top-5 and top-10 versions of both complexity figures (`records/plots/accuracy_by_complexity_{5,4}_buckets_top{5,10}.*`), in the current style: the 8-question run, strategy colours, no whiskers. Per-bucket hits add up to the evaluation's top-5 and top-10 for every strategy. The unsuffixed files stay top-1. | Asked for. |
