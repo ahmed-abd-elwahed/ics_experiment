@@ -57,9 +57,46 @@
     bottom: 12px;
   }
   .reveal .progress { color: #6dbb86; }
+  .show-btn {
+    position: fixed; top: 16px; right: 16px; z-index: 40;
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 16px; min-height: 44px;
+    font: 500 15px/1 'DM Sans', Arial, sans-serif; color: #141413;
+    background: rgba(252, 252, 251, 0.92); border: 2px solid #141413; border-radius: 999px;
+    cursor: pointer; transition: opacity 0.3s, background 0.15s;
+  }
+  .show-btn:hover { background: #6dbb86; }
+  .show-btn:focus-visible { outline: 3px solid #6dbb86; outline-offset: 3px; }
+  .show-btn svg { width: 18px; height: 18px; }
+  .show-btn .exit { display: none; }
+  .is-fullscreen .show-btn .enter { display: none; }
+  .is-fullscreen .show-btn .exit { display: inline; }
+  .is-fullscreen.idle .show-btn,
+  .is-fullscreen.idle .reveal .controls { opacity: 0; pointer-events: none; }
+  .is-fullscreen.idle, .is-fullscreen.idle * { cursor: none !important; }
+  .blank-screen {
+    position: fixed; inset: 0; z-index: 50; display: none; cursor: pointer;
+  }
+  .blank-screen.black { display: block; background: #000; }
+  .blank-screen.white { display: block; background: #fff; }
+  .toast {
+    position: fixed; left: 50%; bottom: 48px; z-index: 60; transform: translateX(-50%);
+    max-width: calc(100vw - 32px); padding: 12px 18px; border-radius: 12px;
+    font: 400 15px/1.4 'DM Sans', Arial, sans-serif; color: #FCFCFB; background: #141413;
+    opacity: 0; pointer-events: none; transition: opacity 0.25s;
+  }
+  .toast.on { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { .show-btn, .toast { transition: none; } }
 </style>
 </head>
 <body>
+<button class="show-btn" type="button" aria-label="Full screen" title="Full screen (F5 from the start, Shift+F5 from this slide)">
+  <svg class="enter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg>
+  <svg class="exit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M9 4v5H4M20 9h-5V4M15 20v-5h5M4 15h5v5"/></svg>
+  <span class="label">Full screen</span>
+</button>
+<div class="blank-screen" aria-hidden="true"></div>
+<div class="toast" role="status" aria-live="polite"></div>
 <div class="reveal">
 <div class="slides">
 
@@ -285,7 +322,116 @@
     slideNumber: 'c/t',
     controls: true,
     progress: true,
+    overview: false,   // Esc ends the show, as in PowerPoint
+    help: false,       // "?" lists reveal's own keys, which differ here
+    mouseWheel: true,  // wheel down = next, wheel up = previous
     plugins: [RevealNotes],
+  });
+
+  // PowerPoint slide-show controls
+  const root = document.documentElement;
+  const btn = document.querySelector('.show-btn');
+  const label = btn.querySelector('.label');
+  const blank = document.querySelector('.blank-screen');
+  const toast = document.querySelector('.toast');
+  let typed = '';          // digits typed before Enter: go to that slide
+  let toastTimer, idleTimer;
+
+  function say(text) {
+    toast.textContent = text;
+    toast.classList.add('on');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('on'), 2600);
+  }
+
+  const isFull = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
+  function enterFull() {
+    const req = root.requestFullscreen || root.webkitRequestFullscreen;
+    if (!req) { say('Full screen is not available in this browser.'); return; }
+    Promise.resolve(req.call(root)).catch(() =>
+      say('Full screen is blocked here. Open the page in its own tab to present.'));
+  }
+  function exitFull() {
+    const ex = document.exitFullscreen || document.webkitExitFullscreen;
+    if (isFull() && ex) ex.call(document);
+  }
+  function toggleFull() { isFull() ? exitFull() : enterFull(); }
+
+  function syncFull() {
+    const on = isFull();
+    root.classList.toggle('is-fullscreen', on);
+    label.textContent = on ? 'Exit full screen' : 'Full screen';
+    btn.setAttribute('aria-label', label.textContent);
+    if (!on) root.classList.remove('idle');
+    else wake();
+  }
+  document.addEventListener('fullscreenchange', syncFull);
+  document.addEventListener('webkitfullscreenchange', syncFull);
+
+  // In full screen, hide the button, arrows and cursor after 2.5 s without mouse movement.
+  function wake() {
+    root.classList.remove('idle');
+    clearTimeout(idleTimer);
+    if (isFull()) idleTimer = setTimeout(() => root.classList.add('idle'), 2500);
+  }
+  document.addEventListener('mousemove', wake);
+
+  btn.addEventListener('click', (e) => { e.stopPropagation(); toggleFull(); btn.blur(); });
+
+  // B or . = black screen, W or , = white screen; any key or click returns.
+  function setBlank(kind) {
+    const same = blank.classList.contains(kind);
+    blank.className = 'blank-screen' + (same ? '' : ' ' + kind);
+  }
+  const blanked = () => blank.classList.contains('black') || blank.classList.contains('white');
+  blank.addEventListener('click', () => setBlank(''));
+
+  const last = () => Reveal.getTotalSlides() - 1;
+  const NEXT = ['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'n', 'N'];
+  const PREV = ['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace', 'p', 'P'];
+
+  window.addEventListener('keydown', (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const k = e.key;
+    const handled = () => { e.preventDefault(); e.stopImmediatePropagation(); };
+
+    if (k === 'F5') { handled(); if (!e.shiftKey) Reveal.slide(0); enterFull(); return; }
+    if (k === 'Escape') {
+      typed = '';
+      if (blanked()) { handled(); setBlank(''); }
+      return;  // the browser leaves full screen itself
+    }
+    if (blanked()) {
+      handled();
+      setBlank('');
+      return;
+    }
+    if (/^[0-9]$/.test(k)) { handled(); typed += k; say('Go to slide ' + typed + ' (Enter)'); return; }
+    if (k === 'Enter') {
+      handled();
+      if (typed) {
+        const n = Math.min(Math.max(parseInt(typed, 10), 1), last() + 1);
+        typed = '';
+        toast.classList.remove('on');
+        Reveal.slide(n - 1);
+      } else Reveal.next();
+      return;
+    }
+    typed = '';
+    if (NEXT.includes(k)) { handled(); Reveal.next(); return; }
+    if (PREV.includes(k)) { handled(); Reveal.prev(); return; }
+    if (k === 'Home') { handled(); Reveal.slide(0); return; }
+    if (k === 'End') { handled(); Reveal.slide(last()); return; }
+    if (k === 'b' || k === 'B' || k === '.') { handled(); setBlank('black'); return; }
+    if (k === 'w' || k === 'W' || k === ',') { handled(); setBlank('white'); return; }
+    if (k === 'f' || k === 'F') { handled(); toggleFull(); return; }
+  }, true);
+
+  // Click anywhere on a slide = next, as in PowerPoint (links and controls still work).
+  document.querySelector('.reveal').addEventListener('click', (e) => {
+    if (e.target.closest('a, button, .controls, .progress, .slide-number, input, select, textarea')) return;
+    if (window.getSelection && String(window.getSelection())) return;
+    Reveal.next();
   });
 </script>
 </body>
