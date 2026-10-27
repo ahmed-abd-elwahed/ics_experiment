@@ -153,8 +153,8 @@
   .doc-crawl .crawl-leg, .doc-crawl .crawl-arm { transform-box: view-box; }
   .doc-crawl .crawl-leg { transform-origin: 35px 117px; }
   .doc-crawl .crawl-arm { transform-origin: 65px 117px; }
-  .crawl-leg-f, .crawl-arm-b { animation: doc-crawl 0.45s ease-in-out infinite alternate; }
-  .crawl-leg-b, .crawl-arm-f { animation: doc-crawl 0.45s ease-in-out infinite alternate-reverse; }
+  .crawl-leg-f, .crawl-arm-b { animation: doc-crawl 0.25s ease-in-out infinite alternate; }
+  .crawl-leg-b, .crawl-arm-f { animation: doc-crawl 0.25s ease-in-out infinite alternate-reverse; }
   @keyframes doc-crawl { from { rotate: -14deg; } to { rotate: 14deg; } }
 
   /* Slide strip: shown below the deck when not in full screen */
@@ -655,7 +655,7 @@
     const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
     let x = MIN, y = 0, dir = 1, stopAt = null, pauseUntil = 0, last = 0;
     let mode = 'walk';                            // walk | held | fall | away | crawl
-    const CRAWL = 150, AWAY = 1200;               // px/s, ms before it comes back
+    const CRAWL = 300, AWAY = 1500;               // px/s, ms before it is back on screen
     let crawl = null;
     const crawlSvg = w.querySelector('.doc-crawl');
     let vx = 0, vy = 0, tilt = 0, grab = null, trail = [];
@@ -708,17 +708,18 @@
     function crawlBack(side) {
       if (mode !== 'away') return;
       const tx = side > 0 ? MAX : MIN;
-      w.style.visibility = '';
-      if (reduced) { x = tx; y = 0; face_(-side); land(); return; }
+      if (reduced) { w.style.visibility = ''; x = tx; y = 0; face_(-side); land(); place(); return; }
       const pl = panel.offsetLeft, top0 = panel.offsetTop - H;
       const sx = side > 0 ? Math.min(SLIDE_W - W - 40, pl + tx + 140) : Math.max(40, pl + tx - 140);
-      x = sx - pl; y = SLIDE_H + 30 - top0;           // just below the bottom edge
+      x = sx - pl; y = SLIDE_H - H + 10 - top0;       // already on screen at the bottom edge
       const dx = tx - x, dy = -y;
       face_(dx >= 0 ? 1 : -1);
       const ang = (dx >= 0 ? Math.atan2(dy, dx) : Math.atan2(-dy, -dx)) * 180 / Math.PI;
       crawl = { x0: x, y0: y, tx, len: Math.hypot(dx, dy), d: 0, ang, rot: ang, side };
       w.classList.add('crawling');
       mode = 'crawl';
+      place();
+      w.style.visibility = '';
     }
     function crawlStep(t, dt) {
       crawl.d += CRAWL * dt;
