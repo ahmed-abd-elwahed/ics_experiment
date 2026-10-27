@@ -103,6 +103,10 @@
   .doc-leg-front, .doc-arm-back { animation: doc-swing 0.8s ease-in-out infinite alternate; }
   .doc-leg-back, .doc-arm-front { animation: doc-swing 0.8s ease-in-out infinite alternate-reverse; }
   .doc-scope-exam { opacity: 0; transition: opacity 0.25s; }
+  .doc-front { opacity: 0; transition: opacity 0.2s; }
+  .doc-profile { transition: opacity 0.2s; }
+  .doc-walker.examining .doc-profile { opacity: 0; }
+  .doc-walker.examining .doc-front { opacity: 1; }
   .doc-scope-rest { transition: opacity 0.25s; }
   /* Listening: stand still, earpieces in, chest piece on the box, a heart beating */
   .doc-walker.examining .doc-face,
@@ -194,8 +198,16 @@
         <g class="doc-arm doc-arm-front" stroke="#141413" stroke-width="4" stroke-linecap="round"><line x1="50" y1="46" x2="50" y2="84"/></g>
         <circle cx="50" cy="22" r="14" fill="#FCFCFB" stroke="#141413" stroke-width="4"/>
         <path d="M37 17 Q50 8 63 17" fill="none" stroke="#141413" stroke-width="3"/>
-        <circle cx="61" cy="13" r="5" fill="#DDDCD6" stroke="#141413" stroke-width="2"/>
-        <circle cx="57" cy="23" r="1.8" fill="#141413"/>
+        <g class="doc-profile">
+          <circle cx="61" cy="13" r="5" fill="#DDDCD6" stroke="#141413" stroke-width="2"/>
+          <circle cx="57" cy="23" r="1.8" fill="#141413"/>
+        </g>
+        <g class="doc-front">
+          <circle cx="50" cy="11" r="5" fill="#DDDCD6" stroke="#141413" stroke-width="2"/>
+          <circle cx="45" cy="22" r="1.8" fill="#141413"/>
+          <circle cx="55" cy="22" r="1.8" fill="#141413"/>
+          <path d="M45 28 Q50 32 55 28" fill="none" stroke="#141413" stroke-width="2" stroke-linecap="round"/>
+        </g>
         <g class="doc-scope-exam">
           <path d="M37 27 Q40 46 50 52 M63 27 Q60 46 50 52" fill="none" stroke="#0E7C8C" stroke-width="3" stroke-linecap="round"/>
           <circle cx="37" cy="26" r="2.5" fill="#141413"/>
