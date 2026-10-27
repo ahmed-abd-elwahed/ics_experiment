@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="deco-hidden">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -159,6 +159,9 @@
   .crawl-leg-b, .crawl-arm-f { animation: doc-crawl 0.25s ease-in-out infinite alternate-reverse; }
   @keyframes doc-crawl { from { rotate: -14deg; } to { rotate: 14deg; } }
 
+  /* Decoration ([data-decoration]) is hidden until H is pressed; H toggles it. */
+  .deco-hidden [data-decoration] { display: none !important; }
+
   /* Slide strip: shown below the deck when not in full screen */
   :root { --strip-h: 136px; }
   html:not(.is-fullscreen) .reveal { height: calc(100% - var(--strip-h)); }
@@ -215,7 +218,7 @@
 
 <section data-background-color="#cfe3d3" id="cover" style="display:flex; flex-direction:column; gap:24px; align-items:center; justify-content:center; padding:96px; background:#cfe3d3">
   <div style="position:relative; display:flex; flex-direction:column; align-items:center; padding:48px; background:#6dbb86; border:2px solid #141413; border-radius:4px">
-    <div class="doc-walker" aria-hidden="true">
+    <div class="doc-walker" data-decoration aria-hidden="true">
       <svg class="doc-face" viewBox="0 0 100 152" width="100" height="152">
         <g class="doc-arm doc-arm-back" stroke="#141413" stroke-width="4" stroke-linecap="round"><line x1="50" y1="46" x2="50" y2="84"/></g>
         <g class="doc-leg doc-leg-back" stroke="#141413" stroke-width="4" stroke-linecap="round"><line x1="50" y1="100" x2="50" y2="148"/><line x1="50" y1="148" x2="58" y2="148"/></g>
@@ -620,6 +623,7 @@
     if (k === 'b' || k === 'B' || k === '.') { handled(); setBlank('black'); return; }
     if (k === 'w' || k === 'W' || k === ',') { handled(); setBlank('white'); return; }
     if (k === 'f' || k === 'F') { handled(); toggleFull(); return; }
+    if (k === 'h' || k === 'H') { handled(); root.classList.toggle('deco-hidden'); return; }
   }, true);
 
   function markThumb(e) {
