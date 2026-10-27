@@ -92,7 +92,8 @@
   /* Cover: a doctor walking along the top of the title box; the script below moves it */
   .doc-walker {
     position: absolute; left: 0; bottom: 100%; width: 134px; height: 204px;
-    margin-bottom: -1px; pointer-events: none; transform: translateX(40px);
+    margin-bottom: -1px; transform: translateX(40px);
+    cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none;
   }
   .doc-face { display: block; width: 100%; height: 100%; overflow: visible; transform-origin: 50% 50%; }
   .doc-walker.facing-left .doc-face { scale: -1 1; }
@@ -129,6 +130,32 @@
     .doc-walker, .doc-walker * { animation: none !important; transition: none !important; }
   }
   .thumb-slide .doc-walker, .thumb-slide .doc-walker * { animation-play-state: paused; }
+  .thumb-slide .doc-walker { pointer-events: none; }
+  /* Picked up or thrown: arms up, legs dangling, surprised face */
+  .doc-mouth-o { opacity: 0; }
+  .doc-walker.held { cursor: grabbing; }
+  .doc-walker:is(.held, .flying) .doc-face { animation: none; }
+  .doc-walker:is(.held, .flying) .doc-arm { animation: none; }
+  .doc-walker:is(.held, .flying) .doc-arm-front { rotate: -155deg; opacity: 1; }
+  .doc-walker:is(.held, .flying) .doc-arm-back { rotate: 155deg; }
+  .doc-walker:is(.held, .flying) .doc-leg-front { animation: doc-dangle 0.35s ease-in-out infinite alternate; }
+  .doc-walker:is(.held, .flying) .doc-leg-back { animation: doc-dangle 0.35s ease-in-out infinite alternate-reverse; }
+  .doc-walker:is(.held, .flying) .doc-profile,
+  .doc-walker:is(.held, .flying) .doc-smile { opacity: 0; }
+  .doc-walker:is(.held, .flying) .doc-front,
+  .doc-walker:is(.held, .flying) .doc-mouth-o { opacity: 1; }
+  @keyframes doc-dangle { from { rotate: -12deg; } to { rotate: 12deg; } }
+  /* Crawling back after being thrown out */
+  .doc-crawl { display: none; position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; transform-origin: 50% 50%; }
+  .doc-walker.crawling .doc-face { display: none; }
+  .doc-walker.crawling .doc-crawl { display: block; }
+  .doc-walker.facing-left .doc-crawl { scale: -1 1; }
+  .doc-crawl .crawl-leg, .doc-crawl .crawl-arm { transform-box: view-box; }
+  .doc-crawl .crawl-leg { transform-origin: 35px 117px; }
+  .doc-crawl .crawl-arm { transform-origin: 65px 117px; }
+  .crawl-leg-f, .crawl-arm-b { animation: doc-crawl 0.45s ease-in-out infinite alternate; }
+  .crawl-leg-b, .crawl-arm-f { animation: doc-crawl 0.45s ease-in-out infinite alternate-reverse; }
+  @keyframes doc-crawl { from { rotate: -14deg; } to { rotate: 14deg; } }
 
   /* Slide strip: shown below the deck when not in full screen */
   :root { --strip-h: 136px; }
@@ -209,7 +236,8 @@
           <circle cx="50" cy="11" r="5" fill="#DDDCD6" stroke="#141413" stroke-width="2"/>
           <circle cx="45" cy="22" r="1.8" fill="#141413"/>
           <circle cx="55" cy="22" r="1.8" fill="#141413"/>
-          <path d="M45 28 Q50 32 55 28" fill="none" stroke="#141413" stroke-width="2" stroke-linecap="round"/>
+          <path class="doc-smile" d="M45 28 Q50 32 55 28" fill="none" stroke="#141413" stroke-width="2" stroke-linecap="round"/>
+          <ellipse class="doc-mouth-o" cx="50" cy="29.5" rx="2.6" ry="3.2" fill="#141413"/>
         </g>
         <g class="doc-scope-exam">
           <path d="M37 27 Q40 46 50 52 M63 27 Q60 46 50 52" fill="none" stroke="#0E7C8C" stroke-width="4" stroke-linecap="round"/>
@@ -225,6 +253,19 @@
           <circle cx="75" cy="75" r="4.5" fill="#FCFCFB" stroke="#141413" stroke-width="2.5"/>
           <path class="doc-heart" d="M98 46 C98 42 93 40 91 44 C89 40 84 42 84 46 C84 50 91 54 91 56 C91 54 98 50 98 46 Z" fill="#D97757" stroke="#141413" stroke-width="1.5" stroke-linejoin="round"/>
         </g>
+      </svg>
+      <svg class="doc-crawl" viewBox="0 0 100 152" width="100" height="152">
+        <g class="crawl-leg crawl-leg-b" fill="none" stroke="#141413" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M34 117 L40 141 L20 147"/></g>
+        <g class="crawl-arm crawl-arm-b" stroke="#141413" stroke-width="4" stroke-linecap="round"><line x1="64" y1="116" x2="62" y2="148"/></g>
+        <path d="M26 104 Q46 98 68 104 L70 126 Q48 130 26 124 Z" fill="#FCFCFB" stroke="#141413" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M64 108 Q62 128 70 132 Q76 130 74 112" fill="none" stroke="#0E7C8C" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="71" cy="134" r="5" fill="#DDDCD6" stroke="#141413" stroke-width="2"/>
+        <g class="crawl-leg crawl-leg-f" fill="none" stroke="#141413" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M36 118 L44 142 L24 148"/></g>
+        <g class="crawl-arm crawl-arm-f" stroke="#141413" stroke-width="4" stroke-linecap="round"><line x1="66" y1="117" x2="72" y2="150"/></g>
+        <circle cx="80" cy="96" r="14" fill="#FCFCFB" stroke="#141413" stroke-width="4"/>
+        <path d="M67 91 Q80 82 93 91" fill="none" stroke="#141413" stroke-width="3"/>
+        <circle cx="91" cy="87" r="5" fill="#DDDCD6" stroke="#141413" stroke-width="2"/>
+        <circle cx="87" cy="97" r="1.8" fill="#141413"/>
       </svg>
     </div>
     <h1 style="width:1400px; font-family:Newsreader, Georgia, serif; font-size:96px; font-weight:500; line-height:1.08; text-align:center; color:#141413">Information Collection Strategies Experiment</h1>
@@ -595,49 +636,174 @@
     if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) { strip.scrollLeft += e.deltaY; e.preventDefault(); }
   }, { passive: false });
 
-  // Cover doctor: walks the box, stops once per crossing at a random spot,
-  // listens with the stethoscope for 3 s, then walks on.
+  // Cover doctor: walks the box, stops once per crossing at a random spot and
+  // listens with the stethoscope for 3 s. It can be picked up with the mouse
+  // and thrown: it falls under gravity and lands back on the box if it comes
+  // down on it. Thrown off the slide, it crawls back in from the bottom on the
+  // side it left by, climbs to that end of the box and walks on.
   (function doctor() {
     const w = document.querySelector('.reveal .doc-walker');
     if (!w) return;
-    const MIN = 40, MAX = 1322;          // slide px along the box top
-    const SPEED = 170;                    // px per second
-    const LISTEN = 3000, TURN = 400;      // ms
-    let x = MIN, dir = 1, stopAt, pauseUntil = 0, last = 0;
-    const place = () => { w.style.transform = 'translateX(' + x.toFixed(1) + 'px)'; };
-    const pickStop = () => {
-      const a = MIN + 0.15 * (MAX - MIN), b = MIN + 0.85 * (MAX - MIN);
-      stopAt = a + Math.random() * (b - a);
+    const face = w.querySelector('.doc-face');
+    const panel = w.parentElement;               // the green title box
+    const W = 134, H = 204;                       // doctor size, slide px
+    const SLIDE_W = 1920, SLIDE_H = 1080;
+    const MIN = 40, MAX = 1322;                   // walking range along the box top
+    const SPEED = 170, LISTEN = 3000, TURN = 400; // px/s, ms, ms
+    const GRAVITY = 2600;                         // px/s²
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+    let x = MIN, y = 0, dir = 1, stopAt = null, pauseUntil = 0, last = 0;
+    let mode = 'walk';                            // walk | held | fall | away | crawl
+    const CRAWL = 150, AWAY = 1200;               // px/s, ms before it comes back
+    let crawl = null;
+    const crawlSvg = w.querySelector('.doc-crawl');
+    let vx = 0, vy = 0, tilt = 0, grab = null, trail = [];
+
+    const place = () => {
+      w.style.transform = 'translate(' + x.toFixed(1) + 'px, ' + y.toFixed(1) + 'px)';
+      face.style.rotate = tilt.toFixed(1) + 'deg';
+      crawlSvg.style.rotate = (crawl ? crawl.rot : 0).toFixed(1) + 'deg';
     };
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      x = MIN + 0.5 * (MAX - MIN); place(); w.classList.add('examining'); return;
-    }
-    pickStop();
-    function frame(t) {
-      const dt = Math.min(t - (last || t), 100) / 1000;
-      last = t;
-      if (t < pauseUntil) { requestAnimationFrame(frame); return; }
+    // One stop per crossing, at a random spot 15–85% of the way still ahead.
+    const pickStop = () => {
+      const end = dir > 0 ? MAX : MIN, span = end - x;
+      stopAt = Math.abs(span) < 200 ? null : x + span * (0.15 + 0.7 * Math.random());
+    };
+    const face_ = (d) => { dir = d; w.classList.toggle('facing-left', dir < 0); };
+
+    if (reduced) { x = MIN + 0.5 * (MAX - MIN); w.classList.add('examining'); }
+    else pickStop();
+    place();
+
+    function walk(t, dt) {
+      if (reduced || t < pauseUntil) return;
       if (w.classList.contains('examining')) { w.classList.remove('examining'); stopAt = null; }
       const nx = x + dir * SPEED * dt;
       if (stopAt != null && (dir > 0 ? nx >= stopAt : nx <= stopAt)) {
-        x = stopAt; place();
-        w.classList.add('examining');
-        pauseUntil = t + LISTEN;
+        x = stopAt; w.classList.add('examining'); pauseUntil = t + LISTEN;
       } else if (nx >= MAX || nx <= MIN) {
-        x = nx >= MAX ? MAX : MIN; place();
-        dir = -dir;
-        w.classList.toggle('facing-left', dir < 0);
-        pickStop();
-        pauseUntil = t + TURN;
-      } else { x = nx; place(); }
+        x = nx >= MAX ? MAX : MIN; face_(-dir); pickStop(); pauseUntil = t + TURN;
+      } else x = nx;
+    }
+
+    function land() {
+      mode = 'walk';
+      w.classList.remove('flying');
+      if (Math.abs(vx) > 60) face_(vx > 0 ? 1 : -1);
+      x = clamp(x, MIN, MAX); y = 0; vx = vy = 0; tilt = 0;
+      if (reduced) w.classList.add('examining'); else pickStop();
+      pauseUntil = performance.now() + TURN;
+    }
+
+    // Off the slide: hide, then crawl back from the bottom on the side it left by.
+    function leave(sx) {
+      const side = sx > SLIDE_W ? 1 : sx < -W ? -1 : (sx + W / 2 > SLIDE_W / 2 ? 1 : -1);
+      mode = 'away';
+      w.style.visibility = 'hidden';
+      w.classList.remove('flying', 'held', 'examining');
+      vx = vy = 0; tilt = 0;
+      setTimeout(() => crawlBack(side), AWAY);
+    }
+    function crawlBack(side) {
+      if (mode !== 'away') return;
+      const tx = side > 0 ? MAX : MIN;
+      w.style.visibility = '';
+      if (reduced) { x = tx; y = 0; face_(-side); land(); return; }
+      const pl = panel.offsetLeft, top0 = panel.offsetTop - H;
+      const sx = side > 0 ? Math.min(SLIDE_W - W - 40, pl + tx + 140) : Math.max(40, pl + tx - 140);
+      x = sx - pl; y = SLIDE_H + 30 - top0;           // just below the bottom edge
+      const dx = tx - x, dy = -y;
+      face_(dx >= 0 ? 1 : -1);
+      const ang = (dx >= 0 ? Math.atan2(dy, dx) : Math.atan2(-dy, -dx)) * 180 / Math.PI;
+      crawl = { x0: x, y0: y, tx, len: Math.hypot(dx, dy), d: 0, ang, rot: ang, side };
+      w.classList.add('crawling');
+      mode = 'crawl';
+    }
+    function crawlStep(t, dt) {
+      crawl.d += CRAWL * dt;
+      const f = Math.min(1, crawl.d / crawl.len);
+      x = crawl.x0 + (crawl.tx - crawl.x0) * f;
+      y = crawl.y0 * (1 - f);
+      crawl.rot = crawl.ang * Math.min(1, (1 - f) / 0.12);   // level out as it climbs onto the box
+      if (f >= 1) {
+        const side = crawl.side;
+        crawl = null;
+        w.classList.remove('crawling');
+        x = side > 0 ? MAX : MIN; y = 0;
+        face_(-side); mode = 'walk'; pickStop(); pauseUntil = t + 600;
+      }
+    }
+
+    function fall(dt) {
+      const py = y;
+      vy += GRAVITY * dt; x += vx * dt; y += vy * dt;
+      tilt = clamp(tilt + vx * dt * 0.05, -60, 60);
+      const over = x + W / 2 >= 0 && x + W / 2 <= panel.offsetWidth;
+      if (over && vy > 0 && py <= 40 && y >= 0) { land(); return; }
+      const sx = panel.offsetLeft + x, sy = panel.offsetTop - H + y;  // slide coordinates
+      if (sx > SLIDE_W || sx < -W || sy > SLIDE_H || sy < -H) leave(sx);
+    }
+
+    function frame(t) {
+      const dt = Math.min(t - (last || t), 50) / 1000;
+      last = t;
+      if (mode === 'walk') walk(t, dt);
+      else if (mode === 'fall') fall(dt);
+      else if (mode === 'crawl') crawlStep(t, dt);
+      if (mode !== 'away') place();
       requestAnimationFrame(frame);
     }
     requestAnimationFrame(frame);
+
+    // Mouse (or touch): press on the doctor, hold and move to carry it; let go to throw.
+    const toBox = (e) => {
+      const s = Reveal.getScale() || 1, r = panel.getBoundingClientRect();
+      return { x: (e.clientX - r.left) / s, y: (e.clientY - r.top) / s };
+    };
+    w.addEventListener('pointerdown', (e) => {
+      if (mode === 'away' || e.button > 0) return;
+      e.preventDefault(); e.stopPropagation();
+      try { w.setPointerCapture(e.pointerId); } catch (_) { /* capture is a nicety */ }
+      const p = toBox(e);
+      grab = { id: e.pointerId, dx: p.x - x, dy: p.y - y };
+      mode = 'held';
+      w.classList.remove('examining', 'flying', 'crawling');
+      crawl = null;
+      w.classList.add('held');
+      trail = [{ t: performance.now(), x, y }];
+    });
+    w.addEventListener('pointermove', (e) => {
+      if (!grab || e.pointerId !== grab.id) return;
+      const p = toBox(e), now = performance.now();
+      x = p.x - grab.dx; y = p.y - grab.dy;
+      trail.push({ t: now, x, y });
+      trail = trail.filter((q) => now - q.t < 100);
+      const q = trail[0], span = (now - q.t) / 1000;
+      tilt = clamp(span > 0 ? (x - q.x) / span * 0.02 : 0, -35, 35);
+      place();
+    });
+    function release(e) {
+      if (!grab || e.pointerId !== grab.id) return;
+      grab = null;
+      const now = performance.now();
+      trail = trail.filter((q) => now - q.t < 100);
+      const q = trail[0] || { t: now, x, y }, span = Math.max((now - q.t) / 1000, 0.016);
+      vx = clamp((x - q.x) / span, -5000, 5000);
+      vy = clamp((y - q.y) / span, -5000, 5000);
+      mode = 'fall';
+      w.classList.remove('held');
+      w.classList.add('flying');
+    }
+    w.addEventListener('pointerup', release);
+    w.addEventListener('pointercancel', release);
+    w.addEventListener('click', (e) => e.stopPropagation());  // carrying it never changes slide
+    w.addEventListener('touchstart', (e) => e.stopPropagation(), { passive: true });  // nor swipes
   })();
 
   // Click anywhere on a slide = next, as in PowerPoint (links and controls still work).
   document.querySelector('.reveal').addEventListener('click', (e) => {
-    if (e.target.closest('a, button, .controls, .progress, .slide-number, input, select, textarea')) return;
+    if (e.target.closest('a, button, .controls, .progress, .slide-number, input, select, textarea, .doc-walker')) return;
     if (window.getSelection && String(window.getSelection())) return;
     Reveal.next();
   });
