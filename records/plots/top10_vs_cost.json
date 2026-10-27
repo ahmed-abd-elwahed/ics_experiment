@@ -1,0 +1,87 @@
+{
+  "k": 10,
+  "runs": [
+    {
+      "label": "4",
+      "evaluation": "records/strategies_272_v2_rep1_4it.eval.json"
+    },
+    {
+      "label": "8",
+      "evaluation": "records/strategies_272_v2_rep1_8it.eval.json"
+    },
+    {
+      "label": "16",
+      "evaluation": "records/strategies_272_v2_rep1_16it.eval.json"
+    }
+  ],
+  "by_strategy": {
+    "hypothesis": [
+      {
+        "questions": "4",
+        "cost_usd": 1.770581,
+        "top10_pct": 32.35294117647059
+      },
+      {
+        "questions": "8",
+        "cost_usd": 3.810594,
+        "top10_pct": 45.220588235294116
+      },
+      {
+        "questions": "16",
+        "cost_usd": 7.385649,
+        "top10_pct": 47.05882352941176
+      }
+    ],
+    "knowledge": [
+      {
+        "questions": "4",
+        "cost_usd": 1.473186,
+        "top10_pct": 36.76470588235294
+      },
+      {
+        "questions": "8",
+        "cost_usd": 3.425122,
+        "top10_pct": 44.48529411764706
+      },
+      {
+        "questions": "16",
+        "cost_usd": 7.996866,
+        "top10_pct": 55.51470588235294
+      }
+    ],
+    "channel": [
+      {
+        "questions": "4",
+        "cost_usd": 1.225189,
+        "top10_pct": 37.13235294117647
+      },
+      {
+        "questions": "8",
+        "cost_usd": 2.411731,
+        "top10_pct": 43.75
+      },
+      {
+        "questions": "16",
+        "cost_usd": 4.779343,
+        "top10_pct": 52.94117647058824
+      }
+    ],
+    "sequence": [
+      {
+        "questions": "4",
+        "cost_usd": 1.33501,
+        "top10_pct": 38.23529411764706
+      },
+      {
+        "questions": "8",
+        "cost_usd": 2.720668,
+        "top10_pct": 46.32352941176471
+      },
+      {
+        "questions": "16",
+        "cost_usd": 5.17227,
+        "top10_pct": 48.89705882352941
+      }
+    ]
+  }
+}

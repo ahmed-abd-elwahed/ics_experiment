@@ -488,3 +488,11 @@ in [environment/NOTES.md](environment/NOTES.md).
 | A later run that scores at or below an earlier one (hidden behind it) is drawn as a tick across the bar at its accuracy, in its gray with a surface ring. | The 4-question bar is always in front, so a drop (e.g. channel-based 21–26: 12.5% at 4, 8.3% at 8) would otherwise vanish. The whiskers stay out of the multi-run figure; every interval is in the table. |
 | The two complexity figures now show only the 8-question run (`records/strategies_272_v2_rep1_8it.eval.json`) in the single-run style: strategy colours and 95% Wilson whiskers. Per-bucket hits add up to that evaluation's top-1 for every strategy. The multi-run form stays available in `plot_complexity` (repeat `--run`). | Asked for: "only use the 8 iterations bars with the og colors". |
 | The two 8-question complexity figures no longer draw the 95% interval whiskers (new `--no-intervals` option); the intervals stay in the HTML/PDF table. The y-axis now tops out at 40% instead of 60%. | Asked for ("remove them"). Without the whiskers the axis only needs to reach the tallest bar. |
+
+### Top-10 accuracy against cost (2026-10-27)
+
+| Decision | Why |
+|---|---|
+| `evaluation/plot_cost.py` draws accuracy against cost: x = a strategy's total cost over its 272 case runs (strategy and environment calls, the evaluation's `cost_usd`), y = top-10 accuracy, one line per strategy through star markers at 4, 8 and 16 questions. Output `records/plots/top10_vs_cost.{svg,html,pdf,png,json}`. | Asked for: a plot like the attached cost/score chart, on a light background, with cost on x, top-10 on y and each strategy a line with stars at 4, 8 and 16 iterations. |
+| Runs: dataset v2, repetition 1 (`records/strategies_272_v2_rep1_{4,8,16}it.eval.json`). | The same runs as the complexity figures; repetition 3 at 16 questions was still running. |
+| Strategy colours as in the complexity figures; direct labels at each line's end; the budgets are stated once under the legend ("left to right: 4, 8, 16") instead of a number at every star. | Cost always rises with the budget, so the order along a line is unambiguous; the per-star numbers collided at 4 questions, where the stars sit within $0.30 of each other. |
