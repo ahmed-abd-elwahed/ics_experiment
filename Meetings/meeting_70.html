@@ -91,10 +91,10 @@
 
   /* Cover: a doctor walking along the top of the title box; the script below moves it */
   .doc-walker {
-    position: absolute; left: 0; bottom: 100%; width: 100px; height: 152px;
+    position: absolute; left: 0; bottom: 100%; width: 134px; height: 204px;
     margin-bottom: -1px; pointer-events: none; transform: translateX(40px);
   }
-  .doc-face { display: block; overflow: visible; transform-origin: 50% 50%; }
+  .doc-face { display: block; width: 100%; height: 100%; overflow: visible; transform-origin: 50% 50%; }
   .doc-walker.facing-left .doc-face { scale: -1 1; }
   .doc-walker .doc-leg, .doc-walker .doc-arm { transform-box: view-box; }
   .doc-walker .doc-leg { transform-origin: 50px 100px; }
@@ -118,6 +118,9 @@
   .doc-walker.examining .doc-scope-rest { opacity: 0; }
   .doc-walker.examining .doc-scope-exam { opacity: 1; }
   .doc-heart { transform-box: fill-box; transform-origin: 50% 60%; }
+  .doc-chestpiece { transform-box: fill-box; transform-origin: 50% 50%; }
+  .doc-walker.examining .doc-chestpiece { animation: doc-press 1.5s ease-in-out infinite; }
+  @keyframes doc-press { 0%, 100% { scale: 1; } 50% { scale: 1.12; } }
   .doc-walker.examining .doc-heart { animation: doc-beat 0.75s ease-in-out infinite; }
   @keyframes doc-bob { from { translate: 0 0; } to { translate: 0 -3px; } }
   @keyframes doc-swing { from { rotate: -22deg; } to { rotate: 22deg; } }
@@ -191,8 +194,8 @@
         <line x1="50" y1="42" x2="50" y2="104" stroke="#141413" stroke-width="2.5"/>
         <rect x="55" y="72" width="9" height="7" rx="1.5" fill="none" stroke="#141413" stroke-width="2"/>
         <g class="doc-scope-rest">
-          <path d="M44 41 Q43 60 50 64 Q57 60 56 41" fill="none" stroke="#0E7C8C" stroke-width="3" stroke-linecap="round"/>
-          <circle cx="50" cy="66" r="4" fill="#0E7C8C" stroke="#141413" stroke-width="1.5"/>
+          <path d="M44 41 Q43 60 50 64 Q57 60 56 41" fill="none" stroke="#0E7C8C" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="50" cy="67" r="5.5" fill="#DDDCD6" stroke="#141413" stroke-width="2"/><circle cx="50" cy="67" r="3" fill="#0E7C8C"/>
         </g>
         <g class="doc-leg doc-leg-front" stroke="#141413" stroke-width="4" stroke-linecap="round"><line x1="50" y1="100" x2="50" y2="148"/><line x1="50" y1="148" x2="58" y2="148"/></g>
         <g class="doc-arm doc-arm-front" stroke="#141413" stroke-width="4" stroke-linecap="round"><line x1="50" y1="46" x2="50" y2="84"/></g>
@@ -209,15 +212,18 @@
           <path d="M45 28 Q50 32 55 28" fill="none" stroke="#141413" stroke-width="2" stroke-linecap="round"/>
         </g>
         <g class="doc-scope-exam">
-          <path d="M37 27 Q40 46 50 52 M63 27 Q60 46 50 52" fill="none" stroke="#0E7C8C" stroke-width="3" stroke-linecap="round"/>
-          <circle cx="37" cy="26" r="2.5" fill="#141413"/>
-          <circle cx="63" cy="26" r="2.5" fill="#141413"/>
-          <path d="M50 52 Q60 62 70 80 Q81 108 86 141" fill="none" stroke="#0E7C8C" stroke-width="3" stroke-linecap="round"/>
-          <line x1="50" y1="46" x2="70" y2="80" stroke="#141413" stroke-width="4" stroke-linecap="round"/>
-          <circle class="doc-hand" cx="70" cy="81" r="4.2" fill="#FCFCFB" stroke="#141413" stroke-width="2.5"/>
-          <path d="M67.5 79.5 Q70 82.5 72.5 79.5" fill="none" stroke="#141413" stroke-width="1.5" stroke-linecap="round"/>
-          <ellipse cx="86" cy="145" rx="6" ry="3.5" fill="#0E7C8C" stroke="#141413" stroke-width="1.5"/>
-          <path class="doc-heart" d="M105 112 C105 108 100 106 98 110 C96 106 91 108 91 112 C91 116 98 120 98 122 C98 120 105 116 105 112 Z" fill="#D97757" stroke="#141413" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M37 27 Q40 46 50 52 M63 27 Q60 46 50 52" fill="none" stroke="#0E7C8C" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="37" cy="26" r="3" fill="#141413"/>
+          <circle cx="63" cy="26" r="3" fill="#141413"/>
+          <path d="M50 52 Q44 86 58 90 Q70 92 68 78" fill="none" stroke="#0E7C8C" stroke-width="4" stroke-linecap="round"/>
+          <line x1="60" y1="46" x2="75" y2="74" stroke="#141413" stroke-width="4" stroke-linecap="round"/>
+          <g class="doc-chestpiece">
+            <circle cx="66" cy="66" r="12" fill="#DDDCD6" stroke="#141413" stroke-width="2.5"/>
+            <circle cx="66" cy="66" r="7.5" fill="#0E7C8C" stroke="#141413" stroke-width="1.5"/>
+            <path d="M62 62 Q64 60 67 60" fill="none" stroke="#FCFCFB" stroke-width="1.8" stroke-linecap="round"/>
+          </g>
+          <circle cx="75" cy="75" r="4.5" fill="#FCFCFB" stroke="#141413" stroke-width="2.5"/>
+          <path class="doc-heart" d="M98 46 C98 42 93 40 91 44 C89 40 84 42 84 46 C84 50 91 54 91 56 C91 54 98 50 98 46 Z" fill="#D97757" stroke="#141413" stroke-width="1.5" stroke-linejoin="round"/>
         </g>
       </svg>
     </div>
@@ -594,7 +600,7 @@
   (function doctor() {
     const w = document.querySelector('.reveal .doc-walker');
     if (!w) return;
-    const MIN = 40, MAX = 1356;          // slide px along the box top
+    const MIN = 40, MAX = 1322;          // slide px along the box top
     const SPEED = 170;                    // px per second
     const LISTEN = 3000, TURN = 400;      // ms
     let x = MIN, dir = 1, stopAt, pauseUntil = 0, last = 0;
