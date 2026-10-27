@@ -7,11 +7,12 @@
 CUTS are the lower bounds of every bucket after the first, comma-separated: "12,16,21,27"
 gives 0-11, 12-15, 16-20, 21-26, 27-60. One group of bars per bucket (x), one bar per strategy,
 y = top-k accuracy in % (default k = 1). With one run, each bar has its 95% Wilson interval.
-With several runs (in budget order), each bar nests them: every run is a bar from zero to its
-accuracy in its run's colour (the same for every strategy: gray, aqua, orange), the tallest drawn
-at the back, so each colour ends exactly at its run's accuracy, also when a larger budget scores
-lower; a number under each bar names its strategy. On an exact tie the earlier run is drawn in
-front. The intervals of every run are in the table. Writes OUT_STEM.svg,
+With several runs (in budget order), the first run's bar is in the strategy's colour, in front;
+each later run is a bar from zero to its accuracy behind it, in one colour shared by every
+strategy (dark gray, then light gray), so where it is higher it shows on top and each colour
+ends at its run's accuracy. A later run at or below an earlier one is hidden behind it and is
+drawn as a tick across the bar at its accuracy. The intervals of every run are in the table.
+Writes OUT_STEM.svg,
 OUT_STEM.html (with the values as a table), OUT_STEM.pdf and OUT_STEM.png (printed by headless
 Google Chrome, like plot_topk). No API calls.
 """
@@ -35,10 +36,11 @@ from evaluation.plot_topk import CHROME, GRID, INK, MUTED, SURFACE, TITLES
 # under 3:1 on the surface, so the figure ships with its table.
 COLOURS = {"hypothesis": "#2a78d6", "knowledge": "#eb6834", "channel": "#1baf7a",
            "sequence": "#eda100"}  # fmt: skip
-# With several runs, one colour per run for every strategy: a neutral dark gray for the first,
-# then the palette's aqua and orange (slots 3 and 2). Validated adjacent on the light surface:
-# CVD dE 9.2, normal-vision >= 20; the gray fails only the chroma floor, as a neutral should.
-RUN_COLOURS = ("#6b6a65", "#1baf7a", "#eb6834")
+# With several runs, the first run keeps the strategy colours; the later runs share one colour
+# each across strategies: dark gray, then light gray. Each validated next to every strategy
+# colour on the light surface (worst CVD dE 18.3, normal-vision >= 21.8); they fail only the
+# chroma floor, as neutrals should. Light gray is under 3:1, so the figure carries its table.
+LATER_COLOURS = ("#52514e", "#b5b3ac")
 MAX_SCORE = 60
 
 
@@ -95,10 +97,8 @@ def figure(labels: list[str], runs: list[tuple[str, dict[str, list[dict[str, flo
            sizes: list[int], k: int) -> str:  # fmt: skip
     strategies = list(runs[0][1])
     single = len(runs) == 1
-    width, height = 1000, 520 if single else 562
-    left, right = 56, 20
-    bottom = 64 if single else 78
-    top = 64 if single else 92
+    width, height = 1000, 520
+    left, right, top, bottom = 56, 20, 64, 64
     pw, ph = width - left - right, height - top - bottom
     peak = max(c["hi" if single else "pct"] for _, t in runs for v in t.values() for c in v)
     y_max = max(10.0, math.ceil(peak / 10) * 10)
@@ -110,32 +110,30 @@ def figure(labels: list[str], runs: list[tuple[str, dict[str, list[dict[str, flo
         return top + ph - v / y_max * ph
 
     def colour(s: str, j: int) -> str:
-        return COLOURS[s] if single else RUN_COLOURS[j]
+        return COLOURS[s] if j == 0 else LATER_COLOURS[j - 1]
 
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" '
            f'width="{width}" height="{height}" font-family="-apple-system, Helvetica Neue, '
            f'Arial, sans-serif" role="img" aria-label="Top-{k} accuracy of each strategy by '
            f'INTERMED complexity bucket">',
            f'<rect width="{width}" height="{height}" fill="{SURFACE}"/>']  # fmt: skip
+    legend = [(COLOURS[s], TITLES[s]) for s in strategies]
+    legend += [(LATER_COLOURS[j - 1], label) for j, (label, _) in enumerate(runs) if j]
     lx = float(left)
-    if single:  # legend, in strategy order
-        for s in strategies:
-            out.append(f'<rect x="{lx}" y="14" width="12" height="12" rx="2" '
-                       f'fill="{COLOURS[s]}"/><text x="{lx + 18}" y="24" font-size="12" '
-                       f'fill="{INK}">{html.escape(TITLES[s])}</text>')  # fmt: skip
-            lx += 18 + 7.2 * len(TITLES[s]) + 26
-    else:  # legend, in budget order, then the strategy key
-        for j, (rl, _) in enumerate(runs):
-            out.append(f'<rect x="{lx}" y="14" width="12" height="12" rx="2" '
-                       f'fill="{RUN_COLOURS[j]}"/><text x="{lx + 18}" y="24" font-size="12" '
-                       f'fill="{INK}">{html.escape(rl)}</text>')  # fmt: skip
-            lx += 18 + 7.2 * len(rl) + 26
-        key = "Bars in each group: " + " · ".join(
-            TITLES[s].replace(". ", " ", 1) for s in strategies
-        )
+    for n, (fill, text) in enumerate(legend):
+        if n == len(strategies):  # the later runs, after a divider
+            out.append(f'<line x1="{lx - 12}" x2="{lx - 12}" y1="12" y2="28" stroke="{GRID}" '
+                       f'stroke-width="1"/>')  # fmt: skip
+            lx += 8
+        out.append(f'<rect x="{lx}" y="14" width="12" height="12" rx="2" fill="{fill}"/>'
+                   f'<text x="{lx + 18}" y="24" font-size="12" fill="{INK}">'
+                   f'{html.escape(text)}</text>')  # fmt: skip
+        lx += 18 + 7.2 * len(text) + 26
+    if not single:
         out.append(
-            f'<text x="{left}" y="48" font-size="11" fill="{MUTED}">{html.escape(key)}. '
-            f"Each colour ends at that run's accuracy.</text>"
+            f'<text x="{left}" y="46" font-size="11" fill="{MUTED}">Strategy colour: '
+            f"{html.escape(runs[0][0])}. Gray bars rise to the later runs' accuracy; a "
+            f"gray tick marks a later run that scored lower or the same.</text>"
         )
     for tick in range(0, int(y_max) + 1, 10):
         out.append(f'<line x1="{left}" x2="{left + pw}" y1="{y(tick):.1f}" y2="{y(tick):.1f}" '
@@ -147,11 +145,10 @@ def figure(labels: list[str], runs: list[tuple[str, dict[str, list[dict[str, flo
     base = y(0)
     for g, label in enumerate(labels):
         gx = left + g * group_w + (group_w - span) / 2
-        ly = top + ph + (20 if single else 34)
-        out.append(f'<text x="{left + (g + 0.5) * group_w:.1f}" y="{ly}" '
+        out.append(f'<text x="{left + (g + 0.5) * group_w:.1f}" y="{top + ph + 20}" '
                    f'font-size="12" font-weight="600" text-anchor="middle" fill="{INK}">'
                    f'{label}</text><text x="{left + (g + 0.5) * group_w:.1f}" '
-                   f'y="{ly + 16}" font-size="11" text-anchor="middle" fill="{MUTED}">'
+                   f'y="{top + ph + 36}" font-size="11" text-anchor="middle" fill="{MUTED}">'
                    f'{sizes[g]} cases</text>')  # fmt: skip
         for i, s in enumerate(strategies):
             x0 = gx + i * (bar_w + 2)
@@ -160,15 +157,27 @@ def figure(labels: list[str], runs: list[tuple[str, dict[str, list[dict[str, flo
                 f"{rl} {c['pct']:.1f}% ({c['hits']}/{c['n']})" for _, rl, c in cells
             )
             parts = [f"<g><title>{html.escape(tip)}</title>"]
-            # Tallest at the back; on a tie the later run goes behind (the earlier stays visible).
-            ordered = sorted(cells, key=lambda jc: (-jc[2]["pct"], -jc[0]))
-            for n, (j, _, c) in enumerate(ordered):
+            # Later runs behind, tallest at the back; the first run always in front.
+            order = sorted(cells[1:], key=lambda jc: (-jc[2]["pct"], -jc[0])) + cells[:1]
+            ticks = []
+            for n, (j, _, c) in enumerate(order):
+                front = max((d["pct"] for _, _, d in order[n + 1 :]), default=-1.0)
+                if j and c["pct"] <= front:  # hidden behind a bar in front: a tick instead
+                    ticks.append((j, c["pct"]))
+                    continue
                 parts.append(f'<path d="{bar_path(x0, bar_w, y(c["pct"]), base)}" '
                              f'fill="{colour(s, j)}"/>')  # fmt: skip
-                if n:  # 2px surface gap where a shorter run's bar ends
+                if n:  # 2px surface gap where a shorter bar ends in front of a taller one
                     parts.append(f'<line x1="{x0:.1f}" x2="{x0 + bar_w:.1f}" '
                                  f'y1="{y(c["pct"]) - 1:.1f}" y2="{y(c["pct"]) - 1:.1f}" '
                                  f'stroke="{SURFACE}" stroke-width="2"/>')  # fmt: skip
+            for j, pct in ticks:  # surface ring, then the run's colour
+                ty = y(pct)
+                parts.append(f'<line x1="{x0 - 3:.1f}" x2="{x0 + bar_w + 3:.1f}" y1="{ty:.1f}" '
+                             f'y2="{ty:.1f}" stroke="{SURFACE}" stroke-width="5"/>'
+                             f'<line x1="{x0 - 3:.1f}" x2="{x0 + bar_w + 3:.1f}" y1="{ty:.1f}" '
+                             f'y2="{ty:.1f}" stroke="{LATER_COLOURS[j - 1]}" stroke-width="3" '
+                             f'stroke-linecap="round"/>')  # fmt: skip
             if single:
                 c, cx = cells[0][2], x0 + bar_w / 2
                 parts.append(f'<line x1="{cx:.1f}" x2="{cx:.1f}" y1="{y(c["lo"]):.1f}" '
@@ -177,10 +186,6 @@ def figure(labels: list[str], runs: list[tuple[str, dict[str, list[dict[str, flo
                              f'<line x1="{cx - 4:.1f}" x2="{cx + 4:.1f}" y1="{y(c["hi"]):.1f}" '
                              f'y2="{y(c["hi"]):.1f}" stroke="{INK}" stroke-width="1.2" '
                              f'stroke-opacity="0.55"/>')  # fmt: skip
-            if not single:  # the strategy's number under its bar
-                parts.append(f'<text x="{x0 + bar_w / 2:.1f}" y="{base + 14:.1f}" '
-                             f'font-size="10" text-anchor="middle" fill="{MUTED}">'
-                             f'{TITLES[s].split(".")[0]}</text>')  # fmt: skip
             out.append("".join(parts) + "</g>")
     out.append(f'<line x1="{left}" x2="{left + pw}" y1="{base:.1f}" y2="{base:.1f}" '
                f'stroke="{MUTED}" stroke-width="1"/>')  # fmt: skip
@@ -268,11 +273,7 @@ match). Brackets{" and whiskers" if len(runs) == 1 else ""}: 95% Wilson interval
     )
     for flag, out in (("--print-to-pdf", stem.with_suffix(".pdf")),
                       ("--screenshot", stem.with_suffix(".png"))):  # fmt: skip
-        extra = (
-            [f"--window-size=1000,{520 if len(runs) == 1 else 562}", "--hide-scrollbars"]
-            if flag == "--screenshot"
-            else []
-        )
+        extra = ["--window-size=1000,520", "--hide-scrollbars"] if flag == "--screenshot" else []
         subprocess.run(
             [CHROME, "--headless=new", "--disable-gpu", "--no-pdf-header-footer", *extra,
              f"{flag}={out}", stem.with_suffix(".svg").resolve().as_uri()
