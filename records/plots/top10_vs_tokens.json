@@ -1,0 +1,89 @@
+{
+  "k": 10,
+  "x": "tokens",
+  "x_title": "Average tokens per case run (prompt + completion, strategy and environment)",
+  "runs": [
+    {
+      "label": "4",
+      "evaluation": "records/strategies_272_v2_rep1_4it.eval.json"
+    },
+    {
+      "label": "8",
+      "evaluation": "records/strategies_272_v2_rep1_8it.eval.json"
+    },
+    {
+      "label": "16",
+      "evaluation": "records/strategies_272_v2_rep1_16it.eval.json"
+    }
+  ],
+  "by_strategy": {
+    "hypothesis": [
+      {
+        "questions": "4",
+        "tokens": 30344.27573529412,
+        "top10_pct": 32.35294117647059
+      },
+      {
+        "questions": "8",
+        "tokens": 66839.69117647059,
+        "top10_pct": 45.220588235294116
+      },
+      {
+        "questions": "16",
+        "tokens": 132133.67647058822,
+        "top10_pct": 47.05882352941176
+      }
+    ],
+    "knowledge": [
+      {
+        "questions": "4",
+        "tokens": 26592.922794117647,
+        "top10_pct": 36.76470588235294
+      },
+      {
+        "questions": "8",
+        "tokens": 62593.158088235294,
+        "top10_pct": 44.48529411764706
+      },
+      {
+        "questions": "16",
+        "tokens": 146580.5919117647,
+        "top10_pct": 55.51470588235294
+      }
+    ],
+    "channel": [
+      {
+        "questions": "4",
+        "tokens": 24115.378676470587,
+        "top10_pct": 37.13235294117647
+      },
+      {
+        "questions": "8",
+        "tokens": 49323.69852941176,
+        "top10_pct": 43.75
+      },
+      {
+        "questions": "16",
+        "tokens": 100406.08088235294,
+        "top10_pct": 52.94117647058824
+      }
+    ],
+    "sequence": [
+      {
+        "questions": "4",
+        "tokens": 24345.595588235294,
+        "top10_pct": 38.23529411764706
+      },
+      {
+        "questions": "8",
+        "tokens": 50799.44852941176,
+        "top10_pct": 46.32352941176471
+      },
+      {
+        "questions": "16",
+        "tokens": 99390.32352941176,
+        "top10_pct": 48.89705882352941
+      }
+    ]
+  }
+}

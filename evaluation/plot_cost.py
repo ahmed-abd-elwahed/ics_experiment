@@ -24,6 +24,42 @@ from evaluation.plot_topk import CHROME, GRID, INK, MUTED, SURFACE, TITLES
 
 AXIS = "#c3c2b7"
 
+# x-axis choices: (axis title, tick label, value label for the table and tooltips).
+XAXES = {
+    "cost": ("Cost (US$, all 272 cases)", lambda v: f"${v:.2f}", lambda v: f"${v:.2f}"),
+    "tokens": ("Average tokens per case run (prompt + completion, strategy and environment)",
+               lambda v: f"{v / 1000:g}k", lambda v: f"{v:,.0f}"),
+    "time": ("Average run time per case run (minutes)", lambda v: f"{v:g}",
+             lambda v: f"{v:.2f} min"),
+}  # fmt: skip
+
+
+def mean_tokens(record_path: Path) -> dict[str, float]:
+    """Each strategy's mean prompt + completion tokens per case run, over every LLM call of the
+    run: the strategy's questions and diagnosis, and the environment's answers (as in its cost)."""
+    record = json.loads(record_path.read_text(encoding="utf-8"))
+    totals: dict[str, list[int]] = {}
+    for run in record["case_runs"]:
+        calls = [c for it in run["iterations"] for c in it.get("strategy_llm_calls") or []]
+        calls += [
+            c
+            for it in run["iterations"]
+            for c in ((it.get("environment_response") or {}).get("llm_calls") or [])
+        ]
+        calls += (run.get("diagnosis") or {}).get("llm_calls") or []
+        tokens = sum((c.get("prompt_tokens") or 0) + (c.get("completion_tokens") or 0)
+                     for c in calls)  # fmt: skip
+        totals.setdefault(run["strategy"], []).append(tokens)
+    return {s: sum(v) / len(v) for s, v in totals.items()}
+
+
+def x_value(axis: str, evaluation: dict, strategy: str, tokens: dict[str, float]) -> float:
+    if axis == "cost":
+        return evaluation["by_strategy"][strategy]["cost_usd"]
+    if axis == "time":
+        return evaluation["by_strategy"][strategy]["mean_case_run_seconds"] / 60
+    return tokens[strategy]
+
 
 def star(cx: float, cy: float, r: float) -> str:
     """A five-pointed star centred on (cx, cy), outer radius r."""
@@ -41,7 +77,8 @@ def nice_step(span: float) -> float:
     return next(m * base for m in (1, 2, 2.5, 5, 10) if m * base >= raw)
 
 
-def figure(series: dict[str, list[tuple[str, float, float]]], k: int) -> str:
+def figure(series: dict[str, list[tuple[str, float, float]]], k: int, axis: str = "cost") -> str:
+    x_title, x_tick, x_text = XAXES[axis]
     width, height = 1000, 600
     left, right, top, bottom = 64, 150, 56, 56
     pw, ph = width - left - right, height - top - bottom
@@ -60,7 +97,7 @@ def figure(series: dict[str, list[tuple[str, float, float]]], k: int) -> str:
 
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" '
            f'width="{width}" height="{height}" font-family="-apple-system, Helvetica Neue, '
-           f'Arial, sans-serif" role="img" aria-label="Top-{k} accuracy against cost for '
+           f'Arial, sans-serif" role="img" aria-label="Top-{k} accuracy against {axis} for '
            f'each strategy">',
            f'<rect width="{width}" height="{height}" fill="{SURFACE}"/>']  # fmt: skip
     lx = float(left)
@@ -82,13 +119,13 @@ def figure(series: dict[str, list[tuple[str, float, float]]], k: int) -> str:
         out.append(f'<line x1="{x(tick):.1f}" x2="{x(tick):.1f}" y1="{top + ph}" '
                    f'y2="{top + ph + 5}" stroke="{AXIS}" stroke-width="1"/><text '
                    f'x="{x(tick):.1f}" y="{top + ph + 20}" font-size="11" text-anchor="middle" '
-                   f'fill="{MUTED}">${tick:.2f}</text>')  # fmt: skip
+                   f'fill="{MUTED}">{x_tick(round(tick, 6))}</text>')  # fmt: skip
         tick += x_step
     out.append(f'<line x1="{left}" x2="{left}" y1="{top}" y2="{top + ph}" stroke="{AXIS}" '
                f'stroke-width="1"/><line x1="{left}" x2="{left + pw}" y1="{top + ph}" '
                f'y2="{top + ph}" stroke="{AXIS}" stroke-width="1"/>')  # fmt: skip
     out.append(f'<text x="{left + pw / 2}" y="{height - 10}" font-size="12" text-anchor="middle" '
-               f'fill="{MUTED}">Cost (US$, all 272 cases)</text>'
+               f'fill="{MUTED}">{html.escape(x_title)}</text>'
                f'<text transform="translate(18 {top + ph / 2}) rotate(-90)" font-size="12" '
                f'text-anchor="middle" fill="{MUTED}">Top-{k} accuracy</text>')  # fmt: skip
 
@@ -100,7 +137,7 @@ def figure(series: dict[str, list[tuple[str, float, float]]], k: int) -> str:
             'stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>'
         )
         for label, c, v in pts:
-            tip = f"{TITLES[s]}, {label} questions: top-{k} {v:.1f}%, ${c:.2f}"
+            tip = f"{TITLES[s]}, {label} questions: top-{k} {v:.1f}%, {x_text(c)}"
             out.append(f'<g><title>{html.escape(tip)}</title>'
                        f'<circle cx="{x(c):.1f}" cy="{y(v):.1f}" r="12" fill="transparent"/>'
                        f'<polygon points="{star(x(c), y(v), 9)}" fill="{COLOURS[s]}" '
@@ -122,32 +159,42 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("stem", type=Path)
     parser.add_argument("runs", nargs="+", metavar="LABEL=EVAL_JSON", help="in budget order")
     parser.add_argument("--k", type=int, default=10, help="top-k accuracy (default 10)")
+    parser.add_argument(
+        "--x",
+        choices=list(XAXES),
+        default="cost",
+        help="x-axis: total cost, mean tokens or mean run time per case run",
+    )
     parser.add_argument("--title", default="")
     args = parser.parse_args(argv)
 
     specs = [(label, Path(path)) for label, _, path in (r.partition("=") for r in args.runs)]
     evals = [(label, json.loads(path.read_text(encoding="utf-8"))) for label, path in specs]
+    tokens = [mean_tokens(Path(e["record"])) if args.x == "tokens" else {} for _, e in evals]
     series = {
-        s: [(label, e["by_strategy"][s]["cost_usd"],
-             100 * e["by_strategy"][s]["metrics"][f"hit_rate@{args.k}"]) for label, e in evals]
+        s: [(label, x_value(args.x, e, s, t),
+             100 * e["by_strategy"][s]["metrics"][f"hit_rate@{args.k}"])
+            for (label, e), t in zip(evals, tokens, strict=True)]
         for s in TITLES if all(s in e["by_strategy"] for _, e in evals)
     }  # fmt: skip
-    svg = figure(series, args.k)
+    svg = figure(series, args.k, args.x)
+    x_title, _, x_text = XAXES[args.x]
     stem = args.stem
     stem.parent.mkdir(parents=True, exist_ok=True)
     stem.with_suffix(".svg").write_text(svg, encoding="utf-8")
     stem.with_suffix(".json").write_text(json.dumps(
-        {"k": args.k, "runs": [{"label": label, "evaluation": str(path)} for label, path in specs],
-         "by_strategy": {s: [{"questions": lbl, "cost_usd": c, f"top{args.k}_pct": v}
+        {"k": args.k, "x": args.x, "x_title": x_title,
+         "runs": [{"label": label, "evaluation": str(path)} for label, path in specs],
+         "by_strategy": {s: [{"questions": lbl, args.x: c, f"top{args.k}_pct": v}
                              for lbl, c, v in pts] for s, pts in series.items()}},
         indent=2) + "\n", encoding="utf-8")  # fmt: skip
     rows = "".join(
-        f"<tr><td>{html.escape(TITLES[s])}</td><td>{lbl}</td><td>${c:.2f}</td>"
+        f"<tr><td>{html.escape(TITLES[s])}</td><td>{lbl}</td><td>{x_text(c)}</td>"
         f"<td>{v:.1f}%</td></tr>"
         for s, pts in series.items()
         for lbl, c, v in pts
     )
-    title = args.title or f"Top-{args.k} accuracy against cost"
+    title = args.title or f"Top-{args.k} accuracy against {args.x}"
     page = stem.with_suffix(".html")
     page.write_text(
         f"""<!doctype html><html><head><meta charset="utf-8"><title>Accuracy and cost</title>
@@ -160,10 +207,11 @@ th, td {{ border-bottom: 1px solid {GRID}; padding: 4px 8px; text-align: right; 
 th:first-child, td:first-child {{ text-align: left; }}
 td {{ font-variant-numeric: tabular-nums; }}</style></head><body>
 <h1>{html.escape(title)}</h1>
-<p>{html.escape(", ".join(f"{label} questions: {path.name}" for label, path in specs))}. Cost:
-strategy and environment calls over all 272 case runs. Top {args.k}: the true diagnosis's
+<p>{html.escape(", ".join(f"{label} questions: {path.name}" for label, path in specs))}.
+x: {html.escape(x_title)}. Top {args.k}: the true diagnosis's
 ICD-11 code is among the strategy's first {args.k} diagnoses (exact code match).</p>
-{svg}<table><thead><tr><th>Strategy</th><th>Questions</th><th>Cost</th><th>Top {args.k}</th>
+{svg}<table><thead><tr><th>Strategy</th><th>Questions</th>
+<th>{html.escape(args.x.title())}</th><th>Top {args.k}</th>
 </tr></thead><tbody>{rows}</tbody></table></body></html>""",
         encoding="utf-8",
     )
