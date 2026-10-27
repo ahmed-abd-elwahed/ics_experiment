@@ -71,8 +71,10 @@
   .show-btn .exit { display: none; }
   .is-fullscreen .show-btn .enter { display: none; }
   .is-fullscreen .show-btn .exit { display: inline; }
-  .is-fullscreen.idle .show-btn,
-  .is-fullscreen.idle .reveal .controls { opacity: 0; pointer-events: none; }
+  /* Full screen shows the slide alone: no button, arrows or slide number (Esc or F leaves). */
+  .is-fullscreen .show-btn,
+  .is-fullscreen .reveal .controls,
+  .is-fullscreen .reveal .slide-number { display: none !important; }
   .is-fullscreen.idle, .is-fullscreen.idle * { cursor: none !important; }
   .blank-screen {
     position: fixed; inset: 0; z-index: 50; display: none; cursor: pointer;
