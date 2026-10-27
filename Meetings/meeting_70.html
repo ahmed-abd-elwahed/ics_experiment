@@ -88,6 +88,37 @@
   .toast.on { opacity: 1; }
   @media (prefers-reduced-motion: reduce) { .show-btn, .toast { transition: none; } }
 
+
+  /* Cover: a doctor walking along the top of the title box */
+  .doc-walker {
+    position: absolute; left: 0; bottom: 100%; width: 100px; height: 152px;
+    margin-bottom: -1px; pointer-events: none;
+    animation: doc-walk 16s linear infinite;
+  }
+  .doc-face { display: block; overflow: visible; transform-origin: 50% 50%; }
+  .doc-walker .doc-leg, .doc-walker .doc-arm { transform-box: view-box; }
+  .doc-walker .doc-leg { transform-origin: 50px 100px; }
+  .doc-walker .doc-arm { transform-origin: 50px 46px; }
+  .doc-leg-front, .doc-arm-back { animation: doc-swing 0.8s ease-in-out infinite alternate; }
+  .doc-leg-back, .doc-arm-front { animation: doc-swing 0.8s ease-in-out infinite alternate-reverse; }
+  .doc-walker svg { animation-name: doc-turn, doc-bob; animation-duration: 16s, 0.4s; animation-timing-function: step-end, ease-in-out;
+    animation-iteration-count: infinite, infinite; animation-direction: normal, alternate; }
+  @keyframes doc-walk {
+    0%   { transform: translateX(40px); }
+    48%  { transform: translateX(1356px); }
+    50%  { transform: translateX(1356px); }
+    98%  { transform: translateX(40px); }
+    100% { transform: translateX(40px); }
+  }
+  @keyframes doc-turn { 0% { scale: 1 1; } 49% { scale: -1 1; } 99% { scale: 1 1; } }
+  @keyframes doc-bob { from { translate: 0 0; } to { translate: 0 -3px; } }
+  @keyframes doc-swing { from { rotate: -22deg; } to { rotate: 22deg; } }
+  @media (prefers-reduced-motion: reduce) {
+    .doc-walker, .doc-walker * { animation: none !important; }
+    .doc-walker { transform: translateX(1356px); }
+  }
+  .thumb-slide .doc-walker, .thumb-slide .doc-walker * { animation-play-state: paused; }
+
   /* Slide strip: shown below the deck when not in full screen */
   :root { --strip-h: 136px; }
   html:not(.is-fullscreen) .reveal { height: calc(100% - var(--strip-h)); }
@@ -143,7 +174,24 @@
 <div class="slides">
 
 <section data-background-color="#cfe3d3" id="cover" data-transition="fade" style="display:flex; flex-direction:column; gap:24px; align-items:center; justify-content:center; padding:96px; background:#cfe3d3">
-  <div style="display:flex; flex-direction:column; align-items:center; padding:48px; background:#6dbb86; border:2px solid #141413; border-radius:4px">
+  <div style="position:relative; display:flex; flex-direction:column; align-items:center; padding:48px; background:#6dbb86; border:2px solid #141413; border-radius:4px">
+    <div class="doc-walker" aria-hidden="true">
+      <svg class="doc-face" viewBox="0 0 100 152" width="100" height="152">
+        <g class="doc-arm doc-arm-back" stroke="#141413" stroke-width="4" stroke-linecap="round"><line x1="50" y1="46" x2="50" y2="84"/></g>
+        <g class="doc-leg doc-leg-back" stroke="#141413" stroke-width="4" stroke-linecap="round"><line x1="50" y1="100" x2="50" y2="148"/><line x1="50" y1="148" x2="58" y2="148"/></g>
+        <path d="M37 42 Q50 36 63 42 L68 104 L32 104 Z" fill="#FCFCFB" stroke="#141413" stroke-width="4" stroke-linejoin="round"/>
+        <line x1="50" y1="42" x2="50" y2="104" stroke="#141413" stroke-width="2.5"/>
+        <rect x="55" y="72" width="9" height="7" rx="1.5" fill="none" stroke="#141413" stroke-width="2"/>
+        <path d="M44 41 Q43 60 50 64 Q57 60 56 41" fill="none" stroke="#0E7C8C" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="50" cy="66" r="4" fill="#0E7C8C" stroke="#141413" stroke-width="1.5"/>
+        <g class="doc-leg doc-leg-front" stroke="#141413" stroke-width="4" stroke-linecap="round"><line x1="50" y1="100" x2="50" y2="148"/><line x1="50" y1="148" x2="58" y2="148"/></g>
+        <g class="doc-arm doc-arm-front" stroke="#141413" stroke-width="4" stroke-linecap="round"><line x1="50" y1="46" x2="50" y2="84"/></g>
+        <circle cx="50" cy="22" r="14" fill="#FCFCFB" stroke="#141413" stroke-width="4"/>
+        <path d="M37 17 Q50 8 63 17" fill="none" stroke="#141413" stroke-width="3"/>
+        <circle cx="61" cy="13" r="5" fill="#DDDCD6" stroke="#141413" stroke-width="2"/>
+        <circle cx="57" cy="23" r="1.8" fill="#141413"/>
+      </svg>
+    </div>
     <h1 style="width:1400px; font-family:Newsreader, Georgia, serif; font-size:96px; font-weight:500; line-height:1.08; text-align:center; color:#141413">Information Collection Strategies Experiment</h1>
   </div>
   <p style="width:1400px; font-family:Newsreader, Georgia, serif; font-size:52px; font-weight:400; line-height:1.23; text-align:center; color:#141413">Scaling consistency and case complexity</p>
