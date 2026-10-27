@@ -23,7 +23,9 @@ bench_runs/
 # Records over GitHub's 100 MB limit are committed gzipped (<record>.json.gz)
 records/strategies_272_8it.json
 records/strategies_272_16it.json
-# v2 repetitions: the 8- and 16-question records are over 100 MB; commit them gzipped
-records/strategies_272_v2_rep*_8it.json
-records/strategies_272_v2_rep*_16it.json
-records/strategies_272_v2_rep*_32it.json
+# v2 repetitions: every record is committed gzipped (the 8- to 32-question ones are over 100 MB).
+# Runs with failed case runs are committed as their _merged record; the raw record and the
+# _rerun_ parts it was merged from stay local.
+records/strategies_272_v2_rep*it.json
+records/strategies_272_v2_rep*it_merged.json
+records/strategies_272_v2_rep*it_rerun_*.json

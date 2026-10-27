@@ -29,8 +29,22 @@ from pathlib import Path
 from typing import Any
 
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-# Ordinal blue ramp (steps 250, 450, 650), validated: monotone lightness, light end 2.06:1.
-RAMP = ("#86b6ef", "#2a78d6", "#104281")
+# Ordinal blue ramps by number of budgets, validated (--ordinal): monotone lightness, light end
+# 2.06:1. Three budgets: steps 250, 450, 650; four: steps 250, 400, 550, 700.
+RAMPS = {
+    1: ("#2a78d6",),
+    2: ("#86b6ef", "#104281"),
+    3: ("#86b6ef", "#2a78d6", "#104281"),
+    4: ("#86b6ef", "#3987e5", "#1c5cab", "#0d366b"),
+}
+
+
+def ramp(n: int) -> tuple[str, ...]:
+    if n not in RAMPS:
+        raise SystemExit(f"plot_topk draws 1 to {max(RAMPS)} budgets, got {n}")
+    return RAMPS[n]
+
+
 INK, MUTED, GRID, SURFACE = "#1f1f1e", "#5e5d59", "#e4e3df", "#fcfcfb"
 TITLES = {
     "hypothesis": "1. Hypothesis-driven",
@@ -137,27 +151,41 @@ def figure(runs: list[Run], only: str | None = None) -> str:
     cols = min(2, len(strategies))
     rows = math.ceil(len(strategies) / cols)
     stacked = only is not None
-    legend_h = 12 + 18 * len(runs) if stacked else 36
-    width, height = cols * w, rows * h + legend_h
+    width = cols * w
+    repeated = any(len(es) > 1 for _, es in runs)
+
+    def legend_label(name: str, es: list[dict[str, Any]]) -> str:
+        if not repeated:
+            return name
+        return f"{name} (mean of {len(es)} runs ± SD)" if len(es) > 1 else f"{name} (1 run)"
+
+    labels = [legend_label(name, es) for name, es in runs]
+    slots, lx, ly = [], 46.0, 18  # (x, y) of each legend entry; wraps when a row is full
+    for label in labels:
+        step = 30 + 8 * len(label) + 28
+        if not stacked and lx > 46 and lx + 30 + 6.5 * len(label) > width - 10:
+            lx, ly = 46.0, ly + 18
+        slots.append((lx, ly))
+        if stacked:
+            ly += 18
+        else:
+            lx += step
+    legend_h = slots[-1][1] + (12 if stacked else 18)
+    height = rows * h + legend_h
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" '
              f'width="{width}" height="{height}" font-family="-apple-system, Helvetica Neue, '
              f'Arial, sans-serif" role="img" aria-label="Top-k accuracy by strategy for '
              f'{len(runs)} iteration budgets">',
              f'<rect width="{width}" height="{height}" fill="{SURFACE}"/>']  # fmt: skip
-    lx = 46.0
-    repeated = any(len(es) > 1 for _, es in runs)
-    for row, ((name, es), colour) in enumerate(zip(runs, RAMP, strict=False)):  # legend
-        label = f"{name} (mean of {len(es)} runs ± SD)" if repeated else name
-        ly = 18 + 18 * row if stacked else 18
+    colours = ramp(len(runs))
+    for label, (lx, ly), colour in zip(labels, slots, colours, strict=True):  # legend
         parts.append(f'<line x1="{lx}" x2="{lx + 22}" y1="{ly}" y2="{ly}" stroke="{colour}" '
                      f'stroke-width="2"/><circle cx="{lx + 11}" cy="{ly}" r="4" fill="{colour}" '
                      f'stroke="{SURFACE}" stroke-width="2"/><text x="{lx + 30}" y="{ly + 4}" '
                      f'font-size="12" fill="{INK}">{html.escape(label)}</text>')  # fmt: skip
-        if not stacked:
-            lx += 30 + 8 * len(label) + 28
     for i, strategy in enumerate(strategies):
         series = [(label, values(es, strategy), spread(es, strategy), colour)
-                  for (label, es), colour in zip(runs, RAMP, strict=False)]  # fmt: skip
+                  for (label, es), colour in zip(runs, colours, strict=True)]  # fmt: skip
         parts.append(panel((i % cols) * w, legend_h + (i // cols) * h, w, h,
                            TITLES[strategy], series, y_max))  # fmt: skip
     return "".join(parts) + "</svg>"
