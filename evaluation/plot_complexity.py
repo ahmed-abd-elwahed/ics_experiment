@@ -8,9 +8,10 @@ CUTS are the lower bounds of every bucket after the first, comma-separated: "12,
 gives 0-11, 12-15, 16-20, 21-26, 27-60. One group of bars per bucket (x), one bar per strategy,
 y = top-k accuracy in % (default k = 1). With one run, each bar has its 95% Wilson interval.
 With several runs (in budget order), each bar nests them: every run is a bar from zero to its
-accuracy in its own shade of the strategy's hue (light = first run), the tallest drawn at the
-back, so each shade ends exactly at its run's accuracy, also when a larger budget scores lower.
-The intervals of every run are in the table. Writes OUT_STEM.svg,
+accuracy in its run's colour (the same for every strategy: gray, aqua, orange), the tallest drawn
+at the back, so each colour ends exactly at its run's accuracy, also when a larger budget scores
+lower; a number under each bar names its strategy. On an exact tie the earlier run is drawn in
+front. The intervals of every run are in the table. Writes OUT_STEM.svg,
 OUT_STEM.html (with the values as a table), OUT_STEM.pdf and OUT_STEM.png (printed by headless
 Google Chrome, like plot_topk). No API calls.
 """
@@ -34,13 +35,10 @@ from evaluation.plot_topk import CHROME, GRID, INK, MUTED, SURFACE, TITLES
 # under 3:1 on the surface, so the figure ships with its table.
 COLOURS = {"hypothesis": "#2a78d6", "knowledge": "#eb6834", "channel": "#1baf7a",
            "sequence": "#eda100"}  # fmt: skip
-# One ordinal ramp per strategy for up to three runs: the slot colour, then mixed with black
-# 28% and 52%. Each validated with --ordinal on the light surface (monotone lightness, visible
-# steps, light end >= 2:1, one hue).
-RAMPS = {"hypothesis": ("#2a78d6", "#1e569a", "#143a67"),
-         "knowledge": ("#eb6834", "#a94b25", "#713219"),
-         "channel": ("#1baf7a", "#137e58", "#0d543b"),
-         "sequence": ("#eda100", "#ab7400", "#724d00")}  # fmt: skip
+# With several runs, one colour per run for every strategy: a neutral dark gray for the first,
+# then the palette's aqua and orange (slots 3 and 2). Validated adjacent on the light surface:
+# CVD dE 9.2, normal-vision >= 20; the gray fails only the chroma floor, as a neutral should.
+RUN_COLOURS = ("#6b6a65", "#1baf7a", "#eb6834")
 MAX_SCORE = 60
 
 
@@ -97,8 +95,9 @@ def figure(labels: list[str], runs: list[tuple[str, dict[str, list[dict[str, flo
            sizes: list[int], k: int) -> str:  # fmt: skip
     strategies = list(runs[0][1])
     single = len(runs) == 1
-    width, height = 1000, 520 if single else 548
-    left, right, bottom = 56, 20, 64
+    width, height = 1000, 520 if single else 562
+    left, right = 56, 20
+    bottom = 64 if single else 78
     top = 64 if single else 92
     pw, ph = width - left - right, height - top - bottom
     peak = max(c["hi" if single else "pct"] for _, t in runs for v in t.values() for c in v)
@@ -111,7 +110,7 @@ def figure(labels: list[str], runs: list[tuple[str, dict[str, list[dict[str, flo
         return top + ph - v / y_max * ph
 
     def colour(s: str, j: int) -> str:
-        return COLOURS[s] if single else RAMPS[s][j]
+        return COLOURS[s] if single else RUN_COLOURS[j]
 
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" '
            f'width="{width}" height="{height}" font-family="-apple-system, Helvetica Neue, '
@@ -119,20 +118,24 @@ def figure(labels: list[str], runs: list[tuple[str, dict[str, list[dict[str, flo
            f'INTERMED complexity bucket">',
            f'<rect width="{width}" height="{height}" fill="{SURFACE}"/>']  # fmt: skip
     lx = float(left)
-    sw = 12 if single else 10
-    for s in strategies:  # legend, in strategy order; with runs, one swatch per run
-        for j in range(len(runs)):
-            out.append(f'<rect x="{lx + j * (sw + 2)}" y="14" width="{sw}" height="12" rx="2" '
-                       f'fill="{colour(s, j)}"/>')  # fmt: skip
-        lx += len(runs) * (sw + 2) + 4
-        out.append(f'<text x="{lx}" y="24" font-size="12" fill="{INK}">'
-                   f'{html.escape(TITLES[s])}</text>')  # fmt: skip
-        lx += 7.2 * len(TITLES[s]) + 26
-    if not single:  # the shade key, in budget order
-        key = "Shades, light to dark: " + ", ".join(label for label, _ in runs)
+    if single:  # legend, in strategy order
+        for s in strategies:
+            out.append(f'<rect x="{lx}" y="14" width="12" height="12" rx="2" '
+                       f'fill="{COLOURS[s]}"/><text x="{lx + 18}" y="24" font-size="12" '
+                       f'fill="{INK}">{html.escape(TITLES[s])}</text>')  # fmt: skip
+            lx += 18 + 7.2 * len(TITLES[s]) + 26
+    else:  # legend, in budget order, then the strategy key
+        for j, (rl, _) in enumerate(runs):
+            out.append(f'<rect x="{lx}" y="14" width="12" height="12" rx="2" '
+                       f'fill="{RUN_COLOURS[j]}"/><text x="{lx + 18}" y="24" font-size="12" '
+                       f'fill="{INK}">{html.escape(rl)}</text>')  # fmt: skip
+            lx += 18 + 7.2 * len(rl) + 26
+        key = "Bars in each group: " + " · ".join(
+            TITLES[s].replace(". ", " ", 1) for s in strategies
+        )
         out.append(
-            f'<text x="{left}" y="48" font-size="11" fill="{MUTED}">'
-            f"{html.escape(key)}. Each shade ends at that run's accuracy.</text>"
+            f'<text x="{left}" y="48" font-size="11" fill="{MUTED}">{html.escape(key)}. '
+            f"Each colour ends at that run's accuracy.</text>"
         )
     for tick in range(0, int(y_max) + 1, 10):
         out.append(f'<line x1="{left}" x2="{left + pw}" y1="{y(tick):.1f}" y2="{y(tick):.1f}" '
@@ -144,10 +147,11 @@ def figure(labels: list[str], runs: list[tuple[str, dict[str, list[dict[str, flo
     base = y(0)
     for g, label in enumerate(labels):
         gx = left + g * group_w + (group_w - span) / 2
-        out.append(f'<text x="{left + (g + 0.5) * group_w:.1f}" y="{top + ph + 20}" '
+        ly = top + ph + (20 if single else 34)
+        out.append(f'<text x="{left + (g + 0.5) * group_w:.1f}" y="{ly}" '
                    f'font-size="12" font-weight="600" text-anchor="middle" fill="{INK}">'
                    f'{label}</text><text x="{left + (g + 0.5) * group_w:.1f}" '
-                   f'y="{top + ph + 36}" font-size="11" text-anchor="middle" fill="{MUTED}">'
+                   f'y="{ly + 16}" font-size="11" text-anchor="middle" fill="{MUTED}">'
                    f'{sizes[g]} cases</text>')  # fmt: skip
         for i, s in enumerate(strategies):
             x0 = gx + i * (bar_w + 2)
@@ -156,7 +160,8 @@ def figure(labels: list[str], runs: list[tuple[str, dict[str, list[dict[str, flo
                 f"{rl} {c['pct']:.1f}% ({c['hits']}/{c['n']})" for _, rl, c in cells
             )
             parts = [f"<g><title>{html.escape(tip)}</title>"]
-            ordered = sorted(cells, key=lambda jc: -jc[2]["pct"])  # tallest at the back
+            # Tallest at the back; on a tie the later run goes behind (the earlier stays visible).
+            ordered = sorted(cells, key=lambda jc: (-jc[2]["pct"], -jc[0]))
             for n, (j, _, c) in enumerate(ordered):
                 parts.append(f'<path d="{bar_path(x0, bar_w, y(c["pct"]), base)}" '
                              f'fill="{colour(s, j)}"/>')  # fmt: skip
@@ -172,6 +177,10 @@ def figure(labels: list[str], runs: list[tuple[str, dict[str, list[dict[str, flo
                              f'<line x1="{cx - 4:.1f}" x2="{cx + 4:.1f}" y1="{y(c["hi"]):.1f}" '
                              f'y2="{y(c["hi"]):.1f}" stroke="{INK}" stroke-width="1.2" '
                              f'stroke-opacity="0.55"/>')  # fmt: skip
+            if not single:  # the strategy's number under its bar
+                parts.append(f'<text x="{x0 + bar_w / 2:.1f}" y="{base + 14:.1f}" '
+                             f'font-size="10" text-anchor="middle" fill="{MUTED}">'
+                             f'{TITLES[s].split(".")[0]}</text>')  # fmt: skip
             out.append("".join(parts) + "</g>")
     out.append(f'<line x1="{left}" x2="{left + pw}" y1="{base:.1f}" y2="{base:.1f}" '
                f'stroke="{MUTED}" stroke-width="1"/>')  # fmt: skip
@@ -260,7 +269,7 @@ match). Brackets{" and whiskers" if len(runs) == 1 else ""}: 95% Wilson interval
     for flag, out in (("--print-to-pdf", stem.with_suffix(".pdf")),
                       ("--screenshot", stem.with_suffix(".png"))):  # fmt: skip
         extra = (
-            [f"--window-size=1000,{520 if len(runs) == 1 else 548}", "--hide-scrollbars"]
+            [f"--window-size=1000,{520 if len(runs) == 1 else 562}", "--hide-scrollbars"]
             if flag == "--screenshot"
             else []
         )
