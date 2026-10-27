@@ -498,3 +498,12 @@ in [environment/NOTES.md](environment/NOTES.md).
 | Strategy colours as in the complexity figures; direct labels at each line's end; the budgets are stated once under the legend ("left to right: 4, 8, 16") instead of a number at every star. | Cost always rises with the budget, so the order along a line is unambiguous; the per-star numbers collided at 4 questions, where the stars sit within $0.30 of each other. |
 | The same plot for top-5 and top-1 (`records/plots/top5_vs_cost.*`, `top1_vs_cost.*`), same runs, `--k 5` and `--k 1`. | Asked for. |
 | The top-10 plot also against tokens and run time (`records/plots/top10_vs_tokens.*`, `top10_vs_time.*`), same runs, new `plot_cost --x tokens` / `--x time`. Tokens: mean prompt + completion tokens per case run over all its LLM calls, strategy (questions and diagnosis) and environment, counted from the run records. Run time: the evaluation's mean seconds per case run, in minutes. | Asked for: the x-axis "once with the average # of tokens and the average run time", y kept at top-10. Tokens cover the same calls as the cost. Run time is wall-clock, so it includes waits for the shared LitSense rate limit (one request per second across all runs). |
+
+### One 32-question run on v2 (2026-10-27)
+
+| Decision | Why |
+|---|---|
+| One run at 32 questions on dataset v2, with repetition 1's config (`configs/strategies_272_v2_rep1.json`, seed 7) and `--max-iterations 32`, recorded as `records/strategies_272_v2_rep1_32it.json`. Estimated at about $50 ($42–64) and 6–8 hours. | Asked for: "a 32 iterations run, but only for one time"; the estimate was approved. It extrapolates each strategy's cost per question (which rose 4–17% from 8 to 16 questions) and the questions it uses (Knowledge nearly always all, Hypothesis and Sequence stopping earlier); $64 is every strategy asking all 32. |
+| It is queued to start when `run_v2_repetitions.sh` exits (it waits on that process), not in parallel. | LitSense allows one request per second in total. |
+| Its raw record is git-ignored and is to be committed gzipped. | Over GitHub's 100 MB limit, like the 16-question records. |
+| In the plots it is a single run, a line without a band. | One run has no spread to show. |

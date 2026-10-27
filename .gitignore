@@ -26,3 +26,4 @@ records/strategies_272_16it.json
 # v2 repetitions: the 8- and 16-question records are over 100 MB; commit them gzipped
 records/strategies_272_v2_rep*_8it.json
 records/strategies_272_v2_rep*_16it.json
+records/strategies_272_v2_rep*_32it.json
