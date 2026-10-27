@@ -213,7 +213,7 @@
 <div class="reveal">
 <div class="slides">
 
-<section data-background-color="#cfe3d3" id="cover" data-transition="fade" style="display:flex; flex-direction:column; gap:24px; align-items:center; justify-content:center; padding:96px; background:#cfe3d3">
+<section data-background-color="#cfe3d3" id="cover" style="display:flex; flex-direction:column; gap:24px; align-items:center; justify-content:center; padding:96px; background:#cfe3d3">
   <div style="position:relative; display:flex; flex-direction:column; align-items:center; padding:48px; background:#6dbb86; border:2px solid #141413; border-radius:4px">
     <div class="doc-walker" aria-hidden="true">
       <svg class="doc-face" viewBox="0 0 100 152" width="100" height="152">
@@ -276,25 +276,25 @@
   <aside class="notes">This deck covers two things: how consistent the scaling results are when the experiment is run several times, and how accuracy relates to how complex a case is, measured with the INTERMED score.</aside>
 </section>
 
-<section data-background-color="#CFE3D3" id="question" data-transition="fade" style="background:#CFE3D3;color:#141413;font-family:'DM Sans', Arial, sans-serif;padding:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px">
+<section data-background-color="#CFE3D3" id="question" style="background:#CFE3D3;color:#141413;font-family:'DM Sans', Arial, sans-serif;padding:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px">
 <h1 style="font-family:'Newsreader', Georgia, serif;font-size:96px;line-height:104px;font-weight:500;text-align:center;width:1400px">Research Question</h1>
 <p style="font-family:'Newsreader', Georgia, serif;font-size:52px;line-height:64px;font-weight:400;text-align:center;width:1500px">What is the most accurate information collection strategy for a computer-based diagnostic system?</p>
 <aside class="notes">Every result in this deck serves this question: which way of collecting information about a patient leads a computer-based system to the right diagnosis most often.</aside>
 </section>
 
-<section data-background-color="#F1F5F0" id="overview" data-transition="fade" style="background:#F1F5F0;color:#141413;font-family:'DM Sans', Arial, sans-serif;padding:96px;display:flex;flex-direction:column;gap:48px">
+<section data-background-color="#F1F5F0" id="overview" style="background:#F1F5F0;color:#141413;font-family:'DM Sans', Arial, sans-serif;padding:96px;display:flex;flex-direction:column;gap:48px">
 <h2 style="font-family:'Newsreader', Georgia, serif;font-size:56px;line-height:64px;font-weight:500">Overview</h2>
 <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgMTcyOCA3NzYiIHJvbGU9ImltZyIgYXJpYS1sYWJlbGxlZGJ5PSJ0IGQiIGZvbnQtZmFtaWx5PSInRE0gU2FucycsIHN5c3RlbS11aSwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzNCIgZm9udC13ZWlnaHQ9IjUwMCIgZmlsbD0iIzE0MTQxMyI+CiAgPHRpdGxlIGlkPSJ0Ij5GcmFtZXdvcmsgb3ZlcnZpZXc8L3RpdGxlPgogIDxkZXNjIGlkPSJkIj5BbiBpbmZvcm1hdGlvbiBjb2xsZWN0aW9uIHN0cmF0ZWd5IHNlbmRzIHF1ZXJpZXMgdG8gYW4gTExNIGluc2lkZSBhIHNpbXVsYXRlZCBlbnZpcm9ubWVudC4gVGhlIExMTSBjb25zdWx0cyB0aGUgY2FzZSBzdHVkeSBhbmQgdGhlIGxpdGVyYXR1cmUsIGFuZCByZXR1cm5zIGFuc3dlcnMuPC9kZXNjPgoKICA8ZGVmcz4KICAgIDxtYXJrZXIgaWQ9ImFycm93IiB2aWV3Qm94PSIwIDAgMTAgMTAiIHJlZlg9IjkiIHJlZlk9IjUiIG1hcmtlcldpZHRoPSI2IiBtYXJrZXJIZWlnaHQ9IjYiIG9yaWVudD0iYXV0by1zdGFydC1yZXZlcnNlIj4KICAgICAgPHBhdGggZD0iTTAsMSBMMTAsNSBMMCw5IFoiIGZpbGw9IiMxNDE0MTMiLz4KICAgIDwvbWFya2VyPgoKICAgIDwhLS0gUm9ib3QsIGNlbnRyZWQgb24gMCwwLiBUaGUgdG9yc28gdGFrZXMgdGhlIGBjb2xvcmAgb2YgdGhlIDx1c2U+LiAtLT4KICAgIDxnIGlkPSJyb2JvdCIgc3Ryb2tlPSIjMTQxNDEzIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+CiAgICAgIDxsaW5lIHgxPSIwIiB5MT0iLTEyNyIgeDI9IjAiIHkyPSItMTA0Ii8+CiAgICAgIDxjaXJjbGUgY3g9IjAiIGN5PSItMTM2IiByPSI5IiBmaWxsPSIjRkZGRkZGIi8+CiAgICAgIDxyZWN0IHg9Ii00OCIgeT0iLTEwNCIgd2lkdGg9Ijk2IiBoZWlnaHQ9IjcyIiByeD0iMTYiIGZpbGw9IiNGRkZGRkYiLz4KICAgICAgPGNpcmNsZSBjeD0iLTIwIiBjeT0iLTY4IiByPSIxMSIgZmlsbD0iI0ZGRkZGRiIvPgogICAgICA8Y2lyY2xlIGN4PSIyMCIgY3k9Ii02OCIgcj0iMTEiIGZpbGw9IiNGRkZGRkYiLz4KICAgICAgPGNpcmNsZSBjeD0iLTIwIiBjeT0iLTY4IiByPSI0IiBmaWxsPSIjMTQxNDEzIiBzdHJva2U9Im5vbmUiLz4KICAgICAgPGNpcmNsZSBjeD0iMjAiIGN5PSItNjgiIHI9IjQiIGZpbGw9IiMxNDE0MTMiIHN0cm9rZT0ibm9uZSIvPgogICAgICA8cmVjdCB4PSItMTQiIHk9Ii0zMiIgd2lkdGg9IjI4IiBoZWlnaHQ9IjEyIiBmaWxsPSIjRkZGRkZGIi8+CiAgICAgIDxwYXRoIGQ9Ik0tNjAsMCBILTg2IFYtNDAiIGZpbGw9Im5vbmUiLz4KICAgICAgPHBhdGggZD0iTS0xMDAsLTU4IGExNCwxNCAwIDAgMCAyOCwwIiBmaWxsPSJub25lIi8+CiAgICAgIDxwYXRoIGQ9Ik02MCwwIEg4NiBWNDQiIGZpbGw9Im5vbmUiLz4KICAgICAgPHBhdGggZD0iTTcyLDYyIGExNCwxNCAwIDAgMSAyOCwwIiBmaWxsPSJub25lIi8+CiAgICAgIDxyZWN0IHg9Ii02MCIgeT0iLTIwIiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEwMCIgcng9IjgiIGZpbGw9ImN1cnJlbnRDb2xvciIvPgogICAgICA8cG9seWxpbmUgcG9pbnRzPSItNDQsMzAgLTI0LDMwIC0xMiw4IDIsNTIgMTQsMjIgMjQsMzAgNDQsMzAiIGZpbGw9Im5vbmUiLz4KICAgICAgPHJlY3QgeD0iLTgyIiB5PSI4OCIgd2lkdGg9IjE2NCIgaGVpZ2h0PSI0OCIgcng9IjI0IiBmaWxsPSIjRkZGRkZGIi8+CiAgICAgIDxjaXJjbGUgY3g9Ii00NCIgY3k9IjExMiIgcj0iNiIgZmlsbD0iIzE0MTQxMyIgc3Ryb2tlPSJub25lIi8+CiAgICAgIDxjaXJjbGUgY3g9IjAiIGN5PSIxMTIiIHI9IjYiIGZpbGw9IiMxNDE0MTMiIHN0cm9rZT0ibm9uZSIvPgogICAgICA8Y2lyY2xlIGN4PSI0NCIgY3k9IjExMiIgcj0iNiIgZmlsbD0iIzE0MTQxMyIgc3Ryb2tlPSJub25lIi8+CiAgICA8L2c+CiAgPC9kZWZzPgoKICA8IS0tIFNpbXVsYXRlZCBlbnZpcm9ubWVudCAtLT4KICA8cmVjdCB4PSIyNCIgeT0iNzIiIHdpZHRoPSI4MjAiIGhlaWdodD0iNjgwIiByeD0iMjQiIGZpbGw9IiNFQ0VERUUiIHN0cm9rZT0iIzE0MTQxMyIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtZGFzaGFycmF5PSIxNCAxMiIvPgogIDxyZWN0IHg9IjIxOSIgeT0iNDUiIHdpZHRoPSI0MzAiIGhlaWdodD0iNTQiIHJ4PSIxMiIgZmlsbD0iI0ZDRTVCNCIgc3Ryb2tlPSIjMTQxNDEzIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8dGV4dCB4PSI0MzQiIHk9IjgzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5TaW11bGF0ZWQgZW52aXJvbm1lbnQ8L3RleHQ+CgogIDwhLS0gQ2FzZSBzdHVkeSAtLT4KICA8cmVjdCB4PSI3NyIgeT0iMTY0IiB3aWR0aD0iMjI2IiBoZWlnaHQ9IjU0IiByeD0iMTIiIGZpbGw9IiNGQ0U1QjQiIHN0cm9rZT0iIzE0MTQxMyIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPHRleHQgeD0iMTkwIiB5PSIyMDIiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkNhc2Ugc3R1ZHk8L3RleHQ+CiAgPGcgc3Ryb2tlPSIjMTQxNDEzIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+CiAgICA8cGF0aCBkPSJNMTMwLDI0MiBIMjE4IEwyNTAsMjc0IFYzOTIgSDEzMCBaIiBmaWxsPSIjQzlDOEUwIi8+CiAgICA8cGF0aCBkPSJNMjE4LDI0MiBWMjc0IEgyNTAiIGZpbGw9IiNGRkZGRkYiLz4KICAgIDxwYXRoIGQ9Ik0xNTIsMjk4IEgxOTAgTTE1MiwzMjIgSDIyOCBNMTUyLDM0NiBIMjI4IE0xNTIsMzcwIEgyMjgiIGZpbGw9Im5vbmUiLz4KICA8L2c+CgogIDwhLS0gVGhlIGxpdGVyYXR1cmUgLS0+CiAgPHJlY3QgeD0iNDAiIHk9IjQ3MCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSI1NCIgcng9IjEyIiBmaWxsPSIjRkNFNUI0IiBzdHJva2U9IiMxNDE0MTMiIHN0cm9rZS13aWR0aD0iMiIvPgogIDx0ZXh0IHg9IjE5MCIgeT0iNTA4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5UaGUgbGl0ZXJhdHVyZTwvdGV4dD4KICA8bGluZSB4MT0iMjIyIiB5MT0iNjQyIiB4Mj0iMjYyIiB5Mj0iNjgyIiBzdHJva2U9IiMxNDE0MTMiIHN0cm9rZS13aWR0aD0iMjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxsaW5lIHgxPSIyMjIiIHkxPSI2NDIiIHgyPSIyNjIiIHkyPSI2ODIiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSIxOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGNpcmNsZSBjeD0iMTgwIiBjeT0iNjAwIiByPSI1NCIgZmlsbD0iI0IzREZFMiIgc3Ryb2tlPSIjMTQxNDEzIiBzdHJva2Utd2lkdGg9IjMiLz4KCiAgPCEtLSBMTE0gLS0+CiAgPHJlY3QgeD0iNTY0IiB5PSIxOTIiIHdpZHRoPSIxMTIiIGhlaWdodD0iNTQiIHJ4PSIxMiIgZmlsbD0iI0ZDRTVCNCIgc3Ryb2tlPSIjMTQxNDEzIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8dGV4dCB4PSI2MjAiIHk9IjIzMCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TExNPC90ZXh0PgogIDx1c2UgeGxpbms6aHJlZj0iI3JvYm90IiBocmVmPSIjcm9ib3QiIHg9IjYyMCIgeT0iNDEwIiBjb2xvcj0iI0I4RDBDNiIvPgoKICA8IS0tIExMTSByZWFkcyB0aGUgY2FzZSBzdHVkeSBhbmQgdGhlIGxpdGVyYXR1cmUgLS0+CiAgPGcgc3Ryb2tlPSIjMTQxNDEzIiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiIG1hcmtlci1zdGFydD0idXJsKCNhcnJvdykiIG1hcmtlci1lbmQ9InVybCgjYXJyb3cpIj4KICAgIDxsaW5lIHgxPSIyNzgiIHkxPSIzMjgiIHgyPSI1MDAiIHkyPSIzNzYiLz4KICAgIDxsaW5lIHgxPSIyNTgiIHkxPSI1NjYiIHgyPSI1MDAiIHkyPSI0NTYiLz4KICA8L2c+CgogIDwhLS0gSW5mb3JtYXRpb24gY29sbGVjdGlvbiBzdHJhdGVneSAtLT4KICA8cmVjdCB4PSIxMTEwIiB5PSIxOTIiIHdpZHRoPSI2MDAiIGhlaWdodD0iNTQiIHJ4PSIxMiIgZmlsbD0iI0ZDRTVCNCIgc3Ryb2tlPSIjMTQxNDEzIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8dGV4dCB4PSIxNDEwIiB5PSIyMzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkluZm9ybWF0aW9uIGNvbGxlY3Rpb24gc3RyYXRlZ3k8L3RleHQ+CiAgPHVzZSB4bGluazpocmVmPSIjcm9ib3QiIGhyZWY9IiNyb2JvdCIgeD0iMTQxMCIgeT0iNDEwIiBjb2xvcj0iI0Q5Nzc1NyIvPgoKICA8IS0tIFF1ZXJ5IGFuZCBhbnN3ZXIgLS0+CiAgPGcgc3Ryb2tlPSIjMTQxNDEzIiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiIG1hcmtlci1lbmQ9InVybCgjYXJyb3cpIj4KICAgIDxsaW5lIHgxPSIxMjgwIiB5MT0iMzg0IiB4Mj0iNzUwIiB5Mj0iMzg0Ii8+CiAgICA8bGluZSB4MT0iNzUwIiB5MT0iNDYyIiB4Mj0iMTI4MCIgeTI9IjQ2MiIvPgogIDwvZz4KICA8dGV4dCB4PSIxMDE1IiB5PSIzNjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlF1ZXJ5PC90ZXh0PgogIDx0ZXh0IHg9IjEwMTUiIHk9IjQ0NiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+QW5zd2VyPC90ZXh0Pgo8L3N2Zz4K" alt="Framework overview: an information collection strategy sends queries to an LLM inside a simulated environment; the LLM consults the case study and the literature, and returns answers." style="width:1728px;height:776px;object-fit:contain">
 <aside class="notes">The framework: an information collection strategy asks questions, one at a time. A simulated environment answers them: an LLM that reads the case study and searches the literature. After its question budget, the strategy gives a ranked list of diagnoses, which we score against the true diagnosis by ICD-11 code.</aside>
 </section>
 
-<section data-background-color="#cfe3d3" id="consistency" data-transition="fade" style="display:flex; flex-direction:column; gap:24px; align-items:center; justify-content:center; padding:96px; background:#cfe3d3">
+<section data-background-color="#cfe3d3" id="consistency" style="display:flex; flex-direction:column; gap:24px; align-items:center; justify-content:center; padding:96px; background:#cfe3d3">
   <h1 style="width:1400px; font-family:Newsreader, Georgia, serif; font-size:96px; font-weight:500; line-height:1.08; text-align:center; color:#141413">Scaling Consistency</h1>
   <p style="width:1400px; font-family:Newsreader, Georgia, serif; font-size:52px; font-weight:400; line-height:1.23; text-align:center; color:#141413">Do the scaling results hold when rerun?</p>
   <aside class="notes">Part one. Earlier, each strategy and question budget was run once. A single run cannot tell a real difference from run-to-run noise, so we ran the scaling experiment again, several times.</aside>
 </section>
 
-<section data-background-color="#f1f5f0" id="repeats" data-transition="fade" style="display:flex; flex-direction:column; gap:48px; padding:96px; background:#f1f5f0">
+<section data-background-color="#f1f5f0" id="repeats" style="display:flex; flex-direction:column; gap:48px; padding:96px; background:#f1f5f0">
   <div style="display:flex; flex-direction:column; gap:24px">
     <h2 style="font-family:Newsreader, Georgia, serif; font-size:56px; font-weight:500; line-height:1.14; color:#141413">Repeating the scaling experiment</h2>
     <p style="font-family:'DM Sans', Arial, sans-serif; font-size:36px; line-height:1.28; color:#5e5d59">Fresh runs at each question budget measure the spread.</p>
@@ -319,7 +319,7 @@
   <aside class="notes">We reran the whole scaling experiment on the 272-case dataset, version 2: every strategy at 4, 8 and 16 questions, three times. The repetitions use the same configuration and differ only in the environment's seed (7, 8 and 9), so the variation comes from the models. At 16 questions the third repetition was still running when the plots were made, so those lines average two runs. Each plot shows top-k accuracy for k from 1 to 10: the share of cases whose true diagnosis is among the strategy's first k. The line is the mean of the runs and the band is one sample standard deviation either side.</aside>
 </section>
 
-<section data-background-color="#FCFCFB" id="hypothesis" data-transition="fade" style="background:#FCFCFB;color:#141413;font-family:'DM Sans', Arial, sans-serif;padding:96px;display:flex;flex-direction:column;gap:48px">
+<section data-background-color="#FCFCFB" id="hypothesis" style="background:#FCFCFB;color:#141413;font-family:'DM Sans', Arial, sans-serif;padding:96px;display:flex;flex-direction:column;gap:48px">
 <div style="display:flex;flex-direction:column;gap:24px">
 <h2 style="font-family:'Newsreader', Georgia, serif;font-size:56px;line-height:64px;font-weight:500">Hypothesis-driven</h2>
 <p style="font-size:36px;line-height:46px;color:#5E5D59">Gains slow after 8 questions; spread under 3 points.</p>
@@ -335,7 +335,7 @@
 <aside class="notes">Hypothesis-driven gains 10 points of top-10 accuracy from 4 to 8 questions, then only 4 more from 8 to 16. At top-1 it goes from 15.6% to 24.8% to 28.1%. The runs agree closely: the largest standard deviation is 2.9 points, at 8 questions.</aside>
 </section>
 
-<section data-background-color="#FCFCFB" id="knowledge" data-transition="fade" style="background:#FCFCFB;color:#141413;font-family:'DM Sans', Arial, sans-serif;padding:96px;display:flex;flex-direction:column;gap:48px">
+<section data-background-color="#FCFCFB" id="knowledge" style="background:#FCFCFB;color:#141413;font-family:'DM Sans', Arial, sans-serif;padding:96px;display:flex;flex-direction:column;gap:48px">
 <div style="display:flex;flex-direction:column;gap:24px">
 <h2 style="font-family:'Newsreader', Georgia, serif;font-size:56px;line-height:64px;font-weight:500">Knowledge-driven</h2>
 <p style="font-size:36px;line-height:46px;color:#5E5D59">Highest at 16 questions; runs within 1.5 points.</p>
@@ -351,7 +351,7 @@
 <aside class="notes">Knowledge-driven makes its largest gain between 8 and 16 questions (+10.6 points of top-10) and reaches the highest top-10 of any strategy, 55.5%. Its top-1 goes from 19.0% to 23.8% to 34.6%. It is also the most stable strategy: no standard deviation above 1.5 points. The two 16-question runs happened to score exactly the same top-10.</aside>
 </section>
 
-<section data-background-color="#FCFCFB" id="channel" data-transition="fade" style="background:#FCFCFB;color:#141413;font-family:'DM Sans', Arial, sans-serif;padding:96px;display:flex;flex-direction:column;gap:48px">
+<section data-background-color="#FCFCFB" id="channel" style="background:#FCFCFB;color:#141413;font-family:'DM Sans', Arial, sans-serif;padding:96px;display:flex;flex-direction:column;gap:48px">
 <div style="display:flex;flex-direction:column;gap:24px">
 <h2 style="font-family:'Newsreader', Georgia, serif;font-size:56px;line-height:64px;font-weight:500">Channel-based</h2>
 <p style="font-size:36px;line-height:46px;color:#5E5D59">Steady gains at every budget; spread under 3 points.</p>
@@ -367,7 +367,7 @@
 <aside class="notes">Channel-based gains about 10 points of top-10 from 4 to 8 questions and 7.5 more from 8 to 16, the largest total gain of the four (+17.6 points). Top-1 goes from 19.1% to 23.7% to 33.6%. Its widest spread is 2.7 points, at 8 questions.</aside>
 </section>
 
-<section data-background-color="#FCFCFB" id="sequence" data-transition="fade" style="background:#FCFCFB;color:#141413;font-family:'DM Sans', Arial, sans-serif;padding:96px;display:flex;flex-direction:column;gap:48px">
+<section data-background-color="#FCFCFB" id="sequence" style="background:#FCFCFB;color:#141413;font-family:'DM Sans', Arial, sans-serif;padding:96px;display:flex;flex-direction:column;gap:48px">
 <div style="display:flex;flex-direction:column;gap:24px">
 <h2 style="font-family:'Newsreader', Georgia, serif;font-size:56px;line-height:64px;font-weight:500">Sequence-based</h2>
 <p style="font-size:36px;line-height:46px;color:#5E5D59">Best at 4 questions, smallest gain by 16.</p>
@@ -383,7 +383,7 @@
 <aside class="notes">Sequence-based is the best strategy at 4 questions (40.4% top-10, 22.7% top-1) but gains the least by 16 questions: +9.6 points of top-10, ending at 50.0%, behind knowledge-driven and channel-based. Top-1 goes from 22.7% to 28.7% to 33.3%. Its spread stays between 1.6 and 2.4 points.</aside>
 </section>
 
-<section data-background-color="#E2EDE3" id="25927e0a" data-transition="fade" style="background:#E2EDE3;color:#141413;font-family:'DM Sans', Arial, sans-serif;padding:96px;display:flex;flex-direction:column;gap:48px">
+<section data-background-color="#E2EDE3" id="25927e0a" style="background:#E2EDE3;color:#141413;font-family:'DM Sans', Arial, sans-serif;padding:96px;display:flex;flex-direction:column;gap:48px">
 <h2 style="font-family:'Newsreader', Georgia, serif;font-size:56px;line-height:64px;font-weight:500">Three insights from the repeated runs</h2>
 <div style="display:flex;flex-direction:row;gap:24px;align-items:stretch">
 <div style="flex:1;background:#FCFCFB;border:3px solid #141413;border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:16px">
@@ -411,13 +411,13 @@
 <aside class="notes">Three insights from the four scaling slides, all on top-10 accuracy over the repetitions. Best scaling: knowledge-driven reaches the highest top-10 at 16 questions, 55.5%, ahead of channel-based (53.5%), sequence-based (50.0%) and hypothesis-driven (46.3%); it also has the highest top-1 there, 34.6%. Best at 4 questions: sequence-based, 40.4% top-10 and 22.7% top-1, the best of the four on both. Most consistent: knowledge-driven has the smallest run-to-run spread, a mean top-10 standard deviation of 0.9 points across the three budgets (1.1 over every k from 1 to 10); hypothesis-driven 1.4, channel-based 1.7 and sequence-based 2.1. The 16-question values average two runs.</aside>
 </section>
 
-<section data-background-color="#CFE3D3" id="complexity" data-transition="fade" style="background:#CFE3D3;color:#141413;font-family:'DM Sans', Arial, sans-serif;padding:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px">
+<section data-background-color="#CFE3D3" id="complexity" style="background:#CFE3D3;color:#141413;font-family:'DM Sans', Arial, sans-serif;padding:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px">
 <h1 style="font-family:'Newsreader', Georgia, serif;font-size:96px;line-height:104px;font-weight:500;text-align:center;width:1400px">Case complexity</h1>
 <p style="font-family:'Newsreader', Georgia, serif;font-size:52px;line-height:64px;font-weight:400;text-align:center;width:1400px">Are complex cases harder to diagnose?</p>
 <aside class="notes">Part two. Accuracy is averaged over all 272 cases, but the cases are not equally hard. To look inside the average, we scored each case’s complexity and compared accuracy across complexity levels.</aside>
 </section>
 
-<section data-background-color="#F1F5F0" id="intermed" data-transition="fade" style="background:#F1F5F0;color:#141413;font-family:'DM Sans', Arial, sans-serif;padding:96px;display:flex;flex-direction:column;gap:48px">
+<section data-background-color="#F1F5F0" id="intermed" style="background:#F1F5F0;color:#141413;font-family:'DM Sans', Arial, sans-serif;padding:96px;display:flex;flex-direction:column;gap:48px">
 <div style="display:flex;flex-direction:column;gap:24px">
 <h2 style="font-family:'Newsreader', Georgia, serif;font-size:56px;line-height:64px;font-weight:500">The INTERMED complexity score</h2>
 <p style="font-size:36px;line-height:46px;color:#5E5D59">Twenty items, each scored 0–3, add up to 0–60.</p>
@@ -433,7 +433,7 @@
 <aside class="notes">INTERMED is a validated grid for biopsychosocial case complexity: four domains (biological, psychological, social, health care) by five categories, 20 items in all, each rated 0 (no need) to 3 (severe need). The total runs from 0 to 60, and 21 or more is the instrument’s cut-off for high complexity. We used the DDx experiment’s prompt word for word with Gemini 4 (seed 42, low reasoning), one call per case on the full case text; the run cost $2.96. Over the 272 cases the mean score is 19.3, the range 0 to 51, and 102 cases score 21 or more.</aside>
 </section>
 
-<section data-background-color="#FCFCFB" id="by-complexity" data-transition="fade" style="background:#FCFCFB;color:#141413;font-family:'DM Sans', Arial, sans-serif;padding:96px;display:flex;flex-direction:column;gap:48px">
+<section data-background-color="#FCFCFB" id="by-complexity" style="background:#FCFCFB;color:#141413;font-family:'DM Sans', Arial, sans-serif;padding:96px;display:flex;flex-direction:column;gap:48px">
 <div style="display:flex;flex-direction:column;gap:24px">
 <h2 style="font-family:'Newsreader', Georgia, serif;font-size:56px;line-height:64px;font-weight:500">Top-1 accuracy by complexity</h2>
 <p style="font-size:36px;line-height:46px;color:#5E5D59">No steady decline; few cases score above 30.</p>
@@ -448,7 +448,7 @@
 <aside class="notes">Top-1 accuracy of each strategy at 8 questions (repetition 1), with the cases grouped into 10-point INTERMED buckets; 51–60 held one case and is folded into 41–60. The big middle bucket, 11–20 with 132 cases, is where most strategies score best, and sequence-based leads it at 35%. All strategies drop at 31–40. The jump at 41–60 rests on only ten cases (hypothesis-driven’s 50% is five of them), so it says little. At top-5 and top-10 the drop with complexity is clearer: about 50–57% at 11–20 against 33–43% above 20.</aside>
 </section>
 
-<section data-background-color="#F1F5F0" id="takeaways" data-transition="fade" style="background:#F1F5F0;color:#141413;font-family:'DM Sans', Arial, sans-serif;padding:96px;display:flex;flex-direction:column;gap:48px">
+<section data-background-color="#F1F5F0" id="takeaways" style="background:#F1F5F0;color:#141413;font-family:'DM Sans', Arial, sans-serif;padding:96px;display:flex;flex-direction:column;gap:48px">
 <h2 style="font-family:'Newsreader', Georgia, serif;font-size:56px;line-height:64px;font-weight:500">More questions help, and repeated runs agree</h2>
 <div style="display:flex;flex-direction:row;gap:24px;align-items:stretch">
 <div style="flex:1;background:#FCFCFB;border:3px solid #141413;border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:24px">
@@ -467,7 +467,7 @@
 <aside class="notes">Three points to keep. One: more questions help every strategy, by 10 to 18 points of top-10 between 4 and 16 questions; knowledge-driven ends highest at 55.5%. Two: the results are consistent; across repetitions no strategy’s top-10 varies by more than 2.9 points (one standard deviation), smaller than most gaps between budgets. Three: at top-1 accuracy does not fall steadily with INTERMED complexity, though the most complex buckets hold few cases; at top-5 and top-10 complex cases do score lower.</aside>
 </section>
 
-<section data-background-color="#cfe3d3" id="05c40578" data-transition="fade" style="display:flex; flex-direction:column; gap:24px; align-items:center; justify-content:center; padding:96px; background:#cfe3d3">
+<section data-background-color="#cfe3d3" id="05c40578" style="display:flex; flex-direction:column; gap:24px; align-items:center; justify-content:center; padding:96px; background:#cfe3d3">
   <h1 style="width:1400px; font-family:Newsreader, Georgia, serif; font-size:96px; font-weight:500; line-height:1.08; text-align:center; color:#141413">Thank you</h1>
 </section>
 
@@ -507,8 +507,8 @@
     maxScale: 2,
     center: false,
     display: 'flex',
-    transition: 'fade',
-    backgroundTransition: 'fade',
+    transition: 'none',          // no per-slide or background fade (they pulse at the frame edges);
+    backgroundTransition: 'none', // the whole screen fades in instead, below
     hash: true,
     slideNumber: 'c/t',
     controls: true,
@@ -517,6 +517,14 @@
     help: false,       // "?" lists reveal's own keys, which differ here
     mouseWheel: true,  // wheel down = next, wheel up = previous
     plugins: [RevealNotes],
+  });
+
+  // On every slide change the whole screen fades in briefly (skipped with reduced motion).
+  const deckEl = document.querySelector('.reveal');
+  Reveal.on('slidechanged', () => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    deckEl.getAnimations().forEach((a) => a.cancel());
+    deckEl.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, easing: 'ease-out' });
   });
 
   // PowerPoint slide-show controls
