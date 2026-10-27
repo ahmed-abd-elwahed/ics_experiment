@@ -467,3 +467,12 @@ in [environment/NOTES.md](environment/NOTES.md).
 | Hits come from each case run's stored `rank` (the evaluation's own rule), and the per-bucket counts add up to the evaluation's overall top-1 for every strategy. | One definition of a hit across the report and the figures. |
 | Five buckets: 0–11, 12–15, 16–20, 21–26, 27–60 (54, 54, 62, 48, 54 cases). Four buckets: 0–11, 12–17, 18–23, 24–60 (54, 74, 73, 71). | The two configurations suggested earlier: the five keep INTERMED's 21 cut-off with near-equal sizes; the four are the most even. Scores are `cases/combined_272_whole_chunking_v2_intermed.json` (Gemini 4). |
 | Colours are the dataviz reference palette's first four categorical slots (blue, orange, aqua, yellow) in strategy order, not the site's strategy colours. | The site's channel-based clay failed the palette check (chroma 0.089, reads as gray; CVD ΔE 6.1 next to the green). The four slots pass; aqua and yellow are under 3:1 on the surface, so the HTML and PDF carry the value table. |
+
+### Scaling plot from the v2 repetitions (2026-10-27)
+
+| Decision | Why |
+|---|---|
+| `records/plots/topk_by_iterations_v2_mean` (.svg/.html/.pdf/.png) plots the v2 repetitions finished so far: each line is the mean top@k over the runs, and a band of the same colour is ±1 sample standard deviation (n − 1). 4 and 8 questions have 3 runs; 16 questions has 2 (repetition 3 was still running). The legend gives each budget's number of runs. | Asked for: "the line should represent the average of the multiple runs" with "a shadow for each line representing the standard deviation", from the completed runs. Sample SD because three runs are a sample of the run-to-run spread. |
+| Repetition 1 at 16 questions still counts its 2 failed case runs (provider overload, HTTP 502) as misses in this version. | They are rerun after repetition 3 finishes; the plot is redrawn then. |
+| `evaluation/plot_topk.py` takes several comma-separated evaluations per label; with one evaluation per label its output is byte-for-byte the same as before (checked against `topk_by_iterations.svg`). The version 1 plot is kept unchanged. | One script for both plots; the earlier single-run figure stays reproducible. |
+| The seven new evaluations (`strategies_272_v2_rep*_*it.eval.json`) are committed now; the run records are committed when all nine are done. | The plot is built from them; the 8- and 16-question records have to be gzipped first. |

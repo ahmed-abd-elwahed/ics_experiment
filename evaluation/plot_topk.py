@@ -1,10 +1,13 @@
 """Plot top-k accuracy (hit rate at k = 1..10) of each strategy for several runs.
 
     .venv/bin/python -m evaluation.plot_topk OUT_STEM "4 iterations=a.eval.json" ...
+    .venv/bin/python -m evaluation.plot_topk OUT_STEM "4 iterations=r1.eval.json,r2.eval.json"
 
-One panel per strategy, one line per run (an ordered one-hue ramp: light = fewest iterations),
-x = k, y = top@k in %. Writes OUT_STEM.svg, OUT_STEM.html (with the values as a table) and
-OUT_STEM.pdf and OUT_STEM.png (printed from the HTML by headless Google Chrome). No API calls.
+One panel per strategy, one line per budget (an ordered one-hue ramp: light = fewest iterations),
+x = k, y = top@k in %. With several comma-separated evaluations (repeated runs) for a budget,
+the line is their mean and a band of the same colour shows ±1 sample standard deviation.
+Writes OUT_STEM.svg, OUT_STEM.html (with the values as a table) and OUT_STEM.pdf and
+OUT_STEM.png (printed from the HTML by headless Google Chrome). No API calls.
 """
 
 from __future__ import annotations
@@ -12,6 +15,7 @@ from __future__ import annotations
 import html
 import json
 import math
+import statistics
 import subprocess
 import sys
 from collections.abc import Sequence
@@ -31,18 +35,36 @@ TITLES = {
 KS = range(1, 11)
 
 
-def load(spec: str) -> tuple[str, dict[str, Any]]:
-    label, _, path = spec.partition("=")
-    return label, json.loads(Path(path).read_text(encoding="utf-8"))
+Run = tuple[str, list[dict[str, Any]]]  # a budget's label and its repeated evaluations
 
 
-def values(evaluation: dict[str, Any], strategy: str) -> list[float]:
+def load(spec: str) -> Run:
+    label, _, paths = spec.partition("=")
+    return label, [json.loads(Path(p).read_text(encoding="utf-8")) for p in paths.split(",")]
+
+
+def one_run(evaluation: dict[str, Any], strategy: str) -> list[float]:
     metrics = evaluation["by_strategy"][strategy]["metrics"]
     return [100 * metrics[f"hit_rate@{k}"] for k in KS]
 
 
+def values(evaluations: list[dict[str, Any]], strategy: str) -> list[float]:
+    """Mean top@k over the repeated runs."""
+    per_run = [one_run(e, strategy) for e in evaluations]
+    return [statistics.mean(col) for col in zip(*per_run, strict=True)]
+
+
+def spread(evaluations: list[dict[str, Any]], strategy: str) -> list[float]:
+    """Sample standard deviation of top@k over the runs (0 for a single run)."""
+    if len(evaluations) < 2:
+        return [0.0] * len(KS)
+    per_run = [one_run(e, strategy) for e in evaluations]
+    return [statistics.stdev(col) for col in zip(*per_run, strict=True)]
+
+
 def panel(x0: float, y0: float, w: float, h: float, title: str,
-          series: list[tuple[str, list[float], str]], y_max: float) -> str:  # fmt: skip
+          series: list[tuple[str, list[float], list[float], str]],
+          y_max: float) -> str:  # fmt: skip
     left, bottom, top, right = 46, 34, 30, 132
     pw, ph = w - left - right, h - top - bottom
 
@@ -65,7 +87,14 @@ def panel(x0: float, y0: float, w: float, h: float, title: str,
     out.append(f'<text x="{x0 + left + pw / 2}" y="{y0 + h - 2}" font-size="11" '
                f'text-anchor="middle" fill="{MUTED}">top k</text>')  # fmt: skip
     ends: list[tuple[float, int, str, str]] = []
-    for label, vals, colour in series:
+    for _, vals, sds, colour in series:  # bands first, so every line stays on top
+        if any(sds):
+            rows = list(zip(KS, vals, sds, strict=True))
+            upper = [f"{x(k):.1f},{y(min(v + d, y_max)):.1f}" for k, v, d in rows]
+            lower = [f"{x(k):.1f},{y(max(v - d, 0)):.1f}" for k, v, d in rows]
+            out.append(f'<polygon points="{" ".join(upper + lower[::-1])}" fill="{colour}" '
+                       'fill-opacity="0.2" stroke="none"/>')  # fmt: skip
+    for label, vals, _, colour in series:
         points = " ".join(f"{x(k):.1f},{y(v):.1f}" for k, v in zip(KS, vals, strict=True))
         out.append(f'<polyline points="{points}" fill="none" stroke="{colour}" '
                    'stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>')  # fmt: skip
@@ -85,9 +114,10 @@ def panel(x0: float, y0: float, w: float, h: float, title: str,
     return "".join(out)
 
 
-def figure(runs: list[tuple[str, dict[str, Any]]]) -> str:
-    strategies = [s for s in TITLES if all(s in e["by_strategy"] for _, e in runs)]
-    top = max(max(values(e, s)) for _, e in runs for s in strategies)
+def figure(runs: list[Run]) -> str:
+    strategies = [s for s in TITLES if all(s in e["by_strategy"] for _, es in runs for e in es)]
+    top = max(v + d for _, es in runs for s in strategies
+              for v, d in zip(values(es, s), spread(es, s), strict=True))  # fmt: skip
     y_max = max(10.0, math.ceil(top / 10) * 10)
     w, h, cols = 500, 300, 2
     rows = math.ceil(len(strategies) / cols)
@@ -99,32 +129,49 @@ def figure(runs: list[tuple[str, dict[str, Any]]]) -> str:
              f'{len(runs)} iteration budgets">',
              f'<rect width="{width}" height="{height}" fill="{SURFACE}"/>']  # fmt: skip
     lx = 46.0
-    for (label, _), colour in zip(runs, RAMP, strict=False):  # legend, in budget order
+    repeated = any(len(es) > 1 for _, es in runs)
+    for (name, es), colour in zip(runs, RAMP, strict=False):  # legend, in budget order
+        label = f"{name} (mean of {len(es)} runs ± SD)" if repeated else name
         parts.append(f'<line x1="{lx}" x2="{lx + 22}" y1="18" y2="18" stroke="{colour}" '
                      f'stroke-width="2"/><circle cx="{lx + 11}" cy="18" r="4" fill="{colour}" '
                      f'stroke="{SURFACE}" stroke-width="2"/><text x="{lx + 30}" y="22" '
                      f'font-size="12" fill="{INK}">{html.escape(label)}</text>')  # fmt: skip
         lx += 30 + 8 * len(label) + 28
     for i, strategy in enumerate(strategies):
-        series = [(label, values(e, strategy), colour)
-                  for (label, e), colour in zip(runs, RAMP, strict=False)]  # fmt: skip
+        series = [(label, values(es, strategy), spread(es, strategy), colour)
+                  for (label, es), colour in zip(runs, RAMP, strict=False)]  # fmt: skip
         parts.append(panel((i % cols) * w, legend_h + (i // cols) * h, w, h,
                            TITLES[strategy], series, y_max))  # fmt: skip
     return "".join(parts) + "</svg>"
 
 
-def table(runs: list[tuple[str, dict[str, Any]]]) -> str:
+def table(runs: list[Run]) -> str:
     head = "".join(f"<th>top {k}</th>" for k in KS)
     body = ""
     for strategy, title in TITLES.items():
-        for label, e in runs:
-            if strategy in e["by_strategy"]:
-                cells = "".join(f"<td>{v:.1f}</td>" for v in values(e, strategy))
+        for label, es in runs:
+            if all(strategy in e["by_strategy"] for e in es):
+                sds = spread(es, strategy) if len(es) > 1 else None
+                cells = "".join(
+                    f"<td>{v:.1f}" + (f" ± {sds[i]:.1f}" if sds else "") + "</td>"
+                    for i, v in enumerate(values(es, strategy))
+                )
                 body += (
                     f"<tr><td>{html.escape(title)}</td><td>{html.escape(label)}</td>{cells}</tr>"
                 )
     return (f"<table><thead><tr><th>Strategy</th><th>Run</th>{head}</tr></thead>"
             f"<tbody>{body}</tbody></table>")  # fmt: skip
+
+
+def repeats_note(runs: list[Run]) -> str:
+    counts = [len(es) for _, es in runs]
+    if max(counts) < 2:
+        return ""
+    each = ", ".join(f"{html.escape(label)}: {len(es)}" for label, es in runs)
+    return (
+        f" Lines are the mean of repeated runs ({each}); the shaded band is ±1 sample "
+        "standard deviation across them."
+    )
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -148,7 +195,7 @@ th:first-child, td:first-child, th:nth-child(2), td:nth-child(2) {{ text-align: 
 td {{ font-variant-numeric: tabular-nums; }}</style></head><body>
 <h1>Top-k accuracy by number of iterations</h1>
 <p>272 cases per strategy and run. Top k: the true diagnosis's ICD-11 code is among the
-strategy's first k diagnoses (exact code match).</p>
+strategy's first k diagnoses (exact code match).{repeats_note(runs)}</p>
 {svg}{table(runs)}</body></html>""",
         encoding="utf-8",
     )
