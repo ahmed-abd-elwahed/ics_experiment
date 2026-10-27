@@ -507,8 +507,8 @@
     maxScale: 2,
     center: false,
     display: 'flex',
-    transition: 'none',          // no per-slide or background fade (they pulse at the frame edges);
-    backgroundTransition: 'none', // the whole screen fades in instead, below
+    transition: 'none',          // slides change instantly: no fade of any kind
+    backgroundTransition: 'none',
     hash: true,
     slideNumber: 'c/t',
     controls: true,
@@ -517,14 +517,6 @@
     help: false,       // "?" lists reveal's own keys, which differ here
     mouseWheel: true,  // wheel down = next, wheel up = previous
     plugins: [RevealNotes],
-  });
-
-  // On every slide change the whole screen fades in briefly (skipped with reduced motion).
-  const deckEl = document.querySelector('.reveal');
-  Reveal.on('slidechanged', () => {
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    deckEl.getAnimations().forEach((a) => a.cancel());
-    deckEl.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, easing: 'ease-out' });
   });
 
   // PowerPoint slide-show controls
