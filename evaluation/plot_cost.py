@@ -5,7 +5,8 @@
 x = the run's total cost in US dollars (strategy and environment calls, all case runs of the
 strategy), y = top-k accuracy in % (default k = 10). Each run is a star marker; each strategy
 is a line through its runs in budget order, which a note under the legend states. Writes
-OUT_STEM.svg, OUT_STEM.html (with the values as a table), OUT_STEM.pdf, OUT_STEM.png and OUT_STEM.json. No API calls.
+OUT_STEM.svg, OUT_STEM.html (with the values as a table), OUT_STEM.pdf, OUT_STEM.png and
+OUT_STEM.json. No API calls.
 """
 
 from __future__ import annotations
